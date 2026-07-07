@@ -1,10 +1,12 @@
 {
-  "promo": "LIVRAISON GRATUITE DÈS €130 · UE & BALKANS",
+  "promo": "LIVRAISON GRATUITE DÈS €60 · UE & BALKANS",
   "nav": {
     "product": "Produit",
     "howItWorks": "Comment ça marche",
     "pods": "Capsules",
     "accessories": "Accessoires",
+    "about": "À propos",
+    "support": "Assistance",
     "buyNow": "Acheter"
   },
   "header": {
@@ -28,16 +30,16 @@
     "colorStandard": "Standard"
   },
   "hero": {
-    "title": "Des verts frais à la maison",
-    "promise": "De la graine à la salade en 18 jours",
-    "description": "PlantyHub HomeGarder One — jardin hydroponique 12 pods, arrosage auto et cycle LED 16/8h.",
+    "title": "Des herbes fraîches à la maison",
+    "promise": "De la graine à l'assaisonnement en 18 jours",
+    "description": "Découvrez HomeGarder One — un jardin 12 pods qui s'arrose seul et suit un cycle LED 16/8h. Sans terre, sans main verte. Des herbes et épices fraîches sur votre plan de travail, toute l'année.",
     "ctaPrimary": "Acheter",
     "ctaSecondary": "Comment ça marche",
     "priceLabel": "HomeGarder One",
     "imageAlt": "PlantyHub HomeGarder One",
     "badge": "Noté 4,9/5 par 500+ jardiniers",
     "trust": {
-      "shipping": "Livraison UE offerte dès 130 €",
+      "shipping": "Livraison UE offerte dès 60 €",
       "guarantee": "Garantie de germination",
       "setup": "Prêt en 5 minutes"
     },
@@ -50,10 +52,10 @@
   "product": {
     "eyebrow": "Produit",
     "title": "PlantyHub HomeGarder One",
-    "description": "Jardin hydroponique intelligent — 12 pods, LED spectre complet, irrigation auto.",
+    "description": "Un jardin de cuisine intelligent qui travaille pour vous — 12 pods, LED spectre complet et arrosage automatique, dans une finition blanc mat qui s'adapte partout.",
     "cta": "Ajouter au panier",
     "trust": {
-      "shipping": "Livraison offerte dès 130 €",
+      "shipping": "Livraison offerte dès 60 €",
       "guarantee": "Garantie de germination",
       "returns": "Retours sous 30 jours"
     },
@@ -72,7 +74,7 @@
     "reviews": {
       "elena": "Thé à la menthe du matin de mon propre jardin.",
       "urbanherbs": "PlantyHub fonctionne tout simplement.",
-      "freshplate": "La laitue cultivée soi-même a un goût incomparable."
+      "freshplate": "Rien ne vaut le goût des herbes cueillies soi-même, sans aucun additif."
     }
   },
   "howItWorks": {
@@ -82,7 +84,7 @@
       "placeCapsule": { "title": "Placez la capsule", "description": "Retirez l'autocollant et insérez-la." },
       "addSolution": { "title": "Ajoutez la solution", "description": "Eau et Sana A & B selon les instructions." },
       "turnOn": { "title": "Allumez", "description": "LED 16h allumée, 8h repos — automatique." },
-      "harvest": { "title": "Récoltez", "description": "Environ 18 jours — herbes fraîches." }
+      "harvest": { "title": "Récoltez", "description": "Environ 18 jours — herbes et épices fraîches, direct dans la poêle." }
     }
   },
   "lightCycle": {
@@ -101,9 +103,9 @@
   },
   "campaign": {
     "eyebrow": "Sélection de départ",
-    "title": "Tout pour commencer à cultiver",
-    "description": "Home Garden + capsules + solution nutritive. Économisez 15 % en groupant vos favoris.",
-    "cta": "Pack & -15 %",
+    "title": "Tout pour votre première récolte",
+    "description": "HomeGarder One + un kit de plantation PlantyHub Pods. Une seule boîte — jardin, graines, capsules et nutriments.",
+    "cta": "Voir le pack de démarrage",
     "imageAlt": "Pack de démarrage PlantyHub"
   },
   "starterBundle": {
@@ -115,13 +117,13 @@
     "imageAlt": "Pack de démarrage PlantyHub",
     "items": {
       "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 pods, cycle LED 16h, arrosage auto." },
-      "seedPodsBox": { "title": "Boîte PlantyHub Pods", "description": "12 capsules — 2× roquette, laitue, menthe, persil, basilic, fleurs comestibles." },
+      "seedPodsBox": { "title": "Boîte PlantyHub Pods", "description": "12 capsules — 2× basilic, menthe, persil, coriandre, aneth et roquette." },
       "diyKit": { "title": "Kit Plantez-vous", "description": "12 capsules, Sana A & B 100 ml, 12 bouchons de germination." },
       "unifiedShipping": { "title": "Une seule boîte", "description": "Tout livré ensemble — prêt à installer." }
     },
     "details": {
-      "arugula": "Roquette ×2", "lettuce": "Laitue ×2", "mint": "Menthe ×2", "parsley": "Persil ×2",
-      "basil": "Basilic ×2", "edibleFlowers": "Fleurs comestibles ×2", "emptyCapsules": "12 capsules",
+      "basil": "Basilic ×2", "mint": "Menthe ×2", "parsley": "Persil ×2", "cilantro": "Coriandre ×2",
+      "dill": "Aneth ×2", "arugula": "Roquette ×2", "emptyCapsules": "12 capsules",
       "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 bouchons", "instructions": "Instructions de dosage"
     }
   },
@@ -133,8 +135,74 @@
   },
   "podsSection": {
     "eyebrow": "PlantyHub Pods",
-    "title": "6 saveurs pour votre jardin",
-    "subtitle": "Capsules de graines — vendues aussi séparément."
+    "title": "Herbes et épices fraîches, prêtes à cultiver",
+    "subtitle": "Capsules pré-ensemencées — vendues aussi séparément."
+  },
+  "podsPage": {
+    "eyebrow": "Capsules PlantyHub",
+    "title": "Toutes les capsules",
+    "subtitle": "Capsules pré-ensemencées pour chaque plat — herbes, épices et pousses fraîches. Insérez-en une et cultivez.",
+    "ctaTitle": "Pas encore de jardin ?",
+    "ctaSubtitle": "Procurez-vous le HomeGarder One et cultivez toutes vos herbes préférées chez vous, toute l'année.",
+    "ctaButton": "Voir le HomeGarder One"
+  },
+  "podDetail": {
+    "quantity": "Quantité",
+    "detailsTitle": "Bon à savoir",
+    "relatedTitle": "Plus de capsules à cultiver",
+    "specs": {
+      "harvest": { "label": "Première récolte", "value": "2–4 semaines" },
+      "pack": { "label": "Format" },
+      "light": { "label": "Lumière", "value": "LED · auto 16/8" },
+      "nature": { "label": "Graines", "value": "Sans OGM" }
+    },
+    "trust": {
+      "compatible": "Compatible avec tous les jardins PlantyHub",
+      "nonGmo": "Sans OGM & naturel",
+      "shipping": "Expédié sous 24h"
+    }
+  },
+  "accessoriesPage": {
+    "eyebrow": "Accessoires & recharges",
+    "title": "Accessoires",
+    "subtitle": "Tout pour étendre et entretenir votre jardin d'intérieur — des supports élégants aux nutriments et capsules de recharge."
+  },
+  "aboutPage": {
+    "eyebrow": "Notre histoire",
+    "title": "À propos de PlantyHub",
+    "lead": "Nous pensons que chacun mérite des herbes fraîches et saines chez soi — sans jardin, sans terre et sans avoir la main verte.",
+    "storyTitle": "La culture simplifiée",
+    "story1": "PlantyHub est né dans une petite cuisine à Pazardzhik, en Bulgarie, avec une idée : rendre la culture d'une vraie saveur fraîche à l'intérieur simple, toute l'année.",
+    "story2": "Aujourd'hui, nos jardins intelligents et capsules pré-ensemencées aident des milliers de foyers en Europe à récolter herbes et épices fraîches en quelques semaines — avec seulement de l'eau, de la lumière et un peu d'amour.",
+    "valuesTitle": "Nos valeurs",
+    "values": {
+      "quality": { "title": "La qualité d'abord", "text": "Des jardins durables et des capsules fiables, testés pour germer et prospérer." },
+      "sustainability": { "title": "Respect de la planète", "text": "Graines sans OGM, matériaux recyclables et culture économe en eau." },
+      "simplicity": { "title": "Vraiment simple", "text": "Conçu pour que tout le monde puisse cultiver — guides clairs et automatisation complète." }
+    },
+    "stats": {
+      "plants": { "value": "500k+", "label": "plantes cultivées" },
+      "countries": { "value": "12", "label": "pays desservis" },
+      "harvests": { "value": "98%", "label": "taux de germination" }
+    }
+  },
+  "supportPage": {
+    "eyebrow": "Nous sommes là pour vous",
+    "title": "Assistance",
+    "subtitle": "Réponses aux questions fréquentes et tous les moyens de joindre notre équipe.",
+    "cards": {
+      "email": { "title": "Écrivez-nous", "text": "Notre équipe répond sous un jour ouvré.", "action": "support@plantyhub.com" },
+      "shipping": { "title": "Livraison", "text": "Bulgarie, Balkans et UE — expédié sous 24h.", "action": "Suivre ma commande" },
+      "returns": { "title": "Retours & garantie", "text": "Satisfait ou remboursé sous 30 jours et 2 ans de garantie.", "action": "Démarrer un retour" }
+    },
+    "faqTitle": "Questions fréquentes",
+    "faqItems": [
+      { "q": "Comment suivre ma commande ?", "a": "Vous recevrez un lien de suivi par e-mail dès l'expédition. Les commandes sont expédiées sous 24 heures les jours ouvrés." },
+      { "q": "Quelle est votre politique de retour ?", "a": "Si vous n'êtes pas satisfait, retournez votre jardin sous 30 jours pour un remboursement complet — sans condition." },
+      { "q": "Comment fonctionne la garantie ?", "a": "Chaque HomeGarder One est garanti 2 ans contre les défauts de fabrication. Contactez-nous avec votre numéro de commande." },
+      { "q": "Mes capsules ne germent pas — que faire ?", "a": "La plupart des capsules germent en 1 à 2 semaines. Vérifiez l'eau du réservoir, la lumière allumée et une pièce chaude. Toujours bloqué ? Écrivez-nous et nous les remplacerons." },
+      { "q": "Proposez-vous des commandes en gros ?", "a": "Oui — écrivez à support@plantyhub.com et nous vous aiderons pour les commandes plus importantes ou professionnelles." }
+    ]
   },
   "consumablesSection": {
     "eyebrow": "Consommables",
@@ -184,8 +252,8 @@
         "description": "Graines, nutriments, humidité — nos capsules biodégradables gèrent tout. Pas de désordre."
       },
       "fresh": {
-        "title": "Le frais bat le magasin",
-        "description": "Du jardin à l'assiette en secondes. Nutriments préservés, sans additifs."
+        "title": "Plus frais que le magasin",
+        "description": "Du plan de travail à l'assiette en secondes. Pleine saveur, sans additifs. C'est le vrai goût des herbes."
       }
     }
   },
@@ -206,7 +274,7 @@
       },
       "sustainable": {
         "title": "Propre & durable",
-        "description": "Moins de déchets que les herbes du supermarché"
+        "description": "Moins de déchets que les épices du supermarché"
       }
     }
   },
@@ -217,8 +285,8 @@
     "posts": {
       "elena": "Thé à la menthe du matin de mon propre jardin — la joie est indescriptible jusqu'à ce que vous cultiviez vous-même.",
       "urbanherbs": "Parfait pour quelqu'un qui ne garde normalement pas les plantes en vie. PlantyHub fonctionne tout simplement.",
-      "freshplate": "Rien n'a aussi bon goût que la laitue cultivée soi-même, sans additifs inutiles.",
-      "gail": "Je n'ai jamais été aussi excitée de voir des plantes pousser. J'ai hâte aux fraises !",
+      "freshplate": "Rien n'a aussi bon goût que les herbes cueillies soi-même, sans additifs inutiles.",
+      "gail": "Je n'ai jamais été aussi excitée de voir des plantes pousser. L'aneth était prêt avant que je m'en rende compte !",
       "homeinestonia": "Mojitos à la menthe fraîche toute l'année !",
       "mamaloves": "Le meilleur upgrade de cuisine. Les enfants adorent surveiller les pousses.",
       "blogilates": "Je ne connaissais pas le plaisir de CULTIVER ma nourriture avant PlantyHub.",
@@ -257,13 +325,13 @@
       "pods-kit": { "name": "Kit PlantyHub Pods", "tagline": "Graines + Plantez-vous" }
     },
     "pods": {
-      "arugula": { "name": "Capsules Roquette" },
-      "lettuce": { "name": "Capsules Laitue" },
-      "mint": { "name": "Capsules Menthe" },
-      "parsley": { "name": "Capsules Persil" },
-      "basil": { "name": "Capsules Basilic" },
-      "edible-flowers": { "name": "Capsules Fleurs comestibles" },
-      "herb-mix-12": { "name": "Mix 12 capsules" }
+      "basil": { "name": "Capsules Basilic", "description": "Doux, aromatique et roi des herbes. Cueillez des feuilles fraîches pour pesto, pâtes et caprese en quelques semaines." },
+      "mint": { "name": "Capsules Menthe", "description": "Feuilles parfumées et rafraîchissantes pour thés, cocktails et desserts — l'une des herbes les plus faciles à cultiver." },
+      "parsley": { "name": "Capsules Persil", "description": "L'herbe fraîche et polyvalente du quotidien — parfaite pour garnitures, sauces et bouillons toute l'année." },
+      "cilantro": { "name": "Capsules Coriandre", "description": "Feuilles fraîches et citronnées qui relèvent currys, salsas et bols de nouilles. Ciselez quand un plat a besoin de peps." },
+      "dill": { "name": "Capsules Aneth", "description": "Fines frondes délicates aux notes anisées — parfaites pour poissons, sauces, marinades et pommes de terre." },
+      "arugula": { "name": "Capsules Roquette", "description": "Feuilles poivrées et relevées pour salades, pizzas et sandwichs. Croissance rapide et récolte continue." },
+      "herb-mix-12": { "name": "Mix 12 capsules", "description": "Un assortiment complet de nos herbes et épices préférées — tout pour remplir votre jardin d'un coup." }
     },
     "consumables": {
       "empty-capsules": { "name": "Capsules vides" },
@@ -296,8 +364,8 @@
       "chosen": "Bon choix ! Votre {{pod}} offert est pour nous.",
       "kits": {
         "herbs": "Mélange d'herbes",
-        "salad": "Jeunes pousses",
-        "aromatic": "Mélange aromatique",
+        "salad": "Pousses du quotidien",
+        "aromatic": "Épices aromatiques",
         "chef": "Sélection du chef"
       }
     },
@@ -337,7 +405,7 @@
       },
       {
         "q": "Combien de temps avant la première récolte ?",
-        "a": "La plupart des herbes et jeunes pousses se récoltent en 2 à 3 semaines et continuent de produire pendant des mois."
+        "a": "La plupart des herbes et épices se récoltent en 2 à 3 semaines et continuent de produire pendant des mois."
       },
       {
         "q": "Quelle est sa consommation électrique ?",
@@ -345,7 +413,7 @@
       },
       {
         "q": "Que puis-je cultiver ?",
-        "a": "Basilic, menthe, persil, coriandre, laitue, roquette et plus — 12 capsules à la fois. Toute capsule HomeGarder s'adapte aux emplacements."
+        "a": "Basilic, menthe, persil, coriandre, aneth, roquette et plus — 12 capsules à la fois. Toute capsule HomeGarder s'adapte aux emplacements."
       },
       {
         "q": "Y a-t-il une garantie ?",
@@ -357,19 +425,39 @@
       }
     ]
   },
+  "newsletter": {
+    "badge": "-5%",
+    "title": "5% de réduction sur votre première commande",
+    "subtitle": "Abonnez-vous pour des conseils et des offres exclusives — nous vous envoyons le code de réduction tout de suite.",
+    "placeholder": "Votre adresse e-mail",
+    "button": "Obtenir mes 5%",
+    "dismiss": "Non merci",
+    "invalid": "Veuillez saisir une adresse e-mail valide.",
+    "disclaimer": "En vous abonnant, vous acceptez de recevoir des e-mails marketing. Désabonnement à tout moment.",
+    "successTitle": "C'est fait !",
+    "success": "Utilisez ce code au paiement pour 5% de réduction sur votre première commande :",
+    "copy": "Copier le code",
+    "copied": "Copié !",
+    "done": "Voir la boutique"
+  },
   "footer": {
     "shipping": "Livraison : Bulgarie · Balkans · Union européenne",
-    "shippingNote": "Livraison gratuite dès €130. Prix en EUR.",
+    "shippingNote": "Livraison gratuite dès €60. Prix en EUR.",
     "linksTitle": "Navigation",
     "links": {
       "product": "Produit",
       "howItWorks": "Comment ça marche",
       "pods": "Capsules",
       "accessories": "Accessoires",
+      "about": "À propos",
+      "support": "Assistance",
       "contact": "Contact",
       "privacy": "Confidentialité"
     },
     "followUs": "Suivez-nous",
+    "contactTitle": "Contact",
+    "address": "PlantyHub · Pazardzhik, Bulgarie",
+    "madeWith": "Cultivé avec soin en Bulgarie",
     "rights": "© {{year}} PlantyHub. Tous droits réservés."
   }
 }

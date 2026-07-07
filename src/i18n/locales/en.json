@@ -1,10 +1,12 @@
 {
-  "promo": "FREE SHIPPING ON ORDERS OVER €130 · EU & BALKANS",
+  "promo": "FREE SHIPPING OVER €60 · DELIVERED ACROSS THE EU & BALKANS",
   "nav": {
     "product": "Product",
     "howItWorks": "How it works",
     "pods": "Pods",
     "accessories": "Accessories",
+    "about": "About",
+    "support": "Support",
     "buyNow": "Buy now"
   },
   "header": {
@@ -28,16 +30,16 @@
     "colorStandard": "Standard"
   },
   "hero": {
-    "title": "Fresh greens at home",
-    "promise": "From seed to salad in 18 days",
-    "description": "PlantyHub HomeGarder One — 12-pod hydroponic planter with automatic watering and a 16/8-hour LED cycle. No soil, no guesswork.",
+    "title": "Fresh herbs, grown at home",
+    "promise": "From seed to seasoning in just 18 days",
+    "description": "Meet HomeGarder One — a 12-pod garden that waters itself and runs a 16/8 LED cycle. No soil, no green thumb. Just fresh herbs and spices on your counter, all year round.",
     "ctaPrimary": "Buy now",
     "ctaSecondary": "How it works",
     "priceLabel": "HomeGarder One",
     "imageAlt": "PlantyHub HomeGarder One with fresh herbs",
     "badge": "Rated 4.9/5 by 500+ home growers",
     "trust": {
-      "shipping": "Free EU shipping over €130",
+      "shipping": "Free EU shipping over €60",
       "guarantee": "Sprouting guarantee",
       "setup": "Ready in 5 minutes"
     },
@@ -50,10 +52,10 @@
   "product": {
     "eyebrow": "Product",
     "title": "PlantyHub HomeGarder One",
-    "description": "Smart hydroponic planter for your kitchen — 12 holes, full-spectrum LED, and automatic irrigation. White matte finish designed for any countertop.",
+    "description": "A smart kitchen garden that does the work for you — 12 pods, full-spectrum LED and self-watering, in a matte-white finish that fits any counter.",
     "cta": "Add to cart",
     "trust": {
-      "shipping": "Free shipping over €130",
+      "shipping": "Free shipping over €60",
       "guarantee": "Sprouting guarantee",
       "returns": "30-day returns"
     },
@@ -77,9 +79,9 @@
     "statLabel": "home gardens",
     "subtitle": "Real people, real harvests — from Sofia to Berlin.",
     "reviews": {
-      "elena": "Morning mint tea from my own kitchen garden — you don't understand the joy until you grow your own.",
-      "urbanherbs": "Perfect for someone who normally can't keep plants alive. PlantyHub just works.",
-      "freshplate": "Nothing tastes as good as self-grown lettuce, without unnecessary additives."
+      "elena": "Morning mint tea from my own kitchen garden — you won't get the joy until you grow your own.",
+      "urbanherbs": "Perfect for someone who usually can't keep a plant alive. PlantyHub just works.",
+      "freshplate": "Nothing beats the taste of herbs you picked yourself, with zero additives."
     }
   },
   "howItWorks": {
@@ -89,78 +91,78 @@
     "steps": {
       "placeCapsule": {
         "title": "Place the capsule",
-        "description": "Peel the sticker and insert the capsule. 12 holes — 12 plants."
+        "description": "Peel the sticker and drop the capsule in. 12 holes — 12 plants."
       },
       "addSolution": {
         "title": "Add the solution",
-        "description": "Fill with water and dose Sana A & B per the instructions in the box."
+        "description": "Fill with water and dose Sana A & B — the box tells you exactly how much."
       },
       "turnOn": {
         "title": "Turn it on",
-        "description": "The LED runs 16 hours and rests 8 — fully automatic."
+        "description": "The LED runs 16 hours and rests 8 — fully automatic, every day."
       },
       "harvest": {
         "title": "Harvest",
-        "description": "In about 18 days — fresh herbs and greens straight from your kitchen."
+        "description": "In about 18 days — snip fresh herbs and spices straight into the pan."
       }
     }
   },
   "lightCycle": {
     "eyebrow": "Light cycle",
     "title": "16 hours on, 8 hours rest",
-    "description": "Full-spectrum LED optimized for sprouting and growth — zero thinking required.",
+    "description": "A full-spectrum LED tuned for sprouting and steady growth — zero thinking required.",
     "onLabel": "16 hours — growth",
-    "onDescription": "Bright LED light drives photosynthesis throughout the day.",
+    "onDescription": "Bright LED light powers photosynthesis all day long.",
     "offLabel": "8 hours — rest",
-    "offDescription": "Plants rest, just like in nature.",
+    "offDescription": "Plants rest overnight, just like in nature.",
     "diagramLabel": "24-hour cycle",
     "days": { "0": "Mon", "1": "Tue", "2": "Wed", "3": "Thu" }
   },
   "featured": {
     "badge": "Flagship",
     "title": "PlantyHub HomeGarder One",
-    "description": "12-pod smart hydroponic planter with full-spectrum LED — 16 hours on, 8 hours rest. Automatic irrigation and a white matte finish for any kitchen.",
+    "description": "A 12-pod smart garden with full-spectrum LED — 16 hours on, 8 hours rest. Self-watering, matte-white, and right at home on any counter.",
     "cta": "Add to cart"
   },
   "campaign": {
     "eyebrow": "Starter picks",
     "title": "Everything for your first harvest",
-    "description": "HomeGarder One + PlantyHub Pods planting kit. One box — garden, seeds, capsules, and nutrients.",
+    "description": "HomeGarder One + a PlantyHub Pods planting kit. One box — garden, seeds, capsules and nutrients.",
     "cta": "View starter bundle",
     "imageAlt": "PlantyHub starter bundle"
   },
   "starterBundle": {
     "eyebrow": "Starter bundle",
     "title": "HomeGarder One + PlantyHub Pods",
-    "description": "The planter and planting kit arrive in one box — ready for your first harvest.",
+    "description": "Garden and planting kit in one box — everything you need for your first harvest.",
     "diyKitTitle": "Plant Yourself kit includes:",
     "cta": "Add starter bundle",
     "imageAlt": "PlantyHub starter bundle with garden and pods",
     "items": {
       "homegarderOne": {
         "title": "PlantyHub HomeGarder One",
-        "description": "12 growing holes, 16-hour LED light cycle, and automatic watering."
+        "description": "12 growing holes, a 16-hour LED cycle and automatic watering."
       },
       "seedPodsBox": {
         "title": "PlantyHub Pods seed box",
-        "description": "12 seed capsules — 2 each of arugula, lettuce, mint, parsley, basil, and edible flowers."
+        "description": "12 seed capsules — 2 each of basil, mint, parsley, cilantro, dill and arugula."
       },
       "diyKit": {
         "title": "Plant Yourself kit",
-        "description": "12 ready capsules (peel stickers and place), Sana A & B 100 ml each, and 12 germination caps."
+        "description": "12 ready capsules (peel and place), Sana A & B (100 ml each) and 12 germination caps."
       },
       "unifiedShipping": {
         "title": "One shipping box",
-        "description": "Garden, seeds, and kit ship together — ready to set up."
+        "description": "Garden, seeds and kit ship together — ready to set up."
       }
     },
     "details": {
-      "arugula": "Arugula ×2",
-      "lettuce": "Lettuce ×2",
+      "basil": "Basil ×2",
       "mint": "Mint ×2",
       "parsley": "Parsley ×2",
-      "basil": "Basil ×2",
-      "edibleFlowers": "Edible flowers ×2",
+      "cilantro": "Cilantro ×2",
+      "dill": "Dill ×2",
+      "arugula": "Arugula ×2",
       "emptyCapsules": "12 capsules",
       "sanaAb": "Sana A + B (100 ml)",
       "germCaps": "12 germ caps",
@@ -169,14 +171,80 @@
   },
   "sleek": {
     "eyebrow": "Our gardens",
-    "title": "Designed for everyday kitchens",
-    "subtitle": "Our indoor gardens help you grow like a pro — minus all the knowing-what-you're-doing part.",
+    "title": "Built for everyday kitchens",
+    "subtitle": "Our indoor gardens let you grow like a pro — without the knowing-what-you're-doing part.",
     "discoverAll": "Discover all gardens"
   },
   "podsSection": {
     "eyebrow": "PlantyHub Pods",
-    "title": "6 flavors for your garden",
-    "subtitle": "Seed capsules — also sold separately as refills."
+    "title": "Fresh herbs & spices, ready to grow",
+    "subtitle": "Pre-seeded capsules — also sold separately as refills."
+  },
+  "podsPage": {
+    "eyebrow": "PlantyHub Pods",
+    "title": "All seed pods",
+    "subtitle": "Pre-seeded capsules for every dish — fresh herbs, spices and greens. Just drop one in and grow.",
+    "ctaTitle": "Don't have a garden yet?",
+    "ctaSubtitle": "Get HomeGarder One and grow all your favourite herbs at home, year-round.",
+    "ctaButton": "Shop HomeGarder One"
+  },
+  "podDetail": {
+    "quantity": "Quantity",
+    "detailsTitle": "Good to know",
+    "relatedTitle": "More pods to grow",
+    "specs": {
+      "harvest": { "label": "First harvest", "value": "2–4 weeks" },
+      "pack": { "label": "Pack size" },
+      "light": { "label": "Light", "value": "LED · auto 16/8" },
+      "nature": { "label": "Seeds", "value": "Non-GMO" }
+    },
+    "trust": {
+      "compatible": "Fits all PlantyHub gardens",
+      "nonGmo": "Non-GMO & natural",
+      "shipping": "Ships within 24h"
+    }
+  },
+  "accessoriesPage": {
+    "eyebrow": "Accessories & refills",
+    "title": "Accessories",
+    "subtitle": "Everything to expand and care for your indoor garden — from stylish stands to nutrients and refill capsules."
+  },
+  "aboutPage": {
+    "eyebrow": "Our story",
+    "title": "About PlantyHub",
+    "lead": "We believe everyone deserves fresh herbs at home — no garden, no soil and no green thumb required.",
+    "storyTitle": "Growing, made simple",
+    "story1": "PlantyHub began in a small kitchen in Pazardzhik, Bulgaria, with one idea: make it effortless to grow real, fresh flavour indoors — all year round.",
+    "story2": "Today our smart gardens and pre-seeded pods help thousands of homes across Europe harvest fresh herbs and spices in weeks — with nothing but water, light and a little love.",
+    "valuesTitle": "What we stand for",
+    "values": {
+      "quality": { "title": "Quality first", "text": "Durable gardens and reliable pods, tested to sprout and thrive." },
+      "sustainability": { "title": "Kind to the planet", "text": "Non-GMO seeds, recyclable materials and water-smart growing." },
+      "simplicity": { "title": "Truly simple", "text": "Designed so anyone can grow — clear guides and full automation." }
+    },
+    "stats": {
+      "plants": { "value": "500k+", "label": "plants grown" },
+      "countries": { "value": "12", "label": "countries served" },
+      "harvests": { "value": "98%", "label": "sprouting success" }
+    }
+  },
+  "supportPage": {
+    "eyebrow": "We're here to help",
+    "title": "Support",
+    "subtitle": "Answers to the questions we hear most — plus every way to reach our team.",
+    "cards": {
+      "email": { "title": "Email us", "text": "Our team replies within one business day.", "action": "support@plantyhub.com" },
+      "shipping": { "title": "Shipping", "text": "Bulgaria, the Balkans and the EU — dispatched within 24h.", "action": "Track your order" },
+      "returns": { "title": "Returns & warranty", "text": "30-day money-back guarantee and a 2-year warranty.", "action": "Start a return" }
+    },
+    "faqTitle": "Frequently asked questions",
+    "faqItems": [
+      { "q": "How do I track my order?", "a": "You'll get a tracking link by email as soon as your order ships. Orders leave our warehouse within 24 hours on business days." },
+      { "q": "What is your return policy?", "a": "Not happy? Return your garden within 30 days for a full refund — no questions asked." },
+      { "q": "How does the warranty work?", "a": "Every HomeGarder One comes with a 2-year warranty against manufacturing defects. Just contact us with your order number." },
+      { "q": "My pods aren't sprouting — what should I do?", "a": "Most pods sprout within 1–2 weeks. Check that the tank has water, the light is on and the room is warm. Still stuck? Email us and we'll replace them free." },
+      { "q": "Do you offer bulk or wholesale orders?", "a": "Yes — email support@plantyhub.com and we'll help with larger or business orders." }
+    ]
   },
   "consumablesSection": {
     "eyebrow": "Consumables",
@@ -185,7 +253,7 @@
   },
   "accessoriesSection": {
     "title": "Accessories",
-    "subtitle": "Storage cabinet, wall shelf, and herb knife."
+    "subtitle": "Storage cabinet, wall shelf and herb knife."
   },
   "press": {
     "eyebrow": "From the blog",
@@ -204,30 +272,30 @@
       "partnership": {
         "date": "May 10, 2025",
         "title": "PlantyHub × Sustainable Living EU",
-        "excerpt": "We partnered with eco-conscious creators to show how one garden can change your daily routine."
+        "excerpt": "We teamed up with eco-conscious creators to show how one garden can change your daily routine."
       },
       "earthday": {
         "date": "Apr 22, 2025",
         "title": "Earth Day: Grow Your Own, Waste Less",
-        "excerpt": "How biodegradable pods and local growing help reduce plastic and food waste at home."
+        "excerpt": "How biodegradable pods and home growing help cut plastic and food waste."
       }
     }
   },
   "growSmarter": {
     "title": "Grow smarter, not harder",
-    "subtitle": "Pick up indoor gardening with us",
+    "subtitle": "Learn indoor gardening with us",
     "items": {
       "zero": {
         "title": "Zero learning curve",
-        "description": "5 minutes to set up. A few days to sprout. A couple of weeks to harvest. No gardening skills required."
+        "description": "5 minutes to set up. A few days to sprout. A couple of weeks to harvest. No gardening skills needed."
       },
       "noSoil": {
         "title": "No soil, no doubt",
-        "description": "Seeds, nutrients, moisture control — our biodegradable pods handle it all. No mess, no stress."
+        "description": "Seeds, nutrients and moisture — our biodegradable pods handle it all. No mess, no stress."
       },
       "fresh": {
-        "title": "Fresh beats the store",
-        "description": "Garden to plate in seconds. Nutrients intact, no additives. This is how greens were meant to taste."
+        "title": "Fresher than the store",
+        "description": "Counter to plate in seconds. Full flavour, no additives. This is how herbs are meant to taste."
       }
     }
   },
@@ -236,15 +304,15 @@
     "items": {
       "sprouting": {
         "title": "Sprouting guarantee",
-        "description": "We replace pods that don't grow"
+        "description": "We replace any pod that doesn't grow"
       },
       "yearRound": {
         "title": "Grow year-round",
-        "description": "Seasonal limits? Don't know her"
+        "description": "No seasons, no waiting for summer"
       },
       "support": {
         "title": "Expert support",
-        "description": "Scan QR guides on every pod"
+        "description": "Scan the QR guide on every pod"
       },
       "sustainable": {
         "title": "Clean & sustainable",
@@ -257,14 +325,14 @@
     "title": "Join our growing community",
     "subtitle": "Real growers. Real harvests. Real joy.",
     "posts": {
-      "elena": "Morning mint tea from my own kitchen garden — you don't understand the joy until you grow your own.",
-      "urbanherbs": "Perfect for someone who normally can't keep plants alive. PlantyHub just works.",
-      "freshplate": "Nothing tastes as good as self-grown lettuce, without unnecessary additives.",
-      "gail": "I've never been so excited to watch plants grow. Can't wait for the strawberries!",
-      "homeinestonia": "Mojitos with fresh peppermint all year around!",
-      "mamaloves": "Pretty much the greatest kitchen upgrade ever. The kids love checking on the sprouts.",
-      "blogilates": "I didn't know the pleasure of GROWING my own food until PlantyHub.",
-      "reese": "The plants grew so fast it blew my mind. Design is stunning too."
+      "elena": "Morning mint tea from my own kitchen garden — you won't get the joy until you grow your own.",
+      "urbanherbs": "Perfect for someone who usually can't keep a plant alive. PlantyHub just works.",
+      "freshplate": "Nothing beats the taste of herbs you picked yourself, with zero additives.",
+      "gail": "I've never been so excited to watch plants grow. The dill was ready before I knew it!",
+      "homeinestonia": "Mojitos with fresh peppermint all year round!",
+      "mamaloves": "Pretty much the best kitchen upgrade ever. The kids love checking on the sprouts.",
+      "blogilates": "I never knew the joy of GROWING my own herbs until PlantyHub.",
+      "reese": "The plants grew so fast it blew my mind. The design is stunning too."
     },
     "handles": {
       "elena": "elenagrows",
@@ -279,7 +347,7 @@
   },
   "support": {
     "name": "PlantyHub HomeGarder One",
-    "description": "12-pod smart hydroponic planter with full-spectrum LED — 16 hours on, 8 hours rest. Automatic irrigation. White matte finish.",
+    "description": "A 12-pod smart garden with full-spectrum LED — 16 hours on, 8 hours rest. Self-watering. Matte-white finish.",
     "specs": {
       "pods": "12 growing holes",
       "irrigation": "Auto irrigation",
@@ -287,7 +355,7 @@
       "qr": "QR guides in the box"
     },
     "helpTitle": "Need help growing?",
-    "helpDescription": "Our support team and QR pod guides are here for every step — from first sprout to harvest.",
+    "helpDescription": "Our support team and QR pod guides are with you every step — from first sprout to harvest.",
     "emailPlaceholder": "Your email",
     "cta": "Get growing tips",
     "emailOr": "Or email"
@@ -308,13 +376,13 @@
       }
     },
     "pods": {
-      "arugula": { "name": "Arugula Seed Pods" },
-      "lettuce": { "name": "Lettuce Seed Pods" },
-      "mint": { "name": "Mint Seed Pods" },
-      "parsley": { "name": "Parsley Seed Pods" },
-      "basil": { "name": "Basil Seed Pods" },
-      "edible-flowers": { "name": "Edible Flower Pods" },
-      "herb-mix-12": { "name": "12-Pod Herb Mix" }
+      "basil": { "name": "Basil Seed Pods", "description": "Sweet, aromatic and the king of herbs. Pick fresh leaves for pesto, pasta and caprese within weeks." },
+      "mint": { "name": "Mint Seed Pods", "description": "Fragrant, cooling leaves for teas, cocktails and desserts — one of the easiest herbs to grow." },
+      "parsley": { "name": "Parsley Seed Pods", "description": "The fresh, everyday all-rounder — perfect for garnishes, sauces and stocks all year round." },
+      "cilantro": { "name": "Cilantro Seed Pods", "description": "Bright, citrusy leaves that lift curries, salsas and noodle bowls. Snip fresh whenever a dish needs a kick." },
+      "dill": { "name": "Dill Seed Pods", "description": "Delicate, feathery fronds with a fresh anise note — made for fish, dips, pickles and potatoes." },
+      "arugula": { "name": "Arugula Seed Pods", "description": "Bold, peppery leaves that add a fresh kick to salads, pizzas and sandwiches. Fast-growing and cut-and-come-again." },
+      "herb-mix-12": { "name": "12-Pod Herb Mix", "description": "A full line-up of our favourite herbs and spices — everything you need to fill your whole garden at once." }
     },
     "consumables": {
       "empty-capsules": { "name": "Empty Capsules" },
@@ -329,7 +397,7 @@
   },
   "cta": {
     "title": "Start your first harvest",
-    "subtitle": "Starter bundle from {{price}} — garden, seeds, and everything in one box.",
+    "subtitle": "Starter bundle from {{price}} — garden, seeds and everything in one box.",
     "emailPlaceholder": "Email for the offer",
     "button": "Get the offer"
   },
@@ -340,15 +408,15 @@
       "badge": "Free gift",
       "hint": "+ 1 free starter set (12 pods)",
       "title": "Pick your free starter set",
-      "subtitle": "Each starter set has everything you need — 12 seed pods to fill your whole garden.",
+      "subtitle": "Every starter set has everything you need — 12 seed pods to fill your whole garden.",
       "pcs": "12 pods · everything included",
       "free": "Free",
-      "note": "Choose a starter set — we'll add it to your box at no extra cost.",
+      "note": "Choose a starter set and we'll add it to your box at no extra cost.",
       "chosen": "Great pick! Your free {{pod}} is on us.",
       "kits": {
         "herbs": "Herb Mix",
-        "salad": "Salad Greens",
-        "aromatic": "Aromatic Mix",
+        "salad": "Everyday Greens",
+        "aromatic": "Aromatic Spices",
         "chef": "Chef's Selection"
       }
     },
@@ -356,25 +424,25 @@
     "quantity": "Quantity",
     "videoBadge": "60-second demo",
     "videoTitle": "See HomeGarder One in action",
-    "videoText": "From unboxing to first harvest — watch how simple it is to set up, plant, and grow fresh herbs on your counter.",
+    "videoText": "From unboxing to first harvest — watch how simple it is to set up, plant and grow fresh herbs on your counter.",
     "highlightsTitle": "Everything you need to grow",
-    "highlightsSubtitle": "One smart planter — soil-free, guesswork-free, year-round.",
+    "highlightsSubtitle": "One smart garden — soil-free, guesswork-free, year-round.",
     "features": {
       "easy": { "title": "Easy", "text": "No soil, no mess — just insert and grow." },
-      "fast": { "title": "Fast growth", "text": "Optimised for quick, healthy harvests." },
+      "fast": { "title": "Fast growth", "text": "Tuned for quick, healthy harvests." },
       "smart": { "title": "Smart system", "text": "Built for PlantyHub indoor gardens." },
       "natural": { "title": "Natural", "text": "Non-GMO, natural ingredients." }
     },
     "howItWorksTitle": "How it works",
     "steps": [
-      "Insert the pod into your planter.",
+      "Drop the pod into your garden.",
       "Add water & nutrients.",
-      "Enjoy a fresh harvest in weeks."
+      "Snip a fresh harvest in weeks."
     ],
     "specsTitle": "Full specifications",
     "inTheBox": "What's in the box",
     "inTheBoxItems": {
-      "garden": "HomeGarder One planter (white matte)",
+      "garden": "HomeGarder One garden (matte white)",
       "led": "Adjustable full-spectrum LED arm",
       "pods": "3 starter seed pods",
       "nutrients": "Sana A + B nutrient set",
@@ -384,19 +452,19 @@
     "faqItems": [
       {
         "q": "Do I need any gardening experience?",
-        "a": "None at all. Just drop in a pod, add water and nutrients, and the LED runs on an automatic 16/8 cycle. The app and pod guides walk you through every step."
+        "a": "None at all. Drop in a pod, add water and nutrients, and the LED runs on an automatic 16/8 cycle. The pod guides walk you through every step."
       },
       {
         "q": "How long until my first harvest?",
-        "a": "Most herbs and leafy greens are ready to pick in about 2–3 weeks, and keep producing for months afterwards."
+        "a": "Most herbs and spices are ready to pick in about 2–3 weeks, and keep producing for months afterwards."
       },
       {
         "q": "How much electricity does it use?",
-        "a": "Very little — the full-spectrum LED is as efficient as a couple of household bulbs, roughly a few euros per month."
+        "a": "Very little — the full-spectrum LED is as efficient as a couple of household bulbs, roughly a few euros a month."
       },
       {
         "q": "What can I grow in it?",
-        "a": "Basil, mint, parsley, cilantro, lettuce, arugula and more — 12 pods at once. Any HomeGarder pod fits the slots."
+        "a": "Basil, mint, parsley, cilantro, dill, arugula and more — 12 pods at once. Any HomeGarder pod fits the slots."
       },
       {
         "q": "Is it covered by a warranty?",
@@ -408,19 +476,39 @@
       }
     ]
   },
+  "newsletter": {
+    "badge": "5% OFF",
+    "title": "Get 5% off your first order",
+    "subtitle": "Subscribe for growing tips and exclusive offers — we'll send your discount code right away.",
+    "placeholder": "Your email address",
+    "button": "Get my 5% off",
+    "dismiss": "No thanks",
+    "invalid": "Please enter a valid email address.",
+    "disclaimer": "By subscribing you agree to receive marketing emails. Unsubscribe anytime.",
+    "successTitle": "You're in!",
+    "success": "Use this code at checkout for 5% off your first order:",
+    "copy": "Copy code",
+    "copied": "Copied!",
+    "done": "Start shopping"
+  },
   "footer": {
     "shipping": "Shipping: Bulgaria · Balkans · European Union",
-    "shippingNote": "Free shipping over €130. Prices in EUR.",
+    "shippingNote": "Free shipping over €60. Prices in EUR.",
     "linksTitle": "Navigation",
     "links": {
       "product": "Product",
       "howItWorks": "How it works",
       "pods": "Pods",
       "accessories": "Accessories",
+      "about": "About us",
+      "support": "Support",
       "contact": "Contact",
       "privacy": "Privacy"
     },
     "followUs": "Follow us",
+    "contactTitle": "Contact",
+    "address": "PlantyHub · Pazardzhik, Bulgaria",
+    "madeWith": "Grown with care in Bulgaria",
     "rights": "© {{year}} PlantyHub. All rights reserved."
   }
 }

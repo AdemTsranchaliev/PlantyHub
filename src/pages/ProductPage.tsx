@@ -56,7 +56,7 @@ const featureItems = [
   { key: 'natural', Icon: EnergySavingsLeafOutlined },
 ] as const
 
-const BONUS_KIT_PRICE = '€34.90'
+const BONUS_KIT_PRICE = '€19.99'
 const bonusKits = [
   { id: 'herbs', image: lifestyleImages.outdoorDeck },
   { id: 'salad', image: lifestyleImages.outdoorHerbs },

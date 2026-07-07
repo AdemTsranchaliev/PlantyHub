@@ -6,41 +6,42 @@ export const campaignBundleCatalog: Record<
   { price: string; image: string; nameKey: string; packKey: string; imageFit?: 'cover' | 'contain' }
 > = {
   'herb-mix-12': {
-    price: '€34.90',
+    price: '€19.99',
     image: stockImages.outdoorDeck,
     nameKey: 'herb-mix-12',
     packKey: 'pack12',
     imageFit: 'cover',
   },
-  basil: { price: '€12.90', image: stockImages.basil, nameKey: 'basil', packKey: 'pack3', imageFit: 'contain' },
-  mint: { price: '€12.90', image: stockImages.mint, nameKey: 'mint', packKey: 'pack3', imageFit: 'contain' },
-  arugula: { price: '€12.90', image: stockImages.arugula, nameKey: 'arugula', packKey: 'pack3', imageFit: 'contain' },
+  basil: { price: '€9.99', image: stockImages.basil, nameKey: 'basil', packKey: 'pack3', imageFit: 'contain' },
+  mint: { price: '€9.99', image: stockImages.mint, nameKey: 'mint', packKey: 'pack3', imageFit: 'contain' },
+  arugula: { price: '€9.99', image: stockImages.arugula, nameKey: 'arugula', packKey: 'pack3', imageFit: 'contain' },
 }
 
 export const navHrefs = {
   product: '/#product',
   howItWorks: '/#how-it-works',
-  pods: '/#pods',
-  accessories: '/#accessories',
+  pods: '/pods',
+  accessories: '/accessories',
+  about: '/about',
+  support: '/support',
   cta: '/#cta',
   /** dedicated product detail page */
   buy: '/homegarder-one',
   /** legacy anchors */
   gardens: '/#product',
   consumables: '/#pods',
-  support: '/#product',
   story: '/#how-it-works',
   press: '#',
 } as const
 
 /** Six homepage pod cards */
 export const homepagePodIds = [
-  'arugula',
-  'lettuce',
+  'basil',
   'mint',
   'parsley',
-  'basil',
-  'edible-flowers',
+  'cilantro',
+  'dill',
+  'arugula',
 ] as const
 
 export const howItWorksStepIds = ['placeCapsule', 'addSolution', 'turnOn', 'harvest'] as const
@@ -66,7 +67,7 @@ export const socialProofImages = {
 export const gardensCatalog = [
   {
     id: 'homegarder-one',
-    price: '€199.00',
+    price: '€99.00',
     colors: [{ id: 'white', hex: '#FFFFFF' }],
     image: stockImages.homeGardenProduct,
     imageFit: 'cover' as const,
@@ -74,15 +75,15 @@ export const gardensCatalog = [
   },
   {
     id: 'starter-bundle',
-    price: '€259.00',
-    compareAt: '€278.90',
+    price: '€129.00',
+    compareAt: '€148.90',
     colors: [{ id: 'white', hex: '#FFFFFF' }],
     image: stockImages.outdoorDeck,
     imageFit: 'cover' as const,
   },
   {
     id: 'pods-kit',
-    price: '€79.90',
+    price: '€39.90',
     colors: [{ id: 'default', hex: '#E8E5DA' }],
     image: stockImages.mintKitchen,
     imageFit: 'cover' as const,
@@ -98,12 +99,12 @@ export const starterBundleItemKeys = [
 ] as const
 
 export const starterBundleDetailKeys = [
-  'arugula',
-  'lettuce',
+  'basil',
   'mint',
   'parsley',
-  'basil',
-  'edibleFlowers',
+  'cilantro',
+  'dill',
+  'arugula',
   'emptyCapsules',
   'sanaAb',
   'germCaps',
@@ -112,22 +113,16 @@ export const starterBundleDetailKeys = [
 
 /** PlantyHub Pods — seed capsule refills (3-pack) */
 export const seedPodsCatalog = [
-  { id: 'arugula', packKey: 'pack3', price: '€12.90', image: stockImages.arugula, imageFit: 'contain' as const },
-  { id: 'lettuce', packKey: 'pack3', price: '€12.90', image: stockImages.lettuce, imageFit: 'contain' as const },
-  { id: 'mint', packKey: 'pack3', price: '€12.90', image: stockImages.mint, imageFit: 'contain' as const },
-  { id: 'parsley', packKey: 'pack3', price: '€12.90', image: stockImages.parsley, imageFit: 'contain' as const },
-  { id: 'basil', packKey: 'pack3', price: '€12.90', image: stockImages.basil, imageFit: 'contain' as const },
-  {
-    id: 'edible-flowers',
-    packKey: 'pack3',
-    price: '€13.90',
-    image: stockImages.arugula,
-    imageFit: 'contain' as const,
-  },
+  { id: 'basil', packKey: 'pack3', price: '€9.99', image: stockImages.basil, imageFit: 'contain' as const },
+  { id: 'mint', packKey: 'pack3', price: '€9.99', image: stockImages.mint, imageFit: 'contain' as const },
+  { id: 'parsley', packKey: 'pack3', price: '€9.99', image: stockImages.parsley, imageFit: 'contain' as const },
+  { id: 'cilantro', packKey: 'pack3', price: '€9.99', image: stockImages.cilantro, imageFit: 'contain' as const },
+  { id: 'dill', packKey: 'pack3', price: '€9.99', image: stockImages.dill, imageFit: 'contain' as const },
+  { id: 'arugula', packKey: 'pack3', price: '€9.99', image: stockImages.arugula, imageFit: 'contain' as const },
   {
     id: 'herb-mix-12',
     packKey: 'pack12',
-    price: '€34.90',
+    price: '€19.99',
     image: stockImages.outdoorDeck,
     imageFit: 'cover' as const,
   },
@@ -138,30 +133,30 @@ export const consumablesCatalog = [
   {
     id: 'empty-capsules',
     packKey: 'pack12',
-    price: '€9.90',
+    price: '€5.90',
     image: stockImages.basilCloseup,
     imageFit: 'cover' as const,
   },
   {
     id: 'sana-ab',
     packKey: 'bottle2x100ml',
-    price: '€14.90',
+    price: '€8.90',
     image: stockImages.homeGardenProduct,
     imageFit: 'cover' as const,
   },
   {
     id: 'germination-caps',
     packKey: 'pack12',
-    price: '€7.90',
+    price: '€4.90',
     image: stockImages.mintCloseup,
     imageFit: 'cover' as const,
   },
 ] as const
 
 export const accessoriesCatalog = [
-  { id: 'storage-cabinet', price: '€49.90', image: stockImages.outdoorHerbs, imageFit: 'cover' as const },
-  { id: 'wall-shelf', price: '€29.90', image: stockImages.kitchenBasil, imageFit: 'cover' as const },
-  { id: 'herb-knife', price: '€12.90', image: stockImages.kitchenCaprese, imageFit: 'cover' as const },
+  { id: 'storage-cabinet', price: '€24.90', image: stockImages.outdoorHerbs, imageFit: 'cover' as const },
+  { id: 'wall-shelf', price: '€14.90', image: stockImages.kitchenBasil, imageFit: 'cover' as const },
+  { id: 'herb-knife', price: '€6.90', image: stockImages.kitchenCaprese, imageFit: 'cover' as const },
 ] as const
 
 export const growSmarterIds = ['zero', 'noSoil', 'fresh'] as const
@@ -201,21 +196,22 @@ export const pressArticleImages = {
 export const homeGardenSpecKeys = ['pods', 'irrigation', 'lightCycle', 'qr'] as const
 
 export const footerLinkKeys = {
-  main: ['product', 'howItWorks', 'pods', 'accessories', 'contact', 'privacy'],
+  main: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'support', 'contact', 'privacy'],
 } as const
 
 export const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com' },
-  { label: 'Facebook', href: 'https://facebook.com' },
-  { label: 'Pinterest', href: 'https://pinterest.com' },
-  { label: 'TikTok', href: 'https://tiktok.com' },
-]
+  { label: 'Instagram', href: 'https://instagram.com/plantyhub.official', icon: 'instagram' },
+  { label: 'TikTok', href: 'https://tiktok.com/@plantyhub.official', icon: 'tiktok' },
+  { label: 'Facebook', href: 'https://facebook.com/plantyhub', icon: 'facebook' },
+  { label: 'YouTube', href: 'https://youtube.com/@plantyhub', icon: 'youtube' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/plantyhub', icon: 'linkedin' },
+] as const
 
 export const campaignHeroImage = stockImages.heroKitchen
 export const homeGardenImage = stockImages.homeGardenProduct
-export const homeGardenPrice = '€199.00'
-export const starterBundlePrice = '€259.00'
-export const podsKitPrice = '€79.90'
+export const homeGardenPrice = '€99.00'
+export const starterBundlePrice = '€129.00'
+export const podsKitPrice = '€39.90'
 
 export const heroPodThumbs = [
   { src: stockImages.basilCloseup, label: 'Basil' },

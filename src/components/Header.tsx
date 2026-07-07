@@ -29,6 +29,8 @@ const navKeys = [
   { key: 'howItWorks', href: navHrefs.howItWorks },
   { key: 'pods', href: navHrefs.pods },
   { key: 'accessories', href: navHrefs.accessories },
+  { key: 'about', href: navHrefs.about },
+  { key: 'support', href: navHrefs.support },
 ] as const
 
 export default function Header() {

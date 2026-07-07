@@ -1,10 +1,12 @@
 {
-  "promo": "KOSTENLOSER VERSAND AB €130 · EU & BALKAN",
+  "promo": "KOSTENLOSER VERSAND AB €60 · EU & BALKAN",
   "nav": {
     "product": "Produkt",
     "howItWorks": "So funktioniert's",
     "pods": "Pods",
     "accessories": "Zubehör",
+    "about": "Über uns",
+    "support": "Support",
     "buyNow": "Jetzt kaufen"
   },
   "header": {
@@ -28,16 +30,16 @@
     "colorStandard": "Standard"
   },
   "hero": {
-    "title": "Frisches Grün zuhause",
-    "promise": "Vom Samen zum Salat in 18 Tagen",
-    "description": "PlantyHub HomeGarder One — 12-Pod Hydroponik mit Auto-Bewässerung und 16/8h LED-Zyklus.",
+    "title": "Frische Kräuter zuhause",
+    "promise": "Vom Samen zum Gewürz in nur 18 Tagen",
+    "description": "Lerne HomeGarder One kennen — ein 12-Pod-Garten, der sich selbst bewässert und im 16/8h-LED-Zyklus läuft. Ohne Erde, ohne grünen Daumen. Frische Kräuter und Gewürze auf deiner Arbeitsfläche, das ganze Jahr.",
     "ctaPrimary": "Jetzt kaufen",
     "ctaSecondary": "So funktioniert's",
     "priceLabel": "HomeGarder One",
     "imageAlt": "PlantyHub HomeGarder One",
     "badge": "4,9/5 von 500+ Hobbygärtnern",
     "trust": {
-      "shipping": "Gratis EU-Versand ab 130 €",
+      "shipping": "Gratis EU-Versand ab 60 €",
       "guarantee": "Keim-Garantie",
       "setup": "In 5 Minuten startklar"
     },
@@ -50,10 +52,10 @@
   "product": {
     "eyebrow": "Produkt",
     "title": "PlantyHub HomeGarder One",
-    "description": "Smarter Hydroponik-Garten für die Küche — 12 Pods, Vollspektrum-LED, Auto-Bewässerung.",
+    "description": "Ein smarter Küchengarten, der die Arbeit für dich übernimmt — 12 Pods, Vollspektrum-LED und Selbstbewässerung, im matt-weißen Finish, das überall passt.",
     "cta": "In den Warenkorb",
     "trust": {
-      "shipping": "Gratis Versand ab 130 €",
+      "shipping": "Gratis Versand ab 60 €",
       "guarantee": "Keim-Garantie",
       "returns": "30 Tage Rückgabe"
     },
@@ -72,7 +74,7 @@
     "reviews": {
       "elena": "Morgendlicher Minztee aus meinem eigenen Garten.",
       "urbanherbs": "PlantyHub funktioniert einfach.",
-      "freshplate": "Selbst angebauter Salat schmeckt am besten."
+      "freshplate": "Selbst gepflückte Kräuter schmecken einfach am besten — ganz ohne Zusätze."
     }
   },
   "howItWorks": {
@@ -82,7 +84,7 @@
       "placeCapsule": { "title": "Kapsel einsetzen", "description": "Sticker abziehen und einsetzen." },
       "addSolution": { "title": "Lösung hinzufügen", "description": "Wasser und Sana A & B dosieren." },
       "turnOn": { "title": "Einschalten", "description": "LED 16h an, 8h aus — automatisch." },
-      "harvest": { "title": "Ernten", "description": "Nach ca. 18 Tagen frische Kräuter." }
+      "harvest": { "title": "Ernten", "description": "Nach ca. 18 Tagen frische Kräuter und Gewürze — direkt in die Pfanne." }
     }
   },
   "lightCycle": {
@@ -101,9 +103,9 @@
   },
   "campaign": {
     "eyebrow": "Starter-Auswahl",
-    "title": "Alles, um mit dem Anbau zu starten",
-    "description": "Home Garden + Pods + Nährlösung. Spare 15 % beim Bündeln deiner Favoriten.",
-    "cta": "Bundle & 15 % sparen",
+    "title": "Alles für deine erste Ernte",
+    "description": "HomeGarder One + ein PlantyHub Pods Pflanz-Kit. Eine Box — Garten, Samen, Kapseln und Nährstoffe.",
+    "cta": "Starter-Paket ansehen",
     "imageAlt": "PlantyHub Starter-Paket"
   },
   "starterBundle": {
@@ -115,13 +117,13 @@
     "imageAlt": "PlantyHub Starter-Paket",
     "items": {
       "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 Pods, 16h LED-Lichtzyklus, Auto-Bewässerung." },
-      "seedPodsBox": { "title": "PlantyHub Pods Samen-Box", "description": "12 Samen-Kapseln — je 2× Rucola, Salat, Minze, Petersilie, Basilikum, essbare Blüten." },
+      "seedPodsBox": { "title": "PlantyHub Pods Samen-Box", "description": "12 Samen-Kapseln — je 2× Basilikum, Minze, Petersilie, Koriander, Dill und Rucola." },
       "diyKit": { "title": "Pflanz-es-selbst-Kit", "description": "12 Kapseln, Sana A & B je 100 ml, 12 Keimkappen." },
       "unifiedShipping": { "title": "Eine Versandbox", "description": "Alles zusammen geliefert — sofort startklar." }
     },
     "details": {
-      "arugula": "Rucola ×2", "lettuce": "Salat ×2", "mint": "Minze ×2", "parsley": "Petersilie ×2",
-      "basil": "Basilikum ×2", "edibleFlowers": "Essbare Blüten ×2", "emptyCapsules": "12 Kapseln",
+      "basil": "Basilikum ×2", "mint": "Minze ×2", "parsley": "Petersilie ×2", "cilantro": "Koriander ×2",
+      "dill": "Dill ×2", "arugula": "Rucola ×2", "emptyCapsules": "12 Kapseln",
       "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 Keimkappen", "instructions": "Dosieranleitung"
     }
   },
@@ -133,8 +135,74 @@
   },
   "podsSection": {
     "eyebrow": "PlantyHub Pods",
-    "title": "6 Sorten für deinen Garten",
-    "subtitle": "Samen-Kapseln — auch einzeln als Nachfüllung."
+    "title": "Frische Kräuter & Gewürze, bereit zum Anbau",
+    "subtitle": "Vorgesäte Kapseln — auch einzeln als Nachfüllung."
+  },
+  "podsPage": {
+    "eyebrow": "PlantyHub Kapseln",
+    "title": "Alle Saatkapseln",
+    "subtitle": "Vorgesäte Kapseln für jedes Gericht — frische Kräuter, Gewürze und Grün. Einfach einsetzen und wachsen lassen.",
+    "ctaTitle": "Noch keinen Garten?",
+    "ctaSubtitle": "Hol dir den HomeGarder One und ziehe alle deine Lieblingskräuter zu Hause, das ganze Jahr.",
+    "ctaButton": "HomeGarder One ansehen"
+  },
+  "podDetail": {
+    "quantity": "Menge",
+    "detailsTitle": "Gut zu wissen",
+    "relatedTitle": "Weitere Pods zum Anbauen",
+    "specs": {
+      "harvest": { "label": "Erste Ernte", "value": "2–4 Wochen" },
+      "pack": { "label": "Packungsgröße" },
+      "light": { "label": "Licht", "value": "LED · auto 16/8" },
+      "nature": { "label": "Samen", "value": "Gentechnikfrei" }
+    },
+    "trust": {
+      "compatible": "Passt in alle PlantyHub Gärten",
+      "nonGmo": "Gentechnikfrei & natürlich",
+      "shipping": "Versand innerhalb 24h"
+    }
+  },
+  "accessoriesPage": {
+    "eyebrow": "Zubehör & Nachfüllungen",
+    "title": "Zubehör",
+    "subtitle": "Alles, um deinen Indoor-Garten zu erweitern und zu pflegen — von stilvollen Ständern bis zu Nährstoffen und Nachfüll-Kapseln."
+  },
+  "aboutPage": {
+    "eyebrow": "Unsere Geschichte",
+    "title": "Über PlantyHub",
+    "lead": "Wir glauben, dass jeder frische Kräuter zu Hause verdient — ohne Garten, ohne Erde und ohne grünen Daumen.",
+    "storyTitle": "Anbau leicht gemacht",
+    "story1": "PlantyHub begann in einer kleinen Küche in Pazardzhik, Bulgarien, mit einer Idee: echten, frischen Geschmack das ganze Jahr über mühelos drinnen anzubauen.",
+    "story2": "Heute helfen unsere smarten Gärten und vorgesäten Kapseln Tausenden Haushalten in Europa, in wenigen Wochen frische Kräuter und Gewürze zu ernten — nur mit Wasser, Licht und ein wenig Liebe.",
+    "valuesTitle": "Wofür wir stehen",
+    "values": {
+      "quality": { "title": "Qualität zuerst", "text": "Robuste Gärten und zuverlässige Kapseln, getestet zum Keimen und Gedeihen." },
+      "sustainability": { "title": "Gut für den Planeten", "text": "Gentechnikfreie Samen, recycelbare Materialien und wassersparender Anbau." },
+      "simplicity": { "title": "Wirklich einfach", "text": "So gestaltet, dass jeder anbauen kann — klare Anleitungen und volle Automatik." }
+    },
+    "stats": {
+      "plants": { "value": "500k+", "label": "gewachsene Pflanzen" },
+      "countries": { "value": "12", "label": "belieferte Länder" },
+      "harvests": { "value": "98%", "label": "Keimerfolg" }
+    }
+  },
+  "supportPage": {
+    "eyebrow": "Wir helfen gerne",
+    "title": "Support",
+    "subtitle": "Antworten auf häufige Fragen und alle Wege, unser Team zu erreichen.",
+    "cards": {
+      "email": { "title": "Schreib uns", "text": "Unser Team antwortet innerhalb eines Werktags.", "action": "support@plantyhub.com" },
+      "shipping": { "title": "Versand", "text": "Bulgarien, Balkan und EU — Versand innerhalb von 24h.", "action": "Bestellung verfolgen" },
+      "returns": { "title": "Rückgabe & Garantie", "text": "30 Tage Geld-zurück-Garantie und 2 Jahre Garantie.", "action": "Rückgabe starten" }
+    },
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqItems": [
+      { "q": "Wie verfolge ich meine Bestellung?", "a": "Du erhältst einen Tracking-Link per E-Mail, sobald deine Bestellung versandt wird. Versand erfolgt innerhalb von 24 Stunden an Werktagen." },
+      { "q": "Wie ist eure Rückgabepolitik?", "a": "Wenn du nicht zufrieden bist, sende deinen Garten innerhalb von 30 Tagen für eine volle Rückerstattung zurück — ohne Wenn und Aber." },
+      { "q": "Wie funktioniert die Garantie?", "a": "Jeder HomeGarder One kommt mit 2 Jahren Garantie auf Herstellungsfehler. Kontaktiere uns einfach mit deiner Bestellnummer." },
+      { "q": "Meine Kapseln keimen nicht — was tun?", "a": "Die meisten Kapseln keimen in 1–2 Wochen. Stelle sicher, dass Wasser im Tank ist, das Licht an ist und der Raum warm. Immer noch Probleme? Schreib uns und wir ersetzen sie." },
+      { "q": "Bietet ihr Groß- oder Firmenbestellungen an?", "a": "Ja — schreib an support@plantyhub.com und wir helfen bei größeren oder geschäftlichen Bestellungen." }
+    ]
   },
   "consumablesSection": {
     "eyebrow": "Verbrauchsmaterial",
@@ -184,8 +252,8 @@
         "description": "Samen, Nährstoffe, Feuchtigkeit — unsere biologisch abbaubaren Pods erledigen alles. Kein Chaos."
       },
       "fresh": {
-        "title": "Frisch schlägt den Supermarkt",
-        "description": "Vom Garten auf den Teller in Sekunden. Nährstoffe erhalten, keine Zusatzstoffe."
+        "title": "Frischer als der Supermarkt",
+        "description": "Von der Arbeitsfläche auf den Teller in Sekunden. Voller Geschmack, keine Zusätze. So sollen Kräuter schmecken."
       }
     }
   },
@@ -206,7 +274,7 @@
       },
       "sustainable": {
         "title": "Sauber & nachhaltig",
-        "description": "Weniger Abfall als Supermarkt-Kräuter"
+        "description": "Weniger Abfall als Supermarkt-Gewürze"
       }
     }
   },
@@ -217,8 +285,8 @@
     "posts": {
       "elena": "Morgendlicher Minztee aus meinem eigenen Küchengarten — die Freude ist unbeschreiblich.",
       "urbanherbs": "Perfekt für jemanden, der normalerweise keine Pflanzen am Leben hält. PlantyHub funktioniert einfach.",
-      "freshplate": "Nichts schmeckt so gut wie selbst angebauter Salat ohne unnötige Zusätze.",
-      "gail": "Ich war noch nie so gespannt auf wachsende Pflanzen. Kann die Erdbeeren kaum erwarten!",
+      "freshplate": "Nichts schmeckt so gut wie selbst gepflückte Kräuter ohne unnötige Zusätze.",
+      "gail": "Ich war noch nie so gespannt auf wachsende Pflanzen. Der Dill war schneller reif, als ich dachte!",
       "homeinestonia": "Mojitos mit frischer Pfefferminze das ganze Jahr!",
       "mamaloves": "Das beste Küchen-Upgrade überhaupt. Die Kinder lieben es, die Keimlinge zu checken.",
       "blogilates": "Ich kannte die Freude am EIGENEN Anbau nicht, bis PlantyHub kam.",
@@ -257,13 +325,13 @@
       "pods-kit": { "name": "PlantyHub Pods Kit", "tagline": "Samen + Pflanz-es-selbst" }
     },
     "pods": {
-      "arugula": { "name": "Rucola Saat-Pods" },
-      "lettuce": { "name": "Salat Saat-Pods" },
-      "mint": { "name": "Minze Saat-Pods" },
-      "parsley": { "name": "Petersilie Saat-Pods" },
-      "basil": { "name": "Basilikum Saat-Pods" },
-      "edible-flowers": { "name": "Essbare Blüten Pods" },
-      "herb-mix-12": { "name": "12er Kräuter-Mix" }
+      "basil": { "name": "Basilikum Saat-Pods", "description": "Süß, aromatisch und der König der Kräuter. Frische Blätter für Pesto, Pasta und Caprese in wenigen Wochen." },
+      "mint": { "name": "Minze Saat-Pods", "description": "Duftende, erfrischende Blätter für Tee, Cocktails und Desserts — eines der einfachsten Kräuter überhaupt." },
+      "parsley": { "name": "Petersilie Saat-Pods", "description": "Das frische, vielseitige Alltagskraut — perfekt für Garnituren, Saucen und Brühen das ganze Jahr." },
+      "cilantro": { "name": "Koriander Saat-Pods", "description": "Frische, zitrusartige Blätter, die Currys, Salsa und Nudelbowls beleben. Schneide frisch, wenn ein Gericht Pep braucht." },
+      "dill": { "name": "Dill Saat-Pods", "description": "Zarte, feine Wedel mit frischer Anisnote — wie gemacht für Fisch, Dips, Eingelegtes und Kartoffeln." },
+      "arugula": { "name": "Rucola Saat-Pods", "description": "Kräftige, pfeffrige Blätter für Salate, Pizza und Sandwiches. Schnellwachsend und immer wieder nachzuernten." },
+      "herb-mix-12": { "name": "12er Kräuter-Mix", "description": "Ein volles Sortiment unserer liebsten Kräuter und Gewürze — alles, um deinen ganzen Garten auf einmal zu füllen." }
     },
     "consumables": {
       "empty-capsules": { "name": "Leere Kapseln" },
@@ -296,8 +364,8 @@
       "chosen": "Gute Wahl! Dein gratis {{pod}} geht auf uns.",
       "kits": {
         "herbs": "Kräutermix",
-        "salad": "Salatmix",
-        "aromatic": "Aroma-Mix",
+        "salad": "Alltags-Grün",
+        "aromatic": "Aromatische Gewürze",
         "chef": "Chef's Auswahl"
       }
     },
@@ -337,7 +405,7 @@
       },
       {
         "q": "Wie lange bis zur ersten Ernte?",
-        "a": "Die meisten Kräuter und Blattgemüse sind in etwa 2–3 Wochen erntereif und tragen danach monatelang weiter."
+        "a": "Die meisten Kräuter und Gewürze sind in etwa 2–3 Wochen erntereif und tragen danach monatelang weiter."
       },
       {
         "q": "Wie viel Strom verbraucht er?",
@@ -345,7 +413,7 @@
       },
       {
         "q": "Was kann ich anbauen?",
-        "a": "Basilikum, Minze, Petersilie, Koriander, Salat, Rucola und mehr — 12 Kapseln gleichzeitig. Jede HomeGarder-Kapsel passt in die Slots."
+        "a": "Basilikum, Minze, Petersilie, Koriander, Dill, Rucola und mehr — 12 Kapseln gleichzeitig. Jede HomeGarder-Kapsel passt in die Slots."
       },
       {
         "q": "Gibt es eine Garantie?",
@@ -357,19 +425,39 @@
       }
     ]
   },
+  "newsletter": {
+    "badge": "5% RABATT",
+    "title": "5% Rabatt auf deine erste Bestellung",
+    "subtitle": "Abonniere für Anbautipps und exklusive Angebote — wir senden dir den Rabattcode sofort.",
+    "placeholder": "Deine E-Mail-Adresse",
+    "button": "Meine 5% sichern",
+    "dismiss": "Nein danke",
+    "invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "disclaimer": "Mit dem Abonnieren stimmst du dem Erhalt von Marketing-E-Mails zu. Jederzeit abbestellbar.",
+    "successTitle": "Geschafft!",
+    "success": "Verwende diesen Code an der Kasse für 5% Rabatt auf deine erste Bestellung:",
+    "copy": "Code kopieren",
+    "copied": "Kopiert!",
+    "done": "Zum Shop"
+  },
   "footer": {
     "shipping": "Versand: Bulgarien · Balkan · Europäische Union",
-    "shippingNote": "Kostenloser Versand ab €130. Preise in EUR.",
+    "shippingNote": "Kostenloser Versand ab €60. Preise in EUR.",
     "linksTitle": "Navigation",
     "links": {
       "product": "Produkt",
       "howItWorks": "So funktioniert's",
       "pods": "Pods",
       "accessories": "Zubehör",
+      "about": "Über uns",
+      "support": "Support",
       "contact": "Kontakt",
       "privacy": "Datenschutz"
     },
     "followUs": "Folge uns",
+    "contactTitle": "Kontakt",
+    "address": "PlantyHub · Pazardzhik, Bulgarien",
+    "madeWith": "Mit Sorgfalt in Bulgarien angebaut",
     "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten."
   }
 }

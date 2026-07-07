@@ -30,6 +30,7 @@ export default function PodsGridSection() {
               <Reveal delay={(index % 6) * 0.06}>
                 <ProductCard
                   layout="grid"
+                  to={`/pods/${pod.id}`}
                   product={{
                     id: pod.id,
                     name: t(`products.pods.${pod.id}.name`),

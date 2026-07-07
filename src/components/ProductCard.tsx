@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
+import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { brand, carouselCardWidth } from '../theme'
 
@@ -21,13 +22,15 @@ type ProductCardProps = {
   product: ProductCardData
   width?: number | string
   layout?: 'carousel' | 'grid'
+  /** When set, the card image and title link to this route */
+  to?: string
 }
 
 function toFlexBasis(width: number | string) {
   return typeof width === 'number' ? `${width}px` : width
 }
 
-export default function ProductCard({ product, width, layout = 'carousel' }: ProductCardProps) {
+export default function ProductCard({ product, width, layout = 'carousel', to }: ProductCardProps) {
   const { t } = useTranslation()
   const basis = toFlexBasis(width ?? carouselCardWidth.xs)
   const basisSm = toFlexBasis(typeof width === 'number' ? width : carouselCardWidth.sm)
@@ -48,8 +51,10 @@ export default function ProductCard({ product, width, layout = 'carousel' }: Pro
     >
       <Box
         className="product-card-wrap"
+        {...(to ? { component: RouterLink, to } : {})}
         sx={{
           position: 'relative',
+          display: 'block',
           bgcolor: brand.white,
           borderRadius: 4,
           overflow: 'hidden',
@@ -82,31 +87,43 @@ export default function ProductCard({ product, width, layout = 'carousel' }: Pro
             boxSizing: 'border-box',
           }}
         />
-        <IconButton
-          className="cart-btn"
-          aria-label={t('common.addToCartAria', { name: product.name })}
-          sx={{
-            position: 'absolute',
-            bottom: 12,
-            right: 12,
-            bgcolor: brand.plantGreen,
-            color: brand.white,
-            opacity: 1,
-            '@media (hover: hover)': {
-              opacity: 0,
-            },
-            '.product-card-wrap:hover &': {
-              '@media (hover: hover)': { opacity: 1 },
-            },
-            '&:hover': { bgcolor: brand.plantGreenDark },
-          }}
-        >
-          <ShoppingBagOutlinedIcon sx={{ fontSize: 20 }} />
-        </IconButton>
+        {!to && (
+          <IconButton
+            className="cart-btn"
+            aria-label={t('common.addToCartAria', { name: product.name })}
+            sx={{
+              position: 'absolute',
+              bottom: 12,
+              right: 12,
+              bgcolor: brand.plantGreen,
+              color: brand.white,
+              opacity: 1,
+              '@media (hover: hover)': {
+                opacity: 0,
+              },
+              '.product-card-wrap:hover &': {
+                '@media (hover: hover)': { opacity: 1 },
+              },
+              '&:hover': { bgcolor: brand.plantGreenDark },
+            }}
+          >
+            <ShoppingBagOutlinedIcon sx={{ fontSize: 20 }} />
+          </IconButton>
+        )}
       </Box>
 
       <Stack spacing={0.35} sx={{ px: 0.25 }}>
-        <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' }, lineHeight: 1.35 }}>
+        <Typography
+          {...(to ? { component: RouterLink, to } : {})}
+          sx={{
+            fontWeight: 700,
+            fontSize: { xs: '0.9rem', sm: '0.95rem' },
+            lineHeight: 1.35,
+            color: 'inherit',
+            textDecoration: 'none',
+            '@media (hover: hover)': { '&:hover': to ? { color: brand.plantGreenDark } : {} },
+          }}
+        >
           {product.name}
         </Typography>
         {product.pack && (
