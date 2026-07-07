@@ -1,0 +1,250 @@
+{
+  "promo": "LIVRAISON GRATUITE DÈS €130",
+  "nav": {
+    "gardens": "Jardins d'intérieur",
+    "pods": "Capsules de graines",
+    "accessories": "Accessoires",
+    "support": "Assistance"
+  },
+  "header": {
+    "region": "UE (€)",
+    "login": "Connexion",
+    "search": "Rechercher",
+    "cart": "Panier",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "common": {
+    "addToCart": "Ajouter au panier",
+    "addToCartAria": "Ajouter {{name}} au panier",
+    "readMore": "Lire la suite",
+    "pack3": "Lot de 3",
+    "pack9": "Lot de 9",
+    "bottle1L": "Bouteille 1L",
+    "colorWhite": "Blanc Mat",
+    "colorStandard": "Standard"
+  },
+  "hero": {
+    "eyebrow": "Hydroponie intelligente",
+    "titleBefore": "Verts frais,",
+    "titleHighlight": "zéro incertitude",
+    "description": "PlantyHub apporte un jardin d'intérieur 12 pods dans votre cuisine — arrosage automatique, lumière spectre complet et capsules biodégradables. Installation en minutes, récolte en semaines.",
+    "ctaPrimary": "Voir le Home Garden",
+    "ctaSecondary": "Parcourir les capsules",
+    "priceFrom": "À partir de {{price}}",
+    "priceLabel": "Home Garden",
+    "shippingNote": "Livraison gratuite dès €130",
+    "imageAlt": "Jardin de cuisine PlantyHub avec herbes fraîches",
+    "badge": "Jardin intelligent 12 pods",
+    "scrollHint": "Voir les produits"
+  },
+  "featured": {
+    "badge": "Phare",
+    "title": "PlantyHub Home Garden",
+    "description": "Jardin hydroponique intelligent 12 pods avec LED spectre complet et irrigation automatique. Finition blanc mat conçue pour s'intégrer à tout plan de travail.",
+    "cta": "Ajouter au panier"
+  },
+  "campaign": {
+    "eyebrow": "Sélection de départ",
+    "title": "Tout pour commencer à cultiver",
+    "description": "Home Garden + capsules + solution nutritive. Économisez 15 % en groupant vos favoris.",
+    "cta": "Pack & -15 %",
+    "imageAlt": "Pack de démarrage PlantyHub"
+  },
+  "sleek": {
+    "eyebrow": "Nos jardins",
+    "title": "Conçus pour la cuisine du quotidien",
+    "subtitle": "Nos jardins d'intérieur vous aident à cultiver comme un pro — sans avoir besoin de savoir quoi faire.",
+    "discoverAll": "Découvrir tous les jardins"
+  },
+  "podsSection": {
+    "eyebrow": "Recharges & saveurs",
+    "title": "Capsules de graines",
+    "shopAll": "Toutes les capsules"
+  },
+  "accessoriesSection": {
+    "title": "Accessoires"
+  },
+  "press": {
+    "eyebrow": "Du blog",
+    "title": "Soins des plantes & Histoires",
+    "articles": {
+      "pesto": {
+        "date": "12 juin 2025",
+        "title": "De la cuisine à la table — Pesto au basilic en 5 semaines",
+        "excerpt": "Une série de recettes simples de la capsule à l'assiette avec votre première récolte PlantyHub."
+      },
+      "hydroponics": {
+        "date": "28 mai 2025",
+        "title": "Pourquoi l'hydroponie utilise 90 % moins d'eau",
+        "excerpt": "La science derrière les jardins intelligents et pourquoi ils sont le choix durable pour les foyers urbains."
+      },
+      "partnership": {
+        "date": "10 mai 2025",
+        "title": "PlantyHub × Sustainable Living EU",
+        "excerpt": "Nous nous sommes associés à des créateurs éco-responsables pour montrer comment un jardin change le quotidien."
+      },
+      "earthday": {
+        "date": "22 avril 2025",
+        "title": "Jour de la Terre : Cultivez, gaspillez moins",
+        "excerpt": "Comment les capsules biodégradables et la culture locale réduisent le plastique et le gaspillage alimentaire."
+      }
+    }
+  },
+  "growSmarter": {
+    "title": "Cultivez plus intelligemment",
+    "subtitle": "Débutez le jardinage d'intérieur avec nous",
+    "items": {
+      "zero": {
+        "title": "Zéro courbe d'apprentissage",
+        "description": "5 minutes d'installation. Quelques jours pour germer. Quelques semaines pour récolter. Aucune compétence requise."
+      },
+      "noSoil": {
+        "title": "Pas de terre, pas de doute",
+        "description": "Graines, nutriments, humidité — nos capsules biodégradables gèrent tout. Pas de désordre."
+      },
+      "fresh": {
+        "title": "Le frais bat le magasin",
+        "description": "Du jardin à l'assiette en secondes. Nutriments préservés, sans additifs."
+      }
+    }
+  },
+  "guarantees": {
+    "title": "Pourquoi ils ne s'en lassent pas",
+    "items": {
+      "sprouting": {
+        "title": "Garantie de germination",
+        "description": "Nous remplaçons les capsules qui ne poussent pas"
+      },
+      "yearRound": {
+        "title": "Cultivez toute l'année",
+        "description": "Les saisons ? On ne connaît pas"
+      },
+      "support": {
+        "title": "Support expert",
+        "description": "Guides QR sur chaque capsule"
+      },
+      "sustainable": {
+        "title": "Propre & durable",
+        "description": "Moins de déchets que les herbes du supermarché"
+      }
+    }
+  },
+  "community": {
+    "stat": "Rejoignez notre communauté florissante !",
+    "title": "Rejoignez notre communauté",
+    "subtitle": "De vrais jardiniers. De vraies récoltes. De vraies joies.",
+    "posts": {
+      "elena": "Thé à la menthe du matin de mon propre jardin — la joie est indescriptible jusqu'à ce que vous cultiviez vous-même.",
+      "urbanherbs": "Parfait pour quelqu'un qui ne garde normalement pas les plantes en vie. PlantyHub fonctionne tout simplement.",
+      "freshplate": "Rien n'a aussi bon goût que la laitue cultivée soi-même, sans additifs inutiles.",
+      "gail": "Je n'ai jamais été aussi excitée de voir des plantes pousser. J'ai hâte aux fraises !",
+      "homeinestonia": "Mojitos à la menthe fraîche toute l'année !",
+      "mamaloves": "Le meilleur upgrade de cuisine. Les enfants adorent surveiller les pousses.",
+      "blogilates": "Je ne connaissais pas le plaisir de CULTIVER ma nourriture avant PlantyHub.",
+      "reese": "Les plantes ont poussé si vite que ça m'a bluffée. Le design est magnifique aussi."
+    },
+    "handles": {
+      "elena": "elenagrows",
+      "urbanherbs": "urbanherbs_berlin",
+      "freshplate": "freshplate_daily",
+      "gail": "gailofthegarden",
+      "homeinestonia": "homeinestonia",
+      "mamaloves": "thismamaloveslife",
+      "blogilates": "blogilates",
+      "reese": "reeseology_"
+    }
+  },
+  "support": {
+    "name": "PlantyHub Home Garden",
+    "description": "Jardin hydroponique intelligent 12 capsules avec LED spectre complet et irrigation automatique. Finition blanc mat, 39,5 × 19,8 × 18,7 cm.",
+    "specs": {
+      "pods": "12 capsules",
+      "irrigation": "Irrigation auto",
+      "led": "LED spectre complet",
+      "qr": "Soins guidés par QR"
+    },
+    "helpTitle": "Besoin d'aide pour cultiver ?",
+    "helpDescription": "Notre équipe et les guides QR vous accompagnent — de la première pousse à la récolte.",
+    "emailPlaceholder": "Votre e-mail",
+    "cta": "Recevoir des conseils",
+    "emailOr": "Ou écrivez à"
+  },
+  "products": {
+    "gardens": {
+      "home-garden": {
+        "name": "PlantyHub Home Garden",
+        "tagline": "Format compact, récolte complète"
+      },
+      "starter-bundle": {
+        "name": "Pack de démarrage",
+        "tagline": "Jardin + capsules + nutriments"
+      },
+      "refill-kit": {
+        "name": "Kit de recharge mensuel",
+        "tagline": "Capsules + nutriments en abonnement"
+      }
+    },
+    "pods": {
+      "basil": { "name": "Capsules Basilic" },
+      "mint": { "name": "Capsules Menthe" },
+      "parsley": { "name": "Capsules Persil" },
+      "dill": { "name": "Capsules Aneth" },
+      "cilantro": { "name": "Capsules Coriandre" },
+      "green-onion": { "name": "Capsules Oignon vert" },
+      "arugula": { "name": "Capsules Roquette" },
+      "lettuce": { "name": "Capsules Laitue" },
+      "spinach": { "name": "Capsules Épinards" },
+      "tomato": { "name": "Capsules Tomates cerises" },
+      "herb-mix": { "name": "Mix Herbes & Verts" },
+      "nutrients": { "name": "Solution hydroponique" }
+    },
+    "accessories": {
+      "nutrients": { "name": "Solution nutritive 1L" },
+      "spare-lid": { "name": "Couvercle de jardin" },
+      "pod-tray": { "name": "Plateau de capsules" }
+    }
+  },
+  "cta": {
+    "title": "Prêt à cultiver chez vous ?",
+    "subtitle": "Rejoignez ceux qui récoltent des herbes fraîches chaque semaine. Votre jardin arrive en quelques jours.",
+    "button": "Voir le Home Garden"
+  },
+  "footer": {
+    "columns": {
+      "gardens": "Jardins intelligents",
+      "pods": "Capsules de graines",
+      "shopLearn": "Boutique & Conseils",
+      "company": "PlantyHub"
+    },
+    "links": {
+      "homeGarden": "Home Garden",
+      "starterBundle": "Pack de démarrage",
+      "monthlyRefills": "Recharges mensuelles",
+      "gardenSpecs": "Spécifications",
+      "allPods": "Toutes les capsules",
+      "herbMix": "Mix herbes",
+      "nutrientMix": "Solution nutritive",
+      "subscription": "Abonnement capsules",
+      "quickstart": "Démarrage rapide",
+      "plantCare": "Soins des plantes",
+      "shipping": "Livraison & retours",
+      "payment": "Paiement",
+      "ourStory": "Notre histoire",
+      "contact": "Contact",
+      "support": "Assistance",
+      "privacy": "Confidentialité"
+    },
+    "followUs": "Suivez-nous",
+    "newsletter": {
+      "title": "Conseils de culture par e-mail",
+      "description": "Pods de saison, recettes de récolte et guides d'entretien — pas de spam, juste du vert.",
+      "placeholder": "Votre e-mail",
+      "cta": "S'abonner"
+    },
+    "rights": "© {{year}} PlantyHub. Tous droits réservés.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "refunds": "Remboursements"
+  }
+}

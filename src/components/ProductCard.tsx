@@ -1,0 +1,124 @@
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
+import { useTranslation } from 'react-i18next'
+import { brand, carouselCardWidth } from '../theme'
+
+export type ProductCardData = {
+  id: string
+  name: string
+  price: string
+  compareAt?: string
+  image: string
+  pack?: string
+  tagline?: string
+  imageFit?: 'cover' | 'contain'
+}
+
+type ProductCardProps = {
+  product: ProductCardData
+  width?: number | string
+  layout?: 'carousel' | 'grid'
+}
+
+function toFlexBasis(width: number | string) {
+  return typeof width === 'number' ? `${width}px` : width
+}
+
+export default function ProductCard({ product, width, layout = 'carousel' }: ProductCardProps) {
+  const { t } = useTranslation()
+  const basis = toFlexBasis(width ?? carouselCardWidth.xs)
+  const basisSm = toFlexBasis(typeof width === 'number' ? width : carouselCardWidth.sm)
+  const basisMd = toFlexBasis(typeof width === 'number' ? width : `${carouselCardWidth.md}px`)
+
+  return (
+    <Box
+      data-scroll-item={layout === 'carousel' ? true : undefined}
+      sx={{
+        ...(layout === 'carousel'
+          ? {
+              flex: { xs: `0 0 ${basis}`, sm: `0 0 ${basisSm}`, md: `0 0 ${basisMd}` },
+              scrollSnapAlign: 'start',
+              maxWidth: { xs: carouselCardWidth.xs, sm: carouselCardWidth.sm },
+            }
+          : { width: '100%', p: 2 }),
+      }}
+    >
+      <Box
+        className="product-card-wrap"
+        sx={{
+          position: 'relative',
+          bgcolor: brand.white,
+          borderRadius: 3,
+          overflow: 'hidden',
+          aspectRatio: '1',
+          mb: 2,
+          border: `1px solid ${brand.border}`,
+          '@media (hover: hover)': {
+            '&:hover': {
+              boxShadow: brand.shadowHover,
+              transform: 'translateY(-4px)',
+            },
+          },
+        }}
+      >
+        <Box
+          component="img"
+          src={product.image}
+          alt={product.name}
+          loading="lazy"
+          sx={{
+            width: '100%',
+            height: '100%',
+            objectFit: product.imageFit ?? 'contain',
+            display: 'block',
+            p: (product.imageFit ?? 'contain') === 'contain' ? 1.5 : 0,
+            boxSizing: 'border-box',
+          }}
+        />
+        <IconButton
+          className="cart-btn"
+          aria-label={t('common.addToCartAria', { name: product.name })}
+          sx={{
+            position: 'absolute',
+            bottom: 12,
+            right: 12,
+            bgcolor: brand.plantGreen,
+            color: brand.white,
+            opacity: 1,
+            '@media (hover: hover)': {
+              opacity: 0,
+            },
+            '.product-card-wrap:hover &': {
+              '@media (hover: hover)': { opacity: 1 },
+            },
+            '&:hover': { bgcolor: brand.plantGreenDark },
+          }}
+        >
+          <ShoppingBagOutlinedIcon sx={{ fontSize: 20 }} />
+        </IconButton>
+      </Box>
+
+      <Stack spacing={0.35} sx={{ px: 0.25 }}>
+        <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' }, lineHeight: 1.35 }}>
+          {product.name}
+        </Typography>
+        {product.pack && (
+          <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
+            {product.pack}
+          </Typography>
+        )}
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center', pt: 0.25, flexWrap: 'wrap' }}>
+          <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' } }}>{product.price}</Typography>
+          {product.compareAt && (
+            <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through', fontSize: '0.85rem' }}>
+              {product.compareAt}
+            </Typography>
+          )}
+        </Stack>
+      </Stack>
+    </Box>
+  )
+}

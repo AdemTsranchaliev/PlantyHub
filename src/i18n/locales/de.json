@@ -1,0 +1,250 @@
+{
+  "promo": "KOSTENLOSER VERSAND AB €130",
+  "nav": {
+    "gardens": "Indoor-Gärten",
+    "pods": "Saat-Pods",
+    "accessories": "Zubehör",
+    "support": "Support"
+  },
+  "header": {
+    "region": "EU (€)",
+    "login": "Anmelden",
+    "search": "Suchen",
+    "cart": "Warenkorb",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "common": {
+    "addToCart": "In den Warenkorb",
+    "addToCartAria": "{{name}} in den Warenkorb legen",
+    "readMore": "Mehr lesen",
+    "pack3": "3er-Pack",
+    "pack9": "9er-Pack",
+    "bottle1L": "1L Flasche",
+    "colorWhite": "Weiß Matt",
+    "colorStandard": "Standard"
+  },
+  "hero": {
+    "eyebrow": "Smarte Hydroponik",
+    "titleBefore": "Frisches Grün,",
+    "titleHighlight": "null Rätselraten",
+    "description": "PlantyHub bringt einen 12-Pod Indoor-Garten in deine Küche — automatische Bewässerung, Vollspektrum-Licht und biologisch abbaubare Pods. Aufbau in Minuten, Ernte in Wochen.",
+    "ctaPrimary": "Home Garden shoppen",
+    "ctaSecondary": "Saat-Pods entdecken",
+    "priceFrom": "Ab {{price}}",
+    "priceLabel": "Home Garden",
+    "shippingNote": "Kostenloser Versand ab €130",
+    "imageAlt": "PlantyHub Küchengarten mit frischen Kräutern",
+    "badge": "12-Pod Smart Garden",
+    "scrollHint": "Zu den Produkten"
+  },
+  "featured": {
+    "badge": "Flaggschiff",
+    "title": "PlantyHub Home Garden",
+    "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED und automatischer Bewässerung. Weißes Mattfinish, das auf jeder Arbeitsfläche gut aussieht.",
+    "cta": "In den Warenkorb"
+  },
+  "campaign": {
+    "eyebrow": "Starter-Auswahl",
+    "title": "Alles, um mit dem Anbau zu starten",
+    "description": "Home Garden + Pods + Nährlösung. Spare 15 % beim Bündeln deiner Favoriten.",
+    "cta": "Bundle & 15 % sparen",
+    "imageAlt": "PlantyHub Starter-Paket"
+  },
+  "sleek": {
+    "eyebrow": "Unsere Gärten",
+    "title": "Für den Alltag in der Küche",
+    "subtitle": "Unsere Indoor-Gärten helfen dir, wie ein Profi zu wachsen — ohne dass du wissen musst, was du tust.",
+    "discoverAll": "Alle Gärten entdecken"
+  },
+  "podsSection": {
+    "eyebrow": "Nachfüllungen & Aromen",
+    "title": "Saat-Pods",
+    "shopAll": "Alle Saat-Pods"
+  },
+  "accessoriesSection": {
+    "title": "Zubehör"
+  },
+  "press": {
+    "eyebrow": "Aus dem Blog",
+    "title": "Pflanzenpflege & Stories",
+    "articles": {
+      "pesto": {
+        "date": "12. Juni 2025",
+        "title": "Von der Küche auf den Tisch — Basilikum-Pesto in 5 Wochen",
+        "excerpt": "Eine einfache Rezeptserie vom Pod bis auf den Teller mit deiner ersten PlantyHub-Ernte."
+      },
+      "hydroponics": {
+        "date": "28. Mai 2025",
+        "title": "Warum Hydroponik 90 % weniger Wasser verbraucht",
+        "excerpt": "Die Wissenschaft hinter smarten Indoor-Gärten und warum sie die nachhaltige Wahl für Stadtwohnungen sind."
+      },
+      "partnership": {
+        "date": "10. Mai 2025",
+        "title": "PlantyHub × Sustainable Living EU",
+        "excerpt": "Wir haben uns mit umweltbewussten Creators zusammengetan, um zu zeigen, wie ein Garten den Alltag verändert."
+      },
+      "earthday": {
+        "date": "22. April 2025",
+        "title": "Earth Day: Selbst anbauen, weniger verschwenden",
+        "excerpt": "Wie biologisch abbaubare Pods und lokaler Anbau Plastik- und Lebensmittelabfälle reduzieren."
+      }
+    }
+  },
+  "growSmarter": {
+    "title": "Klüger wachsen, nicht härter",
+    "subtitle": "Starte mit uns ins Indoor-Gärtnern",
+    "items": {
+      "zero": {
+        "title": "Keine Lernkurve",
+        "description": "5 Minuten Aufbau. Ein paar Tage bis zum Keimen. Ein paar Wochen bis zur Ernte. Keine Gartenkenntnisse nötig."
+      },
+      "noSoil": {
+        "title": "Keine Erde, kein Zweifel",
+        "description": "Samen, Nährstoffe, Feuchtigkeit — unsere biologisch abbaubaren Pods erledigen alles. Kein Chaos."
+      },
+      "fresh": {
+        "title": "Frisch schlägt den Supermarkt",
+        "description": "Vom Garten auf den Teller in Sekunden. Nährstoffe erhalten, keine Zusatzstoffe."
+      }
+    }
+  },
+  "guarantees": {
+    "title": "Warum sie nicht genug von uns bekommen können",
+    "items": {
+      "sprouting": {
+        "title": "Keim-Garantie",
+        "description": "Wir ersetzen Pods, die nicht wachsen"
+      },
+      "yearRound": {
+        "title": "Ganzjährig wachsen",
+        "description": "Saisonale Grenzen? Kennen wir nicht"
+      },
+      "support": {
+        "title": "Experten-Support",
+        "description": "QR-Anleitungen auf jedem Pod"
+      },
+      "sustainable": {
+        "title": "Sauber & nachhaltig",
+        "description": "Weniger Abfall als Supermarkt-Kräuter"
+      }
+    }
+  },
+  "community": {
+    "stat": "Werde Teil unserer Community!",
+    "title": "Werde Teil unserer Community",
+    "subtitle": "Echte Gärtner. Echte Ernten. Echte Freude.",
+    "posts": {
+      "elena": "Morgendlicher Minztee aus meinem eigenen Küchengarten — die Freude ist unbeschreiblich.",
+      "urbanherbs": "Perfekt für jemanden, der normalerweise keine Pflanzen am Leben hält. PlantyHub funktioniert einfach.",
+      "freshplate": "Nichts schmeckt so gut wie selbst angebauter Salat ohne unnötige Zusätze.",
+      "gail": "Ich war noch nie so gespannt auf wachsende Pflanzen. Kann die Erdbeeren kaum erwarten!",
+      "homeinestonia": "Mojitos mit frischer Pfefferminze das ganze Jahr!",
+      "mamaloves": "Das beste Küchen-Upgrade überhaupt. Die Kinder lieben es, die Keimlinge zu checken.",
+      "blogilates": "Ich kannte die Freude am EIGENEN Anbau nicht, bis PlantyHub kam.",
+      "reese": "Die Pflanzen wuchsen so schnell, es hat mich umgehauen. Das Design ist auch stunning."
+    },
+    "handles": {
+      "elena": "elenagrows",
+      "urbanherbs": "urbanherbs_berlin",
+      "freshplate": "freshplate_daily",
+      "gail": "gailofthegarden",
+      "homeinestonia": "homeinestonia",
+      "mamaloves": "thismamaloveslife",
+      "blogilates": "blogilates",
+      "reese": "reeseology_"
+    }
+  },
+  "support": {
+    "name": "PlantyHub Home Garden",
+    "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED und automatischer Bewässerung. Weiß matt, 39,5 × 19,8 × 18,7 cm.",
+    "specs": {
+      "pods": "12 Anbau-Pods",
+      "irrigation": "Auto-Bewässerung",
+      "led": "Vollspektrum-LED",
+      "qr": "QR-Pflege pro Pod"
+    },
+    "helpTitle": "Brauchst du Hilfe beim Anbau?",
+    "helpDescription": "Unser Support und QR-Anleitungen begleiten dich — vom ersten Keimling bis zur Ernte.",
+    "emailPlaceholder": "Deine E-Mail",
+    "cta": "Anbau-Tipps erhalten",
+    "emailOr": "Oder E-Mail an"
+  },
+  "products": {
+    "gardens": {
+      "home-garden": {
+        "name": "PlantyHub Home Garden",
+        "tagline": "Kompakt, volle Ernte"
+      },
+      "starter-bundle": {
+        "name": "Starter-Paket",
+        "tagline": "Garten + Pods + Nährstoffe"
+      },
+      "refill-kit": {
+        "name": "Monatliches Nachfüll-Paket",
+        "tagline": "Pods + Nährstoffe im Abo"
+      }
+    },
+    "pods": {
+      "basil": { "name": "Basilikum Saat-Pods" },
+      "mint": { "name": "Minze Saat-Pods" },
+      "parsley": { "name": "Petersilie Saat-Pods" },
+      "dill": { "name": "Dill Saat-Pods" },
+      "cilantro": { "name": "Koriander Saat-Pods" },
+      "green-onion": { "name": "Frühlingszwiebel Pods" },
+      "arugula": { "name": "Rucola Saat-Pods" },
+      "lettuce": { "name": "Grüner Salat Pods" },
+      "spinach": { "name": "Spinat Saat-Pods" },
+      "tomato": { "name": "Cherry-Tomaten Pods" },
+      "herb-mix": { "name": "Kräuter & Grün Mix" },
+      "nutrients": { "name": "Hydroponik-Nährlösung" }
+    },
+    "accessories": {
+      "nutrients": { "name": "Nährlösung 1L" },
+      "spare-lid": { "name": "Garten-Deckel" },
+      "pod-tray": { "name": "Pod-Aufbewahrung" }
+    }
+  },
+  "cta": {
+    "title": "Bereit, selbst anzubauen?",
+    "subtitle": "Schließe dich Haushalten an, die jede Woche frische Kräuter ernten. Dein Garten ist in wenigen Tagen da.",
+    "button": "Home Garden shoppen"
+  },
+  "footer": {
+    "columns": {
+      "gardens": "Smarte Gärten",
+      "pods": "Saat-Pods",
+      "shopLearn": "Shop & Wissen",
+      "company": "PlantyHub"
+    },
+    "links": {
+      "homeGarden": "Home Garden",
+      "starterBundle": "Starter-Paket",
+      "monthlyRefills": "Monatliche Nachfüllung",
+      "gardenSpecs": "Garten-Specs",
+      "allPods": "Alle Saat-Pods",
+      "herbMix": "Kräuter-Mix",
+      "nutrientMix": "Nährlösung",
+      "subscription": "Pod-Abo",
+      "quickstart": "Schnellstart",
+      "plantCare": "Pflanzenpflege",
+      "shipping": "Versand & Retouren",
+      "payment": "Zahlungsarten",
+      "ourStory": "Unsere Geschichte",
+      "contact": "Kontakt",
+      "support": "Support",
+      "privacy": "Datenschutz"
+    },
+    "followUs": "Folge uns",
+    "newsletter": {
+      "title": "Tipps fürs Anbauen per E-Mail",
+      "description": "Saisonale Pods, Erntrezepte und Pflegeguides — kein Spam, nur Grün.",
+      "placeholder": "Deine E-Mail",
+      "cta": "Abonnieren"
+    },
+    "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "refunds": "Erstattung"
+  }
+}

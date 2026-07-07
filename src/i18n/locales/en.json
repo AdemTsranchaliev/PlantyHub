@@ -1,0 +1,250 @@
+{
+  "promo": "FREE SHIPPING ON ORDERS OVER €130",
+  "nav": {
+    "gardens": "Home Gardens",
+    "pods": "Seed Pods",
+    "accessories": "Accessories",
+    "support": "Support"
+  },
+  "header": {
+    "region": "EU (€)",
+    "login": "Log in",
+    "search": "Search",
+    "cart": "Cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "common": {
+    "addToCart": "Add to cart",
+    "addToCartAria": "Add {{name}} to cart",
+    "readMore": "Read more",
+    "pack3": "3-pack",
+    "pack9": "9-pack",
+    "bottle1L": "1L bottle",
+    "colorWhite": "White Matte",
+    "colorStandard": "Standard"
+  },
+  "hero": {
+    "eyebrow": "Smart hydroponic gardening",
+    "titleBefore": "Fresh greens,",
+    "titleHighlight": "zero guesswork",
+    "description": "PlantyHub brings a 12-pod indoor garden to your kitchen — automatic watering, full-spectrum light, and biodegradable pods. Set up in minutes, harvest in weeks.",
+    "ctaPrimary": "Shop Home Garden",
+    "ctaSecondary": "Browse seed pods",
+    "priceFrom": "From {{price}}",
+    "priceLabel": "Home Garden",
+    "shippingNote": "Free shipping on orders over €130",
+    "imageAlt": "PlantyHub kitchen garden with fresh herbs",
+    "badge": "12-pod smart garden",
+    "scrollHint": "Scroll to products"
+  },
+  "featured": {
+    "badge": "Flagship",
+    "title": "PlantyHub Home Garden",
+    "description": "12-pod smart hydroponic garden with full-spectrum LED and automatic irrigation. White matte finish designed to sit beautifully on any countertop.",
+    "cta": "Add to cart"
+  },
+  "campaign": {
+    "eyebrow": "Starter picks",
+    "title": "Everything you need to start growing",
+    "description": "Home Garden + pod varieties + nutrient mix. Save 15% when you bundle your favorites.",
+    "cta": "Bundle & save 15%",
+    "imageAlt": "PlantyHub starter bundle"
+  },
+  "sleek": {
+    "eyebrow": "Our gardens",
+    "title": "Designed for everyday kitchens",
+    "subtitle": "Our indoor gardens help you grow like a pro — minus all the knowing-what-you're-doing part.",
+    "discoverAll": "Discover all gardens"
+  },
+  "podsSection": {
+    "eyebrow": "Refills & flavors",
+    "title": "Seed Pods",
+    "shopAll": "Shop all seed pods"
+  },
+  "accessoriesSection": {
+    "title": "Accessories"
+  },
+  "press": {
+    "eyebrow": "From the blog",
+    "title": "Plant care & stories",
+    "articles": {
+      "pesto": {
+        "date": "Jun 12, 2025",
+        "title": "Kitchen to Table — Basil Pesto in 5 Weeks",
+        "excerpt": "A simple recipe series showing how to go from pod to plate with your first PlantyHub harvest."
+      },
+      "hydroponics": {
+        "date": "May 28, 2025",
+        "title": "Why Hydroponics Uses 90% Less Water",
+        "excerpt": "The science behind smart indoor gardens and why they're the sustainable choice for urban homes."
+      },
+      "partnership": {
+        "date": "May 10, 2025",
+        "title": "PlantyHub × Sustainable Living EU",
+        "excerpt": "We partnered with eco-conscious creators to show how one garden can change your daily routine."
+      },
+      "earthday": {
+        "date": "Apr 22, 2025",
+        "title": "Earth Day: Grow Your Own, Waste Less",
+        "excerpt": "How biodegradable pods and local growing help reduce plastic and food waste at home."
+      }
+    }
+  },
+  "growSmarter": {
+    "title": "Grow smarter, not harder",
+    "subtitle": "Pick up indoor gardening with us",
+    "items": {
+      "zero": {
+        "title": "Zero learning curve",
+        "description": "5 minutes to set up. A few days to sprout. A couple of weeks to harvest. No gardening skills required."
+      },
+      "noSoil": {
+        "title": "No soil, no doubt",
+        "description": "Seeds, nutrients, moisture control — our biodegradable pods handle it all. No mess, no stress."
+      },
+      "fresh": {
+        "title": "Fresh beats the store",
+        "description": "Garden to plate in seconds. Nutrients intact, no additives. This is how greens were meant to taste."
+      }
+    }
+  },
+  "guarantees": {
+    "title": "Why people can't get enough of us",
+    "items": {
+      "sprouting": {
+        "title": "Sprouting guarantee",
+        "description": "We replace pods that don't grow"
+      },
+      "yearRound": {
+        "title": "Grow year-round",
+        "description": "Seasonal limits? Don't know her"
+      },
+      "support": {
+        "title": "Expert support",
+        "description": "Scan QR guides on every pod"
+      },
+      "sustainable": {
+        "title": "Clean & sustainable",
+        "description": "Less waste than store-bought herbs"
+      }
+    }
+  },
+  "community": {
+    "stat": "Join our thriving community!",
+    "title": "Join our growing community",
+    "subtitle": "Real growers. Real harvests. Real joy.",
+    "posts": {
+      "elena": "Morning mint tea from my own kitchen garden — you don't understand the joy until you grow your own.",
+      "urbanherbs": "Perfect for someone who normally can't keep plants alive. PlantyHub just works.",
+      "freshplate": "Nothing tastes as good as self-grown lettuce, without unnecessary additives.",
+      "gail": "I've never been so excited to watch plants grow. Can't wait for the strawberries!",
+      "homeinestonia": "Mojitos with fresh peppermint all year around!",
+      "mamaloves": "Pretty much the greatest kitchen upgrade ever. The kids love checking on the sprouts.",
+      "blogilates": "I didn't know the pleasure of GROWING my own food until PlantyHub.",
+      "reese": "The plants grew so fast it blew my mind. Design is stunning too."
+    },
+    "handles": {
+      "elena": "elenagrows",
+      "urbanherbs": "urbanherbs_berlin",
+      "freshplate": "freshplate_daily",
+      "gail": "gailofthegarden",
+      "homeinestonia": "homeinestonia",
+      "mamaloves": "thismamaloveslife",
+      "blogilates": "blogilates",
+      "reese": "reeseology_"
+    }
+  },
+  "support": {
+    "name": "PlantyHub Home Garden",
+    "description": "12-pod smart hydroponic garden with full-spectrum LED and automatic irrigation. White matte finish, 39.5 × 19.8 × 18.7 cm.",
+    "specs": {
+      "pods": "12 growing pods",
+      "irrigation": "Auto irrigation",
+      "led": "Full-spectrum LED",
+      "qr": "QR-guided pod care"
+    },
+    "helpTitle": "Need help growing?",
+    "helpDescription": "Our support team and QR pod guides are here for every step — from first sprout to harvest.",
+    "emailPlaceholder": "Your email",
+    "cta": "Get growing tips",
+    "emailOr": "Or email"
+  },
+  "products": {
+    "gardens": {
+      "home-garden": {
+        "name": "PlantyHub Home Garden",
+        "tagline": "Compact size, full harvest"
+      },
+      "starter-bundle": {
+        "name": "Starter Bundle",
+        "tagline": "Garden + pods + nutrients"
+      },
+      "refill-kit": {
+        "name": "Monthly Refill Kit",
+        "tagline": "Pods + nutrients on repeat"
+      }
+    },
+    "pods": {
+      "basil": { "name": "Basil Seed Pods" },
+      "mint": { "name": "Mint Seed Pods" },
+      "parsley": { "name": "Parsley Seed Pods" },
+      "dill": { "name": "Dill Seed Pods" },
+      "cilantro": { "name": "Cilantro Seed Pods" },
+      "green-onion": { "name": "Green Onion Seed Pods" },
+      "arugula": { "name": "Arugula Seed Pods" },
+      "lettuce": { "name": "Green Lettuce Pods" },
+      "spinach": { "name": "Spinach Seed Pods" },
+      "tomato": { "name": "Cherry Tomato Seed Pods" },
+      "herb-mix": { "name": "Herb & Greens Mix" },
+      "nutrients": { "name": "Hydroponic Nutrient Mix" }
+    },
+    "accessories": {
+      "nutrients": { "name": "Nutrient Mix 1L" },
+      "spare-lid": { "name": "Garden Lid Cover" },
+      "pod-tray": { "name": "Pod Storage Tray" }
+    }
+  },
+  "cta": {
+    "title": "Ready to grow your own?",
+    "subtitle": "Join home growers who harvest fresh herbs every week. Your kitchen garden ships in days.",
+    "button": "Shop Home Garden"
+  },
+  "footer": {
+    "columns": {
+      "gardens": "Smart Gardens",
+      "pods": "Seed Pods",
+      "shopLearn": "Shop & Learn",
+      "company": "PlantyHub"
+    },
+    "links": {
+      "homeGarden": "Home Garden",
+      "starterBundle": "Starter Bundle",
+      "monthlyRefills": "Monthly Refills",
+      "gardenSpecs": "Garden Specs",
+      "allPods": "All Seed Pods",
+      "herbMix": "Herb & Greens Mix",
+      "nutrientMix": "Nutrient Mix",
+      "subscription": "Pod Subscription",
+      "quickstart": "Garden Quickstart",
+      "plantCare": "Plant Care Tips",
+      "shipping": "Shipping & Returns",
+      "payment": "Payment Options",
+      "ourStory": "Our Story",
+      "contact": "Contact Us",
+      "support": "Support",
+      "privacy": "Privacy Policy"
+    },
+    "followUs": "Follow us",
+    "newsletter": {
+      "title": "Growing tips in your inbox",
+      "description": "Seasonal pod picks, harvest recipes, and care guides — no spam, just greens.",
+      "placeholder": "Your email",
+      "cta": "Subscribe"
+    },
+    "rights": "© {{year}} PlantyHub. All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "refunds": "Refunds"
+  }
+}
