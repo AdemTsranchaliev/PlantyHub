@@ -2,15 +2,16 @@ import Box from '@mui/material/Box'
 import PromoBar from './components/PromoBar'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import FloatingBuyButton from './components/FloatingBuyButton'
 import HeroSection from './sections/HeroSection'
-import FeaturedGardenSection from './sections/FeaturedGardenSection'
-import GardensGridSection from './sections/GardensGridSection'
-import CampaignHero from './sections/CampaignHero'
-import PodsCarouselSection from './sections/PodsCarouselSection'
 import GrowSmarterSection from './sections/GrowSmarterSection'
+import ProductSection from './sections/ProductSection'
+import HowItWorksSection from './sections/HowItWorksSection'
+import LightCycleSection from './sections/LightCycleSection'
+import PodsGridSection from './sections/PodsGridSection'
+import SocialProofSection from './sections/SocialProofSection'
 import GuaranteesSection from './sections/GuaranteesSection'
-import PressSection from './sections/PressSection'
-import CommunitySection from './sections/CommunitySection'
+import AccessoriesSection from './sections/AccessoriesSection'
 import CtaSection from './sections/CtaSection'
 import { brand } from './theme'
 
@@ -21,17 +22,18 @@ function App() {
       <Header />
       <main>
         <HeroSection />
-        <FeaturedGardenSection />
-        <GardensGridSection />
-        <CampaignHero />
-        <PodsCarouselSection />
         <GrowSmarterSection />
+        <ProductSection />
+        <HowItWorksSection />
+        <LightCycleSection />
+        <PodsGridSection />
+        <SocialProofSection />
         <GuaranteesSection />
-        <PressSection />
-        <CommunitySection />
+        <AccessoriesSection />
         <CtaSection />
       </main>
       <Footer />
+      <FloatingBuyButton />
     </Box>
   )
 }

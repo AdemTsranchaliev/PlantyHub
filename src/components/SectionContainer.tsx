@@ -25,7 +25,7 @@ export default function SectionContainer({
   bleedX = false,
 }: SectionContainerProps) {
   return (
-    <Box id={id} component="section" sx={{ bgcolor, py }}>
+    <Box id={id} component="section" sx={{ bgcolor, py, scrollMarginTop: id ? { xs: 64, md: 76 } : 0 }}>
       <Box
         sx={{
           maxWidth: 1400,

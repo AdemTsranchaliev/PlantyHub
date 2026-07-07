@@ -1,26 +1,29 @@
 import { createTheme } from '@mui/material/styles'
 
 export const brand = {
-  plantGreen: '#4CAF50',
-  plantGreenDark: '#3d8b40',
-  plantGreenLight: '#66bb6a',
-  plantGreenMuted: 'rgba(76, 175, 80, 0.12)',
-  plantGreenGlow: 'rgba(76, 175, 80, 0.22)',
-  graphite: '#2B2B2B',
-  graphiteSoft: '#1a1a1a',
+  plantGreen: '#2F7D53',
+  plantGreenDark: '#1F5A3B',
+  plantGreenLight: '#4CA374',
+  plantGreenMuted: 'rgba(47, 125, 83, 0.10)',
+  plantGreenGlow: 'rgba(47, 125, 83, 0.16)',
+  peach: '#E39F76',
+  peachSoft: '#F3E1D2',
+  peachGlow: 'rgba(227, 159, 118, 0.28)',
+  graphite: '#22301F',
+  graphiteSoft: '#16211A',
   white: '#FFFFFF',
-  beige: '#E8E5DA',
-  beigeDark: '#d9d5c8',
-  textSecondary: '#6b6b6b',
-  surface: '#f7f6f3',
-  surfaceWarm: '#f0efe9',
-  border: '#e5e4e0',
-  shadow: '0 8px 32px rgba(43, 43, 43, 0.08)',
-  shadowHover: '0 16px 48px rgba(43, 43, 43, 0.12)',
-  shadowGreen: '0 20px 60px rgba(76, 175, 80, 0.18)',
+  beige: '#EFE9DB',
+  beigeDark: '#E2DBC9',
+  textSecondary: '#5f665a',
+  surface: '#F7F4EC',
+  surfaceWarm: '#F0EADC',
+  border: '#E6DFCF',
+  shadow: '0 6px 28px rgba(34, 48, 31, 0.06)',
+  shadowHover: '0 22px 60px rgba(34, 48, 31, 0.14)',
+  shadowGreen: '0 12px 30px rgba(47, 125, 83, 0.22)',
   touchMin: 44,
-  gradientHero: 'linear-gradient(135deg, #f7f6f3 0%, #eef5ee 45%, #E8E5DA 100%)',
-  gradientCta: 'linear-gradient(135deg, #3d8b40 0%, #4CAF50 55%, #66bb6a 100%)',
+  gradientHero: 'linear-gradient(165deg, #FBF9F3 0%, #F3EEE1 55%, #ECF1E9 100%)',
+  gradientCta: 'linear-gradient(140deg, #1F5A3B 0%, #2F7D53 62%, #4CA374 100%)',
 } as const
 
 export const carouselCardWidth = {
@@ -29,6 +32,9 @@ export const carouselCardWidth = {
   md: 250,
   lg: 260,
 } as const
+
+const displayFont = '"Fraunces", "Georgia", "Times New Roman", serif'
+const bodyFont = '"Nunito Sans", "Helvetica Neue", "Arial", sans-serif'
 
 const theme = createTheme({
   breakpoints: {
@@ -43,25 +49,32 @@ const theme = createTheme({
     divider: brand.border,
   },
   typography: {
-    fontFamily: '"Nunito Sans", "Helvetica Neue", "Arial", sans-serif',
+    fontFamily: bodyFont,
     h1: {
-      fontWeight: 700,
-      fontSize: '2.25rem',
-      lineHeight: 1.08,
-      letterSpacing: '-0.035em',
-      '@media (min-width:600px)': { fontSize: '2.75rem' },
-      '@media (min-width:900px)': { fontSize: '3.25rem' },
+      fontFamily: displayFont,
+      fontWeight: 600,
+      fontSize: '2.35rem',
+      lineHeight: 1.06,
+      letterSpacing: '-0.02em',
+      '@media (min-width:600px)': { fontSize: '3.2rem' },
+      '@media (min-width:900px)': { fontSize: '3.9rem' },
     },
     h2: {
-      fontWeight: 700,
-      fontSize: '1.75rem',
-      lineHeight: 1.12,
-      letterSpacing: '-0.03em',
-      '@media (min-width:900px)': { fontSize: '2.25rem' },
+      fontFamily: displayFont,
+      fontWeight: 600,
+      fontSize: '2rem',
+      lineHeight: 1.1,
+      letterSpacing: '-0.015em',
+      '@media (min-width:900px)': { fontSize: '2.6rem' },
     },
-    button: { fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.01em' },
+    h3: {
+      fontFamily: displayFont,
+      fontWeight: 600,
+      letterSpacing: '-0.01em',
+    },
+    button: { fontFamily: bodyFont, fontWeight: 700, fontSize: '0.9rem', letterSpacing: '0.01em' },
   },
-  shape: { borderRadius: 12 },
+  shape: { borderRadius: 16 },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -69,17 +82,24 @@ const theme = createTheme({
           textTransform: 'none',
           borderRadius: 999,
           minHeight: brand.touchMin,
-          padding: '12px 24px',
+          padding: '12px 26px',
           boxShadow: 'none',
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease',
           '&:hover': { boxShadow: 'none' },
         },
-        sizeLarge: { minHeight: 48, padding: '14px 28px', fontSize: '0.95rem' },
-        contained: { backgroundColor: brand.plantGreen, color: brand.white, '&:hover': { backgroundColor: brand.plantGreenDark } },
+        sizeLarge: { minHeight: 52, padding: '15px 32px', fontSize: '0.95rem' },
+        contained: {
+          backgroundColor: brand.plantGreen,
+          color: brand.white,
+          '@media (hover: hover)': {
+            '&:hover': { backgroundColor: brand.plantGreenDark, transform: 'translateY(-2px)', boxShadow: brand.shadowGreen },
+          },
+        },
         outlined: {
-          borderColor: brand.border,
+          borderColor: brand.graphite,
           color: brand.graphite,
           borderWidth: 1.5,
-          '&:hover': { borderWidth: 1.5, backgroundColor: brand.surface, borderColor: brand.graphite },
+          '&:hover': { borderWidth: 1.5, backgroundColor: brand.graphite, borderColor: brand.graphite, color: brand.white },
         },
       },
     },

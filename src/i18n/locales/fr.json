@@ -1,13 +1,14 @@
 {
-  "promo": "LIVRAISON GRATUITE DÈS €130",
+  "promo": "LIVRAISON GRATUITE DÈS €130 · UE & BALKANS",
   "nav": {
-    "gardens": "Jardins d'intérieur",
-    "pods": "Capsules de graines",
+    "product": "Produit",
+    "howItWorks": "Comment ça marche",
+    "pods": "Capsules",
     "accessories": "Accessoires",
-    "support": "Assistance"
+    "buyNow": "Acheter"
   },
   "header": {
-    "region": "UE (€)",
+    "region": "UE & Balkans (€)",
     "login": "Connexion",
     "search": "Rechercher",
     "cart": "Panier",
@@ -20,27 +21,81 @@
     "readMore": "Lire la suite",
     "pack3": "Lot de 3",
     "pack9": "Lot de 9",
+    "pack12": "Lot de 12",
     "bottle1L": "Bouteille 1L",
+    "bottle2x100ml": "2×100 ml",
     "colorWhite": "Blanc Mat",
     "colorStandard": "Standard"
   },
   "hero": {
-    "eyebrow": "Hydroponie intelligente",
-    "titleBefore": "Verts frais,",
-    "titleHighlight": "zéro incertitude",
-    "description": "PlantyHub apporte un jardin d'intérieur 12 pods dans votre cuisine — arrosage automatique, lumière spectre complet et capsules biodégradables. Installation en minutes, récolte en semaines.",
-    "ctaPrimary": "Voir le Home Garden",
-    "ctaSecondary": "Parcourir les capsules",
-    "priceFrom": "À partir de {{price}}",
-    "priceLabel": "Home Garden",
-    "shippingNote": "Livraison gratuite dès €130",
-    "imageAlt": "Jardin de cuisine PlantyHub avec herbes fraîches",
-    "badge": "Jardin intelligent 12 pods",
-    "scrollHint": "Voir les produits"
+    "title": "Des verts frais à la maison",
+    "promise": "De la graine à la salade en 18 jours",
+    "description": "PlantyHub HomeGarder One — jardin hydroponique 12 pods, arrosage auto et cycle LED 16/8h.",
+    "ctaPrimary": "Acheter",
+    "ctaSecondary": "Comment ça marche",
+    "priceLabel": "HomeGarder One",
+    "imageAlt": "PlantyHub HomeGarder One",
+    "badge": "Noté 4,9/5 par 500+ jardiniers",
+    "trust": {
+      "shipping": "Livraison UE offerte dès 130 €",
+      "guarantee": "Garantie de germination",
+      "setup": "Prêt en 5 minutes"
+    },
+    "stats": {
+      "pods": { "value": "12", "label": "emplacements" },
+      "light": { "value": "16/8h", "label": "cycle lumineux" },
+      "height": { "value": "jusqu'à 40 cm", "label": "hauteur de croissance" }
+    }
+  },
+  "product": {
+    "eyebrow": "Produit",
+    "title": "PlantyHub HomeGarder One",
+    "description": "Jardin hydroponique intelligent — 12 pods, LED spectre complet, irrigation auto.",
+    "cta": "Ajouter au panier",
+    "trust": {
+      "shipping": "Livraison offerte dès 130 €",
+      "guarantee": "Garantie de germination",
+      "returns": "Retours sous 30 jours"
+    },
+    "specs": {
+      "pods": "Emplacements", "podsValue": "12 capsules",
+      "light": "Lumière", "lightValue": "LED spectre complet · 16h / 8h repos",
+      "growthHeight": "Hauteur", "growthHeightValue": "Jusqu'à 40 cm",
+      "irrigation": "Arrosage", "irrigationValue": "Automatique",
+      "nutrients": "Nutriments", "nutrientsValue": "Sana A + B",
+      "dimensions": "Dimensions", "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
+    }
+  },
+  "socialProof": {
+    "stat": "500+", "statLabel": "jardins à domicile",
+    "subtitle": "De vraies personnes, de vraies récoltes.",
+    "reviews": {
+      "elena": "Thé à la menthe du matin de mon propre jardin.",
+      "urbanherbs": "PlantyHub fonctionne tout simplement.",
+      "freshplate": "La laitue cultivée soi-même a un goût incomparable."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "Comment ça marche", "title": "4 étapes jusqu'à la récolte",
+    "subtitle": "De la boîte à l'assiette.",
+    "steps": {
+      "placeCapsule": { "title": "Placez la capsule", "description": "Retirez l'autocollant et insérez-la." },
+      "addSolution": { "title": "Ajoutez la solution", "description": "Eau et Sana A & B selon les instructions." },
+      "turnOn": { "title": "Allumez", "description": "LED 16h allumée, 8h repos — automatique." },
+      "harvest": { "title": "Récoltez", "description": "Environ 18 jours — herbes fraîches." }
+    }
+  },
+  "lightCycle": {
+    "eyebrow": "Cycle lumineux", "title": "16 heures allumé, 8 repos",
+    "description": "LED spectre complet pour la germination et la croissance.",
+    "onLabel": "16h — croissance", "onDescription": "Lumière LED toute la journée.",
+    "offLabel": "8h — repos", "offDescription": "Les plantes se reposent.",
+    "diagramLabel": "Cycle 24 heures",
+    "days": { "0": "Lun", "1": "Mar", "2": "Mer", "3": "Jeu" }
   },
   "featured": {
     "badge": "Phare",
-    "title": "PlantyHub Home Garden",
+    "title": "PlantyHub HomeGarder One",
     "description": "Jardin hydroponique intelligent 12 pods avec LED spectre complet et irrigation automatique. Finition blanc mat conçue pour s'intégrer à tout plan de travail.",
     "cta": "Ajouter au panier"
   },
@@ -51,6 +106,25 @@
     "cta": "Pack & -15 %",
     "imageAlt": "Pack de démarrage PlantyHub"
   },
+  "starterBundle": {
+    "eyebrow": "Pack de démarrage",
+    "title": "HomeGarder One + PlantyHub Pods",
+    "description": "Le jardin et le kit de plantation arrivent dans une seule boîte.",
+    "diyKitTitle": "Kit Plantez-vous inclut :",
+    "cta": "Ajouter le pack",
+    "imageAlt": "Pack de démarrage PlantyHub",
+    "items": {
+      "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 pods, cycle LED 16h, arrosage auto." },
+      "seedPodsBox": { "title": "Boîte PlantyHub Pods", "description": "12 capsules — 2× roquette, laitue, menthe, persil, basilic, fleurs comestibles." },
+      "diyKit": { "title": "Kit Plantez-vous", "description": "12 capsules, Sana A & B 100 ml, 12 bouchons de germination." },
+      "unifiedShipping": { "title": "Une seule boîte", "description": "Tout livré ensemble — prêt à installer." }
+    },
+    "details": {
+      "arugula": "Roquette ×2", "lettuce": "Laitue ×2", "mint": "Menthe ×2", "parsley": "Persil ×2",
+      "basil": "Basilic ×2", "edibleFlowers": "Fleurs comestibles ×2", "emptyCapsules": "12 capsules",
+      "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 bouchons", "instructions": "Instructions de dosage"
+    }
+  },
   "sleek": {
     "eyebrow": "Nos jardins",
     "title": "Conçus pour la cuisine du quotidien",
@@ -58,12 +132,18 @@
     "discoverAll": "Découvrir tous les jardins"
   },
   "podsSection": {
-    "eyebrow": "Recharges & saveurs",
-    "title": "Capsules de graines",
-    "shopAll": "Toutes les capsules"
+    "eyebrow": "PlantyHub Pods",
+    "title": "6 saveurs pour votre jardin",
+    "subtitle": "Capsules de graines — vendues aussi séparément."
+  },
+  "consumablesSection": {
+    "eyebrow": "Consommables",
+    "title": "Capsules, nutriments & bouchons",
+    "subtitle": "Capsules vides, Sana A & B et bouchons de germination."
   },
   "accessoriesSection": {
-    "title": "Accessoires"
+    "title": "Accessoires",
+    "subtitle": "Armoire de rangement, étagère murale et couteau à herbes."
   },
   "press": {
     "eyebrow": "Du blog",
@@ -156,13 +236,13 @@
     }
   },
   "support": {
-    "name": "PlantyHub Home Garden",
-    "description": "Jardin hydroponique intelligent 12 capsules avec LED spectre complet et irrigation automatique. Finition blanc mat, 39,5 × 19,8 × 18,7 cm.",
+    "name": "PlantyHub HomeGarder One",
+    "description": "Jardin hydroponique 12 capsules avec LED spectre complet — 16 h allumé, 8 h repos. Irrigation auto. Blanc mat.",
     "specs": {
       "pods": "12 capsules",
       "irrigation": "Irrigation auto",
-      "led": "LED spectre complet",
-      "qr": "Soins guidés par QR"
+      "lightCycle": "LED 16h / 8h repos",
+      "qr": "Guides QR dans la boîte"
     },
     "helpTitle": "Besoin d'aide pour cultiver ?",
     "helpDescription": "Notre équipe et les guides QR vous accompagnent — de la première pousse à la récolte.",
@@ -172,79 +252,49 @@
   },
   "products": {
     "gardens": {
-      "home-garden": {
-        "name": "PlantyHub Home Garden",
-        "tagline": "Format compact, récolte complète"
-      },
-      "starter-bundle": {
-        "name": "Pack de démarrage",
-        "tagline": "Jardin + capsules + nutriments"
-      },
-      "refill-kit": {
-        "name": "Kit de recharge mensuel",
-        "tagline": "Capsules + nutriments en abonnement"
-      }
+      "homegarder-one": { "name": "PlantyHub HomeGarder One", "tagline": "12 pods · LED 16h/jour" },
+      "starter-bundle": { "name": "Pack de démarrage", "tagline": "HomeGarder One + PlantyHub Pods" },
+      "pods-kit": { "name": "Kit PlantyHub Pods", "tagline": "Graines + Plantez-vous" }
     },
     "pods": {
-      "basil": { "name": "Capsules Basilic" },
-      "mint": { "name": "Capsules Menthe" },
-      "parsley": { "name": "Capsules Persil" },
-      "dill": { "name": "Capsules Aneth" },
-      "cilantro": { "name": "Capsules Coriandre" },
-      "green-onion": { "name": "Capsules Oignon vert" },
       "arugula": { "name": "Capsules Roquette" },
       "lettuce": { "name": "Capsules Laitue" },
-      "spinach": { "name": "Capsules Épinards" },
-      "tomato": { "name": "Capsules Tomates cerises" },
-      "herb-mix": { "name": "Mix Herbes & Verts" },
-      "nutrients": { "name": "Solution hydroponique" }
+      "mint": { "name": "Capsules Menthe" },
+      "parsley": { "name": "Capsules Persil" },
+      "basil": { "name": "Capsules Basilic" },
+      "edible-flowers": { "name": "Capsules Fleurs comestibles" },
+      "herb-mix-12": { "name": "Mix 12 capsules" }
+    },
+    "consumables": {
+      "empty-capsules": { "name": "Capsules vides" },
+      "sana-ab": { "name": "Nutriments Sana A + B" },
+      "germination-caps": { "name": "Bouchons de germination" }
     },
     "accessories": {
-      "nutrients": { "name": "Solution nutritive 1L" },
-      "spare-lid": { "name": "Couvercle de jardin" },
-      "pod-tray": { "name": "Plateau de capsules" }
+      "storage-cabinet": { "name": "Armoire de rangement" },
+      "wall-shelf": { "name": "Étagère murale" },
+      "herb-knife": { "name": "Couteau à herbes" }
     }
   },
   "cta": {
-    "title": "Prêt à cultiver chez vous ?",
-    "subtitle": "Rejoignez ceux qui récoltent des herbes fraîches chaque semaine. Votre jardin arrive en quelques jours.",
-    "button": "Voir le Home Garden"
+    "title": "Commencez votre première récolte",
+    "subtitle": "Pack de démarrage à partir de {{price}} — tout dans une boîte.",
+    "emailPlaceholder": "E-mail pour l'offre",
+    "button": "Obtenir l'offre"
   },
   "footer": {
-    "columns": {
-      "gardens": "Jardins intelligents",
-      "pods": "Capsules de graines",
-      "shopLearn": "Boutique & Conseils",
-      "company": "PlantyHub"
-    },
+    "shipping": "Livraison : Bulgarie · Balkans · Union européenne",
+    "shippingNote": "Livraison gratuite dès €130. Prix en EUR.",
+    "linksTitle": "Navigation",
     "links": {
-      "homeGarden": "Home Garden",
-      "starterBundle": "Pack de démarrage",
-      "monthlyRefills": "Recharges mensuelles",
-      "gardenSpecs": "Spécifications",
-      "allPods": "Toutes les capsules",
-      "herbMix": "Mix herbes",
-      "nutrientMix": "Solution nutritive",
-      "subscription": "Abonnement capsules",
-      "quickstart": "Démarrage rapide",
-      "plantCare": "Soins des plantes",
-      "shipping": "Livraison & retours",
-      "payment": "Paiement",
-      "ourStory": "Notre histoire",
+      "product": "Produit",
+      "howItWorks": "Comment ça marche",
+      "pods": "Capsules",
+      "accessories": "Accessoires",
       "contact": "Contact",
-      "support": "Assistance",
       "privacy": "Confidentialité"
     },
     "followUs": "Suivez-nous",
-    "newsletter": {
-      "title": "Conseils de culture par e-mail",
-      "description": "Pods de saison, recettes de récolte et guides d'entretien — pas de spam, juste du vert.",
-      "placeholder": "Votre e-mail",
-      "cta": "S'abonner"
-    },
-    "rights": "© {{year}} PlantyHub. Tous droits réservés.",
-    "privacy": "Confidentialité",
-    "terms": "Conditions",
-    "refunds": "Remboursements"
+    "rights": "© {{year}} PlantyHub. Tous droits réservés."
   }
 }

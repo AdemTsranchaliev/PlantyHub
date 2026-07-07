@@ -51,15 +51,17 @@ export default function ProductCard({ product, width, layout = 'carousel' }: Pro
         sx={{
           position: 'relative',
           bgcolor: brand.white,
-          borderRadius: 3,
+          borderRadius: 4,
           overflow: 'hidden',
           aspectRatio: '1',
-          mb: 2,
+          mb: 1.75,
           border: `1px solid ${brand.border}`,
+          transition: 'box-shadow 0.28s ease, transform 0.28s ease, border-color 0.28s ease',
           '@media (hover: hover)': {
             '&:hover': {
               boxShadow: brand.shadowHover,
-              transform: 'translateY(-4px)',
+              transform: 'translateY(-6px)',
+              borderColor: brand.plantGreenLight,
             },
           },
         }}
@@ -111,7 +113,7 @@ export default function ProductCard({ product, width, layout = 'carousel' }: Pro
           </Typography>
         )}
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center', pt: 0.25, flexWrap: 'wrap' }}>
-          <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' } }}>{product.price}</Typography>
+          <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: { xs: '1rem', sm: '1.05rem' }, color: brand.plantGreenDark }}>{product.price}</Typography>
           {product.compareAt && (
             <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through', fontSize: '0.85rem' }}>
               {product.compareAt}

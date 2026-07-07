@@ -9,7 +9,7 @@ import SectionHeading from '../components/SectionHeading'
 import { campaignBundleCatalog, campaignBundleIds } from '../data/catalog'
 import { brand } from '../theme'
 
-function bundleName(t: (key: string) => string, _id: string, nameKey: string) {
+function bundleName(t: (key: string) => string, nameKey: string) {
   return t(`products.pods.${nameKey}.name`)
 }
 
@@ -56,7 +56,7 @@ export default function CampaignHero() {
         <Grid container spacing={3}>
           {campaignBundleIds.map((id) => {
             const item = campaignBundleCatalog[id]
-            const isFeatured = id === 'herb-mix'
+            const isFeatured = id === 'herb-mix-12'
             return (
               <Grid key={id} size={{ xs: 12, sm: 6, lg: 3 }}>
                 <Box
@@ -72,8 +72,9 @@ export default function CampaignHero() {
                       layout="grid"
                       product={{
                         id,
-                        name: bundleName(t, id, item.nameKey),
+                        name: bundleName(t, item.nameKey),
                         price: item.price,
+                        pack: t(`common.${item.packKey}`),
                         image: item.image,
                         imageFit: item.imageFit ?? 'cover',
                       }}
@@ -95,8 +96,9 @@ export default function CampaignHero() {
                 key={id}
                 product={{
                   id,
-                  name: bundleName(t, id, item.nameKey),
+                  name: bundleName(t, item.nameKey),
                   price: item.price,
+                  pack: t(`common.${item.packKey}`),
                   image: item.image,
                   imageFit: item.imageFit ?? 'cover',
                 }}

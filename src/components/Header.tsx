@@ -14,9 +14,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
-import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
@@ -26,10 +24,10 @@ import { navHrefs } from '../data/catalog'
 import { brand } from '../theme'
 
 const navKeys = [
-  { key: 'gardens', href: navHrefs.gardens },
+  { key: 'product', href: navHrefs.product },
+  { key: 'howItWorks', href: navHrefs.howItWorks },
   { key: 'pods', href: navHrefs.pods },
   { key: 'accessories', href: navHrefs.accessories },
-  { key: 'support', href: navHrefs.support },
 ] as const
 
 export default function Header() {
@@ -80,7 +78,7 @@ export default function Header() {
             aria-label="Main"
             sx={{
               display: { xs: 'none', lg: 'flex' },
-              gap: 3.5,
+              gap: 3,
               flex: 2,
               justifyContent: 'center',
             }}
@@ -121,50 +119,41 @@ export default function Header() {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: { xs: 0, sm: 0.25, md: 0.5 },
+              gap: { xs: 0.5, sm: 1 },
               flex: 1,
               justifyContent: 'flex-end',
-              mr: { xs: -0.5, sm: 0 },
             }}
           >
             <Typography
               component="span"
               sx={{
-                display: { xs: 'none', lg: 'inline' },
-                fontSize: '0.8rem',
+                display: { xs: 'none', xl: 'inline' },
+                fontSize: '0.75rem',
                 fontWeight: 600,
                 color: 'text.secondary',
-                mr: 0.5,
               }}
             >
               {t('header.region')}
             </Typography>
             <LanguageSwitcher />
-            <IconButton
-              aria-label={t('header.search')}
-              sx={{ color: brand.graphite, display: { xs: 'none', sm: 'inline-flex' } }}
-            >
-              <SearchIcon fontSize="small" />
-            </IconButton>
-            <Button
-              startIcon={<PersonOutlinedIcon sx={{ fontSize: 18 }} />}
-              sx={{
-                display: { xs: 'none', md: 'inline-flex' },
-                color: brand.graphite,
-                fontWeight: 600,
-                minWidth: 'auto',
-                fontSize: '0.8rem',
-                px: 1,
-                minHeight: 40,
-              }}
-            >
-              {t('header.login')}
-            </Button>
-            <IconButton aria-label={t('header.cart')} sx={{ color: brand.graphite }}>
+            <IconButton aria-label={t('header.cart')} sx={{ color: brand.graphite, display: { xs: 'inline-flex', lg: 'none' } }}>
               <Badge badgeContent={cartCount} color="primary" showZero>
                 <ShoppingBagOutlinedIcon fontSize="small" />
               </Badge>
             </IconButton>
+            <Button
+              variant="contained"
+              href={navHrefs.product}
+              sx={{
+                display: { xs: 'none', sm: 'inline-flex' },
+                fontWeight: 800,
+                px: { sm: 2.5, md: 3 },
+                fontSize: '0.85rem',
+                boxShadow: brand.shadowGreen,
+              }}
+            >
+              {t('nav.buyNow')}
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
@@ -174,32 +163,17 @@ export default function Header() {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         slotProps={{
-          paper: {
-            sx: {
-              width: { xs: 'min(100vw, 320px)', sm: 340 },
-            },
-          },
+          paper: { sx: { width: { xs: 'min(100vw, 320px)', sm: 340 } } },
         }}
       >
-        <Box
-          sx={{
-            p: 2,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            px: pagePaddingX,
-          }}
-        >
+        <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: pagePaddingX }}>
           <Logo />
           <IconButton onClick={() => setMobileOpen(false)} aria-label={t('header.closeMenu')}>
             <CloseIcon />
           </IconButton>
         </Box>
-        <Box sx={{ px: pagePaddingX, pb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box sx={{ px: pagePaddingX, pb: 2 }}>
           <LanguageSwitcher />
-          <Typography sx={{ fontSize: '0.85rem', fontWeight: 600, color: 'text.secondary' }}>
-            {t('header.region')}
-          </Typography>
         </Box>
         <Divider />
         <List sx={{ px: 1, py: 1 }}>
@@ -219,16 +193,10 @@ export default function Header() {
             </ListItem>
           ))}
         </List>
-        <Divider sx={{ mx: 2 }} />
-        <Box sx={{ p: 2, px: pagePaddingX, display: 'flex', gap: 1 }}>
-          <IconButton aria-label={t('header.search')} sx={{ border: `1px solid ${brand.border}` }}>
-            <SearchIcon fontSize="small" />
-          </IconButton>
-          <IconButton aria-label={t('header.cart')} sx={{ border: `1px solid ${brand.border}` }}>
-            <Badge badgeContent={cartCount} color="primary" showZero>
-              <ShoppingBagOutlinedIcon fontSize="small" />
-            </Badge>
-          </IconButton>
+        <Box sx={{ p: 2, px: pagePaddingX }}>
+          <Button variant="contained" fullWidth size="large" href={navHrefs.product} onClick={() => setMobileOpen(false)}>
+            {t('nav.buyNow')}
+          </Button>
         </Box>
       </Drawer>
     </>

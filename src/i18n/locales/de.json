@@ -1,13 +1,14 @@
 {
-  "promo": "KOSTENLOSER VERSAND AB €130",
+  "promo": "KOSTENLOSER VERSAND AB €130 · EU & BALKAN",
   "nav": {
-    "gardens": "Indoor-Gärten",
-    "pods": "Saat-Pods",
+    "product": "Produkt",
+    "howItWorks": "So funktioniert's",
+    "pods": "Pods",
     "accessories": "Zubehör",
-    "support": "Support"
+    "buyNow": "Jetzt kaufen"
   },
   "header": {
-    "region": "EU (€)",
+    "region": "EU & Balkan (€)",
     "login": "Anmelden",
     "search": "Suchen",
     "cart": "Warenkorb",
@@ -20,27 +21,81 @@
     "readMore": "Mehr lesen",
     "pack3": "3er-Pack",
     "pack9": "9er-Pack",
+    "pack12": "12er-Pack",
     "bottle1L": "1L Flasche",
+    "bottle2x100ml": "2×100 ml",
     "colorWhite": "Weiß Matt",
     "colorStandard": "Standard"
   },
   "hero": {
-    "eyebrow": "Smarte Hydroponik",
-    "titleBefore": "Frisches Grün,",
-    "titleHighlight": "null Rätselraten",
-    "description": "PlantyHub bringt einen 12-Pod Indoor-Garten in deine Küche — automatische Bewässerung, Vollspektrum-Licht und biologisch abbaubare Pods. Aufbau in Minuten, Ernte in Wochen.",
-    "ctaPrimary": "Home Garden shoppen",
-    "ctaSecondary": "Saat-Pods entdecken",
-    "priceFrom": "Ab {{price}}",
-    "priceLabel": "Home Garden",
-    "shippingNote": "Kostenloser Versand ab €130",
-    "imageAlt": "PlantyHub Küchengarten mit frischen Kräutern",
-    "badge": "12-Pod Smart Garden",
-    "scrollHint": "Zu den Produkten"
+    "title": "Frisches Grün zuhause",
+    "promise": "Vom Samen zum Salat in 18 Tagen",
+    "description": "PlantyHub HomeGarder One — 12-Pod Hydroponik mit Auto-Bewässerung und 16/8h LED-Zyklus.",
+    "ctaPrimary": "Jetzt kaufen",
+    "ctaSecondary": "So funktioniert's",
+    "priceLabel": "HomeGarder One",
+    "imageAlt": "PlantyHub HomeGarder One",
+    "badge": "4,9/5 von 500+ Hobbygärtnern",
+    "trust": {
+      "shipping": "Gratis EU-Versand ab 130 €",
+      "guarantee": "Keim-Garantie",
+      "setup": "In 5 Minuten startklar"
+    },
+    "stats": {
+      "pods": { "value": "12", "label": "Plätze" },
+      "light": { "value": "16/8h", "label": "Lichtzyklus" },
+      "height": { "value": "bis 40 cm", "label": "Wuchshöhe" }
+    }
+  },
+  "product": {
+    "eyebrow": "Produkt",
+    "title": "PlantyHub HomeGarder One",
+    "description": "Smarter Hydroponik-Garten für die Küche — 12 Pods, Vollspektrum-LED, Auto-Bewässerung.",
+    "cta": "In den Warenkorb",
+    "trust": {
+      "shipping": "Gratis Versand ab 130 €",
+      "guarantee": "Keim-Garantie",
+      "returns": "30 Tage Rückgabe"
+    },
+    "specs": {
+      "pods": "Plätze", "podsValue": "12 Kapseln",
+      "light": "Licht", "lightValue": "Vollspektrum-LED · 16h an / 8h aus",
+      "growthHeight": "Wuchshöhe", "growthHeightValue": "Bis 40 cm",
+      "irrigation": "Bewässerung", "irrigationValue": "Automatisch",
+      "nutrients": "Nährstoffe", "nutrientsValue": "Sana A + B",
+      "dimensions": "Maße", "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
+    }
+  },
+  "socialProof": {
+    "stat": "500+", "statLabel": "Indoor-Gärten",
+    "subtitle": "Echte Menschen, echte Ernten.",
+    "reviews": {
+      "elena": "Morgendlicher Minztee aus meinem eigenen Garten.",
+      "urbanherbs": "PlantyHub funktioniert einfach.",
+      "freshplate": "Selbst angebauter Salat schmeckt am besten."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "So funktioniert's", "title": "4 Schritte zur Ernte",
+    "subtitle": "Von der Box auf den Teller.",
+    "steps": {
+      "placeCapsule": { "title": "Kapsel einsetzen", "description": "Sticker abziehen und einsetzen." },
+      "addSolution": { "title": "Lösung hinzufügen", "description": "Wasser und Sana A & B dosieren." },
+      "turnOn": { "title": "Einschalten", "description": "LED 16h an, 8h aus — automatisch." },
+      "harvest": { "title": "Ernten", "description": "Nach ca. 18 Tagen frische Kräuter." }
+    }
+  },
+  "lightCycle": {
+    "eyebrow": "Lichtzyklus", "title": "16 Stunden an, 8 aus",
+    "description": "Vollspektrum-LED für Keimung und Wachstum.",
+    "onLabel": "16h — Wachstum", "onDescription": "Helles LED-Licht den ganzen Tag.",
+    "offLabel": "8h — Ruhe", "offDescription": "Pflanzen ruhen wie in der Natur.",
+    "diagramLabel": "24-Stunden-Zyklus",
+    "days": { "0": "Mo", "1": "Di", "2": "Mi", "3": "Do" }
   },
   "featured": {
     "badge": "Flaggschiff",
-    "title": "PlantyHub Home Garden",
+    "title": "PlantyHub HomeGarder One",
     "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED und automatischer Bewässerung. Weißes Mattfinish, das auf jeder Arbeitsfläche gut aussieht.",
     "cta": "In den Warenkorb"
   },
@@ -51,6 +106,25 @@
     "cta": "Bundle & 15 % sparen",
     "imageAlt": "PlantyHub Starter-Paket"
   },
+  "starterBundle": {
+    "eyebrow": "Starter-Paket",
+    "title": "HomeGarder One + PlantyHub Pods",
+    "description": "Garten und Pflanz-Kit in einer Box — bereit für die erste Ernte.",
+    "diyKitTitle": "Pflanz-es-selbst-Kit enthält:",
+    "cta": "Starter-Paket hinzufügen",
+    "imageAlt": "PlantyHub Starter-Paket",
+    "items": {
+      "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 Pods, 16h LED-Lichtzyklus, Auto-Bewässerung." },
+      "seedPodsBox": { "title": "PlantyHub Pods Samen-Box", "description": "12 Samen-Kapseln — je 2× Rucola, Salat, Minze, Petersilie, Basilikum, essbare Blüten." },
+      "diyKit": { "title": "Pflanz-es-selbst-Kit", "description": "12 Kapseln, Sana A & B je 100 ml, 12 Keimkappen." },
+      "unifiedShipping": { "title": "Eine Versandbox", "description": "Alles zusammen geliefert — sofort startklar." }
+    },
+    "details": {
+      "arugula": "Rucola ×2", "lettuce": "Salat ×2", "mint": "Minze ×2", "parsley": "Petersilie ×2",
+      "basil": "Basilikum ×2", "edibleFlowers": "Essbare Blüten ×2", "emptyCapsules": "12 Kapseln",
+      "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 Keimkappen", "instructions": "Dosieranleitung"
+    }
+  },
   "sleek": {
     "eyebrow": "Unsere Gärten",
     "title": "Für den Alltag in der Küche",
@@ -58,12 +132,18 @@
     "discoverAll": "Alle Gärten entdecken"
   },
   "podsSection": {
-    "eyebrow": "Nachfüllungen & Aromen",
-    "title": "Saat-Pods",
-    "shopAll": "Alle Saat-Pods"
+    "eyebrow": "PlantyHub Pods",
+    "title": "6 Sorten für deinen Garten",
+    "subtitle": "Samen-Kapseln — auch einzeln als Nachfüllung."
+  },
+  "consumablesSection": {
+    "eyebrow": "Verbrauchsmaterial",
+    "title": "Kapseln, Nährstoffe & Kappen",
+    "subtitle": "Leere Kapseln, Sana A & B und Keimkappen für deinen Garten."
   },
   "accessoriesSection": {
-    "title": "Zubehör"
+    "title": "Zubehör",
+    "subtitle": "Schrank, Wandregal und Kräutermesser."
   },
   "press": {
     "eyebrow": "Aus dem Blog",
@@ -156,13 +236,13 @@
     }
   },
   "support": {
-    "name": "PlantyHub Home Garden",
-    "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED und automatischer Bewässerung. Weiß matt, 39,5 × 19,8 × 18,7 cm.",
+    "name": "PlantyHub HomeGarder One",
+    "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED — 16 Stunden an, 8 Stunden aus. Auto-Bewässerung. Weiß matt.",
     "specs": {
       "pods": "12 Anbau-Pods",
       "irrigation": "Auto-Bewässerung",
-      "led": "Vollspektrum-LED",
-      "qr": "QR-Pflege pro Pod"
+      "lightCycle": "LED 16h an / 8h aus",
+      "qr": "QR-Anleitung in der Box"
     },
     "helpTitle": "Brauchst du Hilfe beim Anbau?",
     "helpDescription": "Unser Support und QR-Anleitungen begleiten dich — vom ersten Keimling bis zur Ernte.",
@@ -172,79 +252,49 @@
   },
   "products": {
     "gardens": {
-      "home-garden": {
-        "name": "PlantyHub Home Garden",
-        "tagline": "Kompakt, volle Ernte"
-      },
-      "starter-bundle": {
-        "name": "Starter-Paket",
-        "tagline": "Garten + Pods + Nährstoffe"
-      },
-      "refill-kit": {
-        "name": "Monatliches Nachfüll-Paket",
-        "tagline": "Pods + Nährstoffe im Abo"
-      }
+      "homegarder-one": { "name": "PlantyHub HomeGarder One", "tagline": "12 Pods · 16h LED" },
+      "starter-bundle": { "name": "Starter-Paket", "tagline": "HomeGarder One + PlantyHub Pods" },
+      "pods-kit": { "name": "PlantyHub Pods Kit", "tagline": "Samen + Pflanz-es-selbst" }
     },
     "pods": {
-      "basil": { "name": "Basilikum Saat-Pods" },
+      "arugula": { "name": "Rucola Saat-Pods" },
+      "lettuce": { "name": "Salat Saat-Pods" },
       "mint": { "name": "Minze Saat-Pods" },
       "parsley": { "name": "Petersilie Saat-Pods" },
-      "dill": { "name": "Dill Saat-Pods" },
-      "cilantro": { "name": "Koriander Saat-Pods" },
-      "green-onion": { "name": "Frühlingszwiebel Pods" },
-      "arugula": { "name": "Rucola Saat-Pods" },
-      "lettuce": { "name": "Grüner Salat Pods" },
-      "spinach": { "name": "Spinat Saat-Pods" },
-      "tomato": { "name": "Cherry-Tomaten Pods" },
-      "herb-mix": { "name": "Kräuter & Grün Mix" },
-      "nutrients": { "name": "Hydroponik-Nährlösung" }
+      "basil": { "name": "Basilikum Saat-Pods" },
+      "edible-flowers": { "name": "Essbare Blüten Pods" },
+      "herb-mix-12": { "name": "12er Kräuter-Mix" }
+    },
+    "consumables": {
+      "empty-capsules": { "name": "Leere Kapseln" },
+      "sana-ab": { "name": "Sana A + B Nährlösung" },
+      "germination-caps": { "name": "Keimkappen" }
     },
     "accessories": {
-      "nutrients": { "name": "Nährlösung 1L" },
-      "spare-lid": { "name": "Garten-Deckel" },
-      "pod-tray": { "name": "Pod-Aufbewahrung" }
+      "storage-cabinet": { "name": "Aufbewahrungsschrank" },
+      "wall-shelf": { "name": "Wandregal" },
+      "herb-knife": { "name": "Kräutermesser" }
     }
   },
   "cta": {
-    "title": "Bereit, selbst anzubauen?",
-    "subtitle": "Schließe dich Haushalten an, die jede Woche frische Kräuter ernten. Dein Garten ist in wenigen Tagen da.",
-    "button": "Home Garden shoppen"
+    "title": "Starte deine erste Ernte",
+    "subtitle": "Starter-Paket ab {{price}} — alles in einer Box.",
+    "emailPlaceholder": "E-Mail für das Angebot",
+    "button": "Angebot sichern"
   },
   "footer": {
-    "columns": {
-      "gardens": "Smarte Gärten",
-      "pods": "Saat-Pods",
-      "shopLearn": "Shop & Wissen",
-      "company": "PlantyHub"
-    },
+    "shipping": "Versand: Bulgarien · Balkan · Europäische Union",
+    "shippingNote": "Kostenloser Versand ab €130. Preise in EUR.",
+    "linksTitle": "Navigation",
     "links": {
-      "homeGarden": "Home Garden",
-      "starterBundle": "Starter-Paket",
-      "monthlyRefills": "Monatliche Nachfüllung",
-      "gardenSpecs": "Garten-Specs",
-      "allPods": "Alle Saat-Pods",
-      "herbMix": "Kräuter-Mix",
-      "nutrientMix": "Nährlösung",
-      "subscription": "Pod-Abo",
-      "quickstart": "Schnellstart",
-      "plantCare": "Pflanzenpflege",
-      "shipping": "Versand & Retouren",
-      "payment": "Zahlungsarten",
-      "ourStory": "Unsere Geschichte",
+      "product": "Produkt",
+      "howItWorks": "So funktioniert's",
+      "pods": "Pods",
+      "accessories": "Zubehör",
       "contact": "Kontakt",
-      "support": "Support",
       "privacy": "Datenschutz"
     },
     "followUs": "Folge uns",
-    "newsletter": {
-      "title": "Tipps fürs Anbauen per E-Mail",
-      "description": "Saisonale Pods, Erntrezepte und Pflegeguides — kein Spam, nur Grün.",
-      "placeholder": "Deine E-Mail",
-      "cta": "Abonnieren"
-    },
-    "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten.",
-    "privacy": "Datenschutz",
-    "terms": "AGB",
-    "refunds": "Erstattung"
+    "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten."
   }
 }

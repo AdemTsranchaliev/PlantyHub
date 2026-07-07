@@ -16,7 +16,7 @@ import { brand } from '../theme'
 const specIcons = {
   pods: SpaOutlinedIcon,
   irrigation: OpacityOutlinedIcon,
-  led: LightModeOutlinedIcon,
+  lightCycle: LightModeOutlinedIcon,
   qr: QrCode2OutlinedIcon,
 } as const
 
@@ -49,7 +49,7 @@ export default function FeaturedGardenSection() {
               <Box
                 component="img"
                 src={homeGardenImage}
-                alt={t('products.gardens.home-garden.name')}
+                alt={t('products.gardens.homegarder-one.name')}
                 sx={{ width: '100%', maxHeight: { md: 520 }, minHeight: { xs: 280, md: 400 }, objectFit: 'cover', display: 'block' }}
               />
             </Box>
