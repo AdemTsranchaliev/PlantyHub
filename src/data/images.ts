@@ -49,5 +49,9 @@ export const stockImages = {
 export const logoSrc = '/logo.png'
 export const logoIconSrc = '/logo-icon.png'
 
+/** Vertical (9:16) product demo video — drop the file at this path in /public */
+export const productVideo = '/videos/homegarder-one.mp4'
+export const productVideoPoster = lifestyleImages.kitchenBasil
+
 /** Community avatars — placeholders until real photos */
 export const avatarPlaceholder = placeholders.avatar

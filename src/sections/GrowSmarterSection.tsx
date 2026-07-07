@@ -38,22 +38,30 @@ export default function GrowSmarterSection() {
               }}
             />
             <Box
-              component="img"
-              src={lifestyleImages.basilCloseup}
-              alt={t('growSmarter.title')}
-              loading="lazy"
               sx={{
                 position: 'relative',
                 zIndex: 1,
-                width: '100%',
-                aspectRatio: { xs: '4/3', md: '4/5' },
-                objectFit: 'cover',
                 borderRadius: '28px',
+                overflow: 'hidden',
                 border: `1px solid ${brand.border}`,
                 boxShadow: brand.shadowHover,
-                display: 'block',
+                '& img': { transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' },
+                '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } },
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={lifestyleImages.basilCloseup}
+                alt={t('growSmarter.title')}
+                loading="lazy"
+                sx={{
+                  width: '100%',
+                  aspectRatio: { xs: '4/3', md: '4/5' },
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </Box>
           </Reveal>
         </Grid>
 

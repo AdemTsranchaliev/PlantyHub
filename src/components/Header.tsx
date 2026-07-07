@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import CloseIcon from '@mui/icons-material/Close'
+import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -68,7 +69,7 @@ export default function Header() {
             >
               <MenuIcon />
             </IconButton>
-            <Link href="#" underline="none" color="inherit" sx={{ display: 'flex', alignItems: 'center', minWidth: 0 }}>
+            <Link component={RouterLink} to="/" underline="none" color="inherit" sx={{ display: 'flex', alignItems: 'center', minWidth: 0 }}>
               <Logo size="md" />
             </Link>
           </Box>
@@ -143,7 +144,8 @@ export default function Header() {
             </IconButton>
             <Button
               variant="contained"
-              href={navHrefs.product}
+              component={RouterLink}
+              to={navHrefs.buy}
               sx={{
                 display: { xs: 'none', sm: 'inline-flex' },
                 fontWeight: 800,
@@ -194,7 +196,7 @@ export default function Header() {
           ))}
         </List>
         <Box sx={{ p: 2, px: pagePaddingX }}>
-          <Button variant="contained" fullWidth size="large" href={navHrefs.product} onClick={() => setMobileOpen(false)}>
+          <Button variant="contained" fullWidth size="large" component={RouterLink} to={navHrefs.buy} onClick={() => setMobileOpen(false)}>
             {t('nav.buyNow')}
           </Button>
         </Box>

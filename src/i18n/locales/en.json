@@ -333,6 +333,81 @@
     "emailPlaceholder": "Email for the offer",
     "button": "Get the offer"
   },
+  "pdp": {
+    "home": "Home",
+    "inStock": "In stock · ships within 24h",
+    "bonus": {
+      "badge": "Free gift",
+      "hint": "+ 1 free starter set (12 pods)",
+      "title": "Pick your free starter set",
+      "subtitle": "Each starter set has everything you need — 12 seed pods to fill your whole garden.",
+      "pcs": "12 pods · everything included",
+      "free": "Free",
+      "note": "Choose a starter set — we'll add it to your box at no extra cost.",
+      "chosen": "Great pick! Your free {{pod}} is on us.",
+      "kits": {
+        "herbs": "Herb Mix",
+        "salad": "Salad Greens",
+        "aromatic": "Aromatic Mix",
+        "chef": "Chef's Selection"
+      }
+    },
+    "color": "Color",
+    "quantity": "Quantity",
+    "videoBadge": "60-second demo",
+    "videoTitle": "See HomeGarder One in action",
+    "videoText": "From unboxing to first harvest — watch how simple it is to set up, plant, and grow fresh herbs on your counter.",
+    "highlightsTitle": "Everything you need to grow",
+    "highlightsSubtitle": "One smart planter — soil-free, guesswork-free, year-round.",
+    "features": {
+      "easy": { "title": "Easy", "text": "No soil, no mess — just insert and grow." },
+      "fast": { "title": "Fast growth", "text": "Optimised for quick, healthy harvests." },
+      "smart": { "title": "Smart system", "text": "Built for PlantyHub indoor gardens." },
+      "natural": { "title": "Natural", "text": "Non-GMO, natural ingredients." }
+    },
+    "howItWorksTitle": "How it works",
+    "steps": [
+      "Insert the pod into your planter.",
+      "Add water & nutrients.",
+      "Enjoy a fresh harvest in weeks."
+    ],
+    "specsTitle": "Full specifications",
+    "inTheBox": "What's in the box",
+    "inTheBoxItems": {
+      "garden": "HomeGarder One planter (white matte)",
+      "led": "Adjustable full-spectrum LED arm",
+      "pods": "3 starter seed pods",
+      "nutrients": "Sana A + B nutrient set",
+      "manual": "Quick-start guide & QR pod guides"
+    },
+    "faqTitle": "Frequently asked questions",
+    "faqItems": [
+      {
+        "q": "Do I need any gardening experience?",
+        "a": "None at all. Just drop in a pod, add water and nutrients, and the LED runs on an automatic 16/8 cycle. The app and pod guides walk you through every step."
+      },
+      {
+        "q": "How long until my first harvest?",
+        "a": "Most herbs and leafy greens are ready to pick in about 2–3 weeks, and keep producing for months afterwards."
+      },
+      {
+        "q": "How much electricity does it use?",
+        "a": "Very little — the full-spectrum LED is as efficient as a couple of household bulbs, roughly a few euros per month."
+      },
+      {
+        "q": "What can I grow in it?",
+        "a": "Basil, mint, parsley, cilantro, lettuce, arugula and more — 12 pods at once. Any HomeGarder pod fits the slots."
+      },
+      {
+        "q": "Is it covered by a warranty?",
+        "a": "Yes — a 2-year warranty plus a 30-day money-back guarantee if it's not for you."
+      },
+      {
+        "q": "Where do you ship?",
+        "a": "We ship across Bulgaria, the Balkans and the European Union, with dispatch within 24 hours."
+      }
+    ]
+  },
   "footer": {
     "shipping": "Shipping: Bulgaria · Balkans · European Union",
     "shippingNote": "Free shipping over €130. Prices in EUR.",

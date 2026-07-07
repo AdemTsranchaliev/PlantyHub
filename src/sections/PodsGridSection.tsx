@@ -6,6 +6,7 @@ import SectionHeading from '../components/SectionHeading'
 import SectionLink from '../components/SectionLink'
 import Reveal from '../components/Reveal'
 import { homepagePodIds, navHrefs, seedPodsCatalog } from '../data/catalog'
+import { brand } from '../theme'
 
 const podsById = Object.fromEntries(seedPodsCatalog.map((p) => [p.id, p]))
 
@@ -13,7 +14,7 @@ export default function PodsGridSection() {
   const { t } = useTranslation()
 
   return (
-    <SectionContainer id="pods" bgcolor="#F0EADC" py={{ xs: 7, sm: 9, md: 12 }}>
+    <SectionContainer id="pods" bgcolor={brand.surface} py={{ xs: 7, sm: 9, md: 12 }}>
       <SectionHeading
         eyebrow={t('podsSection.eyebrow')}
         title={t('podsSection.title')}

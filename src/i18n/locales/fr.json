@@ -282,6 +282,81 @@
     "emailPlaceholder": "E-mail pour l'offre",
     "button": "Obtenir l'offre"
   },
+  "pdp": {
+    "home": "Accueil",
+    "inStock": "En stock · expédié sous 24h",
+    "bonus": {
+      "badge": "Cadeau offert",
+      "hint": "+ 1 set de démarrage offert (12 capsules)",
+      "title": "Choisissez votre set de démarrage offert",
+      "subtitle": "Chaque set de démarrage contient tout le nécessaire — 12 capsules pour remplir tout votre jardin.",
+      "pcs": "12 capsules · tout inclus",
+      "free": "Offert",
+      "note": "Choisissez un set de démarrage — nous l'ajoutons à votre boîte sans frais.",
+      "chosen": "Bon choix ! Votre {{pod}} offert est pour nous.",
+      "kits": {
+        "herbs": "Mélange d'herbes",
+        "salad": "Jeunes pousses",
+        "aromatic": "Mélange aromatique",
+        "chef": "Sélection du chef"
+      }
+    },
+    "color": "Couleur",
+    "quantity": "Quantité",
+    "videoBadge": "Démo en 60 secondes",
+    "videoTitle": "HomeGarder One en action",
+    "videoText": "Du déballage à la première récolte — découvrez comme il est simple d'installer, de planter et de cultiver des herbes fraîches sur votre plan de travail.",
+    "highlightsTitle": "Tout ce qu'il faut pour cultiver",
+    "highlightsSubtitle": "Un jardin intelligent — sans terre, sans prise de tête, toute l'année.",
+    "features": {
+      "easy": { "title": "Facile", "text": "Sans terre, sans dégât — insérez et cultivez." },
+      "fast": { "title": "Croissance rapide", "text": "Optimisé pour des récoltes rapides et saines." },
+      "smart": { "title": "Système intelligent", "text": "Conçu pour les jardins d'intérieur PlantyHub." },
+      "natural": { "title": "Naturel", "text": "Sans OGM, ingrédients naturels." }
+    },
+    "howItWorksTitle": "Comment ça marche",
+    "steps": [
+      "Insérez la capsule dans le jardin.",
+      "Ajoutez de l'eau et des nutriments.",
+      "Récoltez frais en quelques semaines."
+    ],
+    "specsTitle": "Caractéristiques complètes",
+    "inTheBox": "Contenu de la boîte",
+    "inTheBoxItems": {
+      "garden": "Jardin HomeGarder One (blanc mat)",
+      "led": "Bras LED spectre complet réglable",
+      "pods": "3 capsules de graines de démarrage",
+      "nutrients": "Kit de nutriments Sana A + B",
+      "manual": "Guide de démarrage rapide & QR"
+    },
+    "faqTitle": "Questions fréquentes",
+    "faqItems": [
+      {
+        "q": "Faut-il de l'expérience en jardinage ?",
+        "a": "Aucune. Insérez une capsule, ajoutez de l'eau et des nutriments, et la LED fonctionne automatiquement en cycle 16/8. L'appli et les guides QR vous accompagnent à chaque étape."
+      },
+      {
+        "q": "Combien de temps avant la première récolte ?",
+        "a": "La plupart des herbes et jeunes pousses se récoltent en 2 à 3 semaines et continuent de produire pendant des mois."
+      },
+      {
+        "q": "Quelle est sa consommation électrique ?",
+        "a": "Très faible — la LED spectre complet est aussi efficace que quelques ampoules domestiques, soit quelques euros par mois."
+      },
+      {
+        "q": "Que puis-je cultiver ?",
+        "a": "Basilic, menthe, persil, coriandre, laitue, roquette et plus — 12 capsules à la fois. Toute capsule HomeGarder s'adapte aux emplacements."
+      },
+      {
+        "q": "Y a-t-il une garantie ?",
+        "a": "Oui — 2 ans de garantie et satisfait ou remboursé sous 30 jours."
+      },
+      {
+        "q": "Où livrez-vous ?",
+        "a": "Nous livrons en Bulgarie, dans les Balkans et dans l'Union européenne, avec expédition sous 24 heures."
+      }
+    ]
+  },
   "footer": {
     "shipping": "Livraison : Bulgarie · Balkans · Union européenne",
     "shippingNote": "Livraison gratuite dès €130. Prix en EUR.",

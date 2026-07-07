@@ -45,6 +45,12 @@ export default function SocialProofSection() {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
+                transition: 'transform 0.28s ease, box-shadow 0.28s ease',
+                '& img': { transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)' },
+                '@media (hover: hover)': {
+                  '&:hover': { transform: 'translateY(-4px)', boxShadow: brand.shadowHover },
+                  '&:hover img': { transform: 'scale(1.06)' },
+                },
               }}
             >
               <Box

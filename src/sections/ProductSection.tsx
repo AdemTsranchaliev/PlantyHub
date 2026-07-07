@@ -10,10 +10,11 @@ import WaterDropOutlined from '@mui/icons-material/WaterDropOutlined'
 import ScienceOutlined from '@mui/icons-material/ScienceOutlined'
 import StraightenOutlined from '@mui/icons-material/StraightenOutlined'
 import CheckCircleRounded from '@mui/icons-material/CheckCircleRounded'
+import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
-import { homeGardenPrice, productSpecRows } from '../data/catalog'
+import { homeGardenPrice, navHrefs, productSpecRows } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
 import { brand } from '../theme'
 
@@ -32,25 +33,33 @@ export default function ProductSection() {
   const { t } = useTranslation()
 
   return (
-    <SectionContainer id="product" bgcolor={brand.surface} py={{ xs: 7, sm: 9, md: 12 }}>
+    <SectionContainer id="product" bgcolor={brand.white} py={{ xs: 7, sm: 9, md: 12 }}>
       <Grid container spacing={{ xs: 5, md: 7, lg: 9 }} sx={{ alignItems: 'center' }}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Reveal sx={{ position: 'relative' }}>
             <Box
-              component="img"
-              src={lifestyleImages.kitchenBasil}
-              alt={t('product.title')}
-              loading="lazy"
               sx={{
-                width: '100%',
-                aspectRatio: { xs: '4/3', md: '1/1' },
-                objectFit: 'cover',
                 borderRadius: '28px',
+                overflow: 'hidden',
                 border: `1px solid ${brand.border}`,
                 boxShadow: brand.shadowHover,
-                display: 'block',
+                '& img': { transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' },
+                '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } },
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={lifestyleImages.kitchenBasil}
+                alt={t('product.title')}
+                loading="lazy"
+                sx={{
+                  width: '100%',
+                  aspectRatio: { xs: '4/3', md: '1/1' },
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </Box>
             <Box
               sx={{
                 position: 'absolute',
@@ -127,7 +136,7 @@ export default function ProductSection() {
               <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: { xs: '2.1rem', sm: '2.4rem' }, color: brand.plantGreenDark, lineHeight: 1 }}>
                 {homeGardenPrice}
               </Typography>
-              <Button variant="contained" size="large" fullWidth sx={{ width: { sm: 'auto' }, px: { sm: 4.5 } }}>
+              <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} fullWidth sx={{ width: { sm: 'auto' }, px: { sm: 4.5 } }}>
                 {t('product.cta')}
               </Button>
             </Stack>

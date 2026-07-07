@@ -24,7 +24,7 @@ export default function GuaranteesSection() {
   const { t } = useTranslation()
 
   return (
-    <SectionContainer bgcolor={brand.peachSoft} py={{ xs: 7, sm: 9, md: 12 }}>
+    <SectionContainer bgcolor={brand.white} py={{ xs: 7, sm: 9, md: 12 }}>
       <SectionHeading title={t('guarantees.title')} />
 
       <Grid container spacing={{ xs: 2.5, md: 3 }} sx={{ alignItems: 'stretch' }}>
@@ -36,7 +36,7 @@ export default function GuaranteesSection() {
                 delay={index * 0.08}
                 sx={{
                   height: '100%',
-                  bgcolor: brand.white,
+                  bgcolor: brand.surface,
                   borderRadius: '24px',
                   p: { xs: 3, sm: 3.5 },
                   border: `1px solid ${brand.border}`,

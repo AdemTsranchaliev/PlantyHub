@@ -18,16 +18,18 @@ export const campaignBundleCatalog: Record<
 }
 
 export const navHrefs = {
-  product: '#product',
-  howItWorks: '#how-it-works',
-  pods: '#pods',
-  accessories: '#accessories',
-  cta: '#cta',
+  product: '/#product',
+  howItWorks: '/#how-it-works',
+  pods: '/#pods',
+  accessories: '/#accessories',
+  cta: '/#cta',
+  /** dedicated product detail page */
+  buy: '/homegarder-one',
   /** legacy anchors */
-  gardens: '#product',
-  consumables: '#pods',
-  support: '#product',
-  story: '#how-it-works',
+  gardens: '/#product',
+  consumables: '/#pods',
+  support: '/#product',
+  story: '/#how-it-works',
   press: '#',
 } as const
 

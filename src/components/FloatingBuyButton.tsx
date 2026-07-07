@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Fab from '@mui/material/Fab'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
+import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { navHrefs } from '../data/catalog'
 import { brand } from '../theme'
@@ -20,8 +21,8 @@ export default function FloatingBuyButton() {
 
   return (
     <Fab
-      component="a"
-      href={navHrefs.product}
+      component={RouterLink}
+      to={navHrefs.buy}
       variant="extended"
       aria-label={t('nav.buyNow')}
       sx={{

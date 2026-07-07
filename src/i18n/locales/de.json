@@ -282,6 +282,81 @@
     "emailPlaceholder": "E-Mail für das Angebot",
     "button": "Angebot sichern"
   },
+  "pdp": {
+    "home": "Start",
+    "inStock": "Auf Lager · Versand in 24h",
+    "bonus": {
+      "badge": "Gratis Geschenk",
+      "hint": "+ 1 gratis Starter-Set (12 Kapseln)",
+      "title": "Wähle dein gratis Starter-Set",
+      "subtitle": "Jedes Starter-Set enthält alles, was du brauchst — 12 Saatkapseln für deinen ganzen Garten.",
+      "pcs": "12 Kapseln · alles dabei",
+      "free": "Gratis",
+      "note": "Wähle ein Starter-Set — wir legen es kostenlos in deine Box.",
+      "chosen": "Gute Wahl! Dein gratis {{pod}} geht auf uns.",
+      "kits": {
+        "herbs": "Kräutermix",
+        "salad": "Salatmix",
+        "aromatic": "Aroma-Mix",
+        "chef": "Chef's Auswahl"
+      }
+    },
+    "color": "Farbe",
+    "quantity": "Menge",
+    "videoBadge": "60-Sekunden-Demo",
+    "videoTitle": "HomeGarder One in Aktion",
+    "videoText": "Vom Auspacken bis zur ersten Ernte — sieh, wie einfach du frische Kräuter auf der Arbeitsfläche aufstellst, pflanzt und ziehst.",
+    "highlightsTitle": "Alles, was du zum Wachsen brauchst",
+    "highlightsSubtitle": "Ein smarter Garten — ohne Erde, ohne Rätselraten, das ganze Jahr.",
+    "features": {
+      "easy": { "title": "Einfach", "text": "Keine Erde, kein Schmutz — einfach einsetzen und wachsen." },
+      "fast": { "title": "Schnelles Wachstum", "text": "Optimiert für schnelle, gesunde Ernten." },
+      "smart": { "title": "Smartes System", "text": "Für PlantyHub Indoor-Gärten entwickelt." },
+      "natural": { "title": "Natürlich", "text": "Gentechnikfrei, natürliche Zutaten." }
+    },
+    "howItWorksTitle": "So funktioniert's",
+    "steps": [
+      "Kapsel in den Garten einsetzen.",
+      "Wasser & Nährstoffe hinzufügen.",
+      "In wenigen Wochen frisch ernten."
+    ],
+    "specsTitle": "Alle technischen Daten",
+    "inTheBox": "Im Lieferumfang",
+    "inTheBoxItems": {
+      "garden": "HomeGarder One Garten (Weiß matt)",
+      "led": "Verstellbarer Vollspektrum-LED-Arm",
+      "pods": "3 Start-Saatkapseln",
+      "nutrients": "Sana A + B Nährstoff-Set",
+      "manual": "Schnellstart-Anleitung & QR-Guides"
+    },
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqItems": [
+      {
+        "q": "Brauche ich Gartenerfahrung?",
+        "a": "Überhaupt nicht. Kapsel einsetzen, Wasser und Nährstoffe hinzufügen — die LED läuft automatisch im 16/8-Zyklus. App und QR-Guides führen dich Schritt für Schritt."
+      },
+      {
+        "q": "Wie lange bis zur ersten Ernte?",
+        "a": "Die meisten Kräuter und Blattgemüse sind in etwa 2–3 Wochen erntereif und tragen danach monatelang weiter."
+      },
+      {
+        "q": "Wie viel Strom verbraucht er?",
+        "a": "Sehr wenig — die Vollspektrum-LED ist so effizient wie ein paar Haushaltslampen, rund ein paar Euro pro Monat."
+      },
+      {
+        "q": "Was kann ich anbauen?",
+        "a": "Basilikum, Minze, Petersilie, Koriander, Salat, Rucola und mehr — 12 Kapseln gleichzeitig. Jede HomeGarder-Kapsel passt in die Slots."
+      },
+      {
+        "q": "Gibt es eine Garantie?",
+        "a": "Ja — 2 Jahre Garantie plus 30 Tage Geld-zurück-Garantie, falls er nichts für dich ist."
+      },
+      {
+        "q": "Wohin liefert ihr?",
+        "a": "Wir liefern in ganz Bulgarien, auf dem Balkan und in der EU, mit Versand innerhalb von 24 Stunden."
+      }
+    ]
+  },
   "footer": {
     "shipping": "Versand: Bulgarien · Balkan · Europäische Union",
     "shippingNote": "Kostenloser Versand ab €130. Preise in EUR.",

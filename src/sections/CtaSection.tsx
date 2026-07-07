@@ -117,20 +117,28 @@ export default function CtaSection() {
           <Grid size={{ xs: 12, md: 5 }}>
             <Reveal delay={0.1} sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box
-                component="img"
-                src={lifestyleImages.mintKitchen}
-                alt={t('cta.title')}
-                loading="lazy"
                 sx={{
-                  width: '100%',
-                  aspectRatio: '4/5',
-                  objectFit: 'cover',
                   borderRadius: '28px',
+                  overflow: 'hidden',
                   border: '1px solid rgba(255,255,255,0.2)',
                   boxShadow: brand.shadowHover,
-                  display: 'block',
+                  '& img': { transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' },
+                  '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } },
                 }}
-              />
+              >
+                <Box
+                  component="img"
+                  src={lifestyleImages.mintKitchen}
+                  alt={t('cta.title')}
+                  loading="lazy"
+                  sx={{
+                    width: '100%',
+                    aspectRatio: '4/5',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+              </Box>
             </Reveal>
           </Grid>
         </Grid>

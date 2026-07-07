@@ -57,12 +57,14 @@ export default function ProductCard({ product, width, layout = 'carousel' }: Pro
           mb: 1.75,
           border: `1px solid ${brand.border}`,
           transition: 'box-shadow 0.28s ease, transform 0.28s ease, border-color 0.28s ease',
+          '& img': { transition: 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)' },
           '@media (hover: hover)': {
             '&:hover': {
               boxShadow: brand.shadowHover,
               transform: 'translateY(-6px)',
               borderColor: brand.plantGreenLight,
             },
+            '&:hover img': { transform: 'scale(1.06)' },
           },
         }}
       >
