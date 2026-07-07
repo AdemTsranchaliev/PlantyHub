@@ -6,3 +6,8 @@ export function resolveHref(href: string): string {
   if (!href.startsWith('/') || href.startsWith('//')) return href
   return `${BASE_PATH}${href}`
 }
+
+/** Public folder asset path (images, video, logos). */
+export function assetUrl(path: string): string {
+  return resolveHref(path)
+}

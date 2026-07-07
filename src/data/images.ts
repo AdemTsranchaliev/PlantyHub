@@ -1,32 +1,33 @@
 import { placeholders } from './placeholders'
+import { assetUrl } from '../paths'
 
 /** White-background pod product shots */
 export const productImages = {
-  basil: '/images/products/basil.png',
-  mint: '/images/products/mint.png',
-  lettuce: '/images/products/lettuce.png',
-  spinach: '/images/products/spinach.png',
-  tomato: '/images/products/tomato.png',
-  cilantro: '/images/products/cilantro.png',
-  'green-onion': '/images/products/green-onion.png',
-  arugula: '/images/products/arugula.png',
-  parsley: '/images/products/parsley.png',
-  dill: '/images/products/dill.png',
+  basil: assetUrl('/images/products/basil.png'),
+  mint: assetUrl('/images/products/mint.png'),
+  lettuce: assetUrl('/images/products/lettuce.png'),
+  spinach: assetUrl('/images/products/spinach.png'),
+  tomato: assetUrl('/images/products/tomato.png'),
+  cilantro: assetUrl('/images/products/cilantro.png'),
+  'green-onion': assetUrl('/images/products/green-onion.png'),
+  arugula: assetUrl('/images/products/arugula.png'),
+  parsley: assetUrl('/images/products/parsley.png'),
+  dill: assetUrl('/images/products/dill.png'),
 } as const
 
 export type ProductImageId = keyof typeof productImages
 
 /** PlantyHub lifestyle & product photography */
 export const lifestyleImages = {
-  heroKitchen: '/images/lifestyle/hero-kitchen.png',
-  homeGardenProduct: '/images/lifestyle/home-garden-product.png',
-  kitchenBasil: '/images/lifestyle/kitchen-basil.png',
-  kitchenCaprese: '/images/lifestyle/kitchen-caprese.png',
-  mintKitchen: '/images/lifestyle/mint-kitchen.png',
-  outdoorDeck: '/images/lifestyle/outdoor-deck.png',
-  basilCloseup: '/images/lifestyle/basil-closeup.png',
-  outdoorHerbs: '/images/lifestyle/outdoor-herbs.png',
-  mintCloseup: '/images/lifestyle/mint-closeup.png',
+  heroKitchen: assetUrl('/images/lifestyle/hero-kitchen.png'),
+  homeGardenProduct: assetUrl('/images/lifestyle/home-garden-product.png'),
+  kitchenBasil: assetUrl('/images/lifestyle/kitchen-basil.png'),
+  kitchenCaprese: assetUrl('/images/lifestyle/kitchen-caprese.png'),
+  mintKitchen: assetUrl('/images/lifestyle/mint-kitchen.png'),
+  outdoorDeck: assetUrl('/images/lifestyle/outdoor-deck.png'),
+  basilCloseup: assetUrl('/images/lifestyle/basil-closeup.png'),
+  outdoorHerbs: assetUrl('/images/lifestyle/outdoor-herbs.png'),
+  mintCloseup: assetUrl('/images/lifestyle/mint-closeup.png'),
 } as const
 
 /** Combined image map for catalog & sections */
@@ -46,11 +47,11 @@ export const stockImages = {
   strawberries: productImages.tomato,
 } as const
 
-export const logoSrc = '/logo.png'
-export const logoIconSrc = '/logo-icon.png'
+export const logoSrc = assetUrl('/logo.png')
+export const logoIconSrc = assetUrl('/logo-icon.png')
 
 /** Vertical (9:16) product demo video — drop the file at this path in /public */
-export const productVideo = '/videos/homegarder-one.mp4'
+export const productVideo = assetUrl('/videos/homegarder-one.mp4')
 export const productVideoPoster = lifestyleImages.kitchenBasil
 
 /** Community avatars — placeholders until real photos */
