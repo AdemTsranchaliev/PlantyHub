@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import { homeGardenImage, homeGardenPrice, homeGardenSpecKeys, navHrefs } from '../data/catalog'
+import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 const specIcons = {
@@ -102,7 +103,7 @@ export default function FeaturedGardenSection() {
                 <Button
                   variant="contained"
                   size="large"
-                  href={navHrefs.gardens}
+                  href={resolveHref(navHrefs.gardens)}
                   fullWidth
                   sx={{
                     width: { sm: 'auto' },

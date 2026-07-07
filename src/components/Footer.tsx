@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import { pagePaddingX } from './SectionContainer'
 import { footerLinkKeys, navHrefs, socialLinks } from '../data/catalog'
+import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 const footerHrefs: Record<(typeof footerLinkKeys.main)[number], string> = {
@@ -119,7 +120,7 @@ export default function Footer() {
               {footerLinkKeys.main.map((linkKey) => (
                 <Link
                   key={linkKey}
-                  href={footerHrefs[linkKey]}
+                  href={resolveHref(footerHrefs[linkKey])}
                   underline="hover"
                   sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', py: 0.25, '&:hover': { color: brand.white } }}
                 >

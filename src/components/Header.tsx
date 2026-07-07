@@ -22,6 +22,7 @@ import Logo from './Logo'
 import LanguageSwitcher from './LanguageSwitcher'
 import { pagePaddingX } from './SectionContainer'
 import { navHrefs } from '../data/catalog'
+import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 const navKeys = [
@@ -89,7 +90,7 @@ export default function Header() {
             {navKeys.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={resolveHref(link.href)}
                 underline="none"
                 color="inherit"
                 sx={{
@@ -185,7 +186,7 @@ export default function Header() {
             <ListItem key={link.href} disablePadding>
               <ListItemButton
                 component="a"
-                href={link.href}
+                href={resolveHref(link.href)}
                 onClick={() => setMobileOpen(false)}
                 sx={{ borderRadius: 2, py: 1.5 }}
               >

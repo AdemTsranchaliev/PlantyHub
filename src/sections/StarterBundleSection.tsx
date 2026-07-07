@@ -16,6 +16,7 @@ import {
   starterBundlePrice,
 } from '../data/catalog'
 import { stockImages } from '../data/images'
+import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 export default function StarterBundleSection() {
@@ -78,7 +79,7 @@ export default function StarterBundleSection() {
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' } }}>
             <Typography sx={{ fontWeight: 800, fontSize: '1.75rem' }}>{starterBundlePrice}</Typography>
-            <Button variant="contained" size="large" href={navHrefs.gardens}>
+            <Button variant="contained" size="large" href={resolveHref(navHrefs.gardens)}>
               {t('starterBundle.cta')}
             </Button>
           </Stack>

@@ -16,12 +16,13 @@ import './index.css'
 import './i18n/setup'
 import theme from './theme'
 import App from './App.tsx'
+import { BASE_PATH } from './paths'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <BrowserRouter basename={BASE_PATH || undefined}>
         <App />
       </BrowserRouter>
     </ThemeProvider>

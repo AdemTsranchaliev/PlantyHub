@@ -9,6 +9,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { pagePaddingX } from '../components/SectionContainer'
 import { homeGardenImage, homeGardenPrice, navHrefs } from '../data/catalog'
+import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 const statKeys = ['pods', 'light', 'height'] as const
@@ -118,7 +119,7 @@ export default function HeroSection() {
                 <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} fullWidth sx={{ width: { sm: 'auto' }, px: { sm: 4.5 } }}>
                   {t('hero.ctaPrimary')} · {homeGardenPrice}
                 </Button>
-                <Button variant="outlined" size="large" href={navHrefs.howItWorks} fullWidth sx={{ width: { sm: 'auto' } }}>
+                <Button variant="outlined" size="large" href={resolveHref(navHrefs.howItWorks)} fullWidth sx={{ width: { sm: 'auto' } }}>
                   {t('hero.ctaSecondary')}
                 </Button>
               </Stack>

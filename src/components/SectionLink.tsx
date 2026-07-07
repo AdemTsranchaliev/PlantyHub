@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { brand } from '../theme'
+import { resolveHref } from '../paths'
 
 type SectionLinkProps = {
   href: string
@@ -12,7 +13,7 @@ export default function SectionLink({ href, label }: SectionLinkProps) {
   return (
     <Box sx={{ textAlign: 'center', mt: { xs: 3, md: 4 } }}>
       <Link
-        href={href}
+        href={resolveHref(href)}
         underline="none"
         sx={{
           display: 'inline-flex',
