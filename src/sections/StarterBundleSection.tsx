@@ -9,18 +9,19 @@ import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import {
-  homeGardenImage,
   navHrefs,
   starterBundleDetailKeys,
   starterBundleItemKeys,
-  starterBundlePrice,
 } from '../data/catalog'
+import { useProduct } from '../hooks/useProducts'
 import { stockImages } from '../data/images'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 export default function StarterBundleSection() {
   const { t } = useTranslation()
+  const bundle = useProduct('gardens', 'starter-bundle')
+  const garden = useProduct('gardens', 'homegarder-one')
 
   return (
     <SectionContainer py={{ xs: 5, sm: 7, md: 9 }} bgcolor={brand.beige}>
@@ -78,7 +79,7 @@ export default function StarterBundleSection() {
           </Box>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' } }}>
-            <Typography sx={{ fontWeight: 800, fontSize: '1.75rem' }}>{starterBundlePrice}</Typography>
+            <Typography sx={{ fontWeight: 800, fontSize: '1.75rem' }}>{bundle?.price}</Typography>
             <Button variant="contained" size="large" href={resolveHref(navHrefs.gardens)}>
               {t('starterBundle.cta')}
             </Button>
@@ -103,8 +104,8 @@ export default function StarterBundleSection() {
             />
             <Box
               component="img"
-              src={homeGardenImage}
-              alt={t('products.gardens.homegarder-one.name')}
+              src={garden?.image ?? ''}
+              alt={garden?.name ?? ''}
               loading="lazy"
               sx={{
                 position: 'absolute',

@@ -6,16 +6,43 @@ import Typography from '@mui/material/Typography'
 import StarRounded from '@mui/icons-material/StarRounded'
 import LocalShippingOutlined from '@mui/icons-material/LocalShippingOutlined'
 import { Link as RouterLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
 import { pagePaddingX } from '../components/SectionContainer'
-import { homeGardenImage, homeGardenPrice, navHrefs } from '../data/catalog'
+import { navHrefs } from '../data/catalog'
+import { useProduct } from '../hooks/useProducts'
+import { useHt, useHi } from '../hooks/useHomepage'
+import { stockImages } from '../data/images'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 const statKeys = ['pods', 'light', 'height'] as const
 
+function HeroStat({ statKey }: { statKey: (typeof statKeys)[number] }) {
+  const value = useHt(`hero.stats.${statKey}.value`)
+  const label = useHt(`hero.stats.${statKey}.label`)
+  return (
+    <>
+      <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: { xs: '1.05rem', sm: '1.25rem' }, color: brand.plantGreenDark, lineHeight: 1.2 }}>
+        {value}
+      </Typography>
+      <Typography variant="caption" sx={{ fontWeight: 600, color: 'text.secondary', fontSize: '0.72rem' }}>
+        {label}
+      </Typography>
+    </>
+  )
+}
+
 export default function HeroSection() {
-  const { t } = useTranslation()
+  const garden = useProduct('gardens', 'homegarder-one')
+  const heroImage = useHi('hero.main', garden?.image ?? stockImages.homeGardenProduct)
+  const badge = useHt('hero.badge')
+  const title = useHt('hero.title')
+  const promise = useHt('hero.promise')
+  const description = useHt('hero.description')
+  const ctaPrimary = useHt('hero.ctaPrimary')
+  const ctaSecondary = useHt('hero.ctaSecondary')
+  const imageAlt = useHt('hero.imageAlt')
+  const trustShipping = useHt('hero.trust.shipping')
+  const priceLabel = useHt('hero.priceLabel')
 
   return (
     <Box
@@ -40,15 +67,7 @@ export default function HeroSection() {
         }}
       />
 
-      <Box
-        sx={{
-          position: 'relative',
-          maxWidth: 1400,
-          mx: 'auto',
-          px: pagePaddingX,
-          py: { xs: 5, sm: 7, md: 9 },
-        }}
-      >
+      <Box sx={{ position: 'relative', maxWidth: 1400, mx: 'auto', px: pagePaddingX, py: { xs: 5, sm: 7, md: 9 } }}>
         <Grid container spacing={{ xs: 4, md: 6, lg: 8 }} sx={{ alignItems: 'center' }}>
           <Grid size={{ xs: 12, lg: 6 }}>
             <Box className="hero-fade-up" sx={{ maxWidth: 580 }}>
@@ -73,9 +92,7 @@ export default function HeroSection() {
                     <StarRounded key={i} sx={{ fontSize: 17 }} />
                   ))}
                 </Stack>
-                <Typography sx={{ fontSize: '0.8rem', fontWeight: 700, color: brand.graphite }}>
-                  {t('hero.badge')}
-                </Typography>
+                <Typography sx={{ fontSize: '0.8rem', fontWeight: 700, color: brand.graphite }}>{badge}</Typography>
               </Stack>
 
               <Typography
@@ -89,7 +106,7 @@ export default function HeroSection() {
                   color: brand.graphite,
                 }}
               >
-                {t('hero.title')}
+                {title}
               </Typography>
               <Typography
                 sx={{
@@ -102,38 +119,25 @@ export default function HeroSection() {
                   lineHeight: 1.3,
                 }}
               >
-                {t('hero.promise')}
+                {promise}
               </Typography>
-              <Typography
-                sx={{
-                  color: brand.textSecondary,
-                  fontSize: { xs: '1rem', sm: '1.08rem' },
-                  lineHeight: 1.75,
-                  mb: 3.5,
-                }}
-              >
-                {t('hero.description')}
+              <Typography sx={{ color: brand.textSecondary, fontSize: { xs: '1rem', sm: '1.08rem' }, lineHeight: 1.75, mb: 3.5 }}>
+                {description}
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mb: 4 }}>
                 <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} fullWidth sx={{ width: { sm: 'auto' }, px: { sm: 4.5 } }}>
-                  {t('hero.ctaPrimary')} · {homeGardenPrice}
+                  {ctaPrimary} · {garden?.price}
                 </Button>
                 <Button variant="outlined" size="large" href={resolveHref(navHrefs.howItWorks)} fullWidth sx={{ width: { sm: 'auto' } }}>
-                  {t('hero.ctaSecondary')}
+                  {ctaSecondary}
                 </Button>
               </Stack>
 
               <Stack
                 direction="row"
                 spacing={0}
-                sx={{
-                  borderRadius: 3,
-                  overflow: 'hidden',
-                  border: `1px solid ${brand.border}`,
-                  bgcolor: brand.white,
-                  boxShadow: brand.shadow,
-                }}
+                sx={{ borderRadius: 3, overflow: 'hidden', border: `1px solid ${brand.border}`, bgcolor: brand.white, boxShadow: brand.shadow }}
               >
                 {statKeys.map((key, i) => (
                   <Box
@@ -146,12 +150,7 @@ export default function HeroSection() {
                       borderRight: i < statKeys.length - 1 ? `1px solid ${brand.border}` : 'none',
                     }}
                   >
-                    <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: { xs: '1.05rem', sm: '1.25rem' }, color: brand.plantGreenDark, lineHeight: 1.2 }}>
-                      {t(`hero.stats.${key}.value`)}
-                    </Typography>
-                    <Typography variant="caption" sx={{ fontWeight: 600, color: 'text.secondary', fontSize: '0.72rem' }}>
-                      {t(`hero.stats.${key}.label`)}
-                    </Typography>
+                    <HeroStat statKey={key} />
                   </Box>
                 ))}
               </Stack>
@@ -172,22 +171,9 @@ export default function HeroSection() {
               />
               <Box
                 className="hero-fade-up-delay hero-device-float"
-                sx={{
-                  position: 'relative',
-                  zIndex: 1,
-                  borderRadius: '28px',
-                  overflow: 'hidden',
-                  boxShadow: brand.shadowHover,
-                  border: `4px solid ${brand.white}`,
-                }}
+                sx={{ position: 'relative', zIndex: 1, borderRadius: '28px', overflow: 'hidden', boxShadow: brand.shadowHover, border: `4px solid ${brand.white}` }}
               >
-                <Box
-                  component="img"
-                  src={homeGardenImage}
-                  alt={t('hero.imageAlt')}
-                  loading="eager"
-                  sx={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block' }}
-                />
+                <Box component="img" src={heroImage} alt={imageAlt} loading="eager" sx={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block' }} />
                 <Box
                   className="hero-led-pulse"
                   sx={{
@@ -221,9 +207,7 @@ export default function HeroSection() {
                 }}
               >
                 <LocalShippingOutlined sx={{ fontSize: 18, color: brand.plantGreen }} />
-                <Typography sx={{ fontWeight: 700, fontSize: '0.78rem', color: brand.graphite }}>
-                  {t('hero.trust.shipping')}
-                </Typography>
+                <Typography sx={{ fontWeight: 700, fontSize: '0.78rem', color: brand.graphite }}>{trustShipping}</Typography>
               </Box>
 
               <Box
@@ -241,10 +225,10 @@ export default function HeroSection() {
                 }}
               >
                 <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '1.5rem', lineHeight: 1, color: brand.white }}>
-                  {homeGardenPrice}
+                  {garden?.price}
                 </Typography>
                 <Typography variant="caption" sx={{ opacity: 0.85, fontWeight: 600 }}>
-                  {t('hero.priceLabel')}
+                  {priceLabel}
                 </Typography>
               </Box>
             </Box>

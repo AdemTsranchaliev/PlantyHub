@@ -9,14 +9,16 @@ import HorizontalScroll from '../components/HorizontalScroll'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import SectionLink from '../components/SectionLink'
-import { gardensCatalog, navHrefs } from '../data/catalog'
+import { navHrefs } from '../data/catalog'
+import { useGardensCatalog } from '../hooks/useProducts'
+import { useAddProductToCart } from '../hooks/useCart'
 import { brand, carouselCardWidth } from '../theme'
 
 export default function SleekSimpleSection() {
   const { t } = useTranslation()
-  const [selectedColors, setSelectedColors] = useState<Record<string, string>>(
-    Object.fromEntries(gardensCatalog.map((g) => [g.id, g.colors[0].id])),
-  )
+  const gardens = useGardensCatalog()
+  const addProductToCart = useAddProductToCart()
+  const [selectedColors, setSelectedColors] = useState<Record<string, string>>({})
 
   return (
     <SectionContainer bgcolor={brand.white} py={{ xs: 5, sm: 7, md: 9 }} bleedX>
@@ -25,7 +27,7 @@ export default function SleekSimpleSection() {
       </Box>
 
       <HorizontalScroll gap={2}>
-        {gardensCatalog.map((garden) => (
+        {gardens.map((garden) => (
           <Box
             key={garden.id}
             data-scroll-item
@@ -54,12 +56,13 @@ export default function SleekSimpleSection() {
               <Box
                 component="img"
                 src={garden.image}
-                alt={t(`products.gardens.${garden.id}.name`)}
+                alt={garden.name}
                 loading="lazy"
                 sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
               <IconButton
-                aria-label={t('common.addToCartAria', { name: t(`products.gardens.${garden.id}.name`) })}
+                aria-label={t('common.addToCartAria', { name: garden.name })}
+                onClick={() => addProductToCart('gardens', garden)}
                 sx={{
                   position: 'absolute',
                   bottom: 12,
@@ -73,7 +76,7 @@ export default function SleekSimpleSection() {
               </IconButton>
             </Box>
 
-            {garden.colors.length > 1 && (
+            {garden.colors && garden.colors.length > 1 && (
               <Stack direction="row" spacing={0.75} sx={{ mb: 1.5 }}>
                 {garden.colors.map((color) => (
                   <Box
@@ -87,7 +90,7 @@ export default function SleekSimpleSection() {
                       borderRadius: '50%',
                       bgcolor: color.hex,
                       border:
-                        selectedColors[garden.id] === color.id
+                        (selectedColors[garden.id] ?? garden.colors![0].id) === color.id
                           ? `2px solid ${brand.plantGreen}`
                           : `1px solid ${brand.border}`,
                       cursor: 'pointer',
@@ -99,17 +102,15 @@ export default function SleekSimpleSection() {
             )}
 
             <Stack spacing={0.35}>
-              <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' } }}>
-                {t(`products.gardens.${garden.id}.name`)}
-              </Typography>
-              {'featured' in garden && garden.featured && (
+              <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' } }}>{garden.name}</Typography>
+              {garden.featured && (
                 <Typography variant="caption" sx={{ color: brand.plantGreenDark, fontWeight: 700 }}>
                   {t('featured.badge')}
                 </Typography>
               )}
               <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
                 <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.9rem', sm: '0.95rem' } }}>{garden.price}</Typography>
-                {'compareAt' in garden && garden.compareAt && (
+                {garden.compareAt && (
                   <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
                     {garden.compareAt}
                   </Typography>

@@ -5,21 +5,22 @@ import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import SectionLink from '../components/SectionLink'
 import Reveal from '../components/Reveal'
-import { homepagePodIds, navHrefs, seedPodsCatalog } from '../data/catalog'
+import { homepagePodIds, navHrefs } from '../data/catalog'
+import { useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
+import { useHt } from '../hooks/useHomepage'
 import { brand } from '../theme'
-
-const podsById = Object.fromEntries(seedPodsCatalog.map((p) => [p.id, p]))
 
 export default function PodsGridSection() {
   const { t } = useTranslation()
+  const pods = useSeedPodsCatalog()
+  const podsById = Object.fromEntries(pods.map((p) => [p.id, p]))
+  const eyebrow = useHt('podsSection.eyebrow')
+  const title = useHt('podsSection.title')
+  const subtitle = useHt('podsSection.subtitle')
 
   return (
     <SectionContainer id="pods" bgcolor={brand.surface} py={{ xs: 7, sm: 9, md: 12 }}>
-      <SectionHeading
-        eyebrow={t('podsSection.eyebrow')}
-        title={t('podsSection.title')}
-        subtitle={t('podsSection.subtitle')}
-      />
+      <SectionHeading eyebrow={eyebrow} title={title} subtitle={subtitle} />
 
       <Grid container spacing={{ xs: 2, sm: 3 }}>
         {homepagePodIds.map((id, index) => {
@@ -28,18 +29,7 @@ export default function PodsGridSection() {
           return (
             <Grid key={id} size={{ xs: 6, sm: 4, md: 4, lg: 2 }}>
               <Reveal delay={(index % 6) * 0.06}>
-                <ProductCard
-                  layout="grid"
-                  to={`/pods/${pod.id}`}
-                  product={{
-                    id: pod.id,
-                    name: t(`products.pods.${pod.id}.name`),
-                    price: pod.price,
-                    pack: t(`common.${pod.packKey}`),
-                    image: pod.image,
-                    imageFit: pod.imageFit,
-                  }}
-                />
+                <ProductCard layout="grid" to={`/pods/${pod.id}`} product={toProductCardData(pod, t)} />
               </Reveal>
             </Grid>
           )

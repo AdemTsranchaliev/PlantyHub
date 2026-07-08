@@ -24,6 +24,10 @@ export const navHrefs = {
   accessories: '/accessories',
   about: '/about',
   support: '/support',
+  login: '/login',
+  register: '/register',
+  cart: '/cart',
+  checkout: '/checkout',
   cta: '/#cta',
   /** dedicated product detail page */
   buy: '/homegarder-one',

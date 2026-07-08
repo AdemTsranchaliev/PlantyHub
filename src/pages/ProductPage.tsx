@@ -30,8 +30,10 @@ import RadioButtonUncheckedRounded from '@mui/icons-material/RadioButtonUnchecke
 import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
-import { homeGardenPrice, productSpecRows } from '../data/catalog'
+import { productSpecRows } from '../data/catalog'
 import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
+import { useProduct } from '../hooks/useProducts'
+import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 
 const gallery = [
@@ -66,6 +68,8 @@ const bonusKits = [
 
 export default function ProductPage() {
   const { t } = useTranslation()
+  const garden = useProduct('gardens', 'homegarder-one')
+  const addProductToCart = useAddProductToCart()
   const [active, setActive] = useState(0)
   const [qty, setQty] = useState(1)
   const [bonusPod, setBonusPod] = useState<string | null>(null)
@@ -153,7 +157,7 @@ export default function ProductPage() {
 
               <Stack direction="row" spacing={1.5} sx={{ alignItems: 'baseline', mb: 2 }}>
                 <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '2.4rem', color: brand.plantGreenDark, lineHeight: 1 }}>
-                  {homeGardenPrice}
+                  {garden?.price}
                 </Typography>
               </Stack>
 
@@ -200,7 +204,13 @@ export default function ProductPage() {
                     <AddRounded fontSize="small" />
                   </IconButton>
                 </Stack>
-                <Button variant="contained" size="large" fullWidth sx={{ px: 4 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  sx={{ px: 4 }}
+                  onClick={() => garden && addProductToCart('gardens', garden, qty)}
+                >
                   {t('product.cta')}
                 </Button>
               </Stack>
@@ -583,7 +593,7 @@ export default function ProductPage() {
                 </Typography>
               </Stack>
               <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '2.2rem', color: brand.plantGreenDark, lineHeight: 1, mb: 2.5 }}>
-                {homeGardenPrice}
+                {garden?.price}
               </Typography>
               <Button variant="contained" size="large" fullWidth sx={{ mb: 2.5 }}>
                 {t('product.cta')}

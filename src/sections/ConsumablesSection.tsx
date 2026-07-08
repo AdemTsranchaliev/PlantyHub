@@ -4,11 +4,12 @@ import HorizontalScroll from '../components/HorizontalScroll'
 import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
-import { consumablesCatalog } from '../data/catalog'
+import { useConsumablesCatalog, toProductCardData } from '../hooks/useProducts'
 import { brand } from '../theme'
 
 export default function ConsumablesSection() {
   const { t } = useTranslation()
+  const items = useConsumablesCatalog()
 
   return (
     <SectionContainer id="consumables" bgcolor={brand.surface} py={{ xs: 5, sm: 7, md: 9 }} bleedX>
@@ -21,18 +22,8 @@ export default function ConsumablesSection() {
       </Box>
 
       <HorizontalScroll gap={2}>
-        {consumablesCatalog.map((item) => (
-          <ProductCard
-            key={item.id}
-            product={{
-              id: item.id,
-              name: t(`products.consumables.${item.id}.name`),
-              price: item.price,
-              pack: t(`common.${item.packKey}`),
-              image: item.image,
-              imageFit: item.imageFit,
-            }}
-          />
+        {items.map((item) => (
+          <ProductCard key={item.id} product={toProductCardData(item, t)} />
         ))}
       </HorizontalScroll>
     </SectionContainer>

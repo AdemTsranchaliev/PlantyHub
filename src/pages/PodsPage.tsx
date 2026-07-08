@@ -11,11 +11,13 @@ import { useTranslation } from 'react-i18next'
 import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
-import { navHrefs, seedPodsCatalog } from '../data/catalog'
+import { navHrefs } from '../data/catalog'
+import { useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
 import { brand } from '../theme'
 
 export default function PodsPage() {
   const { t } = useTranslation()
+  const pods = useSeedPodsCatalog()
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -63,21 +65,10 @@ export default function PodsPage() {
 
       <SectionContainer bgcolor={brand.white} py={{ xs: 5, sm: 6, md: 8 }}>
         <Grid container spacing={{ xs: 2, sm: 3 }}>
-          {seedPodsCatalog.map((pod, index) => (
+          {pods.map((pod, index) => (
             <Grid key={pod.id} size={{ xs: 6, sm: 4, md: 3 }}>
               <Reveal delay={(index % 4) * 0.06}>
-                <ProductCard
-                  layout="grid"
-                  to={`/pods/${pod.id}`}
-                  product={{
-                    id: pod.id,
-                    name: t(`products.pods.${pod.id}.name`),
-                    price: pod.price,
-                    pack: t(`common.${pod.packKey}`),
-                    image: pod.image,
-                    imageFit: pod.imageFit,
-                  }}
-                />
+                <ProductCard layout="grid" to={`/pods/${pod.id}`} product={toProductCardData(pod, t)} />
               </Reveal>
             </Grid>
           ))}

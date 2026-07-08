@@ -10,7 +10,8 @@ import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined'
 import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
-import { homeGardenImage, homeGardenPrice, homeGardenSpecKeys, navHrefs } from '../data/catalog'
+import { homeGardenSpecKeys, navHrefs } from '../data/catalog'
+import { useProduct } from '../hooks/useProducts'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
@@ -23,6 +24,7 @@ const specIcons = {
 
 export default function FeaturedGardenSection() {
   const { t } = useTranslation()
+  const garden = useProduct('gardens', 'homegarder-one')
 
   return (
     <SectionContainer id="gardens" py={{ xs: 5, sm: 7, md: 10 }}>
@@ -49,8 +51,8 @@ export default function FeaturedGardenSection() {
             >
               <Box
                 component="img"
-                src={homeGardenImage}
-                alt={t('products.gardens.homegarder-one.name')}
+                src={garden?.image ?? ''}
+                alt={garden?.name ?? ''}
                 sx={{ width: '100%', maxHeight: { md: 520 }, minHeight: { xs: 280, md: 400 }, objectFit: 'cover', display: 'block' }}
               />
             </Box>
@@ -98,7 +100,7 @@ export default function FeaturedGardenSection() {
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' }, mt: 'auto' }}>
                 <Typography sx={{ fontWeight: 800, fontSize: { xs: '1.75rem', sm: '2rem' }, color: brand.plantGreenLight }}>
-                  {homeGardenPrice}
+                  {garden?.price}
                 </Typography>
                 <Button
                   variant="contained"

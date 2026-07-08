@@ -459,5 +459,401 @@
     "address": "PlantyHub · Pazardzhik, Bulgarie",
     "madeWith": "Cultivé avec soin en Bulgarie",
     "rights": "© {{year}} PlantyHub. Tous droits réservés."
+  },
+  "auth": {
+    "login": {
+      "eyebrow": "Compte",
+      "title": "Connexion",
+      "subtitle": "Bon retour ! Connectez-vous pour suivre vos commandes et gérer votre jardin.",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "registerLink": "Créer un compte",
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "invalidPassword": "Le mot de passe doit contenir au moins 6 caractères.",
+      "success": "Vous êtes connecté. Bon retour sur PlantyHub !",
+      "continue": "Continuer mes achats"
+    },
+    "register": {
+      "eyebrow": "Rejoignez-nous",
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez PlantyHub pour suivre vos commandes, enregistrer vos favoris et recevoir des conseils de culture.",
+      "name": "Nom complet",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "terms": "J'accepte les Conditions d'utilisation et la Politique de confidentialité.",
+      "submit": "Créer un compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter",
+      "invalidName": "Veuillez saisir votre nom (au moins 2 caractères).",
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "invalidPassword": "Le mot de passe doit contenir au moins 6 caractères.",
+      "passwordMismatch": "Les mots de passe ne correspondent pas.",
+      "success": "Votre compte est prêt. Vous pouvez maintenant vous connecter.",
+      "goToLogin": "Aller à la connexion"
+    }
+  },
+  "cart": {
+    "title": "Panier",
+    "emptyTitle": "Votre panier est vide",
+    "emptySubtitle": "Ajoutez des capsules, jardins ou accessoires pour commencer.",
+    "continueShopping": "Continuer vos achats",
+    "summary": "Récapitulatif",
+    "subtotal": "Sous-total ({{count}} articles)",
+    "subtotal_one": "Sous-total ({{count}} article)",
+    "shipping": "Livraison",
+    "freeShipping": "Gratuite",
+    "freeShippingHint": "Livraison gratuite dès {{amount}}",
+    "total": "Total",
+    "checkout": "Passer commande",
+    "remove": "Supprimer",
+    "added": "Ajouté au panier",
+    "viewCart": "Voir le panier"
+  },
+  "checkout": {
+    "title": "Commande",
+    "emptyTitle": "Votre panier est vide",
+    "backToCart": "Retour au panier",
+    "contact": "Coordonnées",
+    "name": "Nom complet",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "shipping": "Adresse de livraison",
+    "street": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "notes": "Instructions de livraison (optionnel)",
+    "payment": "Mode de paiement",
+    "paymentMethods": {
+      "card": "Carte bancaire",
+      "paypal": "PayPal",
+      "cod": "Paiement à la livraison"
+    },
+    "countries": {
+      "BG": "Bulgarie",
+      "DE": "Allemagne",
+      "FR": "France",
+      "PL": "Pologne",
+      "IT": "Italie",
+      "PT": "Portugal",
+      "CZ": "République tchèque"
+    },
+    "orderSummary": "Votre commande",
+    "qty": "Qté {{count}}",
+    "placeOrder": "Confirmer la commande",
+    "required": "Champ obligatoire",
+    "invalidEmail": "Veuillez entrer un e-mail valide",
+    "breadcrumb": {
+      "cart": "Panier",
+      "checkout": "Informations"
+    },
+    "showOrderSummary": "Afficher le récapitulatif",
+    "hideOrderSummary": "Masquer le récapitulatif",
+    "returnToCart": "Retour au panier",
+    "addNotes": "Ajouter des instructions de livraison",
+    "hideNotes": "Masquer les instructions",
+    "secureCheckout": "Toutes les transactions sont sécurisées et chiffrées"
+  },
+  "order": {
+    "successTitle": "Merci pour votre commande !",
+    "successSubtitle": "Nous avons envoyé une confirmation à {{email}}.",
+    "orderNumber": "Commande {{id}}",
+    "shippingTo": "Livraison à",
+    "items": "Articles",
+    "summary": "Récapitulatif",
+    "continueShopping": "Retour à l'accueil",
+    "notFound": "Commande introuvable",
+    "backHome": "Retour à l'accueil"
+  },
+  "admin": {
+    "brand": "Admin",
+    "welcome": "Bienvenue, {{name}}",
+    "viewStore": "Voir la boutique",
+    "logout": "Déconnexion",
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "catalog": "Catalogue",
+      "gardens": "Jardins",
+      "pods": "Capsules",
+      "consumables": "Consommables",
+      "accessories": "Accessoires",
+      "orders": "Commandes",
+      "customers": "Clients",
+      "content": "Contenu",
+      "newsletter": "Newsletter",
+      "settings": "Paramètres"
+    },
+    "login": {
+      "eyebrow": "Panneau admin",
+      "title": "Connexion",
+      "subtitle": "Gérez les produits, commandes et contenu de la boutique.",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "error": "Identifiants invalides. Utilisez admin@plantyhub.com / admin123",
+      "backToStore": "← Retour à la boutique"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "subtitle": "Vue d'ensemble de votre boutique PlantyHub.",
+      "recentOrders": "Commandes récentes",
+      "weeklySales": "Ventes hebdomadaires",
+      "weeklySalesSubtitle": "Total cette semaine : {{total}}",
+      "orderStatus": "Commandes par statut",
+      "orderStatusSubtitle": "Répartition de toutes les commandes",
+      "topProducts": "Produits phares",
+      "topProductsSubtitle": "Meilleures ventes ce mois",
+      "byCategory": "Revenus par catégorie",
+      "byCategorySubtitle": "Part du chiffre d'affaires total",
+      "sales": "Ventes",
+      "revenue": "Revenu",
+      "days": {
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mer",
+        "thu": "Jeu",
+        "fri": "Ven",
+        "sat": "Sam",
+        "sun": "Dim"
+      },
+      "categories": {
+        "gardens": "Jardins",
+        "pods": "Capsules",
+        "consumables": "Consommables",
+        "accessories": "Accessoires"
+      },
+      "stats": {
+        "revenue": "Revenus (mois)",
+        "ordersMonth": "Commandes (mois)",
+        "avgOrder": "Panier moyen",
+        "orders": "Commandes",
+        "ordersTrend": "+2 cette semaine",
+        "products": "Produits",
+        "customers": "Clients",
+        "customersTrend": "+1 cette semaine",
+        "newsletter": "Abonnés newsletter",
+        "newsletterTrend": "+48 ce mois",
+        "pending": "Commandes en attente",
+        "conversion": "Taux de conversion",
+        "trendUp": "+{{value}} % vs mois dernier"
+      }
+    },
+    "gardens": {
+      "title": "Jardins",
+      "subtitle": "Gérer les jardins intelligents et les packs."
+    },
+    "pods": {
+      "title": "Capsules",
+      "subtitle": "Gérer les recharges de capsules de graines."
+    },
+    "consumables": {
+      "title": "Consommables",
+      "subtitle": "Capsules, nutriments et couvercles de germination."
+    },
+    "accessories": {
+      "title": "Accessoires",
+      "subtitle": "Étagères, rangement et outils."
+    },
+    "orders": {
+      "title": "Commandes",
+      "subtitle": "Suivre et gérer les commandes clients.",
+      "view": "Voir la commande",
+      "table": {
+        "id": "Commande",
+        "customer": "Client",
+        "items": "Articles",
+        "total": "Total",
+        "status": "Statut",
+        "date": "Date"
+      },
+      "status": {
+        "pending": "En attente",
+        "processing": "En cours",
+        "shipped": "Expédiée",
+        "delivered": "Livrée",
+        "cancelled": "Annulée"
+      }
+    },
+    "orderDetail": {
+      "notFound": "Commande introuvable.",
+      "backToOrders": "Retour aux commandes",
+      "placedOn": "Passée le {{date}}",
+      "firstOrder": "Première commande",
+      "customer": "Client",
+      "orderCount": "Commandes du client",
+      "orderNumberOf": "{{current}} sur {{total}}",
+      "shippingAddress": "Adresse de livraison",
+      "waybill": "Lettre de voiture",
+      "waybillNumber": "Numéro de lettre de voiture",
+      "waybillTitle": "Étiquette d'expédition",
+      "createWaybill": "Créer une lettre de voiture",
+      "createWaybillHint": "Générer une étiquette d'expédition. Le statut passera à « Expédiée ».",
+      "createWaybillSubmit": "Générer la lettre de voiture",
+      "printWaybill": "Imprimer la lettre de voiture",
+      "courier": "Transporteur",
+      "couriers": { "econt": "Econt", "speedy": "Speedy", "dhl": "DHL" },
+      "weight": "Poids (kg)",
+      "packages": "Colis",
+      "codAmount": "Contre-remboursement",
+      "waybillNotes": "Notes pour le transporteur",
+      "recipient": "Destinataire",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "items": "Articles ({{count}})",
+      "qty": "Qté",
+      "price": "Prix",
+      "subtotal": "Sous-total",
+      "shippingCost": "Livraison",
+      "tax": "TVA",
+      "notes": "Notes de commande",
+      "timeline": "Historique",
+      "customerOrders": "Autres commandes de ce client",
+      "payment": { "card": "Payé par carte", "cod": "Contre-remboursement", "paypal": "Payé via PayPal" }
+    },
+    "customers": {
+      "title": "Clients",
+      "subtitle": "Clients enregistrés de la boutique.",
+      "view": "Voir le client",
+      "table": {
+        "name": "Nom",
+        "email": "E-mail",
+        "orders": "Commandes",
+        "totalSpent": "Total dépensé",
+        "joined": "Inscription"
+      }
+    },
+    "customerDetail": {
+      "notFound": "Client introuvable.",
+      "backToCustomers": "Retour aux clients",
+      "contact": "Coordonnées",
+      "stats": "Statistiques client",
+      "orders": "Commandes ({{count}})",
+      "noOrders": "Aucune commande pour le moment."
+    },
+    "countries": {
+      "BG": "Bulgarie",
+      "DE": "Allemagne",
+      "FR": "France",
+      "PL": "Pologne",
+      "IT": "Italie",
+      "PT": "Portugal",
+      "CZ": "République tchèque"
+    },
+    "content": {
+      "title": "Contenu",
+      "subtitle": "Gérer les sections d'accueil et les pages statiques.",
+      "homepageSections": "Sections de la page d'accueil",
+      "pages": "Pages statiques",
+      "items": "{{count}} éléments",
+      "faqCount": "{{count}} questions FAQ",
+      "sections": {
+        "hero": "Bannière",
+        "growSmarter": "Cultivez plus malin",
+        "product": "Produit vedette",
+        "howItWorks": "Comment ça marche",
+        "lightCycle": "Cycle lumineux",
+        "podsGrid": "Grille de capsules",
+        "socialProof": "Témoignages",
+        "guarantees": "Garanties",
+        "accessories": "Accessoires",
+        "cta": "Appel à l'action"
+      },
+      "pageLabels": {
+        "about": "Page À propos",
+        "support": "Support & FAQ",
+        "pods": "Catalogue capsules",
+        "accessories": "Page accessoires"
+      },
+      "pageDescriptions": {
+        "about": "Histoire de la marque, valeurs et équipe.",
+        "support": "Cartes support et questions fréquentes.",
+        "pods": "Liste complète des capsules avec pages détail.",
+        "accessories": "Grille d'accessoires et consommables."
+      }
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Gérer les abonnés et campagnes e-mail.",
+      "popupSettings": "Paramètres du popup",
+      "enablePopup": "Afficher le popup newsletter",
+      "exitIntent": "Déclencheur exit-intent",
+      "discountCode": "Code de réduction",
+      "sendCampaign": "Envoyer une campagne",
+      "subject": "Objet",
+      "message": "Message",
+      "send": "Envoyer la campagne",
+      "stats": {
+        "subscribers": "Abonnés",
+        "openRate": "Taux d'ouverture",
+        "openRateTrend": "+3 % vs mois dernier",
+        "activeCodes": "Codes actifs"
+      }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "subtitle": "Configuration de la boutique et notifications.",
+      "store": "Boutique",
+      "storeName": "Nom de la boutique",
+      "currency": "Devise",
+      "shippingThreshold": "Seuil livraison gratuite",
+      "contact": "Contact",
+      "email": "E-mail support",
+      "address": "Adresse",
+      "notifications": "Notifications",
+      "newOrderEmail": "E-mail pour nouvelle commande",
+      "lowStockAlert": "Alerte stock bas",
+      "weeklyReport": "Rapport hebdomadaire des ventes",
+      "demoNote": "Ceci est un panneau admin de démonstration. Les paramètres sont en lecture seule jusqu'à la connexion d'un backend.",
+      "catalog": "Catalogue produits",
+      "resetCatalog": "Réinitialiser le catalogue",
+      "resetCatalogHint": "Restaure tous les produits depuis les données d'origine."
+    },
+    "table": {
+      "product": "Produit",
+      "id": "ID",
+      "price": "Prix",
+      "status": "Statut",
+      "country": "Pays",
+      "actions": "Actions",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "edit": "Modifier"
+    },
+    "actions": {
+      "addProduct": "Ajouter un produit"
+    },
+    "productEdit": {
+      "addTitle": "Ajouter un produit",
+      "editTitle": "Modifier le produit",
+      "basicInfo": "Informations de base",
+      "content": "Contenu (toutes les langues)",
+      "id": "ID produit",
+      "idHint": "Minuscules, ex. basil",
+      "price": "Prix",
+      "compareAt": "Prix barré",
+      "pack": "Conditionnement",
+      "imageUrl": "URL de l'image",
+      "imageFit": "Ajustement image",
+      "fitCover": "Cover",
+      "fitContain": "Contain",
+      "active": "Actif (visible en boutique)",
+      "featured": "Produit vedette",
+      "name": "Nom",
+      "tagline": "Sous-titre",
+      "description": "Description",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "errors": {
+        "idRequired": "L'ID produit est requis.",
+        "nameRequired": "Le nom en anglais est requis.",
+        "priceRequired": "Le prix est requis.",
+        "imageRequired": "L'URL de l'image est requise."
+      }
+    }
   }
 }

@@ -23,6 +23,7 @@ import LanguageSwitcher from './LanguageSwitcher'
 import { pagePaddingX } from './SectionContainer'
 import { navHrefs } from '../data/catalog'
 import { resolveHref } from '../paths'
+import { useCart } from '../hooks/useCart'
 import { brand } from '../theme'
 
 const navKeys = [
@@ -37,7 +38,7 @@ const navKeys = [
 export default function Header() {
   const { t } = useTranslation()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [cartCount] = useState(0)
+  const { itemCount: cartCount } = useCart()
 
   return (
     <>
@@ -140,8 +141,13 @@ export default function Header() {
               {t('header.region')}
             </Typography>
             <LanguageSwitcher />
-            <IconButton aria-label={t('header.cart')} sx={{ color: brand.graphite, display: { xs: 'inline-flex', lg: 'none' } }}>
-              <Badge badgeContent={cartCount} color="primary" showZero>
+            <IconButton
+              aria-label={t('header.cart')}
+              component={RouterLink}
+              to={navHrefs.cart}
+              sx={{ color: brand.graphite }}
+            >
+              <Badge badgeContent={cartCount} color="primary" showZero={false}>
                 <ShoppingBagOutlinedIcon fontSize="small" />
               </Badge>
             </IconButton>

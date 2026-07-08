@@ -510,5 +510,416 @@
     "address": "PlantyHub · Pazardzhik, Bulgaria",
     "madeWith": "Grown with care in Bulgaria",
     "rights": "© {{year}} PlantyHub. All rights reserved."
+  },
+  "auth": {
+    "login": {
+      "eyebrow": "Account",
+      "title": "Log in",
+      "subtitle": "Welcome back! Sign in to track orders and manage your garden.",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Log in",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Create one",
+      "invalidEmail": "Please enter a valid email address.",
+      "invalidPassword": "Password must be at least 6 characters.",
+      "success": "You're signed in. Welcome back to PlantyHub!",
+      "continue": "Continue shopping"
+    },
+    "register": {
+      "eyebrow": "Join us",
+      "title": "Create account",
+      "subtitle": "Join PlantyHub to track orders, save favourites, and get growing tips.",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "terms": "I agree to the Terms of Service and Privacy Policy.",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in",
+      "invalidName": "Please enter your name (at least 2 characters).",
+      "invalidEmail": "Please enter a valid email address.",
+      "invalidPassword": "Password must be at least 6 characters.",
+      "passwordMismatch": "Passwords do not match.",
+      "success": "Your account is ready. You can now sign in.",
+      "goToLogin": "Go to login"
+    }
+  },
+  "cart": {
+    "title": "Your cart",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Add pods, gardens or accessories to get started.",
+    "continueShopping": "Continue shopping",
+    "summary": "Order summary",
+    "subtotal": "Subtotal ({{count}} items)",
+    "subtotal_one": "Subtotal ({{count}} item)",
+    "shipping": "Shipping",
+    "freeShipping": "Free",
+    "freeShippingHint": "Free shipping on orders over {{amount}}",
+    "total": "Total",
+    "checkout": "Proceed to checkout",
+    "remove": "Remove item",
+    "added": "Added to cart",
+    "viewCart": "View cart"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "emptyTitle": "Your cart is empty",
+    "backToCart": "Back to cart",
+    "contact": "Contact details",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "shipping": "Shipping address",
+    "street": "Street address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "country": "Country",
+    "notes": "Delivery notes (optional)",
+    "payment": "Payment method",
+    "paymentMethods": {
+      "card": "Credit / debit card",
+      "paypal": "PayPal",
+      "cod": "Cash on delivery"
+    },
+    "countries": {
+      "BG": "Bulgaria",
+      "DE": "Germany",
+      "FR": "France",
+      "PL": "Poland",
+      "IT": "Italy",
+      "PT": "Portugal",
+      "CZ": "Czech Republic"
+    },
+    "orderSummary": "Your order",
+    "qty": "Qty {{count}}",
+    "placeOrder": "Place order",
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "breadcrumb": {
+      "cart": "Cart",
+      "checkout": "Information"
+    },
+    "showOrderSummary": "Show order summary",
+    "hideOrderSummary": "Hide order summary",
+    "returnToCart": "Return to cart",
+    "addNotes": "Add delivery notes",
+    "hideNotes": "Hide delivery notes",
+    "secureCheckout": "All transactions are secure and encrypted"
+  },
+  "order": {
+    "successTitle": "Thank you for your order!",
+    "successSubtitle": "We've sent a confirmation to {{email}}.",
+    "orderNumber": "Order {{id}}",
+    "shippingTo": "Shipping to",
+    "items": "Items",
+    "summary": "Order summary",
+    "continueShopping": "Back to home",
+    "notFound": "Order not found",
+    "backHome": "Back to home"
+  },
+  "admin": {
+    "brand": "Admin",
+    "welcome": "Welcome, {{name}}",
+    "viewStore": "View store",
+    "logout": "Log out",
+    "nav": {
+      "dashboard": "Dashboard",
+      "catalog": "Catalog",
+      "gardens": "Gardens",
+      "pods": "Seed pods",
+      "consumables": "Consumables",
+      "accessories": "Accessories",
+      "orders": "Orders",
+      "customers": "Customers",
+      "content": "Homepage",
+      "newsletter": "Newsletter",
+      "settings": "Settings"
+    },
+    "login": {
+      "eyebrow": "Admin panel",
+      "title": "Sign in",
+      "subtitle": "Manage products, orders and store content.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "error": "Invalid credentials. Use admin@plantyhub.com / admin123",
+      "backToStore": "← Back to store"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Overview of your PlantyHub store.",
+      "recentOrders": "Recent orders",
+      "weeklySales": "Weekly sales",
+      "weeklySalesSubtitle": "Total this week: {{total}}",
+      "orderStatus": "Orders by status",
+      "orderStatusSubtitle": "Distribution of all orders",
+      "topProducts": "Top products",
+      "topProductsSubtitle": "Best sellers this month",
+      "byCategory": "Revenue by category",
+      "byCategorySubtitle": "Share of total revenue",
+      "sales": "Sales",
+      "revenue": "Revenue",
+      "days": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+      },
+      "categories": {
+        "gardens": "Gardens",
+        "pods": "Seed pods",
+        "consumables": "Consumables",
+        "accessories": "Accessories"
+      },
+      "stats": {
+        "revenue": "Revenue (month)",
+        "ordersMonth": "Orders (month)",
+        "avgOrder": "Avg. order value",
+        "orders": "Orders",
+        "ordersTrend": "+2 this week",
+        "products": "Products",
+        "customers": "Customers",
+        "customersTrend": "+1 this week",
+        "newsletter": "Newsletter subscribers",
+        "newsletterTrend": "+48 this month",
+        "pending": "Pending orders",
+        "conversion": "Conversion rate",
+        "trendUp": "+{{value}}% vs last month"
+      }
+    },
+    "gardens": {
+      "title": "Gardens",
+      "subtitle": "Manage smart garden devices and bundles."
+    },
+    "pods": {
+      "title": "Seed pods",
+      "subtitle": "Manage seed capsule refills."
+    },
+    "consumables": {
+      "title": "Consumables",
+      "subtitle": "Capsules, nutrients and germination caps."
+    },
+    "accessories": {
+      "title": "Accessories",
+      "subtitle": "Shelves, storage and tools."
+    },
+    "orders": {
+      "title": "Orders",
+      "subtitle": "Track and manage customer orders.",
+      "view": "View order",
+      "table": {
+        "id": "Order",
+        "customer": "Customer",
+        "items": "Items",
+        "total": "Total",
+        "status": "Status",
+        "date": "Date"
+      },
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      }
+    },
+    "orderDetail": {
+      "notFound": "Order not found.",
+      "backToOrders": "Back to orders",
+      "placedOn": "Placed on {{date}}",
+      "firstOrder": "First order",
+      "customer": "Customer",
+      "orderCount": "Customer orders",
+      "orderNumberOf": "{{current}} of {{total}}",
+      "shippingAddress": "Shipping address",
+      "waybill": "Waybill",
+      "waybillNumber": "Waybill number",
+      "waybillTitle": "Shipping label",
+      "createWaybill": "Create waybill",
+      "createWaybillHint": "Generate a shipping label for this order. The order status will be set to Shipped.",
+      "createWaybillSubmit": "Generate waybill",
+      "printWaybill": "Print waybill",
+      "courier": "Courier",
+      "couriers": {
+        "econt": "Econt",
+        "speedy": "Speedy",
+        "dhl": "DHL"
+      },
+      "weight": "Weight (kg)",
+      "packages": "Packages",
+      "codAmount": "COD amount",
+      "waybillNotes": "Notes for courier",
+      "recipient": "Recipient",
+      "address": "Address",
+      "phone": "Phone",
+      "items": "Items ({{count}})",
+      "qty": "Qty",
+      "price": "Price",
+      "subtotal": "Subtotal",
+      "shippingCost": "Shipping",
+      "tax": "Tax",
+      "notes": "Order notes",
+      "timeline": "Order timeline",
+      "customerOrders": "Other orders from this customer",
+      "payment": {
+        "card": "Paid by card",
+        "cod": "Cash on delivery",
+        "paypal": "Paid via PayPal"
+      }
+    },
+    "customers": {
+      "title": "Customers",
+      "subtitle": "Registered store customers.",
+      "view": "View customer",
+      "table": {
+        "name": "Name",
+        "email": "Email",
+        "orders": "Orders",
+        "totalSpent": "Total spent",
+        "joined": "Joined"
+      }
+    },
+    "customerDetail": {
+      "notFound": "Customer not found.",
+      "backToCustomers": "Back to customers",
+      "contact": "Contact information",
+      "stats": "Customer statistics",
+      "orders": "Orders ({{count}})",
+      "noOrders": "No orders yet."
+    },
+    "countries": {
+      "BG": "Bulgaria",
+      "DE": "Germany",
+      "FR": "France",
+      "PL": "Poland",
+      "IT": "Italy",
+      "PT": "Portugal",
+      "CZ": "Czech Republic"
+    },
+    "content": {
+      "title": "Homepage",
+      "subtitle": "Edit all homepage sections — texts, images and visibility.",
+      "homepageSections": "Homepage sections",
+      "pages": "Static pages",
+      "items": "{{count}} items",
+      "faqCount": "{{count}} FAQ items",
+      "sections": {
+        "hero": "Hero",
+        "growSmarter": "Grow smarter",
+        "product": "Product highlight",
+        "howItWorks": "How it works",
+        "lightCycle": "Light cycle",
+        "podsGrid": "Pods grid",
+        "socialProof": "Social proof",
+        "guarantees": "Guarantees",
+        "accessories": "Accessories",
+        "cta": "Call to action"
+      },
+      "pageLabels": {
+        "about": "About page",
+        "support": "Support & FAQ",
+        "pods": "Pods catalog",
+        "accessories": "Accessories page"
+      },
+      "pageDescriptions": {
+        "about": "Brand story, values and team info.",
+        "support": "Support cards and frequently asked questions.",
+        "pods": "Full seed pod listing with detail pages.",
+        "accessories": "Accessories and consumables grid."
+      }
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Manage subscribers and email campaigns.",
+      "popupSettings": "Popup settings",
+      "enablePopup": "Show newsletter popup",
+      "exitIntent": "Exit-intent trigger",
+      "discountCode": "Discount code",
+      "sendCampaign": "Send campaign",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send campaign",
+      "stats": {
+        "subscribers": "Subscribers",
+        "openRate": "Open rate",
+        "openRateTrend": "+3% vs last month",
+        "activeCodes": "Active codes"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Store configuration and notifications.",
+      "store": "Store",
+      "storeName": "Store name",
+      "currency": "Currency",
+      "shippingThreshold": "Free shipping threshold",
+      "contact": "Contact",
+      "email": "Support email",
+      "address": "Address",
+      "notifications": "Notifications",
+      "newOrderEmail": "Email on new order",
+      "lowStockAlert": "Low stock alerts",
+      "weeklyReport": "Weekly sales report",
+      "demoNote": "This is a demo admin panel. Settings are read-only until a backend is connected.",
+      "catalog": "Product catalog",
+      "resetCatalog": "Reset catalog to defaults",
+      "resetCatalogHint": "Restores all products from the original catalog data."
+    },
+    "homepage": {
+      "title": "Homepage",
+      "subtitle": "Edit all homepage sections — texts, images and visibility.",
+      "reset": "Reset homepage",
+      "visible": "Visible",
+      "hidden": "Hidden"
+    },
+    "table": {
+      "product": "Product",
+      "id": "ID",
+      "price": "Price",
+      "status": "Status",
+      "country": "Country",
+      "actions": "Actions",
+      "active": "Active",
+      "inactive": "Inactive",
+      "edit": "Edit"
+    },
+    "actions": {
+      "addProduct": "Add product"
+    },
+    "productEdit": {
+      "addTitle": "Add product",
+      "editTitle": "Edit product",
+      "basicInfo": "Basic information",
+      "content": "Content (all languages)",
+      "id": "Product ID",
+      "idHint": "Lowercase slug, e.g. basil",
+      "price": "Price",
+      "compareAt": "Compare-at price",
+      "pack": "Pack size",
+      "imageUrl": "Image URL",
+      "imageFit": "Image fit",
+      "fitCover": "Cover",
+      "fitContain": "Contain",
+      "active": "Active (visible in store)",
+      "featured": "Featured product",
+      "name": "Name",
+      "tagline": "Tagline",
+      "description": "Description",
+      "save": "Save changes",
+      "cancel": "Cancel",
+      "errors": {
+        "idRequired": "Product ID is required.",
+        "nameRequired": "English name is required.",
+        "priceRequired": "Price is required.",
+        "imageRequired": "Image URL is required."
+      }
+    }
   }
 }

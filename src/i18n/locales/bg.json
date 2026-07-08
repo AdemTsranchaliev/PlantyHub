@@ -510,5 +510,416 @@
     "address": "PlantyHub · Пазарджик, България",
     "madeWith": "Създадено с грижа в България",
     "rights": "© {{year}} PlantyHub. Всички права запазени."
+  },
+  "auth": {
+    "login": {
+      "eyebrow": "Акаунт",
+      "title": "Вход",
+      "subtitle": "Добре дошъл отново! Влез, за да следиш поръчките и да управляваш градината си.",
+      "email": "Имейл",
+      "password": "Парола",
+      "rememberMe": "Запомни ме",
+      "forgotPassword": "Забравена парола?",
+      "submit": "Вход",
+      "noAccount": "Нямаш акаунт?",
+      "registerLink": "Регистрирай се",
+      "invalidEmail": "Моля, въведи валиден имейл адрес.",
+      "invalidPassword": "Паролата трябва да е поне 6 символа.",
+      "success": "Вляза успешно. Добре дошъл отново в PlantyHub!",
+      "continue": "Продължи пазаруването"
+    },
+    "register": {
+      "eyebrow": "Присъедини се",
+      "title": "Регистрация",
+      "subtitle": "Създай акаунт в PlantyHub, за да следиш поръчки, запазваш любими и получаваш съвети за отглеждане.",
+      "name": "Пълно име",
+      "email": "Имейл",
+      "password": "Парола",
+      "confirmPassword": "Потвърди паролата",
+      "terms": "Съгласен съм с Условията за ползване и Политиката за поверителност.",
+      "submit": "Създай акаунт",
+      "haveAccount": "Вече имаш акаунт?",
+      "loginLink": "Вход",
+      "invalidName": "Моля, въведи име (поне 2 символа).",
+      "invalidEmail": "Моля, въведи валиден имейл адрес.",
+      "invalidPassword": "Паролата трябва да е поне 6 символа.",
+      "passwordMismatch": "Паролите не съвпадат.",
+      "success": "Акаунтът ти е готов. Можеш да влезеш.",
+      "goToLogin": "Към вход"
+    }
+  },
+  "cart": {
+    "title": "Количка",
+    "emptyTitle": "Количката е празна",
+    "emptySubtitle": "Добави капсули, градини или аксесоари, за да започнеш.",
+    "continueShopping": "Продължи пазаруването",
+    "summary": "Обобщение",
+    "subtotal": "Междинна сума ({{count}} артикула)",
+    "subtotal_one": "Междинна сума ({{count}} артикул)",
+    "shipping": "Доставка",
+    "freeShipping": "Безплатна",
+    "freeShippingHint": "Безплатна доставка над {{amount}}",
+    "total": "Общо",
+    "checkout": "Към поръчка",
+    "remove": "Премахни",
+    "added": "Добавено в количката",
+    "viewCart": "Виж количката"
+  },
+  "checkout": {
+    "title": "Поръчка",
+    "emptyTitle": "Количката е празна",
+    "backToCart": "Обратно към количката",
+    "contact": "Контактни данни",
+    "name": "Име и фамилия",
+    "email": "Имейл",
+    "phone": "Телефон",
+    "shipping": "Адрес за доставка",
+    "street": "Адрес",
+    "city": "Град",
+    "postalCode": "Пощенски код",
+    "country": "Държава",
+    "notes": "Бележки за доставка (по избор)",
+    "payment": "Начин на плащане",
+    "paymentMethods": {
+      "card": "Карта",
+      "paypal": "PayPal",
+      "cod": "Наложен платеж"
+    },
+    "countries": {
+      "BG": "България",
+      "DE": "Германия",
+      "FR": "Франция",
+      "PL": "Полша",
+      "IT": "Италия",
+      "PT": "Португалия",
+      "CZ": "Чехия"
+    },
+    "orderSummary": "Твоята поръчка",
+    "qty": "Бр. {{count}}",
+    "placeOrder": "Поръчай",
+    "required": "Задължително поле",
+    "invalidEmail": "Въведи валиден имейл",
+    "breadcrumb": {
+      "cart": "Количка",
+      "checkout": "Данни"
+    },
+    "showOrderSummary": "Покажи обобщението",
+    "hideOrderSummary": "Скрий обобщението",
+    "returnToCart": "Обратно към количката",
+    "addNotes": "Добави бележка за доставка",
+    "hideNotes": "Скрий бележката",
+    "secureCheckout": "Всички плащания са защитени и криптирани"
+  },
+  "order": {
+    "successTitle": "Благодарим за поръчката!",
+    "successSubtitle": "Изпратихме потвърждение на {{email}}.",
+    "orderNumber": "Поръчка {{id}}",
+    "shippingTo": "Доставка до",
+    "items": "Артикули",
+    "summary": "Обобщение",
+    "continueShopping": "Към началото",
+    "notFound": "Поръчката не е намерена",
+    "backHome": "Към началото"
+  },
+  "admin": {
+    "brand": "Админ",
+    "welcome": "Здравей, {{name}}",
+    "viewStore": "Виж магазина",
+    "logout": "Изход",
+    "nav": {
+      "dashboard": "Табло",
+      "catalog": "Каталог",
+      "gardens": "Градини",
+      "pods": "Семена",
+      "consumables": "Консумативи",
+      "accessories": "Аксесоари",
+      "orders": "Поръчки",
+      "customers": "Клиенти",
+      "content": "Начална страница",
+      "newsletter": "Бюлетин",
+      "settings": "Настройки"
+    },
+    "login": {
+      "eyebrow": "Админ панел",
+      "title": "Вход",
+      "subtitle": "Управлявай продукти, поръчки и съдържание на магазина.",
+      "email": "Имейл",
+      "password": "Парола",
+      "submit": "Вход",
+      "error": "Грешни данни. Използвай admin@plantyhub.com / admin123",
+      "backToStore": "← Обратно към магазина"
+    },
+    "dashboard": {
+      "title": "Табло",
+      "subtitle": "Преглед на PlantyHub магазина.",
+      "recentOrders": "Последни поръчки",
+      "weeklySales": "Седмични продажби",
+      "weeklySalesSubtitle": "Общо тази седмица: {{total}}",
+      "orderStatus": "Поръчки по статус",
+      "orderStatusSubtitle": "Разпределение на всички поръчки",
+      "topProducts": "Топ продукти",
+      "topProductsSubtitle": "Най-продавани този месец",
+      "byCategory": "Приходи по категория",
+      "byCategorySubtitle": "Дял от общите приходи",
+      "sales": "Продажби",
+      "revenue": "Приход",
+      "days": {
+        "mon": "Пон",
+        "tue": "Вто",
+        "wed": "Сря",
+        "thu": "Чет",
+        "fri": "Пет",
+        "sat": "Съб",
+        "sun": "Нед"
+      },
+      "categories": {
+        "gardens": "Градини",
+        "pods": "Семена",
+        "consumables": "Консумативи",
+        "accessories": "Аксесоари"
+      },
+      "stats": {
+        "revenue": "Приходи (месец)",
+        "ordersMonth": "Поръчки (месец)",
+        "avgOrder": "Средна стойност",
+        "orders": "Поръчки",
+        "ordersTrend": "+2 тази седмица",
+        "products": "Продукти",
+        "customers": "Клиенти",
+        "customersTrend": "+1 тази седмица",
+        "newsletter": "Абонати за бюлетин",
+        "newsletterTrend": "+48 този месец",
+        "pending": "Изчакващи поръчки",
+        "conversion": "Конверсия",
+        "trendUp": "+{{value}}% спрямо миналия месец"
+      }
+    },
+    "gardens": {
+      "title": "Градини",
+      "subtitle": "Управление на смарт градини и комплекти."
+    },
+    "pods": {
+      "title": "Семена",
+      "subtitle": "Управление на семенни капсули."
+    },
+    "consumables": {
+      "title": "Консумативи",
+      "subtitle": "Капсули, хранителни вещества и покрития."
+    },
+    "accessories": {
+      "title": "Аксесоари",
+      "subtitle": "Рафтове, съхранение и инструменти."
+    },
+    "orders": {
+      "title": "Поръчки",
+      "subtitle": "Проследяване и управление на поръчки.",
+      "view": "Виж поръчка",
+      "table": {
+        "id": "Поръчка",
+        "customer": "Клиент",
+        "items": "Артикули",
+        "total": "Общо",
+        "status": "Статус",
+        "date": "Дата"
+      },
+      "status": {
+        "pending": "Изчакваща",
+        "processing": "Обработва се",
+        "shipped": "Изпратена",
+        "delivered": "Доставена",
+        "cancelled": "Отказана"
+      }
+    },
+    "orderDetail": {
+      "notFound": "Поръчката не е намерена.",
+      "backToOrders": "Обратно към поръчките",
+      "placedOn": "Направена на {{date}}",
+      "firstOrder": "Първа поръчка",
+      "customer": "Клиент",
+      "orderCount": "Поръчки на клиента",
+      "orderNumberOf": "{{current}} от {{total}}",
+      "shippingAddress": "Адрес за доставка",
+      "waybill": "Товарителница",
+      "waybillNumber": "Номер на товарителница",
+      "waybillTitle": "Товарителница",
+      "createWaybill": "Създай товарителница",
+      "createWaybillHint": "Генерирай товарителница за тази поръчка. Статусът ще стане „Изпратена“.",
+      "createWaybillSubmit": "Генерирай товарителница",
+      "printWaybill": "Принтирай товарителница",
+      "courier": "Куриер",
+      "couriers": {
+        "econt": "Еконт",
+        "speedy": "Спиди",
+        "dhl": "DHL"
+      },
+      "weight": "Тегло (кг)",
+      "packages": "Пакети",
+      "codAmount": "Наложен платеж",
+      "waybillNotes": "Бележки за куриера",
+      "recipient": "Получател",
+      "address": "Адрес",
+      "phone": "Телефон",
+      "items": "Артикули ({{count}})",
+      "qty": "Бр.",
+      "price": "Цена",
+      "subtotal": "Междинна сума",
+      "shippingCost": "Доставка",
+      "tax": "ДДС",
+      "notes": "Бележки към поръчката",
+      "timeline": "Хронология",
+      "customerOrders": "Други поръчки на клиента",
+      "payment": {
+        "card": "Платено с карта",
+        "cod": "Наложен платеж",
+        "paypal": "Платено с PayPal"
+      }
+    },
+    "customers": {
+      "title": "Клиенти",
+      "subtitle": "Регистрирани клиенти на магазина.",
+      "view": "Виж клиент",
+      "table": {
+        "name": "Име",
+        "email": "Имейл",
+        "orders": "Поръчки",
+        "totalSpent": "Общо похарчено",
+        "joined": "Регистрация"
+      }
+    },
+    "customerDetail": {
+      "notFound": "Клиентът не е намерен.",
+      "backToCustomers": "Обратно към клиентите",
+      "contact": "Контактна информация",
+      "stats": "Статистика на клиента",
+      "orders": "Поръчки ({{count}})",
+      "noOrders": "Все още няма поръчки."
+    },
+    "countries": {
+      "BG": "България",
+      "DE": "Германия",
+      "FR": "Франция",
+      "PL": "Полша",
+      "IT": "Италия",
+      "PT": "Португалия",
+      "CZ": "Чехия"
+    },
+    "content": {
+      "title": "Начална страница",
+      "subtitle": "Редактирай всички секции — текстове, снимки и видимост.",
+      "homepageSections": "Секции на началната страница",
+      "pages": "Статични страници",
+      "items": "{{count}} елемента",
+      "faqCount": "{{count}} въпроса",
+      "sections": {
+        "hero": "Главен банер",
+        "growSmarter": "Отглеждай по-умно",
+        "product": "Продукт",
+        "howItWorks": "Как работи",
+        "lightCycle": "Светлинен цикъл",
+        "podsGrid": "Мрежа с капсули",
+        "socialProof": "Отзиви",
+        "guarantees": "Гаранции",
+        "accessories": "Аксесоари",
+        "cta": "Призив за действие"
+      },
+      "pageLabels": {
+        "about": "Страница „За нас“",
+        "support": "Поддръжка и FAQ",
+        "pods": "Каталог капсули",
+        "accessories": "Страница аксесоари"
+      },
+      "pageDescriptions": {
+        "about": "История на бранда, ценности и екип.",
+        "support": "Карти за поддръжка и често задавани въпроси.",
+        "pods": "Пълен списък със семенни капсули и детайлни страници.",
+        "accessories": "Мрежа с аксесоари и консумативи."
+      }
+    },
+    "newsletter": {
+      "title": "Бюлетин",
+      "subtitle": "Управление на абонати и имейл кампании.",
+      "popupSettings": "Настройки на попъп",
+      "enablePopup": "Показвай попъп за бюлетин",
+      "exitIntent": "При излизане от страницата",
+      "discountCode": "Код за отстъпка",
+      "sendCampaign": "Изпрати кампания",
+      "subject": "Тема",
+      "message": "Съобщение",
+      "send": "Изпрати кампания",
+      "stats": {
+        "subscribers": "Абонати",
+        "openRate": "Отваряемост",
+        "openRateTrend": "+3% спрямо миналия месец",
+        "activeCodes": "Активни кодове"
+      }
+    },
+    "settings": {
+      "title": "Настройки",
+      "subtitle": "Конфигурация на магазина и известия.",
+      "store": "Магазин",
+      "storeName": "Име на магазина",
+      "currency": "Валута",
+      "shippingThreshold": "Праг за безплатна доставка",
+      "contact": "Контакти",
+      "email": "Имейл за поддръжка",
+      "address": "Адрес",
+      "notifications": "Известия",
+      "newOrderEmail": "Имейл при нова поръчка",
+      "lowStockAlert": "Предупреждение за ниска наличност",
+      "weeklyReport": "Седмичен отчет за продажби",
+      "demoNote": "Това е демо админ панел. Настройките са само за четене, докато не се свърже бекенд.",
+      "catalog": "Продуктов каталог",
+      "resetCatalog": "Нулирай каталога",
+      "resetCatalogHint": "Възстановява всички продукти от оригиналните данни."
+    },
+    "homepage": {
+      "title": "Начална страница",
+      "subtitle": "Редактирай всички секции — текстове, снимки и видимост.",
+      "reset": "Нулирай началната страница",
+      "visible": "Видима",
+      "hidden": "Скрита"
+    },
+    "table": {
+      "product": "Продукт",
+      "id": "ID",
+      "price": "Цена",
+      "status": "Статус",
+      "country": "Държава",
+      "actions": "Действия",
+      "active": "Активен",
+      "inactive": "Неактивен",
+      "edit": "Редактирай"
+    },
+    "actions": {
+      "addProduct": "Добави продукт"
+    },
+    "productEdit": {
+      "addTitle": "Добави продукт",
+      "editTitle": "Редактирай продукт",
+      "basicInfo": "Основна информация",
+      "content": "Съдържание (всички езици)",
+      "id": "ID на продукта",
+      "idHint": "Малки букви, напр. basil",
+      "price": "Цена",
+      "compareAt": "Стара цена",
+      "pack": "Опаковка",
+      "imageUrl": "URL на изображение",
+      "imageFit": "Побиране на изображение",
+      "fitCover": "Cover",
+      "fitContain": "Contain",
+      "active": "Активен (видим в магазина)",
+      "featured": "Препоръчан продукт",
+      "name": "Име",
+      "tagline": "Подзаглавие",
+      "description": "Описание",
+      "save": "Запази",
+      "cancel": "Отказ",
+      "errors": {
+        "idRequired": "ID на продукта е задължително.",
+        "nameRequired": "Името на английски е задължително.",
+        "priceRequired": "Цената е задължителна.",
+        "imageRequired": "URL на изображение е задължително."
+      }
+    }
   }
 }

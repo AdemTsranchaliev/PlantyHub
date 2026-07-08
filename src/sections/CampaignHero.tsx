@@ -7,10 +7,28 @@ import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import { campaignBundleCatalog, campaignBundleIds } from '../data/catalog'
+import { useProduct } from '../hooks/useProducts'
 import { brand } from '../theme'
 
-function bundleName(t: (key: string) => string, nameKey: string) {
-  return t(`products.pods.${nameKey}.name`)
+function BundleCard({ id, item }: { id: string; item: (typeof campaignBundleCatalog)[keyof typeof campaignBundleCatalog] }) {
+  const { t } = useTranslation()
+  const stored = useProduct('pods', item.nameKey)
+  const name = stored?.name ?? t(`products.pods.${item.nameKey}.name`)
+  const price = stored?.price ?? item.price
+
+  return (
+    <ProductCard
+      layout="grid"
+      product={{
+        id,
+        name,
+        price,
+        pack: t(`common.${item.packKey}`),
+        image: stored?.image ?? item.image,
+        imageFit: stored?.imageFit ?? item.imageFit ?? 'cover',
+      }}
+    />
+  )
 }
 
 export default function CampaignHero() {
@@ -68,17 +86,7 @@ export default function CampaignHero() {
                   }}
                 >
                   <Box sx={{ bgcolor: brand.white, borderRadius: isFeatured ? 3.5 : 4, height: '100%' }}>
-                    <ProductCard
-                      layout="grid"
-                      product={{
-                        id,
-                        name: bundleName(t, item.nameKey),
-                        price: item.price,
-                        pack: t(`common.${item.packKey}`),
-                        image: item.image,
-                        imageFit: item.imageFit ?? 'cover',
-                      }}
-                    />
+                    <BundleCard id={id} item={item} />
                   </Box>
                 </Box>
               </Grid>
@@ -91,19 +99,7 @@ export default function CampaignHero() {
         <HorizontalScroll gap={2}>
           {campaignBundleIds.map((id) => {
             const item = campaignBundleCatalog[id]
-            return (
-              <ProductCard
-                key={id}
-                product={{
-                  id,
-                  name: bundleName(t, item.nameKey),
-                  price: item.price,
-                  pack: t(`common.${item.packKey}`),
-                  image: item.image,
-                  imageFit: item.imageFit ?? 'cover',
-                }}
-              />
-            )
+            return <BundleCard key={id} id={id} item={item} />
           })}
         </HorizontalScroll>
       </Box>

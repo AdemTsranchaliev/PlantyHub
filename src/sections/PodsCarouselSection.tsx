@@ -5,10 +5,12 @@ import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import SectionLink from '../components/SectionLink'
-import { navHrefs, seedPodsCatalog } from '../data/catalog'
+import { navHrefs } from '../data/catalog'
+import { useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
 
 export default function PodsCarouselSection() {
   const { t } = useTranslation()
+  const pods = useSeedPodsCatalog()
 
   return (
     <SectionContainer id="pods" py={{ xs: 5, sm: 7, md: 9 }} bleedX>
@@ -17,18 +19,8 @@ export default function PodsCarouselSection() {
       </Box>
 
       <HorizontalScroll gap={2}>
-        {seedPodsCatalog.map((pod) => (
-          <ProductCard
-            key={pod.id}
-            product={{
-              id: pod.id,
-              name: t(`products.pods.${pod.id}.name`),
-              price: pod.price,
-              pack: t(`common.${pod.packKey}`),
-              image: pod.image,
-              imageFit: pod.imageFit,
-            }}
-          />
+        {pods.map((pod) => (
+          <ProductCard key={pod.id} product={toProductCardData(pod, t)} />
         ))}
       </HorizontalScroll>
 

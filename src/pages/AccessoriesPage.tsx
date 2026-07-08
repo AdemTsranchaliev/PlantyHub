@@ -11,11 +11,16 @@ import { useTranslation } from 'react-i18next'
 import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
-import { accessoriesCatalog, consumablesCatalog, navHrefs } from '../data/catalog'
+import { navHrefs } from '../data/catalog'
+import { useAccessoriesCatalog, useConsumablesCatalog, toProductCardData } from '../hooks/useProducts'
+import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 
 export default function AccessoriesPage() {
   const { t } = useTranslation()
+  const accessories = useAccessoriesCatalog()
+  const consumables = useConsumablesCatalog()
+  const addProductToCart = useAddProductToCart()
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -66,18 +71,13 @@ export default function AccessoriesPage() {
           {t('accessoriesSection.title')}
         </Typography>
         <Grid container spacing={{ xs: 2.5, md: 3 }}>
-          {accessoriesCatalog.map((item, index) => (
+          {accessories.map((item, index) => (
             <Grid key={item.id} size={{ xs: 12, sm: 4 }}>
               <Reveal delay={index * 0.08}>
                 <ProductCard
                   layout="grid"
-                  product={{
-                    id: item.id,
-                    name: t(`products.accessories.${item.id}.name`),
-                    price: item.price,
-                    image: item.image,
-                    imageFit: item.imageFit,
-                  }}
+                  product={toProductCardData(item, t)}
+                  onAddToCart={() => addProductToCart('accessories', item)}
                 />
               </Reveal>
             </Grid>
@@ -93,28 +93,24 @@ export default function AccessoriesPage() {
           {t('consumablesSection.subtitle')}
         </Typography>
         <Grid container spacing={{ xs: 2.5, md: 3 }}>
-          {consumablesCatalog.map((item, index) => (
+          {consumables.map((item, index) => (
             <Grid key={item.id} size={{ xs: 12, sm: 4 }}>
               <Reveal delay={index * 0.08}>
                 <ProductCard
                   layout="grid"
-                  product={{
-                    id: item.id,
-                    name: t(`products.consumables.${item.id}.name`),
-                    price: item.price,
-                    pack: t(`common.${item.packKey}`),
-                    image: item.image,
-                    imageFit: item.imageFit,
-                  }}
+                  product={toProductCardData(item, t)}
+                  onAddToCart={() => addProductToCart('consumables', item)}
                 />
               </Reveal>
             </Grid>
           ))}
         </Grid>
+      </SectionContainer>
 
-        <Box sx={{ mt: { xs: 5, md: 7 }, textAlign: 'center' }}>
-          <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} sx={{ px: 4 }}>
-            {t('podsPage.ctaButton')}
+      <SectionContainer bgcolor={brand.white} py={{ xs: 5, sm: 6, md: 6 }}>
+        <Box sx={{ textAlign: 'center' }}>
+          <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy}>
+            {t('nav.buyNow')}
           </Button>
         </Box>
       </SectionContainer>

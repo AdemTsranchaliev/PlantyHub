@@ -24,13 +24,14 @@ type ProductCardProps = {
   layout?: 'carousel' | 'grid'
   /** When set, the card image and title link to this route */
   to?: string
+  onAddToCart?: (e: React.MouseEvent) => void
 }
 
 function toFlexBasis(width: number | string) {
   return typeof width === 'number' ? `${width}px` : width
 }
 
-export default function ProductCard({ product, width, layout = 'carousel', to }: ProductCardProps) {
+export default function ProductCard({ product, width, layout = 'carousel', to, onAddToCart }: ProductCardProps) {
   const { t } = useTranslation()
   const basis = toFlexBasis(width ?? carouselCardWidth.xs)
   const basisSm = toFlexBasis(typeof width === 'number' ? width : carouselCardWidth.sm)
@@ -91,6 +92,7 @@ export default function ProductCard({ product, width, layout = 'carousel', to }:
           <IconButton
             className="cart-btn"
             aria-label={t('common.addToCartAria', { name: product.name })}
+            onClick={onAddToCart}
             sx={{
               position: 'absolute',
               bottom: 12,

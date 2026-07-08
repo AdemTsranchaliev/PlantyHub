@@ -5,17 +5,26 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import CheckRounded from '@mui/icons-material/CheckRounded'
-import { useTranslation } from 'react-i18next'
 import { pagePaddingX } from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
-import { starterBundlePrice } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
+import { useProduct } from '../hooks/useProducts'
+import { useHt, useHi } from '../hooks/useHomepage'
 import { brand } from '../theme'
 
 const trustKeys = ['shipping', 'guarantee', 'setup'] as const
 
 export default function CtaSection() {
-  const { t } = useTranslation()
+  const bundle = useProduct('gardens', 'starter-bundle')
+  const title = useHt('cta.title')
+  const subtitle = useHt('cta.subtitle', { price: bundle?.price ?? '€129.00' })
+  const emailPlaceholder = useHt('cta.emailPlaceholder')
+  const button = useHt('cta.button')
+  const ctaImage = useHi('cta.main', lifestyleImages.mintKitchen)
+  const trustShipping = useHt('hero.trust.shipping')
+  const trustGuarantee = useHt('hero.trust.guarantee')
+  const trustSetup = useHt('hero.trust.setup')
+  const trustLabels = { shipping: trustShipping, guarantee: trustGuarantee, setup: trustSetup }
 
   return (
     <Box
@@ -56,10 +65,10 @@ export default function CtaSection() {
                   mb: 2,
                 }}
               >
-                {t('cta.title')}
+                {title}
               </Typography>
               <Typography sx={{ fontSize: { xs: '1.05rem', sm: '1.15rem' }, lineHeight: 1.7, opacity: 0.92, mb: 4, maxWidth: 480 }}>
-                {t('cta.subtitle', { price: starterBundlePrice })}
+                {subtitle}
               </Typography>
 
               <Stack
@@ -71,7 +80,7 @@ export default function CtaSection() {
               >
                 <TextField
                   fullWidth
-                  placeholder={t('cta.emailPlaceholder')}
+                  placeholder={emailPlaceholder}
                   size="medium"
                   sx={{
                     flex: 1,
@@ -97,7 +106,7 @@ export default function CtaSection() {
                     '&:hover': { bgcolor: brand.graphiteSoft },
                   }}
                 >
-                  {t('cta.button')}
+                  {button}
                 </Button>
               </Stack>
 
@@ -106,7 +115,7 @@ export default function CtaSection() {
                   <Stack key={key} direction="row" spacing={0.75} sx={{ alignItems: 'center' }}>
                     <CheckRounded sx={{ fontSize: 18, color: brand.peach }} />
                     <Typography sx={{ fontSize: '0.85rem', fontWeight: 600, opacity: 0.95 }}>
-                      {t(`hero.trust.${key}`)}
+                      {trustLabels[key]}
                     </Typography>
                   </Stack>
                 ))}
@@ -128,8 +137,8 @@ export default function CtaSection() {
               >
                 <Box
                   component="img"
-                  src={lifestyleImages.mintKitchen}
-                  alt={t('cta.title')}
+                  src={ctaImage}
+                  alt={title}
                   loading="lazy"
                   sx={{
                     width: '100%',

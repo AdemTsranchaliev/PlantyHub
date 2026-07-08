@@ -20,8 +20,10 @@ import { useTranslation } from 'react-i18next'
 import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
-import { navHrefs, seedPodsCatalog } from '../data/catalog'
+import { navHrefs } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
+import { useProduct, useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
+import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 
 const trustItems = ['compatible', 'nonGmo', 'shipping'] as const
@@ -29,7 +31,9 @@ const trustItems = ['compatible', 'nonGmo', 'shipping'] as const
 export default function PodDetailPage() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
-  const pod = seedPodsCatalog.find((p) => p.id === id)
+  const pod = useProduct('pods', id)
+  const allPods = useSeedPodsCatalog()
+  const addProductToCart = useAddProductToCart()
   const [qty, setQty] = useState(1)
   const [active, setActive] = useState(0)
 
@@ -41,13 +45,12 @@ export default function PodDetailPage() {
 
   useEffect(() => {
     if (pod) {
-      const name = t(`products.pods.${pod.id}.name`)
-      document.title = `${name} · PlantyHub`
+      document.title = `${pod.name} · PlantyHub`
       return () => {
         document.title = 'PlantyHub'
       }
     }
-  }, [pod, t])
+  }, [pod])
 
   if (!pod) {
     return (
@@ -67,7 +70,7 @@ export default function PodDetailPage() {
     { key: 'light', Icon: WbSunnyOutlined, value: t('podDetail.specs.light.value') },
     { key: 'nature', Icon: EnergySavingsLeafOutlined, value: t('podDetail.specs.nature.value') },
   ]
-  const related = seedPodsCatalog.filter((p) => p.id !== pod.id).slice(0, 4)
+  const related = allPods.filter((p) => p.id !== pod.id).slice(0, 4)
 
   return (
     <main>
@@ -82,7 +85,7 @@ export default function PodDetailPage() {
           </Link>
           <NavigateNextRounded sx={{ fontSize: 16, color: brand.textSecondary }} />
           <Typography sx={{ color: brand.graphite, fontSize: '0.85rem', fontWeight: 700 }}>
-            {t(`products.pods.${pod.id}.name`)}
+            {pod.name}
           </Typography>
         </Stack>
 
@@ -100,7 +103,7 @@ export default function PodDetailPage() {
               <Box
                 component="img"
                 src={gallery[active]}
-                alt={t(`products.pods.${pod.id}.name`)}
+                alt={pod.name}
                 decoding="async"
                 fetchPriority="high"
                 sx={{
@@ -119,7 +122,7 @@ export default function PodDetailPage() {
                   key={i}
                   component="button"
                   onClick={() => setActive(i)}
-                  aria-label={`${t(`products.pods.${pod.id}.name`)} ${i + 1}`}
+                  aria-label={`${pod.name} ${i + 1}`}
                   sx={{
                     width: { xs: 64, sm: 80 },
                     height: { xs: 64, sm: 80 },
@@ -152,7 +155,7 @@ export default function PodDetailPage() {
               </Stack>
 
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1 }}>
-                {t(`products.pods.${pod.id}.name`)}
+                {pod.name}
               </Typography>
               <Typography sx={{ color: brand.textSecondary, fontWeight: 600, mb: 2 }}>
                 {t(`common.${pod.packKey}`)}
@@ -170,7 +173,7 @@ export default function PodDetailPage() {
               </Stack>
 
               <Typography sx={{ color: brand.textSecondary, lineHeight: 1.75, fontSize: '1.05rem', mb: 3.5 }}>
-                {t(`products.pods.${pod.id}.description`)}
+                {pod.description}
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' }, mb: 3.5 }}>
@@ -186,7 +189,7 @@ export default function PodDetailPage() {
                     <AddRounded fontSize="small" />
                   </IconButton>
                 </Stack>
-                <Button variant="contained" size="large" fullWidth sx={{ px: 4 }}>
+                <Button variant="contained" size="large" fullWidth sx={{ px: 4 }} onClick={() => addProductToCart('pods', pod, qty)}>
                   {t('common.addToCart')}
                 </Button>
               </Stack>
@@ -242,18 +245,7 @@ export default function PodDetailPage() {
           {related.map((rel, index) => (
             <Grid key={rel.id} size={{ xs: 6, sm: 4, md: 3 }}>
               <Reveal delay={(index % 4) * 0.06}>
-                <ProductCard
-                  layout="grid"
-                  to={`/pods/${rel.id}`}
-                  product={{
-                    id: rel.id,
-                    name: t(`products.pods.${rel.id}.name`),
-                    price: rel.price,
-                    pack: t(`common.${rel.packKey}`),
-                    image: rel.image,
-                    imageFit: rel.imageFit,
-                  }}
-                />
+                <ProductCard layout="grid" to={`/pods/${rel.id}`} product={toProductCardData(rel, t)} />
               </Reveal>
             </Grid>
           ))}
