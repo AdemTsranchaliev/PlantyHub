@@ -1,0 +1,859 @@
+{
+  "promo": "KOSTENLOSER VERSAND AB €60 · EU & BALKAN",
+  "nav": {
+    "product": "Produkt",
+    "howItWorks": "So funktioniert's",
+    "pods": "Pods",
+    "accessories": "Zubehör",
+    "about": "Über uns",
+    "support": "Support",
+    "buyNow": "Jetzt kaufen"
+  },
+  "header": {
+    "region": "EU & Balkan (€)",
+    "login": "Anmelden",
+    "search": "Suchen",
+    "cart": "Warenkorb",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "common": {
+    "addToCart": "In den Warenkorb",
+    "addToCartAria": "{{name}} in den Warenkorb legen",
+    "readMore": "Mehr lesen",
+    "pack3": "3er-Pack",
+    "pack9": "9er-Pack",
+    "pack12": "12er-Pack",
+    "bottle1L": "1L Flasche",
+    "bottle2x100ml": "2×100 ml",
+    "colorWhite": "Weiß Matt",
+    "colorStandard": "Standard"
+  },
+  "hero": {
+    "title": "Frische Kräuter zuhause",
+    "promise": "Vom Samen zum Gewürz in 18 Tagen",
+    "description": "12-Pod-Garten mit Selbstbewässerung und automatischer LED.",
+    "ctaPrimary": "Jetzt kaufen",
+    "ctaSecondary": "So funktioniert's",
+    "priceLabel": "HomeGarder One",
+    "imageAlt": "PlantyHub HomeGarder One",
+    "badge": "4,9/5 · 500+ Kunden",
+    "trust": {
+      "shipping": "Gratis EU-Versand ab 60 €",
+      "guarantee": "Keim-Garantie",
+      "setup": "In 5 Minuten startklar"
+    },
+    "stats": {
+      "pods": { "value": "12", "label": "Plätze" },
+      "light": { "value": "16/8h", "label": "Lichtzyklus" },
+      "height": { "value": "bis 40 cm", "label": "Wuchshöhe" }
+    }
+  },
+  "product": {
+    "eyebrow": "Produkt",
+    "title": "PlantyHub HomeGarder One",
+    "description": "12 Pods, Vollspektrum-LED und Selbstbewässerung — bereit für die Arbeitsfläche.",
+    "cta": "In den Warenkorb",
+    "trust": {
+      "shipping": "Gratis Versand ab 60 €",
+      "guarantee": "Keim-Garantie",
+      "returns": "30 Tage Rückgabe"
+    },
+    "specs": {
+      "pods": "Plätze", "podsValue": "12 Kapseln",
+      "light": "Licht", "lightValue": "Vollspektrum-LED · 16h an / 8h aus",
+      "growthHeight": "Wuchshöhe", "growthHeightValue": "Bis 40 cm",
+      "irrigation": "Bewässerung", "irrigationValue": "Automatisch",
+      "nutrients": "Nährstoffe", "nutrientsValue": "Sana A + B",
+      "dimensions": "Maße", "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
+    }
+  },
+  "socialProof": {
+    "stat": "500+", "statLabel": "zufriedene Kunden",
+    "subtitle": "Beliebt bei Hobbygärtnern in ganz Europa.",
+    "reviews": {
+      "elena": "Morgendlicher Minztee aus meinem eigenen Garten.",
+      "urbanherbs": "Perfekt, wenn man sonst Pflanzen umbringt. Es funktioniert einfach.",
+      "freshplate": "Selbst gepflückte Kräuter — ganz ohne Zusätze."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "So funktioniert's", "title": "4 Schritte zur Ernte",
+    "subtitle": "",
+    "steps": {
+      "placeCapsule": { "title": "Kapsel einsetzen", "description": "Abziehen und einsetzen." },
+      "addSolution": { "title": "Wasser hinzufügen", "description": "Füllen und Sana A & B dosieren." },
+      "turnOn": { "title": "Einschalten", "description": "LED 16h an, 8h aus." },
+      "harvest": { "title": "Ernten", "description": "Frische Kräuter in ~18 Tagen." }
+    }
+  },
+  "lightCycle": {
+    "eyebrow": "Lichtzyklus", "title": "16 Stunden an, 8 aus",
+    "description": "Vollspektrum-LED für Keimung und Wachstum.",
+    "onLabel": "16h — Wachstum", "onDescription": "Helles LED-Licht den ganzen Tag.",
+    "offLabel": "8h — Ruhe", "offDescription": "Pflanzen ruhen wie in der Natur.",
+    "diagramLabel": "24-Stunden-Zyklus",
+    "days": { "0": "Mo", "1": "Di", "2": "Mi", "3": "Do" }
+  },
+  "featured": {
+    "badge": "Flaggschiff",
+    "title": "PlantyHub HomeGarder One",
+    "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED und automatischer Bewässerung. Weißes Mattfinish, das auf jeder Arbeitsfläche gut aussieht.",
+    "cta": "In den Warenkorb"
+  },
+  "campaign": {
+    "eyebrow": "Starter-Auswahl",
+    "title": "Alles für deine erste Ernte",
+    "description": "HomeGarder One + ein PlantyHub Pods Pflanz-Kit. Eine Box — Garten, Samen, Kapseln und Nährstoffe.",
+    "cta": "Starter-Paket ansehen",
+    "imageAlt": "PlantyHub Starter-Paket"
+  },
+  "starterBundle": {
+    "eyebrow": "Starter-Paket",
+    "title": "HomeGarder One + PlantyHub Pods",
+    "description": "Garten und Pflanz-Kit in einer Box — bereit für die erste Ernte.",
+    "diyKitTitle": "Pflanz-es-selbst-Kit enthält:",
+    "cta": "Starter-Paket hinzufügen",
+    "imageAlt": "PlantyHub Starter-Paket",
+    "items": {
+      "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 Pods, 16h LED-Lichtzyklus, Auto-Bewässerung." },
+      "seedPodsBox": { "title": "PlantyHub Pods Samen-Box", "description": "12 Samen-Kapseln — je 2× Basilikum, Minze, Petersilie, Koriander, Dill und Rucola." },
+      "diyKit": { "title": "Pflanz-es-selbst-Kit", "description": "12 Kapseln, Sana A & B je 100 ml, 12 Keimkappen." },
+      "unifiedShipping": { "title": "Eine Versandbox", "description": "Alles zusammen geliefert — sofort startklar." }
+    },
+    "details": {
+      "basil": "Basilikum ×2", "mint": "Minze ×2", "parsley": "Petersilie ×2", "cilantro": "Koriander ×2",
+      "dill": "Dill ×2", "arugula": "Rucola ×2", "emptyCapsules": "12 Kapseln",
+      "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 Keimkappen", "instructions": "Dosieranleitung"
+    }
+  },
+  "sleek": {
+    "eyebrow": "Unsere Gärten",
+    "title": "Für den Alltag in der Küche",
+    "subtitle": "Unsere Indoor-Gärten helfen dir, wie ein Profi zu wachsen — ohne dass du wissen musst, was du tust.",
+    "discoverAll": "Alle Gärten entdecken"
+  },
+  "podsSection": {
+    "eyebrow": "PlantyHub Pods",
+    "title": "Kräuter auswählen",
+    "subtitle": ""
+  },
+  "podsPage": {
+    "eyebrow": "PlantyHub Kapseln",
+    "title": "Alle Saatkapseln",
+    "subtitle": "Vorgesäte Kapseln für jedes Gericht — frische Kräuter, Gewürze und Grün. Einfach einsetzen und wachsen lassen.",
+    "ctaTitle": "Noch keinen Garten?",
+    "ctaSubtitle": "Hol dir den HomeGarder One und ziehe alle deine Lieblingskräuter zu Hause, das ganze Jahr.",
+    "ctaButton": "HomeGarder One ansehen"
+  },
+  "podDetail": {
+    "quantity": "Menge",
+    "detailsTitle": "Gut zu wissen",
+    "relatedTitle": "Weitere Pods zum Anbauen",
+    "specs": {
+      "harvest": { "label": "Erste Ernte", "value": "2–4 Wochen" },
+      "pack": { "label": "Packungsgröße" },
+      "light": { "label": "Licht", "value": "LED · auto 16/8" },
+      "nature": { "label": "Samen", "value": "Gentechnikfrei" }
+    },
+    "trust": {
+      "compatible": "Passt in alle PlantyHub Gärten",
+      "nonGmo": "Gentechnikfrei & natürlich",
+      "shipping": "Versand innerhalb 24h"
+    }
+  },
+  "accessoriesPage": {
+    "eyebrow": "Zubehör & Nachfüllungen",
+    "title": "Zubehör",
+    "subtitle": "Alles, um deinen Indoor-Garten zu erweitern und zu pflegen — von stilvollen Ständern bis zu Nährstoffen und Nachfüll-Kapseln."
+  },
+  "aboutPage": {
+    "eyebrow": "Unsere Geschichte",
+    "title": "Über PlantyHub",
+    "lead": "Wir glauben, dass jeder frische Kräuter zu Hause verdient — ohne Garten, ohne Erde und ohne grünen Daumen.",
+    "storyTitle": "Anbau leicht gemacht",
+    "story1": "PlantyHub begann in einer kleinen Küche in Pazardzhik, Bulgarien, mit einer Idee: echten, frischen Geschmack das ganze Jahr über mühelos drinnen anzubauen.",
+    "story2": "Heute helfen unsere smarten Gärten und vorgesäten Kapseln Tausenden Haushalten in Europa, in wenigen Wochen frische Kräuter und Gewürze zu ernten — nur mit Wasser, Licht und ein wenig Liebe.",
+    "valuesTitle": "Wofür wir stehen",
+    "values": {
+      "quality": { "title": "Qualität zuerst", "text": "Robuste Gärten und zuverlässige Kapseln, getestet zum Keimen und Gedeihen." },
+      "sustainability": { "title": "Gut für den Planeten", "text": "Gentechnikfreie Samen, recycelbare Materialien und wassersparender Anbau." },
+      "simplicity": { "title": "Wirklich einfach", "text": "So gestaltet, dass jeder anbauen kann — klare Anleitungen und volle Automatik." }
+    },
+    "stats": {
+      "plants": { "value": "500k+", "label": "gewachsene Pflanzen" },
+      "countries": { "value": "12", "label": "belieferte Länder" },
+      "harvests": { "value": "98%", "label": "Keimerfolg" }
+    }
+  },
+  "supportPage": {
+    "eyebrow": "Wir helfen gerne",
+    "title": "Support",
+    "subtitle": "Antworten auf häufige Fragen und alle Wege, unser Team zu erreichen.",
+    "cards": {
+      "email": { "title": "Schreib uns", "text": "Unser Team antwortet innerhalb eines Werktags.", "action": "support@plantyhub.com" },
+      "shipping": { "title": "Versand", "text": "Bulgarien, Balkan und EU — Versand innerhalb von 24h.", "action": "Bestellung verfolgen" },
+      "returns": { "title": "Rückgabe & Garantie", "text": "30 Tage Geld-zurück-Garantie und 2 Jahre Garantie.", "action": "Rückgabe starten" }
+    },
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqItems": [
+      { "q": "Wie verfolge ich meine Bestellung?", "a": "Du erhältst einen Tracking-Link per E-Mail, sobald deine Bestellung versandt wird. Versand erfolgt innerhalb von 24 Stunden an Werktagen." },
+      { "q": "Wie ist eure Rückgabepolitik?", "a": "Wenn du nicht zufrieden bist, sende deinen Garten innerhalb von 30 Tagen für eine volle Rückerstattung zurück — ohne Wenn und Aber." },
+      { "q": "Wie funktioniert die Garantie?", "a": "Jeder HomeGarder One kommt mit 2 Jahren Garantie auf Herstellungsfehler. Kontaktiere uns einfach mit deiner Bestellnummer." },
+      { "q": "Meine Kapseln keimen nicht — was tun?", "a": "Die meisten Kapseln keimen in 1–2 Wochen. Stelle sicher, dass Wasser im Tank ist, das Licht an ist und der Raum warm. Immer noch Probleme? Schreib uns und wir ersetzen sie." },
+      { "q": "Bietet ihr Groß- oder Firmenbestellungen an?", "a": "Ja — schreib an support@plantyhub.com und wir helfen bei größeren oder geschäftlichen Bestellungen." }
+    ]
+  },
+  "consumablesSection": {
+    "eyebrow": "Verbrauchsmaterial",
+    "title": "Kapseln, Nährstoffe & Kappen",
+    "subtitle": "Leere Kapseln, Sana A & B und Keimkappen für deinen Garten."
+  },
+  "accessoriesSection": {
+    "title": "Zubehör",
+    "subtitle": "Schrank, Wandregal und Kräutermesser."
+  },
+  "press": {
+    "eyebrow": "Aus dem Blog",
+    "title": "Pflanzenpflege & Stories",
+    "articles": {
+      "pesto": {
+        "date": "12. Juni 2025",
+        "title": "Von der Küche auf den Tisch — Basilikum-Pesto in 5 Wochen",
+        "excerpt": "Eine einfache Rezeptserie vom Pod bis auf den Teller mit deiner ersten PlantyHub-Ernte."
+      },
+      "hydroponics": {
+        "date": "28. Mai 2025",
+        "title": "Warum Hydroponik 90 % weniger Wasser verbraucht",
+        "excerpt": "Die Wissenschaft hinter smarten Indoor-Gärten und warum sie die nachhaltige Wahl für Stadtwohnungen sind."
+      },
+      "partnership": {
+        "date": "10. Mai 2025",
+        "title": "PlantyHub × Sustainable Living EU",
+        "excerpt": "Wir haben uns mit umweltbewussten Creators zusammengetan, um zu zeigen, wie ein Garten den Alltag verändert."
+      },
+      "earthday": {
+        "date": "22. April 2025",
+        "title": "Earth Day: Selbst anbauen, weniger verschwenden",
+        "excerpt": "Wie biologisch abbaubare Pods und lokaler Anbau Plastik- und Lebensmittelabfälle reduzieren."
+      }
+    }
+  },
+  "growSmarter": {
+    "title": "Klüger wachsen, nicht härter",
+    "subtitle": "Starte mit uns ins Indoor-Gärtnern",
+    "items": {
+      "zero": {
+        "title": "Keine Lernkurve",
+        "description": "5 Minuten Aufbau. Ein paar Tage bis zum Keimen. Ein paar Wochen bis zur Ernte. Keine Gartenkenntnisse nötig."
+      },
+      "noSoil": {
+        "title": "Keine Erde, kein Zweifel",
+        "description": "Samen, Nährstoffe, Feuchtigkeit — unsere biologisch abbaubaren Pods erledigen alles. Kein Chaos."
+      },
+      "fresh": {
+        "title": "Frischer als der Supermarkt",
+        "description": "Von der Arbeitsfläche auf den Teller in Sekunden. Voller Geschmack, keine Zusätze. So sollen Kräuter schmecken."
+      }
+    }
+  },
+  "guarantees": {
+    "title": "Warum sie nicht genug von uns bekommen können",
+    "items": {
+      "sprouting": {
+        "title": "Keim-Garantie",
+        "description": "Wir ersetzen Pods, die nicht wachsen"
+      },
+      "yearRound": {
+        "title": "Ganzjährig wachsen",
+        "description": "Saisonale Grenzen? Kennen wir nicht"
+      },
+      "support": {
+        "title": "Experten-Support",
+        "description": "QR-Anleitungen auf jedem Pod"
+      },
+      "sustainable": {
+        "title": "Sauber & nachhaltig",
+        "description": "Weniger Abfall als Supermarkt-Gewürze"
+      }
+    }
+  },
+  "community": {
+    "stat": "Werde Teil unserer Community!",
+    "title": "Werde Teil unserer Community",
+    "subtitle": "Echte Gärtner. Echte Ernten. Echte Freude.",
+    "posts": {
+      "elena": "Morgendlicher Minztee aus meinem eigenen Küchengarten — die Freude ist unbeschreiblich.",
+      "urbanherbs": "Perfekt für jemanden, der normalerweise keine Pflanzen am Leben hält. PlantyHub funktioniert einfach.",
+      "freshplate": "Nichts schmeckt so gut wie selbst gepflückte Kräuter ohne unnötige Zusätze.",
+      "gail": "Ich war noch nie so gespannt auf wachsende Pflanzen. Der Dill war schneller reif, als ich dachte!",
+      "homeinestonia": "Mojitos mit frischer Pfefferminze das ganze Jahr!",
+      "mamaloves": "Das beste Küchen-Upgrade überhaupt. Die Kinder lieben es, die Keimlinge zu checken.",
+      "blogilates": "Ich kannte die Freude am EIGENEN Anbau nicht, bis PlantyHub kam.",
+      "reese": "Die Pflanzen wuchsen so schnell, es hat mich umgehauen. Das Design ist auch stunning."
+    },
+    "handles": {
+      "elena": "elenagrows",
+      "urbanherbs": "urbanherbs_berlin",
+      "freshplate": "freshplate_daily",
+      "gail": "gailofthegarden",
+      "homeinestonia": "homeinestonia",
+      "mamaloves": "thismamaloveslife",
+      "blogilates": "blogilates",
+      "reese": "reeseology_"
+    }
+  },
+  "support": {
+    "name": "PlantyHub HomeGarder One",
+    "description": "12-Pod smarter Hydroponik-Garten mit Vollspektrum-LED — 16 Stunden an, 8 Stunden aus. Auto-Bewässerung. Weiß matt.",
+    "specs": {
+      "pods": "12 Anbau-Pods",
+      "irrigation": "Auto-Bewässerung",
+      "lightCycle": "LED 16h an / 8h aus",
+      "qr": "QR-Anleitung in der Box"
+    },
+    "helpTitle": "Brauchst du Hilfe beim Anbau?",
+    "helpDescription": "Unser Support und QR-Anleitungen begleiten dich — vom ersten Keimling bis zur Ernte.",
+    "emailPlaceholder": "Deine E-Mail",
+    "cta": "Anbau-Tipps erhalten",
+    "emailOr": "Oder E-Mail an"
+  },
+  "products": {
+    "gardens": {
+      "homegarder-one": { "name": "PlantyHub HomeGarder One", "tagline": "12 Pods · 16h LED" },
+      "starter-bundle": { "name": "Starter-Paket", "tagline": "HomeGarder One + PlantyHub Pods" },
+      "pods-kit": { "name": "PlantyHub Pods Kit", "tagline": "Samen + Pflanz-es-selbst" }
+    },
+    "pods": {
+      "basil": { "name": "Basilikum Saat-Pods", "description": "Süß, aromatisch und der König der Kräuter. Frische Blätter für Pesto, Pasta und Caprese in wenigen Wochen." },
+      "mint": { "name": "Minze Saat-Pods", "description": "Duftende, erfrischende Blätter für Tee, Cocktails und Desserts — eines der einfachsten Kräuter überhaupt." },
+      "parsley": { "name": "Petersilie Saat-Pods", "description": "Das frische, vielseitige Alltagskraut — perfekt für Garnituren, Saucen und Brühen das ganze Jahr." },
+      "cilantro": { "name": "Koriander Saat-Pods", "description": "Frische, zitrusartige Blätter, die Currys, Salsa und Nudelbowls beleben. Schneide frisch, wenn ein Gericht Pep braucht." },
+      "dill": { "name": "Dill Saat-Pods", "description": "Zarte, feine Wedel mit frischer Anisnote — wie gemacht für Fisch, Dips, Eingelegtes und Kartoffeln." },
+      "arugula": { "name": "Rucola Saat-Pods", "description": "Kräftige, pfeffrige Blätter für Salate, Pizza und Sandwiches. Schnellwachsend und immer wieder nachzuernten." },
+      "herb-mix-12": { "name": "12er Kräuter-Mix", "description": "Ein volles Sortiment unserer liebsten Kräuter und Gewürze — alles, um deinen ganzen Garten auf einmal zu füllen." }
+    },
+    "consumables": {
+      "empty-capsules": { "name": "Leere Kapseln" },
+      "sana-ab": { "name": "Sana A + B Nährlösung" },
+      "germination-caps": { "name": "Keimkappen" }
+    },
+    "accessories": {
+      "storage-cabinet": { "name": "Aufbewahrungsschrank" },
+      "wall-shelf": { "name": "Wandregal" },
+      "herb-knife": { "name": "Kräutermesser" }
+    }
+  },
+  "cta": {
+    "title": "Starte deine erste Ernte",
+    "subtitle": "Starter-Paket ab {{price}}.",
+    "emailPlaceholder": "E-Mail für das Angebot",
+    "button": "Angebot sichern"
+  },
+  "pdp": {
+    "home": "Start",
+    "inStock": "Auf Lager · Versand in 24h",
+    "bonus": {
+      "badge": "Gratis Geschenk",
+      "hint": "+ 1 gratis Starter-Set (12 Kapseln)",
+      "title": "Wähle dein gratis Starter-Set",
+      "subtitle": "Jedes Starter-Set enthält alles, was du brauchst — 12 Saatkapseln für deinen ganzen Garten.",
+      "pcs": "12 Kapseln · alles dabei",
+      "free": "Gratis",
+      "note": "Wähle ein Starter-Set — wir legen es kostenlos in deine Box.",
+      "chosen": "Gute Wahl! Dein gratis {{pod}} geht auf uns.",
+      "kits": {
+        "herbs": "Kräutermix",
+        "salad": "Alltags-Grün",
+        "aromatic": "Aromatische Gewürze",
+        "chef": "Chef's Auswahl"
+      }
+    },
+    "color": "Farbe",
+    "quantity": "Menge",
+    "videoBadge": "60-Sekunden-Demo",
+    "videoTitle": "HomeGarder One in Aktion",
+    "videoText": "Vom Auspacken bis zur ersten Ernte — sieh, wie einfach du frische Kräuter auf der Arbeitsfläche aufstellst, pflanzt und ziehst.",
+    "highlightsTitle": "Alles, was du zum Wachsen brauchst",
+    "highlightsSubtitle": "Ein smarter Garten — ohne Erde, ohne Rätselraten, das ganze Jahr.",
+    "features": {
+      "easy": { "title": "Einfach", "text": "Keine Erde, kein Schmutz — einfach einsetzen und wachsen." },
+      "fast": { "title": "Schnelles Wachstum", "text": "Optimiert für schnelle, gesunde Ernten." },
+      "smart": { "title": "Smartes System", "text": "Für PlantyHub Indoor-Gärten entwickelt." },
+      "natural": { "title": "Natürlich", "text": "Gentechnikfrei, natürliche Zutaten." }
+    },
+    "howItWorksTitle": "So funktioniert's",
+    "steps": [
+      "Kapsel in den Garten einsetzen.",
+      "Wasser & Nährstoffe hinzufügen.",
+      "In wenigen Wochen frisch ernten."
+    ],
+    "specsTitle": "Alle technischen Daten",
+    "inTheBox": "Im Lieferumfang",
+    "inTheBoxItems": {
+      "garden": "HomeGarder One Garten (Weiß matt)",
+      "led": "Verstellbarer Vollspektrum-LED-Arm",
+      "pods": "3 Start-Saatkapseln",
+      "nutrients": "Sana A + B Nährstoff-Set",
+      "manual": "Schnellstart-Anleitung & QR-Guides"
+    },
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqItems": [
+      {
+        "q": "Brauche ich Gartenerfahrung?",
+        "a": "Überhaupt nicht. Kapsel einsetzen, Wasser und Nährstoffe hinzufügen — die LED läuft automatisch im 16/8-Zyklus. App und QR-Guides führen dich Schritt für Schritt."
+      },
+      {
+        "q": "Wie lange bis zur ersten Ernte?",
+        "a": "Die meisten Kräuter und Gewürze sind in etwa 2–3 Wochen erntereif und tragen danach monatelang weiter."
+      },
+      {
+        "q": "Wie viel Strom verbraucht er?",
+        "a": "Sehr wenig — die Vollspektrum-LED ist so effizient wie ein paar Haushaltslampen, rund ein paar Euro pro Monat."
+      },
+      {
+        "q": "Was kann ich anbauen?",
+        "a": "Basilikum, Minze, Petersilie, Koriander, Dill, Rucola und mehr — 12 Kapseln gleichzeitig. Jede HomeGarder-Kapsel passt in die Slots."
+      },
+      {
+        "q": "Gibt es eine Garantie?",
+        "a": "Ja — 2 Jahre Garantie plus 30 Tage Geld-zurück-Garantie, falls er nichts für dich ist."
+      },
+      {
+        "q": "Wohin liefert ihr?",
+        "a": "Wir liefern in ganz Bulgarien, auf dem Balkan und in der EU, mit Versand innerhalb von 24 Stunden."
+      }
+    ]
+  },
+  "newsletter": {
+    "badge": "5% RABATT",
+    "title": "5% Rabatt auf deine erste Bestellung",
+    "subtitle": "Abonniere für Anbautipps und exklusive Angebote — wir senden dir den Rabattcode sofort.",
+    "placeholder": "Deine E-Mail-Adresse",
+    "button": "Meine 5% sichern",
+    "dismiss": "Nein danke",
+    "invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "disclaimer": "Mit dem Abonnieren stimmst du dem Erhalt von Marketing-E-Mails zu. Jederzeit abbestellbar.",
+    "successTitle": "Geschafft!",
+    "success": "Verwende diesen Code an der Kasse für 5% Rabatt auf deine erste Bestellung:",
+    "copy": "Code kopieren",
+    "copied": "Kopiert!",
+    "done": "Zum Shop"
+  },
+  "footer": {
+    "shipping": "Versand: Bulgarien · Balkan · Europäische Union",
+    "shippingNote": "Kostenloser Versand ab €60. Preise in EUR.",
+    "linksTitle": "Navigation",
+    "links": {
+      "product": "Produkt",
+      "howItWorks": "So funktioniert's",
+      "pods": "Pods",
+      "accessories": "Zubehör",
+      "about": "Über uns",
+      "support": "Support",
+      "contact": "Kontakt",
+      "privacy": "Datenschutz"
+    },
+    "followUs": "Folge uns",
+    "contactTitle": "Kontakt",
+    "address": "PlantyHub · Pazardzhik, Bulgarien",
+    "madeWith": "Mit Sorgfalt in Bulgarien angebaut",
+    "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten."
+  },
+  "auth": {
+    "login": {
+      "eyebrow": "Konto",
+      "title": "Anmelden",
+      "subtitle": "Willkommen zurück! Melde dich an, um Bestellungen zu verfolgen und deinen Garten zu verwalten.",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "rememberMe": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?",
+      "submit": "Anmelden",
+      "noAccount": "Noch kein Konto?",
+      "registerLink": "Jetzt registrieren",
+      "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "invalidPassword": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+      "success": "Du bist angemeldet. Willkommen zurück bei PlantyHub!",
+      "continue": "Weiter einkaufen"
+    },
+    "register": {
+      "eyebrow": "Mitmachen",
+      "title": "Konto erstellen",
+      "subtitle": "Werde Teil von PlantyHub, um Bestellungen zu verfolgen, Favoriten zu speichern und Tipps zum Anbau zu erhalten.",
+      "name": "Vollständiger Name",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzerklärung zu.",
+      "submit": "Konto erstellen",
+      "haveAccount": "Bereits ein Konto?",
+      "loginLink": "Anmelden",
+      "invalidName": "Bitte gib deinen Namen ein (mindestens 2 Zeichen).",
+      "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "invalidPassword": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+      "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+      "success": "Dein Konto ist bereit. Du kannst dich jetzt anmelden.",
+      "goToLogin": "Zur Anmeldung"
+    }
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "emptyTitle": "Dein Warenkorb ist leer",
+    "emptySubtitle": "Füge Pods, Gärten oder Zubehör hinzu.",
+    "continueShopping": "Weiter einkaufen",
+    "summary": "Bestellübersicht",
+    "subtotal": "Zwischensumme ({{count}} Artikel)",
+    "subtotal_one": "Zwischensumme ({{count}} Artikel)",
+    "shipping": "Versand",
+    "freeShipping": "Kostenlos",
+    "freeShippingHint": "Kostenloser Versand ab {{amount}}",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "remove": "Entfernen",
+    "added": "Zum Warenkorb hinzugefügt",
+    "viewCart": "Warenkorb ansehen"
+  },
+  "checkout": {
+    "title": "Kasse",
+    "emptyTitle": "Dein Warenkorb ist leer",
+    "backToCart": "Zurück zum Warenkorb",
+    "contact": "Kontaktdaten",
+    "name": "Vollständiger Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "shipping": "Lieferadresse",
+    "street": "Straße und Hausnummer",
+    "city": "Stadt",
+    "postalCode": "Postleitzahl",
+    "country": "Land",
+    "notes": "Lieferhinweise (optional)",
+    "payment": "Zahlungsmethode",
+    "paymentMethods": {
+      "card": "Kredit- / Debitkarte",
+      "paypal": "PayPal",
+      "cod": "Nachnahme"
+    },
+    "countries": {
+      "BG": "Bulgarien",
+      "DE": "Deutschland",
+      "FR": "Frankreich",
+      "PL": "Polen",
+      "IT": "Italien",
+      "PT": "Portugal",
+      "CZ": "Tschechien"
+    },
+    "orderSummary": "Deine Bestellung",
+    "qty": "Menge {{count}}",
+    "placeOrder": "Bestellung aufgeben",
+    "required": "Pflichtfeld",
+    "invalidEmail": "Bitte gültige E-Mail eingeben",
+    "breadcrumb": {
+      "cart": "Warenkorb",
+      "checkout": "Informationen"
+    },
+    "showOrderSummary": "Bestellübersicht anzeigen",
+    "hideOrderSummary": "Bestellübersicht ausblenden",
+    "returnToCart": "Zurück zum Warenkorb",
+    "addNotes": "Lieferhinweise hinzufügen",
+    "hideNotes": "Lieferhinweise ausblenden",
+    "secureCheckout": "Alle Transaktionen sind sicher und verschlüsselt"
+  },
+  "order": {
+    "successTitle": "Vielen Dank für deine Bestellung!",
+    "successSubtitle": "Wir haben eine Bestätigung an {{email}} gesendet.",
+    "orderNumber": "Bestellung {{id}}",
+    "shippingTo": "Lieferung an",
+    "items": "Artikel",
+    "summary": "Bestellübersicht",
+    "continueShopping": "Zur Startseite",
+    "notFound": "Bestellung nicht gefunden",
+    "backHome": "Zur Startseite"
+  },
+  "admin": {
+    "brand": "Admin",
+    "welcome": "Willkommen, {{name}}",
+    "viewStore": "Shop ansehen",
+    "logout": "Abmelden",
+    "nav": {
+      "dashboard": "Dashboard",
+      "catalog": "Katalog",
+      "gardens": "Gärten",
+      "pods": "Saatkapseln",
+      "consumables": "Verbrauchsmaterial",
+      "accessories": "Zubehör",
+      "orders": "Bestellungen",
+      "customers": "Kunden",
+      "content": "Inhalte",
+      "newsletter": "Newsletter",
+      "settings": "Einstellungen"
+    },
+    "login": {
+      "eyebrow": "Admin-Bereich",
+      "title": "Anmelden",
+      "subtitle": "Produkte, Bestellungen und Shop-Inhalte verwalten.",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "error": "Ungültige Anmeldedaten. Verwende admin@plantyhub.com / admin123",
+      "backToStore": "← Zurück zum Shop"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Überblick über deinen PlantyHub-Shop.",
+      "recentOrders": "Letzte Bestellungen",
+      "weeklySales": "Wochenumsatz",
+      "weeklySalesSubtitle": "Gesamt diese Woche: {{total}}",
+      "orderStatus": "Bestellungen nach Status",
+      "orderStatusSubtitle": "Verteilung aller Bestellungen",
+      "topProducts": "Top-Produkte",
+      "topProductsSubtitle": "Bestseller diesen Monat",
+      "byCategory": "Umsatz nach Kategorie",
+      "byCategorySubtitle": "Anteil am Gesamtumsatz",
+      "sales": "Verkäufe",
+      "revenue": "Umsatz",
+      "days": {
+        "mon": "Mo",
+        "tue": "Di",
+        "wed": "Mi",
+        "thu": "Do",
+        "fri": "Fr",
+        "sat": "Sa",
+        "sun": "So"
+      },
+      "categories": {
+        "gardens": "Gärten",
+        "pods": "Saatkapseln",
+        "consumables": "Verbrauchsmaterial",
+        "accessories": "Zubehör"
+      },
+      "stats": {
+        "revenue": "Umsatz (Monat)",
+        "ordersMonth": "Bestellungen (Monat)",
+        "avgOrder": "Ø Bestellwert",
+        "orders": "Bestellungen",
+        "ordersTrend": "+2 diese Woche",
+        "products": "Produkte",
+        "customers": "Kunden",
+        "customersTrend": "+1 diese Woche",
+        "newsletter": "Newsletter-Abonnenten",
+        "newsletterTrend": "+48 diesen Monat",
+        "pending": "Ausstehende Bestellungen",
+        "conversion": "Conversion-Rate",
+        "trendUp": "+{{value}} % vs. letzter Monat"
+      }
+    },
+    "gardens": {
+      "title": "Gärten",
+      "subtitle": "Smarte Gärten und Bundles verwalten."
+    },
+    "pods": {
+      "title": "Saatkapseln",
+      "subtitle": "Saatkapsel-Nachfüllpackungen verwalten."
+    },
+    "consumables": {
+      "title": "Verbrauchsmaterial",
+      "subtitle": "Kapseln, Nährstoffe und Keimkappen."
+    },
+    "accessories": {
+      "title": "Zubehör",
+      "subtitle": "Regale, Aufbewahrung und Werkzeuge."
+    },
+    "orders": {
+      "title": "Bestellungen",
+      "subtitle": "Kundenbestellungen verfolgen und verwalten.",
+      "view": "Bestellung ansehen",
+      "table": {
+        "id": "Bestellung",
+        "customer": "Kunde",
+        "items": "Artikel",
+        "total": "Gesamt",
+        "status": "Status",
+        "date": "Datum"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "processing": "In Bearbeitung",
+        "shipped": "Versendet",
+        "delivered": "Zugestellt",
+        "cancelled": "Storniert"
+      }
+    },
+    "orderDetail": {
+      "notFound": "Bestellung nicht gefunden.",
+      "backToOrders": "Zurück zu Bestellungen",
+      "placedOn": "Aufgegeben am {{date}}",
+      "firstOrder": "Erste Bestellung",
+      "customer": "Kunde",
+      "orderCount": "Bestellungen des Kunden",
+      "orderNumberOf": "{{current}} von {{total}}",
+      "shippingAddress": "Lieferadresse",
+      "waybill": "Frachtbrief",
+      "waybillNumber": "Frachtbriefnummer",
+      "waybillTitle": "Versandetikett",
+      "createWaybill": "Frachtbrief erstellen",
+      "createWaybillHint": "Versandetikett für diese Bestellung generieren. Status wird auf „Versendet“ gesetzt.",
+      "createWaybillSubmit": "Frachtbrief generieren",
+      "printWaybill": "Frachtbrief drucken",
+      "courier": "Kurier",
+      "couriers": { "econt": "Econt", "speedy": "Speedy", "dhl": "DHL" },
+      "weight": "Gewicht (kg)",
+      "packages": "Pakete",
+      "codAmount": "Nachnahme",
+      "waybillNotes": "Hinweise für Kurier",
+      "recipient": "Empfänger",
+      "address": "Adresse",
+      "phone": "Telefon",
+      "items": "Artikel ({{count}})",
+      "qty": "Menge",
+      "price": "Preis",
+      "subtotal": "Zwischensumme",
+      "shippingCost": "Versand",
+      "tax": "MwSt.",
+      "notes": "Bestellhinweise",
+      "timeline": "Bestellverlauf",
+      "customerOrders": "Weitere Bestellungen dieses Kunden",
+      "payment": { "card": "Mit Karte bezahlt", "cod": "Nachnahme", "paypal": "Mit PayPal bezahlt" }
+    },
+    "customers": {
+      "title": "Kunden",
+      "subtitle": "Registrierte Shop-Kunden.",
+      "view": "Kunde ansehen",
+      "table": {
+        "name": "Name",
+        "email": "E-Mail",
+        "orders": "Bestellungen",
+        "totalSpent": "Gesamtausgaben",
+        "joined": "Registriert"
+      }
+    },
+    "customerDetail": {
+      "notFound": "Kunde nicht gefunden.",
+      "backToCustomers": "Zurück zu Kunden",
+      "contact": "Kontaktinformationen",
+      "stats": "Kundenstatistik",
+      "orders": "Bestellungen ({{count}})",
+      "noOrders": "Noch keine Bestellungen."
+    },
+    "countries": {
+      "BG": "Bulgarien",
+      "DE": "Deutschland",
+      "FR": "Frankreich",
+      "PL": "Polen",
+      "IT": "Italien",
+      "PT": "Portugal",
+      "CZ": "Tschechien"
+    },
+    "content": {
+      "title": "Inhalte",
+      "subtitle": "Startseiten-Abschnitte und statische Seiten verwalten.",
+      "homepageSections": "Startseiten-Abschnitte",
+      "pages": "Statische Seiten",
+      "items": "{{count}} Elemente",
+      "faqCount": "{{count}} FAQ-Einträge",
+      "sections": {
+        "hero": "Hero",
+        "growSmarter": "Smarter anbauen",
+        "product": "Produkt-Highlight",
+        "howItWorks": "So funktioniert's",
+        "lightCycle": "Lichtzyklus",
+        "podsGrid": "Kapsel-Raster",
+        "socialProof": "Kundenstimmen",
+        "guarantees": "Garantien",
+        "accessories": "Zubehör",
+        "cta": "Handlungsaufforderung"
+      },
+      "pageLabels": {
+        "about": "Über-uns-Seite",
+        "support": "Support & FAQ",
+        "pods": "Kapsel-Katalog",
+        "accessories": "Zubehör-Seite"
+      },
+      "pageDescriptions": {
+        "about": "Markengeschichte, Werte und Team.",
+        "support": "Support-Karten und häufig gestellte Fragen.",
+        "pods": "Vollständige Saatkapsel-Liste mit Detailseiten.",
+        "accessories": "Raster mit Zubehör und Verbrauchsmaterial."
+      }
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Abonnenten und E-Mail-Kampagnen verwalten.",
+      "popupSettings": "Popup-Einstellungen",
+      "enablePopup": "Newsletter-Popup anzeigen",
+      "exitIntent": "Exit-Intent-Auslöser",
+      "discountCode": "Rabattcode",
+      "sendCampaign": "Kampagne senden",
+      "subject": "Betreff",
+      "message": "Nachricht",
+      "send": "Kampagne senden",
+      "stats": {
+        "subscribers": "Abonnenten",
+        "openRate": "Öffnungsrate",
+        "openRateTrend": "+3 % vs. letzter Monat",
+        "activeCodes": "Aktive Codes"
+      }
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "subtitle": "Shop-Konfiguration und Benachrichtigungen.",
+      "store": "Shop",
+      "storeName": "Shop-Name",
+      "currency": "Währung",
+      "shippingThreshold": "Schwelle für kostenlosen Versand",
+      "contact": "Kontakt",
+      "email": "Support-E-Mail",
+      "address": "Adresse",
+      "notifications": "Benachrichtigungen",
+      "newOrderEmail": "E-Mail bei neuer Bestellung",
+      "lowStockAlert": "Niedrigbestand-Warnung",
+      "weeklyReport": "Wöchentlicher Verkaufsbericht",
+      "demoNote": "Dies ist ein Demo-Admin-Bereich. Einstellungen sind schreibgeschützt, bis ein Backend verbunden ist.",
+      "catalog": "Produktkatalog",
+      "resetCatalog": "Katalog zurücksetzen",
+      "resetCatalogHint": "Stellt alle Produkte aus den Originaldaten wieder her."
+    },
+    "table": {
+      "product": "Produkt",
+      "id": "ID",
+      "price": "Preis",
+      "status": "Status",
+      "country": "Land",
+      "actions": "Aktionen",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "edit": "Bearbeiten"
+    },
+    "actions": {
+      "addProduct": "Produkt hinzufügen"
+    },
+    "productEdit": {
+      "addTitle": "Produkt hinzufügen",
+      "editTitle": "Produkt bearbeiten",
+      "basicInfo": "Grundinformationen",
+      "content": "Inhalte (alle Sprachen)",
+      "id": "Produkt-ID",
+      "idHint": "Kleinbuchstaben, z. B. basil",
+      "price": "Preis",
+      "compareAt": "Vergleichspreis",
+      "pack": "Packungsgröße",
+      "imageUrl": "Bild-URL",
+      "imageFit": "Bildanpassung",
+      "fitCover": "Cover",
+      "fitContain": "Contain",
+      "active": "Aktiv (im Shop sichtbar)",
+      "featured": "Empfohlenes Produkt",
+      "name": "Name",
+      "tagline": "Untertitel",
+      "description": "Beschreibung",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "errors": {
+        "idRequired": "Produkt-ID ist erforderlich.",
+        "nameRequired": "Englischer Name ist erforderlich.",
+        "priceRequired": "Preis ist erforderlich.",
+        "imageRequired": "Bild-URL ist erforderlich."
+      }
+    }
+  }
+}

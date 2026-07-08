@@ -10,6 +10,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+plantyhub.ui/node_modules
+plantyhub.ui/dist
+plantyhub.ui/dist-ssr
 *.local
 
 # Editor directories and files
@@ -22,3 +25,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# .NET
+bin/
+obj/
+PlantyHub.Api/bin/
+PlantyHub.Api/obj/
+PlantyHub.Api/*.dev.db
+PlantyHub.Api/*.dev.db-*
+*.user
+appsettings.*.local.json

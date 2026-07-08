@@ -1,0 +1,859 @@
+{
+  "promo": "LIVRAISON GRATUITE DÈS €60 · UE & BALKANS",
+  "nav": {
+    "product": "Produit",
+    "howItWorks": "Comment ça marche",
+    "pods": "Capsules",
+    "accessories": "Accessoires",
+    "about": "À propos",
+    "support": "Assistance",
+    "buyNow": "Acheter"
+  },
+  "header": {
+    "region": "UE & Balkans (€)",
+    "login": "Connexion",
+    "search": "Rechercher",
+    "cart": "Panier",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "common": {
+    "addToCart": "Ajouter au panier",
+    "addToCartAria": "Ajouter {{name}} au panier",
+    "readMore": "Lire la suite",
+    "pack3": "Lot de 3",
+    "pack9": "Lot de 9",
+    "pack12": "Lot de 12",
+    "bottle1L": "Bouteille 1L",
+    "bottle2x100ml": "2×100 ml",
+    "colorWhite": "Blanc Mat",
+    "colorStandard": "Standard"
+  },
+  "hero": {
+    "title": "Des herbes fraîches à la maison",
+    "promise": "De la graine à l'assaisonnement en 18 jours",
+    "description": "Jardin 12 pods avec arrosage automatique et LED.",
+    "ctaPrimary": "Acheter",
+    "ctaSecondary": "Comment ça marche",
+    "priceLabel": "HomeGarder One",
+    "imageAlt": "PlantyHub HomeGarder One",
+    "badge": "4,9/5 · 500+ clients",
+    "trust": {
+      "shipping": "Livraison UE offerte dès 60 €",
+      "guarantee": "Garantie de germination",
+      "setup": "Prêt en 5 minutes"
+    },
+    "stats": {
+      "pods": { "value": "12", "label": "emplacements" },
+      "light": { "value": "16/8h", "label": "cycle lumineux" },
+      "height": { "value": "jusqu'à 40 cm", "label": "hauteur de croissance" }
+    }
+  },
+  "product": {
+    "eyebrow": "Produit",
+    "title": "PlantyHub HomeGarder One",
+    "description": "12 pods, LED spectre complet et arrosage auto — prêt pour le plan de travail.",
+    "cta": "Ajouter au panier",
+    "trust": {
+      "shipping": "Livraison offerte dès 60 €",
+      "guarantee": "Garantie de germination",
+      "returns": "Retours sous 30 jours"
+    },
+    "specs": {
+      "pods": "Emplacements", "podsValue": "12 capsules",
+      "light": "Lumière", "lightValue": "LED spectre complet · 16h / 8h repos",
+      "growthHeight": "Hauteur", "growthHeightValue": "Jusqu'à 40 cm",
+      "irrigation": "Arrosage", "irrigationValue": "Automatique",
+      "nutrients": "Nutriments", "nutrientsValue": "Sana A + B",
+      "dimensions": "Dimensions", "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
+    }
+  },
+  "socialProof": {
+    "stat": "500+", "statLabel": "clients satisfaits",
+    "subtitle": "Adoré par les jardiniers à domicile en Europe.",
+    "reviews": {
+      "elena": "Thé à la menthe du matin de mon propre jardin.",
+      "urbanherbs": "Parfait si vous tuez vos plantes. Ça marche tout seul.",
+      "freshplate": "Herbes fraîches cueillies soi-même — zéro additif."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "Comment ça marche", "title": "4 étapes jusqu'à la récolte",
+    "subtitle": "",
+    "steps": {
+      "placeCapsule": { "title": "Placez la capsule", "description": "Retirez l'autocollant et insérez." },
+      "addSolution": { "title": "Ajoutez l'eau", "description": "Remplissez et dosez Sana A & B." },
+      "turnOn": { "title": "Allumez", "description": "LED 16h allumée, 8h repos." },
+      "harvest": { "title": "Récoltez", "description": "Herbes fraîches en ~18 jours." }
+    }
+  },
+  "lightCycle": {
+    "eyebrow": "Cycle lumineux", "title": "16 heures allumé, 8 repos",
+    "description": "LED spectre complet pour la germination et la croissance.",
+    "onLabel": "16h — croissance", "onDescription": "Lumière LED toute la journée.",
+    "offLabel": "8h — repos", "offDescription": "Les plantes se reposent.",
+    "diagramLabel": "Cycle 24 heures",
+    "days": { "0": "Lun", "1": "Mar", "2": "Mer", "3": "Jeu" }
+  },
+  "featured": {
+    "badge": "Phare",
+    "title": "PlantyHub HomeGarder One",
+    "description": "Jardin hydroponique intelligent 12 pods avec LED spectre complet et irrigation automatique. Finition blanc mat conçue pour s'intégrer à tout plan de travail.",
+    "cta": "Ajouter au panier"
+  },
+  "campaign": {
+    "eyebrow": "Sélection de départ",
+    "title": "Tout pour votre première récolte",
+    "description": "HomeGarder One + un kit de plantation PlantyHub Pods. Une seule boîte — jardin, graines, capsules et nutriments.",
+    "cta": "Voir le pack de démarrage",
+    "imageAlt": "Pack de démarrage PlantyHub"
+  },
+  "starterBundle": {
+    "eyebrow": "Pack de démarrage",
+    "title": "HomeGarder One + PlantyHub Pods",
+    "description": "Le jardin et le kit de plantation arrivent dans une seule boîte.",
+    "diyKitTitle": "Kit Plantez-vous inclut :",
+    "cta": "Ajouter le pack",
+    "imageAlt": "Pack de démarrage PlantyHub",
+    "items": {
+      "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 pods, cycle LED 16h, arrosage auto." },
+      "seedPodsBox": { "title": "Boîte PlantyHub Pods", "description": "12 capsules — 2× basilic, menthe, persil, coriandre, aneth et roquette." },
+      "diyKit": { "title": "Kit Plantez-vous", "description": "12 capsules, Sana A & B 100 ml, 12 bouchons de germination." },
+      "unifiedShipping": { "title": "Une seule boîte", "description": "Tout livré ensemble — prêt à installer." }
+    },
+    "details": {
+      "basil": "Basilic ×2", "mint": "Menthe ×2", "parsley": "Persil ×2", "cilantro": "Coriandre ×2",
+      "dill": "Aneth ×2", "arugula": "Roquette ×2", "emptyCapsules": "12 capsules",
+      "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 bouchons", "instructions": "Instructions de dosage"
+    }
+  },
+  "sleek": {
+    "eyebrow": "Nos jardins",
+    "title": "Conçus pour la cuisine du quotidien",
+    "subtitle": "Nos jardins d'intérieur vous aident à cultiver comme un pro — sans avoir besoin de savoir quoi faire.",
+    "discoverAll": "Découvrir tous les jardins"
+  },
+  "podsSection": {
+    "eyebrow": "PlantyHub Pods",
+    "title": "Choisissez vos herbes",
+    "subtitle": ""
+  },
+  "podsPage": {
+    "eyebrow": "Capsules PlantyHub",
+    "title": "Toutes les capsules",
+    "subtitle": "Capsules pré-ensemencées pour chaque plat — herbes, épices et pousses fraîches. Insérez-en une et cultivez.",
+    "ctaTitle": "Pas encore de jardin ?",
+    "ctaSubtitle": "Procurez-vous le HomeGarder One et cultivez toutes vos herbes préférées chez vous, toute l'année.",
+    "ctaButton": "Voir le HomeGarder One"
+  },
+  "podDetail": {
+    "quantity": "Quantité",
+    "detailsTitle": "Bon à savoir",
+    "relatedTitle": "Plus de capsules à cultiver",
+    "specs": {
+      "harvest": { "label": "Première récolte", "value": "2–4 semaines" },
+      "pack": { "label": "Format" },
+      "light": { "label": "Lumière", "value": "LED · auto 16/8" },
+      "nature": { "label": "Graines", "value": "Sans OGM" }
+    },
+    "trust": {
+      "compatible": "Compatible avec tous les jardins PlantyHub",
+      "nonGmo": "Sans OGM & naturel",
+      "shipping": "Expédié sous 24h"
+    }
+  },
+  "accessoriesPage": {
+    "eyebrow": "Accessoires & recharges",
+    "title": "Accessoires",
+    "subtitle": "Tout pour étendre et entretenir votre jardin d'intérieur — des supports élégants aux nutriments et capsules de recharge."
+  },
+  "aboutPage": {
+    "eyebrow": "Notre histoire",
+    "title": "À propos de PlantyHub",
+    "lead": "Nous pensons que chacun mérite des herbes fraîches et saines chez soi — sans jardin, sans terre et sans avoir la main verte.",
+    "storyTitle": "La culture simplifiée",
+    "story1": "PlantyHub est né dans une petite cuisine à Pazardzhik, en Bulgarie, avec une idée : rendre la culture d'une vraie saveur fraîche à l'intérieur simple, toute l'année.",
+    "story2": "Aujourd'hui, nos jardins intelligents et capsules pré-ensemencées aident des milliers de foyers en Europe à récolter herbes et épices fraîches en quelques semaines — avec seulement de l'eau, de la lumière et un peu d'amour.",
+    "valuesTitle": "Nos valeurs",
+    "values": {
+      "quality": { "title": "La qualité d'abord", "text": "Des jardins durables et des capsules fiables, testés pour germer et prospérer." },
+      "sustainability": { "title": "Respect de la planète", "text": "Graines sans OGM, matériaux recyclables et culture économe en eau." },
+      "simplicity": { "title": "Vraiment simple", "text": "Conçu pour que tout le monde puisse cultiver — guides clairs et automatisation complète." }
+    },
+    "stats": {
+      "plants": { "value": "500k+", "label": "plantes cultivées" },
+      "countries": { "value": "12", "label": "pays desservis" },
+      "harvests": { "value": "98%", "label": "taux de germination" }
+    }
+  },
+  "supportPage": {
+    "eyebrow": "Nous sommes là pour vous",
+    "title": "Assistance",
+    "subtitle": "Réponses aux questions fréquentes et tous les moyens de joindre notre équipe.",
+    "cards": {
+      "email": { "title": "Écrivez-nous", "text": "Notre équipe répond sous un jour ouvré.", "action": "support@plantyhub.com" },
+      "shipping": { "title": "Livraison", "text": "Bulgarie, Balkans et UE — expédié sous 24h.", "action": "Suivre ma commande" },
+      "returns": { "title": "Retours & garantie", "text": "Satisfait ou remboursé sous 30 jours et 2 ans de garantie.", "action": "Démarrer un retour" }
+    },
+    "faqTitle": "Questions fréquentes",
+    "faqItems": [
+      { "q": "Comment suivre ma commande ?", "a": "Vous recevrez un lien de suivi par e-mail dès l'expédition. Les commandes sont expédiées sous 24 heures les jours ouvrés." },
+      { "q": "Quelle est votre politique de retour ?", "a": "Si vous n'êtes pas satisfait, retournez votre jardin sous 30 jours pour un remboursement complet — sans condition." },
+      { "q": "Comment fonctionne la garantie ?", "a": "Chaque HomeGarder One est garanti 2 ans contre les défauts de fabrication. Contactez-nous avec votre numéro de commande." },
+      { "q": "Mes capsules ne germent pas — que faire ?", "a": "La plupart des capsules germent en 1 à 2 semaines. Vérifiez l'eau du réservoir, la lumière allumée et une pièce chaude. Toujours bloqué ? Écrivez-nous et nous les remplacerons." },
+      { "q": "Proposez-vous des commandes en gros ?", "a": "Oui — écrivez à support@plantyhub.com et nous vous aiderons pour les commandes plus importantes ou professionnelles." }
+    ]
+  },
+  "consumablesSection": {
+    "eyebrow": "Consommables",
+    "title": "Capsules, nutriments & bouchons",
+    "subtitle": "Capsules vides, Sana A & B et bouchons de germination."
+  },
+  "accessoriesSection": {
+    "title": "Accessoires",
+    "subtitle": "Armoire de rangement, étagère murale et couteau à herbes."
+  },
+  "press": {
+    "eyebrow": "Du blog",
+    "title": "Soins des plantes & Histoires",
+    "articles": {
+      "pesto": {
+        "date": "12 juin 2025",
+        "title": "De la cuisine à la table — Pesto au basilic en 5 semaines",
+        "excerpt": "Une série de recettes simples de la capsule à l'assiette avec votre première récolte PlantyHub."
+      },
+      "hydroponics": {
+        "date": "28 mai 2025",
+        "title": "Pourquoi l'hydroponie utilise 90 % moins d'eau",
+        "excerpt": "La science derrière les jardins intelligents et pourquoi ils sont le choix durable pour les foyers urbains."
+      },
+      "partnership": {
+        "date": "10 mai 2025",
+        "title": "PlantyHub × Sustainable Living EU",
+        "excerpt": "Nous nous sommes associés à des créateurs éco-responsables pour montrer comment un jardin change le quotidien."
+      },
+      "earthday": {
+        "date": "22 avril 2025",
+        "title": "Jour de la Terre : Cultivez, gaspillez moins",
+        "excerpt": "Comment les capsules biodégradables et la culture locale réduisent le plastique et le gaspillage alimentaire."
+      }
+    }
+  },
+  "growSmarter": {
+    "title": "Cultivez plus intelligemment",
+    "subtitle": "Débutez le jardinage d'intérieur avec nous",
+    "items": {
+      "zero": {
+        "title": "Zéro courbe d'apprentissage",
+        "description": "5 minutes d'installation. Quelques jours pour germer. Quelques semaines pour récolter. Aucune compétence requise."
+      },
+      "noSoil": {
+        "title": "Pas de terre, pas de doute",
+        "description": "Graines, nutriments, humidité — nos capsules biodégradables gèrent tout. Pas de désordre."
+      },
+      "fresh": {
+        "title": "Plus frais que le magasin",
+        "description": "Du plan de travail à l'assiette en secondes. Pleine saveur, sans additifs. C'est le vrai goût des herbes."
+      }
+    }
+  },
+  "guarantees": {
+    "title": "Pourquoi ils ne s'en lassent pas",
+    "items": {
+      "sprouting": {
+        "title": "Garantie de germination",
+        "description": "Nous remplaçons les capsules qui ne poussent pas"
+      },
+      "yearRound": {
+        "title": "Cultivez toute l'année",
+        "description": "Les saisons ? On ne connaît pas"
+      },
+      "support": {
+        "title": "Support expert",
+        "description": "Guides QR sur chaque capsule"
+      },
+      "sustainable": {
+        "title": "Propre & durable",
+        "description": "Moins de déchets que les épices du supermarché"
+      }
+    }
+  },
+  "community": {
+    "stat": "Rejoignez notre communauté florissante !",
+    "title": "Rejoignez notre communauté",
+    "subtitle": "De vrais jardiniers. De vraies récoltes. De vraies joies.",
+    "posts": {
+      "elena": "Thé à la menthe du matin de mon propre jardin — la joie est indescriptible jusqu'à ce que vous cultiviez vous-même.",
+      "urbanherbs": "Parfait pour quelqu'un qui ne garde normalement pas les plantes en vie. PlantyHub fonctionne tout simplement.",
+      "freshplate": "Rien n'a aussi bon goût que les herbes cueillies soi-même, sans additifs inutiles.",
+      "gail": "Je n'ai jamais été aussi excitée de voir des plantes pousser. L'aneth était prêt avant que je m'en rende compte !",
+      "homeinestonia": "Mojitos à la menthe fraîche toute l'année !",
+      "mamaloves": "Le meilleur upgrade de cuisine. Les enfants adorent surveiller les pousses.",
+      "blogilates": "Je ne connaissais pas le plaisir de CULTIVER ma nourriture avant PlantyHub.",
+      "reese": "Les plantes ont poussé si vite que ça m'a bluffée. Le design est magnifique aussi."
+    },
+    "handles": {
+      "elena": "elenagrows",
+      "urbanherbs": "urbanherbs_berlin",
+      "freshplate": "freshplate_daily",
+      "gail": "gailofthegarden",
+      "homeinestonia": "homeinestonia",
+      "mamaloves": "thismamaloveslife",
+      "blogilates": "blogilates",
+      "reese": "reeseology_"
+    }
+  },
+  "support": {
+    "name": "PlantyHub HomeGarder One",
+    "description": "Jardin hydroponique 12 capsules avec LED spectre complet — 16 h allumé, 8 h repos. Irrigation auto. Blanc mat.",
+    "specs": {
+      "pods": "12 capsules",
+      "irrigation": "Irrigation auto",
+      "lightCycle": "LED 16h / 8h repos",
+      "qr": "Guides QR dans la boîte"
+    },
+    "helpTitle": "Besoin d'aide pour cultiver ?",
+    "helpDescription": "Notre équipe et les guides QR vous accompagnent — de la première pousse à la récolte.",
+    "emailPlaceholder": "Votre e-mail",
+    "cta": "Recevoir des conseils",
+    "emailOr": "Ou écrivez à"
+  },
+  "products": {
+    "gardens": {
+      "homegarder-one": { "name": "PlantyHub HomeGarder One", "tagline": "12 pods · LED 16h/jour" },
+      "starter-bundle": { "name": "Pack de démarrage", "tagline": "HomeGarder One + PlantyHub Pods" },
+      "pods-kit": { "name": "Kit PlantyHub Pods", "tagline": "Graines + Plantez-vous" }
+    },
+    "pods": {
+      "basil": { "name": "Capsules Basilic", "description": "Doux, aromatique et roi des herbes. Cueillez des feuilles fraîches pour pesto, pâtes et caprese en quelques semaines." },
+      "mint": { "name": "Capsules Menthe", "description": "Feuilles parfumées et rafraîchissantes pour thés, cocktails et desserts — l'une des herbes les plus faciles à cultiver." },
+      "parsley": { "name": "Capsules Persil", "description": "L'herbe fraîche et polyvalente du quotidien — parfaite pour garnitures, sauces et bouillons toute l'année." },
+      "cilantro": { "name": "Capsules Coriandre", "description": "Feuilles fraîches et citronnées qui relèvent currys, salsas et bols de nouilles. Ciselez quand un plat a besoin de peps." },
+      "dill": { "name": "Capsules Aneth", "description": "Fines frondes délicates aux notes anisées — parfaites pour poissons, sauces, marinades et pommes de terre." },
+      "arugula": { "name": "Capsules Roquette", "description": "Feuilles poivrées et relevées pour salades, pizzas et sandwichs. Croissance rapide et récolte continue." },
+      "herb-mix-12": { "name": "Mix 12 capsules", "description": "Un assortiment complet de nos herbes et épices préférées — tout pour remplir votre jardin d'un coup." }
+    },
+    "consumables": {
+      "empty-capsules": { "name": "Capsules vides" },
+      "sana-ab": { "name": "Nutriments Sana A + B" },
+      "germination-caps": { "name": "Bouchons de germination" }
+    },
+    "accessories": {
+      "storage-cabinet": { "name": "Armoire de rangement" },
+      "wall-shelf": { "name": "Étagère murale" },
+      "herb-knife": { "name": "Couteau à herbes" }
+    }
+  },
+  "cta": {
+    "title": "Commencez votre première récolte",
+    "subtitle": "Pack de démarrage à partir de {{price}}.",
+    "emailPlaceholder": "E-mail pour l'offre",
+    "button": "Obtenir l'offre"
+  },
+  "pdp": {
+    "home": "Accueil",
+    "inStock": "En stock · expédié sous 24h",
+    "bonus": {
+      "badge": "Cadeau offert",
+      "hint": "+ 1 set de démarrage offert (12 capsules)",
+      "title": "Choisissez votre set de démarrage offert",
+      "subtitle": "Chaque set de démarrage contient tout le nécessaire — 12 capsules pour remplir tout votre jardin.",
+      "pcs": "12 capsules · tout inclus",
+      "free": "Offert",
+      "note": "Choisissez un set de démarrage — nous l'ajoutons à votre boîte sans frais.",
+      "chosen": "Bon choix ! Votre {{pod}} offert est pour nous.",
+      "kits": {
+        "herbs": "Mélange d'herbes",
+        "salad": "Pousses du quotidien",
+        "aromatic": "Épices aromatiques",
+        "chef": "Sélection du chef"
+      }
+    },
+    "color": "Couleur",
+    "quantity": "Quantité",
+    "videoBadge": "Démo en 60 secondes",
+    "videoTitle": "HomeGarder One en action",
+    "videoText": "Du déballage à la première récolte — découvrez comme il est simple d'installer, de planter et de cultiver des herbes fraîches sur votre plan de travail.",
+    "highlightsTitle": "Tout ce qu'il faut pour cultiver",
+    "highlightsSubtitle": "Un jardin intelligent — sans terre, sans prise de tête, toute l'année.",
+    "features": {
+      "easy": { "title": "Facile", "text": "Sans terre, sans dégât — insérez et cultivez." },
+      "fast": { "title": "Croissance rapide", "text": "Optimisé pour des récoltes rapides et saines." },
+      "smart": { "title": "Système intelligent", "text": "Conçu pour les jardins d'intérieur PlantyHub." },
+      "natural": { "title": "Naturel", "text": "Sans OGM, ingrédients naturels." }
+    },
+    "howItWorksTitle": "Comment ça marche",
+    "steps": [
+      "Insérez la capsule dans le jardin.",
+      "Ajoutez de l'eau et des nutriments.",
+      "Récoltez frais en quelques semaines."
+    ],
+    "specsTitle": "Caractéristiques complètes",
+    "inTheBox": "Contenu de la boîte",
+    "inTheBoxItems": {
+      "garden": "Jardin HomeGarder One (blanc mat)",
+      "led": "Bras LED spectre complet réglable",
+      "pods": "3 capsules de graines de démarrage",
+      "nutrients": "Kit de nutriments Sana A + B",
+      "manual": "Guide de démarrage rapide & QR"
+    },
+    "faqTitle": "Questions fréquentes",
+    "faqItems": [
+      {
+        "q": "Faut-il de l'expérience en jardinage ?",
+        "a": "Aucune. Insérez une capsule, ajoutez de l'eau et des nutriments, et la LED fonctionne automatiquement en cycle 16/8. L'appli et les guides QR vous accompagnent à chaque étape."
+      },
+      {
+        "q": "Combien de temps avant la première récolte ?",
+        "a": "La plupart des herbes et épices se récoltent en 2 à 3 semaines et continuent de produire pendant des mois."
+      },
+      {
+        "q": "Quelle est sa consommation électrique ?",
+        "a": "Très faible — la LED spectre complet est aussi efficace que quelques ampoules domestiques, soit quelques euros par mois."
+      },
+      {
+        "q": "Que puis-je cultiver ?",
+        "a": "Basilic, menthe, persil, coriandre, aneth, roquette et plus — 12 capsules à la fois. Toute capsule HomeGarder s'adapte aux emplacements."
+      },
+      {
+        "q": "Y a-t-il une garantie ?",
+        "a": "Oui — 2 ans de garantie et satisfait ou remboursé sous 30 jours."
+      },
+      {
+        "q": "Où livrez-vous ?",
+        "a": "Nous livrons en Bulgarie, dans les Balkans et dans l'Union européenne, avec expédition sous 24 heures."
+      }
+    ]
+  },
+  "newsletter": {
+    "badge": "-5%",
+    "title": "5% de réduction sur votre première commande",
+    "subtitle": "Abonnez-vous pour des conseils et des offres exclusives — nous vous envoyons le code de réduction tout de suite.",
+    "placeholder": "Votre adresse e-mail",
+    "button": "Obtenir mes 5%",
+    "dismiss": "Non merci",
+    "invalid": "Veuillez saisir une adresse e-mail valide.",
+    "disclaimer": "En vous abonnant, vous acceptez de recevoir des e-mails marketing. Désabonnement à tout moment.",
+    "successTitle": "C'est fait !",
+    "success": "Utilisez ce code au paiement pour 5% de réduction sur votre première commande :",
+    "copy": "Copier le code",
+    "copied": "Copié !",
+    "done": "Voir la boutique"
+  },
+  "footer": {
+    "shipping": "Livraison : Bulgarie · Balkans · Union européenne",
+    "shippingNote": "Livraison gratuite dès €60. Prix en EUR.",
+    "linksTitle": "Navigation",
+    "links": {
+      "product": "Produit",
+      "howItWorks": "Comment ça marche",
+      "pods": "Capsules",
+      "accessories": "Accessoires",
+      "about": "À propos",
+      "support": "Assistance",
+      "contact": "Contact",
+      "privacy": "Confidentialité"
+    },
+    "followUs": "Suivez-nous",
+    "contactTitle": "Contact",
+    "address": "PlantyHub · Pazardzhik, Bulgarie",
+    "madeWith": "Cultivé avec soin en Bulgarie",
+    "rights": "© {{year}} PlantyHub. Tous droits réservés."
+  },
+  "auth": {
+    "login": {
+      "eyebrow": "Compte",
+      "title": "Connexion",
+      "subtitle": "Bon retour ! Connectez-vous pour suivre vos commandes et gérer votre jardin.",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "registerLink": "Créer un compte",
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "invalidPassword": "Le mot de passe doit contenir au moins 6 caractères.",
+      "success": "Vous êtes connecté. Bon retour sur PlantyHub !",
+      "continue": "Continuer mes achats"
+    },
+    "register": {
+      "eyebrow": "Rejoignez-nous",
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez PlantyHub pour suivre vos commandes, enregistrer vos favoris et recevoir des conseils de culture.",
+      "name": "Nom complet",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "terms": "J'accepte les Conditions d'utilisation et la Politique de confidentialité.",
+      "submit": "Créer un compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter",
+      "invalidName": "Veuillez saisir votre nom (au moins 2 caractères).",
+      "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+      "invalidPassword": "Le mot de passe doit contenir au moins 6 caractères.",
+      "passwordMismatch": "Les mots de passe ne correspondent pas.",
+      "success": "Votre compte est prêt. Vous pouvez maintenant vous connecter.",
+      "goToLogin": "Aller à la connexion"
+    }
+  },
+  "cart": {
+    "title": "Panier",
+    "emptyTitle": "Votre panier est vide",
+    "emptySubtitle": "Ajoutez des capsules, jardins ou accessoires pour commencer.",
+    "continueShopping": "Continuer vos achats",
+    "summary": "Récapitulatif",
+    "subtotal": "Sous-total ({{count}} articles)",
+    "subtotal_one": "Sous-total ({{count}} article)",
+    "shipping": "Livraison",
+    "freeShipping": "Gratuite",
+    "freeShippingHint": "Livraison gratuite dès {{amount}}",
+    "total": "Total",
+    "checkout": "Passer commande",
+    "remove": "Supprimer",
+    "added": "Ajouté au panier",
+    "viewCart": "Voir le panier"
+  },
+  "checkout": {
+    "title": "Commande",
+    "emptyTitle": "Votre panier est vide",
+    "backToCart": "Retour au panier",
+    "contact": "Coordonnées",
+    "name": "Nom complet",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "shipping": "Adresse de livraison",
+    "street": "Adresse",
+    "city": "Ville",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "notes": "Instructions de livraison (optionnel)",
+    "payment": "Mode de paiement",
+    "paymentMethods": {
+      "card": "Carte bancaire",
+      "paypal": "PayPal",
+      "cod": "Paiement à la livraison"
+    },
+    "countries": {
+      "BG": "Bulgarie",
+      "DE": "Allemagne",
+      "FR": "France",
+      "PL": "Pologne",
+      "IT": "Italie",
+      "PT": "Portugal",
+      "CZ": "République tchèque"
+    },
+    "orderSummary": "Votre commande",
+    "qty": "Qté {{count}}",
+    "placeOrder": "Confirmer la commande",
+    "required": "Champ obligatoire",
+    "invalidEmail": "Veuillez entrer un e-mail valide",
+    "breadcrumb": {
+      "cart": "Panier",
+      "checkout": "Informations"
+    },
+    "showOrderSummary": "Afficher le récapitulatif",
+    "hideOrderSummary": "Masquer le récapitulatif",
+    "returnToCart": "Retour au panier",
+    "addNotes": "Ajouter des instructions de livraison",
+    "hideNotes": "Masquer les instructions",
+    "secureCheckout": "Toutes les transactions sont sécurisées et chiffrées"
+  },
+  "order": {
+    "successTitle": "Merci pour votre commande !",
+    "successSubtitle": "Nous avons envoyé une confirmation à {{email}}.",
+    "orderNumber": "Commande {{id}}",
+    "shippingTo": "Livraison à",
+    "items": "Articles",
+    "summary": "Récapitulatif",
+    "continueShopping": "Retour à l'accueil",
+    "notFound": "Commande introuvable",
+    "backHome": "Retour à l'accueil"
+  },
+  "admin": {
+    "brand": "Admin",
+    "welcome": "Bienvenue, {{name}}",
+    "viewStore": "Voir la boutique",
+    "logout": "Déconnexion",
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "catalog": "Catalogue",
+      "gardens": "Jardins",
+      "pods": "Capsules",
+      "consumables": "Consommables",
+      "accessories": "Accessoires",
+      "orders": "Commandes",
+      "customers": "Clients",
+      "content": "Contenu",
+      "newsletter": "Newsletter",
+      "settings": "Paramètres"
+    },
+    "login": {
+      "eyebrow": "Panneau admin",
+      "title": "Connexion",
+      "subtitle": "Gérez les produits, commandes et contenu de la boutique.",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "error": "Identifiants invalides. Utilisez admin@plantyhub.com / admin123",
+      "backToStore": "← Retour à la boutique"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "subtitle": "Vue d'ensemble de votre boutique PlantyHub.",
+      "recentOrders": "Commandes récentes",
+      "weeklySales": "Ventes hebdomadaires",
+      "weeklySalesSubtitle": "Total cette semaine : {{total}}",
+      "orderStatus": "Commandes par statut",
+      "orderStatusSubtitle": "Répartition de toutes les commandes",
+      "topProducts": "Produits phares",
+      "topProductsSubtitle": "Meilleures ventes ce mois",
+      "byCategory": "Revenus par catégorie",
+      "byCategorySubtitle": "Part du chiffre d'affaires total",
+      "sales": "Ventes",
+      "revenue": "Revenu",
+      "days": {
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mer",
+        "thu": "Jeu",
+        "fri": "Ven",
+        "sat": "Sam",
+        "sun": "Dim"
+      },
+      "categories": {
+        "gardens": "Jardins",
+        "pods": "Capsules",
+        "consumables": "Consommables",
+        "accessories": "Accessoires"
+      },
+      "stats": {
+        "revenue": "Revenus (mois)",
+        "ordersMonth": "Commandes (mois)",
+        "avgOrder": "Panier moyen",
+        "orders": "Commandes",
+        "ordersTrend": "+2 cette semaine",
+        "products": "Produits",
+        "customers": "Clients",
+        "customersTrend": "+1 cette semaine",
+        "newsletter": "Abonnés newsletter",
+        "newsletterTrend": "+48 ce mois",
+        "pending": "Commandes en attente",
+        "conversion": "Taux de conversion",
+        "trendUp": "+{{value}} % vs mois dernier"
+      }
+    },
+    "gardens": {
+      "title": "Jardins",
+      "subtitle": "Gérer les jardins intelligents et les packs."
+    },
+    "pods": {
+      "title": "Capsules",
+      "subtitle": "Gérer les recharges de capsules de graines."
+    },
+    "consumables": {
+      "title": "Consommables",
+      "subtitle": "Capsules, nutriments et couvercles de germination."
+    },
+    "accessories": {
+      "title": "Accessoires",
+      "subtitle": "Étagères, rangement et outils."
+    },
+    "orders": {
+      "title": "Commandes",
+      "subtitle": "Suivre et gérer les commandes clients.",
+      "view": "Voir la commande",
+      "table": {
+        "id": "Commande",
+        "customer": "Client",
+        "items": "Articles",
+        "total": "Total",
+        "status": "Statut",
+        "date": "Date"
+      },
+      "status": {
+        "pending": "En attente",
+        "processing": "En cours",
+        "shipped": "Expédiée",
+        "delivered": "Livrée",
+        "cancelled": "Annulée"
+      }
+    },
+    "orderDetail": {
+      "notFound": "Commande introuvable.",
+      "backToOrders": "Retour aux commandes",
+      "placedOn": "Passée le {{date}}",
+      "firstOrder": "Première commande",
+      "customer": "Client",
+      "orderCount": "Commandes du client",
+      "orderNumberOf": "{{current}} sur {{total}}",
+      "shippingAddress": "Adresse de livraison",
+      "waybill": "Lettre de voiture",
+      "waybillNumber": "Numéro de lettre de voiture",
+      "waybillTitle": "Étiquette d'expédition",
+      "createWaybill": "Créer une lettre de voiture",
+      "createWaybillHint": "Générer une étiquette d'expédition. Le statut passera à « Expédiée ».",
+      "createWaybillSubmit": "Générer la lettre de voiture",
+      "printWaybill": "Imprimer la lettre de voiture",
+      "courier": "Transporteur",
+      "couriers": { "econt": "Econt", "speedy": "Speedy", "dhl": "DHL" },
+      "weight": "Poids (kg)",
+      "packages": "Colis",
+      "codAmount": "Contre-remboursement",
+      "waybillNotes": "Notes pour le transporteur",
+      "recipient": "Destinataire",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "items": "Articles ({{count}})",
+      "qty": "Qté",
+      "price": "Prix",
+      "subtotal": "Sous-total",
+      "shippingCost": "Livraison",
+      "tax": "TVA",
+      "notes": "Notes de commande",
+      "timeline": "Historique",
+      "customerOrders": "Autres commandes de ce client",
+      "payment": { "card": "Payé par carte", "cod": "Contre-remboursement", "paypal": "Payé via PayPal" }
+    },
+    "customers": {
+      "title": "Clients",
+      "subtitle": "Clients enregistrés de la boutique.",
+      "view": "Voir le client",
+      "table": {
+        "name": "Nom",
+        "email": "E-mail",
+        "orders": "Commandes",
+        "totalSpent": "Total dépensé",
+        "joined": "Inscription"
+      }
+    },
+    "customerDetail": {
+      "notFound": "Client introuvable.",
+      "backToCustomers": "Retour aux clients",
+      "contact": "Coordonnées",
+      "stats": "Statistiques client",
+      "orders": "Commandes ({{count}})",
+      "noOrders": "Aucune commande pour le moment."
+    },
+    "countries": {
+      "BG": "Bulgarie",
+      "DE": "Allemagne",
+      "FR": "France",
+      "PL": "Pologne",
+      "IT": "Italie",
+      "PT": "Portugal",
+      "CZ": "République tchèque"
+    },
+    "content": {
+      "title": "Contenu",
+      "subtitle": "Gérer les sections d'accueil et les pages statiques.",
+      "homepageSections": "Sections de la page d'accueil",
+      "pages": "Pages statiques",
+      "items": "{{count}} éléments",
+      "faqCount": "{{count}} questions FAQ",
+      "sections": {
+        "hero": "Bannière",
+        "growSmarter": "Cultivez plus malin",
+        "product": "Produit vedette",
+        "howItWorks": "Comment ça marche",
+        "lightCycle": "Cycle lumineux",
+        "podsGrid": "Grille de capsules",
+        "socialProof": "Témoignages",
+        "guarantees": "Garanties",
+        "accessories": "Accessoires",
+        "cta": "Appel à l'action"
+      },
+      "pageLabels": {
+        "about": "Page À propos",
+        "support": "Support & FAQ",
+        "pods": "Catalogue capsules",
+        "accessories": "Page accessoires"
+      },
+      "pageDescriptions": {
+        "about": "Histoire de la marque, valeurs et équipe.",
+        "support": "Cartes support et questions fréquentes.",
+        "pods": "Liste complète des capsules avec pages détail.",
+        "accessories": "Grille d'accessoires et consommables."
+      }
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Gérer les abonnés et campagnes e-mail.",
+      "popupSettings": "Paramètres du popup",
+      "enablePopup": "Afficher le popup newsletter",
+      "exitIntent": "Déclencheur exit-intent",
+      "discountCode": "Code de réduction",
+      "sendCampaign": "Envoyer une campagne",
+      "subject": "Objet",
+      "message": "Message",
+      "send": "Envoyer la campagne",
+      "stats": {
+        "subscribers": "Abonnés",
+        "openRate": "Taux d'ouverture",
+        "openRateTrend": "+3 % vs mois dernier",
+        "activeCodes": "Codes actifs"
+      }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "subtitle": "Configuration de la boutique et notifications.",
+      "store": "Boutique",
+      "storeName": "Nom de la boutique",
+      "currency": "Devise",
+      "shippingThreshold": "Seuil livraison gratuite",
+      "contact": "Contact",
+      "email": "E-mail support",
+      "address": "Adresse",
+      "notifications": "Notifications",
+      "newOrderEmail": "E-mail pour nouvelle commande",
+      "lowStockAlert": "Alerte stock bas",
+      "weeklyReport": "Rapport hebdomadaire des ventes",
+      "demoNote": "Ceci est un panneau admin de démonstration. Les paramètres sont en lecture seule jusqu'à la connexion d'un backend.",
+      "catalog": "Catalogue produits",
+      "resetCatalog": "Réinitialiser le catalogue",
+      "resetCatalogHint": "Restaure tous les produits depuis les données d'origine."
+    },
+    "table": {
+      "product": "Produit",
+      "id": "ID",
+      "price": "Prix",
+      "status": "Statut",
+      "country": "Pays",
+      "actions": "Actions",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "edit": "Modifier"
+    },
+    "actions": {
+      "addProduct": "Ajouter un produit"
+    },
+    "productEdit": {
+      "addTitle": "Ajouter un produit",
+      "editTitle": "Modifier le produit",
+      "basicInfo": "Informations de base",
+      "content": "Contenu (toutes les langues)",
+      "id": "ID produit",
+      "idHint": "Minuscules, ex. basil",
+      "price": "Prix",
+      "compareAt": "Prix barré",
+      "pack": "Conditionnement",
+      "imageUrl": "URL de l'image",
+      "imageFit": "Ajustement image",
+      "fitCover": "Cover",
+      "fitContain": "Contain",
+      "active": "Actif (visible en boutique)",
+      "featured": "Produit vedette",
+      "name": "Nom",
+      "tagline": "Sous-titre",
+      "description": "Description",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "errors": {
+        "idRequired": "L'ID produit est requis.",
+        "nameRequired": "Le nom en anglais est requis.",
+        "priceRequired": "Le prix est requis.",
+        "imageRequired": "L'URL de l'image est requise."
+      }
+    }
+  }
+}
