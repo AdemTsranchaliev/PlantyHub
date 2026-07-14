@@ -78,6 +78,29 @@ export type ApiAuthResponse = {
   roles: string[]
 }
 
+export type ApiRegisterResponse = {
+  message: string
+  email: string
+  requiresEmailVerification: boolean
+}
+
+export type ApiMessageResponse = {
+  message: string
+}
+
+export type ApiUserProfile = {
+  email: string
+  name: string
+  roles: string[]
+  emailConfirmed?: boolean
+}
+
+export type ApiNewsletterSubscriber = {
+  email: string
+  subscribedAt: string
+  active: boolean
+}
+
 export type ApiHomepageState = HomepageState
 
 export type ApiProductUpsert = {

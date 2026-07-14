@@ -1,14 +1,19 @@
 import { apiRequest } from './client'
+import { getCustomerToken } from '../auth/session'
 import type {
   ApiAuthResponse,
   ApiCustomer,
   ApiCustomerDetail,
   ApiDashboard,
   ApiHomepageState,
+  ApiMessageResponse,
+  ApiNewsletterSubscriber,
   ApiOrderDetail,
   ApiOrderSummary,
   ApiProductUpsert,
   ApiProductsByCategory,
+  ApiRegisterResponse,
+  ApiUserProfile,
   CheckoutPayload,
   CreateWaybillPayload,
 } from './types'
@@ -17,11 +22,20 @@ import type { HomepageState } from '../store/homepage'
 
 export const authApi = {
   register: (body: { name: string; email: string; password: string }) =>
-    apiRequest<ApiAuthResponse>('/api/auth/register', { method: 'POST', body }),
-  login: (body: { email: string; password: string }) =>
+    apiRequest<ApiRegisterResponse>('/api/auth/register', { method: 'POST', body }),
+  login: (body: { email: string; password: string; rememberMe?: boolean }) =>
     apiRequest<ApiAuthResponse>('/api/auth/login', { method: 'POST', body }),
   adminLogin: (body: { email: string; password: string }) =>
     apiRequest<ApiAuthResponse>('/api/auth/admin/login', { method: 'POST', body }),
+  forgotPassword: (email: string) =>
+    apiRequest<ApiMessageResponse>('/api/auth/forgot-password', { method: 'POST', body: { email } }),
+  resetPassword: (body: { email: string; token: string; newPassword: string }) =>
+    apiRequest<ApiMessageResponse>('/api/auth/reset-password', { method: 'POST', body }),
+  verifyEmail: (body: { userId: string; token: string }) =>
+    apiRequest<ApiMessageResponse>('/api/auth/verify-email', { method: 'POST', body }),
+  resendVerification: (email: string) =>
+    apiRequest<ApiMessageResponse>('/api/auth/resend-verification', { method: 'POST', body: { email } }),
+  me: () => apiRequest<ApiUserProfile>('/api/auth/me', { auth: 'customer' }),
 }
 
 export const productsApi = {
@@ -38,8 +52,15 @@ export const productsApi = {
 }
 
 export const ordersApi = {
-  checkout: (body: CheckoutPayload) => apiRequest<ApiOrderDetail>('/api/orders', { method: 'POST', body }),
-  getById: (id: string) => apiRequest<ApiOrderDetail>(`/api/orders/${id}`),
+  checkout: (body: CheckoutPayload) =>
+    apiRequest<ApiOrderDetail>('/api/orders', {
+      method: 'POST',
+      body,
+      auth: getCustomerToken() ? 'customer' : 'none',
+    }),
+  getById: (id: string, customerAuth = false) =>
+    apiRequest<ApiOrderDetail>(`/api/orders/${id}`, { auth: customerAuth ? 'customer' : 'none' }),
+  getMy: () => apiRequest<ApiOrderSummary[]>('/api/orders/my', { auth: 'customer' }),
   getAdminAll: () => apiRequest<ApiOrderSummary[]>('/api/admin/orders', { auth: 'admin' }),
   getAdminById: (id: string) => apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}`, { auth: 'admin' }),
   updateStatus: (id: string, status: OrderStatus) =>
@@ -61,6 +82,14 @@ export const dashboardApi = {
 export const newsletterApi = {
   subscribe: (email: string) => apiRequest('/api/newsletter/subscribe', { method: 'POST', body: { email } }),
   getStats: () => apiRequest<{ totalSubscribers: number }>('/api/admin/newsletter/stats', { auth: 'admin' }),
+  getSubscribers: () => apiRequest<ApiNewsletterSubscriber[]>('/api/admin/newsletter/subscribers', { auth: 'admin' }),
+  deleteSubscriber: (email: string) =>
+    apiRequest(`/api/admin/newsletter/subscribers/${encodeURIComponent(email)}`, { method: 'DELETE', auth: 'admin' }),
+  unsubscribeSubscriber: (email: string) =>
+    apiRequest(`/api/admin/newsletter/subscribers/${encodeURIComponent(email)}/unsubscribe`, {
+      method: 'POST',
+      auth: 'admin',
+    }),
 }
 
 export const homepageApi = {

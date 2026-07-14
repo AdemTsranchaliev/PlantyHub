@@ -12,6 +12,9 @@
   "header": {
     "region": "EU & Balkans (€)",
     "login": "Log in",
+    "account": "Account",
+    "myOrders": "My orders",
+    "logout": "Log out",
     "search": "Search",
     "cart": "Cart",
     "openMenu": "Open menu",
@@ -528,6 +531,42 @@
       "success": "You're signed in. Welcome back to PlantyHub!",
       "continue": "Continue shopping"
     },
+    "forgotPassword": {
+      "eyebrow": "Account",
+      "title": "Forgot password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "email": "Email",
+      "submit": "Send reset link",
+      "invalidEmail": "Please enter a valid email address.",
+      "backToLogin": "Back to login",
+      "error": "Could not send reset email. Try again later."
+    },
+    "resetPassword": {
+      "eyebrow": "Account",
+      "title": "Reset password",
+      "subtitle": "Choose a new password for your account.",
+      "email": "Email",
+      "password": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Update password",
+      "invalidPassword": "Password must be at least 6 characters.",
+      "passwordMismatch": "Passwords do not match.",
+      "invalidLink": "This reset link is invalid or has expired.",
+      "requestNew": "Request a new link",
+      "backToLogin": "Back to login",
+      "error": "Could not reset password. The link may have expired."
+    },
+    "verifyEmail": {
+      "eyebrow": "Account",
+      "title": "Verify email",
+      "loading": "Verifying your email…",
+      "invalidLink": "This verification link is invalid or has expired.",
+      "error": "Invalid or expired verification link.",
+      "goToLogin": "Go to login",
+      "backToLogin": "Back to login",
+      "resend": "Resend verification email",
+      "resendError": "Could not resend verification email."
+    },
     "register": {
       "eyebrow": "Join us",
       "title": "Create account",
@@ -545,7 +584,27 @@
       "invalidPassword": "Password must be at least 6 characters.",
       "passwordMismatch": "Passwords do not match.",
       "success": "Your account is ready. You can now sign in.",
+      "verifySubtitle": "We sent a verification link to {{email}}.",
+      "verifyHint": "Open the link in your email to activate your account before signing in.",
       "goToLogin": "Go to login"
+    }
+  },
+  "account": {
+    "title": "My orders",
+    "subtitle": "Welcome back, {{name}}. Here are your PlantyHub orders.",
+    "emptyTitle": "No orders yet",
+    "emptySubtitle": "When you place an order, it will appear here.",
+    "startShopping": "Start shopping",
+    "viewOrders": "View my orders",
+    "viewOrder": "View order",
+    "retry": "Try again",
+    "table": {
+      "id": "Order",
+      "items": "Items",
+      "total": "Total",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
     }
   },
   "cart": {
@@ -851,6 +910,17 @@
         "openRate": "Open rate",
         "openRateTrend": "+3% vs last month",
         "activeCodes": "Active codes"
+      },
+      "subscribersTitle": "Subscriber list",
+      "empty": "No subscribers yet.",
+      "active": "Active",
+      "inactive": "Inactive",
+      "unsubscribe": "Unsubscribe",
+      "delete": "Delete subscriber",
+      "table": {
+        "email": "Email",
+        "subscribedAt": "Subscribed",
+        "status": "Status"
       }
     },
     "settings": {

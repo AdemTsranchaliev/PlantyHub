@@ -1,5 +1,6 @@
 import type { CountryCode, OrderStatus } from '../admin/mockData'
 import type { OrderDetail, Waybill } from '../admin/orderDetails'
+import { getCustomerToken } from '../auth/session'
 import { mapOrderSummaryToDetail, ordersApi } from '../api'
 import type { CheckoutPayload } from '../api/types'
 import type { CartItem } from './cart'
@@ -7,6 +8,7 @@ import type { PaymentMethod } from '../admin/orderDetails'
 
 const listeners = new Set<() => void>()
 let cachedOrders: OrderDetail[] = []
+let cachedMyOrders: OrderDetail[] = []
 let orderDetails = new Map<string, OrderDetail>()
 let loading = false
 let loadError: string | null = null
@@ -55,9 +57,34 @@ export async function loadOrders(): Promise<OrderDetail[]> {
   }
 }
 
+export function getMyOrdersState(): OrderDetail[] {
+  return cachedMyOrders
+}
+
+export async function loadMyOrders(): Promise<OrderDetail[]> {
+  loading = true
+  loadError = null
+  emit()
+  try {
+    const summaries = await ordersApi.getMy()
+    cachedMyOrders = summaries.map(mapOrderSummaryToDetail)
+    emit()
+    return cachedMyOrders
+  } catch (err) {
+    loadError = err instanceof Error ? err.message : 'Failed to load orders'
+    emit()
+    return cachedMyOrders
+  } finally {
+    loading = false
+    emit()
+  }
+}
+
 export async function fetchOrderDetail(id: string, admin = false): Promise<OrderDetail | undefined> {
   try {
-    const detail = admin ? await ordersApi.getAdminById(id) : await ordersApi.getById(id)
+    const detail = admin
+      ? await ordersApi.getAdminById(id)
+      : await ordersApi.getById(id, Boolean(getCustomerToken()))
     orderDetails.set(id, detail)
     const index = cachedOrders.findIndex((o) => o.id === id)
     if (index >= 0) cachedOrders[index] = detail
@@ -125,6 +152,7 @@ export async function createWaybill(
 
 export function resetOrdersState() {
   cachedOrders = []
+  cachedMyOrders = []
   orderDetails.clear()
   emit()
 }

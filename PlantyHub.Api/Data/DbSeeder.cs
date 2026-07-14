@@ -250,7 +250,9 @@ public static class DbSeeder
         string id, string name, string email, string phone, CountryCode country,
         OrderStatus status, decimal total, int itemCount, string date)
     {
-        var created = DateTime.Parse(date, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal);
+        var created = DateTime.SpecifyKind(
+            DateTime.Parse(date, System.Globalization.CultureInfo.InvariantCulture),
+            DateTimeKind.Utc);
         var subtotal = total;
         return new Order
         {

@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import CloseIcon from '@mui/icons-material/Close'
+import PersonOutlineRounded from '@mui/icons-material/PersonOutlineRounded'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
@@ -24,6 +25,7 @@ import { pagePaddingX } from './SectionContainer'
 import { navHrefs } from '../data/catalog'
 import { resolveHref } from '../paths'
 import { useCart } from '../hooks/useCart'
+import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { brand } from '../theme'
 
 const navKeys = [
@@ -39,6 +41,7 @@ export default function Header() {
   const { t } = useTranslation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const { itemCount: cartCount } = useCart()
+  const { customer, isLoggedIn, logout } = useCustomerAuth()
 
   return (
     <>
@@ -141,6 +144,35 @@ export default function Header() {
               {t('header.region')}
             </Typography>
             <LanguageSwitcher />
+            {isLoggedIn ? (
+              <Button
+                component={RouterLink}
+                to={navHrefs.myOrders}
+                startIcon={<PersonOutlineRounded />}
+                sx={{
+                  display: { xs: 'none', md: 'inline-flex' },
+                  color: brand.graphite,
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                }}
+              >
+                {customer?.name?.split(' ')[0] ?? t('header.account')}
+              </Button>
+            ) : (
+              <Button
+                component={RouterLink}
+                to={navHrefs.login}
+                startIcon={<PersonOutlineRounded />}
+                sx={{
+                  display: { xs: 'none', md: 'inline-flex' },
+                  color: brand.graphite,
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                }}
+              >
+                {t('header.login')}
+              </Button>
+            )}
             <IconButton
               aria-label={t('header.cart')}
               component={RouterLink}
@@ -186,6 +218,30 @@ export default function Header() {
         <Box sx={{ px: pagePaddingX, pb: 2 }}>
           <LanguageSwitcher />
         </Box>
+        <Divider />
+        {isLoggedIn ? (
+          <Box sx={{ px: pagePaddingX, py: 1.5 }}>
+            <Typography sx={{ fontWeight: 700, color: brand.graphite, mb: 1 }}>{customer?.name}</Typography>
+            <Button component={RouterLink} to={navHrefs.myOrders} fullWidth variant="outlined" onClick={() => setMobileOpen(false)} sx={{ mb: 1 }}>
+              {t('header.myOrders')}
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => {
+                logout()
+                setMobileOpen(false)
+              }}
+            >
+              {t('header.logout')}
+            </Button>
+          </Box>
+        ) : (
+          <Box sx={{ px: pagePaddingX, py: 1.5 }}>
+            <Button component={RouterLink} to={navHrefs.login} fullWidth variant="outlined" onClick={() => setMobileOpen(false)}>
+              {t('header.login')}
+            </Button>
+          </Box>
+        )}
         <Divider />
         <List sx={{ px: 1, py: 1 }}>
           {navKeys.map((link) => (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -6,6 +6,16 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Switch from '@mui/material/Switch'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Chip from '@mui/material/Chip'
+import IconButton from '@mui/material/IconButton'
+import DeleteOutlineRounded from '@mui/icons-material/DeleteOutlineRounded'
+import UnsubscribeRounded from '@mui/icons-material/UnsubscribeRounded'
 import { useTranslation } from 'react-i18next'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import AdminStatCard from '../../components/admin/AdminStatCard'
@@ -13,15 +23,39 @@ import MailRounded from '@mui/icons-material/MailRounded'
 import TrendingUpRounded from '@mui/icons-material/TrendingUpRounded'
 import LocalOfferRounded from '@mui/icons-material/LocalOfferRounded'
 import { newsletterApi } from '../../api'
+import type { ApiNewsletterSubscriber } from '../../api/types'
 import { brand } from '../../theme'
 
 export default function AdminNewsletterPage() {
   const { t } = useTranslation()
   const [subscriberCount, setSubscriberCount] = useState(0)
+  const [subscribers, setSubscribers] = useState<ApiNewsletterSubscriber[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const loadData = useCallback(async () => {
+    setLoading(true)
+    try {
+      const [stats, list] = await Promise.all([newsletterApi.getStats(), newsletterApi.getSubscribers()])
+      setSubscriberCount(stats.totalSubscribers)
+      setSubscribers(list)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
 
   useEffect(() => {
-    void newsletterApi.getStats().then((stats) => setSubscriberCount(stats.totalSubscribers))
-  }, [])
+    void loadData()
+  }, [loadData])
+
+  const handleUnsubscribe = async (email: string) => {
+    await newsletterApi.unsubscribeSubscriber(email)
+    await loadData()
+  }
+
+  const handleDelete = async (email: string) => {
+    await newsletterApi.deleteSubscriber(email)
+    await loadData()
+  }
 
   return (
     <>
@@ -52,6 +86,86 @@ export default function AdminNewsletterPage() {
           />
         </Grid>
       </Grid>
+
+      <TableContainer
+        sx={{
+          bgcolor: brand.white,
+          borderRadius: '20px',
+          border: `1px solid ${brand.border}`,
+          overflow: 'hidden',
+          mb: 3,
+        }}
+      >
+        <Box sx={{ px: 3, py: 2, borderBottom: `1px solid ${brand.border}` }}>
+          <Typography sx={{ fontWeight: 700, color: brand.graphite }}>{t('admin.newsletter.subscribersTitle')}</Typography>
+        </Box>
+        <Table>
+          <TableHead>
+            <TableRow sx={{ bgcolor: brand.surface }}>
+              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                {t('admin.newsletter.table.email')}
+              </TableCell>
+              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                {t('admin.newsletter.table.subscribedAt')}
+              </TableCell>
+              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                {t('admin.newsletter.table.status')}
+              </TableCell>
+              <TableCell align="right" sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                {t('admin.table.actions')}
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {!loading && subscribers.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={4} sx={{ py: 4, textAlign: 'center', color: brand.textSecondary }}>
+                  {t('admin.newsletter.empty')}
+                </TableCell>
+              </TableRow>
+            ) : (
+              subscribers.map((subscriber) => (
+                <TableRow key={subscriber.email} sx={{ '&:last-child td': { borderBottom: 0 } }}>
+                  <TableCell sx={{ fontWeight: 600 }}>{subscriber.email}</TableCell>
+                  <TableCell sx={{ color: brand.textSecondary }}>{subscriber.subscribedAt}</TableCell>
+                  <TableCell>
+                    <Chip
+                      label={subscriber.active ? t('admin.newsletter.active') : t('admin.newsletter.inactive')}
+                      size="small"
+                      sx={{
+                        bgcolor: subscriber.active ? brand.plantGreenMuted : 'rgba(28, 35, 30, 0.08)',
+                        color: subscriber.active ? brand.plantGreenDark : brand.textSecondary,
+                        fontWeight: 700,
+                        fontSize: '0.75rem',
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    {subscriber.active && (
+                      <IconButton
+                        size="small"
+                        aria-label={t('admin.newsletter.unsubscribe')}
+                        onClick={() => void handleUnsubscribe(subscriber.email)}
+                        sx={{ color: brand.textSecondary }}
+                      >
+                        <UnsubscribeRounded fontSize="small" />
+                      </IconButton>
+                    )}
+                    <IconButton
+                      size="small"
+                      aria-label={t('admin.newsletter.delete')}
+                      onClick={() => void handleDelete(subscriber.email)}
+                      sx={{ color: brand.textSecondary }}
+                    >
+                      <DeleteOutlineRounded fontSize="small" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>

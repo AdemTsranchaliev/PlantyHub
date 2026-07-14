@@ -20,6 +20,7 @@ import { navHrefs } from '../data/catalog'
 import type { CountryCode } from '../admin/mockData'
 import type { PaymentMethod } from '../admin/orderDetails'
 import { useCart } from '../hooks/useCart'
+import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { createCustomerOrder } from '../store/orders'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -120,6 +121,7 @@ export default function CheckoutPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { items, itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, clearCart } = useCart()
+  const { customer } = useCustomerAuth()
   const [form, setForm] = useState<FormState>(emptyForm)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitting, setSubmitting] = useState(false)
@@ -131,15 +133,13 @@ export default function CheckoutPage() {
   }, [])
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem('plantyhub_user')
-      if (!raw) return
-      const user = JSON.parse(raw) as { email?: string }
-      if (user.email) setForm((prev) => ({ ...prev, email: user.email ?? prev.email }))
-    } catch {
-      // ignore
-    }
-  }, [])
+    if (!customer) return
+    setForm((prev) => ({
+      ...prev,
+      name: prev.name || customer.name,
+      email: prev.email || customer.email,
+    }))
+  }, [customer])
 
   if (items.length === 0) {
     return (

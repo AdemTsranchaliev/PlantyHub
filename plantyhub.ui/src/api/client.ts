@@ -3,10 +3,12 @@ import { getAdminToken, getCustomerToken } from '../auth/session'
 
 export class ApiError extends Error {
   status: number
+  code?: string
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, code?: string) {
     super(message)
     this.status = status
+    this.code = code
   }
 }
 
@@ -33,13 +35,15 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 
   if (!res.ok) {
     let message = res.statusText
+    let code: string | undefined
     try {
-      const data = (await res.json()) as { message?: string }
+      const data = (await res.json()) as { message?: string; code?: string }
       if (data.message) message = data.message
+      code = data.code
     } catch {
       // ignore
     }
-    throw new ApiError(res.status, message)
+    throw new ApiError(res.status, message, code)
   }
 
   if (res.status === 204) return undefined as T

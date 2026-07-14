@@ -36,11 +36,17 @@ export type StoredProduct = {
 
 export type ProductsState = Record<ProductCategory, StoredProduct[]>
 
+const emptyProductsState: ProductsState = {
+  gardens: [],
+  pods: [],
+  consumables: [],
+  accessories: [],
+}
+
 const locales = { en, bg, de, fr } as const
 const listeners = new Set<() => void>()
 let cachedState: ProductsState | null = null
 let loading = false
-let loadedAdmin = false
 let loadError: string | null = null
 
 function emit() {
@@ -126,14 +132,10 @@ function setState(state: ProductsState) {
 }
 
 export function getProductsState(): ProductsState {
-  if (!cachedState) cachedState = createDefaultProductsState()
-  return cachedState
+  return cachedState ?? emptyProductsState
 }
 
 export async function loadProducts(admin = false): Promise<ProductsState> {
-  if (cachedState && !admin && !loadedAdmin) return cachedState
-  if (cachedState && admin && loadedAdmin) return cachedState
-
   loading = true
   loadError = null
   emit()
@@ -141,12 +143,11 @@ export async function loadProducts(admin = false): Promise<ProductsState> {
   try {
     const data = admin ? await productsApi.getAdmin() : await productsApi.getPublic()
     const state = mapProductsResponse(data)
-    loadedAdmin = admin
     setState(state)
     return state
   } catch (err) {
     loadError = err instanceof Error ? err.message : 'Failed to load products'
-    if (!cachedState) setState(createDefaultProductsState())
+    emit()
     return getProductsState()
   } finally {
     loading = false
@@ -157,17 +158,20 @@ export async function loadProducts(admin = false): Promise<ProductsState> {
 export async function addProduct(category: ProductCategory, product: StoredProduct): Promise<boolean> {
   await productsApi.create(toProductUpsert(product, category))
   await loadProducts(true)
+  await loadProducts(false)
   return true
 }
 
 export async function updateProduct(category: ProductCategory, id: string, product: StoredProduct) {
   await productsApi.update(id, toProductUpsert({ ...product, id }, category))
   await loadProducts(true)
+  await loadProducts(false)
 }
 
 export async function deleteProduct(_category: ProductCategory, id: string) {
   await productsApi.delete(id)
   await loadProducts(true)
+  await loadProducts(false)
 }
 
 export function getProduct(category: ProductCategory, id: string): StoredProduct | undefined {
@@ -199,8 +203,8 @@ export const packKeyOptions = ['pack3', 'pack9', 'pack12', 'bottle1L', 'bottle2x
 
 // Legacy stubs for settings page
 export function resetProductsState() {
-  cachedState = createDefaultProductsState()
-  loadedAdmin = false
+  cachedState = null
+  loadError = null
   emit()
 }
 

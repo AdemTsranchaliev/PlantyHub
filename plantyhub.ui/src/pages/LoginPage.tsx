@@ -14,7 +14,8 @@ import { useTranslation } from 'react-i18next'
 import AuthPageLayout from '../components/AuthPageLayout'
 import { navHrefs } from '../data/catalog'
 import { authApi } from '../api'
-import { setCustomerSession } from '../auth/session'
+import { ApiError } from '../api/client'
+import { setCustomerFromAuth } from '../store/auth'
 import { brand } from '../theme'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -29,15 +30,27 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(true)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [authError, setAuthError] = useState('')
+  const [needsVerification, setNeedsVerification] = useState(false)
+  const [resendMessage, setResendMessage] = useState('')
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [])
+
+  const handleResend = async () => {
+    if (!emailPattern.test(email.trim())) return
+    try {
+      const response = await authApi.resendVerification(email.trim())
+      setResendMessage(response.message)
+    } catch {
+      setResendMessage(t('auth.verifyEmail.resendError', { defaultValue: 'Could not resend verification email.' }))
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -50,15 +63,19 @@ export default function LoginPage() {
 
     setSubmitting(true)
     setAuthError('')
+    setNeedsVerification(false)
+    setResendMessage('')
     try {
-      const response = await authApi.login({ email: email.trim(), password })
-      setCustomerSession(response)
-      if (rememberMe) {
-        localStorage.setItem('plantyhub_user', JSON.stringify({ name: response.name, email: response.email }))
-      }
+      const response = await authApi.login({ email: email.trim(), password, rememberMe })
+      setCustomerFromAuth(response, rememberMe)
       setSubmitted(true)
-    } catch {
-      setAuthError(t('auth.login.invalidCredentials', { defaultValue: 'Invalid email or password.' }))
+    } catch (err) {
+      if (err instanceof ApiError && err.code === 'email_not_verified') {
+        setNeedsVerification(true)
+        setAuthError(err.message)
+      } else {
+        setAuthError(t('auth.login.invalidCredentials', { defaultValue: 'Invalid email or password.' }))
+      }
     } finally {
       setSubmitting(false)
     }
@@ -69,8 +86,8 @@ export default function LoginPage() {
       <AuthPageLayout eyebrow={t('auth.login.eyebrow')} title={t('auth.login.title')} subtitle={t('auth.login.success')}>
         <Stack spacing={2.5} sx={{ alignItems: 'center', textAlign: 'center', py: 1 }}>
           <CheckCircleRounded sx={{ fontSize: 56, color: brand.plantGreen }} />
-          <Button variant="contained" size="large" fullWidth onClick={() => navigate('/')}>
-            {t('auth.login.continue')}
+          <Button variant="contained" size="large" fullWidth onClick={() => navigate(navHrefs.myOrders)}>
+            {t('account.viewOrders', { defaultValue: 'View my orders' })}
           </Button>
         </Stack>
       </AuthPageLayout>
@@ -82,6 +99,14 @@ export default function LoginPage() {
       <Stack component="form" onSubmit={handleSubmit} spacing={2}>
         {authError && (
           <Typography sx={{ color: 'error.main', fontSize: '0.9rem' }}>{authError}</Typography>
+        )}
+        {needsVerification && (
+          <Stack spacing={1}>
+            <Button variant="outlined" onClick={() => void handleResend()}>
+              {t('auth.verifyEmail.resend')}
+            </Button>
+            {resendMessage && <Typography sx={{ fontSize: '0.85rem', color: brand.textSecondary }}>{resendMessage}</Typography>}
+          </Stack>
         )}
         <TextField
           type="email"
@@ -121,7 +146,7 @@ export default function LoginPage() {
             }
             label={<Typography sx={{ fontSize: '0.9rem', color: brand.textSecondary }}>{t('auth.login.rememberMe')}</Typography>}
           />
-          <Link href="mailto:support@plantyhub.com" underline="hover" sx={{ fontSize: '0.9rem', fontWeight: 600, color: brand.plantGreenDark }}>
+          <Link component={RouterLink} to={navHrefs.forgotPassword} underline="hover" sx={{ fontSize: '0.9rem', fontWeight: 600, color: brand.plantGreenDark }}>
             {t('auth.login.forgotPassword')}
           </Link>
         </Stack>

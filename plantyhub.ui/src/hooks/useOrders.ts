@@ -9,6 +9,8 @@ import {
   getOrdersLoading,
   getOrdersState,
   getOrderDetail,
+  getMyOrdersState,
+  loadMyOrders,
   loadOrders,
   resetOrdersState,
   subscribeOrders,
@@ -17,6 +19,16 @@ import {
 
 export function useOrders() {
   return useSyncExternalStore(subscribeOrders, getOrdersState, getOrdersState)
+}
+
+export function useMyOrders() {
+  return useSyncExternalStore(subscribeOrders, getMyOrdersState, getMyOrdersState)
+}
+
+export function useMyOrdersBootstrap() {
+  useEffect(() => {
+    void loadMyOrders()
+  }, [])
 }
 
 export function useOrdersBootstrap() {

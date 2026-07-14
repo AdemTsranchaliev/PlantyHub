@@ -23,7 +23,7 @@ public class JwtTokenService(IOptions<JwtSettings> options)
 {
     private readonly JwtSettings _settings = options.Value;
 
-    public string CreateToken(ApplicationUser user, IEnumerable<string> roles)
+    public string CreateToken(ApplicationUser user, IEnumerable<string> roles, int? expiryMinutes = null)
     {
         var claims = new List<Claim>
         {
@@ -36,7 +36,7 @@ public class JwtTokenService(IOptions<JwtSettings> options)
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var expires = DateTime.UtcNow.AddMinutes(_settings.ExpiryMinutes);
+        var expires = DateTime.UtcNow.AddMinutes(expiryMinutes ?? _settings.ExpiryMinutes);
 
         var token = new JwtSecurityToken(
             issuer: _settings.Issuer,

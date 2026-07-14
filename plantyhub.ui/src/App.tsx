@@ -10,6 +10,7 @@ import NewsletterDialog from './components/NewsletterDialog'
 import CartSnackbar from './components/CartSnackbar'
 import HomePage from './pages/HomePage'
 import DataBootstrap from './components/DataBootstrap'
+import SessionBootstrap from './components/SessionBootstrap'
 import { brand } from './theme'
 
 const ProductPage = lazy(() => import('./pages/ProductPage'))
@@ -20,9 +21,13 @@ const AboutPage = lazy(() => import('./pages/AboutPage'))
 const SupportPage = lazy(() => import('./pages/SupportPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
+const VerifyEmailPage = lazy(() => import('./pages/VerifyEmailPage'))
 const CartPage = lazy(() => import('./pages/CartPage'))
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'))
 const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage'))
+const MyOrdersPage = lazy(() => import('./pages/MyOrdersPage'))
 
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout'))
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
@@ -66,6 +71,10 @@ function StorefrontRoutes() {
           <Route path="/support" element={<SupportPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
+          <Route path="/account/orders" element={<MyOrdersPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order/:orderId" element={<OrderConfirmationPage />} />
@@ -113,6 +122,7 @@ function App() {
 
   return (
     <>
+      <SessionBootstrap />
       <DataBootstrap />
       <StorefrontRoutes />
     </>

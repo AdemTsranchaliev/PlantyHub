@@ -12,6 +12,9 @@
   "header": {
     "region": "UE & Balkans (€)",
     "login": "Connexion",
+    "account": "Compte",
+    "myOrders": "Mes commandes",
+    "logout": "Déconnexion",
     "search": "Rechercher",
     "cart": "Panier",
     "openMenu": "Ouvrir le menu",
@@ -497,6 +500,24 @@
       "goToLogin": "Aller à la connexion"
     }
   },
+  "account": {
+    "title": "Mes commandes",
+    "subtitle": "Bon retour, {{name}}. Voici vos commandes PlantyHub.",
+    "emptyTitle": "Aucune commande",
+    "emptySubtitle": "Lorsque vous passerez commande, elle apparaîtra ici.",
+    "startShopping": "Commencer les achats",
+    "viewOrders": "Voir mes commandes",
+    "viewOrder": "Voir la commande",
+    "retry": "Réessayer",
+    "table": {
+      "id": "Commande",
+      "items": "Articles",
+      "total": "Total",
+      "status": "Statut",
+      "date": "Date",
+      "actions": "Actions"
+    }
+  },
   "cart": {
     "title": "Panier",
     "emptyTitle": "Votre panier est vide",
@@ -792,6 +813,17 @@
         "openRate": "Taux d'ouverture",
         "openRateTrend": "+3 % vs mois dernier",
         "activeCodes": "Codes actifs"
+      },
+      "subscribersTitle": "Liste des abonnés",
+      "empty": "Aucun abonné pour le moment.",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "unsubscribe": "Se désabonner",
+      "delete": "Supprimer l'abonné",
+      "table": {
+        "email": "E-mail",
+        "subscribedAt": "Inscrit le",
+        "status": "Statut"
       }
     },
     "settings": {

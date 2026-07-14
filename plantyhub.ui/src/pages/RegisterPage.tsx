@@ -37,11 +37,23 @@ export default function RegisterPage() {
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [submittedEmail, setSubmittedEmail] = useState('')
+  const [resendMessage, setResendMessage] = useState('')
   const [authError, setAuthError] = useState('')
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [])
+
+  const handleResend = async () => {
+    if (!submittedEmail) return
+    try {
+      const response = await authApi.resendVerification(submittedEmail)
+      setResendMessage(response.message)
+    } catch {
+      setResendMessage(t('auth.verifyEmail.resendError', { defaultValue: 'Could not resend verification email.' }))
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -58,7 +70,8 @@ export default function RegisterPage() {
     setSubmitting(true)
     setAuthError('')
     try {
-      await authApi.register({ name: name.trim(), email: email.trim(), password })
+      const response = await authApi.register({ name: name.trim(), email: email.trim(), password })
+      setSubmittedEmail(response.email)
       setSubmitted(true)
     } catch {
       setAuthError(t('auth.register.error', { defaultValue: 'Could not create account. Email may already be in use.' }))
@@ -69,9 +82,16 @@ export default function RegisterPage() {
 
   if (submitted) {
     return (
-      <AuthPageLayout eyebrow={t('auth.register.eyebrow')} title={t('auth.register.title')} subtitle={t('auth.register.success')}>
+      <AuthPageLayout eyebrow={t('auth.register.eyebrow')} title={t('auth.register.title')} subtitle={t('auth.register.verifySubtitle', { email: submittedEmail })}>
         <Stack spacing={2.5} sx={{ alignItems: 'center', textAlign: 'center', py: 1 }}>
           <CheckCircleRounded sx={{ fontSize: 56, color: brand.plantGreen }} />
+          <Typography sx={{ color: brand.textSecondary, fontSize: '0.95rem' }}>
+            {t('auth.register.verifyHint')}
+          </Typography>
+          <Button variant="outlined" fullWidth onClick={() => void handleResend()}>
+            {t('auth.verifyEmail.resend')}
+          </Button>
+          {resendMessage && <Typography sx={{ fontSize: '0.85rem', color: brand.textSecondary }}>{resendMessage}</Typography>}
           <Button variant="contained" size="large" fullWidth onClick={() => navigate(navHrefs.login)}>
             {t('auth.register.goToLogin')}
           </Button>
