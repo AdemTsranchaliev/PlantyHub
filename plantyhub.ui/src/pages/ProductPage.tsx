@@ -33,16 +33,9 @@ import Reveal from '../components/Reveal'
 import { productSpecRows } from '../data/catalog'
 import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
 import { useProduct } from '../hooks/useProducts'
+import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
-
-const gallery = [
-  lifestyleImages.homeGardenProduct,
-  lifestyleImages.kitchenBasil,
-  lifestyleImages.basilCloseup,
-  lifestyleImages.mintKitchen,
-  lifestyleImages.heroKitchen,
-]
 
 const highlightKeys = ['pods', 'light', 'irrigation', 'growthHeight'] as const
 const trustItems = [
@@ -59,21 +52,38 @@ const featureItems = [
 ] as const
 
 const BONUS_KIT_PRICE = '€19.99'
-const bonusKits = [
-  { id: 'herbs', image: lifestyleImages.outdoorDeck },
-  { id: 'salad', image: lifestyleImages.outdoorHerbs },
-  { id: 'aromatic', image: lifestyleImages.mintKitchen },
-  { id: 'chef', image: lifestyleImages.kitchenBasil },
-] as const
+const bonusKitIds = ['herbs', 'salad', 'aromatic', 'chef'] as const
 
 export default function ProductPage() {
   const { t } = useTranslation()
   const garden = useProduct('gardens', 'homegarder-one')
   const addProductToCart = useAddProductToCart()
+  const { images } = useSiteAssetsStore()
   const [active, setActive] = useState(0)
   const [qty, setQty] = useState(1)
   const [bonusPod, setBonusPod] = useState<string | null>(null)
   const faqItems = t('pdp.faqItems', { returnObjects: true }) as { q: string; a: string }[]
+
+  const gallery = [
+    images['pdp.gallery.homeGarden'] || lifestyleImages.homeGardenProduct,
+    images['pdp.gallery.kitchenBasil'] || lifestyleImages.kitchenBasil,
+    images['pdp.gallery.basilCloseup'] || lifestyleImages.basilCloseup,
+    images['pdp.gallery.mintKitchen'] || lifestyleImages.mintKitchen,
+    images['pdp.gallery.heroKitchen'] || lifestyleImages.heroKitchen,
+  ]
+
+  const bonusKits = bonusKitIds.map((id) => ({
+    id,
+    image: images[`pdp.bonus.${id}`] || (
+      id === 'herbs'
+        ? lifestyleImages.outdoorDeck
+        : id === 'salad'
+          ? lifestyleImages.outdoorHerbs
+          : id === 'aromatic'
+            ? lifestyleImages.mintKitchen
+            : lifestyleImages.kitchenBasil
+    ),
+  }))
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

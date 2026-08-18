@@ -9,7 +9,7 @@ cd PlantyHub.Api
 dotnet run
 ```
 
-API: `http://localhost:5280` · Health: `GET /health`
+API: `http://localhost:5281` · Health: `GET /health`
 
 Development uses SQLite (`plantyhub.dev.db`). Production uses PostgreSQL — set `Database:UseSqlite` to `false` in `appsettings.json`.
 
@@ -17,9 +17,82 @@ Development uses SQLite (`plantyhub.dev.db`). Production uses PostgreSQL — set
 
 | Email | Password |
 |-------|----------|
-| `admin@plantyhub.com` | `Admin123!` |
+| `admin@plantyhub.com` | `admin123` |
 
 Send JWT as `Authorization: Bearer <token>`.
+
+## Cloudflare R2 (image uploads)
+
+Admin image uploads go to a public R2 bucket via `POST /api/admin/media/upload`.
+
+### Setup
+
+1. Create an R2 bucket in the Cloudflare dashboard (e.g. `plantyhub`).
+2. Enable **public access** (custom domain or R2.dev subdomain) and copy the public base URL.
+3. Create an R2 API token with Object Read & Write on that bucket.
+4. Set config in `appsettings.Development.json` or environment variables:
+
+```json
+"R2": {
+  "AccountId": "<cloudflare-account-id>",
+  "AccessKeyId": "<r2-access-key-id>",
+  "SecretAccessKey": "<r2-secret-access-key>",
+  "BucketName": "plantyhub",
+  "PublicBaseUrl": "https://media.yourdomain.com"
+}
+```
+
+Env equivalents: `R2__AccountId`, `R2__AccessKeyId`, `R2__SecretAccessKey`, `R2__BucketName`, `R2__PublicBaseUrl`.
+
+Without R2 configured, the upload endpoint returns `503` — you can still paste any image URL in admin fields.
+
+### Media API
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/admin/media/upload` | Multipart file upload (JPEG/PNG/WebP/GIF, max 8 MB) → `{ url, key }` |
+| GET | `/api/site-assets` | Public site image overrides (blog, about, PDP extras) |
+| PUT | `/api/site-assets` | Admin update of site image map |
+
+---
+
+## Email (SMTP + templates)
+
+Transactional and campaign emails use DB templates with `{{variable}}` placeholders. If `Email:SmtpHost` is empty, messages are logged to the console (`DevEmailSender`) instead of being sent.
+
+### SMTP config
+
+```json
+"Email": {
+  "FromAddress": "noreply@plantyhub.com",
+  "FromName": "PlantyHub",
+  "SmtpHost": "smtp.example.com",
+  "SmtpPort": 587,
+  "SmtpUser": "user",
+  "SmtpPassword": "secret",
+  "UseSsl": true
+}
+```
+
+Env equivalents: `Email__FromAddress`, `Email__FromName`, `Email__SmtpHost`, `Email__SmtpPort`, `Email__SmtpUser`, `Email__SmtpPassword`, `Email__UseSsl`.
+
+Seeded template keys: `verify-email`, `password-reset`, `welcome`, `order-confirmation`, `order-shipped`, `order-cancelled`, `newsletter`.
+
+### Email templates (admin)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/admin/email-templates` | List templates |
+| GET | `/api/admin/email-templates/{key}` | Get template (incl. sample data) |
+| PUT | `/api/admin/email-templates/{key}` | Update name/subject/html/sample data |
+| POST | `/api/admin/email-templates/{key}/preview` | Render `{ subject, html }` with optional variables |
+| POST | `/api/admin/email-templates/{key}/send-test` | `{ "email": "...", "variables": { } }` |
+
+### Newsletter campaign
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/admin/newsletter/send` | Send `newsletter` template to all active subscribers; optional `{ subject, headline, htmlBody, ctaUrl }` overrides |
 
 ---
 
@@ -108,6 +181,7 @@ Statuses: `pending`, `processing`, `shipped`, `delivered`, `cancelled`
 | GET | `/api/admin/newsletter/subscribers` | Admin | List subscribers |
 | DELETE | `/api/admin/newsletter/subscribers/{email}` | Admin | Remove subscriber |
 | POST | `/api/admin/newsletter/subscribers/{email}/unsubscribe` | Admin | Deactivate |
+| POST | `/api/admin/newsletter/send` | Admin | Campaign send (see Email section) |
 
 ## Homepage (admin)
 

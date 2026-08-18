@@ -23,6 +23,7 @@ import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
 import { useProduct, useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
+import { useSiteAsset } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 
@@ -36,6 +37,8 @@ export default function PodDetailPage() {
   const addProductToCart = useAddProductToCart()
   const [qty, setQty] = useState(1)
   const [active, setActive] = useState(0)
+  const galleryExtra1 = useSiteAsset('pdp.gallery.basilCloseup', lifestyleImages.basilCloseup)
+  const galleryExtra2 = useSiteAsset('pdp.gallery.kitchenBasil', lifestyleImages.kitchenBasil)
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -63,7 +66,7 @@ export default function PodDetailPage() {
     )
   }
 
-  const gallery = [pod.image, lifestyleImages.basilCloseup, lifestyleImages.kitchenBasil]
+  const gallery = [pod.image, galleryExtra1, galleryExtra2]
   const specs = [
     { key: 'harvest', Icon: ScheduleOutlined, value: t('podDetail.specs.harvest.value') },
     { key: 'pack', Icon: Inventory2Outlined, value: t(`common.${pod.packKey}`) },

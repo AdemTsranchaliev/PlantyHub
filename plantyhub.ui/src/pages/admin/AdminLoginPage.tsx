@@ -11,14 +11,12 @@ import { useTranslation } from 'react-i18next'
 import { brand } from '../../theme'
 import { isAdminAuthenticated, loginAdmin } from '../../admin/auth'
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
 export default function AdminLoginPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<'invalid' | 'network' | 'validation' | false>(false)
   const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
@@ -31,18 +29,14 @@ export default function AdminLoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!emailPattern.test(email.trim()) || password.length < 6) {
-      setError(true)
+    setSubmitting(true)
+    const result = await loginAdmin(email, password)
+    setSubmitting(false)
+    if (result.ok) {
+      navigate('/admin')
       return
     }
-    setSubmitting(true)
-    const user = await loginAdmin(email, password)
-    setSubmitting(false)
-    if (user) {
-      navigate('/admin')
-    } else {
-      setError(true)
-    }
+    setError(result.reason)
   }
 
   return (
@@ -109,7 +103,7 @@ export default function AdminLoginPage() {
 
         {error && (
           <Alert severity="error" sx={{ mb: 2, borderRadius: '12px' }}>
-            {t('admin.login.error')}
+            {t(`admin.login.error${error === 'invalid' ? '' : error === 'network' ? 'Network' : 'Validation'}`)}
           </Alert>
         )}
 

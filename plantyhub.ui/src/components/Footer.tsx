@@ -26,6 +26,7 @@ const footerHrefs: Record<(typeof footerLinkKeys.main)[number], string> = {
   pods: navHrefs.pods,
   accessories: navHrefs.accessories,
   about: navHrefs.about,
+  blog: navHrefs.blog,
   support: navHrefs.support,
   contact: 'mailto:support@plantyhub.com',
   privacy: '#',

@@ -23,6 +23,7 @@ export const navHrefs = {
   pods: '/pods',
   accessories: '/accessories',
   about: '/about',
+  blog: '/blog',
   support: '/support',
   login: '/login',
   register: '/register',
@@ -39,7 +40,7 @@ export const navHrefs = {
   gardens: '/#product',
   consumables: '/#pods',
   story: '/#how-it-works',
-  press: '#',
+  press: '/blog',
 } as const
 
 /** Six homepage pod cards */
@@ -135,11 +136,23 @@ export const seedPodsCatalog = [
   { id: 'cilantro', packKey: 'pack3', price: '€9.99', image: stockImages.cilantro, imageFit: 'contain' as const },
   { id: 'dill', packKey: 'pack3', price: '€9.99', image: stockImages.dill, imageFit: 'contain' as const },
   { id: 'arugula', packKey: 'pack3', price: '€9.99', image: stockImages.arugula, imageFit: 'contain' as const },
+  { id: 'thyme', packKey: 'pack3', price: '€9.99', image: stockImages.thyme, imageFit: 'cover' as const },
+  { id: 'oregano', packKey: 'pack3', price: '€9.99', image: stockImages.oregano, imageFit: 'cover' as const },
+  { id: 'rosemary', packKey: 'pack3', price: '€9.99', image: stockImages.rosemary, imageFit: 'cover' as const },
+  { id: 'chives', packKey: 'pack3', price: '€9.99', image: stockImages.chives, imageFit: 'contain' as const },
+  { id: 'chili', packKey: 'pack3', price: '€9.99', image: stockImages.chili, imageFit: 'contain' as const },
   {
     id: 'herb-mix-12',
     packKey: 'pack12',
     price: '€19.99',
     image: stockImages.outdoorDeck,
+    imageFit: 'cover' as const,
+  },
+  {
+    id: 'spice-mix-12',
+    packKey: 'pack12',
+    price: '€19.99',
+    image: stockImages.spiceMix,
     imageFit: 'cover' as const,
   },
 ] as const
@@ -200,19 +213,33 @@ export const communityAvatars: Record<(typeof communityPostIds)[number], string>
   reese: avatarPlaceholder('Reese'),
 }
 
-export const pressArticleIds = ['pesto', 'hydroponics', 'partnership', 'earthday'] as const
+export const blogArticleIds = [
+  'pesto',
+  'hydroponics',
+  'spices',
+  'first-harvest',
+  'partnership',
+  'earthday',
+] as const
 
-export const pressArticleImages = {
+/** @deprecated Prefer blogArticleIds — kept for PressSection compatibility */
+export const pressArticleIds = blogArticleIds
+
+export const blogArticleImages = {
   pesto: stockImages.kitchenCaprese,
   hydroponics: stockImages.basilCloseup,
+  spices: stockImages.mintKitchen,
+  'first-harvest': stockImages.kitchenBasil,
   partnership: stockImages.outdoorDeck,
   earthday: stockImages.outdoorHerbs,
 } as const
 
+export const pressArticleImages = blogArticleImages
+
 export const homeGardenSpecKeys = ['pods', 'irrigation', 'lightCycle', 'qr'] as const
 
 export const footerLinkKeys = {
-  main: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'support', 'contact', 'privacy'],
+  main: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'blog', 'support', 'contact', 'privacy'],
 } as const
 
 export const socialLinks = [

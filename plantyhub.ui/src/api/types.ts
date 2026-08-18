@@ -88,6 +88,44 @@ export type ApiMessageResponse = {
   message: string
 }
 
+export type ApiMediaUpload = {
+  url: string
+  key: string
+}
+
+export type ApiSiteAssets = {
+  images: Record<string, string>
+}
+
+export type ApiEmailTemplateSummary = {
+  key: string
+  name: string
+  description: string
+  subject: string
+  updatedAt: string
+}
+
+export type ApiEmailTemplateDetail = {
+  key: string
+  name: string
+  description: string
+  subject: string
+  htmlBody: string
+  sampleData: Record<string, string>
+  updatedAt: string
+}
+
+export type ApiEmailPreview = {
+  subject: string
+  html: string
+}
+
+export type ApiNewsletterSendResult = {
+  sent: number
+  failed: number
+  errors: string[]
+}
+
 export type ApiUserProfile = {
   email: string
   name: string

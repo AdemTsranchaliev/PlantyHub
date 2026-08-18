@@ -1,18 +1,24 @@
-import { apiRequest } from './client'
+import { apiRequest, apiUpload } from './client'
 import { getCustomerToken } from '../auth/session'
 import type {
   ApiAuthResponse,
   ApiCustomer,
   ApiCustomerDetail,
   ApiDashboard,
+  ApiEmailPreview,
+  ApiEmailTemplateDetail,
+  ApiEmailTemplateSummary,
   ApiHomepageState,
+  ApiMediaUpload,
   ApiMessageResponse,
+  ApiNewsletterSendResult,
   ApiNewsletterSubscriber,
   ApiOrderDetail,
   ApiOrderSummary,
   ApiProductUpsert,
   ApiProductsByCategory,
   ApiRegisterResponse,
+  ApiSiteAssets,
   ApiUserProfile,
   CheckoutPayload,
   CreateWaybillPayload,
@@ -90,12 +96,51 @@ export const newsletterApi = {
       method: 'POST',
       auth: 'admin',
     }),
+  sendCampaign: (body: { subject?: string; htmlBody?: string; headline?: string; ctaUrl?: string }) =>
+    apiRequest<ApiNewsletterSendResult>('/api/admin/newsletter/send', { method: 'POST', body, auth: 'admin' }),
+}
+
+export const emailTemplatesApi = {
+  list: () => apiRequest<ApiEmailTemplateSummary[]>('/api/admin/email-templates', { auth: 'admin' }),
+  get: (key: string) => apiRequest<ApiEmailTemplateDetail>(`/api/admin/email-templates/${key}`, { auth: 'admin' }),
+  update: (
+    key: string,
+    body: {
+      name?: string
+      description?: string
+      subject?: string
+      htmlBody?: string
+      sampleData?: Record<string, string>
+    },
+  ) => apiRequest<ApiEmailTemplateDetail>(`/api/admin/email-templates/${key}`, { method: 'PUT', body, auth: 'admin' }),
+  preview: (key: string, variables?: Record<string, string>) =>
+    apiRequest<ApiEmailPreview>(`/api/admin/email-templates/${key}/preview`, {
+      method: 'POST',
+      body: { variables },
+      auth: 'admin',
+    }),
+  sendTest: (key: string, email: string, variables?: Record<string, string>) =>
+    apiRequest<ApiMessageResponse>(`/api/admin/email-templates/${key}/send-test`, {
+      method: 'POST',
+      body: { email, variables },
+      auth: 'admin',
+    }),
 }
 
 export const homepageApi = {
   get: () => apiRequest<ApiHomepageState>('/api/homepage'),
   update: (body: Partial<HomepageState>) => apiRequest<ApiHomepageState>('/api/homepage', { method: 'PUT', body, auth: 'admin' }),
   reset: () => apiRequest<ApiHomepageState>('/api/homepage/reset', { method: 'POST', auth: 'admin' }),
+}
+
+export const mediaApi = {
+  upload: (file: File) => apiUpload<ApiMediaUpload>('/api/admin/media/upload', file, 'admin'),
+}
+
+export const siteAssetsApi = {
+  get: () => apiRequest<ApiSiteAssets>('/api/site-assets'),
+  update: (images: Record<string, string>) =>
+    apiRequest<ApiSiteAssets>('/api/site-assets', { method: 'PUT', body: { images }, auth: 'admin' }),
 }
 
 export { mapOrderSummaryToDetail, mapProductsResponse, toProductUpsert } from './types'

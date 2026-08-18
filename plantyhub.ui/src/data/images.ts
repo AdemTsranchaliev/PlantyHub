@@ -45,6 +45,12 @@ export const stockImages = {
   accessories: lifestyleImages.outdoorDeck,
   tray: lifestyleImages.outdoorHerbs,
   strawberries: productImages.tomato,
+  thyme: lifestyleImages.outdoorHerbs,
+  oregano: lifestyleImages.kitchenBasil,
+  rosemary: lifestyleImages.outdoorDeck,
+  chives: productImages['green-onion'],
+  chili: productImages.tomato,
+  spiceMix: lifestyleImages.mintKitchen,
 } as const
 
 export const logoSrc = assetUrl('/logo.png')

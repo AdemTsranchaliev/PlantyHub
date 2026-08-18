@@ -15,6 +15,7 @@ import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
+import { useSiteAsset } from '../hooks/useSiteAssets'
 import { brand } from '../theme'
 
 const valueItems = [
@@ -27,6 +28,7 @@ const statKeys = ['plants', 'countries', 'harvests'] as const
 
 export default function AboutPage() {
   const { t } = useTranslation()
+  const heroImage = useSiteAsset('about.hero', lifestyleImages.heroKitchen)
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -85,7 +87,7 @@ export default function AboutPage() {
             >
               <Box
                 component="img"
-                src={lifestyleImages.heroKitchen}
+                src={heroImage}
                 alt={t('aboutPage.title')}
                 loading="lazy"
                 decoding="async"

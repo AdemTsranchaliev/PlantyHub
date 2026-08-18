@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -31,6 +32,13 @@ export default function AdminNewsletterPage() {
   const [subscriberCount, setSubscriberCount] = useState(0)
   const [subscribers, setSubscribers] = useState<ApiNewsletterSubscriber[]>([])
   const [loading, setLoading] = useState(true)
+  const [headline, setHeadline] = useState('')
+  const [subject, setSubject] = useState('')
+  const [messageBody, setMessageBody] = useState('')
+  const [ctaUrl, setCtaUrl] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sendResult, setSendResult] = useState<string | null>(null)
+  const [sendError, setSendError] = useState<string | null>(null)
 
   const loadData = useCallback(async () => {
     setLoading(true)
@@ -55,6 +63,30 @@ export default function AdminNewsletterPage() {
   const handleDelete = async (email: string) => {
     await newsletterApi.deleteSubscriber(email)
     await loadData()
+  }
+
+  const handleSendCampaign = async () => {
+    setSending(true)
+    setSendResult(null)
+    setSendError(null)
+    try {
+      const result = await newsletterApi.sendCampaign({
+        subject: subject.trim() || undefined,
+        headline: headline.trim() || undefined,
+        htmlBody: messageBody.trim() || undefined,
+        ctaUrl: ctaUrl.trim() || undefined,
+      })
+      setSendResult(
+        t('admin.newsletter.sendResult', {
+          sent: result.sent,
+          failed: result.failed,
+        }),
+      )
+    } catch {
+      setSendError(t('admin.newsletter.sendFailed'))
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -211,10 +243,53 @@ export default function AdminNewsletterPage() {
             <Typography sx={{ fontWeight: 700, color: brand.graphite, mb: 2 }}>
               {t('admin.newsletter.sendCampaign')}
             </Typography>
-            <TextField label={t('admin.newsletter.subject')} fullWidth disabled sx={{ mb: 2 }} />
-            <TextField label={t('admin.newsletter.message')} multiline rows={4} fullWidth disabled sx={{ mb: 2 }} />
-            <Button variant="contained" disabled>
-              {t('admin.newsletter.send')}
+            <Typography sx={{ color: brand.textSecondary, fontSize: '0.88rem', mb: 2 }}>
+              {t('admin.newsletter.sendCampaignHint')}
+            </Typography>
+            {sendResult && (
+              <Alert severity="success" sx={{ mb: 2, borderRadius: '12px' }} onClose={() => setSendResult(null)}>
+                {sendResult}
+              </Alert>
+            )}
+            {sendError && (
+              <Alert severity="error" sx={{ mb: 2, borderRadius: '12px' }} onClose={() => setSendError(null)}>
+                {sendError}
+              </Alert>
+            )}
+            <TextField
+              label={t('admin.newsletter.headline')}
+              value={headline}
+              onChange={(e) => setHeadline(e.target.value)}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              label={t('admin.newsletter.subject')}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              fullWidth
+              sx={{ mb: 2 }}
+              helperText={t('admin.newsletter.subjectHint')}
+            />
+            <TextField
+              label={t('admin.newsletter.message')}
+              value={messageBody}
+              onChange={(e) => setMessageBody(e.target.value)}
+              multiline
+              rows={4}
+              fullWidth
+              sx={{ mb: 2 }}
+              helperText={t('admin.newsletter.messageHint')}
+            />
+            <TextField
+              label={t('admin.newsletter.ctaUrl')}
+              value={ctaUrl}
+              onChange={(e) => setCtaUrl(e.target.value)}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+            <Button variant="contained" disabled={sending || subscriberCount === 0} onClick={() => void handleSendCampaign()}>
+              {sending ? t('admin.newsletter.sending') : t('admin.newsletter.send')}
             </Button>
           </Box>
         </Grid>

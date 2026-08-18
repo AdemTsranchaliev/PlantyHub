@@ -5,4 +5,16 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ command }) => ({
   plugins: [react()],
   base: command === 'build' ? '/PlantyHub/' : '/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5281',
+        changeOrigin: true,
+      },
+      '/health': {
+        target: 'http://localhost:5281',
+        changeOrigin: true,
+      },
+    },
+  },
 }))

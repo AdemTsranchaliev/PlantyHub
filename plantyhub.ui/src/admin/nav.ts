@@ -6,7 +6,9 @@ import CategoryRounded from '@mui/icons-material/CategoryRounded'
 import ShoppingBagRounded from '@mui/icons-material/ShoppingBagRounded'
 import PeopleRounded from '@mui/icons-material/PeopleRounded'
 import ArticleRounded from '@mui/icons-material/ArticleRounded'
+import PhotoLibraryRounded from '@mui/icons-material/PhotoLibraryRounded'
 import MailRounded from '@mui/icons-material/MailRounded'
+import EmailRounded from '@mui/icons-material/EmailRounded'
 import SettingsRounded from '@mui/icons-material/SettingsRounded'
 import type { SvgIconComponent } from '@mui/icons-material'
 
@@ -26,6 +28,8 @@ export const adminNavItems: AdminNavItem[] = [
   { path: '/admin/orders', labelKey: 'admin.nav.orders', icon: ShoppingBagRounded },
   { path: '/admin/customers', labelKey: 'admin.nav.customers', icon: PeopleRounded },
   { path: '/admin/content', labelKey: 'admin.nav.content', icon: ArticleRounded },
+  { path: '/admin/media', labelKey: 'admin.nav.media', icon: PhotoLibraryRounded },
+  { path: '/admin/emails', labelKey: 'admin.nav.emails', icon: EmailRounded },
   { path: '/admin/newsletter', labelKey: 'admin.nav.newsletter', icon: MailRounded },
   { path: '/admin/settings', labelKey: 'admin.nav.settings', icon: SettingsRounded },
 ]

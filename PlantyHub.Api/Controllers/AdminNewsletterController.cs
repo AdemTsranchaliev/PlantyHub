@@ -31,4 +31,11 @@ public class AdminNewsletterController(NewsletterService newsletter) : Controlle
         var ok = await newsletter.UnsubscribeAsync(email, ct);
         return ok ? NoContent() : NotFound();
     }
+
+    [HttpPost("send")]
+    public async Task<ActionResult<NewsletterSendResult>> Send(NewsletterSendRequest request, CancellationToken ct)
+    {
+        var result = await newsletter.SendCampaignAsync(request, ct);
+        return Ok(result);
+    }
 }

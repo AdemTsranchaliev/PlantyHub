@@ -18,6 +18,8 @@ const PodsPage = lazy(() => import('./pages/PodsPage'))
 const PodDetailPage = lazy(() => import('./pages/PodDetailPage'))
 const AccessoriesPage = lazy(() => import('./pages/AccessoriesPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
+const BlogPage = lazy(() => import('./pages/BlogPage'))
+const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'))
 const SupportPage = lazy(() => import('./pages/SupportPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
@@ -41,6 +43,8 @@ const AdminOrderDetailPage = lazy(() => import('./pages/admin/AdminOrderDetailPa
 const AdminCustomersPage = lazy(() => import('./pages/admin/AdminCustomersPage'))
 const AdminCustomerDetailPage = lazy(() => import('./pages/admin/AdminCustomerDetailPage'))
 const AdminContentPage = lazy(() => import('./pages/admin/AdminContentPage'))
+const AdminMediaPage = lazy(() => import('./pages/admin/AdminMediaPage'))
+const AdminEmailsPage = lazy(() => import('./pages/admin/AdminEmailsPage'))
 const AdminNewsletterPage = lazy(() => import('./pages/admin/AdminNewsletterPage'))
 const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage'))
 
@@ -68,6 +72,8 @@ function StorefrontRoutes() {
           <Route path="/pods/:id" element={<PodDetailPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogArticlePage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -104,6 +110,8 @@ function AdminRoutes() {
           <Route path="customers" element={<AdminCustomersPage />} />
           <Route path="customers/:customerId" element={<AdminCustomerDetailPage />} />
           <Route path="content" element={<AdminContentPage />} />
+          <Route path="media" element={<AdminMediaPage />} />
+          <Route path="emails" element={<AdminEmailsPage />} />
           <Route path="newsletter" element={<AdminNewsletterPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
         </Route>

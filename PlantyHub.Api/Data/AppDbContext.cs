@@ -20,6 +20,8 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<NewsletterSubscriber> NewsletterSubscribers => Set<NewsletterSubscriber>();
     public DbSet<HomepageSettings> HomepageSettings => Set<HomepageSettings>();
+    public DbSet<SiteAssets> SiteAssets => Set<SiteAssets>();
+    public DbSet<EmailTemplate> EmailTemplates => Set<EmailTemplate>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -109,6 +111,17 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<HomepageSettings>(entity =>
         {
             entity.HasKey(h => h.Id);
+        });
+
+        builder.Entity<SiteAssets>(entity =>
+        {
+            entity.HasKey(a => a.Id);
+        });
+
+        builder.Entity<EmailTemplate>(entity =>
+        {
+            entity.HasKey(t => t.Id);
+            entity.HasIndex(t => t.Key).IsUnique();
         });
     }
 }

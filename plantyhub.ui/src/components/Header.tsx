@@ -34,6 +34,7 @@ const navKeys = [
   { key: 'pods', href: navHrefs.pods },
   { key: 'accessories', href: navHrefs.accessories },
   { key: 'about', href: navHrefs.about },
+  { key: 'blog', href: navHrefs.blog },
   { key: 'support', href: navHrefs.support },
 ] as const
 

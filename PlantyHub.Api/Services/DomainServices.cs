@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PlantyHub.Api.Data;
 using PlantyHub.Api.Dtos;
 using PlantyHub.Api.Models;
@@ -183,7 +184,7 @@ public class CustomerService(AppDbContext db)
     }
 }
 
-public class OrderService(AppDbContext db, CustomerService customers)
+public class OrderService(AppDbContext db, CustomerService customers, EmailTemplateService emailTemplates)
 {
     public async Task<Order?> GetByIdAsync(string id, CancellationToken ct = default) =>
         await db.Orders
@@ -296,6 +297,28 @@ public class OrderService(AppDbContext db, CustomerService customers)
         db.Orders.Add(order);
         await db.SaveChangesAsync(ct);
         await customers.UpsertFromOrderAsync(order, ct);
+
+        try
+        {
+            var itemsSummary = string.Join("<br/>", order.Items.Select(i =>
+                $"{EmailTemplateService.HtmlEncode(i.Name)} × {i.Quantity}"));
+            await emailTemplates.SendTemplatedAsync(
+                "order-confirmation",
+                order.Email,
+                new Dictionary<string, string>
+                {
+                    ["name"] = EmailTemplateService.HtmlEncode(order.CustomerName),
+                    ["orderId"] = order.Id,
+                    ["total"] = PriceHelper.FormatEuro(order.Total),
+                    ["itemsSummary"] = itemsSummary,
+                },
+                ct);
+        }
+        catch
+        {
+            // Order is already saved — email failures should not roll back checkout.
+        }
+
         return order;
     }
 
@@ -313,6 +336,7 @@ public class OrderService(AppDbContext db, CustomerService customers)
         });
 
         await db.SaveChangesAsync(ct);
+        await TrySendOrderStatusEmailAsync(order, ct);
         return order;
     }
 
@@ -344,6 +368,7 @@ public class OrderService(AppDbContext db, CustomerService customers)
         });
 
         await db.SaveChangesAsync(ct);
+        await TrySendOrderStatusEmailAsync(order, ct);
         return order;
     }
 
@@ -359,6 +384,42 @@ public class OrderService(AppDbContext db, CustomerService customers)
 
     public async Task<Order?> CancelAsync(string id, CancellationToken ct = default) =>
         await UpdateStatusAsync(id, "cancelled", ct);
+
+    private async Task TrySendOrderStatusEmailAsync(Order order, CancellationToken ct)
+    {
+        try
+        {
+            if (order.Status == OrderStatus.Shipped)
+            {
+                await emailTemplates.SendTemplatedAsync(
+                    "order-shipped",
+                    order.Email,
+                    new Dictionary<string, string>
+                    {
+                        ["name"] = EmailTemplateService.HtmlEncode(order.CustomerName),
+                        ["orderId"] = order.Id,
+                        ["trackingNumber"] = EmailTemplateService.HtmlEncode(order.Waybill?.Number ?? "—"),
+                    },
+                    ct);
+            }
+            else if (order.Status == OrderStatus.Cancelled)
+            {
+                await emailTemplates.SendTemplatedAsync(
+                    "order-cancelled",
+                    order.Email,
+                    new Dictionary<string, string>
+                    {
+                        ["name"] = EmailTemplateService.HtmlEncode(order.CustomerName),
+                        ["orderId"] = order.Id,
+                    },
+                    ct);
+            }
+        }
+        catch
+        {
+            // Status already saved.
+        }
+    }
 }
 
 public class ProductService(AppDbContext db)
@@ -571,8 +632,10 @@ public class AdminDashboardService(AppDbContext db)
     }
 }
 
-public class NewsletterService(AppDbContext db)
+public class NewsletterService(AppDbContext db, EmailTemplateService emailTemplates, IEmailSender emailSender, IOptions<AppSettings> appOptions)
 {
+    private readonly AppSettings _app = appOptions.Value;
+
     public async Task<int> GetActiveCountAsync(CancellationToken ct = default) =>
         await db.NewsletterSubscribers.CountAsync(s => s.Active, ct);
 
@@ -602,5 +665,62 @@ public class NewsletterService(AppDbContext db)
         db.NewsletterSubscribers.Remove(subscriber);
         await db.SaveChangesAsync(ct);
         return true;
+    }
+
+    public async Task<NewsletterSendResult> SendCampaignAsync(NewsletterSendRequest request, CancellationToken ct = default)
+    {
+        var template = await emailTemplates.GetByKeyAsync("newsletter", ct)
+            ?? throw new InvalidOperationException("Newsletter template was not found.");
+
+        var sample = EmailTemplateService.ParseSampleData(template);
+        var headline = !string.IsNullOrWhiteSpace(request.Headline)
+            ? request.Headline.Trim()
+            : sample.GetValueOrDefault("headline", "News from PlantyHub");
+        var bodyHtml = !string.IsNullOrWhiteSpace(request.HtmlBody)
+            ? request.HtmlBody.Trim()
+            : sample.GetValueOrDefault("bodyHtml", "<p>Hello from PlantyHub.</p>");
+        var ctaUrl = !string.IsNullOrWhiteSpace(request.CtaUrl)
+            ? request.CtaUrl.Trim()
+            : $"{_app.FrontendUrl.TrimEnd('/')}/pods";
+        var subjectTemplate = !string.IsNullOrWhiteSpace(request.Subject)
+            ? request.Subject.Trim()
+            : template.Subject;
+
+        var subscribers = await db.NewsletterSubscribers.Where(s => s.Active).ToListAsync(ct);
+        var sent = 0;
+        var errors = new List<string>();
+
+        foreach (var subscriber in subscribers)
+        {
+            try
+            {
+                var displayName = EmailTemplateService.HtmlEncode(subscriber.Email.Split('@')[0]);
+                var subjectVars = new Dictionary<string, string>
+                {
+                    ["name"] = displayName,
+                    ["headline"] = headline,
+                    ["bodyHtml"] = bodyHtml,
+                    ["ctaUrl"] = ctaUrl,
+                };
+                var htmlVars = new Dictionary<string, string>
+                {
+                    ["name"] = displayName,
+                    ["headline"] = EmailTemplateService.HtmlEncode(headline),
+                    ["bodyHtml"] = bodyHtml,
+                    ["ctaUrl"] = ctaUrl,
+                };
+
+                var subject = EmailTemplateService.Render(subjectTemplate, subjectVars);
+                var html = EmailTemplateService.Render(template.HtmlBody, htmlVars);
+                await emailSender.SendAsync(subscriber.Email, subject, html, ct);
+                sent++;
+            }
+            catch (Exception ex)
+            {
+                errors.Add($"{subscriber.Email}: {ex.Message}");
+            }
+        }
+
+        return new NewsletterSendResult(sent, errors.Count, errors);
     }
 }

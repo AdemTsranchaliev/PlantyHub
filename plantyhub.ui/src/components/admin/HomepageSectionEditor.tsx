@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
-import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Switch from '@mui/material/Switch'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -19,6 +18,7 @@ import {
   homepageSectionsSchema,
 } from '../../admin/homepageSchema'
 import { useHomepageStore } from '../../hooks/useHomepage'
+import ImagePicker from './ImagePicker'
 import { brand } from '../../theme'
 
 type Props = {
@@ -79,30 +79,12 @@ export default function HomepageSectionEditor({ sectionKey }: Props) {
             if (field.kind === 'image') {
               const value = state.images[field.key] ?? field.defaultUrl
               return (
-                <Box key={field.key}>
-                  <TextField
-                    label={t(field.labelKey, { defaultValue: field.key })}
-                    value={value}
-                    onChange={(e) => setHomepageImage(field.key, e.target.value)}
-                    fullWidth
-                    size="small"
-                  />
-                  {value && (
-                    <Box
-                      component="img"
-                      src={value}
-                      alt=""
-                      sx={{
-                        mt: 1,
-                        width: 80,
-                        height: 80,
-                        objectFit: 'cover',
-                        borderRadius: '12px',
-                        border: `1px solid ${brand.border}`,
-                      }}
-                    />
-                  )}
-                </Box>
+                <ImagePicker
+                  key={field.key}
+                  label={t(field.labelKey, { defaultValue: field.key })}
+                  value={value}
+                  onChange={(url) => setHomepageImage(field.key, url)}
+                />
               )
             }
             const value = state.texts[lang]?.[field.key] ?? ''

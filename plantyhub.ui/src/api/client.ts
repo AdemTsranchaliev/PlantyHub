@@ -49,3 +49,33 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
   if (res.status === 204) return undefined as T
   return (await res.json()) as T
 }
+
+/** Multipart upload (do not set Content-Type — browser sets boundary). */
+export async function apiUpload<T>(path: string, file: File, auth: 'admin' | 'customer' = 'admin'): Promise<T> {
+  const token = auth === 'admin' ? getAdminToken() : getCustomerToken()
+  const form = new FormData()
+  form.append('file', file)
+
+  const res = await fetch(`${API_URL}${path}`, {
+    method: 'POST',
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: form,
+  })
+
+  if (!res.ok) {
+    let message = res.statusText
+    let code: string | undefined
+    try {
+      const data = (await res.json()) as { message?: string; code?: string }
+      if (data.message) message = data.message
+      code = data.code
+    } catch {
+      // ignore
+    }
+    throw new ApiError(res.status, message, code)
+  }
+
+  return (await res.json()) as T
+}

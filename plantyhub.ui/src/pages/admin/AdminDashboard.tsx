@@ -1,4 +1,4 @@
-import { Link as RouterLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -70,6 +70,7 @@ function Panel({ title, subtitle, children }: { title: string; subtitle?: string
 
 export default function AdminDashboard() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const { data: dashboard, loading: dashboardLoading } = useDashboard()
   const { customers } = useCustomers()
   const gardens = useCategoryProducts('gardens')
@@ -348,9 +349,8 @@ export default function AdminDashboard() {
                 <TableRow
                   key={order.id}
                   hover
-                  component={RouterLink}
-                  to={`/admin/orders/${order.id}`}
-                  sx={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}
+                  onClick={() => navigate(`/admin/orders/${order.id}`)}
+                  sx={{ cursor: 'pointer' }}
                 >
                   <TableCell sx={{ fontFamily: 'monospace', fontWeight: 700, color: brand.graphite }}>{order.id}</TableCell>
                   <TableCell>{order.customer}</TableCell>

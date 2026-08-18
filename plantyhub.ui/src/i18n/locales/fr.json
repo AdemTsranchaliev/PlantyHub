@@ -6,6 +6,7 @@
     "pods": "Capsules",
     "accessories": "Accessoires",
     "about": "À propos",
+    "blog": "Blog",
     "support": "Assistance",
     "buyNow": "Acheter"
   },
@@ -218,27 +219,74 @@
   },
   "press": {
     "eyebrow": "Du blog",
-    "title": "Soins des plantes & Histoires",
+    "title": "Soins des plantes & Histoires"
+  },
+  "blogPage": {
+    "eyebrow": "Histoires & conseils",
+    "title": "Blog",
+    "lead": "Recettes, guides de culture et histoires de cuisine de la communauté PlantyHub — de la première pousse à l'assiette.",
+    "backToBlog": "Retour au blog",
+    "related": "Plus d'histoires",
     "articles": {
       "pesto": {
         "date": "12 juin 2025",
         "title": "De la cuisine à la table — Pesto au basilic en 5 semaines",
-        "excerpt": "Une série de recettes simples de la capsule à l'assiette avec votre première récolte PlantyHub."
+        "excerpt": "Une série de recettes simples de la capsule à l'assiette avec votre première récolte PlantyHub.",
+        "body": [
+          "Vos premières capsules de basilic sont souvent prêtes entre la troisième et la cinquième semaine — coupez les feuilles du sommet et la plante repart.",
+          "Pour un pesto express, mixez une poignée de basilic frais avec huile d'olive, ail, pignons et fromage dur jusqu'à obtenir une texture soyeuse.",
+          "La différence avec les herbes du supermarché est immédiate : un arôme plus vif et un pesto qui sent le jardin, pas le frigo."
+        ]
       },
       "hydroponics": {
         "date": "28 mai 2025",
         "title": "Pourquoi l'hydroponie utilise 90 % moins d'eau",
-        "excerpt": "La science derrière les jardins intelligents et pourquoi ils sont le choix durable pour les foyers urbains."
+        "excerpt": "La science derrière les jardins intelligents et pourquoi ils sont le choix durable pour les foyers urbains.",
+        "body": [
+          "En pleine terre, l'eau se perd par ruissellement et évaporation. Un bac hydroponique fermé recirculé ce dont les racines ont vraiment besoin.",
+          "Avec HomeGarder One, la lumière dosée et l'humidité stable font investir les plantes dans les feuilles, pas dans la survie à la sécheresse.",
+          "Pour un appartement, cela veut dire moins d'ajouts d'eau, moins de gaspillage et des herbes productives pendant des mois."
+        ]
+      },
+      "spices": {
+        "date": "2 juillet 2025",
+        "title": "Des épices aromatiques à cultiver sur le plan de travail",
+        "excerpt": "Thym, origan, romarin, ciboulette et piment — le tiroir à épices réinventé en capsules vivantes.",
+        "body": [
+          "Les épices culinaires n'ont pas besoin d'arriver sèches. Des aromates lents comme le thym, l'origan et le romarin prospèrent sous LED stable.",
+          "La ciboulette apporte une note d'oignon douce pour œufs et soupes. Le piment amène la chaleur dès que les fruits se colorent.",
+          "Remplissez quelques trous avec nos capsules d'épices — ou prenez le mix 12 capsules — et assaisonnez directement depuis la canopée."
+        ]
+      },
+      "first-harvest": {
+        "date": "20 juin 2025",
+        "title": "Comment réussir sa première récolte sans stress",
+        "excerpt": "Une checklist calme pour les semaines deux et trois : quoi couper, quoi laisser, et à quelle fréquence nourrir.",
+        "body": [
+          "Attendez plusieurs vraies feuilles avant la première coupe. Ne retirez jamais plus d'un tiers du feuillage d'un coup.",
+          "Récoltez le matin, quand les huiles sont concentrées. Utilisez des ciseaux propres et coupez juste au-dessus d'un nœud.",
+          "Gardez solution nutritive et cycle lumineux stables — une plante stressée amertume bien avant de paraître malade."
+        ]
       },
       "partnership": {
         "date": "10 mai 2025",
         "title": "PlantyHub × Sustainable Living EU",
-        "excerpt": "Nous nous sommes associés à des créateurs éco-responsables pour montrer comment un jardin change le quotidien."
+        "excerpt": "Nous nous sommes associés à des créateurs éco-responsables pour montrer comment un jardin change le quotidien.",
+        "body": [
+          "Avec Sustainable Living EU, nous avons suivi des foyers qui ont remplacé les bouquets hebdomadaires par un jardin de comptoir.",
+          "Les créateurs ont noté le temps d'installation, les ajouts d'eau et le goût — la plupart cuisinaient leur propre récolte en un mois.",
+          "La leçon est simple : quand la culture est automatique, l'assaisonnement frais cesse d'être une occasion spéciale."
+        ]
       },
       "earthday": {
         "date": "22 avril 2025",
         "title": "Jour de la Terre : Cultivez, gaspillez moins",
-        "excerpt": "Comment les capsules biodégradables et la culture locale réduisent le plastique et le gaspillage alimentaire."
+        "excerpt": "Comment les capsules biodégradables et la culture locale réduisent le plastique et le gaspillage alimentaire.",
+        "body": [
+          "Les herbes du commerce se flétrissent souvent inutilisées. Couper seulement ce dont on a besoin, c'est du goût sans barquette à moitié pleine.",
+          "Nos capsules sont conçues pour se composter après le cycle, et le jardin dure des années avec des recharges.",
+          "Les petits jardins de cuisine ne résoudront pas seuls le climat — mais ils changent les habitudes, et les habitudes se multiplient."
+        ]
       }
     }
   },
@@ -334,7 +382,13 @@
       "cilantro": { "name": "Capsules Coriandre", "description": "Feuilles fraîches et citronnées qui relèvent currys, salsas et bols de nouilles. Ciselez quand un plat a besoin de peps." },
       "dill": { "name": "Capsules Aneth", "description": "Fines frondes délicates aux notes anisées — parfaites pour poissons, sauces, marinades et pommes de terre." },
       "arugula": { "name": "Capsules Roquette", "description": "Feuilles poivrées et relevées pour salades, pizzas et sandwichs. Croissance rapide et récolte continue." },
-      "herb-mix-12": { "name": "Mix 12 capsules", "description": "Un assortiment complet de nos herbes et épices préférées — tout pour remplir votre jardin d'un coup." }
+      "thyme": { "name": "Capsules Thym", "description": "Petites feuilles boisées au parfum chaud — indispensables pour rôtis, marinades et sauces lentes." },
+      "oregano": { "name": "Capsules Origan", "description": "Épice méditerranéenne classique pour pizza, sauces tomate et légumes grillés — intense même en petite pincée." },
+      "rosemary": { "name": "Capsules Romarin", "description": "Feuilles en aiguilles à la profondeur résineuse. Parfait avec pommes de terre, agneau et focaccia." },
+      "chives": { "name": "Capsules Ciboulette", "description": "Verts d'oignon doux pour œufs, soupes et salades. Ciselez souvent — elle repousse." },
+      "chili": { "name": "Capsules Piment", "description": "Plants de piment compacts pour la chaleur en cuisine — récoltez quand les fruits se colorent." },
+      "herb-mix-12": { "name": "Mix 12 capsules", "description": "Un assortiment complet de nos herbes et épices préférées — tout pour remplir votre jardin d'un coup." },
+      "spice-mix-12": { "name": "Mix 12 épices", "description": "Épices aromatiques pour tout le jardin — thym, origan, romarin, ciboulette, piment et compagnons pour assaisonner au quotidien." }
     },
     "consumables": {
       "empty-capsules": { "name": "Capsules vides" },
@@ -453,6 +507,7 @@
       "pods": "Capsules",
       "accessories": "Accessoires",
       "about": "À propos",
+      "blog": "Blog",
       "support": "Assistance",
       "contact": "Contact",
       "privacy": "Confidentialité"
@@ -606,6 +661,8 @@
       "orders": "Commandes",
       "customers": "Clients",
       "content": "Contenu",
+      "media": "Médias",
+      "emails": "E-mails",
       "newsletter": "Newsletter",
       "settings": "Paramètres"
     },
@@ -617,6 +674,8 @@
       "password": "Mot de passe",
       "submit": "Se connecter",
       "error": "Identifiants invalides. Utilisez admin@plantyhub.com / admin123",
+      "errorNetwork": "Impossible de joindre l'API. Démarrez le backend avec `dotnet run` dans PlantyHub.Api, puis réessayez.",
+      "errorValidation": "Saisissez un e-mail valide et un mot de passe d'au moins 6 caractères.",
       "backToStore": "← Retour à la boutique"
     },
     "dashboard": {
@@ -805,9 +864,17 @@
       "exitIntent": "Déclencheur exit-intent",
       "discountCode": "Code de réduction",
       "sendCampaign": "Envoyer une campagne",
+      "sendCampaignHint": "Utilise le modèle newsletter. Les champs vides reprennent les valeurs du modèle. Modifier le HTML complet sous E-mails.",
+      "headline": "Titre",
       "subject": "Objet",
-      "message": "Message",
+      "subjectHint": "Prend en charge {{headline}} et {{name}}",
+      "message": "Contenu HTML",
+      "messageHint": "Inséré dans {{bodyHtml}} du modèle newsletter",
+      "ctaUrl": "Lien CTA",
       "send": "Envoyer la campagne",
+      "sending": "Envoi…",
+      "sendResult": "Envoyés {{sent}}, échoués {{failed}}",
+      "sendFailed": "La campagne n'a pas pu être envoyée.",
       "stats": {
         "subscribers": "Abonnés",
         "openRate": "Taux d'ouverture",
@@ -825,6 +892,28 @@
         "subscribedAt": "Inscrit le",
         "status": "Statut"
       }
+    },
+    "emails": {
+      "title": "Modèles d'e-mail",
+      "subtitle": "Prévisualiser, modifier et tester les e-mails transactionnels et campagnes.",
+      "templates": "Modèles",
+      "empty": "Aucun modèle pour le moment.",
+      "name": "Nom",
+      "description": "Description",
+      "subject": "Objet",
+      "htmlBody": "Corps HTML",
+      "sampleData": "Variables d'exemple (JSON)",
+      "variablesHint": "Utilisez {{name}}, {{orderId}}, {{verifyUrl}}, etc.",
+      "save": "Enregistrer le modèle",
+      "saved": "Modèle enregistré.",
+      "saveFailed": "Impossible d'enregistrer le modèle.",
+      "refreshPreview": "Actualiser l'aperçu",
+      "preview": "Aperçu",
+      "testEmail": "Destinataire de test",
+      "sendTest": "Envoyer un test",
+      "testEmailRequired": "Saisissez un e-mail de test valide.",
+      "testFailed": "Échec de l'e-mail de test.",
+      "invalidSampleJson": "Les variables d'exemple doivent être un objet JSON valide."
     },
     "settings": {
       "title": "Paramètres",
@@ -858,6 +947,46 @@
     },
     "actions": {
       "addProduct": "Ajouter un produit"
+    },
+    "imagePicker": {
+      "upload": "Téléverser vers R2",
+      "uploading": "Téléversement…",
+      "uploadFailed": "Échec du téléversement.",
+      "noImage": "Pas encore d'image"
+    },
+    "media": {
+      "title": "Médias",
+      "subtitle": "Téléversez et remplacez les images du blog, À propos et des pages produit.",
+      "saveFailed": "Impossible d'enregistrer l'image. Réessayez.",
+      "groups": {
+        "blog": "Articles du blog",
+        "about": "Page À propos",
+        "pdp": "Pages produit et capsules"
+      },
+      "slots": {
+        "blog": {
+          "pesto": "Article — pesto basilic",
+          "hydroponics": "Article — hydroponie",
+          "spices": "Article — épices aromatiques",
+          "first-harvest": "Article — première récolte",
+          "partnership": "Article — partenariat",
+          "earthday": "Article — Jour de la Terre"
+        },
+        "about": {
+          "hero": "À propos — image hero"
+        },
+        "pdp": {
+          "basilCloseup": "Galerie — gros plan basilic",
+          "kitchenBasil": "Galerie — basilic cuisine",
+          "homeGarden": "Galerie — HomeGarder One",
+          "mintKitchen": "Galerie — menthe cuisine",
+          "heroKitchen": "Galerie — hero cuisine",
+          "bonusHerbs": "Kit bonus — herbes",
+          "bonusSalad": "Kit bonus — salade",
+          "bonusAromatic": "Kit bonus — aromatique",
+          "bonusChef": "Kit bonus — chef"
+        }
+      }
     },
     "productEdit": {
       "addTitle": "Ajouter un produit",

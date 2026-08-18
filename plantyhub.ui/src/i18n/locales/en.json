@@ -6,6 +6,7 @@
     "pods": "Pods",
     "accessories": "Accessories",
     "about": "About",
+    "blog": "Blog",
     "support": "Support",
     "buyNow": "Buy now"
   },
@@ -260,27 +261,74 @@
   },
   "press": {
     "eyebrow": "From the blog",
-    "title": "Plant care & stories",
+    "title": "Plant care & stories"
+  },
+  "blogPage": {
+    "eyebrow": "Stories & tips",
+    "title": "Blog",
+    "lead": "Recipes, growing guides and kitchen stories from the PlantyHub community — from first sprout to plate.",
+    "backToBlog": "Back to blog",
+    "related": "More stories",
     "articles": {
       "pesto": {
         "date": "Jun 12, 2025",
         "title": "Kitchen to Table — Basil Pesto in 5 Weeks",
-        "excerpt": "A simple recipe series showing how to go from pod to plate with your first PlantyHub harvest."
+        "excerpt": "A simple recipe series showing how to go from pod to plate with your first PlantyHub harvest.",
+        "body": [
+          "Your first basil pods usually tip into harvest mode around week three to five — snip the top leaves and the plant keeps pushing new growth.",
+          "For a weeknight pesto, blend a generous handful of fresh basil with olive oil, garlic, pine nuts and hard cheese until silky. Taste for salt and lemon.",
+          "The difference from supermarket herbs is immediate: brighter aroma, softer bitterness, and pesto that tastes like the garden instead of the fridge."
+        ]
       },
       "hydroponics": {
         "date": "May 28, 2025",
         "title": "Why Hydroponics Uses 90% Less Water",
-        "excerpt": "The science behind smart indoor gardens and why they're the sustainable choice for urban homes."
+        "excerpt": "The science behind smart indoor gardens and why they're the sustainable choice for urban homes.",
+        "body": [
+          "In soil gardens, water escapes through runoff and evaporation. A closed hydroponic tray recirculates what the roots actually need.",
+          "HomeGarder One dosed lighting and steady moisture mean plants spend energy on leaves, not on surviving dry spells.",
+          "For apartment growers, that translates to fewer top-ups, less waste, and herbs that stay productive for months."
+        ]
+      },
+      "spices": {
+        "date": "Jul 2, 2025",
+        "title": "Aromatic Spices You Can Grow on the Counter",
+        "excerpt": "Thyme, oregano, rosemary, chives and chili — the spice drawer, reinvented as living pods.",
+        "body": [
+          "Culinary spices do not have to arrive dried. Slow-growing aromatics like thyme, oregano and rosemary thrive under steady LED light.",
+          "Chives give you a cut-and-come-again onion note for eggs and soups. Chili pods bring heat once fruits begin to colour.",
+          "Fill a few holes with our spice pods — or grab the 12-pod spice mix — and season straight from the canopy while dinner is on the hob."
+        ]
+      },
+      "first-harvest": {
+        "date": "Jun 20, 2025",
+        "title": "How to Take Your First Harvest Without Stress",
+        "excerpt": "A calm checklist for week two and three: what to snip, what to leave, and how often to feed.",
+        "body": [
+          "Wait until plants have several true leaves before the first cut. Never remove more than a third of the canopy at once.",
+          "Harvest in the morning when oils are concentrated. Use clean scissors and cut just above a leaf node to encourage branching.",
+          "Keep the nutrient solution topped up and the light cycle consistent — a stressed plant tastes bitter long before it looks unhealthy."
+        ]
       },
       "partnership": {
         "date": "May 10, 2025",
         "title": "PlantyHub × Sustainable Living EU",
-        "excerpt": "We teamed up with eco-conscious creators to show how one garden can change your daily routine."
+        "excerpt": "We teamed up with eco-conscious creators to show how one garden can change your daily routine.",
+        "body": [
+          "Together with Sustainable Living EU we followed households swapping weekly herb packets for a countertop garden.",
+          "Creators logged setup time, water top-ups and flavour notes — most were cooking with their own cut greens inside a month.",
+          "The takeaway was simple: when growing is automatic, fresh seasoning stops being a special occasion."
+        ]
       },
       "earthday": {
         "date": "Apr 22, 2025",
         "title": "Earth Day: Grow Your Own, Waste Less",
-        "excerpt": "How biodegradable pods and home growing help cut plastic and food waste."
+        "excerpt": "How biodegradable pods and home growing help cut plastic and food waste.",
+        "body": [
+          "Store-bought soft herbs often wilt unused. Growing only what you snip means flavour without the half-empty clamshell.",
+          "Our pods are designed to compost after the grow cycle, and the garden itself is built to last years of refills.",
+          "Small kitchen gardens will not solve climate change alone — but they change habits, and habits scale."
+        ]
       }
     }
   },
@@ -385,7 +433,13 @@
       "cilantro": { "name": "Cilantro Seed Pods", "description": "Bright, citrusy leaves that lift curries, salsas and noodle bowls. Snip fresh whenever a dish needs a kick." },
       "dill": { "name": "Dill Seed Pods", "description": "Delicate, feathery fronds with a fresh anise note — made for fish, dips, pickles and potatoes." },
       "arugula": { "name": "Arugula Seed Pods", "description": "Bold, peppery leaves that add a fresh kick to salads, pizzas and sandwiches. Fast-growing and cut-and-come-again." },
-      "herb-mix-12": { "name": "12-Pod Herb Mix", "description": "A full line-up of our favourite herbs and spices — everything you need to fill your whole garden at once." }
+      "thyme": { "name": "Thyme Seed Pods", "description": "Tiny, woody leaves with warm perfume — essential for roasts, marinades and slow sauces." },
+      "oregano": { "name": "Oregano Seed Pods", "description": "Classic Mediterranean spice for pizza, tomato sauces and grilled vegetables — punchy even in small pinches." },
+      "rosemary": { "name": "Rosemary Seed Pods", "description": "Needle-like leaves with piney depth. Perfect with potatoes, lamb and focaccia fresh from the oven." },
+      "chives": { "name": "Chives Seed Pods", "description": "Mild onion greens for eggs, soups and salads. Snip often and they grow right back." },
+      "chili": { "name": "Chili Seed Pods", "description": "Compact chili plants for kitchen heat — harvest when fruits colour up for fresh spice with real kick." },
+      "herb-mix-12": { "name": "12-Pod Herb Mix", "description": "A full line-up of our favourite herbs and spices — everything you need to fill your whole garden at once." },
+      "spice-mix-12": { "name": "12-Pod Spice Mix", "description": "Aromatic spices to fill your garden — thyme, oregano, rosemary, chives, chili and companions for everyday seasoning." }
     },
     "consumables": {
       "empty-capsules": { "name": "Empty Capsules" },
@@ -504,6 +558,7 @@
       "pods": "Pods",
       "accessories": "Accessories",
       "about": "About us",
+      "blog": "Blog",
       "support": "Support",
       "contact": "Contact",
       "privacy": "Privacy"
@@ -695,6 +750,8 @@
       "orders": "Orders",
       "customers": "Customers",
       "content": "Homepage",
+      "media": "Media",
+      "emails": "Emails",
       "newsletter": "Newsletter",
       "settings": "Settings"
     },
@@ -706,6 +763,8 @@
       "password": "Password",
       "submit": "Sign in",
       "error": "Invalid credentials. Use admin@plantyhub.com / admin123",
+      "errorNetwork": "Cannot reach the API. Start the backend with `dotnet run` in PlantyHub.Api, then try again.",
+      "errorValidation": "Enter a valid email and a password with at least 6 characters.",
       "backToStore": "← Back to store"
     },
     "dashboard": {
@@ -902,9 +961,17 @@
       "exitIntent": "Exit-intent trigger",
       "discountCode": "Discount code",
       "sendCampaign": "Send campaign",
+      "sendCampaignHint": "Uses the newsletter email template. Leave fields empty to use template defaults. Edit the full HTML layout under Emails.",
+      "headline": "Headline",
       "subject": "Subject",
-      "message": "Message",
+      "subjectHint": "Supports {{headline}} and {{name}}",
+      "message": "HTML body",
+      "messageHint": "Inserted into {{bodyHtml}} in the newsletter template",
+      "ctaUrl": "CTA link",
       "send": "Send campaign",
+      "sending": "Sending…",
+      "sendResult": "Sent {{sent}}, failed {{failed}}",
+      "sendFailed": "Campaign could not be sent.",
       "stats": {
         "subscribers": "Subscribers",
         "openRate": "Open rate",
@@ -922,6 +989,28 @@
         "subscribedAt": "Subscribed",
         "status": "Status"
       }
+    },
+    "emails": {
+      "title": "Email templates",
+      "subtitle": "Preview, edit and test transactional and campaign emails.",
+      "templates": "Templates",
+      "empty": "No templates yet.",
+      "name": "Name",
+      "description": "Description",
+      "subject": "Subject",
+      "htmlBody": "HTML body",
+      "sampleData": "Sample variables (JSON)",
+      "variablesHint": "Use {{name}}, {{orderId}}, {{verifyUrl}}, etc.",
+      "save": "Save template",
+      "saved": "Template saved.",
+      "saveFailed": "Could not save template.",
+      "refreshPreview": "Refresh preview",
+      "preview": "Preview",
+      "testEmail": "Test recipient",
+      "sendTest": "Send test",
+      "testEmailRequired": "Enter a valid test email.",
+      "testFailed": "Test email failed.",
+      "invalidSampleJson": "Sample variables must be valid JSON object."
     },
     "settings": {
       "title": "Settings",
@@ -948,6 +1037,46 @@
       "reset": "Reset homepage",
       "visible": "Visible",
       "hidden": "Hidden"
+    },
+    "imagePicker": {
+      "upload": "Upload to R2",
+      "uploading": "Uploading…",
+      "uploadFailed": "Upload failed.",
+      "noImage": "No image yet"
+    },
+    "media": {
+      "title": "Media",
+      "subtitle": "Upload and replace images for blog, About and product pages.",
+      "saveFailed": "Could not save image. Try again.",
+      "groups": {
+        "blog": "Blog articles",
+        "about": "About page",
+        "pdp": "Product & pod pages"
+      },
+      "slots": {
+        "blog": {
+          "pesto": "Basil pesto article",
+          "hydroponics": "Hydroponics article",
+          "spices": "Aromatic spices article",
+          "first-harvest": "First harvest article",
+          "partnership": "Partnership article",
+          "earthday": "Earth Day article"
+        },
+        "about": {
+          "hero": "About hero image"
+        },
+        "pdp": {
+          "basilCloseup": "Gallery — basil close-up",
+          "kitchenBasil": "Gallery — kitchen basil",
+          "homeGarden": "Gallery — HomeGarder One",
+          "mintKitchen": "Gallery — mint kitchen",
+          "heroKitchen": "Gallery — hero kitchen",
+          "bonusHerbs": "Bonus kit — herbs",
+          "bonusSalad": "Bonus kit — salad",
+          "bonusAromatic": "Bonus kit — aromatic",
+          "bonusChef": "Bonus kit — chef"
+        }
+      }
     },
     "table": {
       "product": "Product",

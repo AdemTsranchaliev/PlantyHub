@@ -6,6 +6,7 @@
     "pods": "Pods",
     "accessories": "Zubehör",
     "about": "Über uns",
+    "blog": "Blog",
     "support": "Support",
     "buyNow": "Jetzt kaufen"
   },
@@ -218,27 +219,74 @@
   },
   "press": {
     "eyebrow": "Aus dem Blog",
-    "title": "Pflanzenpflege & Stories",
+    "title": "Pflanzenpflege & Stories"
+  },
+  "blogPage": {
+    "eyebrow": "Geschichten & Tipps",
+    "title": "Blog",
+    "lead": "Rezepte, Anbau-Guides und Küchengeschichten aus der PlantyHub-Community — vom ersten Keimling bis auf den Teller.",
+    "backToBlog": "Zurück zum Blog",
+    "related": "Mehr Geschichten",
     "articles": {
       "pesto": {
         "date": "12. Juni 2025",
         "title": "Von der Küche auf den Tisch — Basilikum-Pesto in 5 Wochen",
-        "excerpt": "Eine einfache Rezeptserie vom Pod bis auf den Teller mit deiner ersten PlantyHub-Ernte."
+        "excerpt": "Eine einfache Rezeptserie vom Pod bis auf den Teller mit deiner ersten PlantyHub-Ernte.",
+        "body": [
+          "Deine ersten Basilikum-Pods sind meist in Woche drei bis fünf erntereif — schneide die oberen Blätter und die Pflanze treibt weiter aus.",
+          "Für ein schnelles Pesto püriere eine Handvoll frisches Basilikum mit Olivenöl, Knoblauch, Pinienkernen und Hartkäse bis es seidig ist.",
+          "Der Unterschied zum Supermarkt-Kraut ist sofort da: intensiver Duft und Pesto, das nach Garten schmeckt — nicht nach Kühlschrank."
+        ]
       },
       "hydroponics": {
         "date": "28. Mai 2025",
         "title": "Warum Hydroponik 90 % weniger Wasser verbraucht",
-        "excerpt": "Die Wissenschaft hinter smarten Indoor-Gärten und warum sie die nachhaltige Wahl für Stadtwohnungen sind."
+        "excerpt": "Die Wissenschaft hinter smarten Indoor-Gärten und warum sie die nachhaltige Wahl für Stadtwohnungen sind.",
+        "body": [
+          "Im Erdbeet geht Wasser durch Abfluss und Verdunstung verloren. Ein geschlossenes Hydroponik-Tablett recirculiert nur, was die Wurzeln brauchen.",
+          "Bei HomeGarder One sorgen dosiertes Licht und gleichmäßige Feuchte dafür, dass Pflanzen Energie in Blätter stecken — nicht in Dürrestress.",
+          "Für Stadtwohnungen heißt das: seltener nachfüllen, weniger Abfall und Kräuter, die monatelang nachwachsen."
+        ]
+      },
+      "spices": {
+        "date": "2. Juli 2025",
+        "title": "Aromatische Gewürze vom Küchentresen",
+        "excerpt": "Thymian, Oregano, Rosmarin, Schnittlauch und Chili — die Gewerze-Schublade als lebende Pods.",
+        "body": [
+          "Kulinarische Gewürze müssen nicht trocken ankommen. Langsam wachsende Aromaten wie Thymian, Oregano und Rosmarin gedeihen unter stabiler LED-Licht.",
+          "Schnittlauch liefert eine milde Zwiebelnote für Eier und Suppen. Chili bringt Schärfe, sobald die Früchte sich färben.",
+          "Fülle ein paar Löcher mit unseren Gewürz-Pods — oder nimm den 12er-Gewürzmix — und würze direkt von der Pflanze."
+        ]
+      },
+      "first-harvest": {
+        "date": "20. Juni 2025",
+        "title": "So gelingt die erste Ernte ohne Stress",
+        "excerpt": "Eine ruhige Checkliste für Woche zwei und drei: was schneiden, was stehen lassen und wie oft düngen.",
+        "body": [
+          "Warte, bis die Pflanze mehrere echte Blätter hat. Entferne nie mehr als ein Drittel der Krone auf einmal.",
+          "Ernte morgens, wenn die Öle konzentriert sind. Mit sauberer Schere knapp über einem Blattknoten schneiden.",
+          "Halte Nährlösung und Lichtzyklus stabil — gestresste Pflanzen schmecken bitter, lange bevor sie krank aussehen."
+        ]
       },
       "partnership": {
         "date": "10. Mai 2025",
         "title": "PlantyHub × Sustainable Living EU",
-        "excerpt": "Wir haben uns mit umweltbewussten Creators zusammengetan, um zu zeigen, wie ein Garten den Alltag verändert."
+        "excerpt": "Wir haben uns mit umweltbewussten Creators zusammengetan, um zu zeigen, wie ein Garten den Alltag verändert.",
+        "body": [
+          "Gemeinsam mit Sustainable Living EU begleiteten wir Haushalte, die wöchentliche Kräuterpackungen gegen einen Tischgarten tauschten.",
+          "Creators notierten Setup-Zeit, Nachfüllen und Geschmack — die meisten kochten innerhalb eines Monats mit eigener Ernte.",
+          "Das Fazit: Wenn Anbau automatisch läuft, hören frische Gewürze auf, ein besonderer Anlass zu sein."
+        ]
       },
       "earthday": {
         "date": "22. April 2025",
         "title": "Earth Day: Selbst anbauen, weniger verschwenden",
-        "excerpt": "Wie biologisch abbaubare Pods und lokaler Anbau Plastik- und Lebensmittelabfälle reduzieren."
+        "excerpt": "Wie biologisch abbaubare Pods und lokaler Anbau Plastik- und Lebensmittelabfälle reduzieren.",
+        "body": [
+          "Gekaufte Kräuter welken oft ungenutzt. Wer nur schneidet, was gebraucht wird, spart Plastikschalen und Abfall.",
+          "Unsere Pods sind nach dem Zyklus kompostierbar, und der Garten hält Jahre mit Nachfüllungen.",
+          "Kleine Küchengärten lösen die Klimakrise nicht allein — aber sie ändern Gewohnheiten, und Gewohnheiten skalieren."
+        ]
       }
     }
   },
@@ -334,7 +382,13 @@
       "cilantro": { "name": "Koriander Saat-Pods", "description": "Frische, zitrusartige Blätter, die Currys, Salsa und Nudelbowls beleben. Schneide frisch, wenn ein Gericht Pep braucht." },
       "dill": { "name": "Dill Saat-Pods", "description": "Zarte, feine Wedel mit frischer Anisnote — wie gemacht für Fisch, Dips, Eingelegtes und Kartoffeln." },
       "arugula": { "name": "Rucola Saat-Pods", "description": "Kräftige, pfeffrige Blätter für Salate, Pizza und Sandwiches. Schnellwachsend und immer wieder nachzuernten." },
-      "herb-mix-12": { "name": "12er Kräuter-Mix", "description": "Ein volles Sortiment unserer liebsten Kräuter und Gewürze — alles, um deinen ganzen Garten auf einmal zu füllen." }
+      "thyme": { "name": "Thymian Saat-Pods", "description": "Kleine, holzige Blätter mit warmem Duft — unverzichtbar für Braten, Marinaden und langsame Saucen." },
+      "oregano": { "name": "Oregano Saat-Pods", "description": "Klassisches Mittelmeer-Gewürz für Pizza, Tomatensaucen und Grillgemüse — kräftig schon in kleinen Prisen." },
+      "rosemary": { "name": "Rosmarin Saat-Pods", "description": "Nadelartige Blätter mit harziger Tiefe. Perfekt zu Kartoffeln, Lamm und frischer Focaccia." },
+      "chives": { "name": "Schnittlauch Saat-Pods", "description": "Milde Zwiebelgrün für Eier, Suppen und Salate. Oft schneiden — er wächst nach." },
+      "chili": { "name": "Chili Saat-Pods", "description": "Kompakte Chili-Pflanzen für Küchenhitze — ernten, wenn die Früchte sich färben." },
+      "herb-mix-12": { "name": "12er Kräuter-Mix", "description": "Ein volles Sortiment unserer liebsten Kräuter und Gewürze — alles, um deinen ganzen Garten auf einmal zu füllen." },
+      "spice-mix-12": { "name": "12er Gewürz-Mix", "description": "Aromatische Gewürze für den ganzen Garten — Thymian, Oregano, Rosmarin, Schnittlauch, Chili und mehr zum täglichen Würzen." }
     },
     "consumables": {
       "empty-capsules": { "name": "Leere Kapseln" },
@@ -453,6 +507,7 @@
       "pods": "Pods",
       "accessories": "Zubehör",
       "about": "Über uns",
+      "blog": "Blog",
       "support": "Support",
       "contact": "Kontakt",
       "privacy": "Datenschutz"
@@ -606,6 +661,8 @@
       "orders": "Bestellungen",
       "customers": "Kunden",
       "content": "Inhalte",
+      "media": "Medien",
+      "emails": "E-Mails",
       "newsletter": "Newsletter",
       "settings": "Einstellungen"
     },
@@ -617,6 +674,8 @@
       "password": "Passwort",
       "submit": "Anmelden",
       "error": "Ungültige Anmeldedaten. Verwende admin@plantyhub.com / admin123",
+      "errorNetwork": "API nicht erreichbar. Starte das Backend mit `dotnet run` in PlantyHub.Api und versuche es erneut.",
+      "errorValidation": "Gib eine gültige E-Mail und ein Passwort mit mindestens 6 Zeichen ein.",
       "backToStore": "← Zurück zum Shop"
     },
     "dashboard": {
@@ -805,9 +864,17 @@
       "exitIntent": "Exit-Intent-Auslöser",
       "discountCode": "Rabattcode",
       "sendCampaign": "Kampagne senden",
+      "sendCampaignHint": "Nutzt die Newsletter-Vorlage. Leere Felder übernehmen die Vorlagenwerte. Volles HTML unter E-Mails bearbeiten.",
+      "headline": "Überschrift",
       "subject": "Betreff",
-      "message": "Nachricht",
+      "subjectHint": "Unterstützt {{headline}} und {{name}}",
+      "message": "HTML-Inhalt",
+      "messageHint": "Wird in {{bodyHtml}} der Newsletter-Vorlage eingefügt",
+      "ctaUrl": "CTA-Link",
       "send": "Kampagne senden",
+      "sending": "Wird gesendet…",
+      "sendResult": "Gesendet {{sent}}, fehlgeschlagen {{failed}}",
+      "sendFailed": "Kampagne konnte nicht gesendet werden.",
       "stats": {
         "subscribers": "Abonnenten",
         "openRate": "Öffnungsrate",
@@ -825,6 +892,28 @@
         "subscribedAt": "Abonniert",
         "status": "Status"
       }
+    },
+    "emails": {
+      "title": "E-Mail-Vorlagen",
+      "subtitle": "Transaktions- und Kampagnen-E-Mails ansehen, bearbeiten und testen.",
+      "templates": "Vorlagen",
+      "empty": "Noch keine Vorlagen.",
+      "name": "Name",
+      "description": "Beschreibung",
+      "subject": "Betreff",
+      "htmlBody": "HTML-Inhalt",
+      "sampleData": "Beispielvariablen (JSON)",
+      "variablesHint": "Verwende {{name}}, {{orderId}}, {{verifyUrl}} usw.",
+      "save": "Vorlage speichern",
+      "saved": "Vorlage gespeichert.",
+      "saveFailed": "Vorlage konnte nicht gespeichert werden.",
+      "refreshPreview": "Vorschau aktualisieren",
+      "preview": "Vorschau",
+      "testEmail": "Testempfänger",
+      "sendTest": "Test senden",
+      "testEmailRequired": "Bitte gültige Test-E-Mail eingeben.",
+      "testFailed": "Test-E-Mail fehlgeschlagen.",
+      "invalidSampleJson": "Beispielvariablen müssen ein gültiges JSON-Objekt sein."
     },
     "settings": {
       "title": "Einstellungen",
@@ -858,6 +947,46 @@
     },
     "actions": {
       "addProduct": "Produkt hinzufügen"
+    },
+    "imagePicker": {
+      "upload": "Zu R2 hochladen",
+      "uploading": "Wird hochgeladen…",
+      "uploadFailed": "Upload fehlgeschlagen.",
+      "noImage": "Noch kein Bild"
+    },
+    "media": {
+      "title": "Medien",
+      "subtitle": "Bilder für Blog, Über uns und Produktseiten hochladen und austauschen.",
+      "saveFailed": "Bild konnte nicht gespeichert werden. Bitte erneut versuchen.",
+      "groups": {
+        "blog": "Blog-Artikel",
+        "about": "Über-uns-Seite",
+        "pdp": "Produkt- & Pod-Seiten"
+      },
+      "slots": {
+        "blog": {
+          "pesto": "Artikel — Basilikum-Pesto",
+          "hydroponics": "Artikel — Hydroponik",
+          "spices": "Artikel — aromatische Gewürze",
+          "first-harvest": "Artikel — erste Ernte",
+          "partnership": "Artikel — Partnerschaft",
+          "earthday": "Artikel — Earth Day"
+        },
+        "about": {
+          "hero": "Über uns — Hero-Bild"
+        },
+        "pdp": {
+          "basilCloseup": "Galerie — Basilikum-Nahaufnahme",
+          "kitchenBasil": "Galerie — Küchen-Basilikum",
+          "homeGarden": "Galerie — HomeGarder One",
+          "mintKitchen": "Galerie — Minze in der Küche",
+          "heroKitchen": "Galerie — Hero-Küche",
+          "bonusHerbs": "Bonus-Set — Kräuter",
+          "bonusSalad": "Bonus-Set — Salat",
+          "bonusAromatic": "Bonus-Set — aromatisch",
+          "bonusChef": "Bonus-Set — Chef"
+        }
+      }
     },
     "productEdit": {
       "addTitle": "Produkt hinzufügen",

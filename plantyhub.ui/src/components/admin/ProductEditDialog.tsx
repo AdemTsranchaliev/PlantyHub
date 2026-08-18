@@ -29,6 +29,7 @@ import {
   packKeyOptions,
   slugify,
 } from '../../store/products'
+import ImagePicker from './ImagePicker'
 import { brand } from '../../theme'
 
 type Props = {
@@ -193,32 +194,13 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
             </FormControl>
           </Stack>
 
-          <TextField
+          <ImagePicker
             label={t('admin.productEdit.imageUrl')}
             value={draft.image}
-            onChange={(e) => setDraft((p) => ({ ...p, image: e.target.value }))}
-            fullWidth
-            placeholder="https://..."
+            onChange={(url) => setDraft((p) => ({ ...p, image: url }))}
+            size="medium"
+            previewFit={draft.imageFit}
           />
-
-          {draft.image && (
-            <Box
-              component="img"
-              src={draft.image}
-              alt=""
-              sx={{
-                width: 120,
-                height: 120,
-                objectFit: draft.imageFit,
-                borderRadius: '16px',
-                border: `1px solid ${brand.border}`,
-                bgcolor: brand.surface,
-              }}
-              onError={(e) => {
-                ;(e.target as HTMLImageElement).style.display = 'none'
-              }}
-            />
-          )}
 
           <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
             <FormControlLabel

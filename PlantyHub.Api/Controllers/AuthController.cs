@@ -135,6 +135,15 @@ public class AuthController(
         if (!result.Succeeded)
             return BadRequest(new { message = "Invalid or expired verification link." });
 
+        try
+        {
+            await authEmail.SendWelcomeEmailAsync(user);
+        }
+        catch
+        {
+            // Verification already succeeded.
+        }
+
         return Ok(new MessageResponse("Email verified successfully. You can now sign in."));
     }
 

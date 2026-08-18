@@ -26,6 +26,6 @@ cd PlantyHub.Api
 dotnet run
 ```
 
-API: `http://localhost:5280` · UI dev server: `http://localhost:5173`
+API: `http://localhost:5281` · UI dev server: `http://localhost:5173`
 
 See each project's README for details.

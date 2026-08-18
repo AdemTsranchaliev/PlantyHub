@@ -11,7 +11,7 @@ public static class DbSeeder
     public const string AdminRole = "Admin";
     public const string CustomerRole = "Customer";
     public const string AdminEmail = "admin@plantyhub.com";
-    public const string AdminPassword = "Admin123!";
+    public const string AdminPassword = "admin123";
 
     public static async Task SeedAsync(IServiceProvider services)
     {
@@ -41,9 +41,19 @@ public static class DbSeeder
             await userManager.CreateAsync(admin, AdminPassword);
             await userManager.AddToRoleAsync(admin, AdminRole);
         }
+        else
+        {
+            if (!await userManager.IsInRoleAsync(admin, AdminRole))
+                await userManager.AddToRoleAsync(admin, AdminRole);
 
-        if (!await db.Products.AnyAsync())
-            await SeedProductsAsync(db);
+            if (!await userManager.CheckPasswordAsync(admin, AdminPassword))
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(admin);
+                await userManager.ResetPasswordAsync(admin, token, AdminPassword);
+            }
+        }
+
+        await EnsureProductsAsync(db);
 
         if (!await db.Orders.AnyAsync())
             await SeedOrdersAsync(db);
@@ -76,64 +86,133 @@ public static class DbSeeder
             });
             await db.SaveChangesAsync();
         }
+
+        if (!await db.SiteAssets.AnyAsync())
+        {
+            db.SiteAssets.Add(new SiteAssets { Id = 1, ImagesJson = "{}" });
+            await db.SaveChangesAsync();
+        }
+
+        await EnsureEmailTemplatesAsync(db);
     }
 
-    private static async Task SeedProductsAsync(AppDbContext db)
+    private static async Task EnsureEmailTemplatesAsync(AppDbContext db)
     {
-        var products = new List<Product>
+        var defaults = EmailTemplateSeeder.DefaultTemplates().ToList();
+        var existing = await db.EmailTemplates.ToListAsync();
+        var byKey = existing.ToDictionary(t => t.Key, StringComparer.OrdinalIgnoreCase);
+
+        // Always refresh the reference verify-email template so design updates land on restart.
+        const string referenceKey = "verify-email";
+        var reference = defaults.First(t => t.Key == referenceKey);
+        if (byKey.TryGetValue(referenceKey, out var existingReference))
         {
-            Garden("homegarder-one", 99.00m, "/images/lifestyle/home-garden-product.png", ImageFit.Cover, featured: true,
-                colors: [("white", "#FFFFFF")],
-                en: ("PlantyHub HomeGarder One", "12 holes · 16h LED daily", null),
-                bg: ("PlantyHub HomeGarder One", "12 отвора · 16ч LED дневно", null)),
-            Garden("starter-bundle", 129.00m, "/images/lifestyle/outdoor-deck.png", ImageFit.Cover, compareAt: 148.90m,
-                colors: [("white", "#FFFFFF")],
-                en: ("Starter Bundle", "HomeGarder One + PlantyHub Pods", null),
-                bg: ("Стартов комплект", "HomeGarder One + PlantyHub Pods", null)),
-            Garden("pods-kit", 39.90m, "/images/lifestyle/mint-kitchen.png", ImageFit.Cover,
-                colors: [("default", "#E8E5DA")],
-                en: ("PlantyHub Pods Kit", "Seeds + Plant Yourself kit", null),
-                bg: ("PlantyHub Pods Kit", "Семена + комплект „Посади сам“", null)),
+            existingReference.Name = reference.Name;
+            existingReference.Description = reference.Description;
+            existingReference.Subject = reference.Subject;
+            existingReference.HtmlBody = reference.HtmlBody;
+            existingReference.SampleDataJson = reference.SampleDataJson;
+            existingReference.UpdatedAt = DateTime.UtcNow;
+        }
+        else
+        {
+            db.EmailTemplates.Add(reference);
+            byKey[referenceKey] = reference;
+        }
 
-            Pod("basil", 9.99m, "/images/stock/basil.jpg", "pack3",
-                en: ("Basil Seed Pods", null, "Sweet, aromatic and the king of herbs."),
-                bg: ("Босилек капсули", null, "Сладък, ароматен босилек за песто и паста.")),
-            Pod("mint", 9.99m, "/images/stock/mint.jpg", "pack3",
-                en: ("Mint Seed Pods", null, "Fragrant, cooling leaves for teas and cocktails."),
-                bg: ("Мента капсули", null, "Ароматни листа за чай и коктейли.")),
-            Pod("parsley", 9.99m, "/images/products/parsley.png", "pack3",
-                en: ("Parsley Seed Pods", null, "The fresh, everyday all-rounder."),
-                bg: ("Магданоз капсули", null, "Свеж магданоз за гарнитури и сосове.")),
-            Pod("cilantro", 9.99m, "/images/products/cilantro.png", "pack3",
-                en: ("Cilantro Seed Pods", null, "Bright, citrusy leaves for curries and salsas."),
-                bg: ("Кориандър капсули", null, "Свежи листа за къри и сосове.")),
-            Pod("dill", 9.99m, "/images/products/dill.png", "pack3",
-                en: ("Dill Seed Pods", null, "Delicate fronds for fish and pickles."),
-                bg: ("Копър капсули", null, "Нежни листа за риба и кисели краставички.")),
-            Pod("arugula", 9.99m, "/images/products/arugula.png", "pack3",
-                en: ("Arugula Seed Pods", null, "Bold, peppery leaves for salads."),
-                bg: ("Рукола капсули", null, "Пикантни листа за салати и пица.")),
-            Pod("herb-mix-12", 19.99m, "/images/lifestyle/outdoor-deck.png", "pack12",
-                en: ("12-Pod Herb Mix", null, "A full line-up of favourite herbs."),
-                bg: ("12-капсулен билков микс", null, "Пълен комплект любими билки.")),
+        var missing = defaults
+            .Where(t => !byKey.ContainsKey(t.Key))
+            .ToList();
+        if (missing.Count > 0)
+            db.EmailTemplates.AddRange(missing);
 
-            Consumable("empty-capsules", 5.90m, "/images/lifestyle/basil-closeup.png", "pack12",
-                en: "Empty Capsules", bg: "Празни капсули"),
-            Consumable("sana-ab", 8.90m, "/images/lifestyle/home-garden-product.png", "bottle2x100ml",
-                en: "Sana A + B Nutrients", bg: "Sana A + B хранителни вещества"),
-            Consumable("germination-caps", 4.90m, "/images/lifestyle/mint-closeup.png", "pack12",
-                en: "Germination Caps", bg: "Капсули за покълване"),
-
-            Accessory("storage-cabinet", 24.90m, "/images/lifestyle/outdoor-herbs.png",
-                en: "Storage Cabinet", bg: "Шкаф за съхранение"),
-            Accessory("wall-shelf", 14.90m, "/images/lifestyle/kitchen-basil.png",
-                en: "Wall Shelf", bg: "Стенна рафт"),
-            Accessory("herb-knife", 6.90m, "/images/lifestyle/kitchen-caprese.png",
-                en: "Herb Knife", bg: "Нож за билки"),
-        };
-
-        db.Products.AddRange(products);
         await db.SaveChangesAsync();
+    }
+
+    private static async Task EnsureProductsAsync(AppDbContext db)
+    {
+        var existing = await db.Products.Select(p => p.Slug).ToListAsync();
+        var existingSet = existing.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var missing = CatalogProducts().Where(p => !existingSet.Contains(p.Slug)).ToList();
+        if (missing.Count == 0) return;
+
+        db.Products.AddRange(missing);
+        await db.SaveChangesAsync();
+    }
+
+    private static IEnumerable<Product> CatalogProducts()
+    {
+        yield return Garden("homegarder-one", 99.00m, "/images/lifestyle/home-garden-product.png", ImageFit.Cover, featured: true,
+            colors: [("white", "#FFFFFF")],
+            en: ("PlantyHub HomeGarder One", "12 holes · 16h LED daily", null),
+            bg: ("PlantyHub HomeGarder One", "12 отвора · 16ч LED дневно", null));
+        yield return Garden("starter-bundle", 129.00m, "/images/lifestyle/outdoor-deck.png", ImageFit.Cover, compareAt: 148.90m,
+            colors: [("white", "#FFFFFF")],
+            en: ("Starter Bundle", "HomeGarder One + PlantyHub Pods", null),
+            bg: ("Стартов комплект", "HomeGarder One + PlantyHub Pods", null));
+        yield return Garden("pods-kit", 39.90m, "/images/lifestyle/mint-kitchen.png", ImageFit.Cover,
+            colors: [("default", "#E8E5DA")],
+            en: ("PlantyHub Pods Kit", "Seeds + Plant Yourself kit", null),
+            bg: ("PlantyHub Pods Kit", "Семена + комплект „Посади сам“", null));
+
+        yield return Pod("basil", 9.99m, "/images/stock/basil.jpg", "pack3",
+            en: ("Basil Seed Pods", null, "Sweet, aromatic and the king of herbs."),
+            bg: ("Босилек капсули", null, "Сладък, ароматен босилек за песто и паста."));
+        yield return Pod("mint", 9.99m, "/images/stock/mint.jpg", "pack3",
+            en: ("Mint Seed Pods", null, "Fragrant, cooling leaves for teas and cocktails."),
+            bg: ("Мента капсули", null, "Ароматни листа за чай и коктейли."));
+        yield return Pod("parsley", 9.99m, "/images/products/parsley.png", "pack3",
+            en: ("Parsley Seed Pods", null, "The fresh, everyday all-rounder."),
+            bg: ("Магданоз капсули", null, "Свеж магданоз за гарнитури и сосове."));
+        yield return Pod("cilantro", 9.99m, "/images/products/cilantro.png", "pack3",
+            en: ("Cilantro Seed Pods", null, "Bright, citrusy leaves for curries and salsas."),
+            bg: ("Кориандър капсули", null, "Свежи листа за къри и сосове."));
+        yield return Pod("dill", 9.99m, "/images/products/dill.png", "pack3",
+            en: ("Dill Seed Pods", null, "Delicate fronds for fish and pickles."),
+            bg: ("Копър капсули", null, "Нежни листа за риба и кисели краставички."));
+        yield return Pod("arugula", 9.99m, "/images/products/arugula.png", "pack3",
+            en: ("Arugula Seed Pods", null, "Bold, peppery leaves for salads."),
+            bg: ("Рукола капсули", null, "Пикантни листа за салати и пица."));
+        yield return Pod("thyme", 9.99m, "/images/lifestyle/outdoor-herbs.png", "pack3",
+            en: ("Thyme Seed Pods", null, "Tiny woody leaves with warm perfume for roasts and marinades."),
+            bg: ("Мащерка капсули", null, "Дребни ароматни листа за печива и маринати."),
+            fit: ImageFit.Cover);
+        yield return Pod("oregano", 9.99m, "/images/lifestyle/kitchen-basil.png", "pack3",
+            en: ("Oregano Seed Pods", null, "Classic Mediterranean spice for pizza and tomato sauces."),
+            bg: ("Риган капсули", null, "Класическа средиземноморска подправка за пица и сосове."),
+            fit: ImageFit.Cover);
+        yield return Pod("rosemary", 9.99m, "/images/lifestyle/outdoor-deck.png", "pack3",
+            en: ("Rosemary Seed Pods", null, "Needle-like leaves with piney depth for potatoes and lamb."),
+            bg: ("Розмарин капсули", null, "Иглести листа с борова дълбочина за картофи и меса."),
+            fit: ImageFit.Cover);
+        yield return Pod("chives", 9.99m, "/images/products/green-onion.png", "pack3",
+            en: ("Chives Seed Pods", null, "Mild onion greens for eggs, soups and salads."),
+            bg: ("Лукче капсули", null, "Меки лукови зелени за яйца, супи и салати."));
+        yield return Pod("chili", 9.99m, "/images/products/tomato.png", "pack3",
+            en: ("Chili Seed Pods", null, "Compact chili plants for fresh kitchen heat."),
+            bg: ("Чили капсули", null, "Компактни чушлета за свежа кухненска лютивост."));
+        yield return Pod("herb-mix-12", 19.99m, "/images/lifestyle/outdoor-deck.png", "pack12",
+            en: ("12-Pod Herb Mix", null, "A full line-up of favourite herbs."),
+            bg: ("12-капсулен билков микс", null, "Пълен комплект любими билки."),
+            fit: ImageFit.Cover);
+        yield return Pod("spice-mix-12", 19.99m, "/images/lifestyle/mint-kitchen.png", "pack12",
+            en: ("12-Pod Spice Mix", null, "Aromatic spices to fill your whole garden."),
+            bg: ("Микс 12 подправки", null, "Ароматни подправки за цялата градина."),
+            fit: ImageFit.Cover);
+
+        yield return Consumable("empty-capsules", 5.90m, "/images/lifestyle/basil-closeup.png", "pack12",
+            en: "Empty Capsules", bg: "Празни капсули");
+        yield return Consumable("sana-ab", 8.90m, "/images/lifestyle/home-garden-product.png", "bottle2x100ml",
+            en: "Sana A + B Nutrients", bg: "Sana A + B хранителни вещества");
+        yield return Consumable("germination-caps", 4.90m, "/images/lifestyle/mint-closeup.png", "pack12",
+            en: "Germination Caps", bg: "Капсули за покълване");
+
+        yield return Accessory("storage-cabinet", 24.90m, "/images/lifestyle/outdoor-herbs.png",
+            en: "Storage Cabinet", bg: "Шкаф за съхранение");
+        yield return Accessory("wall-shelf", 14.90m, "/images/lifestyle/kitchen-basil.png",
+            en: "Wall Shelf", bg: "Стенна рафт");
+        yield return Accessory("herb-knife", 6.90m, "/images/lifestyle/kitchen-caprese.png",
+            en: "Herb Knife", bg: "Нож за билки");
     }
 
     private static async Task SeedOrdersAsync(AppDbContext db)
@@ -193,9 +272,10 @@ public static class DbSeeder
     private static Product Pod(
         string slug, decimal price, string image, string packKey,
         (string name, string? tagline, string? description) en,
-        (string name, string? tagline, string? description) bg)
+        (string name, string? tagline, string? description) bg,
+        ImageFit fit = ImageFit.Contain)
     {
-        return BuildProduct(slug, ProductCategory.Pods, price, image, ImageFit.Contain, packKey, null, null, false, en, bg);
+        return BuildProduct(slug, ProductCategory.Pods, price, image, fit, packKey, null, null, false, en, bg);
     }
 
     private static Product Consumable(string slug, decimal price, string image, string packKey, string en, string bg) =>
