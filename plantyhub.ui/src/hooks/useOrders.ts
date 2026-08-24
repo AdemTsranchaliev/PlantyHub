@@ -71,7 +71,7 @@ export function useOrdersStore() {
     updateOrderStatus: (id: string, status: OrderStatus) => updateOrderStatus(id, status),
     createWaybill: (
       id: string,
-      data: Omit<Waybill, 'number' | 'createdAt'> & { number: string },
+      data: Omit<Waybill, 'number' | 'createdAt'>,
     ) => createWaybill(id, data),
     resetOrdersState,
   }

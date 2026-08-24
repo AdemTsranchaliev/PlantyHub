@@ -5,7 +5,6 @@ import Button from '@mui/material/Button'
 import Collapse from '@mui/material/Collapse'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
-import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import CreditCardOutlined from '@mui/icons-material/CreditCardOutlined'
@@ -15,16 +14,19 @@ import PaymentsOutlined from '@mui/icons-material/PaymentsOutlined'
 import { useTranslation } from 'react-i18next'
 import Logo from '../components/Logo'
 import CheckoutField from '../components/checkout/CheckoutField'
+import CheckoutPlaceFields from '../components/checkout/CheckoutPlaceFields'
 import { CheckoutOrderSummary, MobileOrderSummary, checkout } from '../components/checkout/CheckoutOrderSummary'
 import { navHrefs } from '../data/catalog'
-import type { CountryCode } from '../admin/mockData'
 import type { PaymentMethod } from '../admin/orderDetails'
+import { ApiError } from '../api/client'
+import { shippingApi, taxApi } from '../api'
+import type { ShippingQuote, VatQuote } from '../api/types'
 import { useCart } from '../hooks/useCart'
 import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { createCustomerOrder } from '../store/orders'
+import { formatEuro, FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../utils/price'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const countries: CountryCode[] = ['BG', 'DE', 'FR', 'PL', 'IT', 'PT', 'CZ']
 
 type FormState = {
   name: string
@@ -32,8 +34,11 @@ type FormState = {
   phone: string
   street: string
   city: string
+  cityId: string
+  countryId: string
   postalCode: string
-  country: CountryCode
+  country: string
+  officeCode: string
   paymentMethod: PaymentMethod
   notes: string
 }
@@ -46,8 +51,11 @@ const emptyForm: FormState = {
   phone: '',
   street: '',
   city: '',
+  cityId: '',
+  countryId: '',
   postalCode: '',
   country: 'BG',
+  officeCode: '',
   paymentMethod: 'card',
   notes: '',
 }
@@ -120,13 +128,18 @@ function PaymentOption({
 export default function CheckoutPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { items, itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, clearCart } = useCart()
+  const { items, itemCount, subtotal, subtotalLabel, clearCart } = useCart()
   const { customer } = useCustomerAuth()
   const [form, setForm] = useState<FormState>(emptyForm)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [summaryOpen, setSummaryOpen] = useState(false)
   const [notesOpen, setNotesOpen] = useState(false)
+  const [quotes, setQuotes] = useState<ShippingQuote[]>([])
+  const [quotesLoading, setQuotesLoading] = useState(false)
+  const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>(null)
+  const [vat, setVat] = useState<VatQuote | null>(null)
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
@@ -140,6 +153,61 @@ export default function CheckoutPage() {
       email: prev.email || customer.email,
     }))
   }, [customer])
+
+  useEffect(() => {
+    if (form.city.trim().length < 2 || form.postalCode.trim().length < 3) {
+      setQuotes([])
+      setSelectedQuoteId(null)
+      return
+    }
+    const timer = window.setTimeout(() => {
+      setQuotesLoading(true)
+      void shippingApi
+        .quotes({
+          country: form.country,
+          city: form.city.trim(),
+          cityId: form.cityId || undefined,
+          postalCode: form.postalCode.trim(),
+          street: form.street.trim() || undefined,
+          officeCode: form.officeCode || undefined,
+          paymentMethod: form.paymentMethod,
+          subtotal,
+        })
+        .then((data) => {
+          const curated = curateCheckoutQuotes(data.quotes, form.country)
+          setQuotes(curated)
+          setSelectedQuoteId((current) => {
+            if (current && curated.some((quote) => quote.id === current)) return current
+            return defaultQuoteId(curated, form.street, form.officeCode)
+          })
+        })
+        .catch(() => {
+          setQuotes([])
+          setSelectedQuoteId(null)
+        })
+        .finally(() => setQuotesLoading(false))
+    }, 500)
+    return () => window.clearTimeout(timer)
+  }, [form.country, form.city, form.cityId, form.postalCode, form.street, form.officeCode, form.paymentMethod, subtotal])
+
+  const selectedQuote = quotes.find((quote) => quote.id === selectedQuoteId)
+  const shippingAmount =
+    subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : selectedQuote ? selectedQuote.priceEur : STANDARD_SHIPPING_COST
+
+  useEffect(() => {
+    let cancelled = false
+    void taxApi
+      .quote(form.country || 'BG', subtotal, shippingAmount)
+      .then((data) => {
+        if (!cancelled) setVat(data)
+      })
+      .catch(() => {
+        if (!cancelled) setVat(null)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [form.country, subtotal, shippingAmount])
 
   if (items.length === 0) {
     return (
@@ -161,6 +229,8 @@ export default function CheckoutPage() {
     )
   }
 
+  const pickupCourier = pickupCourierFor(selectedQuote)
+
   const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: false }))
@@ -174,6 +244,7 @@ export default function CheckoutPage() {
       street: form.street.trim().length < 3,
       city: form.city.trim().length < 2,
       postalCode: form.postalCode.trim().length < 3,
+      officeCode: pickupCourier != null && form.officeCode.trim().length < 1,
     }
     setErrors(next)
     return !Object.values(next).some(Boolean)
@@ -183,6 +254,7 @@ export default function CheckoutPage() {
     e.preventDefault()
     if (!validate()) return
     setSubmitting(true)
+    setSubmitError(null)
     try {
       const order = await createCustomerOrder(items, {
         name: form.name.trim(),
@@ -194,15 +266,38 @@ export default function CheckoutPage() {
         country: form.country,
         paymentMethod: form.paymentMethod,
         notes: form.notes.trim() || undefined,
+        courier: selectedQuote?.courier,
+        delivery: selectedQuote?.delivery,
+        officeCode: form.officeCode || selectedQuote?.officeCode || undefined,
+        cityId: form.cityId || undefined,
       })
       clearCart()
       navigate(`/order/${order.id}`, { replace: true })
-    } catch {
+    } catch (err) {
+      setSubmitError(err instanceof ApiError ? err.message : t('checkout.failed'))
       setSubmitting(false)
     }
   }
 
-  const summaryProps = { items, itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping }
+  const totalAmount = vat?.enabled ? vat.total : subtotal + shippingAmount
+  const vatHint =
+    vat?.enabled && vat.ratePercent > 0
+      ? vat.pricesIncludeVat
+        ? t('cart.vatIncluded', { rate: vat.ratePercent })
+        : t('cart.vatAdded', { rate: vat.ratePercent })
+      : vat?.enabled && vat.message === 'outsideEu'
+        ? t('cart.vatExport')
+        : null
+  const summaryProps = {
+    items,
+    itemCount,
+    subtotalLabel,
+    shippingLabel: formatEuro(shippingAmount),
+    totalLabel: formatEuro(totalAmount),
+    freeShipping: shippingAmount === 0,
+    taxLabel: vat?.enabled && vat.tax > 0 ? formatEuro(vat.tax) : null,
+    taxHint: vatHint,
+  }
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: checkout.bg, color: checkout.text }}>
@@ -288,18 +383,6 @@ export default function CheckoutPage() {
                 <SectionHeading>{t('checkout.shipping')}</SectionHeading>
                 <Stack spacing={1.25}>
                   <CheckoutField
-                    select
-                    label={t('checkout.country')}
-                    value={form.country}
-                    onChange={(e) => updateField('country', e.target.value as CountryCode)}
-                  >
-                    {countries.map((code) => (
-                      <MenuItem key={code} value={code}>
-                        {t(`checkout.countries.${code}`)}
-                      </MenuItem>
-                    ))}
-                  </CheckoutField>
-                  <CheckoutField
                     label={t('checkout.street')}
                     autoComplete="street-address"
                     value={form.street}
@@ -307,28 +390,64 @@ export default function CheckoutPage() {
                     error={errors.street}
                     helperText={t('checkout.required')}
                   />
-                  <Grid container spacing={1.25}>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <CheckoutField
-                        label={t('checkout.city')}
-                        autoComplete="address-level2"
-                        value={form.city}
-                        onChange={(e) => updateField('city', e.target.value)}
-                        error={errors.city}
-                        helperText={t('checkout.required')}
-                      />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <CheckoutField
-                        label={t('checkout.postalCode')}
-                        autoComplete="postal-code"
-                        value={form.postalCode}
-                        onChange={(e) => updateField('postalCode', e.target.value)}
-                        error={errors.postalCode}
-                        helperText={t('checkout.required')}
-                      />
-                    </Grid>
-                  </Grid>
+                  <CheckoutPlaceFields
+                    value={{
+                      country: form.country,
+                      countryId: form.countryId,
+                      city: form.city,
+                      cityId: form.cityId,
+                      postalCode: form.postalCode,
+                      officeCode: form.officeCode,
+                    }}
+                    pickupCourier={pickupCourier}
+                    officeRequired={pickupCourier != null}
+                    errors={{ city: errors.city, postalCode: errors.postalCode, officeCode: errors.officeCode }}
+                    onChange={(patch) => {
+                      setForm((prev) => ({ ...prev, ...patch }))
+                      setErrors((prev) => ({
+                        ...prev,
+                        city: patch.city !== undefined ? false : prev.city,
+                        postalCode: patch.postalCode !== undefined ? false : prev.postalCode,
+                        officeCode: patch.officeCode !== undefined ? false : prev.officeCode,
+                      }))
+                    }}
+                  />
+                  <Box>
+                    <Typography sx={{ fontSize: '0.8125rem', fontWeight: 600, color: checkout.muted, mb: 1 }}>
+                      {t('checkout.deliveryMethod')}
+                    </Typography>
+                    {quotesLoading ? (
+                      <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>
+                        {t('checkout.quoting')}
+                      </Typography>
+                    ) : quotes.length === 0 ? (
+                      <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>
+                        {t('checkout.quoteFallback')}
+                      </Typography>
+                    ) : (
+                      <Stack spacing={0.75}>
+                        {quotes.map((quote) => {
+                          const cheapest = Math.min(...quotes.map((item) => item.priceEur))
+                          const isCheapest = quotes.length > 1 && quote.priceEur === cheapest && subtotal < FREE_SHIPPING_THRESHOLD
+                          return (
+                            <PaymentOption
+                              key={quote.id}
+                              selected={selectedQuoteId === quote.id}
+                              label={`${t(`checkout.couriers.${quote.courier}`, { defaultValue: quote.courier })} — ${t(`checkout.delivery.${quote.delivery}`, { defaultValue: quote.delivery })} · ${subtotal >= FREE_SHIPPING_THRESHOLD ? t('cart.freeShipping') : formatEuro(quote.priceEur)}${isCheapest ? ` · ${t('checkout.cheapest')}` : ''}`}
+                              Icon={LocalShippingOutlined}
+                              onSelect={() => {
+                                setSelectedQuoteId(quote.id)
+                                setForm((prev) => ({
+                                  ...prev,
+                                  officeCode: quote.courier === selectedQuote?.courier ? prev.officeCode : '',
+                                }))
+                              }}
+                            />
+                          )
+                        })}
+                      </Stack>
+                    )}
+                  </Box>
                   <Box>
                     <Link
                       component="button"
@@ -378,6 +497,11 @@ export default function CheckoutPage() {
               </Box>
 
               <Box>
+                {submitError ? (
+                  <Typography sx={{ color: '#C62828', fontSize: '0.8125rem', fontWeight: 600, mb: 1.25 }}>
+                    {submitError}
+                  </Typography>
+                ) : null}
                 <Button
                   type="submit"
                   variant="contained"
@@ -448,4 +572,47 @@ export default function CheckoutPage() {
       </Box>
     </Box>
   )
+}
+
+function curateCheckoutQuotes(quotes: ShippingQuote[], country: string): ShippingQuote[] {
+  const ok = quotes.filter((quote) => !quote.message)
+  const best = (delivery: string, couriers: string[]) =>
+    ok
+      .filter((quote) => quote.delivery === delivery && couriers.includes(quote.courier))
+      .sort((a, b) => a.priceEur - b.priceEur)[0]
+
+  const bulgaria = country.trim().toUpperCase() === 'BG'
+  const items: ShippingQuote[] = []
+  const address = best('address', bulgaria ? ['econt', 'speedy'] : ['econt', 'speedy', 'dhl'])
+  const office = best('office', ['econt', 'speedy'])
+  const locker = ok.find((quote) => quote.courier === 'boxnow' && quote.delivery === 'locker')
+  if (address) items.push(address)
+  if (office) items.push(office)
+  if (bulgaria && locker) items.push(locker)
+  if (!bulgaria) {
+    const dhl = best('address', ['dhl'])
+    if (dhl && dhl.id !== address?.id) items.push(dhl)
+  }
+  return items
+}
+
+function defaultQuoteId(quotes: ShippingQuote[], street: string, officeCode: string) {
+  if (officeCode.trim()) {
+    const locker = quotes.find((quote) => quote.delivery === 'locker')
+    const office = quotes.find((quote) => quote.delivery === 'office')
+    if (locker) return locker.id
+    if (office) return office.id
+  }
+  if (street.trim().length >= 3) {
+    const address = quotes.find((quote) => quote.delivery === 'address')
+    if (address) return address.id
+  }
+  return [...quotes].sort((a, b) => a.priceEur - b.priceEur)[0]?.id ?? null
+}
+
+function pickupCourierFor(quote: ShippingQuote | undefined): 'econt' | 'speedy' | 'boxnow' | null {
+  if (!quote) return null
+  if (quote.delivery === 'locker' && quote.courier === 'boxnow') return 'boxnow'
+  if (quote.delivery === 'office' && (quote.courier === 'econt' || quote.courier === 'speedy')) return quote.courier
+  return null
 }

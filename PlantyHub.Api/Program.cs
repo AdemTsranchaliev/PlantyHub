@@ -74,10 +74,21 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<EmailTemplateService>();
+builder.Services.AddScoped<OrderEmailService>();
 builder.Services.AddScoped<AuthEmailService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<CourierService>();
+builder.Services.AddScoped<CourierLocationService>();
+builder.Services.AddScoped<CourierRateService>();
+builder.Services.AddScoped<VatService>();
+builder.Services.AddScoped<AccountingReportService>();
+builder.Services.AddHttpClient("couriers", client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(45);
+    client.DefaultRequestHeaders.UserAgent.ParseAdd("PlantyHub/1.0");
+});
 builder.Services.AddScoped<AdminDashboardService>();
 builder.Services.AddScoped<NewsletterService>();
 builder.Services.AddSingleton<IR2StorageService, R2StorageService>();
@@ -102,14 +113,16 @@ builder.Services.AddCors(options =>
                     && (uri.Host is "localhost" or "127.0.0.1"))
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowCredentials();
+                .AllowCredentials()
+                .WithExposedHeaders("Content-Disposition");
             return;
         }
 
         policy.WithOrigins(allowedOrigins)
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowCredentials()
+            .WithExposedHeaders("Content-Disposition");
     });
 });
 

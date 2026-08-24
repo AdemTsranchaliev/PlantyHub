@@ -1,9 +1,12 @@
 import { authApi } from '../api'
 import type { ApiAuthResponse } from '../api/types'
 import {
+  clearAdminSession,
   clearCustomerSession,
   getCustomerToken,
   getCustomerUser,
+  hasAdminRole,
+  setAdminSession,
   setCustomerSession,
   type SessionUser,
 } from '../auth/session'
@@ -31,11 +34,16 @@ export function isCustomerLoggedIn(): boolean {
 export function setCustomerFromAuth(response: ApiAuthResponse, remember = true) {
   setCustomerSession(response, remember)
   customer = { email: response.email, name: response.name, roles: response.roles }
+  if (hasAdminRole(response.roles)) {
+    setAdminSession(response)
+  }
   emit()
 }
 
 export function logoutCustomer() {
+  const wasAdmin = hasAdminRole(customer?.roles)
   clearCustomerSession()
+  if (wasAdmin) clearAdminSession()
   customer = null
   emit()
 }
@@ -50,6 +58,10 @@ export async function validateCustomerSession(): Promise<SessionUser | null> {
   try {
     const profile = await authApi.me()
     customer = { email: profile.email, name: profile.name, roles: profile.roles }
+    const token = getCustomerToken()
+    if (token && hasAdminRole(profile.roles)) {
+      setAdminSession({ token, email: profile.email, name: profile.name, roles: profile.roles })
+    }
     emit()
     return customer
   } catch {

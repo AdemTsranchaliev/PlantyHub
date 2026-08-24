@@ -1,4 +1,4 @@
-import { apiRequest, apiUpload } from './client'
+import { apiRequest, apiUpload, apiDownload } from './client'
 import { getCustomerToken } from '../auth/session'
 import type {
   ApiAuthResponse,
@@ -22,6 +22,15 @@ import type {
   ApiUserProfile,
   CheckoutPayload,
   CreateWaybillPayload,
+  ApiCourierSettings,
+  ApiCourierSender,
+  UpdateCourierAccountPayload,
+  CourierLocationList,
+  CourierOfficeList,
+  ShippingQuotesResponse,
+  VatQuote,
+  StoreVatSettings,
+  AccountingReportPreview,
 } from './types'
 import type { OrderStatus } from '../admin/mockData'
 import type { HomepageState } from '../store/homepage'
@@ -141,6 +150,112 @@ export const siteAssetsApi = {
   get: () => apiRequest<ApiSiteAssets>('/api/site-assets'),
   update: (images: Record<string, string>) =>
     apiRequest<ApiSiteAssets>('/api/site-assets', { method: 'PUT', body: { images }, auth: 'admin' }),
+}
+
+export const shippingApi = {
+  countries: (courier = 'econt', refresh = false) => {
+    const q = new URLSearchParams({ courier })
+    if (refresh) q.set('refresh', 'true')
+    return apiRequest<CourierLocationList>(`/api/shipping/countries?${q}`)
+  },
+  cities: (courier: string, countryId: string, refresh = false) => {
+    const q = new URLSearchParams({ courier, countryId })
+    if (refresh) q.set('refresh', 'true')
+    return apiRequest<CourierLocationList>(`/api/shipping/cities?${q}`)
+  },
+  offices: (
+    courier: string,
+    params: { countryId: string; cityId?: string; cityName?: string },
+    refresh = false,
+  ) => {
+    const q = new URLSearchParams({ courier, countryId: params.countryId })
+    if (params.cityId) q.set('cityId', params.cityId)
+    if (params.cityName) q.set('cityName', params.cityName)
+    if (refresh) q.set('refresh', 'true')
+    return apiRequest<CourierOfficeList>(`/api/shipping/offices?${q}`)
+  },
+  quotes: (body: {
+    country: string
+    city: string
+    cityId?: string
+    postalCode: string
+    street?: string
+    officeCode?: string
+    paymentMethod?: string
+    subtotal?: number
+    weightKg?: number
+  }) => apiRequest<ShippingQuotesResponse>('/api/shipping/quotes', { method: 'POST', body }),
+}
+
+export const couriersApi = {
+  get: () => apiRequest<ApiCourierSettings>('/api/admin/couriers', { auth: 'admin' }),
+  update: (body: {
+    sender?: ApiCourierSender
+    econt?: UpdateCourierAccountPayload
+    speedy?: UpdateCourierAccountPayload
+    dhl?: UpdateCourierAccountPayload
+    boxnow?: UpdateCourierAccountPayload
+  }) => apiRequest<ApiCourierSettings>('/api/admin/couriers', { method: 'PUT', body, auth: 'admin' }),
+  countries: (courier: string, refresh = false) =>
+    apiRequest<CourierLocationList>(`/api/admin/couriers/${courier}/countries${refresh ? '?refresh=true' : ''}`, {
+      auth: 'admin',
+    }),
+  cities: (courier: string, countryId: string, refresh = false) => {
+    const q = new URLSearchParams({ countryId })
+    if (refresh) q.set('refresh', 'true')
+    return apiRequest<CourierLocationList>(`/api/admin/couriers/${courier}/cities?${q}`, { auth: 'admin' })
+  },
+  offices: (
+    courier: string,
+    params: { countryId: string; cityId?: string; cityName?: string },
+    refresh = false,
+  ) => {
+    const q = new URLSearchParams({ countryId: params.countryId })
+    if (params.cityId) q.set('cityId', params.cityId)
+    if (params.cityName) q.set('cityName', params.cityName)
+    if (refresh) q.set('refresh', 'true')
+    return apiRequest<CourierOfficeList>(`/api/admin/couriers/${courier}/offices?${q}`, { auth: 'admin' })
+  },
+    calculate: (body: {
+    country: string
+    city: string
+    cityId?: string
+    postalCode: string
+    street?: string
+    officeCode?: string
+    weightKg?: number
+    courier?: string
+  }) => apiRequest<ShippingQuotesResponse>('/api/admin/couriers/calculate', { method: 'POST', body, auth: 'admin' }),
+}
+
+export const taxApi = {
+  quote: (country: string, subtotal: number, shipping = 0) => {
+    const q = new URLSearchParams({
+      country,
+      subtotal: String(subtotal),
+      shipping: String(shipping),
+    })
+    return apiRequest<VatQuote>(`/api/tax?${q}`)
+  },
+}
+
+export const storeApi = {
+  get: () => apiRequest<StoreVatSettings>('/api/admin/store', { auth: 'admin' }),
+  update: (body: { enabled: boolean; pricesIncludeVat: boolean; vatNumber?: string }) =>
+    apiRequest<StoreVatSettings>('/api/admin/store', { method: 'PUT', body, auth: 'admin' }),
+}
+
+export type AccountingReportKind = 'pack' | 'sales' | 'vat' | 'items'
+
+export const reportsApi = {
+  preview: (from: string, to: string, includeCancelled = false) => {
+    const q = new URLSearchParams({ from, to, includeCancelled: String(includeCancelled) })
+    return apiRequest<AccountingReportPreview>(`/api/admin/reports?${q}`, { auth: 'admin' })
+  },
+  download: (kind: AccountingReportKind, from: string, to: string, includeCancelled = false) => {
+    const q = new URLSearchParams({ from, to, includeCancelled: String(includeCancelled) })
+    return apiDownload(`/api/admin/reports/${kind}?${q}`, 'admin')
+  },
 }
 
 export { mapOrderSummaryToDetail, mapProductsResponse, toProductUpsert } from './types'

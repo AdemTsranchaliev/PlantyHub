@@ -4,9 +4,9 @@ import {
   clearAdminSession,
   getAdminUser,
   isAdminAuthenticated,
-  setAdminSession,
   type SessionUser,
 } from '../auth/session'
+import { setCustomerFromAuth } from '../store/auth'
 
 export type AdminUser = {
   email: string
@@ -29,7 +29,7 @@ export async function loginAdmin(email: string, password: string): Promise<Admin
 
   try {
     const response = await authApi.adminLogin({ email: trimmedEmail, password: trimmedPassword })
-    setAdminSession(response)
+    setCustomerFromAuth(response)
     return { ok: true, user: { email: response.email, name: response.name } }
   } catch (err) {
     if (err instanceof ApiError && err.status === 401) {

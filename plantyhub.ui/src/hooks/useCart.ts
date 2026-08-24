@@ -9,6 +9,7 @@ import {
   removeFromCart,
   subscribeCart,
   updateCartQuantity,
+  type CartGift,
   type CartItem,
 } from '../store/cart'
 import { calcShipping, formatEuro, parseEuro } from '../utils/price'
@@ -54,7 +55,7 @@ export function useAddProductToCart() {
   const { addToCart } = useCart()
   const { t } = useTranslation()
 
-  return (category: CartItem['category'], product: ResolvedProduct, quantity = 1) => {
+  return (category: CartItem['category'], product: ResolvedProduct, quantity = 1, gift?: CartGift) => {
     addToCart({
       category,
       productId: product.id,
@@ -64,6 +65,7 @@ export function useAddProductToCart() {
       image: product.image,
       imageFit: product.imageFit,
       pack: product.packKey ? t(`common.${product.packKey}`) : undefined,
+      gift,
     })
   }
 }

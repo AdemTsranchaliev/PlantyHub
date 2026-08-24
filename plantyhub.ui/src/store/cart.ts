@@ -1,5 +1,12 @@
 import type { ProductCategory } from './products'
 
+export type CartGift = {
+  id: string
+  name: string
+  image: string
+  compareAt: string
+}
+
 export type CartItem = {
   key: string
   category: ProductCategory
@@ -10,6 +17,7 @@ export type CartItem = {
   image: string
   imageFit?: 'cover' | 'contain'
   pack?: string
+  gift?: CartGift
 }
 
 type CartState = {
@@ -79,6 +87,7 @@ export function addToCart(item: Omit<CartItem, 'key' | 'quantity'> & { quantity?
     image: item.image,
     imageFit: item.imageFit,
     pack: item.pack,
+    gift: item.gift ?? existing?.gift,
   }
 
   const items = existing

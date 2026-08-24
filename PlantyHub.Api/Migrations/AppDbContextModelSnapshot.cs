@@ -166,8 +166,9 @@ namespace PlantyHub.Api.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<int?>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -227,13 +228,63 @@ namespace PlantyHub.Api.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.CourierLocationCache", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FetchedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Json")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("character varying(160)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key")
+                        .IsUnique();
+
+                    b.ToTable("CourierLocationCache");
+                });
+
+            modelBuilder.Entity("PlantyHub.Api.Models.CourierSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Json")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourierSettings");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.Customer", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -365,8 +416,10 @@ namespace PlantyHub.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("BillingCountry")
-                        .HasColumnType("integer");
+                    b.Property<string>("BillingCountry")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
 
                     b.Property<string>("BillingName")
                         .IsRequired()
@@ -384,8 +437,10 @@ namespace PlantyHub.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("integer");
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -419,11 +474,22 @@ namespace PlantyHub.Api.Migrations
                         .HasPrecision(10, 2)
                         .HasColumnType("numeric(10,2)");
 
-                    b.Property<int>("ShippingCountry")
-                        .HasColumnType("integer");
+                    b.Property<string>("ShippingCountry")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
+
+                    b.Property<string>("ShippingCourier")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShippingDelivery")
+                        .HasColumnType("text");
 
                     b.Property<string>("ShippingName")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShippingOfficeCode")
                         .HasColumnType("text");
 
                     b.Property<string>("ShippingPhone")
@@ -448,6 +514,10 @@ namespace PlantyHub.Api.Migrations
                     b.Property<decimal>("Tax")
                         .HasPrecision(10, 2)
                         .HasColumnType("numeric(10,2)");
+
+                    b.Property<decimal?>("TaxRate")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)");
 
                     b.Property<decimal>("Total")
                         .HasPrecision(10, 2)
@@ -479,6 +549,15 @@ namespace PlantyHub.Api.Migrations
 
                     b.Property<int>("Category")
                         .HasColumnType("integer");
+
+                    b.Property<string>("GiftCompareAt")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GiftImage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GiftName")
+                        .HasColumnType("text");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -668,6 +747,26 @@ namespace PlantyHub.Api.Migrations
                     b.ToTable("SiteAssets");
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.StoreSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Json")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StoreSettings");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.Waybill", b =>
                 {
                     b.Property<Guid>("Id")
@@ -684,6 +783,12 @@ namespace PlantyHub.Api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("ExternalId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Mode")
+                        .HasColumnType("text");
+
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
@@ -697,6 +802,9 @@ namespace PlantyHub.Api.Migrations
 
                     b.Property<int>("Packages")
                         .HasColumnType("integer");
+
+                    b.Property<string>("TrackingUrl")
+                        .HasColumnType("text");
 
                     b.Property<decimal>("WeightKg")
                         .HasPrecision(6, 2)

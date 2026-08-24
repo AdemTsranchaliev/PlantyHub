@@ -8,7 +8,7 @@ export function formatEuro(amount: number) {
   return `€${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 }
 
-export const FREE_SHIPPING_THRESHOLD = 60
+export const FREE_SHIPPING_THRESHOLD = 150
 export const STANDARD_SHIPPING_COST = 4.99
 
 export function calcShipping(subtotal: number) {

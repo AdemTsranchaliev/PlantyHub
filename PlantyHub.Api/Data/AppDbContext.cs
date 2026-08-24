@@ -22,10 +22,15 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<HomepageSettings> HomepageSettings => Set<HomepageSettings>();
     public DbSet<SiteAssets> SiteAssets => Set<SiteAssets>();
     public DbSet<EmailTemplate> EmailTemplates => Set<EmailTemplate>();
+    public DbSet<CourierSettings> CourierSettings => Set<CourierSettings>();
+    public DbSet<CourierLocationCache> CourierLocationCache => Set<CourierLocationCache>();
+    public DbSet<StoreSettings> StoreSettings => Set<StoreSettings>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<ApplicationUser>().Property(u => u.Country).HasMaxLength(2);
 
         builder.Entity<Product>(entity =>
         {
@@ -56,6 +61,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         {
             entity.HasKey(c => c.Id);
             entity.HasIndex(c => c.Email).IsUnique();
+            entity.Property(c => c.Country).HasMaxLength(2);
             entity.HasMany(c => c.Orders)
                 .WithOne(o => o.Customer)
                 .HasForeignKey(o => o.CustomerId)
@@ -68,10 +74,14 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(o => o.Subtotal).HasPrecision(10, 2);
             entity.Property(o => o.ShippingCost).HasPrecision(10, 2);
             entity.Property(o => o.Tax).HasPrecision(10, 2);
+            entity.Property(o => o.TaxRate).HasPrecision(5, 2);
             entity.Property(o => o.Total).HasPrecision(10, 2);
             entity.HasIndex(o => o.Email);
             entity.HasIndex(o => o.Status);
             entity.HasIndex(o => o.CreatedAt);
+            entity.Property(o => o.Country).HasMaxLength(2);
+            entity.Property(o => o.ShippingCountry).HasMaxLength(2);
+            entity.Property(o => o.BillingCountry).HasMaxLength(2);
         });
 
         builder.Entity<OrderItem>(entity =>
@@ -122,6 +132,23 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         {
             entity.HasKey(t => t.Id);
             entity.HasIndex(t => t.Key).IsUnique();
+        });
+
+        builder.Entity<CourierSettings>(entity =>
+        {
+            entity.HasKey(s => s.Id);
+        });
+
+        builder.Entity<CourierLocationCache>(entity =>
+        {
+            entity.HasKey(c => c.Id);
+            entity.HasIndex(c => c.Key).IsUnique();
+            entity.Property(c => c.Key).HasMaxLength(160);
+        });
+
+        builder.Entity<StoreSettings>(entity =>
+        {
+            entity.HasKey(s => s.Id);
         });
     }
 }

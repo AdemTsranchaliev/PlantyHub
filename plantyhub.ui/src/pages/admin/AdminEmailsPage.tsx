@@ -13,6 +13,7 @@ import SaveRounded from '@mui/icons-material/SaveRounded'
 import SendRounded from '@mui/icons-material/SendRounded'
 import { useTranslation } from 'react-i18next'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
+import AdminFieldGroup from '../../components/admin/AdminFieldGroup'
 import { emailTemplatesApi } from '../../api'
 import type { ApiEmailTemplateDetail, ApiEmailTemplateSummary } from '../../api/types'
 import { brand } from '../../theme'
@@ -175,44 +176,41 @@ export default function AdminEmailsPage() {
 
         <Grid size={{ xs: 12, md: 5 }}>
           {detail && (
-            <Box sx={{ bgcolor: brand.white, borderRadius: '20px', border: `1px solid ${brand.border}`, p: 2.5 }}>
+            <Box sx={{ bgcolor: brand.surface, borderRadius: '20px', border: `1px solid ${brand.border}`, p: 1.5 }}>
               <Stack spacing={2}>
-                <TextField label={t('admin.emails.name')} value={name} onChange={(e) => setName(e.target.value)} fullWidth size="small" />
-                <TextField
-                  label={t('admin.emails.description')}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  fullWidth
-                  size="small"
-                />
-                <TextField
-                  label={t('admin.emails.subject')}
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  fullWidth
-                  size="small"
-                  helperText={t('admin.emails.variablesHint')}
-                />
-                <TextField
-                  label={t('admin.emails.htmlBody')}
-                  value={htmlBody}
-                  onChange={(e) => setHtmlBody(e.target.value)}
-                  fullWidth
-                  multiline
-                  minRows={12}
-                  size="small"
-                  InputProps={{ sx: { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.82rem' } }}
-                />
-                <TextField
-                  label={t('admin.emails.sampleData')}
-                  value={sampleJson}
-                  onChange={(e) => setSampleJson(e.target.value)}
-                  fullWidth
-                  multiline
-                  minRows={4}
-                  size="small"
-                  InputProps={{ sx: { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.82rem' } }}
-                />
+                <AdminFieldGroup title={t('admin.emails.details')}>
+                  <TextField label={t('admin.emails.name')} value={name} onChange={(e) => setName(e.target.value)} />
+                  <TextField
+                    label={t('admin.emails.description')}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </AdminFieldGroup>
+                <AdminFieldGroup title={t('admin.emails.content')} hint={t('admin.emails.variablesHint')}>
+                  <TextField
+                    label={t('admin.emails.subject')}
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
+                  <TextField
+                    label={t('admin.emails.htmlBody')}
+                    value={htmlBody}
+                    onChange={(e) => setHtmlBody(e.target.value)}
+                    multiline
+                    minRows={12}
+                    slotProps={{ input: { sx: { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.82rem' } } }}
+                  />
+                </AdminFieldGroup>
+                <AdminFieldGroup title={t('admin.emails.sampleData')} hint={t('admin.emails.sampleHint')}>
+                  <TextField
+                    label={t('admin.emails.sampleData')}
+                    value={sampleJson}
+                    onChange={(e) => setSampleJson(e.target.value)}
+                    multiline
+                    minRows={4}
+                    slotProps={{ input: { sx: { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.82rem' } } }}
+                  />
+                </AdminFieldGroup>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
                   <Button variant="contained" startIcon={<SaveRounded />} onClick={() => void handleSave()} disabled={saving}>
                     {t('admin.emails.save')}
@@ -221,18 +219,19 @@ export default function AdminEmailsPage() {
                     {t('admin.emails.refreshPreview')}
                   </Button>
                 </Stack>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ alignItems: { sm: 'center' } }}>
-                  <TextField
-                    label={t('admin.emails.testEmail')}
-                    value={testEmail}
-                    onChange={(e) => setTestEmail(e.target.value)}
-                    fullWidth
-                    size="small"
-                  />
-                  <Button variant="outlined" startIcon={<SendRounded />} onClick={() => void handleSendTest()} sx={{ whiteSpace: 'nowrap' }}>
-                    {t('admin.emails.sendTest')}
-                  </Button>
-                </Stack>
+                <AdminFieldGroup title={t('admin.emails.testSend')} hint={t('admin.emails.testHint')}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ alignItems: { sm: 'flex-start' } }}>
+                    <TextField
+                      label={t('admin.emails.testEmail')}
+                      value={testEmail}
+                      onChange={(e) => setTestEmail(e.target.value)}
+                      type="email"
+                    />
+                    <Button variant="outlined" startIcon={<SendRounded />} onClick={() => void handleSendTest()} sx={{ whiteSpace: 'nowrap', minHeight: 48 }}>
+                      {t('admin.emails.sendTest')}
+                    </Button>
+                  </Stack>
+                </AdminFieldGroup>
               </Stack>
             </Box>
           )}

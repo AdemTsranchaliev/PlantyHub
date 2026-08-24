@@ -19,6 +19,7 @@ import PendingActionsRounded from '@mui/icons-material/PendingActionsRounded'
 import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { countryDisplayName } from '../../utils/country'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import AdminStatCard from '../../components/admin/AdminStatCard'
 import AdminBarChart from '../../components/admin/AdminBarChart'
@@ -69,7 +70,7 @@ function Panel({ title, subtitle, children }: { title: string; subtitle?: string
 }
 
 export default function AdminDashboard() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const { data: dashboard, loading: dashboardLoading } = useDashboard()
   const { customers } = useCustomers()
@@ -354,7 +355,7 @@ export default function AdminDashboard() {
                 >
                   <TableCell sx={{ fontFamily: 'monospace', fontWeight: 700, color: brand.graphite }}>{order.id}</TableCell>
                   <TableCell>{order.customer}</TableCell>
-                  <TableCell>{t(`admin.countries.${order.country}`)}</TableCell>
+                  <TableCell>{t(`admin.countries.${order.country}`, { defaultValue: countryDisplayName(order.country, i18n.language) })}</TableCell>
                   <TableCell sx={{ fontWeight: 700 }}>{order.total}</TableCell>
                   <TableCell>
                     <Chip

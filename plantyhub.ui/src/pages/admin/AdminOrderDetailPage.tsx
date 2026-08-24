@@ -26,9 +26,11 @@ import PrintRounded from '@mui/icons-material/PrintRounded'
 import PublicRounded from '@mui/icons-material/PublicRounded'
 import StarRounded from '@mui/icons-material/StarRounded'
 import { useTranslation } from 'react-i18next'
+import { countryDisplayName } from '../../utils/country'
 import { AdminBreadcrumb } from '../../components/admin/AdminPageHeader'
 import CreateWaybillDialog from '../../components/admin/CreateWaybillDialog'
 import type { OrderStatus } from '../../admin/mockData'
+import OrderGiftLine from '../../components/OrderGiftLine'
 import { useOrderDetail, useOrders, useOrdersStore } from '../../hooks/useOrders'
 import { brand } from '../../theme'
 
@@ -71,7 +73,7 @@ function formatDateTime(iso: string) {
 export default function AdminOrderDetailPage() {
   const { orderId } = useParams<{ orderId: string }>()
   const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { order, loading } = useOrderDetail(orderId, true)
   const allOrders = useOrders()
   const { updateOrderStatus } = useOrdersStore()
@@ -130,11 +132,12 @@ export default function AdminOrderDetailPage() {
         <tr><td><b>${t('admin.orderDetail.courier')}</b></td><td>${t(`admin.orderDetail.couriers.${order.waybill.courier}`)}</td></tr>
         <tr><td><b>${t('admin.orders.table.id')}</b></td><td>${order.id}</td></tr>
         <tr><td><b>${t('admin.orderDetail.recipient')}</b></td><td>${order.shipping.name}</td></tr>
-        <tr><td><b>${t('admin.orderDetail.address')}</b></td><td>${order.shipping.street}, ${order.shipping.city} ${order.shipping.postalCode}, ${t(`admin.countries.${order.shipping.country}`)}</td></tr>
+        <tr><td><b>${t('admin.orderDetail.address')}</b></td><td>${order.shipping.street}, ${order.shipping.city} ${order.shipping.postalCode}, ${t(`admin.countries.${order.shipping.country}`, { defaultValue: countryDisplayName(order.shipping.country, i18n.language) })}</td></tr>
         <tr><td><b>${t('admin.orderDetail.phone')}</b></td><td>${order.shipping.phone}</td></tr>
         <tr><td><b>${t('admin.orderDetail.weight')}</b></td><td>${order.waybill.weightKg} kg</td></tr>
         <tr><td><b>${t('admin.orderDetail.packages')}</b></td><td>${order.waybill.packages}</td></tr>
         ${order.waybill.codAmount ? `<tr><td><b>${t('admin.orderDetail.codAmount')}</b></td><td>${order.waybill.codAmount}</td></tr>` : ''}
+        ${order.waybill.trackingUrl ? `<tr><td><b>${t('admin.orderDetail.tracking')}</b></td><td>${order.waybill.trackingUrl}</td></tr>` : ''}
       </table>
       </body></html>
     `)
@@ -178,7 +181,7 @@ export default function AdminOrderDetailPage() {
               )}
             </Stack>
             <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem', mt: 0.5 }}>
-              {t('admin.orderDetail.placedOn', { date: order.date })} · {t(`admin.countries.${order.country}`)}
+              {t('admin.orderDetail.placedOn', { date: order.date })} · {t(`admin.countries.${order.country}`, { defaultValue: countryDisplayName(order.country, i18n.language) })}
             </Typography>
           </Box>
         </Stack>
@@ -201,9 +204,10 @@ export default function AdminOrderDetailPage() {
           <TextField
             select
             size="small"
+            label={t('admin.orderDetail.status')}
             value={order.status}
             onChange={(e) => void updateOrderStatus(order.id, e.target.value as OrderStatus)}
-            sx={{ minWidth: 160 }}
+            sx={{ minWidth: 180 }}
           >
             {(['pending', 'processing', 'shipped', 'delivered', 'cancelled'] as OrderStatus[]).map((s) => (
               <MenuItem key={s} value={s}>
@@ -245,7 +249,7 @@ export default function AdminOrderDetailPage() {
                 </Stack>
                 <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                   <PublicRounded sx={{ fontSize: 18, color: brand.textSecondary }} />
-                  <Typography sx={{ fontSize: '0.9rem', fontWeight: 600 }}>{t(`admin.countries.${order.country}`)}</Typography>
+                  <Typography sx={{ fontSize: '0.9rem', fontWeight: 600 }}>{t(`admin.countries.${order.country}`, { defaultValue: countryDisplayName(order.country, i18n.language) })}</Typography>
                 </Stack>
               </Stack>
               <Divider sx={{ my: 2 }} />
@@ -276,7 +280,7 @@ export default function AdminOrderDetailPage() {
                 {order.shipping.postalCode} {order.shipping.city}
               </Typography>
               <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem', fontWeight: 600 }}>
-                {t(`admin.countries.${order.shipping.country}`)}
+                {t(`admin.countries.${order.shipping.country}`, { defaultValue: countryDisplayName(order.shipping.country, i18n.language) })}
               </Typography>
               <Typography sx={{ mt: 1, fontSize: '0.9rem' }}>{order.shipping.phone}</Typography>
             </Panel>
@@ -310,6 +314,16 @@ export default function AdminOrderDetailPage() {
                       {t('admin.orderDetail.codAmount')}: {order.waybill.codAmount}
                     </Typography>
                   )}
+                  {order.waybill.mode ? (
+                    <Typography sx={{ fontSize: '0.82rem', color: brand.textSecondary }}>
+                      {t(`admin.settings.couriers.modes.${order.waybill.mode === 'sandbox' || order.waybill.mode === 'live' ? order.waybill.mode : 'manual'}`)}
+                    </Typography>
+                  ) : null}
+                  {order.waybill.trackingUrl ? (
+                    <Link href={order.waybill.trackingUrl} target="_blank" rel="noopener noreferrer" sx={{ fontSize: '0.9rem', fontWeight: 700 }}>
+                      {t('admin.orderDetail.tracking')}
+                    </Link>
+                  ) : null}
                   <Typography sx={{ fontSize: '0.82rem', color: brand.textSecondary }}>
                     {formatDateTime(order.waybill.createdAt)}
                   </Typography>
@@ -358,6 +372,7 @@ export default function AdminOrderDetailPage() {
                               <Typography sx={{ fontSize: '0.78rem', color: brand.textSecondary }}>
                                 {t(`admin.dashboard.categories.${item.categoryKey}`)}
                               </Typography>
+                              {item.gift ? <OrderGiftLine gift={item.gift} compact /> : null}
                             </Box>
                           </Stack>
                         </TableCell>
@@ -381,7 +396,11 @@ export default function AdminOrderDetailPage() {
                     <Typography sx={{ fontSize: '0.9rem' }}>{order.shippingCost}</Typography>
                   </Stack>
                   <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem' }}>{t('admin.orderDetail.tax')}</Typography>
+                    <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem' }}>
+                      {order.taxRate
+                        ? t('admin.orderDetail.taxRate', { rate: order.taxRate })
+                        : t('admin.orderDetail.tax')}
+                    </Typography>
                     <Typography sx={{ fontSize: '0.9rem' }}>{order.tax}</Typography>
                   </Stack>
                   <Divider />
@@ -457,7 +476,7 @@ export default function AdminOrderDetailPage() {
                       }}
                     >
                       <span>{o.id}</span>
-                      <span style={{ color: brand.textSecondary }}>{o.date} · {t(`admin.countries.${o.country}`)} · {o.total}</span>
+                      <span style={{ color: brand.textSecondary }}>{o.date} · {t(`admin.countries.${o.country}`, { defaultValue: countryDisplayName(o.country, i18n.language) })} · {o.total}</span>
                     </Link>
                   ))}
                 </Stack>

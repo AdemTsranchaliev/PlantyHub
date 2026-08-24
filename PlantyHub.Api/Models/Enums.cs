@@ -45,5 +45,6 @@ public enum CourierId
 {
     Econt,
     Speedy,
-    Dhl
+    Dhl,
+    Boxnow
 }

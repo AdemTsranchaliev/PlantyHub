@@ -108,9 +108,46 @@ export default function CartPage() {
                           {item.pack}
                         </Typography>
                       )}
-                      <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, color: brand.plantGreenDark }}>
+                      <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, color: brand.plantGreenDark, mb: item.gift ? 1.25 : 0 }}>
                         {item.price}
                       </Typography>
+                      {item.gift && (
+                        <Stack
+                          direction="row"
+                          spacing={1.25}
+                          sx={{
+                            alignItems: 'center',
+                            p: 1,
+                            pr: 1.25,
+                            borderRadius: '12px',
+                            border: `1.5px dashed ${brand.plantGreen}`,
+                            bgcolor: brand.plantGreenMuted,
+                          }}
+                        >
+                          <Box
+                            component="img"
+                            src={item.gift.image}
+                            alt=""
+                            sx={{ width: 40, height: 40, borderRadius: '9px', objectFit: 'contain', bgcolor: brand.white, flexShrink: 0 }}
+                          />
+                          <Box sx={{ minWidth: 0, flex: 1 }}>
+                            <Typography sx={{ fontSize: '0.72rem', fontWeight: 700, color: brand.plantGreenDark, lineHeight: 1.2 }}>
+                              {t('cart.freeGift')}
+                            </Typography>
+                            <Typography sx={{ fontWeight: 700, fontSize: '0.85rem', color: brand.graphite, lineHeight: 1.3 }}>
+                              {item.gift.name}
+                            </Typography>
+                          </Box>
+                          <Stack spacing={0} sx={{ alignItems: 'flex-end', flexShrink: 0 }}>
+                            <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, color: brand.plantGreen, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                              {t('pdp.bonus.free')}
+                            </Typography>
+                            <Typography sx={{ fontSize: '0.8rem', color: brand.textSecondary, textDecoration: 'line-through' }}>
+                              {item.gift.compareAt}
+                            </Typography>
+                          </Stack>
+                        </Stack>
+                      )}
                     </Box>
                     <Stack direction="row" spacing={1} sx={{ alignItems: 'center', alignSelf: { xs: 'flex-start', sm: 'center' } }}>
                       <Stack

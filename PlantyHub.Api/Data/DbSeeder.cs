@@ -93,6 +93,12 @@ public static class DbSeeder
             await db.SaveChangesAsync();
         }
 
+        if (!await db.CourierSettings.AnyAsync())
+        {
+            db.CourierSettings.Add(new CourierSettings { Id = 1, Json = "{}" });
+            await db.SaveChangesAsync();
+        }
+
         await EnsureEmailTemplatesAsync(db);
     }
 
@@ -102,22 +108,34 @@ public static class DbSeeder
         var existing = await db.EmailTemplates.ToListAsync();
         var byKey = existing.ToDictionary(t => t.Key, StringComparer.OrdinalIgnoreCase);
 
-        // Always refresh the reference verify-email template so design updates land on restart.
-        const string referenceKey = "verify-email";
-        var reference = defaults.First(t => t.Key == referenceKey);
-        if (byKey.TryGetValue(referenceKey, out var existingReference))
+        // Always refresh the reference layout and all customer order emails on restart.
+        var refreshKeys = new[]
         {
-            existingReference.Name = reference.Name;
-            existingReference.Description = reference.Description;
-            existingReference.Subject = reference.Subject;
-            existingReference.HtmlBody = reference.HtmlBody;
-            existingReference.SampleDataJson = reference.SampleDataJson;
-            existingReference.UpdatedAt = DateTime.UtcNow;
-        }
-        else
+            "verify-email",
+            "order-confirmation",
+            "order-invoice",
+            "order-processing",
+            "order-shipped",
+            "order-delivered",
+            "order-cancelled",
+        };
+        foreach (var key in refreshKeys)
         {
-            db.EmailTemplates.Add(reference);
-            byKey[referenceKey] = reference;
+            var fresh = defaults.First(t => t.Key == key);
+            if (byKey.TryGetValue(key, out var existingRow))
+            {
+                existingRow.Name = fresh.Name;
+                existingRow.Description = fresh.Description;
+                existingRow.Subject = fresh.Subject;
+                existingRow.HtmlBody = fresh.HtmlBody;
+                existingRow.SampleDataJson = fresh.SampleDataJson;
+                existingRow.UpdatedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                db.EmailTemplates.Add(fresh);
+                byKey[key] = fresh;
+            }
         }
 
         var missing = defaults
@@ -340,7 +358,7 @@ public static class DbSeeder
             CustomerName = name,
             Email = email,
             Phone = phone,
-            Country = country,
+            Country = country.ToString(),
             Status = status,
             PaymentMethod = PaymentMethod.Card,
             Subtotal = subtotal,
@@ -353,13 +371,13 @@ public static class DbSeeder
             ShippingStreet = "Demo street 1",
             ShippingCity = "Demo city",
             ShippingPostalCode = "1000",
-            ShippingCountry = country,
+            ShippingCountry = country.ToString(),
             BillingName = name,
             BillingPhone = phone,
             BillingStreet = "Demo street 1",
             BillingCity = "Demo city",
             BillingPostalCode = "1000",
-            BillingCountry = country,
+            BillingCountry = country.ToString(),
             Items =
             [
                 new OrderItem

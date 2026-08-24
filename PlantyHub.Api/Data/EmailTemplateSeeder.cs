@@ -57,56 +57,50 @@ public static class EmailTemplateSeeder
         yield return T(
             "order-confirmation",
             "Order confirmation",
-            "Sent when a new order is placed.",
+            "Sent when a customer places an order. Includes items, totals, addresses and a link to the order.",
             "Order {{orderId}} confirmed",
-            Wrap("""
-                <h1 style="margin:0 0 16px;font-size:22px;color:#1C231E;">Thanks for your order</h1>
-                <p style="margin:0 0 12px;color:#4A554E;line-height:1.6;">Hi {{name}},</p>
-                <p style="margin:0 0 12px;color:#4A554E;line-height:1.6;">We received order <strong>{{orderId}}</strong> for <strong>{{total}}</strong>.</p>
-                <p style="margin:0 0 8px;color:#4A554E;line-height:1.6;"><strong>Items</strong></p>
-                <p style="margin:0;color:#4A554E;line-height:1.6;">{{itemsSummary}}</p>
-                """),
-            new Dictionary<string, string>
-            {
-                ["name"] = "Elena",
-                ["orderId"] = "PH-1042",
-                ["total"] = "€108.99",
-                ["itemsSummary"] = "HomeGarder One × 1<br/>Basil Seed Pods × 1",
-            });
+            Wrap(ConfirmationHtml()),
+            OrderEmailService.SampleVariables());
+
+        yield return T(
+            "order-invoice",
+            "Invoice",
+            "Formal invoice sent with the order confirmation. Includes seller VAT number, buyer address, items and tax.",
+            "Invoice {{invoiceNumber}} for order {{orderId}}",
+            Wrap(InvoiceHtml()),
+            OrderEmailService.SampleVariables());
+
+        yield return T(
+            "order-processing",
+            "Order processing",
+            "Sent when the order is being prepared.",
+            "Order {{orderId}} is being prepared",
+            Wrap(ProcessingHtml()),
+            OrderEmailService.SampleVariables());
 
         yield return T(
             "order-shipped",
             "Order shipped",
-            "Sent when an order is marked shipped / waybill created.",
+            "Sent when the order is marked shipped or a waybill is created.",
             "Order {{orderId}} is on the way",
-            Wrap("""
-                <h1 style="margin:0 0 16px;font-size:22px;color:#1C231E;">Your order has shipped</h1>
-                <p style="margin:0 0 12px;color:#4A554E;line-height:1.6;">Hi {{name}},</p>
-                <p style="margin:0 0 12px;color:#4A554E;line-height:1.6;">Order <strong>{{orderId}}</strong> is on its way.</p>
-                <p style="margin:0;color:#4A554E;line-height:1.6;">Tracking: <strong>{{trackingNumber}}</strong></p>
-                """),
-            new Dictionary<string, string>
-            {
-                ["name"] = "Elena",
-                ["orderId"] = "PH-1042",
-                ["trackingNumber"] = "SP-998877",
-            });
+            Wrap(ShippedHtml()),
+            OrderEmailService.SampleVariables());
+
+        yield return T(
+            "order-delivered",
+            "Order delivered",
+            "Sent when the order is marked delivered.",
+            "Order {{orderId}} has been delivered",
+            Wrap(DeliveredHtml()),
+            OrderEmailService.SampleVariables());
 
         yield return T(
             "order-cancelled",
             "Order cancelled",
-            "Sent when an order is cancelled.",
+            "Sent when the order is cancelled.",
             "Order {{orderId}} cancelled",
-            Wrap("""
-                <h1 style="margin:0 0 16px;font-size:22px;color:#1C231E;">Order cancelled</h1>
-                <p style="margin:0 0 12px;color:#4A554E;line-height:1.6;">Hi {{name}},</p>
-                <p style="margin:0;color:#4A554E;line-height:1.6;">Order <strong>{{orderId}}</strong> has been cancelled. If this was a mistake, reply to this email and we will help.</p>
-                """),
-            new Dictionary<string, string>
-            {
-                ["name"] = "Elena",
-                ["orderId"] = "PH-1042",
-            });
+            Wrap(CancelledHtml()),
+            OrderEmailService.SampleVariables());
 
         yield return T(
             "newsletter",
@@ -194,6 +188,151 @@ public static class EmailTemplateSeeder
           If you did not create a PlantyHub account, you can safely ignore this message.
         </p>
         """);
+
+    private static string ConfirmationHtml() => OrderIntro(
+        "Order",
+        "Thanks for your order",
+        "We received your order and a separate invoice is on its way to this inbox.",
+        """
+        <p style="margin:0 0 20px;font-size:16px;line-height:1.65;color:#68706A;">
+          Order <strong style="color:#1C231E;">{{orderId}}</strong> · {{orderDate}} · {{paymentMethod}}
+        </p>
+        """) + OrderDetails() + ViewOrderButton();
+
+    private static string InvoiceHtml() => """
+        <p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2F7D53;">
+          Invoice / Фактура
+        </p>
+        <h1 style="margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:1.2;font-weight:600;color:#1C231E;">
+          Invoice {{invoiceNumber}}
+        </h1>
+        <p style="margin:0 0 24px;font-size:16px;line-height:1.55;color:#68706A;">
+          Keep this email as your invoice for order {{orderId}}.
+        </p>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 24px;">
+          <tr>
+            <td valign="top" style="width:50%;padding-right:12px;">
+              <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;">Seller</p>
+              <p style="margin:0;font-size:14px;line-height:1.55;color:#1C231E;">
+                <strong>{{sellerName}}</strong><br/>
+                VAT: {{sellerVatNumber}}<br/>
+                {{sellerAddress}}<br/>
+                {{sellerEmail}}
+              </p>
+            </td>
+            <td valign="top" style="width:50%;padding-left:12px;">
+              <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;">Bill to</p>
+              <p style="margin:0;font-size:14px;line-height:1.55;color:#1C231E;">{{billingAddress}}</p>
+            </td>
+          </tr>
+        </table>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#68706A;">
+          Date: <strong style="color:#1C231E;">{{orderDate}}</strong> · Payment: <strong style="color:#1C231E;">{{paymentMethod}}</strong>
+        </p>
+        """ + OrderDetails() + """
+        <p style="margin:20px 0 0;font-size:12px;line-height:1.55;color:#68706A;">
+          Amounts are in EUR. VAT is the standard rate of the shipping country. Taxable amount = total − VAT.
+        </p>
+        """;
+
+    private static string ProcessingHtml() => OrderIntro(
+        "Order",
+        "We are preparing your order",
+        "Your payment is in and the garden is being packed.",
+        """
+        <p style="margin:0 0 20px;font-size:16px;line-height:1.65;color:#68706A;">
+          Order <strong style="color:#1C231E;">{{orderId}}</strong> is now being prepared. You will get tracking as soon as it ships.
+        </p>
+        """) + OrderDetails() + ViewOrderButton();
+
+    private static string ShippedHtml() => OrderIntro(
+        "Shipping",
+        "Your order is on the way",
+        "The courier has the parcel.",
+        """
+        <p style="margin:0 0 20px;font-size:16px;line-height:1.65;color:#68706A;">
+          Order <strong style="color:#1C231E;">{{orderId}}</strong> has shipped with {{courier}}.
+        </p>
+        <div style="margin:0 0 24px;">{{trackingBlock}}</div>
+        """) + OrderDetails() + ViewOrderButton();
+
+    private static string DeliveredHtml() => OrderIntro(
+        "Delivered",
+        "Your order has arrived",
+        "We hope the first harvest is close.",
+        """
+        <p style="margin:0 0 20px;font-size:16px;line-height:1.65;color:#68706A;">
+          Order <strong style="color:#1C231E;">{{orderId}}</strong> is marked as delivered. If something is missing, reply to this email.
+        </p>
+        """) + OrderDetails() + ViewOrderButton();
+
+    private static string CancelledHtml() => OrderIntro(
+        "Cancelled",
+        "Order cancelled",
+        "This order will not be shipped.",
+        """
+        <p style="margin:0 0 20px;font-size:16px;line-height:1.65;color:#68706A;">
+          Order <strong style="color:#1C231E;">{{orderId}}</strong> for <strong style="color:#1C231E;">{{total}}</strong> has been cancelled.
+          If this was a mistake, reply to this email and we will help.
+        </p>
+        """) + OrderDetails();
+
+    private static string OrderIntro(string eyebrow, string title, string subtitle, string body) =>
+        """
+        <p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2F7D53;">
+          __EYEBROW__
+        </p>
+        <h1 style="margin:0 0 10px;font-family:Georgia,'Times New Roman',serif;font-size:30px;line-height:1.2;font-weight:600;color:#1C231E;">
+          __TITLE__
+        </h1>
+        <p style="margin:0 0 22px;font-size:16px;line-height:1.55;color:#68706A;">
+          __SUBTITLE__
+        </p>
+        <p style="margin:0 0 12px;font-size:16px;line-height:1.6;color:#1C231E;">
+          Hi {{name}},
+        </p>
+        __BODY__
+        """
+        .Replace("__EYEBROW__", eyebrow, StringComparison.Ordinal)
+        .Replace("__TITLE__", title, StringComparison.Ordinal)
+        .Replace("__SUBTITLE__", subtitle, StringComparison.Ordinal)
+        .Replace("__BODY__", body, StringComparison.Ordinal);
+
+    private static string OrderDetails() => """
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 8px;">
+          <tr>
+            <td style="padding:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;">Items</td>
+            <td style="padding:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;text-align:center;width:48px;">Qty</td>
+            <td style="padding:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;text-align:right;width:88px;">Total</td>
+          </tr>
+          {{itemsHtml}}
+        </table>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 24px;">
+          {{totalsHtml}}
+        </table>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 8px;">
+          <tr>
+            <td valign="top" style="width:50%;padding-right:12px;">
+              <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;">Ship to</p>
+              <p style="margin:0;font-size:14px;line-height:1.55;color:#1C231E;">{{shippingAddress}}</p>
+            </td>
+            <td valign="top" style="width:50%;padding-left:12px;">
+              <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#68706A;">Payment</p>
+              <p style="margin:0;font-size:14px;line-height:1.55;color:#1C231E;">{{paymentMethod}}</p>
+            </td>
+          </tr>
+        </table>
+        """;
+
+    private static string ViewOrderButton() => """
+        <table role="presentation" cellspacing="0" cellpadding="0" style="margin:24px 0 0;">
+          <tr>
+            <td style="border-radius:12px;background:#2F7D53;">
+              <a href="{{orderUrl}}" style="display:inline-block;padding:15px 32px;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;">View order</a>
+            </td>
+          </tr>
+        </table>
+        """;
 
     private static string Wrap(string inner)
     {

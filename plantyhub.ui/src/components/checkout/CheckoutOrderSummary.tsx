@@ -25,6 +25,8 @@ type SummaryProps = {
   shippingLabel: string
   totalLabel: string
   freeShipping: boolean
+  taxLabel?: string | null
+  taxHint?: string | null
 }
 
 function lineTotal(item: CartItem) {
@@ -32,6 +34,7 @@ function lineTotal(item: CartItem) {
 }
 
 function LineItem({ item }: { item: CartItem }) {
+  const { t } = useTranslation()
   return (
     <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
       <Box sx={{ position: 'relative', flexShrink: 0 }}>
@@ -84,15 +87,32 @@ function LineItem({ item }: { item: CartItem }) {
         {item.pack && (
           <Typography sx={{ fontSize: '0.6875rem', color: checkout.muted }}>{item.pack}</Typography>
         )}
+        {item.gift && (
+          <Typography sx={{ fontSize: '0.6875rem', color: checkout.link, fontWeight: 600, mt: 0.25 }}>
+            {t('cart.freeGift')}: {item.gift.name}
+          </Typography>
+        )}
       </Box>
-      <Typography sx={{ fontSize: '0.8125rem', fontWeight: 500, color: checkout.text, flexShrink: 0 }}>
-        {lineTotal(item)}
-      </Typography>
+      <Stack spacing={0} sx={{ alignItems: 'flex-end', flexShrink: 0 }}>
+        <Typography sx={{ fontSize: '0.8125rem', fontWeight: 500, color: checkout.text }}>
+          {lineTotal(item)}
+        </Typography>
+        {item.gift && (
+          <Stack direction="row" spacing={0.5} sx={{ alignItems: 'baseline' }}>
+            <Typography sx={{ fontSize: '0.6875rem', fontWeight: 700, color: checkout.link }}>
+              {t('pdp.bonus.free')}
+            </Typography>
+            <Typography sx={{ fontSize: '0.6875rem', color: checkout.muted, textDecoration: 'line-through' }}>
+              {item.gift.compareAt}
+            </Typography>
+          </Stack>
+        )}
+      </Stack>
     </Stack>
   )
 }
 
-function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping }: SummaryProps) {
+function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, taxLabel, taxHint }: SummaryProps) {
   const { t } = useTranslation()
 
   return (
@@ -114,6 +134,15 @@ function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipp
           {t('cart.freeShippingHint', { amount: `€${FREE_SHIPPING_THRESHOLD}` })}
         </Typography>
       )}
+      {taxLabel ? (
+        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>{t('cart.vat')}</Typography>
+          <Typography sx={{ fontSize: '0.8125rem', color: checkout.text }}>{taxLabel}</Typography>
+        </Stack>
+      ) : null}
+      {taxHint ? (
+        <Typography sx={{ fontSize: '0.6875rem', color: checkout.muted }}>{taxHint}</Typography>
+      ) : null}
       <Divider sx={{ borderColor: checkout.border, my: 0.25 }} />
       <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography sx={{ fontSize: '0.9375rem', fontWeight: 600, color: checkout.text }}>{t('cart.total')}</Typography>

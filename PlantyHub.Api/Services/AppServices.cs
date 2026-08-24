@@ -51,7 +51,7 @@ public class JwtTokenService(IOptions<JwtSettings> options)
 
 public static class PriceHelper
 {
-    public const decimal FreeShippingThreshold = 60m;
+    public const decimal FreeShippingThreshold = 150m;
     public const decimal StandardShippingCost = 4.99m;
 
     public static decimal ParseEuro(string value)
@@ -81,8 +81,15 @@ public static class EnumMapper
         _ => throw new ArgumentException($"Unknown product category: {category}")
     };
 
-    public static CountryCode ParseCountry(string country) =>
-        Enum.Parse<CountryCode>(country.Trim().ToUpperInvariant(), ignoreCase: true);
+    public static string ParseCountry(string country)
+    {
+        var code = country.Trim().ToUpperInvariant();
+        if (code.Length == 2 && code.All(char.IsAsciiLetter))
+            return code;
+        if (Enum.TryParse<CountryCode>(code, true, out var known))
+            return known.ToString();
+        throw new ArgumentException($"Unknown country: {country}");
+    }
 
     public static ImageFit ParseImageFit(string fit) => fit.Trim().ToLowerInvariant() switch
     {
@@ -134,6 +141,7 @@ public static class EnumMapper
         "econt" => CourierId.Econt,
         "speedy" => CourierId.Speedy,
         "dhl" => CourierId.Dhl,
+        "boxnow" or "box-now" or "box_now" or "boxNow" => CourierId.Boxnow,
         _ => throw new ArgumentException($"Unknown courier: {courier}")
     };
 
@@ -147,6 +155,9 @@ public static class EnumMapper
     };
 
     public static string ToApi(CountryCode country) => country.ToString();
+
+    public static string ToApiCountry(string country) =>
+        string.IsNullOrWhiteSpace(country) ? "BG" : country.Trim().ToUpperInvariant();
 
     public static string ToApi(OrderStatus status) => status switch
     {
@@ -171,6 +182,7 @@ public static class EnumMapper
         CourierId.Econt => "econt",
         CourierId.Speedy => "speedy",
         CourierId.Dhl => "dhl",
+        CourierId.Boxnow => "boxnow",
         _ => courier.ToString().ToLowerInvariant()
     };
 

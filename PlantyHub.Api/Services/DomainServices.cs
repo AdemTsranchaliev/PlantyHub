@@ -42,18 +42,20 @@ public class OrderMapper
             order.Id,
             order.CustomerName,
             order.Email,
-            EnumMapper.ToApi(order.Country),
+            EnumMapper.ToApiCountry(order.Country),
             order.Items.Sum(i => i.Quantity),
             PriceHelper.FormatEuro(order.Total),
             EnumMapper.ToApi(order.Status),
-            order.CreatedAt.ToString("yyyy-MM-dd"));
+            order.CreatedAt.ToString("yyyy-MM-dd"),
+            order.Waybill is null ? null : EnumMapper.ToApi(order.Waybill.Courier),
+            order.Waybill?.Number);
 
     public static OrderDetailDto ToDetail(Order order) =>
         new(
             order.Id,
             order.CustomerName,
             order.Email,
-            EnumMapper.ToApi(order.Country),
+            EnumMapper.ToApiCountry(order.Country),
             order.Items.Sum(i => i.Quantity),
             PriceHelper.FormatEuro(order.Total),
             EnumMapper.ToApi(order.Status),
@@ -69,21 +71,24 @@ public class OrderMapper
                 i.Quantity,
                 PriceHelper.FormatEuro(i.UnitPrice),
                 PriceHelper.FormatEuro(i.Total),
-                i.Image)).ToList(),
+                i.Image,
+                string.IsNullOrWhiteSpace(i.GiftName)
+                    ? null
+                    : new OrderLineGiftDto(i.GiftName, i.GiftImage ?? string.Empty, i.GiftCompareAt))).ToList(),
             new OrderAddressDto(
                 order.ShippingName,
                 order.ShippingPhone,
                 order.ShippingStreet,
                 order.ShippingCity,
                 order.ShippingPostalCode,
-                EnumMapper.ToApi(order.ShippingCountry)),
+                EnumMapper.ToApiCountry(order.ShippingCountry)),
             new OrderAddressDto(
                 order.BillingName,
                 order.BillingPhone,
                 order.BillingStreet,
                 order.BillingCity,
                 order.BillingPostalCode,
-                EnumMapper.ToApi(order.BillingCountry)),
+                EnumMapper.ToApiCountry(order.BillingCountry)),
             EnumMapper.ToApi(order.PaymentMethod),
             PriceHelper.FormatEuro(order.Subtotal),
             PriceHelper.FormatEuro(order.ShippingCost),
@@ -98,11 +103,15 @@ public class OrderMapper
                     order.Waybill.WeightKg,
                     order.Waybill.Packages,
                     order.Waybill.CodAmount.HasValue ? PriceHelper.FormatEuro(order.Waybill.CodAmount.Value) : null,
-                    order.Waybill.Notes),
+                    order.Waybill.Notes,
+                    order.Waybill.TrackingUrl,
+                    order.Waybill.ExternalId,
+                    order.Waybill.Mode),
             order.Timeline
                 .OrderBy(t => t.At)
                 .Select(t => new OrderTimelineDto(t.At.ToString("o"), EnumMapper.ToApi(t.Status), t.Note))
-                .ToList());
+                .ToList(),
+            order.TaxRate);
 }
 
 public class CustomerService(AppDbContext db)
@@ -150,7 +159,7 @@ public class CustomerService(AppDbContext db)
             c.Name,
             c.Email,
             c.Phone,
-            EnumMapper.ToApi(c.Country),
+            EnumMapper.ToApiCountry(c.Country),
             c.Orders.Count,
             PriceHelper.FormatEuro(c.Orders.Sum(o => o.Total)),
             c.JoinedAt.ToString("yyyy-MM-dd"))).ToList();
@@ -170,7 +179,7 @@ public class CustomerService(AppDbContext db)
             customer.Name,
             customer.Email,
             customer.Phone,
-            EnumMapper.ToApi(customer.Country),
+            EnumMapper.ToApiCountry(customer.Country),
             customer.Orders.Count,
             PriceHelper.FormatEuro(customer.Orders.Sum(o => o.Total)),
             customer.JoinedAt.ToString("yyyy-MM-dd"));
@@ -184,7 +193,7 @@ public class CustomerService(AppDbContext db)
     }
 }
 
-public class OrderService(AppDbContext db, CustomerService customers, EmailTemplateService emailTemplates)
+public class OrderService(AppDbContext db, CustomerService customers, OrderEmailService orderEmails, CourierService couriers, CourierRateService rates, VatService vat)
 {
     public async Task<Order?> GetByIdAsync(string id, CancellationToken ct = default) =>
         await db.Orders
@@ -232,10 +241,40 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
         }
 
         var subtotal = lineItems.Sum(x => x.UnitPrice * x.Item.Quantity);
-        var shipping = PriceHelper.CalcShipping(subtotal);
-        var total = subtotal + shipping;
+        decimal shipping;
+        if (subtotal >= PriceHelper.FreeShippingThreshold)
+        {
+            shipping = 0m;
+        }
+        else if (!string.IsNullOrWhiteSpace(request.Courier) && !string.IsNullOrWhiteSpace(request.Delivery))
+        {
+            var quotes = await rates.QuoteAsync(new ShippingQuoteRequest
+            {
+                Country = request.Country,
+                City = request.City,
+                CityId = request.CityId,
+                PostalCode = request.PostalCode,
+                Street = request.Street,
+                OfficeCode = request.OfficeCode,
+                PaymentMethod = request.PaymentMethod,
+                Subtotal = subtotal,
+            }, ct);
+            var match = quotes.FirstOrDefault(q =>
+                q.Courier.Equals(request.Courier, StringComparison.OrdinalIgnoreCase)
+                && q.Delivery.Equals(request.Delivery, StringComparison.OrdinalIgnoreCase));
+            if (match is null)
+                throw new InvalidOperationException("Shipping quote is no longer valid. Refresh delivery options.");
+            shipping = match.PriceEur;
+        }
+        else
+        {
+            shipping = PriceHelper.StandardShippingCost;
+        }
+        var vatQuote = await vat.QuoteAsync(country, subtotal, shipping, ct);
+        var tax = vatQuote.Tax;
+        var total = vatQuote.Total;
         var now = DateTime.UtcNow;
-        var orderId = $"PH-{now:yyMMddHHmmss}"[..11];
+        var orderId = await NextOrderIdAsync(now, ct);
 
         var order = new Order
         {
@@ -249,10 +288,14 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
             PaymentMethod = paymentMethod,
             Subtotal = subtotal,
             ShippingCost = shipping,
-            Tax = 0m,
+            Tax = tax,
+            TaxRate = vatQuote.Enabled ? vatQuote.RatePercent : null,
             Total = total,
             Notes = request.Notes,
             CreatedAt = now,
+            ShippingCourier = string.IsNullOrWhiteSpace(request.Courier) ? null : request.Courier.Trim().ToLowerInvariant(),
+            ShippingDelivery = string.IsNullOrWhiteSpace(request.Delivery) ? null : request.Delivery.Trim().ToLowerInvariant(),
+            ShippingOfficeCode = string.IsNullOrWhiteSpace(request.OfficeCode) ? null : request.OfficeCode.Trim(),
             ShippingName = request.Name.Trim(),
             ShippingPhone = request.Phone.Trim(),
             ShippingStreet = request.Street.Trim(),
@@ -290,7 +333,10 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
                 Quantity = item.Quantity,
                 UnitPrice = unitPrice,
                 Total = unitPrice * item.Quantity,
-                Image = product.Image
+                Image = product.Image,
+                GiftName = string.IsNullOrWhiteSpace(item.GiftName) ? null : item.GiftName.Trim(),
+                GiftImage = string.IsNullOrWhiteSpace(item.GiftImage) ? null : item.GiftImage.Trim(),
+                GiftCompareAt = string.IsNullOrWhiteSpace(item.GiftCompareAt) ? null : item.GiftCompareAt.Trim(),
             });
         }
 
@@ -300,19 +346,7 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
 
         try
         {
-            var itemsSummary = string.Join("<br/>", order.Items.Select(i =>
-                $"{EmailTemplateService.HtmlEncode(i.Name)} × {i.Quantity}"));
-            await emailTemplates.SendTemplatedAsync(
-                "order-confirmation",
-                order.Email,
-                new Dictionary<string, string>
-                {
-                    ["name"] = EmailTemplateService.HtmlEncode(order.CustomerName),
-                    ["orderId"] = order.Id,
-                    ["total"] = PriceHelper.FormatEuro(order.Total),
-                    ["itemsSummary"] = itemsSummary,
-                },
-                ct);
+            await orderEmails.TrySendCheckoutAsync(order, ct);
         }
         catch
         {
@@ -320,6 +354,20 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
         }
 
         return order;
+    }
+
+    async Task<string> NextOrderIdAsync(DateTime now, CancellationToken ct)
+    {
+        for (var i = 0; i < 25; i++)
+        {
+            var id = i == 0
+                ? $"PH-{now:yyMMddHHmmss}"
+                : $"PH-{now:yyMMddHHmmss}{i:D2}";
+            if (!await db.Orders.AnyAsync(o => o.Id == id, ct))
+                return id;
+        }
+
+        return $"PH-{now:yyMMddHHmmss}{Guid.NewGuid().ToString("N")[..4]}";
     }
 
     public async Task<Order?> UpdateStatusAsync(string id, string status, CancellationToken ct = default)
@@ -336,7 +384,7 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
         });
 
         await db.SaveChangesAsync(ct);
-        await TrySendOrderStatusEmailAsync(order, ct);
+        await orderEmails.TrySendStatusAsync(order, ct);
         return order;
     }
 
@@ -348,27 +396,33 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
         if (order.Waybill is not null)
             throw new InvalidOperationException("Waybill already exists for this order.");
 
+        var courier = EnumMapper.ParseCourier(request.Courier);
+        var shipment = await couriers.CreateShipmentAsync(courier, request, ct);
+
         var now = DateTime.UtcNow;
         order.Waybill = new Waybill
         {
-            Number = request.Number.Trim(),
-            Courier = EnumMapper.ParseCourier(request.Courier),
+            Number = shipment.Number,
+            Courier = courier,
             CreatedAt = now,
             WeightKg = request.WeightKg,
             Packages = request.Packages,
             CodAmount = request.CodAmount,
-            Notes = request.Notes
+            Notes = request.Notes,
+            TrackingUrl = shipment.TrackingUrl,
+            ExternalId = shipment.ExternalId,
+            Mode = shipment.Mode,
         };
         order.Status = OrderStatus.Shipped;
         order.Timeline.Add(new OrderTimelineEntry
         {
             At = now,
             Status = OrderStatus.Shipped,
-            Note = $"Waybill {request.Number.Trim()}"
+            Note = $"Waybill {shipment.Number}"
         });
 
         await db.SaveChangesAsync(ct);
-        await TrySendOrderStatusEmailAsync(order, ct);
+        await orderEmails.TrySendStatusAsync(order, ct);
         return order;
     }
 
@@ -384,42 +438,6 @@ public class OrderService(AppDbContext db, CustomerService customers, EmailTempl
 
     public async Task<Order?> CancelAsync(string id, CancellationToken ct = default) =>
         await UpdateStatusAsync(id, "cancelled", ct);
-
-    private async Task TrySendOrderStatusEmailAsync(Order order, CancellationToken ct)
-    {
-        try
-        {
-            if (order.Status == OrderStatus.Shipped)
-            {
-                await emailTemplates.SendTemplatedAsync(
-                    "order-shipped",
-                    order.Email,
-                    new Dictionary<string, string>
-                    {
-                        ["name"] = EmailTemplateService.HtmlEncode(order.CustomerName),
-                        ["orderId"] = order.Id,
-                        ["trackingNumber"] = EmailTemplateService.HtmlEncode(order.Waybill?.Number ?? "—"),
-                    },
-                    ct);
-            }
-            else if (order.Status == OrderStatus.Cancelled)
-            {
-                await emailTemplates.SendTemplatedAsync(
-                    "order-cancelled",
-                    order.Email,
-                    new Dictionary<string, string>
-                    {
-                        ["name"] = EmailTemplateService.HtmlEncode(order.CustomerName),
-                        ["orderId"] = order.Id,
-                    },
-                    ct);
-            }
-        }
-        catch
-        {
-            // Status already saved.
-        }
-    }
 }
 
 public class ProductService(AppDbContext db)

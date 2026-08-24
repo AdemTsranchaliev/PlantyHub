@@ -16,8 +16,9 @@ import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
 import { useTranslation } from 'react-i18next'
 import Logo from '../Logo'
 import LanguageSwitcher from '../LanguageSwitcher'
-import { adminNavItems, adminCatalogItems } from '../../admin/nav'
+import { adminNavGroups } from '../../admin/nav'
 import { clearAdminUser, getAdminUser, isAdminAuthenticated } from '../../admin/auth'
+import { logoutCustomer } from '../../store/auth'
 import AdminDataBootstrap from './AdminDataBootstrap'
 import { brand } from '../../theme'
 
@@ -36,7 +37,8 @@ export default function AdminLayout() {
 
   const handleLogout = () => {
     clearAdminUser()
-    navigate('/admin/login')
+    logoutCustomer()
+    navigate('/login')
   }
 
   const isActive = (path: string) => {
@@ -60,79 +62,52 @@ export default function AdminLayout() {
 
       <Divider />
 
-      <List sx={{ flex: 1, px: 1.5, py: 1 }}>
-        {adminNavItems.map((item) => {
-          if (item.group === 'catalog' && item === adminCatalogItems[0]) {
-            return (
-              <Box key="catalog-group">
-                <Typography
+      <List sx={{ flex: 1, px: 1.5, py: 1, overflow: 'auto' }}>
+        {adminNavGroups.map((group) => (
+          <Box key={group.id} sx={{ mb: 0.75 }}>
+            {group.labelKey ? (
+              <Typography
+                sx={{
+                  px: 1.5,
+                  py: 1,
+                  mt: group.id === 'overview' ? 0 : 0.75,
+                  fontSize: '0.7rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: brand.textSecondary,
+                }}
+              >
+                {t(group.labelKey)}
+              </Typography>
+            ) : null}
+            {group.items.map((item) => {
+              const Icon = item.icon
+              return (
+                <ListItemButton
+                  key={item.path}
+                  component={RouterLink}
+                  to={item.path}
+                  selected={isActive(item.path)}
+                  onClick={() => setMobileOpen(false)}
                   sx={{
-                    px: 1.5,
-                    py: 1,
-                    mt: 1,
-                    fontSize: '0.7rem',
-                    fontWeight: 800,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: brand.textSecondary,
+                    borderRadius: '12px',
+                    mb: 0.5,
+                    '&.Mui-selected': { bgcolor: brand.plantGreenMuted, color: brand.plantGreenDark, '& .MuiListItemIcon-root': { color: brand.plantGreen } },
                   }}
                 >
-                  {t('admin.nav.catalog')}
-                </Typography>
-                {adminCatalogItems.map((catalogItem) => {
-                  const Icon = catalogItem.icon
-                  return (
-                    <ListItemButton
-                      key={catalogItem.path}
-                      component={RouterLink}
-                      to={catalogItem.path}
-                      selected={isActive(catalogItem.path)}
-                      onClick={() => setMobileOpen(false)}
-                      sx={{
-                        borderRadius: '12px',
-                        mb: 0.5,
-                        '&.Mui-selected': { bgcolor: brand.plantGreenMuted, color: brand.plantGreenDark, '& .MuiListItemIcon-root': { color: brand.plantGreen } },
-                      }}
-                    >
-                      <ListItemIcon sx={{ minWidth: 40, color: brand.textSecondary }}>
-                        <Icon fontSize="small" />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={t(catalogItem.labelKey)}
-                        sx={{ '& .MuiListItemText-primary': { fontSize: '0.92rem', fontWeight: 600 } }}
-                      />
-                    </ListItemButton>
-                  )
-                })}
-              </Box>
-            )
-          }
-          if (item.group === 'catalog') return null
-
-          const Icon = item.icon
-          return (
-            <ListItemButton
-              key={item.path}
-              component={RouterLink}
-              to={item.path}
-              selected={isActive(item.path)}
-              onClick={() => setMobileOpen(false)}
-              sx={{
-                borderRadius: '12px',
-                mb: 0.5,
-                '&.Mui-selected': { bgcolor: brand.plantGreenMuted, color: brand.plantGreenDark, '& .MuiListItemIcon-root': { color: brand.plantGreen } },
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 40, color: brand.textSecondary }}>
-                <Icon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText
-                primary={t(item.labelKey)}
-                sx={{ '& .MuiListItemText-primary': { fontSize: '0.92rem', fontWeight: 600 } }}
-              />
-            </ListItemButton>
-          )
-        })}
+                  <ListItemIcon sx={{ minWidth: 40, color: brand.textSecondary }}>
+                    <Icon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={t(item.labelKey)}
+                    sx={{ '& .MuiListItemText-primary': { fontSize: '0.92rem', fontWeight: 600 } }}
+                  />
+                </ListItemButton>
+              )
+            })}
+          </Box>
+        ))}
       </List>
 
       <Divider />

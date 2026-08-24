@@ -37,6 +37,10 @@ function writeJsonTo(storage: Storage, key: string, value: unknown) {
   storage.setItem(key, JSON.stringify(value))
 }
 
+export function hasAdminRole(roles?: string[] | null): boolean {
+  return Boolean(roles?.some((role) => role.toLowerCase() === 'admin'))
+}
+
 export function getAdminToken(): string | null {
   return localStorage.getItem(ADMIN_TOKEN_KEY)
 }

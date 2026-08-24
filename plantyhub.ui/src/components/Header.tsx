@@ -26,6 +26,7 @@ import { navHrefs } from '../data/catalog'
 import { resolveHref } from '../paths'
 import { useCart } from '../hooks/useCart'
 import { useCustomerAuth } from '../hooks/useCustomerAuth'
+import { hasAdminRole } from '../auth/session'
 import { brand } from '../theme'
 
 const navKeys = [
@@ -43,6 +44,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { itemCount: cartCount } = useCart()
   const { customer, isLoggedIn, logout } = useCustomerAuth()
+  const isAdmin = hasAdminRole(customer?.roles)
 
   return (
     <>
@@ -146,19 +148,35 @@ export default function Header() {
             </Typography>
             <LanguageSwitcher />
             {isLoggedIn ? (
-              <Button
-                component={RouterLink}
-                to={navHrefs.myOrders}
-                startIcon={<PersonOutlineRounded />}
-                sx={{
-                  display: { xs: 'none', md: 'inline-flex' },
-                  color: brand.graphite,
-                  fontWeight: 700,
-                  fontSize: '0.85rem',
-                }}
-              >
-                {customer?.name?.split(' ')[0] ?? t('header.account')}
-              </Button>
+              <>
+                {isAdmin && (
+                  <Button
+                    component={RouterLink}
+                    to="/admin"
+                    sx={{
+                      display: { xs: 'none', md: 'inline-flex' },
+                      color: brand.plantGreenDark,
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                    }}
+                  >
+                    {t('header.admin')}
+                  </Button>
+                )}
+                <Button
+                  component={RouterLink}
+                  to={navHrefs.myOrders}
+                  startIcon={<PersonOutlineRounded />}
+                  sx={{
+                    display: { xs: 'none', md: 'inline-flex' },
+                    color: brand.graphite,
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                  }}
+                >
+                  {customer?.name?.split(' ')[0] ?? t('header.account')}
+                </Button>
+              </>
             ) : (
               <Button
                 component={RouterLink}
@@ -223,6 +241,11 @@ export default function Header() {
         {isLoggedIn ? (
           <Box sx={{ px: pagePaddingX, py: 1.5 }}>
             <Typography sx={{ fontWeight: 700, color: brand.graphite, mb: 1 }}>{customer?.name}</Typography>
+            {isAdmin && (
+              <Button component={RouterLink} to="/admin" fullWidth variant="contained" onClick={() => setMobileOpen(false)} sx={{ mb: 1 }}>
+                {t('header.admin')}
+              </Button>
+            )}
             <Button component={RouterLink} to={navHrefs.myOrders} fullWidth variant="outlined" onClick={() => setMobileOpen(false)} sx={{ mb: 1 }}>
               {t('header.myOrders')}
             </Button>

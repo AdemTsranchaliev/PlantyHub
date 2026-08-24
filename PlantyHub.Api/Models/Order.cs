@@ -10,29 +10,33 @@ public class Order
     public string CustomerName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
-    public CountryCode Country { get; set; }
+    public string Country { get; set; } = "BG";
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
     public PaymentMethod PaymentMethod { get; set; }
     public decimal Subtotal { get; set; }
     public decimal ShippingCost { get; set; }
     public decimal Tax { get; set; }
+    public decimal? TaxRate { get; set; }
     public decimal Total { get; set; }
     public string? Notes { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public string? ShippingCourier { get; set; }
+    public string? ShippingDelivery { get; set; }
+    public string? ShippingOfficeCode { get; set; }
 
     public string ShippingName { get; set; } = string.Empty;
     public string ShippingPhone { get; set; } = string.Empty;
     public string ShippingStreet { get; set; } = string.Empty;
     public string ShippingCity { get; set; } = string.Empty;
     public string ShippingPostalCode { get; set; } = string.Empty;
-    public CountryCode ShippingCountry { get; set; }
+    public string ShippingCountry { get; set; } = "BG";
 
     public string BillingName { get; set; } = string.Empty;
     public string BillingPhone { get; set; } = string.Empty;
     public string BillingStreet { get; set; } = string.Empty;
     public string BillingCity { get; set; } = string.Empty;
     public string BillingPostalCode { get; set; } = string.Empty;
-    public CountryCode BillingCountry { get; set; }
+    public string BillingCountry { get; set; } = "BG";
 
     public Waybill? Waybill { get; set; }
     public ICollection<OrderItem> Items { get; set; } = [];
@@ -51,6 +55,9 @@ public class OrderItem
     public decimal UnitPrice { get; set; }
     public decimal Total { get; set; }
     public string Image { get; set; } = string.Empty;
+    public string? GiftName { get; set; }
+    public string? GiftImage { get; set; }
+    public string? GiftCompareAt { get; set; }
 }
 
 public class OrderTimelineEntry
@@ -75,4 +82,7 @@ public class Waybill
     public int Packages { get; set; } = 1;
     public decimal? CodAmount { get; set; }
     public string? Notes { get; set; }
+    public string? TrackingUrl { get; set; }
+    public string? ExternalId { get; set; }
+    public string? Mode { get; set; }
 }

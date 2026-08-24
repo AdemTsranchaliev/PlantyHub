@@ -20,6 +20,7 @@ import PhoneRounded from '@mui/icons-material/PhoneRounded'
 import PublicRounded from '@mui/icons-material/PublicRounded'
 import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useTranslation } from 'react-i18next'
+import { countryDisplayName } from '../../utils/country'
 import { AdminBreadcrumb } from '../../components/admin/AdminPageHeader'
 import { useCustomerDetail } from '../../hooks/useCustomers'
 import { brand } from '../../theme'
@@ -52,7 +53,7 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 export default function AdminCustomerDetailPage() {
   const { customerId } = useParams<{ customerId: string }>()
   const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { data, loading } = useCustomerDetail(customerId)
   const customer = data?.customer
   const customerOrders = data?.orders ?? []
@@ -107,7 +108,7 @@ export default function AdminCustomerDetailPage() {
               {customer.name}
             </Typography>
             <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem' }}>
-              {customer.id} · {t(`admin.countries.${customer.country}`)}
+              {customer.id} · {t(`admin.countries.${customer.country}`, { defaultValue: countryDisplayName(customer.country, i18n.language) })}
             </Typography>
           </Box>
         </Stack>
@@ -128,7 +129,7 @@ export default function AdminCustomerDetailPage() {
                 </Stack>
                 <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                   <PublicRounded sx={{ fontSize: 18, color: brand.textSecondary }} />
-                  <Typography sx={{ fontSize: '0.9rem', fontWeight: 600 }}>{t(`admin.countries.${customer.country}`)}</Typography>
+                  <Typography sx={{ fontSize: '0.9rem', fontWeight: 600 }}>{t(`admin.countries.${customer.country}`, { defaultValue: countryDisplayName(customer.country, i18n.language) })}</Typography>
                 </Stack>
               </Stack>
             </Panel>
@@ -193,7 +194,7 @@ export default function AdminCustomerDetailPage() {
                       return (
                         <TableRow key={order.id}>
                           <TableCell sx={{ border: 0, fontFamily: 'monospace', fontWeight: 700 }}>{order.id}</TableCell>
-                          <TableCell sx={{ border: 0 }}>{t(`admin.countries.${order.country}`)}</TableCell>
+                          <TableCell sx={{ border: 0 }}>{t(`admin.countries.${order.country}`, { defaultValue: countryDisplayName(order.country, i18n.language) })}</TableCell>
                           <TableCell sx={{ border: 0, fontWeight: 700 }}>{order.total}</TableCell>
                           <TableCell sx={{ border: 0 }}>
                             <Chip

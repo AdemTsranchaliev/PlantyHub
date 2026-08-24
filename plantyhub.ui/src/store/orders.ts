@@ -105,6 +105,10 @@ export type CheckoutInput = {
   country: CountryCode
   paymentMethod: PaymentMethod
   notes?: string
+  courier?: string
+  delivery?: string
+  officeCode?: string
+  cityId?: string
 }
 
 export async function createCustomerOrder(cartItems: CartItem[], checkout: CheckoutInput): Promise<OrderDetail> {
@@ -117,6 +121,9 @@ export async function createCustomerOrder(cartItems: CartItem[], checkout: Check
       quantity: item.quantity,
       price: item.price,
       image: item.image,
+      giftName: item.gift?.name,
+      giftImage: item.gift?.image,
+      giftCompareAt: item.gift?.compareAt,
     })),
   }
   const order = await ordersApi.checkout(payload)
@@ -135,10 +142,9 @@ export async function updateOrderStatus(id: string, status: OrderStatus) {
 
 export async function createWaybill(
   id: string,
-  data: Omit<Waybill, 'number' | 'createdAt'> & { number: string },
+  data: Omit<Waybill, 'number' | 'createdAt'>,
 ) {
   const order = await ordersApi.createWaybill(id, {
-    number: data.number,
     courier: data.courier,
     weightKg: data.weightKg,
     packages: data.packages,

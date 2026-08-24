@@ -33,6 +33,8 @@ export type ApiOrderSummary = {
   total: string
   status: OrderStatus
   date: string
+  courier?: string | null
+  waybillNumber?: string | null
 }
 
 export type ApiOrderDetail = OrderDetail
@@ -235,6 +237,10 @@ export type CheckoutPayload = {
   country: CountryCode
   paymentMethod: PaymentMethod
   notes?: string
+  courier?: string
+  delivery?: string
+  officeCode?: string
+  cityId?: string
   items: {
     productId: string
     category: ProductCategory
@@ -242,14 +248,182 @@ export type CheckoutPayload = {
     quantity: number
     price: string
     image: string
+    giftName?: string
+    giftImage?: string
+    giftCompareAt?: string
   }[]
 }
 
+export type ShippingQuote = {
+  id: string
+  courier: string
+  delivery: string
+  officeCode?: string | null
+  price: number
+  currency: string
+  priceEur: number
+  message?: string | null
+}
+
+export type ShippingQuotesResponse = {
+  quotes: ShippingQuote[]
+}
+
 export type CreateWaybillPayload = {
-  number: string
   courier: CourierId
   weightKg: number
   packages: number
   codAmount?: number
   notes?: string
+}
+
+export type CourierIdKey = 'econt' | 'speedy' | 'dhl' | 'boxnow'
+
+export type ApiCourierSender = {
+  company: string
+  contactName: string
+  phone: string
+  email: string
+  street: string
+  city: string
+  postalCode: string
+  country: string
+  defaultCourier: CourierIdKey | string
+}
+
+export type ApiCourierAccount = {
+  id: CourierIdKey
+  enabled: boolean
+  testMode: boolean
+  configured: boolean
+  mode: 'manual' | 'sandbox' | 'live' | string
+  hasPassword: boolean
+  username: string
+  siteId: string
+  apiUrl: string
+  officeCode: string
+  clientId: string
+  contractId: string
+  accountNumber: string
+  iban: string
+  serviceType: string
+  contents: string
+  payer: string
+  defaultWeightKg: number
+  defaultPackages: number
+  labelFormat: string
+  notes: string
+  countryCode: string
+  cityId: string
+  cityName: string
+}
+
+export type ApiCourierSettings = {
+  sender: ApiCourierSender
+  econt: ApiCourierAccount
+  speedy: ApiCourierAccount
+  dhl: ApiCourierAccount
+  boxnow: ApiCourierAccount
+}
+
+export type UpdateCourierAccountPayload = {
+  enabled: boolean
+  testMode: boolean
+  username?: string
+  password?: string
+  siteId?: string
+  apiUrl?: string
+  officeCode?: string
+  clientId?: string
+  contractId?: string
+  accountNumber?: string
+  iban?: string
+  serviceType?: string
+  contents?: string
+  payer?: string
+  defaultWeightKg?: number
+  defaultPackages?: number
+  labelFormat?: string
+  notes?: string
+  countryCode?: string
+  cityId?: string
+  cityName?: string
+}
+
+export type CourierPlace = {
+  id: string
+  code: string
+  name: string
+  nameEn?: string | null
+}
+
+export type CourierOfficePlace = {
+  id: string
+  code: string
+  name: string
+  nameEn?: string | null
+  cityId?: string | null
+  cityName?: string | null
+  address?: string | null
+}
+
+export type CourierLocationList = {
+  source: string
+  cachedAt?: string | null
+  message?: string | null
+  items: CourierPlace[]
+}
+
+export type CourierOfficeList = {
+  source: string
+  cachedAt?: string | null
+  message?: string | null
+  items: CourierOfficePlace[]
+}
+
+export type StoreVatRate = {
+  country: string
+  ratePercent: number
+}
+
+export type StoreVatSettings = {
+  enabled: boolean
+  pricesIncludeVat: boolean
+  vatNumber: string
+  homeCountry?: string
+  rates: StoreVatRate[]
+}
+
+export type VatQuote = {
+  enabled: boolean
+  country: string
+  ratePercent: number
+  pricesIncludeVat: boolean
+  tax: number
+  total: number
+  message?: string | null
+}
+
+export type AccountingVatCountry = {
+  country: string
+  countryName: string
+  ratePercent: number
+  orders: number
+  net: number
+  vat: number
+  gross: number
+}
+
+export type AccountingReportPreview = {
+  from: string
+  to: string
+  vatNumber: string
+  orderCount: number
+  cancelledExcluded: number
+  products: number
+  shipping: number
+  net: number
+  vat: number
+  gross: number
+  byCountry: AccountingVatCountry[]
 }

@@ -10,14 +10,16 @@ import Typography from '@mui/material/Typography'
 import CheckCircleRounded from '@mui/icons-material/CheckCircleRounded'
 import LocalShippingOutlined from '@mui/icons-material/LocalShippingOutlined'
 import { useTranslation } from 'react-i18next'
+import { countryDisplayName } from '../utils/country'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
+import OrderGiftLine from '../components/OrderGiftLine'
 import { useOrderDetail } from '../hooks/useOrders'
 import { brand } from '../theme'
 
 export default function OrderConfirmationPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { orderId } = useParams<{ orderId: string }>()
   const { order, loading } = useOrderDetail(orderId)
 
@@ -79,7 +81,7 @@ export default function OrderConfirmationPage() {
                 <br />
                 {order.shipping.postalCode} {order.shipping.city}
                 <br />
-                {t(`checkout.countries.${order.shipping.country}`)}
+                {countryDisplayName(order.shipping.country, i18n.language)}
               </Typography>
             </Reveal>
 
@@ -101,6 +103,7 @@ export default function OrderConfirmationPage() {
                       <Typography variant="body2" color="text.secondary">
                         {t('checkout.qty', { count: item.quantity })}
                       </Typography>
+                      {item.gift ? <OrderGiftLine gift={item.gift} /> : null}
                     </Box>
                     <Typography sx={{ fontWeight: 700 }}>{item.total}</Typography>
                   </Stack>
@@ -130,6 +133,14 @@ export default function OrderConfirmationPage() {
                   <Typography color="text.secondary">{t('cart.shipping')}</Typography>
                   <Typography sx={{ fontWeight: 700 }}>{order.shippingCost}</Typography>
                 </Stack>
+                {order.tax && order.tax !== '€0.00' ? (
+                  <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
+                    <Typography color="text.secondary">
+                      {order.taxRate ? t('cart.vatRate', { rate: order.taxRate }) : t('cart.vat')}
+                    </Typography>
+                    <Typography sx={{ fontWeight: 700 }}>{order.tax}</Typography>
+                  </Stack>
+                ) : null}
                 <Divider />
                 <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                   <Typography sx={{ fontWeight: 800 }}>{t('cart.total')}</Typography>

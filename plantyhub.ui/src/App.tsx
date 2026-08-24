@@ -11,6 +11,8 @@ import CartSnackbar from './components/CartSnackbar'
 import HomePage from './pages/HomePage'
 import DataBootstrap from './components/DataBootstrap'
 import SessionBootstrap from './components/SessionBootstrap'
+import { ThemeProvider } from '@mui/material/styles'
+import adminTheme from './admin/adminTheme'
 import { brand } from './theme'
 
 const ProductPage = lazy(() => import('./pages/ProductPage'))
@@ -47,6 +49,9 @@ const AdminMediaPage = lazy(() => import('./pages/admin/AdminMediaPage'))
 const AdminEmailsPage = lazy(() => import('./pages/admin/AdminEmailsPage'))
 const AdminNewsletterPage = lazy(() => import('./pages/admin/AdminNewsletterPage'))
 const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage'))
+const AdminCouriersPage = lazy(() => import('./pages/admin/AdminCouriersPage'))
+const AdminVatPage = lazy(() => import('./pages/admin/AdminVatPage'))
+const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage'))
 
 function PageFallback() {
   return (
@@ -96,10 +101,11 @@ function StorefrontRoutes() {
 
 function AdminRoutes() {
   return (
-    <Suspense fallback={<PageFallback />}>
-      <Routes>
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminLayout />}>
+    <ThemeProvider theme={adminTheme}>
+      <Suspense fallback={<PageFallback />}>
+        <Routes>
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="gardens" element={<AdminGardensPage />} />
           <Route path="pods" element={<AdminPodsPage />} />
@@ -113,10 +119,14 @@ function AdminRoutes() {
           <Route path="media" element={<AdminMediaPage />} />
           <Route path="emails" element={<AdminEmailsPage />} />
           <Route path="newsletter" element={<AdminNewsletterPage />} />
+          <Route path="couriers" element={<AdminCouriersPage />} />
+          <Route path="vat" element={<AdminVatPage />} />
+          <Route path="reports" element={<AdminReportsPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
         </Route>
       </Routes>
     </Suspense>
+    </ThemeProvider>
   )
 }
 

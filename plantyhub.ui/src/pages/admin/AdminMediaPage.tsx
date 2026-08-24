@@ -1,5 +1,6 @@
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react'
@@ -48,16 +49,18 @@ export default function AdminMediaPage() {
             <Typography sx={{ fontWeight: 700, color: brand.graphite, fontSize: '1.05rem', mb: 2 }}>
               {t(group.labelKey)}
             </Typography>
-            <Stack spacing={2.5}>
+            <Grid container spacing={2.5}>
               {group.slots.map((slot) => (
-                <ImagePicker
-                  key={slot.key}
-                  label={t(slot.labelKey, { defaultValue: slot.key })}
-                  value={images[slot.key] ?? slot.defaultUrl}
-                  onChange={(url) => void handleChange(slot.key, url)}
-                />
+                <Grid key={slot.key} size={{ xs: 12, md: 6 }}>
+                  <ImagePicker
+                    label={t(slot.labelKey, { defaultValue: slot.key })}
+                    value={images[slot.key] ?? slot.defaultUrl}
+                    onChange={(url) => void handleChange(slot.key, url)}
+                    size="medium"
+                  />
+                </Grid>
               ))}
-            </Stack>
+            </Grid>
           </Box>
         ))}
       </Stack>

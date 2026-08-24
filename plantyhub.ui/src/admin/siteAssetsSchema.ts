@@ -1,5 +1,5 @@
 import { blogArticleIds, blogArticleImages } from '../data/catalog'
-import { lifestyleImages } from '../data/images'
+import { lifestyleImages, stockImages } from '../data/images'
 
 export type SiteAssetSlot = {
   key: string
@@ -64,24 +64,24 @@ export const siteAssetGroups: SiteAssetGroup[] = [
         defaultUrl: lifestyleImages.heroKitchen,
       },
       {
-        key: 'pdp.bonus.herbs',
-        labelKey: 'admin.media.slots.pdp.bonusHerbs',
-        defaultUrl: lifestyleImages.outdoorDeck,
+        key: 'pdp.bonus.basil',
+        labelKey: 'admin.media.slots.pdp.bonusBasil',
+        defaultUrl: stockImages.basil,
       },
       {
-        key: 'pdp.bonus.salad',
-        labelKey: 'admin.media.slots.pdp.bonusSalad',
-        defaultUrl: lifestyleImages.outdoorHerbs,
+        key: 'pdp.bonus.mint',
+        labelKey: 'admin.media.slots.pdp.bonusMint',
+        defaultUrl: stockImages.mint,
       },
       {
-        key: 'pdp.bonus.aromatic',
-        labelKey: 'admin.media.slots.pdp.bonusAromatic',
-        defaultUrl: lifestyleImages.mintKitchen,
+        key: 'pdp.bonus.parsley',
+        labelKey: 'admin.media.slots.pdp.bonusParsley',
+        defaultUrl: stockImages.parsley,
       },
       {
-        key: 'pdp.bonus.chef',
-        labelKey: 'admin.media.slots.pdp.bonusChef',
-        defaultUrl: lifestyleImages.kitchenBasil,
+        key: 'pdp.bonus.arugula',
+        labelKey: 'admin.media.slots.pdp.bonusArugula',
+        defaultUrl: stockImages.arugula,
       },
     ],
   },

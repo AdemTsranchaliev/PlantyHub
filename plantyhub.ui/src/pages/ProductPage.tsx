@@ -25,13 +25,11 @@ import AutoAwesomeOutlined from '@mui/icons-material/AutoAwesomeOutlined'
 import EnergySavingsLeafOutlined from '@mui/icons-material/EnergySavingsLeafOutlined'
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded'
 import CardGiftcardRounded from '@mui/icons-material/CardGiftcardRounded'
-import RadioButtonCheckedRounded from '@mui/icons-material/RadioButtonCheckedRounded'
-import RadioButtonUncheckedRounded from '@mui/icons-material/RadioButtonUncheckedRounded'
 import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { productSpecRows } from '../data/catalog'
-import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
+import { lifestyleImages, productVideo, productVideoPoster, stockImages } from '../data/images'
 import { useProduct } from '../hooks/useProducts'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
@@ -51,8 +49,8 @@ const featureItems = [
   { key: 'natural', Icon: EnergySavingsLeafOutlined },
 ] as const
 
+const bonusKitIds = ['basil', 'mint', 'parsley', 'arugula'] as const
 const BONUS_KIT_PRICE = '€19.99'
-const bonusKitIds = ['herbs', 'salad', 'aromatic', 'chef'] as const
 
 export default function ProductPage() {
   const { t } = useTranslation()
@@ -74,15 +72,7 @@ export default function ProductPage() {
 
   const bonusKits = bonusKitIds.map((id) => ({
     id,
-    image: images[`pdp.bonus.${id}`] || (
-      id === 'herbs'
-        ? lifestyleImages.outdoorDeck
-        : id === 'salad'
-          ? lifestyleImages.outdoorHerbs
-          : id === 'aromatic'
-            ? lifestyleImages.mintKitchen
-            : lifestyleImages.kitchenBasil
-    ),
+    image: images[`pdp.bonus.${id}`] || stockImages[id],
   }))
 
   useEffect(() => {
@@ -219,31 +209,86 @@ export default function ProductPage() {
                   size="large"
                   fullWidth
                   sx={{ px: 4 }}
-                  onClick={() => garden && addProductToCart('gardens', garden, qty)}
+                  onClick={() => {
+                    if (!garden) return
+                    const gift = bonusPod
+                      ? {
+                          id: bonusPod,
+                          name: t(`pdp.bonus.kits.${bonusPod}`),
+                          image: bonusKits.find((kit) => kit.id === bonusPod)?.image ?? stockImages[bonusPod],
+                          compareAt: BONUS_KIT_PRICE,
+                        }
+                      : undefined
+                    addProductToCart('gardens', garden, qty, gift)
+                  }}
                 >
                   {t('product.cta')}
                 </Button>
               </Stack>
 
-              <Link
-                href="#bonus"
-                underline="none"
+              <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.25,
                   mb: 3.5,
-                  p: 1.75,
+                  p: 1.5,
                   borderRadius: '14px',
                   border: `1.5px dashed ${brand.plantGreen}`,
                   bgcolor: brand.plantGreenMuted,
                 }}
               >
-                <CardGiftcardRounded sx={{ fontSize: 22, color: brand.plantGreenDark }} />
-                <Typography sx={{ fontSize: '0.9rem', fontWeight: 700, color: brand.plantGreenDark }}>
-                  {t('pdp.bonus.hint')}
-                </Typography>
-              </Link>
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 1.25 }}>
+                  <CardGiftcardRounded sx={{ fontSize: 20, color: brand.plantGreenDark, flexShrink: 0 }} />
+                  <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.plantGreenDark, lineHeight: 1.35 }}>
+                    {t('pdp.bonus.hint')}
+                  </Typography>
+                </Stack>
+                <Grid container spacing={0.75}>
+                  {bonusKits.map((kit) => {
+                    const selected = bonusPod === kit.id
+                    return (
+                      <Grid key={kit.id} size={6}>
+                        <Box
+                          component="button"
+                          type="button"
+                          onClick={() => setBonusPod((prev) => (prev === kit.id ? null : kit.id))}
+                          aria-pressed={selected}
+                          sx={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 0.85,
+                            textAlign: 'left',
+                            p: 0.65,
+                            pr: 0.85,
+                            borderRadius: '12px',
+                            bgcolor: brand.white,
+                            cursor: 'pointer',
+                            border: selected ? `2px solid ${brand.plantGreen}` : `1px solid ${brand.border}`,
+                            boxShadow: selected ? brand.shadowGreen : 'none',
+                            transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
+                          }}
+                        >
+                          <Box
+                            component="img"
+                            src={kit.image}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            sx={{ flexShrink: 0, width: 40, height: 40, borderRadius: '9px', objectFit: 'contain', bgcolor: brand.surface, display: 'block' }}
+                          />
+                          <Typography sx={{ fontWeight: 700, fontSize: '0.72rem', color: brand.graphite, lineHeight: 1.25 }}>
+                            {t(`pdp.bonus.kits.${kit.id}`)}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    )
+                  })}
+                </Grid>
+                {bonusPod && (
+                  <Typography sx={{ mt: 1, fontSize: '0.75rem', fontWeight: 700, color: brand.plantGreenDark }}>
+                    {t('pdp.bonus.chosen', { pod: t(`pdp.bonus.kits.${bonusPod}`) })}
+                  </Typography>
+                )}
+              </Box>
 
               <Stack direction="row" useFlexGap sx={{ flexWrap: 'wrap', gap: { xs: 1.5, sm: 2.5 }, pt: 3, borderTop: `1px solid ${brand.border}` }}>
                 {trustItems.map(({ key, Icon }) => (
@@ -258,124 +303,6 @@ export default function ProductPage() {
             </Reveal>
           </Grid>
         </Grid>
-      </SectionContainer>
-
-      <SectionContainer bgcolor={brand.white} py={{ xs: 4, sm: 5, md: 6 }} id="bonus">
-        <Reveal
-          sx={{
-            position: 'relative',
-            borderRadius: '28px',
-            border: `2px dashed ${brand.plantGreen}`,
-            bgcolor: brand.plantGreenMuted,
-            p: { xs: 3, sm: 4, md: 5 },
-          }}
-        >
-          <Stack
-            direction="row"
-            spacing={0.75}
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: { xs: 20, md: 32 },
-              transform: 'translateY(-50%)',
-              alignItems: 'center',
-              bgcolor: brand.plantGreenDark,
-              color: brand.white,
-              borderRadius: 999,
-              px: 1.75,
-              py: 0.6,
-              boxShadow: brand.shadowGreen,
-            }}
-          >
-            <CardGiftcardRounded sx={{ fontSize: 18 }} />
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-              {t('pdp.bonus.badge')}
-            </Typography>
-          </Stack>
-
-          <Box sx={{ mb: 3, mt: 1 }}>
-            <Typography component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, color: brand.graphite, mb: 1 }}>
-              {t('pdp.bonus.title')}
-            </Typography>
-            <Typography sx={{ color: brand.textSecondary, fontSize: '1rem', maxWidth: 560 }}>
-              {t('pdp.bonus.subtitle')}
-            </Typography>
-          </Box>
-
-          <Grid container spacing={{ xs: 1.5, sm: 2 }}>
-            {bonusKits.map((kit) => {
-              const selected = bonusPod === kit.id
-              return (
-                <Grid key={kit.id} size={{ xs: 12, sm: 6 }}>
-                  <Box
-                    component="button"
-                    type="button"
-                    onClick={() => setBonusPod((prev) => (prev === kit.id ? null : kit.id))}
-                    aria-pressed={selected}
-                    sx={{
-                      position: 'relative',
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.75,
-                      textAlign: 'left',
-                      p: 1.5,
-                      pr: 5,
-                      borderRadius: '18px',
-                      bgcolor: brand.white,
-                      cursor: 'pointer',
-                      border: selected ? `2px solid ${brand.plantGreen}` : `1px solid ${brand.border}`,
-                      boxShadow: selected ? brand.shadowGreen : 'none',
-                      transition: 'border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease',
-                      '@media (hover: hover)': {
-                        '&:hover': { transform: 'translateY(-3px)', boxShadow: brand.shadow },
-                      },
-                    }}
-                  >
-                    <Box
-                      component="img"
-                      src={kit.image}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      sx={{ flexShrink: 0, width: 72, height: 72, borderRadius: '14px', objectFit: 'cover', display: 'block' }}
-                    />
-                    <Box sx={{ minWidth: 0 }}>
-                      <Typography sx={{ fontWeight: 700, fontSize: '0.95rem', color: brand.graphite, lineHeight: 1.25, mb: 0.35 }}>
-                        {t(`pdp.bonus.kits.${kit.id}`)}
-                      </Typography>
-                      <Typography sx={{ fontSize: '0.78rem', color: brand.textSecondary, mb: 0.6 }}>
-                        {t('pdp.bonus.pcs')}
-                      </Typography>
-                      <Stack direction="row" spacing={0.75} sx={{ alignItems: 'baseline' }}>
-                        <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, color: brand.plantGreen, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                          {t('pdp.bonus.free')}
-                        </Typography>
-                        <Typography sx={{ fontSize: '0.75rem', color: brand.textSecondary, textDecoration: 'line-through' }}>
-                          {BONUS_KIT_PRICE}
-                        </Typography>
-                      </Stack>
-                    </Box>
-                    {selected ? (
-                      <RadioButtonCheckedRounded sx={{ position: 'absolute', top: '50%', right: 14, transform: 'translateY(-50%)', fontSize: 24, color: brand.plantGreen }} />
-                    ) : (
-                      <RadioButtonUncheckedRounded sx={{ position: 'absolute', top: '50%', right: 14, transform: 'translateY(-50%)', fontSize: 24, color: brand.border }} />
-                    )}
-                  </Box>
-                </Grid>
-              )
-            })}
-          </Grid>
-
-          <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mt: 3 }}>
-            <CheckCircleRounded sx={{ fontSize: 18, color: brand.plantGreen, flexShrink: 0 }} />
-            <Typography sx={{ fontSize: '0.9rem', fontWeight: bonusPod ? 700 : 400, color: bonusPod ? brand.plantGreenDark : brand.textSecondary }}>
-              {bonusPod
-                ? t('pdp.bonus.chosen', { pod: t(`pdp.bonus.kits.${bonusPod}`) })
-                : t('pdp.bonus.note')}
-            </Typography>
-          </Stack>
-        </Reveal>
       </SectionContainer>
 
       <SectionContainer bgcolor={brand.cream} py={{ xs: 6, sm: 7, md: 8 }}>

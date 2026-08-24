@@ -17,6 +17,7 @@ import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import DeleteOutlineRounded from '@mui/icons-material/DeleteOutlineRounded'
 import UnsubscribeRounded from '@mui/icons-material/UnsubscribeRounded'
+import Stack from '@mui/material/Stack'
 import { useTranslation } from 'react-i18next'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import AdminStatCard from '../../components/admin/AdminStatCard'
@@ -256,41 +257,38 @@ export default function AdminNewsletterPage() {
                 {sendError}
               </Alert>
             )}
-            <TextField
-              label={t('admin.newsletter.headline')}
-              value={headline}
-              onChange={(e) => setHeadline(e.target.value)}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              label={t('admin.newsletter.subject')}
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              fullWidth
-              sx={{ mb: 2 }}
-              helperText={t('admin.newsletter.subjectHint')}
-            />
-            <TextField
-              label={t('admin.newsletter.message')}
-              value={messageBody}
-              onChange={(e) => setMessageBody(e.target.value)}
-              multiline
-              rows={4}
-              fullWidth
-              sx={{ mb: 2 }}
-              helperText={t('admin.newsletter.messageHint')}
-            />
-            <TextField
-              label={t('admin.newsletter.ctaUrl')}
-              value={ctaUrl}
-              onChange={(e) => setCtaUrl(e.target.value)}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-            <Button variant="contained" disabled={sending || subscriberCount === 0} onClick={() => void handleSendCampaign()}>
-              {sending ? t('admin.newsletter.sending') : t('admin.newsletter.send')}
-            </Button>
+            <Stack spacing={1.75}>
+              <TextField
+                label={t('admin.newsletter.headline')}
+                value={headline}
+                onChange={(e) => setHeadline(e.target.value)}
+                helperText={t('admin.newsletter.headlineHint')}
+              />
+              <TextField
+                label={t('admin.newsletter.subject')}
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                helperText={t('admin.newsletter.subjectHint')}
+              />
+              <TextField
+                label={t('admin.newsletter.message')}
+                value={messageBody}
+                onChange={(e) => setMessageBody(e.target.value)}
+                multiline
+                minRows={4}
+                helperText={t('admin.newsletter.messageHint')}
+              />
+              <TextField
+                label={t('admin.newsletter.ctaUrl')}
+                value={ctaUrl}
+                onChange={(e) => setCtaUrl(e.target.value)}
+                placeholder="https://"
+                helperText={t('admin.newsletter.ctaUrlHint')}
+              />
+              <Button variant="contained" disabled={sending || subscriberCount === 0} onClick={() => void handleSendCampaign()} sx={{ alignSelf: 'flex-start' }}>
+                {sending ? t('admin.newsletter.sending') : t('admin.newsletter.send')}
+              </Button>
+            </Stack>
           </Box>
         </Grid>
       </Grid>

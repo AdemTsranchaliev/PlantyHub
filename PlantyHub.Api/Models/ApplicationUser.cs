@@ -5,6 +5,6 @@ namespace PlantyHub.Api.Models;
 public class ApplicationUser : IdentityUser
 {
     public string? FullName { get; set; }
-    public CountryCode? Country { get; set; }
+    public string? Country { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

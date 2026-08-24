@@ -2,6 +2,8 @@ using PlantyHub.Api.Models;
 
 namespace PlantyHub.Api.Dtos;
 
+public record OrderLineGiftDto(string Name, string Image, string? CompareAt);
+
 public record OrderLineItemDto(
     string Id,
     string ProductId,
@@ -11,7 +13,8 @@ public record OrderLineItemDto(
     int Quantity,
     string UnitPrice,
     string Total,
-    string Image);
+    string Image,
+    OrderLineGiftDto? Gift);
 
 public record OrderAddressDto(
     string Name,
@@ -28,7 +31,10 @@ public record WaybillDto(
     decimal WeightKg,
     int Packages,
     string? CodAmount,
-    string? Notes);
+    string? Notes,
+    string? TrackingUrl,
+    string? ExternalId,
+    string? Mode);
 
 public record OrderTimelineDto(string At, string Status, string? Note);
 
@@ -40,7 +46,9 @@ public record OrderSummaryDto(
     int Items,
     string Total,
     string Status,
-    string Date);
+    string Date,
+    string? Courier,
+    string? WaybillNumber);
 
 public record OrderDetailDto(
     string Id,
@@ -62,7 +70,8 @@ public record OrderDetailDto(
     string Tax,
     string? Notes,
     WaybillDto? Waybill,
-    IReadOnlyList<OrderTimelineDto> Timeline);
+    IReadOnlyList<OrderTimelineDto> Timeline,
+    decimal? TaxRate = null);
 
 public record CheckoutLineItemRequest(
     string ProductId,
@@ -70,7 +79,12 @@ public record CheckoutLineItemRequest(
     string Name,
     int Quantity,
     string Price,
-    string Image);
+    string Image)
+{
+    public string? GiftName { get; init; }
+    public string? GiftImage { get; init; }
+    public string? GiftCompareAt { get; init; }
+}
 
 public record CheckoutRequest(
     string Name,
@@ -82,12 +96,15 @@ public record CheckoutRequest(
     string Country,
     string PaymentMethod,
     string? Notes,
-    IReadOnlyList<CheckoutLineItemRequest> Items);
+    IReadOnlyList<CheckoutLineItemRequest> Items,
+    string? Courier = null,
+    string? Delivery = null,
+    string? OfficeCode = null,
+    string? CityId = null);
 
 public record UpdateOrderStatusRequest(string Status);
 
 public record CreateWaybillRequest(
-    string Number,
     string Courier,
     decimal WeightKg,
     int Packages,

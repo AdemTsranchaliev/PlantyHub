@@ -8,14 +8,12 @@ import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import SelectMui from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
-import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
 import SaveRounded from '@mui/icons-material/SaveRounded'
 import CloseRounded from '@mui/icons-material/CloseRounded'
@@ -30,6 +28,7 @@ import {
   slugify,
 } from '../../store/products'
 import ImagePicker from './ImagePicker'
+import AdminFieldGroup from './AdminFieldGroup'
 import { brand } from '../../theme'
 
 type Props = {
@@ -75,7 +74,6 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
   const hasCompareAt = category === 'gardens'
   const hasFeatured = category === 'gardens'
   const hasTagline = category === 'gardens'
-  const hasDescription = category !== 'accessories' || true // all can have description
 
   const updateLocale = (lang: LanguageCode, field: keyof ProductLocaleContent, value: string) => {
     setDraft((prev) => ({
@@ -122,66 +120,26 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth scroll="paper">
-      <DialogTitle sx={{ fontWeight: 700, color: brand.graphite }}>
+      <DialogTitle>
         {isNew ? t('admin.productEdit.addTitle') : t('admin.productEdit.editTitle')}
       </DialogTitle>
-      <DialogContent dividers>
+      <DialogContent dividers sx={{ bgcolor: brand.surface }}>
         {error && (
           <Alert severity="error" sx={{ mb: 2, borderRadius: '12px' }} onClose={() => setError('')}>
             {error}
           </Alert>
         )}
 
-        <Stack spacing={3}>
-          <Typography sx={{ fontWeight: 700, fontSize: '0.95rem', color: brand.graphite }}>
-            {t('admin.productEdit.basicInfo')}
-          </Typography>
-
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-            <TextField
-              label={t('admin.productEdit.id')}
-              value={draft.id}
-              onChange={(e) => setDraft((p) => ({ ...p, id: e.target.value }))}
-              disabled={!isNew}
-              fullWidth
-              helperText={isNew ? t('admin.productEdit.idHint') : undefined}
+        <Stack spacing={2}>
+          <AdminFieldGroup title={t('admin.productEdit.photo')}>
+            <ImagePicker
+              label={t('admin.productEdit.imageUrl')}
+              value={draft.image}
+              onChange={(url) => setDraft((p) => ({ ...p, image: url }))}
+              size="medium"
+              previewFit={draft.imageFit}
             />
-            <TextField
-              label={t('admin.productEdit.price')}
-              value={draft.price}
-              onChange={(e) => setDraft((p) => ({ ...p, price: e.target.value }))}
-              fullWidth
-              placeholder="€9.99"
-            />
-            {hasCompareAt && (
-              <TextField
-                label={t('admin.productEdit.compareAt')}
-                value={draft.compareAt ?? ''}
-                onChange={(e) => setDraft((p) => ({ ...p, compareAt: e.target.value || undefined }))}
-                fullWidth
-                placeholder="€129.00"
-              />
-            )}
-          </Stack>
-
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-            {hasPack && (
-              <FormControl fullWidth>
-                <InputLabel>{t('admin.productEdit.pack')}</InputLabel>
-                <SelectMui
-                  label={t('admin.productEdit.pack')}
-                  value={draft.packKey ?? 'pack3'}
-                  onChange={(e) => setDraft((p) => ({ ...p, packKey: e.target.value }))}
-                >
-                  {packKeyOptions.map((key) => (
-                    <MenuItem key={key} value={key}>
-                      {t(`common.${key}`)}
-                    </MenuItem>
-                  ))}
-                </SelectMui>
-              </FormControl>
-            )}
-            <FormControl fullWidth>
+            <FormControl>
               <InputLabel>{t('admin.productEdit.imageFit')}</InputLabel>
               <SelectMui
                 label={t('admin.productEdit.imageFit')}
@@ -192,82 +150,105 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                 <MenuItem value="contain">{t('admin.productEdit.fitContain')}</MenuItem>
               </SelectMui>
             </FormControl>
-          </Stack>
+          </AdminFieldGroup>
 
-          <ImagePicker
-            label={t('admin.productEdit.imageUrl')}
-            value={draft.image}
-            onChange={(url) => setDraft((p) => ({ ...p, image: url }))}
-            size="medium"
-            previewFit={draft.imageFit}
-          />
-
-          <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={draft.active}
-                  onChange={(e) => setDraft((p) => ({ ...p, active: e.target.checked }))}
-                  sx={{ '& .Mui-checked': { color: brand.plantGreen } }}
-                />
-              }
-              label={t('admin.productEdit.active')}
-            />
-            {hasFeatured && (
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={!!draft.featured}
-                    onChange={(e) => setDraft((p) => ({ ...p, featured: e.target.checked }))}
-                    sx={{ '& .Mui-checked': { color: brand.plantGreen } }}
-                  />
-                }
-                label={t('admin.productEdit.featured')}
+          <AdminFieldGroup title={t('admin.productEdit.pricing')} hint={t('admin.productEdit.pricingHint')}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75}>
+              <TextField
+                label={t('admin.productEdit.price')}
+                value={draft.price}
+                onChange={(e) => setDraft((p) => ({ ...p, price: e.target.value }))}
+                placeholder="€9.99"
               />
-            )}
-          </Stack>
+              {hasCompareAt && (
+                <TextField
+                  label={t('admin.productEdit.compareAt')}
+                  value={draft.compareAt ?? ''}
+                  onChange={(e) => setDraft((p) => ({ ...p, compareAt: e.target.value || undefined }))}
+                  placeholder="€129.00"
+                  helperText={t('admin.productEdit.compareAtHint')}
+                />
+              )}
+              {hasPack && (
+                <FormControl>
+                  <InputLabel>{t('admin.productEdit.pack')}</InputLabel>
+                  <SelectMui
+                    label={t('admin.productEdit.pack')}
+                    value={draft.packKey ?? 'pack3'}
+                    onChange={(e) => setDraft((p) => ({ ...p, packKey: e.target.value }))}
+                  >
+                    {packKeyOptions.map((key) => (
+                      <MenuItem key={key} value={key}>
+                        {t(`common.${key}`)}
+                      </MenuItem>
+                    ))}
+                  </SelectMui>
+                </FormControl>
+              )}
+            </Stack>
+          </AdminFieldGroup>
 
-          <Box>
-            <Typography sx={{ fontWeight: 700, fontSize: '0.95rem', color: brand.graphite, mb: 1.5 }}>
-              {t('admin.productEdit.content')}
-            </Typography>
-            <Tabs
-              value={langTab}
-              onChange={(_, v) => setLangTab(v)}
-              sx={{ mb: 2, borderBottom: `1px solid ${brand.border}` }}
-            >
+          <AdminFieldGroup title={t('admin.productEdit.content')} hint={t('admin.productEdit.contentHint')}>
+            <Tabs value={langTab} onChange={(_, v) => setLangTab(v)} sx={{ borderBottom: `1px solid ${brand.border}` }}>
               {supportedLanguages.map((l) => (
                 <Tab key={l.code} value={l.code} label={l.short} />
               ))}
             </Tabs>
-            <Stack spacing={2}>
+            <TextField
+              label={t('admin.productEdit.name')}
+              value={locale.name}
+              onChange={(e) => updateLocale(langTab, 'name', e.target.value)}
+              required
+              helperText={langTab === 'en' ? t('admin.productEdit.nameHint') : undefined}
+            />
+            {hasTagline && (
               <TextField
-                label={t('admin.productEdit.name')}
-                value={locale.name}
-                onChange={(e) => updateLocale(langTab, 'name', e.target.value)}
-                fullWidth
-                required
+                label={t('admin.productEdit.tagline')}
+                value={locale.tagline ?? ''}
+                onChange={(e) => updateLocale(langTab, 'tagline', e.target.value)}
               />
-              {hasTagline && (
-                <TextField
-                  label={t('admin.productEdit.tagline')}
-                  value={locale.tagline ?? ''}
-                  onChange={(e) => updateLocale(langTab, 'tagline', e.target.value)}
-                  fullWidth
-                />
-              )}
-              {hasDescription && (
-                <TextField
-                  label={t('admin.productEdit.description')}
-                  value={locale.description ?? ''}
-                  onChange={(e) => updateLocale(langTab, 'description', e.target.value)}
-                  fullWidth
-                  multiline
-                  minRows={3}
+            )}
+            <TextField
+              label={t('admin.productEdit.description')}
+              value={locale.description ?? ''}
+              onChange={(e) => updateLocale(langTab, 'description', e.target.value)}
+              multiline
+              minRows={3}
+            />
+          </AdminFieldGroup>
+
+          <AdminFieldGroup title={t('admin.productEdit.visibility')}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ flexWrap: 'wrap' }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={draft.active}
+                    onChange={(e) => setDraft((p) => ({ ...p, active: e.target.checked }))}
+                  />
+                }
+                label={t('admin.productEdit.active')}
+              />
+              {hasFeatured && (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={!!draft.featured}
+                      onChange={(e) => setDraft((p) => ({ ...p, featured: e.target.checked }))}
+                    />
+                  }
+                  label={t('admin.productEdit.featured')}
                 />
               )}
             </Stack>
-          </Box>
+            {isNew && (
+              <TextField
+                label={t('admin.productEdit.id')}
+                value={draft.id}
+                onChange={(e) => setDraft((p) => ({ ...p, id: e.target.value }))}
+                helperText={t('admin.productEdit.idHint')}
+              />
+            )}
+          </AdminFieldGroup>
         </Stack>
       </DialogContent>
       <DialogActions sx={{ px: 3, py: 2 }}>

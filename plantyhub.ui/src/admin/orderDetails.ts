@@ -2,7 +2,7 @@ import { stockImages } from '../data/images'
 import type { AdminCustomer, CountryCode } from './mockData'
 import { mockCustomers, mockOrders, type AdminOrder, type OrderStatus } from './mockData'
 
-export type CourierId = 'econt' | 'speedy' | 'dhl'
+export type CourierId = 'econt' | 'speedy' | 'dhl' | 'boxnow'
 
 export type OrderLineItem = {
   id: string
@@ -14,6 +14,11 @@ export type OrderLineItem = {
   unitPrice: string
   total: string
   image: string
+  gift?: {
+    name: string
+    image: string
+    compareAt?: string
+  }
 }
 
 export type OrderAddress = {
@@ -35,6 +40,9 @@ export type Waybill = {
   packages: number
   codAmount?: string
   notes?: string
+  trackingUrl?: string
+  externalId?: string
+  mode?: 'manual' | 'sandbox' | 'live' | string
 }
 
 export type OrderTimelineEntry = {
@@ -53,6 +61,7 @@ export type OrderDetail = AdminOrder & {
   subtotal: string
   shippingCost: string
   tax: string
+  taxRate?: number | null
   notes?: string
   waybill?: Waybill
   timeline: OrderTimelineEntry[]
@@ -482,7 +491,7 @@ export function getCustomerOrderNumber(orderId: string): number {
 }
 
 export function generateWaybillNumber(courier: CourierId): string {
-  const prefix = courier === 'econt' ? 'EC' : courier === 'speedy' ? 'SP' : 'DHL'
+  const prefix = courier === 'econt' ? 'EC' : courier === 'speedy' ? 'SP' : courier === 'boxnow' ? 'BN' : 'DHL'
   const digits = Math.floor(1000000000 + Math.random() * 9000000000)
   return `${prefix}-${digits}`
 }

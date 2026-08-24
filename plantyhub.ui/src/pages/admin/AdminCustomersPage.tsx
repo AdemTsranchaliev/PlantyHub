@@ -9,12 +9,13 @@ import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useTranslation } from 'react-i18next'
+import { countryDisplayName } from '../../utils/country'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import { useCustomers } from '../../hooks/useCustomers'
 import { brand } from '../../theme'
 
 export default function AdminCustomersPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { customers, loading } = useCustomers()
 
   return (
@@ -66,7 +67,7 @@ export default function AdminCustomersPage() {
                   </div>
                 </TableCell>
                 <TableCell sx={{ color: brand.textSecondary }}>{customer.email}</TableCell>
-                <TableCell>{t(`admin.countries.${customer.country}`)}</TableCell>
+                <TableCell>{t(`admin.countries.${customer.country}`, { defaultValue: countryDisplayName(customer.country, i18n.language) })}</TableCell>
                 <TableCell>{customer.orders}</TableCell>
                 <TableCell sx={{ fontWeight: 700 }}>{customer.totalSpent}</TableCell>
                 <TableCell sx={{ color: brand.textSecondary }}>{customer.joined}</TableCell>

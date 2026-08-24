@@ -1,4 +1,4 @@
-export type CountryCode = 'BG' | 'DE' | 'FR' | 'PL' | 'IT' | 'PT' | 'CZ'
+export type CountryCode = string
 
 export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
@@ -11,6 +11,8 @@ export type AdminOrder = {
   total: string
   status: OrderStatus
   date: string
+  courier?: string | null
+  waybillNumber?: string | null
 }
 
 export type AdminCustomer = {

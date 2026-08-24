@@ -16,6 +16,7 @@ import { navHrefs } from '../data/catalog'
 import { authApi } from '../api'
 import { ApiError } from '../api/client'
 import { setCustomerFromAuth } from '../store/auth'
+import { hasAdminRole } from '../auth/session'
 import { brand } from '../theme'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -68,6 +69,10 @@ export default function LoginPage() {
     try {
       const response = await authApi.login({ email: email.trim(), password, rememberMe })
       setCustomerFromAuth(response, rememberMe)
+      if (hasAdminRole(response.roles)) {
+        navigate('/admin')
+        return
+      }
       setSubmitted(true)
     } catch (err) {
       if (err instanceof ApiError && err.code === 'email_not_verified') {
