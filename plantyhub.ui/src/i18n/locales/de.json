@@ -7,11 +7,13 @@
     "accessories": "Zubehör",
     "about": "Über uns",
     "blog": "Blog",
-    "support": "Support",
-    "buyNow": "Jetzt kaufen"
+    "support": "Kontakt",
+    "buyNow": "Jetzt kaufen",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "learn": "Lernen"
   },
   "header": {
-    "region": "EU & Balkan (€)",
     "login": "Anmelden",
     "account": "Konto",
     "admin": "Admin",
@@ -49,9 +51,18 @@
       "setup": "In 5 Minuten startklar"
     },
     "stats": {
-      "pods": { "value": "12", "label": "Plätze" },
-      "light": { "value": "16/8h", "label": "Lichtzyklus" },
-      "height": { "value": "bis 40 cm", "label": "Wuchshöhe" }
+      "pods": {
+        "value": "12",
+        "label": "Plätze"
+      },
+      "light": {
+        "value": "16/8h",
+        "label": "Lichtzyklus"
+      },
+      "height": {
+        "value": "bis 40 cm",
+        "label": "Wuchshöhe"
+      }
     }
   },
   "product": {
@@ -65,16 +76,23 @@
       "returns": "30 Tage Rückgabe"
     },
     "specs": {
-      "pods": "Plätze", "podsValue": "12 Kapseln",
-      "light": "Licht", "lightValue": "Vollspektrum-LED · 16h an / 8h aus",
-      "growthHeight": "Wuchshöhe", "growthHeightValue": "Bis 40 cm",
-      "irrigation": "Bewässerung", "irrigationValue": "Automatisch",
-      "nutrients": "Nährstoffe", "nutrientsValue": "Sana A + B",
-      "dimensions": "Maße", "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
+      "pods": "Plätze",
+      "podsValue": "12 Kapseln",
+      "light": "Licht",
+      "lightValue": "Vollspektrum-LED · 16h an / 8h aus",
+      "growthHeight": "Wuchshöhe",
+      "growthHeightValue": "Bis 40 cm",
+      "irrigation": "Bewässerung",
+      "irrigationValue": "Automatisch",
+      "nutrients": "Nährstoffe",
+      "nutrientsValue": "Sana A + B",
+      "dimensions": "Maße",
+      "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
     }
   },
   "socialProof": {
-    "stat": "500+", "statLabel": "zufriedene Kunden",
+    "stat": "500+",
+    "statLabel": "zufriedene Kunden",
     "subtitle": "Beliebt bei Hobbygärtnern in ganz Europa.",
     "reviews": {
       "elena": "Morgendlicher Minztee aus meinem eigenen Garten.",
@@ -83,22 +101,43 @@
     }
   },
   "howItWorks": {
-    "eyebrow": "So funktioniert's", "title": "4 Schritte zur Ernte",
+    "eyebrow": "So funktioniert's",
+    "title": "4 Schritte zur Ernte",
     "subtitle": "",
     "steps": {
-      "placeCapsule": { "title": "Kapsel einsetzen", "description": "Abziehen und einsetzen." },
-      "addSolution": { "title": "Wasser hinzufügen", "description": "Füllen und Sana A & B dosieren." },
-      "turnOn": { "title": "Einschalten", "description": "LED 16h an, 8h aus." },
-      "harvest": { "title": "Ernten", "description": "Frische Kräuter in ~18 Tagen." }
+      "placeCapsule": {
+        "title": "Kapsel einsetzen",
+        "description": "Abziehen und einsetzen."
+      },
+      "addSolution": {
+        "title": "Wasser hinzufügen",
+        "description": "Füllen und Sana A & B dosieren."
+      },
+      "turnOn": {
+        "title": "Einschalten",
+        "description": "LED 16h an, 8h aus."
+      },
+      "harvest": {
+        "title": "Ernten",
+        "description": "Frische Kräuter in ~18 Tagen."
+      }
     }
   },
   "lightCycle": {
-    "eyebrow": "Lichtzyklus", "title": "16 Stunden an, 8 aus",
+    "eyebrow": "Lichtzyklus",
+    "title": "16 Stunden an, 8 aus",
     "description": "Vollspektrum-LED für Keimung und Wachstum.",
-    "onLabel": "16h — Wachstum", "onDescription": "Helles LED-Licht den ganzen Tag.",
-    "offLabel": "8h — Ruhe", "offDescription": "Pflanzen ruhen wie in der Natur.",
+    "onLabel": "16h — Wachstum",
+    "onDescription": "Helles LED-Licht den ganzen Tag.",
+    "offLabel": "8h — Ruhe",
+    "offDescription": "Pflanzen ruhen wie in der Natur.",
     "diagramLabel": "24-Stunden-Zyklus",
-    "days": { "0": "Mo", "1": "Di", "2": "Mi", "3": "Do" }
+    "days": {
+      "0": "Mo",
+      "1": "Di",
+      "2": "Mi",
+      "3": "Do"
+    }
   },
   "featured": {
     "badge": "Flaggschiff",
@@ -121,15 +160,34 @@
     "cta": "Starter-Paket hinzufügen",
     "imageAlt": "PlantyHub Starter-Paket",
     "items": {
-      "homegarderOne": { "title": "PlantyHub HomeGarder One", "description": "12 Pods, 16h LED-Lichtzyklus, Auto-Bewässerung." },
-      "seedPodsBox": { "title": "PlantyHub Pods Samen-Box", "description": "12 Samen-Kapseln — je 2× Basilikum, Minze, Petersilie, Koriander, Dill und Rucola." },
-      "diyKit": { "title": "Pflanz-es-selbst-Kit", "description": "12 Kapseln, Sana A & B je 100 ml, 12 Keimkappen." },
-      "unifiedShipping": { "title": "Eine Versandbox", "description": "Alles zusammen geliefert — sofort startklar." }
+      "homegarderOne": {
+        "title": "PlantyHub HomeGarder One",
+        "description": "12 Pods, 16h LED-Lichtzyklus, Auto-Bewässerung."
+      },
+      "seedPodsBox": {
+        "title": "PlantyHub Pods Samen-Box",
+        "description": "12 Samen-Kapseln — je 2× Basilikum, Minze, Petersilie, Koriander, Dill und Rucola."
+      },
+      "diyKit": {
+        "title": "Pflanz-es-selbst-Kit",
+        "description": "12 Kapseln, Sana A & B je 100 ml, 12 Keimkappen."
+      },
+      "unifiedShipping": {
+        "title": "Eine Versandbox",
+        "description": "Alles zusammen geliefert — sofort startklar."
+      }
     },
     "details": {
-      "basil": "Basilikum ×2", "mint": "Minze ×2", "parsley": "Petersilie ×2", "cilantro": "Koriander ×2",
-      "dill": "Dill ×2", "arugula": "Rucola ×2", "emptyCapsules": "12 Kapseln",
-      "sanaAb": "Sana A + B (100 ml)", "germCaps": "12 Keimkappen", "instructions": "Dosieranleitung"
+      "basil": "Basilikum ×2",
+      "mint": "Minze ×2",
+      "parsley": "Petersilie ×2",
+      "cilantro": "Koriander ×2",
+      "dill": "Dill ×2",
+      "arugula": "Rucola ×2",
+      "emptyCapsules": "12 Kapseln",
+      "sanaAb": "Sana A + B (100 ml)",
+      "germCaps": "12 Keimkappen",
+      "instructions": "Dosieranleitung"
     }
   },
   "sleek": {
@@ -156,10 +214,21 @@
     "detailsTitle": "Gut zu wissen",
     "relatedTitle": "Weitere Pods zum Anbauen",
     "specs": {
-      "harvest": { "label": "Erste Ernte", "value": "2–4 Wochen" },
-      "pack": { "label": "Packungsgröße" },
-      "light": { "label": "Licht", "value": "LED · auto 16/8" },
-      "nature": { "label": "Samen", "value": "Gentechnikfrei" }
+      "harvest": {
+        "label": "Erste Ernte",
+        "value": "2–4 Wochen"
+      },
+      "pack": {
+        "label": "Packungsgröße"
+      },
+      "light": {
+        "label": "Licht",
+        "value": "LED · auto 16/8"
+      },
+      "nature": {
+        "label": "Samen",
+        "value": "Gentechnikfrei"
+      }
     },
     "trust": {
       "compatible": "Passt in alle PlantyHub Gärten",
@@ -173,41 +242,169 @@
     "subtitle": "Alles, um deinen Indoor-Garten zu erweitern und zu pflegen — von stilvollen Ständern bis zu Nährstoffen und Nachfüll-Kapseln."
   },
   "aboutPage": {
-    "eyebrow": "Unsere Geschichte",
-    "title": "Über PlantyHub",
-    "lead": "Wir glauben, dass jeder frische Kräuter zu Hause verdient — ohne Garten, ohne Erde und ohne grünen Daumen.",
-    "storyTitle": "Anbau leicht gemacht",
-    "story1": "PlantyHub begann in einer kleinen Küche in Pazardzhik, Bulgarien, mit einer Idee: echten, frischen Geschmack das ganze Jahr über mühelos drinnen anzubauen.",
-    "story2": "Heute helfen unsere smarten Gärten und vorgesäten Kapseln Tausenden Haushalten in Europa, in wenigen Wochen frische Kräuter und Gewürze zu ernten — nur mit Wasser, Licht und ein wenig Liebe.",
+    "eyebrow": "Unsere Mission",
+    "title": "Die Zukunft ist hier",
+    "lead": "Anbauen kann leicht und modern sein. Frische Kräuter auf der Arbeitsplatte — ohne Garten, ohne Erde, ohne Expertenwissen.",
+    "missionKicker": "Warum es uns gibt",
+    "quote": "Einfacher. Moderner.\nErnte zu Hause.",
+    "mission": "Wir wollen, dass jedes Zuhause frischen Geschmack erntet — nicht nach Jahren Übung, sondern ab der ersten Woche. Die Zukunft des Anbaus steht auf deiner Arbeitsplatte.",
+    "pillars": {
+      "easy": {
+        "title": "Einfacher",
+        "text": "Ohne Garten, ohne Erde und ohne komplizierte Regeln."
+      },
+      "modern": {
+        "title": "Moderner",
+        "text": "Smarte Beleuchtung und Bewässerung, die für dich arbeiten."
+      },
+      "home": {
+        "title": "Ernte zu Hause",
+        "text": "Frischer Geschmack auf der Arbeitsplatte ab der ersten Woche."
+      }
+    },
+    "storyKicker": "Wie alles begann",
+    "storyTitle": "Von einer Küche zu Tausenden Haushalten",
+    "story1": "PlantyHub begann in einer kleinen Küche mit einer Idee: echten, frischen Geschmack das ganze Jahr über mühelos drinnen anzubauen.",
+    "story2": "Heute helfen unsere smarten Gärten und vorgesäten Kapseln Tausenden Haushalten in Europa, in wenigen Wochen frische Kräuter zu ernten — nur mit Wasser, Licht und ein wenig Fürsorge.",
+    "videoBadge": "Sieh es wachsen",
+    "playVideo": "Video abspielen",
+    "pauseVideo": "Video pausieren",
     "valuesTitle": "Wofür wir stehen",
     "values": {
-      "quality": { "title": "Qualität zuerst", "text": "Robuste Gärten und zuverlässige Kapseln, getestet zum Keimen und Gedeihen." },
-      "sustainability": { "title": "Gut für den Planeten", "text": "Gentechnikfreie Samen, recycelbare Materialien und wassersparender Anbau." },
-      "simplicity": { "title": "Wirklich einfach", "text": "So gestaltet, dass jeder anbauen kann — klare Anleitungen und volle Automatik." }
+      "quality": {
+        "title": "Modernes Gärtnern",
+        "text": "Smarte Beleuchtung, automatisches Gießen und Kapseln, die keimen. Technik, die für dich arbeitet."
+      },
+      "sustainability": {
+        "title": "Gut für den Planeten",
+        "text": "Gentechnikfreie Samen, recycelbare Materialien und Hydroponik, die deutlich weniger Wasser braucht als Erde."
+      },
+      "simplicity": {
+        "title": "Einfacher für alle",
+        "text": "Ohne Erde, ohne Erfahrung, ohne komplizierte Regeln. Kapsel einsetzen — der Garten macht den Rest."
+      }
     },
     "stats": {
-      "plants": { "value": "500k+", "label": "gewachsene Pflanzen" },
-      "countries": { "value": "12", "label": "belieferte Länder" },
-      "harvests": { "value": "98%", "label": "Keimerfolg" }
-    }
+      "plants": {
+        "value": "500k+",
+        "label": "gewachsene Pflanzen"
+      },
+      "countries": {
+        "value": "12",
+        "label": "belieferte Länder"
+      },
+      "harvests": {
+        "value": "98%",
+        "label": "Keimerfolg"
+      }
+    },
+    "originEyebrow": "Bereit zur Ernte",
+    "originTitle": "Frischer Geschmack auf deiner Arbeitsplatte",
+    "originText": "Leise, schöne Gärten, die wirklich einfach zu nutzen sind — nur Wasser, Licht und ein wenig Fürsorge.",
+    "originPlace": "",
+    "ctaButton": "Ernte starten"
   },
   "supportPage": {
-    "eyebrow": "Wir helfen gerne",
-    "title": "Support",
-    "subtitle": "Antworten auf häufige Fragen und alle Wege, unser Team zu erreichen.",
+    "eyebrow": "Kontakt",
+    "title": "Kontakt",
+    "subtitle": "Sende eine Anfrage oder sieh in die FAQ.",
     "cards": {
-      "email": { "title": "Schreib uns", "text": "Unser Team antwortet innerhalb eines Werktags.", "action": "support@plantyhub.com" },
-      "shipping": { "title": "Versand", "text": "Bulgarien, Balkan und EU — Versand innerhalb von 24h.", "action": "Bestellung verfolgen" },
-      "returns": { "title": "Rückgabe & Garantie", "text": "30 Tage Geld-zurück-Garantie und 2 Jahre Garantie.", "action": "Rückgabe starten" }
+      "email": {
+        "title": "Schreib uns",
+        "text": "Unser Team antwortet innerhalb eines Werktags.",
+        "action": "support@plantyhub.com"
+      },
+      "shipping": {
+        "title": "Versand",
+        "text": "Bulgarien, Balkan und EU — Versand innerhalb von 24h.",
+        "action": "Bestellung verfolgen"
+      },
+      "returns": {
+        "title": "Rückgabe & Garantie",
+        "text": "30 Tage Geld-zurück-Garantie und 2 Jahre Garantie.",
+        "action": "Rückgabe starten"
+      }
     },
-    "faqTitle": "Häufig gestellte Fragen",
+    "faqTitle": "Zuerst die FAQ prüfen",
     "faqItems": [
-      { "q": "Wie verfolge ich meine Bestellung?", "a": "Du erhältst einen Tracking-Link per E-Mail, sobald deine Bestellung versandt wird. Versand erfolgt innerhalb von 24 Stunden an Werktagen." },
-      { "q": "Wie ist eure Rückgabepolitik?", "a": "Wenn du nicht zufrieden bist, sende deinen Garten innerhalb von 30 Tagen für eine volle Rückerstattung zurück — ohne Wenn und Aber." },
-      { "q": "Wie funktioniert die Garantie?", "a": "Jeder HomeGarder One kommt mit 2 Jahren Garantie auf Herstellungsfehler. Kontaktiere uns einfach mit deiner Bestellnummer." },
-      { "q": "Meine Kapseln keimen nicht — was tun?", "a": "Die meisten Kapseln keimen in 1–2 Wochen. Stelle sicher, dass Wasser im Tank ist, das Licht an ist und der Raum warm. Immer noch Probleme? Schreib uns und wir ersetzen sie." },
-      { "q": "Bietet ihr Groß- oder Firmenbestellungen an?", "a": "Ja — schreib an support@plantyhub.com und wir helfen bei größeren oder geschäftlichen Bestellungen." }
-    ]
+      {
+        "q": "Wie verfolge ich meine Bestellung?",
+        "a": "Du erhältst einen Tracking-Link per E-Mail, sobald deine Bestellung versandt wird. Versand erfolgt innerhalb von 24 Stunden an Werktagen."
+      },
+      {
+        "q": "Wie ist eure Rückgabepolitik?",
+        "a": "Wenn du nicht zufrieden bist, sende deinen Garten innerhalb von 30 Tagen für eine volle Rückerstattung zurück — ohne Wenn und Aber."
+      },
+      {
+        "q": "Wie funktioniert die Garantie?",
+        "a": "Jeder HomeGarder One kommt mit 2 Jahren Garantie auf Herstellungsfehler. Kontaktiere uns einfach mit deiner Bestellnummer."
+      },
+      {
+        "q": "Meine Kapseln keimen nicht — was tun?",
+        "a": "Die meisten Kapseln keimen in 1–2 Wochen. Stelle sicher, dass Wasser im Tank ist, das Licht an ist und der Raum warm. Immer noch Probleme? Schreib uns und wir ersetzen sie."
+      },
+      {
+        "q": "Bietet ihr Groß- oder Firmenbestellungen an?",
+        "a": "Ja — schreib an support@plantyhub.com und wir helfen bei größeren oder geschäftlichen Bestellungen."
+      }
+    ],
+    "faqCta": "Zu den häufigen Fragen",
+    "heroTitle": "Kontakt",
+    "emailCta": "E-Mail senden",
+    "emailLabel": "E-Mail",
+    "responseTitle": "Schnelle Antwort",
+    "responseText": "Meist antworten wir innerhalb eines Werktags.",
+    "form": {
+      "cta": "Anfrage senden",
+      "title": "Anfrage",
+      "lead": "Füll das Formular aus — deine Nachricht geht direkt an unser Team.",
+      "name": "Name",
+      "nameError": "Bitte Namen eingeben.",
+      "email": "E-Mail",
+      "emailError": "Bitte gültige E-Mail eingeben.",
+      "subject": "Betreff",
+      "subjectError": "Bitte Betreff wählen.",
+      "subjects": {
+        "general": "Allgemeine Frage",
+        "order": "Bestellung",
+        "shipping": "Versand",
+        "returns": "Rückgabe",
+        "warranty": "Garantie",
+        "pods": "Kapseln & Anbau",
+        "wholesale": "Großbestellung",
+        "other": "Sonstiges"
+      },
+      "orderNumber": "Bestellnummer (optional)",
+      "orderNumberHint": "Hilft uns, schneller zu antworten.",
+      "message": "Nachricht",
+      "messageError": "Mindestens 10 Zeichen schreiben.",
+      "submit": "Senden",
+      "sending": "Wird gesendet…",
+      "error": "Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.",
+      "successTitle": "Anfrage erhalten",
+      "successText": "Wir antworten innerhalb eines Werktags an deine E-Mail.",
+      "sendAnother": "Weitere Anfrage senden"
+    },
+    "topicsTitle": "Wobei wir helfen",
+    "topicsLead": "Wähle ein Thema — wir zeigen den nächsten Schritt.",
+    "topics": {
+      "shipping": {
+        "title": "Versand & Tracking",
+        "text": "Wohin wir liefern, Fristen und wie du deine Sendung verfolgst.",
+        "action": "Zur FAQ"
+      },
+      "returns": {
+        "title": "Rückgabe",
+        "text": "30 Tage Rückgaberecht, wenn das Produkt nicht passt.",
+        "action": "Rückgabe anfragen"
+      },
+      "warranty": {
+        "title": "Garantie",
+        "text": "2 Jahre bei Herstellungsfehlern — schreib uns mit Bestellnummer.",
+        "action": "Mail schreiben"
+      }
+    },
+    "faqText": "Die meisten Fragen zu Setup, Kapseln und Pflege sind schon beantwortet."
   },
   "consumablesSection": {
     "eyebrow": "Verbrauchsmaterial",
@@ -234,9 +431,11 @@
         "title": "Von der Küche auf den Tisch — Basilikum-Pesto in 5 Wochen",
         "excerpt": "Eine einfache Rezeptserie vom Pod bis auf den Teller mit deiner ersten PlantyHub-Ernte.",
         "body": [
-          "Deine ersten Basilikum-Pods sind meist in Woche drei bis fünf erntereif — schneide die oberen Blätter und die Pflanze treibt weiter aus.",
-          "Für ein schnelles Pesto püriere eine Handvoll frisches Basilikum mit Olivenöl, Knoblauch, Pinienkernen und Hartkäse bis es seidig ist.",
-          "Der Unterschied zum Supermarkt-Kraut ist sofort da: intensiver Duft und Pesto, das nach Garten schmeckt — nicht nach Kühlschrank."
+          "Die ersten Basilikum-Kapseln sind meist in Woche drei bis fünf erntereif — Spitzen schneiden, die Pflanze wächst weiter.",
+          "Für schnelles Pesto eine Handvoll frisches Basilikum mit Olivenöl, Knoblauch, Pinienkernen und Hartkäse glatt pürieren. Mit Salz und Zitrone abschmecken.",
+          "Der Unterschied zu Kräutern aus dem Laden ist sofort klar: intensiveres Aroma und Pesto, das nach Garten schmeckt — nicht nach Kühlschrank.",
+          "Pesto im Glas mit einer dünnen Ölschicht oben lagern — so hält es einige Tage im Kühlschrank. Oder in Eiswürfelformen einfrieren.",
+          "Nach der Ernte den Garten im Rhythmus lassen. Eine neue Basilikum- oder Minzkapsel im nächsten Slot hält die Küche frisch."
         ]
       },
       "hydroponics": {
@@ -244,9 +443,10 @@
         "title": "Warum Hydroponik 90 % weniger Wasser verbraucht",
         "excerpt": "Die Wissenschaft hinter smarten Indoor-Gärten und warum sie die nachhaltige Wahl für Stadtwohnungen sind.",
         "body": [
-          "Im Erdbeet geht Wasser durch Abfluss und Verdunstung verloren. Ein geschlossenes Hydroponik-Tablett recirculiert nur, was die Wurzeln brauchen.",
-          "Bei HomeGarder One sorgen dosiertes Licht und gleichmäßige Feuchte dafür, dass Pflanzen Energie in Blätter stecken — nicht in Dürrestress.",
-          "Für Stadtwohnungen heißt das: seltener nachfüllen, weniger Abfall und Kräuter, die monatelang nachwachsen."
+          "In Erdbeeten geht Wasser durch Abfluss und Verdunstung verloren. Eine geschlossene Hydrokultur führt nur zurück, was die Wurzeln brauchen.",
+          "Bei HomeGarder One sorgen dosiertes Licht und stabile Feuchte dafür, dass Pflanzen in Blätter investieren statt Trockenstress zu überleben.",
+          "Für Stadthaushalte heißt das: seltener nachfüllen, weniger Abfall und Kräuter, die monatelang tragen.",
+          "Hydroponik ist kein Laborexperiment — es ist eine ruhige Arbeitsplatte, die mitkocht. Weniger Wasser, weniger Stress, mehr Geschmack."
         ]
       },
       "spices": {
@@ -254,9 +454,10 @@
         "title": "Aromatische Gewürze vom Küchentresen",
         "excerpt": "Thymian, Oregano, Rosmarin, Schnittlauch und Chili — die Gewerze-Schublade als lebende Pods.",
         "body": [
-          "Kulinarische Gewürze müssen nicht trocken ankommen. Langsam wachsende Aromaten wie Thymian, Oregano und Rosmarin gedeihen unter stabiler LED-Licht.",
-          "Schnittlauch liefert eine milde Zwiebelnote für Eier und Suppen. Chili bringt Schärfe, sobald die Früchte sich färben.",
-          "Fülle ein paar Löcher mit unseren Gewürz-Pods — oder nimm den 12er-Gewürzmix — und würze direkt von der Pflanze."
+          "Küchengewürze müssen nicht nur getrocknet kommen. Langsame Aromen wie Thymian, Oregano und Rosmarin gedeihen unter stabilem LED-Licht.",
+          "Schnittlauch gibt milde Zwiebelnoten für Eier und Suppen. Chili bringt Schärfe, sobald die Früchte Farbe annehmen.",
+          "Fülle einige Plätze mit unseren Gewürzkapseln — oder nimm den 12er-Mix — und würze direkt von der Krone beim Kochen.",
+          "Wenig und oft ernten: frische Gewürze duften am besten direkt nach dem Schnitt, nicht nach Tagen in der Plastikbox."
         ]
       },
       "first-harvest": {
@@ -264,9 +465,10 @@
         "title": "So gelingt die erste Ernte ohne Stress",
         "excerpt": "Eine ruhige Checkliste für Woche zwei und drei: was schneiden, was stehen lassen und wie oft düngen.",
         "body": [
-          "Warte, bis die Pflanze mehrere echte Blätter hat. Entferne nie mehr als ein Drittel der Krone auf einmal.",
-          "Ernte morgens, wenn die Öle konzentriert sind. Mit sauberer Schere knapp über einem Blattknoten schneiden.",
-          "Halte Nährlösung und Lichtzyklus stabil — gestresste Pflanzen schmecken bitter, lange bevor sie krank aussehen."
+          "Warte auf mehrere echte Blätter vor dem ersten Schnitt. Nimm nie mehr als ein Drittel der Krone auf einmal.",
+          "Ernte morgens, wenn ätherische Öle am stärksten sind. Saubere Schere, Schnitt über einem Blattknoten für Verzweigung.",
+          "Halte Nährlösung und Lichtzyklus stabil — gestresste Pflanzen werden bitter, bevor sie schlecht aussehen.",
+          "Wenn du unsicher bist, starte mit Basilikum oder Minze: sie verzeihen Fehler und zeigen schnell, ob dein Rhythmus stimmt."
         ]
       },
       "partnership": {
@@ -274,9 +476,10 @@
         "title": "PlantyHub × Sustainable Living EU",
         "excerpt": "Wir haben uns mit umweltbewussten Creators zusammengetan, um zu zeigen, wie ein Garten den Alltag verändert.",
         "body": [
-          "Gemeinsam mit Sustainable Living EU begleiteten wir Haushalte, die wöchentliche Kräuterpackungen gegen einen Tischgarten tauschten.",
-          "Creators notierten Setup-Zeit, Nachfüllen und Geschmack — die meisten kochten innerhalb eines Monats mit eigener Ernte.",
-          "Das Fazit: Wenn Anbau automatisch läuft, hören frische Gewürze auf, ein besonderer Anlass zu sein."
+          "Gemeinsam mit Sustainable Living EU haben wir Haushalte begleitet, die Ladenkräuter durch einen Tischgarten ersetzt haben.",
+          "Creator notierten Setup, Nachfüllen und Geschmack — die meisten kochten innerhalb eines Monats mit eigener Ernte.",
+          "Das Fazit ist einfach: wenn Anbauen automatisch läuft, sind frische Kräuter kein Festtagsereignis mehr.",
+          "Kleine Gewohnheiten summieren sich — weniger Plastik, weniger welkes Grün, mehr Abendessen mit selbst Gezogenem."
         ]
       },
       "earthday": {
@@ -284,12 +487,16 @@
         "title": "Earth Day: Selbst anbauen, weniger verschwenden",
         "excerpt": "Wie biologisch abbaubare Pods und lokaler Anbau Plastik- und Lebensmittelabfälle reduzieren.",
         "body": [
-          "Gekaufte Kräuter welken oft ungenutzt. Wer nur schneidet, was gebraucht wird, spart Plastikschalen und Abfall.",
-          "Unsere Pods sind nach dem Zyklus kompostierbar, und der Garten hält Jahre mit Nachfüllungen.",
-          "Kleine Küchengärten lösen die Klimakrise nicht allein — aber sie ändern Gewohnheiten, und Gewohnheiten skalieren."
+          "Gekaufte Kräuter welken oft ungenutzt. Wenn du nur schneidest, was du brauchst, kommt Geschmack ohne halb volle Box.",
+          "Kapseln sind zum Kompostieren nach dem Zyklus gedacht, der Garten hält Jahre mit Nachfüllungen.",
+          "Ein kleiner Küchengarten löst das Klima nicht allein — aber er ändert Gewohnheiten, und Gewohnheiten multiplizieren sich.",
+          "Starte mit einer Kapsel. Dann zwei. Nach einem Monat spricht deine Küche eine andere Sprache — Ernte statt Abfall."
         ]
       }
-    }
+    },
+    "minRead": "{{minutes}} Min. Lesezeit",
+    "articleCta": "Jetzt anbauen",
+    "viewAll": "Alle Artikel"
   },
   "growSmarter": {
     "title": "Klüger wachsen, nicht härter",
@@ -372,34 +579,94 @@
   },
   "products": {
     "gardens": {
-      "homegarder-one": { "name": "PlantyHub HomeGarder One", "tagline": "12 Pods · 16h LED" },
-      "starter-bundle": { "name": "Starter-Paket", "tagline": "HomeGarder One + PlantyHub Pods" },
-      "pods-kit": { "name": "PlantyHub Pods Kit", "tagline": "Samen + Pflanz-es-selbst" }
+      "homegarder-one": {
+        "name": "PlantyHub HomeGarder One",
+        "tagline": "12 Pods · 16h LED"
+      },
+      "starter-bundle": {
+        "name": "Starter-Paket",
+        "tagline": "HomeGarder One + PlantyHub Pods"
+      },
+      "pods-kit": {
+        "name": "PlantyHub Pods Kit",
+        "tagline": "Samen + Pflanz-es-selbst"
+      }
     },
     "pods": {
-      "basil": { "name": "Basilikum Saat-Pods", "description": "Süß, aromatisch und der König der Kräuter. Frische Blätter für Pesto, Pasta und Caprese in wenigen Wochen." },
-      "mint": { "name": "Minze Saat-Pods", "description": "Duftende, erfrischende Blätter für Tee, Cocktails und Desserts — eines der einfachsten Kräuter überhaupt." },
-      "parsley": { "name": "Petersilie Saat-Pods", "description": "Das frische, vielseitige Alltagskraut — perfekt für Garnituren, Saucen und Brühen das ganze Jahr." },
-      "cilantro": { "name": "Koriander Saat-Pods", "description": "Frische, zitrusartige Blätter, die Currys, Salsa und Nudelbowls beleben. Schneide frisch, wenn ein Gericht Pep braucht." },
-      "dill": { "name": "Dill Saat-Pods", "description": "Zarte, feine Wedel mit frischer Anisnote — wie gemacht für Fisch, Dips, Eingelegtes und Kartoffeln." },
-      "arugula": { "name": "Rucola Saat-Pods", "description": "Kräftige, pfeffrige Blätter für Salate, Pizza und Sandwiches. Schnellwachsend und immer wieder nachzuernten." },
-      "thyme": { "name": "Thymian Saat-Pods", "description": "Kleine, holzige Blätter mit warmem Duft — unverzichtbar für Braten, Marinaden und langsame Saucen." },
-      "oregano": { "name": "Oregano Saat-Pods", "description": "Klassisches Mittelmeer-Gewürz für Pizza, Tomatensaucen und Grillgemüse — kräftig schon in kleinen Prisen." },
-      "rosemary": { "name": "Rosmarin Saat-Pods", "description": "Nadelartige Blätter mit harziger Tiefe. Perfekt zu Kartoffeln, Lamm und frischer Focaccia." },
-      "chives": { "name": "Schnittlauch Saat-Pods", "description": "Milde Zwiebelgrün für Eier, Suppen und Salate. Oft schneiden — er wächst nach." },
-      "chili": { "name": "Chili Saat-Pods", "description": "Kompakte Chili-Pflanzen für Küchenhitze — ernten, wenn die Früchte sich färben." },
-      "herb-mix-12": { "name": "12er Kräuter-Mix", "description": "Ein volles Sortiment unserer liebsten Kräuter und Gewürze — alles, um deinen ganzen Garten auf einmal zu füllen." },
-      "spice-mix-12": { "name": "12er Gewürz-Mix", "description": "Aromatische Gewürze für den ganzen Garten — Thymian, Oregano, Rosmarin, Schnittlauch, Chili und mehr zum täglichen Würzen." }
+      "basil": {
+        "name": "Basilikum Saat-Pods",
+        "description": "Süß, aromatisch und der König der Kräuter. Frische Blätter für Pesto, Pasta und Caprese in wenigen Wochen."
+      },
+      "mint": {
+        "name": "Minze Saat-Pods",
+        "description": "Duftende, erfrischende Blätter für Tee, Cocktails und Desserts — eines der einfachsten Kräuter überhaupt."
+      },
+      "parsley": {
+        "name": "Petersilie Saat-Pods",
+        "description": "Das frische, vielseitige Alltagskraut — perfekt für Garnituren, Saucen und Brühen das ganze Jahr."
+      },
+      "cilantro": {
+        "name": "Koriander Saat-Pods",
+        "description": "Frische, zitrusartige Blätter, die Currys, Salsa und Nudelbowls beleben. Schneide frisch, wenn ein Gericht Pep braucht."
+      },
+      "dill": {
+        "name": "Dill Saat-Pods",
+        "description": "Zarte, feine Wedel mit frischer Anisnote — wie gemacht für Fisch, Dips, Eingelegtes und Kartoffeln."
+      },
+      "arugula": {
+        "name": "Rucola Saat-Pods",
+        "description": "Kräftige, pfeffrige Blätter für Salate, Pizza und Sandwiches. Schnellwachsend und immer wieder nachzuernten."
+      },
+      "thyme": {
+        "name": "Thymian Saat-Pods",
+        "description": "Kleine, holzige Blätter mit warmem Duft — unverzichtbar für Braten, Marinaden und langsame Saucen."
+      },
+      "oregano": {
+        "name": "Oregano Saat-Pods",
+        "description": "Klassisches Mittelmeer-Gewürz für Pizza, Tomatensaucen und Grillgemüse — kräftig schon in kleinen Prisen."
+      },
+      "rosemary": {
+        "name": "Rosmarin Saat-Pods",
+        "description": "Nadelartige Blätter mit harziger Tiefe. Perfekt zu Kartoffeln, Lamm und frischer Focaccia."
+      },
+      "chives": {
+        "name": "Schnittlauch Saat-Pods",
+        "description": "Milde Zwiebelgrün für Eier, Suppen und Salate. Oft schneiden — er wächst nach."
+      },
+      "chili": {
+        "name": "Chili Saat-Pods",
+        "description": "Kompakte Chili-Pflanzen für Küchenhitze — ernten, wenn die Früchte sich färben."
+      },
+      "herb-mix-12": {
+        "name": "12er Kräuter-Mix",
+        "description": "Ein volles Sortiment unserer liebsten Kräuter und Gewürze — alles, um deinen ganzen Garten auf einmal zu füllen."
+      },
+      "spice-mix-12": {
+        "name": "12er Gewürz-Mix",
+        "description": "Aromatische Gewürze für den ganzen Garten — Thymian, Oregano, Rosmarin, Schnittlauch, Chili und mehr zum täglichen Würzen."
+      }
     },
     "consumables": {
-      "empty-capsules": { "name": "Leere Kapseln" },
-      "sana-ab": { "name": "Sana A + B Nährlösung" },
-      "germination-caps": { "name": "Keimkappen" }
+      "empty-capsules": {
+        "name": "Leere Kapseln"
+      },
+      "sana-ab": {
+        "name": "Sana A + B Nährlösung"
+      },
+      "germination-caps": {
+        "name": "Keimkappen"
+      }
     },
     "accessories": {
-      "storage-cabinet": { "name": "Aufbewahrungsschrank" },
-      "wall-shelf": { "name": "Wandregal" },
-      "herb-knife": { "name": "Kräutermesser" }
+      "storage-cabinet": {
+        "name": "Aufbewahrungsschrank"
+      },
+      "wall-shelf": {
+        "name": "Wandregal"
+      },
+      "herb-knife": {
+        "name": "Kräutermesser"
+      }
     }
   },
   "cta": {
@@ -435,10 +702,22 @@
     "highlightsTitle": "Alles, was du zum Wachsen brauchst",
     "highlightsSubtitle": "Ein smarter Garten — ohne Erde, ohne Rätselraten, das ganze Jahr.",
     "features": {
-      "easy": { "title": "Einfach", "text": "Keine Erde, kein Schmutz — einfach einsetzen und wachsen." },
-      "fast": { "title": "Schnelles Wachstum", "text": "Optimiert für schnelle, gesunde Ernten." },
-      "smart": { "title": "Smartes System", "text": "Für PlantyHub Indoor-Gärten entwickelt." },
-      "natural": { "title": "Natürlich", "text": "Gentechnikfrei, natürliche Zutaten." }
+      "easy": {
+        "title": "Einfach",
+        "text": "Keine Erde, kein Schmutz — einfach einsetzen und wachsen."
+      },
+      "fast": {
+        "title": "Schnelles Wachstum",
+        "text": "Optimiert für schnelle, gesunde Ernten."
+      },
+      "smart": {
+        "title": "Smartes System",
+        "text": "Für PlantyHub Indoor-Gärten entwickelt."
+      },
+      "natural": {
+        "title": "Natürlich",
+        "text": "Gentechnikfrei, natürliche Zutaten."
+      }
     },
     "howItWorksTitle": "So funktioniert's",
     "steps": [
@@ -502,6 +781,7 @@
     "shipping": "Versand: Bulgarien · Balkan · Europäische Union",
     "shippingNote": "Kostenloser Versand ab €150. Preise in EUR.",
     "linksTitle": "Navigation",
+    "legalTitle": "Rechtliches",
     "links": {
       "product": "Produkt",
       "howItWorks": "So funktioniert's",
@@ -509,13 +789,16 @@
       "accessories": "Zubehör",
       "about": "Über uns",
       "blog": "Blog",
-      "support": "Support",
+      "privacy": "Datenschutz",
+      "cookies": "Cookies",
+      "terms": "Nutzungsbedingungen",
+      "faq": "FAQ",
       "contact": "Kontakt",
-      "privacy": "Datenschutz"
+      "learn": "Lernen"
     },
     "followUs": "Folge uns",
     "contactTitle": "Kontakt",
-    "address": "PlantyHub · Pazardzhik, Bulgarien",
+    "address": "PlantyHub · Bulgarien",
     "madeWith": "Mit Sorgfalt in Bulgarien angebaut",
     "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten."
   },
@@ -553,7 +836,10 @@
       "invalidPassword": "Das Passwort muss mindestens 6 Zeichen lang sein.",
       "passwordMismatch": "Die Passwörter stimmen nicht überein.",
       "success": "Dein Konto ist bereit. Du kannst dich jetzt anmelden.",
-      "goToLogin": "Zur Anmeldung"
+      "goToLogin": "Zur Anmeldung",
+      "termsBefore": "Ich stimme den",
+      "termsMiddle": " und der",
+      "termsAfter": " zu."
     }
   },
   "account": {
@@ -828,7 +1114,12 @@
       "courier": "Kurier",
       "courierHint": "Erscheint auf dem Versandetikett",
       "status": "Bestellstatus",
-      "couriers": { "econt": "Econt", "speedy": "Speedy", "dhl": "DHL", "boxnow": "BOX NOW" },
+      "couriers": {
+        "econt": "Econt",
+        "speedy": "Speedy",
+        "dhl": "DHL",
+        "boxnow": "BOX NOW"
+      },
       "weight": "Gewicht (kg)",
       "weightHint": "Gesamtgewicht der Sendung",
       "packages": "Pakete",
@@ -848,7 +1139,11 @@
       "notes": "Bestellhinweise",
       "timeline": "Bestellverlauf",
       "customerOrders": "Weitere Bestellungen dieses Kunden",
-      "payment": { "card": "Mit Karte bezahlt", "cod": "Nachnahme", "paypal": "Mit PayPal bezahlt" }
+      "payment": {
+        "card": "Mit Karte bezahlt",
+        "cod": "Nachnahme",
+        "paypal": "Mit PayPal bezahlt"
+      }
     },
     "customers": {
       "title": "Kunden",
@@ -1115,7 +1410,10 @@
       "saved": "Kurierprofil gespeichert.",
       "loadFailed": "Kurier-Einstellungen konnten nicht geladen werden.",
       "saveFailed": "Kurier-Einstellungen konnten nicht gespeichert werden.",
-      "tabs": { "sender": "Absender", "calculator": "Rechner" },
+      "tabs": {
+        "sender": "Absender",
+        "calculator": "Rechner"
+      },
       "connection": "API-Verbindung",
       "account": "Konto",
       "accountHint": "Kunden- und Vertragsnummern aus dem Kurierportal.",
@@ -1142,7 +1440,10 @@
       "contents": "Standardinhalt",
       "contentsHint": "Auf dem Etikett, z. B. Indoor-Garten / Saatpads.",
       "payer": "Wer zahlt den Versand",
-      "payers": { "sender": "Absender", "receiver": "Empfänger" },
+      "payers": {
+        "sender": "Absender",
+        "receiver": "Empfänger"
+      },
       "labelFormat": "Etikettenformat",
       "notes": "Zusatzparameter",
       "notesHint": "Alles weitere, was dieser Kurier braucht. Wird mit der Sendung gespeichert.",
@@ -1327,5 +1628,627 @@
         "imageRequired": "Bild-URL ist erforderlich."
       }
     }
+  },
+  "faqPage": {
+    "eyebrow": "Hilfe & Antworten",
+    "title": "Häufig gestellte Fragen",
+    "lead": "Alles zu HomeGarder One, Kapseln, Versand, Garantie und Pflanzenpflege — an einem Ort.",
+    "allCategories": "Alle",
+    "ctaTitle": "Keine Antwort gefunden?",
+    "ctaText": "Schreib uns — wir antworten innerhalb eines Werktags.",
+    "ctaSupport": "Zum Kontakt",
+    "ctaEmail": "E-Mail schreiben",
+    "categories": [
+      {
+        "id": "orders",
+        "title": "Bestellungen & Versand",
+        "items": [
+          {
+            "q": "Wohin liefert ihr?",
+            "a": "Wir liefern nach Bulgarien, auf den Balkan und in die EU. Bestellungen gehen an Werktagen meist innerhalb von 24 Stunden raus."
+          },
+          {
+            "q": "Was kostet der Versand?",
+            "a": "Der Versand wird an der Kasse nach Zielort berechnet. Ab €150 ist der Versand für die meisten EU- und Balkan-Ziele kostenlos."
+          },
+          {
+            "q": "Wie lange dauert die Lieferung?",
+            "a": "Typisch 1–3 Werktage in Bulgarien und 3–7 Werktage in der EU, je nach Kurier und Ziel."
+          },
+          {
+            "q": "Wie verfolge ich meine Bestellung?",
+            "a": "Nach dem Versand erhältst du eine E-Mail mit Tracking-Nummer und Link. Mit Konto siehst du den Status auch unter Meine Bestellungen."
+          },
+          {
+            "q": "Kann ich die Adresse nach der Bestellung ändern?",
+            "a": "Ja, wenn das Paket noch nicht versendet wurde. Schreib sofort an support@plantyhub.com mit Bestellnummer und neuer Adresse."
+          },
+          {
+            "q": "Was tun bei beschädigter Sendung?",
+            "a": "Fotografiere Verpackung und Produkt und melde dich innerhalb von 48 Stunden. Wir ersetzen oder organisieren eine Rücksendung ohne Mehrkosten für dich."
+          },
+          {
+            "q": "Liefert ihr außerhalb der EU?",
+            "a": "Aktuell liegt der Fokus auf Bulgarien, Balkan und EU. Schreib uns für andere Länder — wir prüfen die Möglichkeiten."
+          },
+          {
+            "q": "Bekomme ich eine Rechnung?",
+            "a": "Ja. Privatkunden erhalten Beleg/Rechnung wie vorgeschrieben. Firmen können Rechnungsdaten an der Kasse angeben oder uns danach schreiben."
+          }
+        ]
+      },
+      {
+        "id": "product",
+        "title": "Produkt & Einrichtung",
+        "items": [
+          {
+            "q": "Was ist HomeGarder One?",
+            "a": "Ein smarter Hydroponik-Gartengerät für die Arbeitsplatte: Vollspektrum-LED, automatisches Gießen und Platz für mehrere Kapseln — ohne Erde und ohne Erfahrung."
+          },
+          {
+            "q": "Was ist im Karton?",
+            "a": "Das Gerät, LED-Arm, Netzteil, Starterkapseln (je nach Bundle), Nährstoffe Sana A + B und eine Kurzanleitung mit QR."
+          },
+          {
+            "q": "Wie lange dauert die erste Einrichtung?",
+            "a": "Meist 10–15 Minuten: auspacken, Lampe montieren, Wasser einfüllen, Kapseln einsetzen, einschalten."
+          },
+          {
+            "q": "Brauche ich WLAN oder eine App?",
+            "a": "Für den Grundbetrieb nicht. Der Garten läuft mit eigenem Lichtzyklus. Vernetzte Funktionen stehen ggf. in der Anleitung."
+          },
+          {
+            "q": "Wie viele Kapselplätze gibt es?",
+            "a": "HomeGarder One züchtet mehrere Kapseln gleichzeitig — typisch bis zu 12 je nach Modell. Exacte Angaben auf der Produktseite."
+          },
+          {
+            "q": "Ist es laut?",
+            "a": "Nein — für Küche und Wohnzimmer gemacht. Pumpe und Licht sind im Normalbetrieb leise."
+          },
+          {
+            "q": "Wo soll ich es aufstellen?",
+            "a": "Auf stabiler Fläche nah an einer Steckdose, weg von Backofen und starkem Zug. Luft um die Lampe lassen, Lüftungen nicht blockieren."
+          },
+          {
+            "q": "Welche Größe und welches Gewicht?",
+            "a": "Kompakter Tischgarten — Maße und Gewicht stehen in den Spezifikationen von HomeGarder One."
+          },
+          {
+            "q": "Wie viel Strom verbraucht es?",
+            "a": "Die LED ist effizient — etwa wie ein paar LED-Lampen. Der Verbrauch hängt von Helligkeit und dem 16/8-Zyklus ab."
+          }
+        ]
+      },
+      {
+        "id": "growing",
+        "title": "Anbau & Ernte",
+        "items": [
+          {
+            "q": "Brauche ich Gärtner-Erfahrung?",
+            "a": "Nein. Kapsel einsetzen, Wasser und Nährstoffe hinzufügen — das Licht läuft automatisch. QR-Anleitung führt dich Schritt für Schritt."
+          },
+          {
+            "q": "Wann ist die erste Ernte?",
+            "a": "Die meisten Kräuter sind ca. 2–4 Wochen nach dem Keimen erntereif und tragen bei guter Pflege Wochen oder Monate weiter."
+          },
+          {
+            "q": "Wie ernte ich richtig?",
+            "a": "Spitzen und äußere Blätter schneiden, nicht die ganze Pflanze — so treibt sie neu aus. Saubere Schere verwenden."
+          },
+          {
+            "q": "Welcher Lichtzyklus?",
+            "a": "Etwa 16 Stunden Licht und 8 Stunden Dunkelheit. Zyklus nicht ständig unterbrechen — Pflanzen brauchen Ruhe."
+          },
+          {
+            "q": "Welche Temperatur ist ideal?",
+            "a": "Ideal 18–26°C. Längere Phasen unter 15°C oder über 30°C verlangsamen Keimen und Wachstum."
+          },
+          {
+            "q": "Warum sind meine Pflanzen blass oder schwach?",
+            "a": "Wasserstand, vollen Lichtzyklus, Haltbarkeit der Kapseln und korrekte Nährstoffdosierung prüfen."
+          },
+          {
+            "q": "Kann ich das ganze Jahr anbauen?",
+            "a": "Ja — genau das ist Indoor-Hydroponik. Du brauchst nur Wasser, Licht und Nährstoffe."
+          },
+          {
+            "q": "Meine Pflanzen riechen seltsam — normal?",
+            "a": "Frische Kräuter duften angenehm. Bei Modergeruch Tank entleeren, spülen und frische Nährlösung einfüllen."
+          }
+        ]
+      },
+      {
+        "id": "pods",
+        "title": "Kapseln & Verbrauchsmaterial",
+        "items": [
+          {
+            "q": "Was kann ich anbauen?",
+            "a": "Basilikum, Minze, Petersilie, Koriander, Dill, Rucola, Frühlingszwiebel und mehr aus unserem Katalog. Jede HomeGarder-Kapsel passt."
+          },
+          {
+            "q": "Was ist in einer Kapsel?",
+            "a": "Vorgesäte Samen in hydroponischem Medium, einsatzbereit. Gentechnikfreie Samen gemäß unserer Produktpolitik."
+          },
+          {
+            "q": "Wie lange halten unbenutzte Kapseln?",
+            "a": "Trocken und kühl in der Originalverpackung lagern. Datum auf der Packung prüfen — stark abgelaufene Kapseln nicht verwenden."
+          },
+          {
+            "q": "Was sind Sana A und Sana B?",
+            "a": "Zweiteiliges Nährstoffsystem für Hydroponik. Mit Wasser laut Anleitung mischen — Konzentrate nie unverdünnt zusammenmischen."
+          },
+          {
+            "q": "Wie oft Wasser nachfüllen?",
+            "a": "Mehrmals pro Woche prüfen. Bei Wärme und größerem Blattwerk steigt der Verbrauch. Tank nie leer laufen lassen."
+          },
+          {
+            "q": "Wann Nährlösung wechseln?",
+            "a": "Meist alle 2–4 Wochen oder früher bei langsamem Wachstum / Blattverfärbung. Ablassen, leicht spülen, frisch auffüllen."
+          },
+          {
+            "q": "Kapsel keimt nicht — was tun?",
+            "a": "7–14 Tage warten. Wasser, Licht und Temperatur prüfen. Passiert nichts, schreib uns mit Bestellnummer — wir ersetzen laut Keimpolitik."
+          },
+          {
+            "q": "Kann ich eine Kapsel wiederverwenden?",
+            "a": "Nicht empfohlen. Nach der Ernte frische Kapsel einsetzen."
+          },
+          {
+            "q": "Wo kaufe ich neue Kapseln?",
+            "a": "Im Bereich Kapseln auf der Website. Sorten kombinieren und Nährstoffe oder Zubehör mitbestellen."
+          }
+        ]
+      },
+      {
+        "id": "care",
+        "title": "Pflege & Wartung",
+        "items": [
+          {
+            "q": "Wie reinige ich den Garten?",
+            "a": "Ausschalten, Wasser ablassen, Tank mit weichem Schwamm und klarem Wasser waschen. Keine aggressiven Reiniger an Elektronik und LED."
+          },
+          {
+            "q": "Wie oft reinigen?",
+            "a": "Leicht bei jedem Nährstoffwechsel; gründlicher alle 1–2 Monate oder beim Komplettaustausch der Kapseln."
+          },
+          {
+            "q": "Algen im Tank?",
+            "a": "Licht aufs Wasser reduzieren (Kapselkappen helfen), Tank waschen und Wasser wechseln. Algen lieben Licht und stehendes Wasser."
+          },
+          {
+            "q": "Lampe geht nicht an — prüfen?",
+            "a": "Steckdose, Netzteil und Kabel prüfen. Bleibt es aus, melde dich — ggf. Garantiefall."
+          },
+          {
+            "q": "Pumpe zirkuliert nicht?",
+            "a": "Genug Wasser und freien Ansaugbereich sicherstellen. Gerät neu starten. Sonst Support kontaktieren."
+          },
+          {
+            "q": "Sicher bei Kindern und Haustieren?",
+            "a": "Kabel ordentlich führen, niemand soll aus dem Tank trinken. Nährlösung ist nicht zum Verzehr. LED nicht lange aus der Nähe anstarren."
+          },
+          {
+            "q": "Darf ich es im Betrieb umstellen?",
+            "a": "Besser ausschalten und teilweise entleeren, damit nichts überschwappt. Vorsichtig tragen — voller Tank ist schwer."
+          }
+        ]
+      },
+      {
+        "id": "warranty",
+        "title": "Garantie & Rückgabe",
+        "items": [
+          {
+            "q": "Welche Garantie gibt es?",
+            "a": "HomeGarder One hat 2 Jahre Garantie auf Herstellungsfehler. Bestellnummer und Kaufnachweis aufbewahren."
+          },
+          {
+            "q": "Wie ist die Rückgaberichtlinie?",
+            "a": "30 Tage Rückgaberecht bei Unzufriedenheit, gemäß Bedingungen (Zustand, Vollständigkeit). Melde dich für Label/Anleitung."
+          },
+          {
+            "q": "Wie starte ich einen Garantiefall?",
+            "a": "E-Mail an support@plantyhub.com mit Beschreibung, Fotos/Video und Bestellnummer. Wir führen dich durch Diagnose oder Ersatz."
+          },
+          {
+            "q": "Was ist nicht abgedeckt?",
+            "a": "Schäden durch Fehlgebrauch, Sturz, Wasser an Elektronik außerhalb Normalbetrieb, Fremdreparaturen oder verbrauchte Verbrauchsmaterialien."
+          },
+          {
+            "q": "Wie lange dauert die Erstattung?",
+            "a": "Nach Erhalt und Prüfung der Rücksendung meist wenige Werktage, je nach Bank/Karte."
+          },
+          {
+            "q": "Kann nur Lampe oder Pumpe getauscht werden?",
+            "a": "Oft ja, je nach Diagnose. Teil nicht entsorgen, bevor du uns schreibst."
+          }
+        ]
+      },
+      {
+        "id": "account",
+        "title": "Zahlung & Konto",
+        "items": [
+          {
+            "q": "Welche Zahlungsmittel?",
+            "a": "Karte und weitere Methoden an der Kasse. Online-Zahlungen laufen über einen sicheren Prozess."
+          },
+          {
+            "q": "Preise inkl. MwSt.?",
+            "a": "Shop-Preise sind in Euro. Steuern/MwSt. hängen von der Lieferadresse ab und erscheinen klar vor dem Bezahlen."
+          },
+          {
+            "q": "Brauche ich ein Konto?",
+            "a": "Nicht nötig zum Kaufen, aber hilfreich für Tracking und Nachbestellung von Kapseln."
+          },
+          {
+            "q": "Passwort zurücksetzen?",
+            "a": "Auf der Login-Seite „Passwort vergessen?“ wählen und dem E-Mail-Link folgen. Spam prüfen oder uns schreiben."
+          },
+          {
+            "q": "Wie funktioniert der Newsletter-Rabatt?",
+            "a": "Nach Anmeldung erhältst du einen Code (z. B. 5% auf die erste Bestellung). Vor dem Bezahlen an der Kasse eingeben."
+          },
+          {
+            "q": "Business-/Großmengen?",
+            "a": "Ja. Schreib an support@plantyhub.com mit Mengen und Standort."
+          },
+          {
+            "q": "Newsletter abbestellen?",
+            "a": "Jeder Marketing-Mail hat einen Abmeldelink. Transaktionsmails zu Bestellungen können weiterhin nötig sein."
+          },
+          {
+            "q": "Sind meine Daten geschützt?",
+            "a": "Wir verarbeiten personenbezogene Daten gemäß Datenschutzrichtlinie für Bestellungen, Support und (mit Einwilligung) Marketing."
+          }
+        ]
+      }
+    ]
+  },
+  "legalPages": {
+    "updatedLabel": "Zuletzt aktualisiert",
+    "contentsLabel": "Inhalt",
+    "contactTitle": "Fragen?",
+    "contactLead": "Fragen zu diesen Dokumenten? Schreib uns — wir antworten in der Regel innerhalb eines Werktags.",
+    "contactCta": "Zum Kontakt",
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "eyebrow": "Rechtliches",
+      "updated": "17. September 2026",
+      "lead": "Diese Erklärung beschreibt, wie PlantyHub („wir“) personenbezogene Daten erhebt, nutzt und schützt, wenn du über plantyhub.com einkaufst oder uns kontaktierst.",
+      "sections": [
+        {
+          "title": "Wer wir sind",
+          "paragraphs": [
+            "Verantwortlicher ist PlantyHub, Bulgarien. Wir verarbeiten Daten gemäß DSGVO und geltendem bulgarischem Recht."
+          ],
+          "items": [
+            "Datenschutzanfragen: support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "Welche Daten wir erheben",
+          "paragraphs": [
+            "Je nach Nutzung der Website können wir verarbeiten:"
+          ],
+          "items": [
+            "Konto- und Bestelldaten — Name, E-Mail, Lieferadresse, Telefon (falls angegeben)",
+            "Zahlungsdaten — über den Zahlungsdienstleister (keine vollständigen Kartendaten bei uns)",
+            "Kommunikation — Kontaktformular, E-Mails und Support-Anfragen",
+            "Technische Daten — IP-Adresse, Browser/Gerät und Nutzungsstatistiken (siehe Cookie-Richtlinie)"
+          ]
+        },
+        {
+          "title": "Zwecke der Verarbeitung",
+          "items": [
+            "Bestellung, Lieferung, Rechnung und Garantieabwicklung",
+            "Kontoverwaltung, Anmeldung und Sicherheit",
+            "Beantwortung von Anfragen und Kundensupport",
+            "Verbesserung von Website und Produkten (aggregierte/pseudonymisierte Analysen)",
+            "Marketing nur mit Einwilligung (z. B. Newsletter) — Abmeldung jederzeit möglich"
+          ]
+        },
+        {
+          "title": "Rechtsgrundlagen",
+          "items": [
+            "Vertrag — zur Erfüllung von Bestellung oder Konto",
+            "Rechtliche Pflicht — Steuer- und Buchhaltungspflichten",
+            "Berechtigtes Interesse — Sicherheit, Betrugsprävention, Serviceverbesserung",
+            "Einwilligung — Newsletter, nicht notwendige Cookies und ähnliche Zwecke"
+          ]
+        },
+        {
+          "title": "Weitergabe",
+          "paragraphs": [
+            "Weitergabe nur an vertrauenswürdige Auftragsverarbeiter. Wir verkaufen keine personenbezogenen Daten."
+          ],
+          "items": [
+            "Versand / Kurierdienste",
+            "Zahlungsdienstleister",
+            "Hosting und E-Mail-Dienste",
+            "Zuständige Behörden — nur bei gesetzlicher Pflicht"
+          ]
+        },
+        {
+          "title": "Speicherung und Sicherheit",
+          "items": [
+            "Speicherung nur so lange wie nötig oder gesetzlich vorgeschrieben",
+            "Technische und organisatorische Maßnahmen gegen unbefugten Zugriff, Verlust oder Missbrauch"
+          ]
+        },
+        {
+          "title": "Deine Rechte",
+          "paragraphs": [
+            "Du kannst folgende Rechte per E-Mail an support@plantyhub.com ausüben:"
+          ],
+          "items": [
+            "Auskunft, Berichtigung und Löschung",
+            "Einschränkung und Datenübertragbarkeit",
+            "Widerspruch gegen bestimmte Verarbeitung",
+            "Widerruf der Einwilligung, soweit einschlägig",
+            "Beschwerde bei der bulgarischen Datenschutzkommission (CPDP)"
+          ]
+        },
+        {
+          "title": "Kinder",
+          "paragraphs": [
+            "Unsere Dienste richten sich nicht an Personen unter 16 Jahren. Unrechtmäßig erhobene Daten von Kindern löschen wir."
+          ]
+        },
+        {
+          "title": "Änderungen",
+          "paragraphs": [
+            "Wir können diese Erklärung aktualisieren. Das Datum der letzten Aktualisierung steht oben. Wesentliche Änderungen weisen wir auf der Website aus."
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie-Richtlinie",
+      "eyebrow": "Rechtliches",
+      "updated": "17. September 2026",
+      "lead": "Hier erklären wir, wie PlantyHub Cookies und ähnliche Technologien auf der Website einsetzt.",
+      "sections": [
+        {
+          "title": "Was sind Cookies",
+          "paragraphs": [
+            "Cookies sind kleine Textdateien im Browser. Sie helfen der Website zu funktionieren, Einstellungen zu speichern und — mit Einwilligung — die Nutzung zu verstehen."
+          ]
+        },
+        {
+          "title": "Welche Cookies wir nutzen",
+          "items": [
+            "Notwendig — Warenkorb, Sitzung, Login, Sicherheit und Sprache; ohne sie funktioniert die Website nicht korrekt",
+            "Funktional — speichern Präferenzen (z. B. Sprache)",
+            "Analyse — helfen zu verstehen, welche Seiten genutzt werden; nur mit Einwilligung",
+            "Marketing — können Kampagnen messen; nur mit Einwilligung"
+          ]
+        },
+        {
+          "title": "Rechtsgrundlage",
+          "items": [
+            "Notwendige Cookies — berechtigtes Interesse / Erforderlichkeit",
+            "Nicht notwendige Cookies — Einwilligung, jederzeit widerrufbar"
+          ]
+        },
+        {
+          "title": "Cookies verwalten",
+          "items": [
+            "Cookies in den Browsereinstellungen löschen oder blockieren",
+            "Das Blockieren notwendiger Cookies kann Warenkorb oder Login beeinträchtigen",
+            "Bei einem Einwilligungsbanner Wahl dort ändern oder support@plantyhub.com schreiben"
+          ]
+        },
+        {
+          "title": "Weitere Informationen",
+          "paragraphs": [
+            "Zur Verarbeitung personenbezogener Daten siehe die Datenschutzerklärung. Cookie-Fragen: support@plantyhub.com."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "eyebrow": "Rechtliches",
+      "updated": "17. September 2026",
+      "lead": "Diese Bedingungen gelten für die Nutzung von plantyhub.com und Käufe bei PlantyHub. Mit Nutzung der Website oder einer Bestellung akzeptierst du sie.",
+      "sections": [
+        {
+          "title": "Der Shop",
+          "items": [
+            "PlantyHub verkauft intelligente Hydroponik-Gärten, Pods, Zubehör und verwandte Produkte online",
+            "Lieferung in Bulgarien, dem Balkan und der EU (je nach Verfügbarkeit)",
+            "Preise in Euro, sofern nicht anders angegeben",
+            "Maßgeblich ist der Preis beim Checkout"
+          ]
+        },
+        {
+          "title": "Konto",
+          "items": [
+            "Einkauf als Gast oder mit Konto möglich",
+            "Du bist für korrekte Angaben und Passwortsicherheit verantwortlich",
+            "Bei Missbrauch, Betrug oder Verstoß können wir Konten einschränken oder schließen"
+          ]
+        },
+        {
+          "title": "Bestellung und Zahlung",
+          "items": [
+            "Eine Bestellung ist ein Kaufangebot; Annahme per Bestätigung / Status-E-Mail",
+            "Zahlung über die im Checkout angebotenen Methoden",
+            "Stornierung möglich bei Zahlungsfehler, Nichtverfügbarkeit oder Betrugsverdacht"
+          ]
+        },
+        {
+          "title": "Lieferung",
+          "items": [
+            "Lieferzeiten sind Schätzungen und hängen von Kurier und Adresse ab",
+            "Gefahrübergang nach geltendem Verbraucherrecht bei Verbraucherlieferungen",
+            "Kostenloser Versand ab einem Schwellenwert (z. B. €150) — siehe Checkout"
+          ]
+        },
+        {
+          "title": "Widerruf und Rückgabe",
+          "items": [
+            "Als Verbraucher in der EU/EWR hast du in der Regel 14 Tage Widerrufsrecht beim Fernabsatz",
+            "Gesetzliche Ausnahmen können gelten",
+            "Zu Garantie, Mängeln und Rücksendungen siehe FAQ oder support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "Geistiges Eigentum",
+          "paragraphs": [
+            "Inhalte der Website gehören PlantyHub oder Lizenzgebern. Kommerzielle Nutzung ohne Erlaubnis ist untersagt."
+          ]
+        },
+        {
+          "title": "Haftung",
+          "items": [
+            "Wir bemühen uns um korrekte Informationen, garantieren aber keine Fehlerfreiheit",
+            "Haftung für Produkte und Dienste im Rahmen des geltenden Rechts",
+            "Keine Haftung für höhere Gewalt oder Störungen außerhalb unserer Kontrolle"
+          ]
+        },
+        {
+          "title": "Anwendbares Recht",
+          "items": [
+            "Es gilt das Recht der Republik Bulgarien",
+            "EU-Verbraucher behalten zwingende Rechte nach lokalem Verbraucherrecht",
+            "Streitigkeiten möglichst einvernehmlich; sonst zuständige bulgarische Gerichte"
+          ]
+        },
+        {
+          "title": "Kontakt",
+          "paragraphs": [
+            "Fragen zu diesen Bedingungen: support@plantyhub.com · PlantyHub, Bulgarien."
+          ]
+        }
+      ]
+    }
+  },
+  "learnPage": {
+    "title": "PlantyHub Lernen",
+    "eyebrow": "Wissen",
+    "lead": "Wähle einen Bereich, dann ein Thema — und öffne die Lektion mit Fotos, Video und klaren Schritten.",
+    "pickSection": "Bereich wählen",
+    "backToSections": "Alle Bereiche",
+    "backToTopics": "Zurück zu den Themen",
+    "openTopic": "Lektion öffnen",
+    "tipLabel": "Tipp",
+    "stepsLabel": "Schritte",
+    "videoLabel": "Video-Beispiel",
+    "galleryLabel": "Praxis-Fotos",
+    "sections": {
+      "start": {
+        "title": "Hier starten",
+        "description": "Hydrokultur-Basics und der erste Start deines Gartens.",
+        "topicsLabel": "Themen in diesem Bereich"
+      },
+      "grow": {
+        "title": "Klug wachsen lassen",
+        "description": "Licht, Wasser, Kapseln und Nährstoffe für stabiles Wachstum.",
+        "topicsLabel": "Themen in diesem Bereich"
+      },
+      "harvest": {
+        "title": "Ernte & Pflege",
+        "description": "Richtig schneiden und häufige Probleme lösen.",
+        "topicsLabel": "Themen in diesem Bereich"
+      }
+    },
+    "topics": {
+      "basics": {
+        "title": "Was ist Hydrokultur",
+        "duration": "3 Min.",
+        "summary": "Warum Pflanzen im Wasser wachsen und was PlantyHub anders macht.",
+        "lead": "Pflanzen wachsen in nährstoffreichem Wasser — ohne Erde, mit mehr Kontrolle über Licht und Feuchtigkeit.",
+        "videoLabel": "Video: Hydrokultur zu Hause",
+        "galleryLabel": "Fotos: Wasser, Wurzeln und frische Blätter",
+        "steps": [
+          "Wurzeln nehmen Wasser und Nährstoffe aus der Wanne — nicht aus Erde.",
+          "Die LED ersetzt Sonnenlicht mit einem 16/8-Zyklus (16 Std. Licht / 8 Std. Pause).",
+          "Geschlossene Systeme verbrauchen typischerweise weniger Wasser als klassisches Gärtnern.",
+          "Ergebnis: frische Kräuter auf der Theke — das ganze Jahr."
+        ],
+        "tip": "Hydrokultur muss nicht kompliziert sein — die Kapsel bringt Samen und Nährstoffe, das Gerät regelt Licht und Bewässerung."
+      },
+      "setup": {
+        "title": "Erster Start",
+        "duration": "5 Min.",
+        "summary": "Vom Auspacken zum laufenden Garten in wenigen Minuten.",
+        "lead": "Vom Auspacken zum laufenden Garten in wenigen klaren Schritten.",
+        "videoLabel": "Video: Auspacken und erstes Einschalten",
+        "galleryLabel": "Fotos: Gerät, Wasser und Kapseln",
+        "steps": [
+          "Stelle das Gerät auf eine stabile Fläche, weg von starker Hitze.",
+          "Fülle sauberes Wasser bis zur Markierung.",
+          "Setze die Kapseln gemäß Verpackung in die Slots.",
+          "Schalte die Lampe ein und lass den Automodus laufen — Gerät in den ersten Tagen wenig bewegen."
+        ],
+        "tip": "Zimmertemperatur-Wasser verwenden. Bei sehr hartem Leitungswasser kann abgekochtes, abgekühltes Wasser helfen."
+      },
+      "light": {
+        "title": "Licht und Wasser",
+        "duration": "4 Min.",
+        "summary": "Der 16/8-Zyklus und das richtige Wasserlevel.",
+        "lead": "Die zwei wichtigsten Faktoren: gleichmäßiges Licht und genug Wasser.",
+        "videoLabel": "Video: Lampenhöhe und Wachstum",
+        "galleryLabel": "Fotos: Licht, Wasserstand, gesundes Wachstum",
+        "steps": [
+          "Die Lampe folgt 16/8 — nachts nicht „zum Sparen“ ausschalten.",
+          "Wasser 1–2× pro Woche prüfen und bis zur Marke nachfüllen.",
+          "Nicht über das Maximum füllen.",
+          "Lampenhöhe an das Pflanzenwachstum anpassen."
+        ],
+        "tip": "Gelbe untere Blätter oft: zu wenig Licht oder altes Wasser — zuerst Stand und Lampenhöhe prüfen."
+      },
+      "pods": {
+        "title": "Kapseln und Nährstoffe",
+        "duration": "4 Min.",
+        "summary": "Was in der Kapsel steckt und wie du sie richtig nutzt.",
+        "lead": "Jede Kapsel ist ein Starterpaket: Samen, Medium und Nährstoffe für den ersten Zyklus.",
+        "galleryLabel": "Fotos: Kapseln, Sorten und Slots",
+        "steps": [
+          "Kapsel nicht vorzeitig öffnen.",
+          "QR-Code scannen für sortenspezifische Tipps.",
+          "Kulturen wachsen unterschiedlich schnell.",
+          "Nach dem Zyklus alte Kapsel entfernen und Slot reinigen."
+        ],
+        "tip": "Wenn eine Kapsel hinterherhinkt: die anderen nicht herausnehmen — Variation ist normal. Noch ein paar Tage warten."
+      },
+      "harvest": {
+        "title": "Ernten wie ein Profi",
+        "duration": "5 Min.",
+        "summary": "Wann und wie schneiden, damit mehr nachwächst.",
+        "lead": "Der richtige Schnitt hält die Pflanze länger produktiv.",
+        "galleryLabel": "Fotos: Ernte, Schnitt und Küche",
+        "steps": [
+          "Ernten, sobald genug reife Blätter da sind (oft Woche 2–4).",
+          "Über einem Knoten / Blattpaar schneiden — fördert Verzweigung.",
+          "Nicht mehr als etwa ⅓ der Pflanze auf einmal nehmen.",
+          "Saubere Schere verwenden; frisch schmeckt’s am besten."
+        ],
+        "tip": "Regelmäßige leichte Schnitte sind besser als seltene Radikalschnitte."
+      },
+      "care": {
+        "title": "Pflege und häufige Probleme",
+        "duration": "6 Min.",
+        "summary": "Schnelle Checks bei keinem Keimen, blassen Blättern oder trübem Wasser.",
+        "lead": "Die meisten Probleme hängen mit Wasser, Licht oder Temperatur zusammen.",
+        "galleryLabel": "Fotos: Pflege und saubere Wanne",
+        "steps": [
+          "Kein Keimen nach 10–14 Tagen: Wasser, Lampe und Raumtemperatur (~18–24°C) prüfen.",
+          "Blasse Pflanzen: Lampenhöhe und Tageszyklus prüfen.",
+          "Geruch oder trübes Wasser: Wasser wechseln und Wanne spülen.",
+          "Nach jedem Zyklus: kurze Reinigung von Wanne und Slots."
+        ],
+        "tip": "Es gibt eine Keimgarantie — bei korrekter Pflege und ohne Erfolg einfach schreiben."
+      }
+    },
+    "ctaTitle": "Bereit zum Anwenden?",
+    "ctaText": "FAQ für schnelle Antworten, Kontakt bei Problemen — oder starte mit HomeGarder One.",
+    "ctaFaq": "Zur FAQ",
+    "ctaContact": "Kontakt",
+    "ctaBuy": "Zum Produkt",
+    "topicsCount": "{{count}} Themen",
+    "nextTopic": "Weiter",
+    "playVideo": "Video abspielen",
+    "pauseVideo": "Pause"
   }
 }

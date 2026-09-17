@@ -94,6 +94,16 @@ export const dashboardApi = {
   get: () => apiRequest<ApiDashboard>('/api/admin/dashboard', { auth: 'admin' }),
 }
 
+export const contactApi = {
+  sendInquiry: (body: {
+    name: string
+    email: string
+    subject: string
+    message: string
+    orderNumber?: string
+  }) => apiRequest<{ message: string }>('/api/contact', { method: 'POST', body }),
+}
+
 export const newsletterApi = {
   subscribe: (email: string) => apiRequest('/api/newsletter/subscribe', { method: 'POST', body: { email } }),
   getStats: () => apiRequest<{ totalSubscribers: number }>('/api/admin/newsletter/stats', { auth: 'admin' }),

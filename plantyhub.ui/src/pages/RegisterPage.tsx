@@ -168,7 +168,15 @@ export default function RegisterPage() {
           }
           label={
             <Typography sx={{ fontSize: '0.88rem', color: errors.terms ? 'error.main' : brand.textSecondary, lineHeight: 1.5 }}>
-              {t('auth.register.terms')}
+              {t('auth.register.termsBefore')}{' '}
+              <Link component={RouterLink} to={navHrefs.terms} underline="hover" sx={{ fontWeight: 700, color: brand.plantGreenDark }}>
+                {t('footer.links.terms')}
+              </Link>
+              {t('auth.register.termsMiddle')}{' '}
+              <Link component={RouterLink} to={navHrefs.privacy} underline="hover" sx={{ fontWeight: 700, color: brand.plantGreenDark }}>
+                {t('footer.links.privacy')}
+              </Link>
+              {t('auth.register.termsAfter')}
             </Typography>
           }
         />

@@ -7,11 +7,13 @@
     "accessories": "Accessories",
     "about": "About",
     "blog": "Blog",
-    "support": "Support",
-    "buyNow": "Buy now"
+    "support": "Contact",
+    "buyNow": "Buy now",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "learn": "Learn"
   },
   "header": {
-    "region": "EU & Balkans (€)",
     "login": "Log in",
     "account": "Account",
     "admin": "Admin",
@@ -49,9 +51,18 @@
       "setup": "Ready in 5 minutes"
     },
     "stats": {
-      "pods": { "value": "12", "label": "growing holes" },
-      "light": { "value": "16/8h", "label": "light cycle" },
-      "height": { "value": "up to 40 cm", "label": "growth height" }
+      "pods": {
+        "value": "12",
+        "label": "growing holes"
+      },
+      "light": {
+        "value": "16/8h",
+        "label": "light cycle"
+      },
+      "height": {
+        "value": "up to 40 cm",
+        "label": "growth height"
+      }
     }
   },
   "product": {
@@ -121,7 +132,12 @@
     "offLabel": "8 hours — rest",
     "offDescription": "Plants rest overnight, just like in nature.",
     "diagramLabel": "24-hour cycle",
-    "days": { "0": "Mon", "1": "Tue", "2": "Wed", "3": "Thu" }
+    "days": {
+      "0": "Mon",
+      "1": "Tue",
+      "2": "Wed",
+      "3": "Thu"
+    }
   },
   "featured": {
     "badge": "Flagship",
@@ -198,10 +214,21 @@
     "detailsTitle": "Good to know",
     "relatedTitle": "More pods to grow",
     "specs": {
-      "harvest": { "label": "First harvest", "value": "2–4 weeks" },
-      "pack": { "label": "Pack size" },
-      "light": { "label": "Light", "value": "LED · auto 16/8" },
-      "nature": { "label": "Seeds", "value": "Non-GMO" }
+      "harvest": {
+        "label": "First harvest",
+        "value": "2–4 weeks"
+      },
+      "pack": {
+        "label": "Pack size"
+      },
+      "light": {
+        "label": "Light",
+        "value": "LED · auto 16/8"
+      },
+      "nature": {
+        "label": "Seeds",
+        "value": "Non-GMO"
+      }
     },
     "trust": {
       "compatible": "Fits all PlantyHub gardens",
@@ -215,41 +242,169 @@
     "subtitle": "Everything to expand and care for your indoor garden — from stylish stands to nutrients and refill capsules."
   },
   "aboutPage": {
-    "eyebrow": "Our story",
-    "title": "About PlantyHub",
-    "lead": "We believe everyone deserves fresh herbs at home — no garden, no soil and no green thumb required.",
-    "storyTitle": "Growing, made simple",
-    "story1": "PlantyHub began in a small kitchen in Pazardzhik, Bulgaria, with one idea: make it effortless to grow real, fresh flavour indoors — all year round.",
-    "story2": "Today our smart gardens and pre-seeded pods help thousands of homes across Europe harvest fresh herbs and spices in weeks — with nothing but water, light and a little love.",
+    "eyebrow": "Our mission",
+    "title": "The future is here",
+    "lead": "Growing can be easy and modern. Fresh herbs on your counter — no garden, no soil, no expertise required.",
+    "missionKicker": "Why we exist",
+    "quote": "Easier. More modern.\nA harvest at home.",
+    "mission": "We want every home to pick fresh flavour — not after years of practice, but from week one. The future of growing is on your counter.",
+    "pillars": {
+      "easy": {
+        "title": "Easier",
+        "text": "No garden, no soil and no complicated rules."
+      },
+      "modern": {
+        "title": "More modern",
+        "text": "Smart light and watering that work so you don’t have to."
+      },
+      "home": {
+        "title": "Harvest at home",
+        "text": "Fresh flavour on your counter from the first week."
+      }
+    },
+    "storyKicker": "How it started",
+    "storyTitle": "From one kitchen to thousands of homes",
+    "story1": "PlantyHub began in a small kitchen with one idea: make it effortless to grow real, fresh flavour indoors — all year round.",
+    "story2": "Today our smart gardens and pre-seeded pods help thousands of homes across Europe harvest fresh herbs in weeks — with nothing but water, light and a little care.",
+    "videoBadge": "See it grow",
+    "playVideo": "Play video",
+    "pauseVideo": "Pause video",
     "valuesTitle": "What we stand for",
     "values": {
-      "quality": { "title": "Quality first", "text": "Durable gardens and reliable pods, tested to sprout and thrive." },
-      "sustainability": { "title": "Kind to the planet", "text": "Non-GMO seeds, recyclable materials and water-smart growing." },
-      "simplicity": { "title": "Truly simple", "text": "Designed so anyone can grow — clear guides and full automation." }
+      "quality": {
+        "title": "Modern growing",
+        "text": "Smart light, automatic watering and pods ready to sprout. Technology that works so you don’t have to."
+      },
+      "sustainability": {
+        "title": "Kind to the planet",
+        "text": "Non-GMO seeds, recyclable materials and hydroponics that uses far less water than soil growing."
+      },
+      "simplicity": {
+        "title": "Easier for everyone",
+        "text": "No soil, no experience, no complicated rules. Drop in a pod — the garden takes care of the rest."
+      }
     },
     "stats": {
-      "plants": { "value": "500k+", "label": "plants grown" },
-      "countries": { "value": "12", "label": "countries served" },
-      "harvests": { "value": "98%", "label": "sprouting success" }
-    }
+      "plants": {
+        "value": "500k+",
+        "label": "plants grown"
+      },
+      "countries": {
+        "value": "12",
+        "label": "countries served"
+      },
+      "harvests": {
+        "value": "98%",
+        "label": "sprouting success"
+      }
+    },
+    "originEyebrow": "Ready to harvest",
+    "originTitle": "Fresh flavour on your counter",
+    "originText": "Quiet, beautiful gardens that are genuinely easy to use — just water, light and a little care.",
+    "originPlace": "",
+    "ctaButton": "Start your harvest"
   },
   "supportPage": {
-    "eyebrow": "We're here to help",
-    "title": "Support",
-    "subtitle": "Answers to the questions we hear most — plus every way to reach our team.",
+    "eyebrow": "Contact",
+    "title": "Contact",
+    "subtitle": "Send an inquiry or check the FAQ.",
     "cards": {
-      "email": { "title": "Email us", "text": "Our team replies within one business day.", "action": "support@plantyhub.com" },
-      "shipping": { "title": "Shipping", "text": "Bulgaria, the Balkans and the EU — dispatched within 24h.", "action": "Track your order" },
-      "returns": { "title": "Returns & warranty", "text": "30-day money-back guarantee and a 2-year warranty.", "action": "Start a return" }
+      "email": {
+        "title": "Email us",
+        "text": "Our team replies within one business day.",
+        "action": "support@plantyhub.com"
+      },
+      "shipping": {
+        "title": "Shipping",
+        "text": "Bulgaria, the Balkans and the EU — dispatched within 24h.",
+        "action": "Track your order"
+      },
+      "returns": {
+        "title": "Returns & warranty",
+        "text": "30-day money-back guarantee and a 2-year warranty.",
+        "action": "Start a return"
+      }
     },
-    "faqTitle": "Frequently asked questions",
+    "faqTitle": "Check the FAQ first",
     "faqItems": [
-      { "q": "How do I track my order?", "a": "You'll get a tracking link by email as soon as your order ships. Orders leave our warehouse within 24 hours on business days." },
-      { "q": "What is your return policy?", "a": "Not happy? Return your garden within 30 days for a full refund — no questions asked." },
-      { "q": "How does the warranty work?", "a": "Every HomeGarder One comes with a 2-year warranty against manufacturing defects. Just contact us with your order number." },
-      { "q": "My pods aren't sprouting — what should I do?", "a": "Most pods sprout within 1–2 weeks. Check that the tank has water, the light is on and the room is warm. Still stuck? Email us and we'll replace them free." },
-      { "q": "Do you offer bulk or wholesale orders?", "a": "Yes — email support@plantyhub.com and we'll help with larger or business orders." }
-    ]
+      {
+        "q": "How do I track my order?",
+        "a": "You'll get a tracking link by email as soon as your order ships. Orders leave our warehouse within 24 hours on business days."
+      },
+      {
+        "q": "What is your return policy?",
+        "a": "Not happy? Return your garden within 30 days for a full refund — no questions asked."
+      },
+      {
+        "q": "How does the warranty work?",
+        "a": "Every HomeGarder One comes with a 2-year warranty against manufacturing defects. Just contact us with your order number."
+      },
+      {
+        "q": "My pods aren't sprouting — what should I do?",
+        "a": "Most pods sprout within 1–2 weeks. Check that the tank has water, the light is on and the room is warm. Still stuck? Email us and we'll replace them free."
+      },
+      {
+        "q": "Do you offer bulk or wholesale orders?",
+        "a": "Yes — email support@plantyhub.com and we'll help with larger or business orders."
+      }
+    ],
+    "faqCta": "Go to frequently asked questions",
+    "heroTitle": "Contact",
+    "emailCta": "Send an email",
+    "emailLabel": "Email",
+    "responseTitle": "Quick reply",
+    "responseText": "We usually answer within 1 business day.",
+    "form": {
+      "cta": "Send an inquiry",
+      "title": "Inquiry",
+      "lead": "Fill in the form — your message goes straight to our team.",
+      "name": "Name",
+      "nameError": "Enter your name.",
+      "email": "Email",
+      "emailError": "Enter a valid email.",
+      "subject": "Subject",
+      "subjectError": "Choose a subject.",
+      "subjects": {
+        "general": "General question",
+        "order": "Order",
+        "shipping": "Shipping",
+        "returns": "Returns",
+        "warranty": "Warranty",
+        "pods": "Pods & growing",
+        "wholesale": "Wholesale",
+        "other": "Other"
+      },
+      "orderNumber": "Order number (optional)",
+      "orderNumberHint": "Helps us reply faster.",
+      "message": "Message",
+      "messageError": "Write at least 10 characters.",
+      "submit": "Send",
+      "sending": "Sending…",
+      "error": "Your message could not be sent. Please try again.",
+      "successTitle": "Inquiry received",
+      "successText": "We'll reply to your email within 1 business day.",
+      "sendAnother": "Send another inquiry"
+    },
+    "topicsTitle": "How we can help",
+    "topicsLead": "Pick a topic and we will point you to the next step.",
+    "topics": {
+      "shipping": {
+        "title": "Shipping & tracking",
+        "text": "Where we ship, timelines and how to track your parcel.",
+        "action": "See FAQ"
+      },
+      "returns": {
+        "title": "Returns",
+        "text": "30-day returns if the product is not for you.",
+        "action": "Request a return"
+      },
+      "warranty": {
+        "title": "Warranty",
+        "text": "2 years for manufacturing defects — email us with your order number.",
+        "action": "Email us"
+      }
+    },
+    "faqText": "Most questions about setup, pods and care already have an answer."
   },
   "consumablesSection": {
     "eyebrow": "Consumables",
@@ -276,9 +431,11 @@
         "title": "Kitchen to Table — Basil Pesto in 5 Weeks",
         "excerpt": "A simple recipe series showing how to go from pod to plate with your first PlantyHub harvest.",
         "body": [
-          "Your first basil pods usually tip into harvest mode around week three to five — snip the top leaves and the plant keeps pushing new growth.",
-          "For a weeknight pesto, blend a generous handful of fresh basil with olive oil, garlic, pine nuts and hard cheese until silky. Taste for salt and lemon.",
-          "The difference from supermarket herbs is immediate: brighter aroma, softer bitterness, and pesto that tastes like the garden instead of the fridge."
+          "Your first basil pods usually reach harvest around weeks three to five — snip the tips and the plant keeps growing.",
+          "For a quick pesto, blend a handful of fresh basil with olive oil, garlic, pine nuts and hard cheese until smooth. Season with salt and lemon.",
+          "The difference from shop herbs is immediate: brighter aroma and pesto that tastes like a garden, not a fridge.",
+          "Store pesto in a jar with a thin layer of oil on top — it keeps for several days in the fridge. Or freeze in ice-cube trays for winter.",
+          "After harvesting, leave the garden on its cycle. A new basil or mint pod in the next slot keeps something fresh on the counter."
         ]
       },
       "hydroponics": {
@@ -286,9 +443,10 @@
         "title": "Why Hydroponics Uses 90% Less Water",
         "excerpt": "The science behind smart indoor gardens and why they're the sustainable choice for urban homes.",
         "body": [
-          "In soil gardens, water escapes through runoff and evaporation. A closed hydroponic tray recirculates what the roots actually need.",
-          "HomeGarder One dosed lighting and steady moisture mean plants spend energy on leaves, not on surviving dry spells.",
-          "For apartment growers, that translates to fewer top-ups, less waste, and herbs that stay productive for months."
+          "In soil gardens, water is lost to runoff and evaporation. A closed hydroponic tray recirculates only what roots need.",
+          "With HomeGarder One, metered light and steady moisture let plants invest in leaves instead of surviving drought.",
+          "For city households that means fewer top-ups, less waste and herbs that keep producing for months.",
+          "Hydroponics is not a lab experiment — it is a quiet counter that works while you cook. Less water, less stress, more flavour."
         ]
       },
       "spices": {
@@ -296,9 +454,10 @@
         "title": "Aromatic Spices You Can Grow on the Counter",
         "excerpt": "Thyme, oregano, rosemary, chives and chili — the spice drawer, reinvented as living pods.",
         "body": [
-          "Culinary spices do not have to arrive dried. Slow-growing aromatics like thyme, oregano and rosemary thrive under steady LED light.",
-          "Chives give you a cut-and-come-again onion note for eggs and soups. Chili pods bring heat once fruits begin to colour.",
-          "Fill a few holes with our spice pods — or grab the 12-pod spice mix — and season straight from the canopy while dinner is on the hob."
+          "Culinary spices do not have to arrive only dried. Slow aromatics like thyme, oregano and rosemary thrive under steady LED light.",
+          "Chives give a soft onion note for eggs and soups. Chillies bring heat once fruits start to colour.",
+          "Fill a few slots with our spice pods — or take the 12-pod mix — and season straight from the crown while you cook.",
+          "Harvest little and often: live spices smell best when the leaf was just cut, not sitting for days in a plastic box."
         ]
       },
       "first-harvest": {
@@ -306,9 +465,10 @@
         "title": "How to Take Your First Harvest Without Stress",
         "excerpt": "A calm checklist for week two and three: what to snip, what to leave, and how often to feed.",
         "body": [
-          "Wait until plants have several true leaves before the first cut. Never remove more than a third of the canopy at once.",
-          "Harvest in the morning when oils are concentrated. Use clean scissors and cut just above a leaf node to encourage branching.",
-          "Keep the nutrient solution topped up and the light cycle consistent — a stressed plant tastes bitter long before it looks unhealthy."
+          "Wait until the plant has several true leaves before the first cut. Never take more than one third of the canopy at once.",
+          "Harvest in the morning when essential oils are strongest. Use clean scissors and cut above a leaf node so it branches.",
+          "Keep the nutrient solution and light cycle steady — a stressed plant turns bitter before it looks bad.",
+          "If you are unsure, start with basil or mint: they forgive easy mistakes and quickly show whether your garden rhythm is right."
         ]
       },
       "partnership": {
@@ -316,9 +476,10 @@
         "title": "PlantyHub × Sustainable Living EU",
         "excerpt": "We teamed up with eco-conscious creators to show how one garden can change your daily routine.",
         "body": [
-          "Together with Sustainable Living EU we followed households swapping weekly herb packets for a countertop garden.",
-          "Creators logged setup time, water top-ups and flavour notes — most were cooking with their own cut greens inside a month.",
-          "The takeaway was simple: when growing is automatic, fresh seasoning stops being a special occasion."
+          "Together with Sustainable Living EU we followed homes that replaced shop-bought herbs with a countertop garden.",
+          "Creators logged setup time, top-ups and taste — most cooked with their own harvest within a month.",
+          "The takeaway is simple: when growing is automatic, fresh herbs stop being a special occasion.",
+          "Small habits add up — less plastic from clamshell packs, fewer wilted herbs, more dinners scented with what you grew yourself."
         ]
       },
       "earthday": {
@@ -326,12 +487,16 @@
         "title": "Earth Day: Grow Your Own, Waste Less",
         "excerpt": "How biodegradable pods and home growing help cut plastic and food waste.",
         "body": [
-          "Store-bought soft herbs often wilt unused. Growing only what you snip means flavour without the half-empty clamshell.",
-          "Our pods are designed to compost after the grow cycle, and the garden itself is built to last years of refills.",
-          "Small kitchen gardens will not solve climate change alone — but they change habits, and habits scale."
+          "Shop herbs often wilt unused. When you cut only what you need, flavour arrives without a half-empty box.",
+          "Pods are designed to compost after their cycle, and the garden lasts for years with refills.",
+          "A small kitchen garden will not fix the climate alone — but it changes habits, and habits multiply.",
+          "Start with one pod. Then two. After a month your kitchen speaks a different language — harvest, not waste."
         ]
       }
-    }
+    },
+    "minRead": "{{minutes}} min read",
+    "articleCta": "Start growing",
+    "viewAll": "All articles"
   },
   "growSmarter": {
     "title": "Grow smarter, not harder",
@@ -428,29 +593,80 @@
       }
     },
     "pods": {
-      "basil": { "name": "Basil Seed Pods", "description": "Sweet, aromatic and the king of herbs. Pick fresh leaves for pesto, pasta and caprese within weeks." },
-      "mint": { "name": "Mint Seed Pods", "description": "Fragrant, cooling leaves for teas, cocktails and desserts — one of the easiest herbs to grow." },
-      "parsley": { "name": "Parsley Seed Pods", "description": "The fresh, everyday all-rounder — perfect for garnishes, sauces and stocks all year round." },
-      "cilantro": { "name": "Cilantro Seed Pods", "description": "Bright, citrusy leaves that lift curries, salsas and noodle bowls. Snip fresh whenever a dish needs a kick." },
-      "dill": { "name": "Dill Seed Pods", "description": "Delicate, feathery fronds with a fresh anise note — made for fish, dips, pickles and potatoes." },
-      "arugula": { "name": "Arugula Seed Pods", "description": "Bold, peppery leaves that add a fresh kick to salads, pizzas and sandwiches. Fast-growing and cut-and-come-again." },
-      "thyme": { "name": "Thyme Seed Pods", "description": "Tiny, woody leaves with warm perfume — essential for roasts, marinades and slow sauces." },
-      "oregano": { "name": "Oregano Seed Pods", "description": "Classic Mediterranean spice for pizza, tomato sauces and grilled vegetables — punchy even in small pinches." },
-      "rosemary": { "name": "Rosemary Seed Pods", "description": "Needle-like leaves with piney depth. Perfect with potatoes, lamb and focaccia fresh from the oven." },
-      "chives": { "name": "Chives Seed Pods", "description": "Mild onion greens for eggs, soups and salads. Snip often and they grow right back." },
-      "chili": { "name": "Chili Seed Pods", "description": "Compact chili plants for kitchen heat — harvest when fruits colour up for fresh spice with real kick." },
-      "herb-mix-12": { "name": "12-Pod Herb Mix", "description": "A full line-up of our favourite herbs and spices — everything you need to fill your whole garden at once." },
-      "spice-mix-12": { "name": "12-Pod Spice Mix", "description": "Aromatic spices to fill your garden — thyme, oregano, rosemary, chives, chili and companions for everyday seasoning." }
+      "basil": {
+        "name": "Basil Seed Pods",
+        "description": "Sweet, aromatic and the king of herbs. Pick fresh leaves for pesto, pasta and caprese within weeks."
+      },
+      "mint": {
+        "name": "Mint Seed Pods",
+        "description": "Fragrant, cooling leaves for teas, cocktails and desserts — one of the easiest herbs to grow."
+      },
+      "parsley": {
+        "name": "Parsley Seed Pods",
+        "description": "The fresh, everyday all-rounder — perfect for garnishes, sauces and stocks all year round."
+      },
+      "cilantro": {
+        "name": "Cilantro Seed Pods",
+        "description": "Bright, citrusy leaves that lift curries, salsas and noodle bowls. Snip fresh whenever a dish needs a kick."
+      },
+      "dill": {
+        "name": "Dill Seed Pods",
+        "description": "Delicate, feathery fronds with a fresh anise note — made for fish, dips, pickles and potatoes."
+      },
+      "arugula": {
+        "name": "Arugula Seed Pods",
+        "description": "Bold, peppery leaves that add a fresh kick to salads, pizzas and sandwiches. Fast-growing and cut-and-come-again."
+      },
+      "thyme": {
+        "name": "Thyme Seed Pods",
+        "description": "Tiny, woody leaves with warm perfume — essential for roasts, marinades and slow sauces."
+      },
+      "oregano": {
+        "name": "Oregano Seed Pods",
+        "description": "Classic Mediterranean spice for pizza, tomato sauces and grilled vegetables — punchy even in small pinches."
+      },
+      "rosemary": {
+        "name": "Rosemary Seed Pods",
+        "description": "Needle-like leaves with piney depth. Perfect with potatoes, lamb and focaccia fresh from the oven."
+      },
+      "chives": {
+        "name": "Chives Seed Pods",
+        "description": "Mild onion greens for eggs, soups and salads. Snip often and they grow right back."
+      },
+      "chili": {
+        "name": "Chili Seed Pods",
+        "description": "Compact chili plants for kitchen heat — harvest when fruits colour up for fresh spice with real kick."
+      },
+      "herb-mix-12": {
+        "name": "12-Pod Herb Mix",
+        "description": "A full line-up of our favourite herbs and spices — everything you need to fill your whole garden at once."
+      },
+      "spice-mix-12": {
+        "name": "12-Pod Spice Mix",
+        "description": "Aromatic spices to fill your garden — thyme, oregano, rosemary, chives, chili and companions for everyday seasoning."
+      }
     },
     "consumables": {
-      "empty-capsules": { "name": "Empty Capsules" },
-      "sana-ab": { "name": "Sana A + B Nutrients" },
-      "germination-caps": { "name": "Germination Caps" }
+      "empty-capsules": {
+        "name": "Empty Capsules"
+      },
+      "sana-ab": {
+        "name": "Sana A + B Nutrients"
+      },
+      "germination-caps": {
+        "name": "Germination Caps"
+      }
     },
     "accessories": {
-      "storage-cabinet": { "name": "Storage Cabinet" },
-      "wall-shelf": { "name": "Wall Shelf" },
-      "herb-knife": { "name": "Herb Knife" }
+      "storage-cabinet": {
+        "name": "Storage Cabinet"
+      },
+      "wall-shelf": {
+        "name": "Wall Shelf"
+      },
+      "herb-knife": {
+        "name": "Herb Knife"
+      }
     }
   },
   "cta": {
@@ -486,10 +702,22 @@
     "highlightsTitle": "Everything you need to grow",
     "highlightsSubtitle": "One smart garden — soil-free, guesswork-free, year-round.",
     "features": {
-      "easy": { "title": "Easy", "text": "No soil, no mess — just insert and grow." },
-      "fast": { "title": "Fast growth", "text": "Tuned for quick, healthy harvests." },
-      "smart": { "title": "Smart system", "text": "Built for PlantyHub indoor gardens." },
-      "natural": { "title": "Natural", "text": "Non-GMO, natural ingredients." }
+      "easy": {
+        "title": "Easy",
+        "text": "No soil, no mess — just insert and grow."
+      },
+      "fast": {
+        "title": "Fast growth",
+        "text": "Tuned for quick, healthy harvests."
+      },
+      "smart": {
+        "title": "Smart system",
+        "text": "Built for PlantyHub indoor gardens."
+      },
+      "natural": {
+        "title": "Natural",
+        "text": "Non-GMO, natural ingredients."
+      }
     },
     "howItWorksTitle": "How it works",
     "steps": [
@@ -553,6 +781,7 @@
     "shipping": "Shipping: Bulgaria · Balkans · European Union",
     "shippingNote": "Free shipping over €150. Prices in EUR.",
     "linksTitle": "Navigation",
+    "legalTitle": "Legal",
     "links": {
       "product": "Product",
       "howItWorks": "How it works",
@@ -560,13 +789,16 @@
       "accessories": "Accessories",
       "about": "About us",
       "blog": "Blog",
-      "support": "Support",
+      "privacy": "Privacy",
+      "cookies": "Cookies",
+      "terms": "Terms of use",
+      "faq": "FAQ",
       "contact": "Contact",
-      "privacy": "Privacy"
+      "learn": "Learn"
     },
     "followUs": "Follow us",
     "contactTitle": "Contact",
-    "address": "PlantyHub · Pazardzhik, Bulgaria",
+    "address": "PlantyHub · Bulgaria",
     "madeWith": "Grown with care in Bulgaria",
     "rights": "© {{year}} PlantyHub. All rights reserved."
   },
@@ -642,7 +874,10 @@
       "success": "Your account is ready. You can now sign in.",
       "verifySubtitle": "We sent a verification link to {{email}}.",
       "verifyHint": "Open the link in your email to activate your account before signing in.",
-      "goToLogin": "Go to login"
+      "goToLogin": "Go to login",
+      "termsBefore": "I agree to the",
+      "termsMiddle": " and",
+      "termsAfter": "."
     }
   },
   "account": {
@@ -1213,7 +1448,10 @@
       "saved": "Courier profile saved.",
       "loadFailed": "Could not load courier settings.",
       "saveFailed": "Could not save courier settings.",
-      "tabs": { "sender": "Sender", "calculator": "Calculator" },
+      "tabs": {
+        "sender": "Sender",
+        "calculator": "Calculator"
+      },
       "connection": "API connection",
       "account": "Account",
       "accountHint": "Client and contract numbers from the courier portal.",
@@ -1240,7 +1478,10 @@
       "contents": "Default contents",
       "contentsHint": "Shown on the label, e.g. indoor garden / seed pods.",
       "payer": "Who pays shipping",
-      "payers": { "sender": "Sender", "receiver": "Receiver" },
+      "payers": {
+        "sender": "Sender",
+        "receiver": "Receiver"
+      },
       "labelFormat": "Label format",
       "notes": "Extra parameters",
       "notesHint": "Anything else this courier needs. Stored and sent with the shipment later.",
@@ -1586,5 +1827,627 @@
         "imageRequired": "Image URL is required."
       }
     }
+  },
+  "faqPage": {
+    "eyebrow": "Help & answers",
+    "title": "Frequently asked questions",
+    "lead": "Everything about HomeGarder One, pods, shipping, warranty and plant care — in one place.",
+    "allCategories": "All",
+    "ctaTitle": "Still need help?",
+    "ctaText": "Write to us — we reply within one business day.",
+    "ctaSupport": "Go to contact",
+    "ctaEmail": "Email us",
+    "categories": [
+      {
+        "id": "orders",
+        "title": "Orders & shipping",
+        "items": [
+          {
+            "q": "Where do you ship?",
+            "a": "We ship to Bulgaria, the Balkans and the European Union. Orders usually leave within 24 hours on business days."
+          },
+          {
+            "q": "How much is shipping?",
+            "a": "Shipping is calculated at checkout by destination. Over €150, shipping is free for most EU and Balkan destinations."
+          },
+          {
+            "q": "How long does delivery take?",
+            "a": "Typically 1–3 business days in Bulgaria and 3–7 business days in the EU, depending on courier and destination."
+          },
+          {
+            "q": "How do I track my order?",
+            "a": "Once shipped, you get an email with a tracking number and courier link. You can also check status under My orders if you have an account."
+          },
+          {
+            "q": "Can I change the address after ordering?",
+            "a": "Yes, if the parcel has not shipped yet. Email support@plantyhub.com immediately with your order number and new address."
+          },
+          {
+            "q": "What if my parcel arrives damaged?",
+            "a": "Photograph the packaging and product and contact us within 48 hours. We will replace it or arrange a return at no extra cost to you."
+          },
+          {
+            "q": "Do you ship outside the EU?",
+            "a": "We currently focus on Bulgaria, the Balkans and the EU. Message us for other countries — we will confirm if it is possible."
+          },
+          {
+            "q": "Do I get an invoice?",
+            "a": "Yes. Consumers receive a receipt/invoice as required. Companies can add billing details at checkout or email us after ordering."
+          }
+        ]
+      },
+      {
+        "id": "product",
+        "title": "Product & setup",
+        "items": [
+          {
+            "q": "What is HomeGarder One?",
+            "a": "A smart hydroponic countertop garden: full-spectrum LED light, automatic watering and room for multiple pods — no soil and no gardening experience needed."
+          },
+          {
+            "q": "What is in the box?",
+            "a": "The garden unit, LED arm, power supply, starter pods (depending on bundle), Sana A + B nutrients and a quick-start guide with QR instructions."
+          },
+          {
+            "q": "How long does first setup take?",
+            "a": "Usually 10–15 minutes: unpack, attach the light, fill with water, insert pods and plug in."
+          },
+          {
+            "q": "Do I need Wi‑Fi or an app?",
+            "a": "Not required for core use. The garden runs on its own light cycle. If connectivity features are available, the manual covers them."
+          },
+          {
+            "q": "How many pod slots are there?",
+            "a": "HomeGarder One grows several pods at once — typically up to 12 depending on the model and kit. See the product page for exact specs."
+          },
+          {
+            "q": "Is it noisy?",
+            "a": "No — designed for kitchens and living rooms. Pump and light stay quiet in normal use."
+          },
+          {
+            "q": "Where should I place it?",
+            "a": "On a stable counter near a socket, away from ovens and strong drafts. Leave airflow around the lamp and do not block vents."
+          },
+          {
+            "q": "What are the size and weight?",
+            "a": "It is a compact desktop garden — exact dimensions and weight are listed in the HomeGarder One specifications."
+          },
+          {
+            "q": "How much power does it use?",
+            "a": "The LED system is efficient — roughly like a few LED bulbs. Usage depends on brightness and the 16/8 light cycle."
+          }
+        ]
+      },
+      {
+        "id": "growing",
+        "title": "Growing & harvest",
+        "items": [
+          {
+            "q": "Do I need gardening experience?",
+            "a": "No. Insert a pod, add water and nutrients, and the light follows an automatic cycle. QR instructions guide every step."
+          },
+          {
+            "q": "When is the first harvest?",
+            "a": "Most herbs are ready for a first trim about 2–4 weeks after sprouting and keep producing for weeks or months with good care."
+          },
+          {
+            "q": "How should I harvest?",
+            "a": "Snip tips and outer leaves rather than the whole plant so it branches and keeps producing. Use clean scissors."
+          },
+          {
+            "q": "What light cycle should I use?",
+            "a": "About 16 hours light and 8 hours dark. Avoid interrupting the cycle often — plants need rest."
+          },
+          {
+            "q": "What temperature works best?",
+            "a": "Ideally 18–26°C. Avoid long periods below 15°C or above 30°C — that slows sprouting and growth."
+          },
+          {
+            "q": "Why are my plants pale or weak?",
+            "a": "Check water level, that the lamp runs a full cycle, that pods are not expired, and that nutrients are dosed as instructed."
+          },
+          {
+            "q": "Can I grow year-round?",
+            "a": "Yes — that is the point of indoor hydroponics. You only need water, light and nutrients."
+          },
+          {
+            "q": "My plants smell odd — is that normal?",
+            "a": "Fresh herbs should smell pleasant. A stagnant-water smell means drain, rinse the tank and refill with clean nutrient solution."
+          }
+        ]
+      },
+      {
+        "id": "pods",
+        "title": "Pods & consumables",
+        "items": [
+          {
+            "q": "What can I grow?",
+            "a": "Basil, mint, parsley, cilantro, dill, arugula, green onion and more from our catalog. Every HomeGarder pod fits the slots."
+          },
+          {
+            "q": "What is inside a pod?",
+            "a": "Pre-seeded seeds in a hydroponic medium, ready to insert. Non-GMO seeds as per our product policy."
+          },
+          {
+            "q": "How long do unused pods last?",
+            "a": "Store dry and cool in the original packaging. Check the date on the pack — do not use heavily expired pods."
+          },
+          {
+            "q": "What are Sana A and Sana B?",
+            "a": "A two-part nutrient system for hydroponics. Mix with water as directed — never mix concentrates together undiluted."
+          },
+          {
+            "q": "How often should I top up water?",
+            "a": "Check a few times a week. Plants drink more in warm weather and as they grow larger. Never let the tank run dry."
+          },
+          {
+            "q": "When should I replace the nutrient solution?",
+            "a": "Usually every 2–4 weeks, or sooner if growth slows or leaves change colour. Drain, rinse lightly and refill fresh."
+          },
+          {
+            "q": "My pod will not sprout — what now?",
+            "a": "Wait 7–14 days. Check water, light and temperature. If nothing happens, email us with your order number — we replace pods under our sprouting policy."
+          },
+          {
+            "q": "Can I reuse a pod?",
+            "a": "Not recommended. After harvest, insert a fresh pod for a clean restart."
+          },
+          {
+            "q": "Where do I buy more pods?",
+            "a": "In the Pods section of the site. Mix flavours and add nutrients or accessories in the same order."
+          }
+        ]
+      },
+      {
+        "id": "care",
+        "title": "Care & maintenance",
+        "items": [
+          {
+            "q": "How do I clean the garden?",
+            "a": "Unplug, drain the water, wash the tank with a soft sponge and clean water. Avoid harsh cleaners on electronics and the LED panel."
+          },
+          {
+            "q": "How often should I clean?",
+            "a": "Light cleaning when you refresh nutrients; deeper clean every 1–2 months or when replacing all pods."
+          },
+          {
+            "q": "What about algae in the tank?",
+            "a": "Reduce light reaching the water (pod caps help), wash the tank and change the water. Algae love light and stagnant water."
+          },
+          {
+            "q": "The light will not turn on — how do I check?",
+            "a": "Check the socket, adapter and cable connection. If it still fails, contact us — it may be covered by warranty."
+          },
+          {
+            "q": "The pump is not circulating?",
+            "a": "Make sure there is enough water and the intake is not blocked. Restart the unit. If it still fails, contact support."
+          },
+          {
+            "q": "Is it safe around kids and pets?",
+            "a": "Keep cables tidy and do not let anyone drink from the tank. Nutrient solution is not for consumption. Avoid staring into the LED up close for long."
+          },
+          {
+            "q": "Can I move it while running?",
+            "a": "Better to unplug and partially drain first to avoid spills. Move carefully — a full tank is heavy."
+          }
+        ]
+      },
+      {
+        "id": "warranty",
+        "title": "Warranty & returns",
+        "items": [
+          {
+            "q": "What warranty do I get?",
+            "a": "HomeGarder One includes a 2-year warranty for manufacturing defects. Keep your order number and proof of purchase."
+          },
+          {
+            "q": "What is the return policy?",
+            "a": "You have 30 days to return if you are not satisfied, subject to return conditions (condition and completeness). Contact us for a label/instructions."
+          },
+          {
+            "q": "How do I start a warranty claim?",
+            "a": "Email support@plantyhub.com with a description, photos/video and order number. We will guide diagnosis or replacement."
+          },
+          {
+            "q": "What is not covered?",
+            "a": "Damage from misuse, drops, water on electronics outside normal operation, unauthorised repairs, or used consumables (pods, nutrients)."
+          },
+          {
+            "q": "How long do refunds take?",
+            "a": "After we receive and inspect the return, refunds usually take a few business days depending on your bank/card."
+          },
+          {
+            "q": "Can I replace only the lamp or pump?",
+            "a": "Often yes, depending on diagnosis. Do not discard the part before contacting us."
+          }
+        ]
+      },
+      {
+        "id": "account",
+        "title": "Payment & account",
+        "items": [
+          {
+            "q": "Which payment methods do you accept?",
+            "a": "Card and other methods shown at checkout. Online payments use a secure process."
+          },
+          {
+            "q": "Are prices VAT inclusive?",
+            "a": "Store prices are in euros. Taxes/VAT depend on shipping address and appear clearly before you pay."
+          },
+          {
+            "q": "Do I need an account?",
+            "a": "Not required to buy, but an account makes tracking orders and reordering pods easier."
+          },
+          {
+            "q": "How do I reset my password?",
+            "a": "On the login page choose Forgot password? and follow the email link. Check spam if it does not arrive, or contact us."
+          },
+          {
+            "q": "How does the newsletter discount work?",
+            "a": "After subscribing you get a code (e.g. 5% off first order). Enter it at checkout before paying. One code per order unless stated otherwise."
+          },
+          {
+            "q": "Do you offer business / bulk pricing?",
+            "a": "Yes. Email support@plantyhub.com with approximate quantities and location."
+          },
+          {
+            "q": "How do I unsubscribe from emails?",
+            "a": "Every marketing email has an unsubscribe link. Transactional order emails may still be sent when needed."
+          },
+          {
+            "q": "Is my data protected?",
+            "a": "We process personal data under our privacy policy for orders, support and (with consent) marketing."
+          }
+        ]
+      }
+    ]
+  },
+  "legalPages": {
+    "updatedLabel": "Last updated",
+    "contentsLabel": "Contents",
+    "contactTitle": "Questions?",
+    "contactLead": "Questions about these documents? Contact us — we usually reply within one business day.",
+    "contactCta": "Go to contact",
+    "privacy": {
+      "title": "Privacy policy",
+      "eyebrow": "Legal",
+      "updated": "17 September 2026",
+      "lead": "This policy explains how PlantyHub (“we”) collects, uses and protects your personal data when you shop or contact us via plantyhub.com.",
+      "sections": [
+        {
+          "title": "Who we are",
+          "paragraphs": [
+            "The data controller is PlantyHub, Bulgaria. We process data in line with the GDPR and applicable Bulgarian law."
+          ],
+          "items": [
+            "Privacy requests: support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "What we collect",
+          "paragraphs": [
+            "Depending on how you use the site, we may process:"
+          ],
+          "items": [
+            "Account and order data — name, email, shipping address, phone (if provided)",
+            "Payment data — via our payment provider (we do not store full card numbers)",
+            "Communications — contact-form messages, emails and support requests",
+            "Technical data — IP address, browser/device type and basic usage stats (see Cookie policy)"
+          ]
+        },
+        {
+          "title": "How we use data",
+          "items": [
+            "Fulfil orders, delivery, invoicing and warranty support",
+            "Create and manage your account, sign-in and security",
+            "Answer enquiries and provide customer support",
+            "Improve the site and products (aggregated or pseudonymised analytics)",
+            "Marketing only with your consent (e.g. newsletter) — unsubscribe anytime"
+          ]
+        },
+        {
+          "title": "Legal bases",
+          "items": [
+            "Contract — to perform your order or account",
+            "Legal obligation — tax and accounting requirements",
+            "Legitimate interest — site security, fraud prevention and service improvement",
+            "Consent — newsletter, non-essential cookies and similar purposes"
+          ]
+        },
+        {
+          "title": "Sharing",
+          "paragraphs": [
+            "We share data only with trusted processors needed to run the service. We do not sell personal data."
+          ],
+          "items": [
+            "Couriers / delivery partners",
+            "Payment providers",
+            "Hosting and email tools",
+            "Competent authorities — when required by law"
+          ]
+        },
+        {
+          "title": "Retention and security",
+          "items": [
+            "We keep data only as long as needed for the purpose or as required by law",
+            "We apply technical and organisational measures against unauthorised access, loss or misuse"
+          ]
+        },
+        {
+          "title": "Your rights",
+          "paragraphs": [
+            "You may exercise the following rights by emailing support@plantyhub.com:"
+          ],
+          "items": [
+            "Access, rectification and erasure",
+            "Restriction and portability",
+            "Objection to certain processing",
+            "Withdraw consent where processing is based on consent",
+            "Lodge a complaint with the Bulgarian Commission for Personal Data Protection (CPDP)"
+          ]
+        },
+        {
+          "title": "Children",
+          "paragraphs": [
+            "Our services are not directed at anyone under 16. If we learn we collected a child’s data without a lawful basis, we will delete it."
+          ]
+        },
+        {
+          "title": "Changes",
+          "paragraphs": [
+            "We may update this policy. The last-updated date is shown above. Material changes will be noted on the site."
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie policy",
+      "eyebrow": "Legal",
+      "updated": "17 September 2026",
+      "lead": "This page explains how PlantyHub uses cookies and similar technologies on the site.",
+      "sections": [
+        {
+          "title": "What cookies are",
+          "paragraphs": [
+            "Cookies are small text files stored in your browser. They help the site work, remember preferences and — with consent — understand how the site is used."
+          ]
+        },
+        {
+          "title": "Cookies we use",
+          "items": [
+            "Essential — cart, session, sign-in, security and language; required for the site to work",
+            "Functional — remember preferences (e.g. language)",
+            "Analytics — help us see which pages are used most; loaded only with consent when enabled",
+            "Marketing — may measure campaigns; enabled only with consent"
+          ]
+        },
+        {
+          "title": "Legal basis",
+          "items": [
+            "Essential cookies — legitimate interest / necessity for the service",
+            "Non-essential cookies — consent, which you can withdraw anytime"
+          ]
+        },
+        {
+          "title": "Managing cookies",
+          "items": [
+            "Delete or block cookies in your browser settings",
+            "Blocking essential cookies may break cart or sign-in",
+            "If we show a consent banner, change your choice there or email support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "More information",
+          "paragraphs": [
+            "For personal-data processing see our Privacy policy. Cookie questions: support@plantyhub.com."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of use",
+      "eyebrow": "Legal",
+      "updated": "17 September 2026",
+      "lead": "These terms govern use of plantyhub.com and purchases from PlantyHub. By using the site or placing an order you accept them.",
+      "sections": [
+        {
+          "title": "The store",
+          "items": [
+            "PlantyHub sells smart hydroponic gardens, pods, accessories and related products online",
+            "Delivery in Bulgaria, the Balkans and the EU (subject to availability)",
+            "Prices are in euro unless stated otherwise",
+            "The confirmed price is the one at checkout"
+          ]
+        },
+        {
+          "title": "Account",
+          "items": [
+            "Shop as a guest or with an account",
+            "You are responsible for accurate details and password security",
+            "We may restrict or close accounts in case of abuse, fraud or breach of these terms"
+          ]
+        },
+        {
+          "title": "Orders and payment",
+          "items": [
+            "An order is an offer to buy; acceptance is confirmed by order confirmation / status email",
+            "Payment via the methods shown at checkout",
+            "We may cancel orders for failed payment, stock issues or suspected fraud"
+          ]
+        },
+        {
+          "title": "Delivery",
+          "items": [
+            "Delivery times are estimates and depend on the courier and address",
+            "Risk passes in line with applicable consumer law for consumer deliveries",
+            "Free shipping may apply above a threshold (e.g. €150) — see checkout information"
+          ]
+        },
+        {
+          "title": "Withdrawal and returns",
+          "items": [
+            "EU/EEA consumers generally have 14 days to withdraw from a distance contract",
+            "Legal exceptions may apply (e.g. sealed hygiene/consumable goods)",
+            "For warranty, defects and returns see the FAQ or email support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "Intellectual property",
+          "paragraphs": [
+            "Site content (text, design, logos, images, software elements) belongs to PlantyHub or its licensors. You may not copy or use it commercially without permission."
+          ]
+        },
+        {
+          "title": "Liability",
+          "items": [
+            "We aim for accurate site information but do not guarantee error-free content",
+            "Liability for products and services is limited as allowed by consumer and contract law",
+            "We are not liable for force majeure or disruptions outside our control"
+          ]
+        },
+        {
+          "title": "Governing law",
+          "items": [
+            "These terms are governed by the laws of the Republic of Bulgaria",
+            "EU consumers also keep mandatory rights under local consumer law",
+            "Disputes should first be resolved amicably; otherwise by competent Bulgarian courts"
+          ]
+        },
+        {
+          "title": "Contact",
+          "paragraphs": [
+            "Questions about these terms: support@plantyhub.com · PlantyHub, Bulgaria."
+          ]
+        }
+      ]
+    }
+  },
+  "learnPage": {
+    "title": "PlantyHub Learn",
+    "eyebrow": "Education",
+    "lead": "Pick a section, then a topic — and open the lesson with photos, video and clear steps.",
+    "pickSection": "Choose a section",
+    "backToSections": "All sections",
+    "backToTopics": "Back to topics",
+    "openTopic": "Open lesson",
+    "tipLabel": "Tip",
+    "stepsLabel": "Steps",
+    "videoLabel": "Video example",
+    "galleryLabel": "Practice photos",
+    "sections": {
+      "start": {
+        "title": "Start here",
+        "description": "Hydroponics basics and your first garden setup.",
+        "topicsLabel": "Topics in this section"
+      },
+      "grow": {
+        "title": "Grow smarter",
+        "description": "Light, water, pods and feeding for steady growth.",
+        "topicsLabel": "Topics in this section"
+      },
+      "harvest": {
+        "title": "Harvest & care",
+        "description": "How to cut correctly and fix common issues.",
+        "topicsLabel": "Topics in this section"
+      }
+    },
+    "topics": {
+      "basics": {
+        "title": "What hydroponics is",
+        "duration": "3 min",
+        "summary": "Why plants grow in water and what PlantyHub does differently.",
+        "lead": "Plants grow in nutrient-rich water — no soil, less mess, more control over light and moisture.",
+        "videoLabel": "Video: hydroponics at home",
+        "galleryLabel": "Photos: water, roots and fresh leaves",
+        "steps": [
+          "Roots take water and nutrients from the tray solution — not from soil.",
+          "The LED replaces sunlight with a predictable 16/8 cycle (16 h light / 8 h rest).",
+          "A closed system typically uses less water than traditional gardening.",
+          "Result: fresh herbs on the counter, year-round, without waiting for a season."
+        ],
+        "tip": "Hydroponics isn’t “advanced science” here — the pod carries seeds and nutrients, and the device handles light and watering."
+      },
+      "setup": {
+        "title": "First setup",
+        "duration": "5 min",
+        "summary": "From unboxing to a running garden in a few minutes.",
+        "lead": "From unboxing to a running garden in a few clear steps.",
+        "videoLabel": "Video: unboxing and first power-on",
+        "galleryLabel": "Photos: device, water and pods",
+        "steps": [
+          "Place the unit on a stable counter, away from strong direct heat sources.",
+          "Fill clean water to the marked level in the reservoir / tray.",
+          "Insert pods into the slots as shown on the packaging.",
+          "Turn the light on and let the automatic cycle run — avoid moving the unit often in the first days."
+        ],
+        "tip": "Use room-temperature water. If your tap water is very hard, boiled-and-cooled water can help more stable germination."
+      },
+      "light": {
+        "title": "Light and water",
+        "duration": "4 min",
+        "summary": "The 16/8 cycle and how to keep water at the right level.",
+        "lead": "The two things that matter most: steady light and enough water.",
+        "videoLabel": "Video: lamp height and growth",
+        "galleryLabel": "Photos: light, water level, healthy growth",
+        "steps": [
+          "The lamp follows a 16/8 cycle — don’t switch it off overnight “to save power”; plants need rhythm.",
+          "Check water 1–2 times a week and top up to the mark.",
+          "Don’t overfill past the maximum — more water doesn’t mean faster growth.",
+          "Keep the lamp at the right height for plant size (adjustable arm)."
+        ],
+        "tip": "Yellow lower leaves often mean too little light or stale water — start by checking level and lamp height."
+      },
+      "pods": {
+        "title": "Pods and feeding",
+        "duration": "4 min",
+        "summary": "What’s inside a pod and how to use it correctly.",
+        "lead": "Each pod is a starter pack: seeds, medium and nutrients for the first cycle.",
+        "galleryLabel": "Photos: pods, varieties and slots",
+        "steps": [
+          "Don’t open the pod early — moisture and light should reach it only inside the device.",
+          "Scan the QR on the pod for variety-specific timelines and tips.",
+          "Crops grow at different speeds — basil and lettuce don’t mature the same way.",
+          "After a cycle, remove the old pod and clean the slot before a new one."
+        ],
+        "tip": "If one pod lags behind, don’t pull the others — variation is normal. Wait a few more days before requesting a replacement."
+      },
+      "harvest": {
+        "title": "Harvest like a pro",
+        "duration": "5 min",
+        "summary": "When and how to cut so the plant keeps producing.",
+        "lead": "The right cut keeps the plant productive longer and yields more leaves over time.",
+        "galleryLabel": "Photos: harvest, cutting and cooking",
+        "steps": [
+          "Start harvesting once enough mature leaves are ready (often week 2–4 by variety).",
+          "Cut above a node / leaf pair — that encourages branching.",
+          "Don’t take more than about ⅓ of the plant at once.",
+          "Use clean scissors; herbs taste best right after cutting."
+        ],
+        "tip": "Light, regular cuts beat rare “clear-cuts” of the whole plant — your garden stays green for weeks."
+      },
+      "care": {
+        "title": "Care and common issues",
+        "duration": "6 min",
+        "summary": "Quick checks for no sprouts, pale leaves or cloudy water.",
+        "lead": "Most problems come down to water, light or room temperature.",
+        "galleryLabel": "Photos: maintenance and a clean tray",
+        "steps": [
+          "No sprouts after 10–14 days: check water, lamp and room temp (ideally ~18–24°C).",
+          "Pale plants: raise/lower the lamp and confirm the daily cycle is running.",
+          "Smell or cloudy water: change water and rinse the tray.",
+          "After each full cycle: a short clean of tray and slots."
+        ],
+        "tip": "You have a germination guarantee — if a pod fails with proper care, contact us. Better a quick message than weeks of guessing."
+      }
+    },
+    "ctaTitle": "Ready to put this into practice?",
+    "ctaText": "Browse the FAQ for quick answers, contact us if something’s off, or start with HomeGarder One.",
+    "ctaFaq": "Go to FAQ",
+    "ctaContact": "Contact",
+    "ctaBuy": "See the product",
+    "topicsCount": "{{count}} topics",
+    "nextTopic": "Next",
+    "playVideo": "Play video",
+    "pauseVideo": "Pause"
   }
 }

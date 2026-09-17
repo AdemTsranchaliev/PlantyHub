@@ -29,14 +29,20 @@ import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { hasAdminRole } from '../auth/session'
 import { brand } from '../theme'
 
-const navKeys = [
+const desktopNavKeys = [
   { key: 'product', href: navHrefs.product },
   { key: 'howItWorks', href: navHrefs.howItWorks },
   { key: 'pods', href: navHrefs.pods },
   { key: 'accessories', href: navHrefs.accessories },
   { key: 'about', href: navHrefs.about },
+] as const
+
+const mobileNavKeys = [
+  ...desktopNavKeys,
   { key: 'blog', href: navHrefs.blog },
-  { key: 'support', href: navHrefs.support },
+  { key: 'learn', href: navHrefs.learn },
+  { key: 'faq', href: navHrefs.faq },
+  { key: 'contact', href: navHrefs.contact },
 ] as const
 
 export default function Header() {
@@ -94,7 +100,7 @@ export default function Header() {
               justifyContent: 'center',
             }}
           >
-            {navKeys.map((link) => (
+            {desktopNavKeys.map((link) => (
               <Link
                 key={link.href}
                 href={resolveHref(link.href)}
@@ -135,17 +141,6 @@ export default function Header() {
               justifyContent: 'flex-end',
             }}
           >
-            <Typography
-              component="span"
-              sx={{
-                display: { xs: 'none', xl: 'inline' },
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                color: 'text.secondary',
-              }}
-            >
-              {t('header.region')}
-            </Typography>
             <LanguageSwitcher />
             {isLoggedIn ? (
               <>
@@ -268,7 +263,7 @@ export default function Header() {
         )}
         <Divider />
         <List sx={{ px: 1, py: 1 }}>
-          {navKeys.map((link) => (
+          {mobileNavKeys.map((link) => (
             <ListItem key={link.href} disablePadding>
               <ListItemButton
                 component="a"

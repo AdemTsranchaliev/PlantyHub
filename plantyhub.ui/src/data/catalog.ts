@@ -24,7 +24,14 @@ export const navHrefs = {
   accessories: '/accessories',
   about: '/about',
   blog: '/blog',
-  support: '/support',
+  faq: '/faq',
+  learn: '/learn',
+  contact: '/contact',
+  /** @deprecated use contact — kept for old links */
+  support: '/contact',
+  privacy: '/privacy',
+  cookies: '/cookies',
+  terms: '/terms',
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
@@ -226,10 +233,10 @@ export const blogArticleIds = [
 export const pressArticleIds = blogArticleIds
 
 export const blogArticleImages = {
-  pesto: stockImages.kitchenCaprese,
-  hydroponics: stockImages.basilCloseup,
+  pesto: stockImages.kitchenBasil,
+  hydroponics: stockImages.homeGardenProduct,
   spices: stockImages.mintKitchen,
-  'first-harvest': stockImages.kitchenBasil,
+  'first-harvest': stockImages.basilCloseup,
   partnership: stockImages.outdoorDeck,
   earthday: stockImages.outdoorHerbs,
 } as const
@@ -239,8 +246,9 @@ export const pressArticleImages = blogArticleImages
 export const homeGardenSpecKeys = ['pods', 'irrigation', 'lightCycle', 'qr'] as const
 
 export const footerLinkKeys = {
-  main: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'blog', 'support', 'contact', 'privacy'],
-} as const
+  nav: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'blog', 'learn', 'faq', 'contact'] as const,
+  legal: ['privacy', 'cookies', 'terms'] as const,
+}
 
 export const socialLinks = [
   { label: 'Instagram', href: 'https://instagram.com/plantyhub.official', icon: 'instagram' },

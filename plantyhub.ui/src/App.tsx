@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import PromoBar from './components/PromoBar'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -23,6 +23,9 @@ const AboutPage = lazy(() => import('./pages/AboutPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'))
 const SupportPage = lazy(() => import('./pages/SupportPage'))
+const FaqPage = lazy(() => import('./pages/FaqPage'))
+const LearnPage = lazy(() => import('./pages/LearnPage'))
+const LegalPage = lazy(() => import('./pages/LegalPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
@@ -79,7 +82,13 @@ function StorefrontRoutes() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogArticlePage />} />
-          <Route path="/support" element={<SupportPage />} />
+          <Route path="/contact" element={<SupportPage />} />
+          <Route path="/support" element={<Navigate to="/contact" replace />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/privacy" element={<LegalPage doc="privacy" />} />
+          <Route path="/cookies" element={<LegalPage doc="cookies" />} />
+          <Route path="/terms" element={<LegalPage doc="terms" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />

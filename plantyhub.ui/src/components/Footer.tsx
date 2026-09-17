@@ -20,16 +20,22 @@ import { footerLinkKeys, navHrefs, socialLinks } from '../data/catalog'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
-const footerHrefs: Record<(typeof footerLinkKeys.main)[number], string> = {
+const navHrefsMap: Record<(typeof footerLinkKeys.nav)[number], string> = {
   product: navHrefs.product,
   howItWorks: navHrefs.howItWorks,
   pods: navHrefs.pods,
   accessories: navHrefs.accessories,
   about: navHrefs.about,
   blog: navHrefs.blog,
-  support: navHrefs.support,
-  contact: 'mailto:support@plantyhub.com',
-  privacy: '#',
+  learn: navHrefs.learn,
+  faq: navHrefs.faq,
+  contact: navHrefs.contact,
+}
+
+const legalHrefs: Record<(typeof footerLinkKeys.legal)[number], string> = {
+  privacy: navHrefs.privacy,
+  cookies: navHrefs.cookies,
+  terms: navHrefs.terms,
 }
 
 function TikTokIcon(props: SvgIconProps) {
@@ -48,6 +54,21 @@ const socialIcons: Record<string, ComponentType<SvgIconProps>> = {
   linkedin: LinkedInIcon,
 }
 
+const linkSx = {
+  color: 'rgba(255,255,255,0.7)',
+  fontSize: '0.88rem',
+  py: 0.25,
+  '&:hover': { color: brand.white },
+} as const
+
+const sectionTitleSx = {
+  fontWeight: 700,
+  letterSpacing: '0.06em',
+  fontSize: '0.75rem',
+  color: brand.plantGreenLight,
+  mb: 2,
+} as const
+
 export default function Footer() {
   const { t } = useTranslation()
   const year = new Date().getFullYear()
@@ -63,8 +84,8 @@ export default function Footer() {
       }}
     >
       <Box sx={{ maxWidth: 1400, mx: 'auto', px: pagePaddingX }}>
-        <Grid container spacing={4} sx={{ mb: 5 }}>
-          <Grid size={{ xs: 12, md: 5 }}>
+        <Grid container spacing={{ xs: 4, md: 3 }} sx={{ mb: 5 }}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={{ mb: 3, filter: 'brightness(0) invert(1)' }}>
               <Logo size="lg" />
             </Box>
@@ -78,7 +99,7 @@ export default function Footer() {
               {t('footer.shippingNote')}
             </Typography>
 
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, letterSpacing: '0.06em', fontSize: '0.75rem', color: brand.plantGreenLight, mb: 1.5 }}>
+            <Typography variant="subtitle2" sx={{ ...sectionTitleSx, mb: 1.5 }}>
               {t('footer.followUs')}
             </Typography>
             <Stack direction="row" spacing={1.25}>
@@ -113,34 +134,38 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid size={{ xs: 6, md: 4 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, letterSpacing: '0.06em', fontSize: '0.75rem', color: brand.plantGreenLight, mb: 2 }}>
+          <Grid size={{ xs: 6, sm: 4, md: 3 }}>
+            <Typography variant="subtitle2" sx={sectionTitleSx}>
               {t('footer.linksTitle')}
             </Typography>
             <Stack spacing={1}>
-              {footerLinkKeys.main.map((linkKey) => (
-                <Link
-                  key={linkKey}
-                  href={resolveHref(footerHrefs[linkKey])}
-                  underline="hover"
-                  sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', py: 0.25, '&:hover': { color: brand.white } }}
-                >
+              {footerLinkKeys.nav.map((linkKey) => (
+                <Link key={linkKey} href={resolveHref(navHrefsMap[linkKey])} underline="hover" sx={linkSx}>
                   {t(`footer.links.${linkKey}`)}
                 </Link>
               ))}
             </Stack>
           </Grid>
 
-          <Grid size={{ xs: 6, md: 3 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, letterSpacing: '0.06em', fontSize: '0.75rem', color: brand.plantGreenLight, mb: 2 }}>
+          <Grid size={{ xs: 6, sm: 4, md: 2 }}>
+            <Typography variant="subtitle2" sx={sectionTitleSx}>
+              {t('footer.legalTitle')}
+            </Typography>
+            <Stack spacing={1}>
+              {footerLinkKeys.legal.map((linkKey) => (
+                <Link key={linkKey} href={resolveHref(legalHrefs[linkKey])} underline="hover" sx={linkSx}>
+                  {t(`footer.links.${linkKey}`)}
+                </Link>
+              ))}
+            </Stack>
+          </Grid>
+
+          <Grid size={{ xs: 12, sm: 4, md: 3 }}>
+            <Typography variant="subtitle2" sx={sectionTitleSx}>
               {t('footer.contactTitle')}
             </Typography>
             <Stack spacing={1.25}>
-              <Link
-                href="mailto:support@plantyhub.com"
-                underline="hover"
-                sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', '&:hover': { color: brand.white } }}
-              >
+              <Link href="mailto:support@plantyhub.com" underline="hover" sx={linkSx}>
                 support@plantyhub.com
               </Link>
               <Typography sx={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', lineHeight: 1.6 }}>
