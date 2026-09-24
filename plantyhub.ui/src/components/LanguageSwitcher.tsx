@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
@@ -7,18 +8,28 @@ import Typography from '@mui/material/Typography'
 import LanguageIcon from '@mui/icons-material/Language'
 import { useTranslation } from 'react-i18next'
 import { languageStorageKey, supportedLanguages, type LanguageCode } from '../i18n/languages'
+import { BASE_PATH } from '../paths'
 import { brand } from '../theme'
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation()
+  const location = useLocation()
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
   const current = supportedLanguages.find((l) => l.code === i18n.language) ?? supportedLanguages[0]
+  const onAdmin = location.pathname === '/admin' || location.pathname.startsWith('/admin/')
 
   const changeLanguage = (code: LanguageCode) => {
-    void i18n.changeLanguage(code)
     localStorage.setItem(languageStorageKey, code)
     document.documentElement.lang = code
     setAnchor(null)
+
+    if (onAdmin) {
+      void i18n.changeLanguage(code)
+      return
+    }
+
+    const path = location.pathname === '/' ? '/' : location.pathname
+    window.location.assign(`${BASE_PATH}/${code}${path}${location.search}${location.hash}`)
   }
 
   return (

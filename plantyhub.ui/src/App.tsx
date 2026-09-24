@@ -10,9 +10,11 @@ import NewsletterDialog from './components/NewsletterDialog'
 import CartSnackbar from './components/CartSnackbar'
 import HomePage from './pages/HomePage'
 import DataBootstrap from './components/DataBootstrap'
+import LocaleHead from './components/LocaleHead'
 import SessionBootstrap from './components/SessionBootstrap'
 import { ThemeProvider } from '@mui/material/styles'
 import adminTheme from './admin/adminTheme'
+import { resolveHref } from './paths'
 import { brand } from './theme'
 
 const ProductPage = lazy(() => import('./pages/ProductPage'))
@@ -55,6 +57,11 @@ const AdminCouriersPage = lazy(() => import('./pages/admin/AdminCouriersPage'))
 const AdminVatPage = lazy(() => import('./pages/admin/AdminVatPage'))
 const AdminPromoCodesPage = lazy(() => import('./pages/admin/AdminPromoCodesPage'))
 const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage'))
+
+function AdminLoginRedirect() {
+  window.location.replace(resolveHref('/login'))
+  return null
+}
 
 function PageFallback() {
   return (
@@ -113,7 +120,7 @@ function AdminRoutes() {
     <ThemeProvider theme={adminTheme}>
       <Suspense fallback={<PageFallback />}>
         <Routes>
-          <Route path="/admin/login" element={<Navigate to="/login" replace />} />
+          <Route path="/admin/login" element={<AdminLoginRedirect />} />
           <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="gardens" element={<AdminGardensPage />} />
@@ -152,6 +159,7 @@ function App() {
     <>
       <SessionBootstrap />
       <DataBootstrap />
+      <LocaleHead />
       <StorefrontRoutes />
     </>
   )

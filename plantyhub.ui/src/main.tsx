@@ -16,15 +16,51 @@ import './index.css'
 import './i18n/setup'
 import theme from './theme'
 import App from './App.tsx'
+import { localeFromPathname, preferredLanguage } from './i18n/languages'
 import { BASE_PATH } from './paths'
+
+function isAdminPath(pathname: string) {
+  const base = BASE_PATH
+  const rest = base && (pathname === base || pathname.startsWith(`${base}/`))
+    ? pathname.slice(base.length)
+    : pathname
+  return rest === '/admin' || rest.startsWith('/admin/')
+}
+
+function AppRouter() {
+  const { pathname, search, hash } = window.location
+
+  if (isAdminPath(pathname)) {
+    return (
+      <BrowserRouter basename={BASE_PATH || undefined}>
+        <App />
+      </BrowserRouter>
+    )
+  }
+
+  const locale = localeFromPathname(pathname, BASE_PATH)
+  if (!locale) {
+    const base = BASE_PATH
+    const rest = base && (pathname === base || pathname.startsWith(`${base}/`))
+      ? pathname.slice(base.length) || '/'
+      : pathname
+    const target = `${base}/${preferredLanguage()}${rest === '/' ? '/' : rest}${search}${hash}`
+    window.location.replace(target)
+    return null
+  }
+
+  return (
+    <BrowserRouter basename={`${BASE_PATH}/${locale}`}>
+      <App />
+    </BrowserRouter>
+  )
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter basename={BASE_PATH || undefined}>
-        <App />
-      </BrowserRouter>
+      <AppRouter />
     </ThemeProvider>
   </StrictMode>,
 )

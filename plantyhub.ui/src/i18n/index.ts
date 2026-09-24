@@ -4,10 +4,11 @@ import bg from './locales/bg.json'
 import de from './locales/de.json'
 import en from './locales/en.json'
 import fr from './locales/fr.json'
-import { defaultLanguage, languageStorageKey, type LanguageCode } from './languages'
+import { defaultLanguage, localeFromPathname, preferredLanguage } from './languages'
 
-const saved = localStorage.getItem(languageStorageKey) as LanguageCode | null
-const initialLanguage = saved ?? defaultLanguage
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
+const saved = preferredLanguage()
+const initialLanguage = localeFromPathname(window.location.pathname, basePath) ?? saved ?? defaultLanguage
 
 void i18n.use(initReactI18next).init({
   resources: {

@@ -162,8 +162,8 @@ export default function Header() {
               <>
                 {isAdmin && (
                   <Button
-                    component={RouterLink}
-                    to="/admin"
+                    component="a"
+                    href={`${resolveHref('/admin')}`}
                     sx={headerTextButtonSx}
                   >
                     {t('header.admin')}
@@ -244,7 +244,7 @@ export default function Header() {
           <Box sx={{ px: pagePaddingX, py: 1.5 }}>
             <Typography sx={{ fontWeight: 700, color: brand.graphite, mb: 1 }}>{customer?.name}</Typography>
             {isAdmin && (
-              <Button component={RouterLink} to="/admin" fullWidth variant="contained" onClick={() => setMobileOpen(false)} sx={{ mb: 1 }}>
+              <Button component="a" href={resolveHref('/admin')} fullWidth variant="contained" onClick={() => setMobileOpen(false)} sx={{ mb: 1 }}>
                 {t('header.admin')}
               </Button>
             )}

@@ -18,9 +18,18 @@ import { ApiError } from '../api/client'
 import { setCustomerFromAuth } from '../store/auth'
 import { hasAdminRole } from '../auth/session'
 import { useCustomerAuth } from '../hooks/useCustomerAuth'
+import { resolveHref } from '../paths'
 import { brand } from '../theme'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function goTo(navigate: (path: string, options: { replace: true }) => void, dest: string) {
+  if (dest === '/admin' || dest.startsWith('/admin/')) {
+    window.location.assign(resolveHref(dest))
+    return
+  }
+  navigate(dest, { replace: true })
+}
 
 function destinationAfterLogin(roles: string[] | undefined, from?: string) {
   if (hasAdminRole(roles)) {
@@ -58,7 +67,7 @@ export default function LoginPage() {
   useEffect(() => {
     if (!isLoggedIn) return
     const dest = destinationAfterLogin(customer?.roles, from)
-    if (dest) navigate(dest, { replace: true })
+    if (dest) goTo(navigate, dest)
   }, [isLoggedIn, customer?.roles, from, navigate])
 
   const handleResend = async () => {
@@ -89,7 +98,7 @@ export default function LoginPage() {
       setCustomerFromAuth(response, rememberMe)
       const dest = destinationAfterLogin(response.roles, from)
       if (dest) {
-        navigate(dest, { replace: true })
+        goTo(navigate, dest)
         return
       }
       setSubmitted(true)

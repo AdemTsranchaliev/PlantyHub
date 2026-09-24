@@ -150,8 +150,27 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.Use(async (context, next) =>
+{
+    if (HttpMethods.IsGet(context.Request.Method) && LocaleSeo.NeedsLocaleRedirect(context.Request.Path))
+    {
+        var language = LocaleSeo.PickLanguage(context.Request.Headers.AcceptLanguage);
+        var path = context.Request.Path.Value ?? "/";
+        var target = path == "/" ? $"/{language}/" : $"/{language}{path}";
+        context.Response.Redirect($"{target}{context.Request.QueryString}", permanent: false);
+        return;
+    }
+
+    await next();
+});
+
 app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "PlantyHub.Api" }));
+app.MapGet("/robots.txt", (HttpContext context) =>
+    Results.Text(LocaleSeo.Robots(context.Request), "text/plain; charset=utf-8"));
+app.MapGet("/sitemap.xml", (HttpContext context) =>
+    Results.Text(LocaleSeo.Sitemap(context.Request), "application/xml; charset=utf-8"));
+
 app.MapFallback(async context =>
 {
     if (context.Request.Path.StartsWithSegments("/api") ||
@@ -168,8 +187,10 @@ app.MapFallback(async context =>
         return;
     }
 
+    var html = await File.ReadAllTextAsync(index);
+    html = LocaleSeo.Apply(html, context.Request);
     context.Response.ContentType = "text/html; charset=utf-8";
-    await context.Response.SendFileAsync(index);
+    await context.Response.WriteAsync(html);
 });
 
 app.Run();

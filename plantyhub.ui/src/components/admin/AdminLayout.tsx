@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet, Link as RouterLink, useLocation, useNavigate, Navigate } from 'react-router-dom'
+import { Outlet, Link as RouterLink, useLocation } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
@@ -20,6 +20,7 @@ import { adminNavGroups } from '../../admin/nav'
 import { clearAdminUser, getAdminUser, isAdminAuthenticated } from '../../admin/auth'
 import { logoutCustomer } from '../../store/auth'
 import AdminDataBootstrap from './AdminDataBootstrap'
+import { resolveHref } from '../../paths'
 import { brand } from '../../theme'
 
 const SIDEBAR_WIDTH = 260
@@ -27,18 +28,18 @@ const SIDEBAR_WIDTH = 260
 export default function AdminLayout() {
   const { t } = useTranslation()
   const location = useLocation()
-  const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
   const admin = getAdminUser()
 
   if (!isAdminAuthenticated()) {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />
+    window.location.replace(resolveHref('/login'))
+    return null
   }
 
   const handleLogout = () => {
     clearAdminUser()
     logoutCustomer()
-    navigate('/login')
+    window.location.assign(resolveHref('/login'))
   }
 
   const isActive = (path: string) => {
@@ -115,7 +116,7 @@ export default function AdminLayout() {
       <Box sx={{ p: 2 }}>
         <ListItemButton
           component="a"
-          href="/"
+          href={resolveHref('/')}
           target="_blank"
           rel="noopener noreferrer"
           sx={{ borderRadius: '12px', mb: 1 }}
