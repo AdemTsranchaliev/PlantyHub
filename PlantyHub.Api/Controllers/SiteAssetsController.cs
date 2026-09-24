@@ -35,7 +35,7 @@ public class SiteAssetsController(AppDbContext db) : ControllerBase
         }
 
         if (request.Images is not null)
-            assets.ImagesJson = JsonSerializer.Serialize(request.Images, JsonDefaults.Options);
+            assets.ImagesJson = JsonSerializer.Serialize(MediaUrls.ResolveMap(request.Images), JsonDefaults.Options);
 
         assets.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync(ct);
@@ -43,5 +43,5 @@ public class SiteAssetsController(AppDbContext db) : ControllerBase
     }
 
     private static SiteAssetsDto Map(SiteAssets assets) =>
-        new(JsonSerializer.Deserialize<Dictionary<string, string>>(assets.ImagesJson, JsonDefaults.Options) ?? new());
+        new(MediaUrls.ResolveMap(JsonSerializer.Deserialize<Dictionary<string, string>>(assets.ImagesJson, JsonDefaults.Options)));
 }

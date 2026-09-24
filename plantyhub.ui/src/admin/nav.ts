@@ -12,6 +12,7 @@ import EmailRounded from '@mui/icons-material/EmailRounded'
 import SettingsRounded from '@mui/icons-material/SettingsRounded'
 import LocalShippingRounded from '@mui/icons-material/LocalShippingRounded'
 import PercentRounded from '@mui/icons-material/PercentRounded'
+import LocalOfferRounded from '@mui/icons-material/LocalOfferRounded'
 import AssessmentRounded from '@mui/icons-material/AssessmentRounded'
 import type { SvgIconComponent } from '@mui/icons-material'
 
@@ -50,6 +51,7 @@ export const adminNavGroups: AdminNavGroup[] = [
       { path: '/admin/customers', labelKey: 'admin.nav.customers', icon: PeopleRounded },
       { path: '/admin/couriers', labelKey: 'admin.nav.couriers', icon: LocalShippingRounded },
       { path: '/admin/vat', labelKey: 'admin.nav.vat', icon: PercentRounded },
+      { path: '/admin/promo-codes', labelKey: 'admin.nav.promoCodes', icon: LocalOfferRounded },
       { path: '/admin/reports', labelKey: 'admin.nav.reports', icon: AssessmentRounded },
     ],
   },

@@ -25,6 +25,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<CourierSettings> CourierSettings => Set<CourierSettings>();
     public DbSet<CourierLocationCache> CourierLocationCache => Set<CourierLocationCache>();
     public DbSet<StoreSettings> StoreSettings => Set<StoreSettings>();
+    public DbSet<PromoCode> PromoCodes => Set<PromoCode>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -72,6 +73,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         {
             entity.HasKey(o => o.Id);
             entity.Property(o => o.Subtotal).HasPrecision(10, 2);
+            entity.Property(o => o.Discount).HasPrecision(10, 2);
             entity.Property(o => o.ShippingCost).HasPrecision(10, 2);
             entity.Property(o => o.Tax).HasPrecision(10, 2);
             entity.Property(o => o.TaxRate).HasPrecision(5, 2);
@@ -82,6 +84,15 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(o => o.Country).HasMaxLength(2);
             entity.Property(o => o.ShippingCountry).HasMaxLength(2);
             entity.Property(o => o.BillingCountry).HasMaxLength(2);
+        });
+
+        builder.Entity<PromoCode>(entity =>
+        {
+            entity.HasIndex(p => p.Code).IsUnique();
+            entity.Property(p => p.Code).HasMaxLength(40);
+            entity.Property(p => p.Type).HasMaxLength(16);
+            entity.Property(p => p.Amount).HasPrecision(10, 2);
+            entity.Property(p => p.MinSubtotal).HasPrecision(10, 2);
         });
 
         builder.Entity<OrderItem>(entity =>

@@ -12,6 +12,11 @@ using PlantyHub.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 80 * 1024 * 1024;
+});
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {

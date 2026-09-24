@@ -100,7 +100,7 @@ public class AuthEmailService(
                 ["name"] = EmailTemplateService.HtmlEncode(user.FullName ?? user.Email),
                 ["verifyUrl"] = link,
                 ["siteUrl"] = _app.FrontendUrl.TrimEnd('/'),
-                ["logoUrl"] = $"{_app.FrontendUrl.TrimEnd('/')}/logo.png",
+                ["logoUrl"] = "https://media.plantyhub.com/logo.png",
             },
             ct);
     }

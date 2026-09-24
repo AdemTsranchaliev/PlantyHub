@@ -13,6 +13,7 @@ import { navHrefs } from '../data/catalog'
 import { useGardensCatalog } from '../hooks/useProducts'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 function GardenCard({
   name,
@@ -72,9 +73,9 @@ function GardenCard({
             {t('featured.badge')}
           </Box>
         )}
-        <Box
-          component="img"
+        <MediaImg
           src={image}
+          preset="card"
           alt={name}
           loading="lazy"
           sx={{ width: '100%', height: '100%', objectFit: imageFit, display: 'block' }}

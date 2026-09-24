@@ -99,7 +99,7 @@ public class EmailTemplateService(AppDbContext db, IEmailSender emailSender, IOp
 
         var frontend = _app.FrontendUrl.TrimEnd('/');
         merged.TryAdd("siteUrl", frontend);
-        merged.TryAdd("logoUrl", $"{frontend}/logo.png");
+        merged.TryAdd("logoUrl", "https://media.plantyhub.com/logo.png");
         return merged;
     }
 

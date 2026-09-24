@@ -32,6 +32,7 @@ import CreateWaybillDialog from '../../components/admin/CreateWaybillDialog'
 import type { OrderStatus } from '../../admin/mockData'
 import OrderGiftLine from '../../components/OrderGiftLine'
 import { useOrderDetail, useOrders, useOrdersStore } from '../../hooks/useOrders'
+import MediaImg from '../../components/MediaImg'
 import { brand } from '../../theme'
 
 const statusColors: Record<string, { bg: string; color: string }> = {
@@ -359,9 +360,9 @@ export default function AdminOrderDetailPage() {
                       <TableRow key={item.id}>
                         <TableCell sx={{ border: 0, py: 1.5 }}>
                           <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
-                            <Box
-                              component="img"
+                            <MediaImg
                               src={item.image}
+                              preset="thumb"
                               alt=""
                               sx={{ width: 48, height: 48, borderRadius: '12px', objectFit: 'contain', bgcolor: brand.surface }}
                             />

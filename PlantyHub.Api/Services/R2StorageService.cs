@@ -66,6 +66,9 @@ public class R2StorageService : IR2StorageService, IDisposable
                 "image/png" => ".png",
                 "image/webp" => ".webp",
                 "image/gif" => ".gif",
+                "video/mp4" => ".mp4",
+                "video/webm" => ".webm",
+                "video/quicktime" => ".mov",
                 _ => ".bin",
             };
 
@@ -81,6 +84,7 @@ public class R2StorageService : IR2StorageService, IDisposable
             DisablePayloadSigning = true,
             DisableDefaultChecksumValidation = true,
         };
+        request.Headers.CacheControl = "public, max-age=31536000, immutable";
 
         await _client.PutObjectAsync(request, ct);
 

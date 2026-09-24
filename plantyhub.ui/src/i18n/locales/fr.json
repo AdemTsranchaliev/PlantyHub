@@ -136,7 +136,10 @@
       "0": "Lun",
       "1": "Mar",
       "2": "Mer",
-      "3": "Jeu"
+      "3": "Jeu",
+      "4": "Ven",
+      "5": "Sam",
+      "6": "Dim"
     }
   },
   "featured": {
@@ -212,6 +215,11 @@
   "podDetail": {
     "quantity": "Quantité",
     "detailsTitle": "Bon à savoir",
+    "includesTitle": "Contenu",
+    "includesPods": "{{count}} capsules de graines",
+    "includesCaps": "{{count}} capuchons",
+    "includesNutrient": "Nutriment A + B",
+    "includesNutrientHint": "{{ml}} ml chacun",
     "relatedTitle": "Plus de capsules à cultiver",
     "specs": {
       "harvest": {
@@ -800,6 +808,8 @@
     "contactTitle": "Contact",
     "address": "PlantyHub · Bulgarie",
     "madeWith": "Cultivé avec soin en Bulgarie",
+    "payments": "Les paiements par carte sont traités de façon sécurisée par Stripe.",
+    "paymentsLabel": "Moyens de paiement acceptés",
     "rights": "© {{year}} PlantyHub. Tous droits réservés."
   },
   "auth": {
@@ -1005,14 +1015,16 @@
       "title": "Tableau de bord",
       "subtitle": "Vue d'ensemble de votre boutique PlantyHub.",
       "recentOrders": "Commandes récentes",
+      "viewOrders": "Toutes les commandes",
+      "emptyProducts": "Pas encore de ventes.",
       "weeklySales": "Ventes hebdomadaires",
       "weeklySalesSubtitle": "Total cette semaine : {{total}}",
       "orderStatus": "Commandes par statut",
       "orderStatusSubtitle": "Répartition de toutes les commandes",
       "topProducts": "Produits phares",
       "topProductsSubtitle": "Meilleures ventes ce mois",
-      "byCategory": "Revenus par catégorie",
-      "byCategorySubtitle": "Part du chiffre d'affaires total",
+      "byCategory": "Catalogue",
+      "byCategorySubtitle": "Produits par catégorie",
       "sales": "Ventes",
       "revenue": "Revenu",
       "days": {
@@ -1052,7 +1064,10 @@
     },
     "pods": {
       "title": "Capsules",
-      "subtitle": "Gérer les recharges de capsules de graines."
+      "subtitle": "Capsules et kits — quantité et contenu.",
+      "totalPods": "{{count}} capsules au total",
+      "podsOnly": "{{count}} capsules",
+      "includes": "{{pods}} capsules, {{caps}} capuchons, nutriment A + B, {{ml}} ml chacun"
     },
     "consumables": {
       "title": "Consommables",
@@ -1540,10 +1555,15 @@
       "actions": "Actions",
       "active": "Actif",
       "inactive": "Inactif",
-      "edit": "Modifier"
+      "featured": "En vedette",
+      "edit": "Modifier",
+      "empty": "Aucun produit."
     },
     "actions": {
       "addProduct": "Ajouter un produit"
+    },
+    "catalog": {
+      "count": "{{count}} produits"
     },
     "fields": {
       "texts": "Textes",
@@ -1598,18 +1618,69 @@
       "editTitle": "Modifier le produit",
       "basicInfo": "Informations de base",
       "photo": "Photo",
+      "gallery": "Photos",
+      "addImages": "Ajouter des photos",
+      "coverImage": "Principale",
+      "moveBack": "Reculer",
+      "moveForward": "Avancer",
+      "removeImage": "Retirer la photo",
+      "video": "Vidéo",
+      "replaceVideo": "Remplacer la vidéo",
+      "videoBadge": "Libellé de la vidéo",
+      "videoTitle": "Titre de la vidéo",
+      "videoText": "Texte de la vidéo",
+      "specLabel": "Spécification",
+      "specValue": "Valeur",
+      "addSpec": "Ajouter une spécification",
+      "removeSpec": "Retirer la spécification",
       "pricing": "Prix",
       "pricingHint": "C'est ce que voient les clients en boutique.",
       "compareAtHint": "Affiché barré à côté du prix de vente",
       "visibility": "Visibilité",
       "content": "Textes boutique",
       "contentHint": "Changez de langue pour chaque traduction. Le nom anglais est obligatoire.",
+      "dragHint": "Faites glisser les photos pour changer l'ordre. La première est la couverture. Vous pouvez aussi déposer des fichiers sur la grille.",
+      "dragImage": "Déplacer la photo {{n}}",
+      "sections": {
+        "photos": "Photos",
+        "video": "Vidéo",
+        "details": "Détails",
+        "page": "Page",
+        "faq": "Questions"
+      },
+      "removeLine": "Retirer",
+      "addStep": "Ajouter une étape",
+      "addBox": "Ajouter un article",
+      "addFeature": "Ajouter un atout",
+      "addFaq": "Ajouter une question",
+      "featureTitle": "Titre",
+      "featureText": "Texte",
+      "faqQuestion": "Question",
+      "faqAnswer": "Réponse",
+      "highlightsTitle": "Titre des atouts",
+      "highlightsSubtitle": "Sous-titre des atouts",
+      "specsTitle": "Titre des spécifications",
+      "howTitle": "Titre « Comment ça marche »",
+      "boxTitle": "Titre « Dans la boîte »",
+      "faqTitle": "Titre des questions",
+      "features": "Atouts",
+      "steps": "Étapes",
+      "inTheBox": "Dans la boîte",
+      "faq": "Questions",
+      "faqHint": "Questions générales du site. Changez de langue pour chaque traduction.",
+      "specs": "Spécifications",
+      "sectionTitles": "Titres des sections",
+      "videoPoster": "Image d'aperçu",
       "nameHint": "Obligatoire — utilisé comme nom par défaut",
       "id": "ID produit",
       "idHint": "Minuscules, ex. basil. Laissez vide pour le générer depuis le nom anglais.",
       "price": "Prix",
       "compareAt": "Prix barré",
       "pack": "Conditionnement",
+      "kit": "Contenu",
+      "kitPods": "Capsules",
+      "kitCaps": "Capuchons",
+      "kitNutrient": "A + B, ml chacun",
       "imageUrl": "Photo du produit",
       "imageFit": "Comment la photo remplit le cadre",
       "fitCover": "Remplir le cadre",

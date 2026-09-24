@@ -32,7 +32,7 @@ export default function AdminLayout() {
   const admin = getAdminUser()
 
   if (!isAdminAuthenticated()) {
-    return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />
   }
 
   const handleLogout = () => {

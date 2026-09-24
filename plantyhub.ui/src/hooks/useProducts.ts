@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import type { LanguageCode } from '../i18n/languages'
 import {
   type ProductCategory,
-  type ProductLocaleContent,
   type StoredProduct,
   getLocalizedField,
   getProductsError,
@@ -90,7 +89,7 @@ export function useProduct(category: ProductCategory, id: string | undefined): R
 export function useProductText(
   category: ProductCategory,
   id: string,
-  field: keyof ProductLocaleContent,
+  field: 'name' | 'tagline' | 'description' | 'videoBadge' | 'videoTitle' | 'videoText',
 ): string {
   const state = useProductsState()
   const lang = useLang()

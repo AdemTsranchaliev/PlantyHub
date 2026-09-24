@@ -40,8 +40,6 @@ export const authApi = {
     apiRequest<ApiRegisterResponse>('/api/auth/register', { method: 'POST', body }),
   login: (body: { email: string; password: string; rememberMe?: boolean }) =>
     apiRequest<ApiAuthResponse>('/api/auth/login', { method: 'POST', body }),
-  adminLogin: (body: { email: string; password: string }) =>
-    apiRequest<ApiAuthResponse>('/api/auth/admin/login', { method: 'POST', body }),
   forgotPassword: (email: string) =>
     apiRequest<ApiMessageResponse>('/api/auth/forgot-password', { method: 'POST', body: { email } }),
   resetPassword: (body: { email: string; token: string; newPassword: string }) =>
@@ -150,6 +148,45 @@ export const homepageApi = {
   get: () => apiRequest<ApiHomepageState>('/api/homepage'),
   update: (body: Partial<HomepageState>) => apiRequest<ApiHomepageState>('/api/homepage', { method: 'PUT', body, auth: 'admin' }),
   reset: () => apiRequest<ApiHomepageState>('/api/homepage/reset', { method: 'POST', auth: 'admin' }),
+}
+
+export type PromoUse = {
+  orderId: string
+  customerName: string
+  discount: number
+  createdAt: string
+}
+
+export type PromoCode = {
+  id: string
+  code: string
+  type: 'percent' | 'fixed'
+  amount: number
+  minSubtotal?: number | null
+  usageLimit?: number | null
+  usedCount: number
+  startsAt?: string | null
+  expiresAt?: string | null
+  active: boolean
+  uses?: PromoUse[]
+}
+
+export type PromoQuote = {
+  code: string
+  type: 'percent' | 'fixed'
+  amount: number
+  discount: number
+}
+
+export const promoApi = {
+  list: () => apiRequest<PromoCode[]>('/api/promo-codes', { auth: 'admin' }),
+  create: (body: Omit<PromoCode, 'id' | 'usedCount' | 'uses'>) =>
+    apiRequest<PromoCode>('/api/promo-codes', { method: 'POST', body, auth: 'admin' }),
+  update: (id: string, body: Omit<PromoCode, 'id' | 'usedCount' | 'uses'>) =>
+    apiRequest<PromoCode>(`/api/promo-codes/${id}`, { method: 'PUT', body, auth: 'admin' }),
+  remove: (id: string) => apiRequest<void>(`/api/promo-codes/${id}`, { method: 'DELETE', auth: 'admin' }),
+  validate: (code: string, subtotal: number) =>
+    apiRequest<PromoQuote>('/api/promo-codes/validate', { method: 'POST', body: { code, subtotal } }),
 }
 
 export const mediaApi = {

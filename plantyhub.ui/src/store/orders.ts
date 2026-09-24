@@ -109,6 +109,7 @@ export type CheckoutInput = {
   delivery?: string
   officeCode?: string
   cityId?: string
+  promoCode?: string
 }
 
 export async function createCustomerOrder(cartItems: CartItem[], checkout: CheckoutInput): Promise<OrderDetail> {

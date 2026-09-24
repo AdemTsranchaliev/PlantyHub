@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -17,9 +17,18 @@ import { authApi } from '../api'
 import { ApiError } from '../api/client'
 import { setCustomerFromAuth } from '../store/auth'
 import { hasAdminRole } from '../auth/session'
+import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { brand } from '../theme'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function destinationAfterLogin(roles: string[] | undefined, from?: string) {
+  if (hasAdminRole(roles)) {
+    return from?.startsWith('/admin') ? from : '/admin'
+  }
+  if (from && !from.startsWith('/admin')) return from
+  return null
+}
 
 type FieldErrors = {
   email?: boolean
@@ -29,6 +38,9 @@ type FieldErrors = {
 export default function LoginPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const location = useLocation()
+  const { isLoggedIn, customer } = useCustomerAuth()
+  const from = (location.state as { from?: string } | null)?.from
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
@@ -42,6 +54,12 @@ export default function LoginPage() {
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [])
+
+  useEffect(() => {
+    if (!isLoggedIn) return
+    const dest = destinationAfterLogin(customer?.roles, from)
+    if (dest) navigate(dest, { replace: true })
+  }, [isLoggedIn, customer?.roles, from, navigate])
 
   const handleResend = async () => {
     if (!emailPattern.test(email.trim())) return
@@ -69,8 +87,9 @@ export default function LoginPage() {
     try {
       const response = await authApi.login({ email: email.trim(), password, rememberMe })
       setCustomerFromAuth(response, rememberMe)
-      if (hasAdminRole(response.roles)) {
-        navigate('/admin')
+      const dest = destinationAfterLogin(response.roles, from)
+      if (dest) {
+        navigate(dest, { replace: true })
         return
       }
       setSubmitted(true)

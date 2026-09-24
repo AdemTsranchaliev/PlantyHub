@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { mediaApi } from '../../api'
 import { ApiError } from '../../api/client'
 import { brand } from '../../theme'
+import MediaImg from '../MediaImg'
 
 type Props = {
   label: string
@@ -79,9 +80,9 @@ export default function ImagePicker({ label, value, onChange, size = 'small', pr
           }}
         >
           {showPreview ? (
-            <Box
-              component="img"
+            <MediaImg
               src={value}
+              preset="thumb"
               alt=""
               sx={{ width: '100%', height: '100%', objectFit: previewFit, display: 'block', bgcolor: brand.white }}
               onError={() => setBroken(true)}

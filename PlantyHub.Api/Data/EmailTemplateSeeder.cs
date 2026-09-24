@@ -19,7 +19,7 @@ public static class EmailTemplateSeeder
             {
                 ["name"] = "Elena",
                 ["verifyUrl"] = "https://plantyhub.com/verify-email?userId=demo&token=demo",
-                ["logoUrl"] = "http://localhost:5281/email/logo.png",
+                ["logoUrl"] = "https://media.plantyhub.com/logo.png",
                 ["siteUrl"] = "https://plantyhub.com",
             });
 

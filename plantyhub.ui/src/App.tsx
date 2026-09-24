@@ -37,7 +37,6 @@ const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage')
 const MyOrdersPage = lazy(() => import('./pages/MyOrdersPage'))
 
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout'))
-const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminGardensPage = lazy(() => import('./pages/admin/AdminGardensPage'))
 const AdminPodsPage = lazy(() => import('./pages/admin/AdminPodsPage'))
@@ -54,6 +53,7 @@ const AdminNewsletterPage = lazy(() => import('./pages/admin/AdminNewsletterPage
 const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage'))
 const AdminCouriersPage = lazy(() => import('./pages/admin/AdminCouriersPage'))
 const AdminVatPage = lazy(() => import('./pages/admin/AdminVatPage'))
+const AdminPromoCodesPage = lazy(() => import('./pages/admin/AdminPromoCodesPage'))
 const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage'))
 
 function PageFallback() {
@@ -113,7 +113,7 @@ function AdminRoutes() {
     <ThemeProvider theme={adminTheme}>
       <Suspense fallback={<PageFallback />}>
         <Routes>
-          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin/login" element={<Navigate to="/login" replace />} />
           <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="gardens" element={<AdminGardensPage />} />
@@ -130,6 +130,7 @@ function AdminRoutes() {
           <Route path="newsletter" element={<AdminNewsletterPage />} />
           <Route path="couriers" element={<AdminCouriersPage />} />
           <Route path="vat" element={<AdminVatPage />} />
+          <Route path="promo-codes" element={<AdminPromoCodesPage />} />
           <Route path="reports" element={<AdminReportsPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
         </Route>

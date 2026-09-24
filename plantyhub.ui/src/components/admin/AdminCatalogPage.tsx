@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 import AddRounded from '@mui/icons-material/AddRounded'
+import { brand } from '../../theme'
 import { useTranslation } from 'react-i18next'
 import AdminPageHeader from './AdminPageHeader'
 import AdminProductTable from './AdminProductTable'
 import ProductEditDialog from './ProductEditDialog'
 import { useCategoryProducts } from '../../hooks/useProducts'
-import { addProduct, getProduct, updateProduct, type ProductCategory, type StoredProduct } from '../../store/products'
+import { addProduct, getProduct, resolveKit, updateProduct, type ProductCategory, type StoredProduct } from '../../store/products'
 
 type Props = {
   category: ProductCategory
@@ -43,15 +46,27 @@ export default function AdminCatalogPage({ category, titleKey, subtitleKey }: Pr
     }
   }
 
-  const rows = products.map((item) => ({
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    compareAt: item.compareAt,
-    image: item.image,
-    extra: item.tagline ?? item.description,
-    active: item.active,
-  }))
+  const rows = products.map((item) => {
+    const kit = category === 'pods' ? resolveKit(item) : undefined
+    const includes = kit
+      ? kit.caps || kit.nutrientMl
+        ? t('admin.pods.includes', { pods: kit.pods, caps: kit.caps, ml: kit.nutrientMl })
+        : kit.pods
+          ? t('admin.pods.podsOnly', { count: kit.pods })
+          : undefined
+      : undefined
+    return {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      compareAt: item.compareAt,
+      image: item.image,
+      extra: includes ?? item.tagline ?? item.description,
+      active: item.active,
+      featured: item.featured,
+    }
+  })
+  const totalPods = category === 'pods' ? products.reduce((sum, item) => sum + resolveKit(item).pods, 0) : 0
 
   return (
     <>
@@ -59,9 +74,15 @@ export default function AdminCatalogPage({ category, titleKey, subtitleKey }: Pr
         title={t(titleKey)}
         subtitle={t(subtitleKey)}
         action={
-          <Button variant="contained" startIcon={<AddRounded />} onClick={openAdd}>
-            {t('admin.actions.addProduct')}
-          </Button>
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+            <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem', fontWeight: 700 }}>
+              {t('admin.catalog.count', { count: products.length })}
+              {category === 'pods' ? ` · ${t('admin.pods.totalPods', { count: totalPods })}` : ''}
+            </Typography>
+            <Button variant="contained" startIcon={<AddRounded />} onClick={openAdd}>
+              {t('admin.actions.addProduct')}
+            </Button>
+          </Stack>
         }
       />
       <AdminProductTable rows={rows} onEdit={openEdit} />

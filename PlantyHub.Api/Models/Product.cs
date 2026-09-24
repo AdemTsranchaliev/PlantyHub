@@ -8,8 +8,12 @@ public class Product
     public decimal Price { get; set; }
     public decimal? CompareAtPrice { get; set; }
     public string? PackKey { get; set; }
+    public string KitJson { get; set; } = "{}";
     public string Image { get; set; } = string.Empty;
     public ImageFit ImageFit { get; set; } = ImageFit.Cover;
+    public string GalleryJson { get; set; } = "[]";
+    public string? VideoUrl { get; set; }
+    public string? VideoPoster { get; set; }
     public bool Featured { get; set; }
     public bool Active { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
@@ -28,6 +32,10 @@ public class ProductTranslation
     public string Name { get; set; } = string.Empty;
     public string? Tagline { get; set; }
     public string? Description { get; set; }
+    public string? VideoBadge { get; set; }
+    public string? VideoTitle { get; set; }
+    public string? VideoText { get; set; }
+    public string SpecsJson { get; set; } = "[]";
 }
 
 public class ProductColor

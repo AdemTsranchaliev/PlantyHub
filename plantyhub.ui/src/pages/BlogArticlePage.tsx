@@ -15,6 +15,7 @@ import SectionContainer, { pagePaddingX } from '../components/SectionContainer'
 import { blogArticleIds, blogArticleImages, navHrefs } from '../data/catalog'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 type BlogArticleId = (typeof blogArticleIds)[number]
 
@@ -125,9 +126,9 @@ export default function BlogArticlePage() {
             {excerpt}
           </Typography>
 
-          <Box
-            component="img"
+          <MediaImg
             src={heroImage}
+            preset="hero"
             alt={title}
             loading="eager"
             decoding="async"
@@ -237,12 +238,12 @@ export default function BlogArticlePage() {
                     },
                   }}
                 >
-                  <Box
-                    component="img"
-                    src={images[`blog.${id}`] || blogArticleImages[id]}
-                    alt={t(`blogPage.articles.${id}.title`)}
-                    loading="lazy"
-                    decoding="async"
+                    <MediaImg
+                      src={images[`blog.${id}`] || blogArticleImages[id]}
+                      preset="card"
+                      alt={t(`blogPage.articles.${id}.title`)}
+                      loading="lazy"
+                      decoding="async"
                     sx={{
                       width: '100%',
                       aspectRatio: '4 / 3',

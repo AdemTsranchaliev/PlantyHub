@@ -41,7 +41,7 @@ public class HomepageController(AppDbContext db) : ControllerBase
         if (request.Texts is not null)
             settings.TextsJson = JsonSerializer.Serialize(request.Texts, JsonDefaults.Options);
         if (request.Images is not null)
-            settings.ImagesJson = JsonSerializer.Serialize(request.Images, JsonDefaults.Options);
+            settings.ImagesJson = JsonSerializer.Serialize(MediaUrls.ResolveMap(request.Images), JsonDefaults.Options);
 
         settings.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync(ct);
@@ -81,5 +81,5 @@ public class HomepageController(AppDbContext db) : ControllerBase
             settings.LayoutVersion,
             JsonSerializer.Deserialize<Dictionary<string, bool>>(settings.SectionsJson, JsonDefaults.Options) ?? new(),
             JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(settings.TextsJson, JsonDefaults.Options) ?? new(),
-            JsonSerializer.Deserialize<Dictionary<string, string>>(settings.ImagesJson, JsonDefaults.Options) ?? new());
+            MediaUrls.ResolveMap(JsonSerializer.Deserialize<Dictionary<string, string>>(settings.ImagesJson, JsonDefaults.Options)));
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
@@ -19,6 +19,7 @@ import {
   type HomepageSectionKey,
 } from '../../admin/homepageSchema'
 import { useHomepageStore } from '../../hooks/useHomepage'
+import { subscribeHomepage } from '../../store/homepage'
 import { supportedLanguages, type LanguageCode } from '../../i18n/languages'
 import { brand } from '../../theme'
 
@@ -30,6 +31,20 @@ export default function AdminContentPage() {
   const [lang, setLang] = useState<LanguageCode>(
     uiLang === 'bg' || uiLang === 'de' || uiLang === 'fr' ? uiLang : 'en',
   )
+  const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop')
+  const [previewTick, setPreviewTick] = useState(0)
+
+  useEffect(() => {
+    let timer = 0
+    return subscribeHomepage(() => {
+      window.clearTimeout(timer)
+      timer = window.setTimeout(() => setPreviewTick((value) => value + 1), 800)
+    })
+  }, [])
+
+  const sectionHref = homepageSectionMeta[sectionKey].href
+  const [previewPath, previewHash = ''] = sectionHref.split('#')
+  const previewSrc = `${previewPath}${previewPath.includes('?') ? '&' : '?'}preview=${previewTick}${previewHash ? `#${previewHash}` : ''}`
 
   const handleReset = () => {
     if (window.confirm(t('admin.homepage.resetConfirm'))) reset()
@@ -180,6 +195,60 @@ export default function AdminContentPage() {
           <HomepageSectionEditor sectionKey={sectionKey} lang={lang} />
         </Grid>
       </Grid>
+
+      <Box
+        sx={{
+          mt: 2.5,
+          borderRadius: '20px',
+          border: `1px solid ${brand.border}`,
+          bgcolor: brand.white,
+          overflow: 'hidden',
+        }}
+      >
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={1.5}
+          sx={{ alignItems: { sm: 'center' }, justifyContent: 'space-between', px: 2, py: 1.5, borderBottom: `1px solid ${brand.border}` }}
+        >
+          <Box>
+            <Typography sx={{ fontWeight: 800, color: brand.graphite }}>{t('admin.homepage.preview')}</Typography>
+            <Typography sx={{ color: brand.textSecondary, fontSize: '0.8rem' }}>{t('admin.homepage.previewHint')}</Typography>
+          </Box>
+          <ToggleButtonGroup
+            exclusive
+            size="small"
+            value={device}
+            onChange={(_, value: 'desktop' | 'mobile' | null) => {
+              if (value) setDevice(value)
+            }}
+          >
+            <ToggleButton value="desktop" sx={{ px: 1.75, fontWeight: 800, textTransform: 'none' }}>
+              {t('admin.homepage.previewDesktop')}
+            </ToggleButton>
+            <ToggleButton value="mobile" sx={{ px: 1.75, fontWeight: 800, textTransform: 'none' }}>
+              {t('admin.homepage.previewMobile')}
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Stack>
+        <Box sx={{ bgcolor: brand.surface, py: device === 'mobile' ? 2 : 0, display: 'flex', justifyContent: 'center' }}>
+          <Box
+            component="iframe"
+            key={previewSrc}
+            title={t('admin.homepage.preview')}
+            src={previewSrc}
+            sx={{
+              width: device === 'mobile' ? 390 : '100%',
+              maxWidth: '100%',
+              height: device === 'mobile' ? 720 : 640,
+              border: 0,
+              display: 'block',
+              bgcolor: brand.white,
+              borderRadius: device === 'mobile' ? '24px' : 0,
+              boxShadow: device === 'mobile' ? brand.shadow : 'none',
+            }}
+          />
+        </Box>
+      </Box>
     </>
   )
 }

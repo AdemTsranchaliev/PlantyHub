@@ -13,6 +13,7 @@ import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
+import { resolveKit } from '../store/products'
 import { brand } from '../theme'
 
 export default function PodsPage() {
@@ -68,7 +69,14 @@ export default function PodsPage() {
           {pods.map((pod, index) => (
             <Grid key={pod.id} size={{ xs: 6, sm: 4, md: 3 }}>
               <Reveal delay={(index % 4) * 0.06}>
-                <ProductCard layout="grid" to={`/pods/${pod.id}`} product={toProductCardData(pod, t)} />
+                <ProductCard
+                  layout="grid"
+                  to={`/pods/${pod.id}`}
+                  product={{
+                    ...toProductCardData(pod, t),
+                    includes: resolveKit(pod),
+                  }}
+                />
               </Reveal>
             </Grid>
           ))}

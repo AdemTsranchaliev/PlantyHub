@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -9,14 +9,11 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import Link from '@mui/material/Link'
 import EuroRounded from '@mui/icons-material/EuroRounded'
 import ShoppingBagRounded from '@mui/icons-material/ShoppingBagRounded'
 import PeopleRounded from '@mui/icons-material/PeopleRounded'
-import TrendingUpRounded from '@mui/icons-material/TrendingUpRounded'
-import InventoryRounded from '@mui/icons-material/InventoryRounded'
-import MailRounded from '@mui/icons-material/MailRounded'
 import PendingActionsRounded from '@mui/icons-material/PendingActionsRounded'
-import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { countryDisplayName } from '../../utils/country'
@@ -47,24 +44,39 @@ const orderStatusBarColors: Record<string, string> = {
   cancelled: brand.textSecondary,
 }
 
-function Panel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+function Panel({
+  title,
+  subtitle,
+  action,
+  children,
+  flush,
+}: {
+  title: string
+  subtitle?: string
+  action?: React.ReactNode
+  children: React.ReactNode
+  flush?: boolean
+}) {
   return (
     <Box
       sx={{
         bgcolor: brand.white,
-        borderRadius: '20px',
+        borderRadius: '18px',
         border: `1px solid ${brand.border}`,
-        p: { xs: 2, sm: 2.5 },
         height: '100%',
+        overflow: 'hidden',
       }}
     >
-      <Typography sx={{ fontWeight: 700, color: brand.graphite, fontSize: '1.05rem', mb: subtitle ? 0.5 : 2 }}>
-        {title}
-      </Typography>
-      {subtitle && (
-        <Typography sx={{ color: brand.textSecondary, fontSize: '0.88rem', mb: 2 }}>{subtitle}</Typography>
-      )}
-      {children}
+      <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, px: { xs: 2, sm: 2.5 }, pt: 2, pb: flush ? 1.5 : 0 }}>
+        <Box>
+          <Typography sx={{ fontWeight: 800, color: brand.graphite, fontSize: '1rem' }}>{title}</Typography>
+          {subtitle && (
+            <Typography sx={{ color: brand.textSecondary, fontSize: '0.82rem', mt: 0.25 }}>{subtitle}</Typography>
+          )}
+        </Box>
+        {action}
+      </Box>
+      <Box sx={{ p: flush ? 0 : { xs: 2, sm: 2.5 }, pt: flush ? 0 : 2 }}>{children}</Box>
     </Box>
   )
 }
@@ -106,22 +118,25 @@ export default function AdminDashboard() {
       { key: 'consumables' as const, count: consumables.length },
       { key: 'accessories' as const, count: accessories.length },
     ]
-    const total = productCount || 1
     return categories.map((cat) => ({
       key: cat.key,
-      share: Math.round((cat.count / total) * 100),
-      revenue: String(cat.count),
+      count: cat.count,
     }))
-  }, [gardens.length, pods.length, consumables.length, accessories.length, productCount])
+  }, [gardens.length, pods.length, consumables.length, accessories.length])
 
-  const trendLabel = (value: number) => t('admin.dashboard.stats.trendUp', { value })
+  const trendLabel = (value: number) => (value > 0 ? t('admin.dashboard.stats.trendUp', { value }) : undefined)
+  const secondaryStats = [
+    { label: t('admin.dashboard.stats.avgOrder'), value: dashboardLoading ? '—' : formatEuro(stats?.avgOrderValue ?? 0) },
+    { label: t('admin.dashboard.stats.products'), value: productCount },
+    { label: t('admin.dashboard.stats.newsletter'), value: (stats?.newsletterSubscribers ?? 0).toLocaleString() },
+    { label: t('admin.dashboard.stats.conversion'), value: `${stats?.conversionRate ?? 0}%` },
+  ]
 
   return (
     <Box>
       <AdminPageHeader title={t('admin.dashboard.title')} subtitle={t('admin.dashboard.subtitle')} />
 
-      {/* Primary KPIs */}
-      <Grid container spacing={2} sx={{ mb: 2 }}>
+      <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <AdminStatCard
             label={t('admin.dashboard.stats.revenue')}
@@ -131,7 +146,7 @@ export default function AdminDashboard() {
             trendUp
           />
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        <Grid size={{ xs: 6, lg: 3 }}>
           <AdminStatCard
             label={t('admin.dashboard.stats.ordersMonth')}
             value={dashboardLoading ? '—' : (stats?.ordersThisMonth ?? 0)}
@@ -140,13 +155,12 @@ export default function AdminDashboard() {
             trendUp
           />
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        <Grid size={{ xs: 6, lg: 3 }}>
           <AdminStatCard
-            label={t('admin.dashboard.stats.avgOrder')}
-            value={dashboardLoading ? '—' : formatEuro(stats?.avgOrderValue ?? 0)}
-            icon={<TrendingUpRounded />}
-            trend={stats ? trendLabel(stats.avgOrderTrend) : undefined}
-            trendUp
+            label={t('admin.dashboard.stats.pending')}
+            value={stats?.pendingOrders ?? 0}
+            icon={<PendingActionsRounded />}
+            attention={(stats?.pendingOrders ?? 0) > 0}
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
@@ -154,46 +168,42 @@ export default function AdminDashboard() {
             label={t('admin.dashboard.stats.customers')}
             value={customers.length}
             icon={<PeopleRounded />}
-            trend={t('admin.dashboard.stats.customersTrend')}
-            trendUp
           />
         </Grid>
       </Grid>
 
-      {/* Secondary KPIs */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        <Grid size={{ xs: 6, sm: 3 }}>
-          <AdminStatCard label={t('admin.dashboard.stats.products')} value={productCount} icon={<InventoryRounded />} />
-        </Grid>
-        <Grid size={{ xs: 6, sm: 3 }}>
-          <AdminStatCard
-            label={t('admin.dashboard.stats.newsletter')}
-            value={(stats?.newsletterSubscribers ?? 0).toLocaleString()}
-            icon={<MailRounded />}
-            trend={t('admin.dashboard.stats.newsletterTrend')}
-            trendUp
-          />
-        </Grid>
-        <Grid size={{ xs: 6, sm: 3 }}>
-          <AdminStatCard
-            label={t('admin.dashboard.stats.pending')}
-            value={stats?.pendingOrders ?? 0}
-            icon={<PendingActionsRounded />}
-          />
-        </Grid>
-        <Grid size={{ xs: 6, sm: 3 }}>
-          <AdminStatCard
-            label={t('admin.dashboard.stats.conversion')}
-            value={`${stats?.conversionRate ?? 0}%`}
-            icon={<VisibilityRounded />}
-            trend={stats ? trendLabel(stats.conversionTrend) : undefined}
-            trendUp
-          />
-        </Grid>
-      </Grid>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
+          bgcolor: brand.white,
+          border: `1px solid ${brand.border}`,
+          borderRadius: '18px',
+          mb: 2.5,
+          overflow: 'hidden',
+        }}
+      >
+        {secondaryStats.map((item, index) => (
+          <Box
+            key={item.label}
+            sx={{
+              px: 2,
+              py: 1.5,
+              borderRight: { md: index < 3 ? `1px solid ${brand.border}` : 'none' },
+              borderBottom: { xs: index < 2 ? `1px solid ${brand.border}` : 'none', md: 'none' },
+              borderLeft: { xs: index % 2 === 1 ? `1px solid ${brand.border}` : 'none', md: 'none' },
+            }}
+          >
+            <Typography sx={{ color: brand.textSecondary, fontSize: '0.75rem', fontWeight: 700 }}>{item.label}</Typography>
+            <Typography sx={{ color: brand.graphite, fontSize: '1.05rem', fontWeight: 800, fontVariantNumeric: 'tabular-nums', mt: 0.25 }}>
+              {item.value}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
 
       {/* Charts row */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
+      <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
         <Grid size={{ xs: 12, lg: 7 }}>
           <Panel
             title={t('admin.dashboard.weeklySales')}
@@ -204,6 +214,7 @@ export default function AdminDashboard() {
                 label: t(`admin.dashboard.days.${d.dayKey}`),
                 value: d.amount,
               }))}
+              formatValue={(value) => formatEuro(value)}
             />
           </Panel>
         </Grid>
@@ -221,8 +232,8 @@ export default function AdminDashboard() {
       </Grid>
 
       {/* Products & categories */}
-      <Grid container spacing={2} sx={{ mb: 3 }}>
-        <Grid size={{ xs: 12, lg: 6 }}>
+      <Grid container spacing={1.5} sx={{ mb: 1.5 }}>
+        <Grid size={{ xs: 12, lg: 7 }}>
           <Panel title={t('admin.dashboard.topProducts')} subtitle={t('admin.dashboard.topProductsSubtitle')}>
             <Table size="small">
               <TableHead>
@@ -239,6 +250,13 @@ export default function AdminDashboard() {
                 </TableRow>
               </TableHead>
               <TableBody>
+                {topProducts.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={3} sx={{ border: 0, color: brand.textSecondary, py: 3 }}>
+                      {t('admin.dashboard.emptyProducts')}
+                    </TableCell>
+                  </TableRow>
+                )}
                 {topProducts.map((product, i) => (
                   <TableRow key={product.id}>
                     <TableCell sx={{ border: 0, py: 1.25 }}>
@@ -281,42 +299,36 @@ export default function AdminDashboard() {
             </Table>
           </Panel>
         </Grid>
-        <Grid size={{ xs: 12, lg: 6 }}>
+        <Grid size={{ xs: 12, lg: 5 }}>
           <Panel title={t('admin.dashboard.byCategory')} subtitle={t('admin.dashboard.byCategorySubtitle')}>
-            <AdminProgressList
-              items={categoryBreakdown.map((cat) => ({
-                label: t(`admin.dashboard.categories.${cat.key}`),
-                value: cat.share,
-              }))}
-            />
-            <Box sx={{ mt: 2.5, pt: 2, borderTop: `1px solid ${brand.border}` }}>
+            <Grid container spacing={1.25}>
               {categoryBreakdown.map((cat) => (
-                <Box key={cat.key} sx={{ display: 'flex', justifyContent: 'space-between', py: 0.5 }}>
-                  <Typography sx={{ fontSize: '0.85rem', color: brand.textSecondary }}>
-                    {t(`admin.dashboard.categories.${cat.key}`)}
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.graphite }}>
-                    {cat.revenue}
-                  </Typography>
-                </Box>
+                <Grid key={cat.key} size={6}>
+                  <Box sx={{ bgcolor: brand.surface, borderRadius: '14px', px: 1.75, py: 1.5 }}>
+                    <Typography sx={{ fontSize: '1.35rem', fontWeight: 800, color: brand.graphite, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>
+                      {cat.count}
+                    </Typography>
+                    <Typography sx={{ fontSize: '0.8rem', fontWeight: 600, color: brand.textSecondary, mt: 0.5 }}>
+                      {t(`admin.dashboard.categories.${cat.key}`)}
+                    </Typography>
+                  </Box>
+                </Grid>
               ))}
-            </Box>
+            </Grid>
           </Panel>
         </Grid>
       </Grid>
 
-      {/* Recent orders */}
-      <Typography variant="h6" sx={{ color: brand.graphite, mb: 2, fontSize: '1.1rem' }}>
-        {t('admin.dashboard.recentOrders')}
-      </Typography>
-      <TableContainer
-        sx={{
-          bgcolor: brand.white,
-          borderRadius: '20px',
-          border: `1px solid ${brand.border}`,
-          overflow: 'hidden',
-        }}
+      <Panel
+        flush
+        title={t('admin.dashboard.recentOrders')}
+        action={
+          <Link component={RouterLink} to="/admin/orders" underline="hover" sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.plantGreenDark, whiteSpace: 'nowrap' }}>
+            {t('admin.dashboard.viewOrders')}
+          </Link>
+        }
       >
+      <TableContainer>
         <Table>
           <TableHead>
             <TableRow sx={{ bgcolor: brand.surface }}>
@@ -326,7 +338,7 @@ export default function AdminDashboard() {
               <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
                 {t('admin.orders.table.customer')}
               </TableCell>
-              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
+              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', display: { xs: 'none', md: 'table-cell' } }}>
                 {t('admin.table.country')}
               </TableCell>
               <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
@@ -335,11 +347,8 @@ export default function AdminDashboard() {
               <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
                 {t('admin.orders.table.status')}
               </TableCell>
-              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
+              <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', display: { xs: 'none', sm: 'table-cell' } }}>
                 {t('admin.orders.table.date')}
-              </TableCell>
-              <TableCell align="right" sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase' }}>
-                {t('admin.table.actions')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -355,7 +364,7 @@ export default function AdminDashboard() {
                 >
                   <TableCell sx={{ fontFamily: 'monospace', fontWeight: 700, color: brand.graphite }}>{order.id}</TableCell>
                   <TableCell>{order.customer}</TableCell>
-                  <TableCell>{t(`admin.countries.${order.country}`, { defaultValue: countryDisplayName(order.country, i18n.language) })}</TableCell>
+                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{t(`admin.countries.${order.country}`, { defaultValue: countryDisplayName(order.country, i18n.language) })}</TableCell>
                   <TableCell sx={{ fontWeight: 700 }}>{order.total}</TableCell>
                   <TableCell>
                     <Chip
@@ -364,16 +373,14 @@ export default function AdminDashboard() {
                       sx={{ bgcolor: colors.bg, color: colors.color, fontWeight: 700, fontSize: '0.75rem' }}
                     />
                   </TableCell>
-                  <TableCell sx={{ color: brand.textSecondary }}>{order.date}</TableCell>
-                  <TableCell align="right">
-                    <VisibilityRounded sx={{ fontSize: 18, color: brand.textSecondary }} />
-                  </TableCell>
+                  <TableCell sx={{ color: brand.textSecondary, display: { xs: 'none', sm: 'table-cell' } }}>{order.date}</TableCell>
                 </TableRow>
               )
             })}
           </TableBody>
         </Table>
       </TableContainer>
+      </Panel>
     </Box>
   )
 }

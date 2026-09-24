@@ -11,6 +11,10 @@ export type ApiProductDto = {
   packKey?: string | null
   image: string
   imageFit: 'cover' | 'contain'
+  gallery?: string[]
+  videoUrl?: string | null
+  videoPoster?: string | null
+  kit?: { pods: number; caps: number; nutrientMl: number } | null
   featured: boolean
   active: boolean
   colors: { id: string; hex: string }[]
@@ -151,6 +155,10 @@ export type ApiProductUpsert = {
   packKey?: string
   image: string
   imageFit: 'cover' | 'contain'
+  gallery?: string[]
+  videoUrl?: string
+  videoPoster?: string
+  kit?: { pods: number; caps: number; nutrientMl: number }
   featured?: boolean
   active: boolean
   colors?: { id: string; hex: string }[]
@@ -165,6 +173,10 @@ export function mapProductDto(dto: ApiProductDto): StoredProduct {
     packKey: dto.packKey ?? undefined,
     image: dto.image,
     imageFit: dto.imageFit,
+    gallery: dto.gallery?.length ? dto.gallery : undefined,
+    videoUrl: dto.videoUrl || undefined,
+    videoPoster: dto.videoPoster || undefined,
+    kit: dto.kit && (dto.kit.pods || dto.kit.caps || dto.kit.nutrientMl) ? dto.kit : undefined,
     featured: dto.featured,
     active: dto.active,
     colors: dto.colors?.length ? dto.colors : undefined,
@@ -188,8 +200,12 @@ export function toProductUpsert(product: StoredProduct, category: ProductCategor
     price: product.price,
     compareAt: product.compareAt,
     packKey: product.packKey,
-    image: product.image,
+    image: product.gallery?.[0] || product.image,
     imageFit: product.imageFit,
+    gallery: product.gallery,
+    videoUrl: product.videoUrl,
+    videoPoster: product.videoPoster,
+    kit: product.kit,
     featured: product.featured ?? false,
     active: product.active,
     colors: product.colors?.map((c) => ({ id: c.id, hex: c.hex })),
@@ -241,6 +257,7 @@ export type CheckoutPayload = {
   delivery?: string
   officeCode?: string
   cityId?: string
+  promoCode?: string
   items: {
     productId: string
     category: ProductCategory

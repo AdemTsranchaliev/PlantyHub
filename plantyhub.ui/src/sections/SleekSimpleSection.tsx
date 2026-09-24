@@ -13,6 +13,7 @@ import { navHrefs } from '../data/catalog'
 import { useGardensCatalog } from '../hooks/useProducts'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand, carouselCardWidth } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function SleekSimpleSection() {
   const { t } = useTranslation()
@@ -53,12 +54,12 @@ export default function SleekSimpleSection() {
                 transition: 'box-shadow 0.25s ease, transform 0.25s ease',
               }}
             >
-              <Box
-                component="img"
-                src={garden.image}
-                alt={garden.name}
-                loading="lazy"
-                sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                <MediaImg
+                  src={garden.image}
+                  preset="card"
+                  alt={garden.name}
+                  loading="lazy"
+                  sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
               <IconButton
                 aria-label={t('common.addToCartAria', { name: garden.name })}

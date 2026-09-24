@@ -11,6 +11,7 @@ import SectionHeading from '../components/SectionHeading'
 import { blogArticleImages, navHrefs, pressArticleIds } from '../data/catalog'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function PressSection() {
   const { t } = useTranslation()
@@ -74,9 +75,9 @@ function ArticleCard({ id }: { id: (typeof pressArticleIds)[number] }) {
           },
         }}
       >
-        <Box
-          component="img"
+        <MediaImg
           src={image}
+          preset="card"
           alt={t(`blogPage.articles.${id}.title`)}
           loading="lazy"
           sx={{ width: '100%', height: { xs: 160, sm: 180 }, objectFit: 'cover', display: 'block' }}

@@ -383,6 +383,56 @@ namespace PlantyHub.Api.Migrations
                     b.ToTable("HomepageSettings");
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.PromoCode", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("MinSubtotal")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)");
+
+                    b.Property<DateTime?>("StartsAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)");
+
+                    b.Property<int?>("UsageLimit")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsedCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("PromoCodes");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.NewsletterSubscriber", b =>
                 {
                     b.Property<Guid>("Id")
@@ -452,6 +502,10 @@ namespace PlantyHub.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<decimal>("Discount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -464,6 +518,9 @@ namespace PlantyHub.Api.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PromoCode")
                         .HasColumnType("text");
 
                     b.Property<string>("ShippingCity")
@@ -641,12 +698,20 @@ namespace PlantyHub.Api.Migrations
                     b.Property<bool>("Featured")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("GalleryJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ImageFit")
                         .HasColumnType("integer");
+
+                    b.Property<string>("KitJson")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("PackKey")
                         .HasColumnType("text");
@@ -661,6 +726,12 @@ namespace PlantyHub.Api.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("VideoPoster")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VideoUrl")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -716,7 +787,20 @@ namespace PlantyHub.Api.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("SpecsJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Tagline")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VideoBadge")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VideoText")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VideoTitle")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

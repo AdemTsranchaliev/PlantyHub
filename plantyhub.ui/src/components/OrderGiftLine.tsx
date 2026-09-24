@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { brand } from '../theme'
+import MediaImg from './MediaImg'
 
 type Gift = {
   name: string
@@ -35,9 +36,9 @@ export default function OrderGiftLine({ gift, compact = false }: Props) {
       }}
     >
       {gift.image ? (
-        <Box
-          component="img"
+        <MediaImg
           src={gift.image}
+          preset="thumb"
           alt=""
           sx={{
             width: size,

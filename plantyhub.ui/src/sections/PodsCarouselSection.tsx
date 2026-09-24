@@ -7,6 +7,7 @@ import SectionHeading from '../components/SectionHeading'
 import SectionLink from '../components/SectionLink'
 import { navHrefs } from '../data/catalog'
 import { useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
+import { resolveKit } from '../store/products'
 
 export default function PodsCarouselSection() {
   const { t } = useTranslation()
@@ -20,7 +21,7 @@ export default function PodsCarouselSection() {
 
       <HorizontalScroll gap={2}>
         {pods.map((pod) => (
-          <ProductCard key={pod.id} product={toProductCardData(pod, t)} />
+          <ProductCard key={pod.id} product={{ ...toProductCardData(pod, t), includes: resolveKit(pod) }} />
         ))}
       </HorizontalScroll>
 

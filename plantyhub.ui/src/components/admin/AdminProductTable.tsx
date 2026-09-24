@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton'
 import EditRounded from '@mui/icons-material/EditRounded'
 import { useTranslation } from 'react-i18next'
 import { brand } from '../../theme'
+import MediaImg from '../MediaImg'
 
 type ProductRow = {
   id: string
@@ -19,12 +20,22 @@ type ProductRow = {
   image: string
   extra?: string
   active?: boolean
+  featured?: boolean
 }
 
 type Props = {
   rows: ProductRow[]
   onEdit?: (id: string) => void
 }
+
+const headerCellSx = {
+  fontWeight: 700,
+  color: brand.textSecondary,
+  fontSize: '0.75rem',
+  textTransform: 'uppercase',
+  letterSpacing: '0.05em',
+  borderBottom: `1px solid ${brand.border}`,
+} as const
 
 export default function AdminProductTable({ rows, onEdit }: Props) {
   const { t } = useTranslation()
@@ -33,7 +44,7 @@ export default function AdminProductTable({ rows, onEdit }: Props) {
     <TableContainer
       sx={{
         bgcolor: brand.white,
-        borderRadius: '20px',
+        borderRadius: '18px',
         border: `1px solid ${brand.border}`,
         overflow: 'hidden',
       }}
@@ -41,47 +52,73 @@ export default function AdminProductTable({ rows, onEdit }: Props) {
       <Table>
         <TableHead>
           <TableRow sx={{ bgcolor: brand.surface }}>
-            <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t('admin.table.product')}
-            </TableCell>
-            <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t('admin.table.id')}
-            </TableCell>
-            <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t('admin.table.price')}
-            </TableCell>
-            <TableCell sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t('admin.table.status')}
-            </TableCell>
-            <TableCell align="right" sx={{ fontWeight: 700, color: brand.textSecondary, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t('admin.table.actions')}
-            </TableCell>
+            <TableCell sx={headerCellSx}>{t('admin.table.product')}</TableCell>
+            <TableCell sx={{ ...headerCellSx, display: { xs: 'none', md: 'table-cell' } }}>{t('admin.table.id')}</TableCell>
+            <TableCell sx={headerCellSx}>{t('admin.table.price')}</TableCell>
+            <TableCell sx={headerCellSx}>{t('admin.table.status')}</TableCell>
+            <TableCell align="right" sx={headerCellSx}>{t('admin.table.actions')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
+          {rows.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={5} sx={{ color: brand.textSecondary, py: 4, border: 0 }}>
+                {t('admin.table.empty')}
+              </TableCell>
+            </TableRow>
+          )}
           {rows.map((row) => (
-            <TableRow key={row.id} sx={{ '&:last-child td': { borderBottom: 0 } }}>
+            <TableRow
+              key={row.id}
+              hover
+              onClick={() => onEdit?.(row.id)}
+              sx={{ cursor: onEdit ? 'pointer' : 'default', '&:last-child td': { borderBottom: 0 } }}
+            >
               <TableCell>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Box
-                    component="img"
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, minWidth: 0 }}>
+                  <MediaImg
                     src={row.image}
-                    alt={row.name}
-                    sx={{ width: 48, height: 48, borderRadius: '12px', objectFit: 'cover', bgcolor: brand.surface, border: `1px solid ${brand.border}` }}
+                    preset="thumb"
+                    alt=""
+                    sx={{ width: 52, height: 52, borderRadius: '12px', objectFit: 'cover', bgcolor: brand.surface, border: `1px solid ${brand.border}`, flexShrink: 0 }}
                   />
-                  <Box>
-                    <Box sx={{ fontWeight: 700, color: brand.graphite, fontSize: '0.95rem' }}>{row.name}</Box>
+                  <Box sx={{ minWidth: 0 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+                      <Box sx={{ fontWeight: 800, color: brand.graphite, fontSize: '0.95rem' }}>{row.name}</Box>
+                      {row.featured && (
+                        <Chip
+                          label={t('admin.table.featured')}
+                          size="small"
+                          sx={{ height: 22, bgcolor: 'rgba(227, 159, 118, 0.18)', color: '#C47A4A', fontWeight: 700, fontSize: '0.7rem' }}
+                        />
+                      )}
+                    </Box>
                     {row.extra && (
-                      <Box sx={{ color: brand.textSecondary, fontSize: '0.82rem', mt: 0.25 }}>{row.extra}</Box>
+                      <Box
+                        sx={{
+                          color: brand.textSecondary,
+                          fontSize: '0.8rem',
+                          mt: 0.25,
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          maxWidth: { xs: 180, sm: 360, md: 420 },
+                        }}
+                      >
+                        {row.extra}
+                      </Box>
                     )}
+                    <Box sx={{ display: { xs: 'block', md: 'none' }, color: brand.textSecondary, fontFamily: 'monospace', fontSize: '0.75rem', mt: 0.25 }}>
+                      {row.id}
+                    </Box>
                   </Box>
                 </Box>
               </TableCell>
-              <TableCell sx={{ color: brand.textSecondary, fontFamily: 'monospace', fontSize: '0.85rem' }}>{row.id}</TableCell>
+              <TableCell sx={{ color: brand.textSecondary, fontFamily: 'monospace', fontSize: '0.82rem', display: { xs: 'none', md: 'table-cell' } }}>{row.id}</TableCell>
               <TableCell>
-                <Box sx={{ fontWeight: 700, color: brand.graphite }}>{row.price}</Box>
+                <Box sx={{ fontWeight: 800, color: brand.graphite, fontVariantNumeric: 'tabular-nums' }}>{row.price}</Box>
                 {row.compareAt && (
-                  <Box sx={{ color: brand.textSecondary, fontSize: '0.82rem', textDecoration: 'line-through' }}>{row.compareAt}</Box>
+                  <Box sx={{ color: brand.textSecondary, fontSize: '0.8rem', textDecoration: 'line-through' }}>{row.compareAt}</Box>
                 )}
               </TableCell>
               <TableCell>
@@ -100,8 +137,11 @@ export default function AdminProductTable({ rows, onEdit }: Props) {
                 <IconButton
                   size="small"
                   aria-label={t('admin.table.edit')}
-                  onClick={() => onEdit?.(row.id)}
-                  sx={{ color: brand.textSecondary, '&:hover': { color: brand.plantGreen } }}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    onEdit?.(row.id)
+                  }}
+                  sx={{ color: brand.textSecondary, '&:hover': { color: brand.plantGreen, bgcolor: brand.plantGreenMuted } }}
                 >
                   <EditRounded fontSize="small" />
                 </IconButton>

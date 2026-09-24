@@ -17,6 +17,7 @@ import { navHrefs } from '../data/catalog'
 import OrderGiftLine from '../components/OrderGiftLine'
 import { useOrderDetail } from '../hooks/useOrders'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function OrderConfirmationPage() {
   const { t, i18n } = useTranslation()
@@ -92,12 +93,12 @@ export default function OrderConfirmationPage() {
               <Stack spacing={2}>
                 {order.lineItems.map((item) => (
                   <Stack key={item.id} direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-                    <Box
-                      component="img"
-                      src={item.image}
-                      alt={item.nameKey}
-                      sx={{ width: 64, height: 64, borderRadius: '12px', objectFit: 'contain', bgcolor: brand.surface }}
-                    />
+                      <MediaImg
+                        src={item.image}
+                        preset="thumb"
+                        alt={item.nameKey}
+                        sx={{ width: 64, height: 64, borderRadius: '12px', objectFit: 'contain', bgcolor: brand.surface }}
+                      />
                     <Box sx={{ flex: 1 }}>
                       <Typography sx={{ fontWeight: 700 }}>{item.name ?? item.nameKey}</Typography>
                       <Typography variant="body2" color="text.secondary">

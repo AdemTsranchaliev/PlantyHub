@@ -15,13 +15,17 @@ public class AdminMediaController(IR2StorageService storage) : ControllerBase
         "image/png",
         "image/webp",
         "image/gif",
+        "video/mp4",
+        "video/webm",
+        "video/quicktime",
     };
 
-    private const long MaxBytes = 8 * 1024 * 1024;
+    private const long MaxImageBytes = 8 * 1024 * 1024;
+    private const long MaxVideoBytes = 80 * 1024 * 1024;
 
     [HttpPost("upload")]
-    [RequestSizeLimit(MaxBytes)]
-    [RequestFormLimits(MultipartBodyLengthLimit = MaxBytes)]
+    [RequestSizeLimit(MaxVideoBytes)]
+    [RequestFormLimits(MultipartBodyLengthLimit = MaxVideoBytes)]
     public async Task<ActionResult<object>> Upload(IFormFile file, CancellationToken ct)
     {
         if (!storage.IsConfigured)
@@ -33,12 +37,14 @@ public class AdminMediaController(IR2StorageService storage) : ControllerBase
         if (file is null || file.Length == 0)
             return BadRequest(new { message = "No file uploaded." });
 
-        if (file.Length > MaxBytes)
-            return BadRequest(new { message = "File exceeds 8 MB limit." });
-
         var contentType = file.ContentType;
         if (string.IsNullOrWhiteSpace(contentType) || !AllowedContentTypes.Contains(contentType))
-            return BadRequest(new { message = "Only JPEG, PNG, WebP and GIF images are allowed." });
+            return BadRequest(new { message = "Only JPEG, PNG, WebP, GIF images and MP4, WebM or MOV videos are allowed." });
+
+        var isVideo = contentType.StartsWith("video/", StringComparison.OrdinalIgnoreCase);
+        var maxBytes = isVideo ? MaxVideoBytes : MaxImageBytes;
+        if (file.Length > maxBytes)
+            return BadRequest(new { message = isVideo ? "Video exceeds 80 MB limit." : "File exceeds 8 MB limit." });
 
         await using var stream = file.OpenReadStream();
         var (url, key) = await storage.UploadAsync(stream, file.FileName, contentType, ct);

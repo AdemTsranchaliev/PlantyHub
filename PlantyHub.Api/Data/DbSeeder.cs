@@ -54,6 +54,7 @@ public static class DbSeeder
         }
 
         await EnsureProductsAsync(db);
+        await RemapLocalMediaAsync(db);
 
         if (!await db.Orders.AnyAsync())
             await SeedOrdersAsync(db);
@@ -158,6 +159,47 @@ public static class DbSeeder
         await db.SaveChangesAsync();
     }
 
+    private static async Task RemapLocalMediaAsync(AppDbContext db)
+    {
+        var products = await db.Products.ToListAsync();
+        foreach (var product in products)
+        {
+            product.Image = MediaUrls.Resolve(product.Image);
+            product.VideoUrl = MediaUrls.ResolveOrNull(product.VideoUrl);
+            product.VideoPoster = MediaUrls.ResolveOrNull(product.VideoPoster);
+            try
+            {
+                var gallery = JsonSerializer.Deserialize<List<string>>(product.GalleryJson) ?? [];
+                product.GalleryJson = ProductMapper.WriteGallery(gallery);
+            }
+            catch
+            {
+                // keep existing gallery json
+            }
+        }
+
+        foreach (var item in await db.OrderItems.ToListAsync())
+        {
+            item.Image = MediaUrls.Resolve(item.Image);
+            if (!string.IsNullOrWhiteSpace(item.GiftImage))
+                item.GiftImage = MediaUrls.Resolve(item.GiftImage);
+        }
+
+        foreach (var settings in await db.HomepageSettings.ToListAsync())
+        {
+            var images = JsonSerializer.Deserialize<Dictionary<string, string>>(settings.ImagesJson, JsonDefaults.Options) ?? new();
+            settings.ImagesJson = JsonSerializer.Serialize(MediaUrls.ResolveMap(images), JsonDefaults.Options);
+        }
+
+        foreach (var assets in await db.SiteAssets.ToListAsync())
+        {
+            var images = JsonSerializer.Deserialize<Dictionary<string, string>>(assets.ImagesJson, JsonDefaults.Options) ?? new();
+            assets.ImagesJson = JsonSerializer.Serialize(MediaUrls.ResolveMap(images), JsonDefaults.Options);
+        }
+
+        await db.SaveChangesAsync();
+    }
+
     private static IEnumerable<Product> CatalogProducts()
     {
         yield return Garden("homegarder-one", 99.00m, "/images/lifestyle/home-garden-product.png", ImageFit.Cover, featured: true,
@@ -212,11 +254,11 @@ public static class DbSeeder
         yield return Pod("herb-mix-12", 19.99m, "/images/lifestyle/outdoor-deck.png", "pack12",
             en: ("12-Pod Herb Mix", null, "A full line-up of favourite herbs."),
             bg: ("12-капсулен билков микс", null, "Пълен комплект любими билки."),
-            fit: ImageFit.Cover);
+            fit: ImageFit.Cover, kit: true);
         yield return Pod("spice-mix-12", 19.99m, "/images/lifestyle/mint-kitchen.png", "pack12",
             en: ("12-Pod Spice Mix", null, "Aromatic spices to fill your whole garden."),
             bg: ("Микс 12 подправки", null, "Ароматни подправки за цялата градина."),
-            fit: ImageFit.Cover);
+            fit: ImageFit.Cover, kit: true);
 
         yield return Consumable("empty-capsules", 5.90m, "/images/lifestyle/basil-closeup.png", "pack12",
             en: "Empty Capsules", bg: "Празни капсули");
@@ -291,9 +333,12 @@ public static class DbSeeder
         string slug, decimal price, string image, string packKey,
         (string name, string? tagline, string? description) en,
         (string name, string? tagline, string? description) bg,
-        ImageFit fit = ImageFit.Contain)
+        ImageFit fit = ImageFit.Contain,
+        bool kit = false)
     {
-        return BuildProduct(slug, ProductCategory.Pods, price, image, fit, packKey, null, null, false, en, bg);
+        var product = BuildProduct(slug, ProductCategory.Pods, price, image, fit, packKey, null, null, false, en, bg);
+        if (kit) product.KitJson = """{"pods":12,"caps":12,"nutrientMl":100}""";
+        return product;
     }
 
     private static Product Consumable(string slug, decimal price, string image, string packKey, string en, string bg) =>
@@ -324,7 +369,7 @@ public static class DbSeeder
             Price = price,
             CompareAtPrice = compareAt,
             PackKey = packKey,
-            Image = image,
+            Image = MediaUrls.Resolve(image),
             ImageFit = fit,
             Featured = featured,
             Active = true,
@@ -388,7 +433,7 @@ public static class DbSeeder
                     Quantity = itemCount,
                     UnitPrice = total / itemCount,
                     Total = total,
-                    Image = "/images/stock/basil.jpg"
+                    Image = MediaUrls.Resolve("/images/stock/basil.jpg")
                 }
             ],
             Timeline =

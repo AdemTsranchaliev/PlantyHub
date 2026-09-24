@@ -147,6 +147,9 @@ export const homepageSectionsSchema: Record<HomepageSectionKey, SchemaField[]> =
     { kind: 'text', key: 'lightCycle.days.1', labelKey: 'admin.homepage.fields.lightCycle.dayTue', group: 'days' },
     { kind: 'text', key: 'lightCycle.days.2', labelKey: 'admin.homepage.fields.lightCycle.dayWed', group: 'days' },
     { kind: 'text', key: 'lightCycle.days.3', labelKey: 'admin.homepage.fields.lightCycle.dayThu', group: 'days' },
+    { kind: 'text', key: 'lightCycle.days.4', labelKey: 'admin.homepage.fields.lightCycle.dayFri', group: 'days' },
+    { kind: 'text', key: 'lightCycle.days.5', labelKey: 'admin.homepage.fields.lightCycle.daySat', group: 'days' },
+    { kind: 'text', key: 'lightCycle.days.6', labelKey: 'admin.homepage.fields.lightCycle.daySun', group: 'days' },
   ],
   podsGrid: [
     { kind: 'text', key: 'podsSection.eyebrow', labelKey: 'admin.homepage.fields.podsGrid.eyebrow', group: 'heading' },

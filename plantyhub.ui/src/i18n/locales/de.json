@@ -136,7 +136,10 @@
       "0": "Mo",
       "1": "Di",
       "2": "Mi",
-      "3": "Do"
+      "3": "Do",
+      "4": "Fr",
+      "5": "Sa",
+      "6": "So"
     }
   },
   "featured": {
@@ -212,6 +215,11 @@
   "podDetail": {
     "quantity": "Menge",
     "detailsTitle": "Gut zu wissen",
+    "includesTitle": "Inhalt",
+    "includesPods": "{{count}} Saatkapseln",
+    "includesCaps": "{{count}} Deckel",
+    "includesNutrient": "Nährstoff A + B",
+    "includesNutrientHint": "je {{ml}} ml",
     "relatedTitle": "Weitere Pods zum Anbauen",
     "specs": {
       "harvest": {
@@ -800,6 +808,8 @@
     "contactTitle": "Kontakt",
     "address": "PlantyHub · Bulgarien",
     "madeWith": "Mit Sorgfalt in Bulgarien angebaut",
+    "payments": "Kartenzahlungen werden sicher über Stripe abgewickelt.",
+    "paymentsLabel": "Akzeptierte Zahlungsmethoden",
     "rights": "© {{year}} PlantyHub. Alle Rechte vorbehalten."
   },
   "auth": {
@@ -1005,14 +1015,16 @@
       "title": "Dashboard",
       "subtitle": "Überblick über deinen PlantyHub-Shop.",
       "recentOrders": "Letzte Bestellungen",
+      "viewOrders": "Alle Bestellungen",
+      "emptyProducts": "Noch keine Verkäufe.",
       "weeklySales": "Wochenumsatz",
       "weeklySalesSubtitle": "Gesamt diese Woche: {{total}}",
       "orderStatus": "Bestellungen nach Status",
       "orderStatusSubtitle": "Verteilung aller Bestellungen",
       "topProducts": "Top-Produkte",
       "topProductsSubtitle": "Bestseller diesen Monat",
-      "byCategory": "Umsatz nach Kategorie",
-      "byCategorySubtitle": "Anteil am Gesamtumsatz",
+      "byCategory": "Katalog",
+      "byCategorySubtitle": "Produkte nach Kategorie",
       "sales": "Verkäufe",
       "revenue": "Umsatz",
       "days": {
@@ -1052,7 +1064,10 @@
     },
     "pods": {
       "title": "Saatkapseln",
-      "subtitle": "Saatkapsel-Nachfüllpackungen verwalten."
+      "subtitle": "Kapseln und Sets — Anzahl und Inhalt.",
+      "totalPods": "{{count}} Kapseln insgesamt",
+      "podsOnly": "{{count}} Kapseln",
+      "includes": "{{pods}} Kapseln, {{caps}} Deckel, Nährstoff A + B je {{ml}} ml"
     },
     "consumables": {
       "title": "Verbrauchsmaterial",
@@ -1540,10 +1555,15 @@
       "actions": "Aktionen",
       "active": "Aktiv",
       "inactive": "Inaktiv",
-      "edit": "Bearbeiten"
+      "featured": "Empfohlen",
+      "edit": "Bearbeiten",
+      "empty": "Noch keine Produkte."
     },
     "actions": {
       "addProduct": "Produkt hinzufügen"
+    },
+    "catalog": {
+      "count": "{{count}} Produkte"
     },
     "fields": {
       "texts": "Texte",
@@ -1598,18 +1618,69 @@
       "editTitle": "Produkt bearbeiten",
       "basicInfo": "Grundinformationen",
       "photo": "Foto",
+      "gallery": "Fotos",
+      "addImages": "Fotos hinzufügen",
+      "coverImage": "Titelbild",
+      "moveBack": "Nach hinten",
+      "moveForward": "Nach vorn",
+      "removeImage": "Foto entfernen",
+      "video": "Video",
+      "replaceVideo": "Video ersetzen",
+      "videoBadge": "Video-Label",
+      "videoTitle": "Videotitel",
+      "videoText": "Videotext",
+      "specLabel": "Spezifikation",
+      "specValue": "Wert",
+      "addSpec": "Spezifikation hinzufügen",
+      "removeSpec": "Spezifikation entfernen",
       "pricing": "Preis",
       "pricingHint": "Das sehen Kundinnen und Kunden im Shop.",
       "compareAtHint": "Wird durchgestrichen neben dem Verkaufspreis gezeigt",
       "visibility": "Sichtbarkeit",
       "content": "Shop-Texte",
       "contentHint": "Sprache wechseln, um jede Übersetzung zu bearbeiten. Englischer Name ist Pflicht.",
+      "dragHint": "Fotos ziehen, um die Reihenfolge zu ändern. Das erste ist das Titelbild. Dateien können auch auf das Raster gezogen werden.",
+      "dragImage": "Foto {{n}} verschieben",
+      "sections": {
+        "photos": "Fotos",
+        "video": "Video",
+        "details": "Details",
+        "page": "Seite",
+        "faq": "Fragen"
+      },
+      "removeLine": "Entfernen",
+      "addStep": "Schritt hinzufügen",
+      "addBox": "Artikel hinzufügen",
+      "addFeature": "Vorteil hinzufügen",
+      "addFaq": "Frage hinzufügen",
+      "featureTitle": "Titel",
+      "featureText": "Text",
+      "faqQuestion": "Frage",
+      "faqAnswer": "Antwort",
+      "highlightsTitle": "Titel der Vorteile",
+      "highlightsSubtitle": "Untertitel der Vorteile",
+      "specsTitle": "Titel der Spezifikationen",
+      "howTitle": "Titel „So funktioniert es“",
+      "boxTitle": "Titel „Im Karton“",
+      "faqTitle": "Titel der Fragen",
+      "features": "Vorteile",
+      "steps": "Schritte",
+      "inTheBox": "Im Karton",
+      "faq": "Fragen",
+      "faqHint": "Allgemeine Fragen für die Website. Sprache wechseln, um jede Übersetzung zu bearbeiten.",
+      "specs": "Spezifikationen",
+      "sectionTitles": "Abschnittstitel",
+      "videoPoster": "Vorschaubild",
       "nameHint": "Pflichtfeld — wird als Standardname verwendet",
       "id": "Produkt-ID",
       "idHint": "Kleinbuchstaben, z. B. basil. Leer lassen, um aus dem englischen Namen zu erzeugen.",
       "price": "Preis",
       "compareAt": "Vergleichspreis",
       "pack": "Packungsgröße",
+      "kit": "Inhalt",
+      "kitPods": "Kapseln",
+      "kitCaps": "Deckel",
+      "kitNutrient": "A + B, ml je",
       "imageUrl": "Produktfoto",
       "imageFit": "Wie das Foto den Rahmen füllt",
       "fitCover": "Rahmen füllen",

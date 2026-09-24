@@ -35,3 +35,9 @@ PlantyHub.Api/*.dev.db
 PlantyHub.Api/*.dev.db-*
 *.user
 appsettings.*.local.json
+
+# Secrets stay on this machine (dotnet user-secrets, env files)
+.env
+.env.local
+.env.*.local
+secrets.json

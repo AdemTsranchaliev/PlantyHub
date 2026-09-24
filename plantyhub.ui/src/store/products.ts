@@ -13,21 +13,60 @@ import { mapProductsResponse, productsApi, toProductUpsert } from '../api'
 
 export type ProductCategory = 'gardens' | 'pods' | 'consumables' | 'accessories'
 
+export type ProductSpec = {
+  label: string
+  value: string
+}
+
+export type ProductFeature = {
+  title: string
+  text: string
+}
+
+export type ProductFaq = {
+  q: string
+  a: string
+}
+
 export type ProductLocaleContent = {
   name: string
   tagline?: string
   description?: string
+  videoBadge?: string
+  videoTitle?: string
+  videoText?: string
+  specs?: ProductSpec[]
+  highlightsTitle?: string
+  highlightsSubtitle?: string
+  specsTitle?: string
+  howTitle?: string
+  boxTitle?: string
+  faqTitle?: string
+  features?: ProductFeature[]
+  steps?: string[]
+  inTheBox?: string[]
+  faq?: ProductFaq[]
 }
 
 export type ProductColor = { id: string; hex: string }
+
+export type ProductKit = {
+  pods: number
+  caps: number
+  nutrientMl: number
+}
 
 export type StoredProduct = {
   id: string
   price: string
   compareAt?: string
   packKey?: string
+  kit?: ProductKit
   image: string
   imageFit: 'cover' | 'contain'
+  gallery?: string[]
+  videoUrl?: string
+  videoPoster?: string
   featured?: boolean
   active: boolean
   colors?: ProductColor[]
@@ -178,9 +217,11 @@ export function getProduct(category: ProductCategory, id: string): StoredProduct
   return getProductsState()[category].find((p) => p.id === id)
 }
 
+type LocaleStringField = 'name' | 'tagline' | 'description' | 'videoBadge' | 'videoTitle' | 'videoText'
+
 export function getLocalizedField(
   product: StoredProduct,
-  field: keyof ProductLocaleContent,
+  field: LocaleStringField,
   lang: LanguageCode,
 ): string {
   return (
@@ -200,6 +241,18 @@ export function slugify(value: string) {
 }
 
 export const packKeyOptions = ['pack3', 'pack9', 'pack12', 'bottle1L', 'bottle2x100ml'] as const
+
+export function packSize(packKey?: string) {
+  const match = packKey?.match(/^pack(\d+)$/)
+  return match ? Number(match[1]) : 0
+}
+
+export function resolveKit(product: { packKey?: string; kit?: ProductKit }): ProductKit {
+  if (product.kit && (product.kit.pods || product.kit.caps || product.kit.nutrientMl)) return product.kit
+  const pods = packSize(product.packKey)
+  if (pods > 0) return { pods, caps: pods, nutrientMl: 100 }
+  return { pods: 0, caps: 0, nutrientMl: 0 }
+}
 
 // Legacy stubs for settings page
 export function resetProductsState() {

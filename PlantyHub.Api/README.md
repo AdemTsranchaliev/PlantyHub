@@ -23,26 +23,28 @@ Send JWT as `Authorization: Bearer <token>`.
 
 ## Cloudflare R2 (image uploads)
 
-Admin image uploads go to a public R2 bucket via `POST /api/admin/media/upload`.
+Admin image uploads go to a public R2 bucket via `POST /api/admin/media/upload`. The site stores the original object URL and requests resized/WebP variants through Cloudflare Image Transformations (`/cdn-cgi/image/…`).
 
 ### Setup
 
-1. Create an R2 bucket in the Cloudflare dashboard (e.g. `plantyhub`).
-2. Enable **public access** (custom domain or R2.dev subdomain) and copy the public base URL.
-3. Create an R2 API token with Object Read & Write on that bucket.
-4. Set config in `appsettings.Development.json` or environment variables:
+1. In Cloudflare → **R2 Object Storage**, create a bucket named `plantyhub`.
+2. Open the bucket → **Settings** → **Public access** → **Custom Domains** → **Connect Domain** → `media.plantyhub.com`. Cloudflare adds the DNS CNAME. Do not use the `r2.dev` URL in production (no cache, no image transforms).
+3. **Images → Transformations** → enable transformations on the `plantyhub.com` zone. Allowed sources: same zone (covers `media.plantyhub.com`).
+4. **R2 → Manage R2 API Tokens** → create a token with **Object Read & Write** on bucket `plantyhub`. Copy Access Key ID, Secret Access Key, and Account ID (Overview page).
+5. Put secrets in user-secrets (do not commit them):
 
-```json
-"R2": {
-  "AccountId": "<cloudflare-account-id>",
-  "AccessKeyId": "<r2-access-key-id>",
-  "SecretAccessKey": "<r2-secret-access-key>",
-  "BucketName": "plantyhub",
-  "PublicBaseUrl": "https://media.yourdomain.com"
-}
+```bash
+cd PlantyHub.Api
+dotnet user-secrets set "R2:AccountId" "<cloudflare-account-id>"
+dotnet user-secrets set "R2:AccessKeyId" "<r2-access-key-id>"
+dotnet user-secrets set "R2:SecretAccessKey" "<r2-secret-access-key>"
+dotnet user-secrets set "R2:BucketName" "plantyhub"
+dotnet user-secrets set "R2:PublicBaseUrl" "https://media.plantyhub.com"
 ```
 
 Env equivalents: `R2__AccountId`, `R2__AccessKeyId`, `R2__SecretAccessKey`, `R2__BucketName`, `R2__PublicBaseUrl`.
+
+Public files are then `https://media.plantyhub.com/uploads/…`. The frontend rewrites those to `https://media.plantyhub.com/cdn-cgi/image/width=720,format=auto,…/uploads/…`.
 
 Without R2 configured, the upload endpoint returns `503` — you can still paste any image URL in admin fields.
 

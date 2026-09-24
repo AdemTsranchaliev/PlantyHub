@@ -7,6 +7,7 @@ import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import { communityAvatars, communityPostIds } from '../data/catalog'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function CommunitySection() {
   const { t } = useTranslation()
@@ -35,10 +36,10 @@ export default function CommunitySection() {
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <Box
-                component="img"
-                src={communityAvatars[id]}
-                alt={t(`community.handles.${id}`)}
+                <MediaImg
+                  src={communityAvatars[id]}
+                  preset="thumb"
+                  alt={t(`community.handles.${id}`)}
                 sx={{
                   width: 44,
                   height: 44,

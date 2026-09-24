@@ -100,7 +100,8 @@ public record CheckoutRequest(
     string? Courier = null,
     string? Delivery = null,
     string? OfficeCode = null,
-    string? CityId = null);
+    string? CityId = null,
+    string? PromoCode = null);
 
 public record UpdateOrderStatusRequest(string Status);
 

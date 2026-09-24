@@ -17,6 +17,7 @@ import { useProduct } from '../hooks/useProducts'
 import { stockImages } from '../data/images'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function StarterBundleSection() {
   const { t } = useTranslation()
@@ -88,11 +89,11 @@ export default function StarterBundleSection() {
 
         <Grid size={{ xs: 12, md: 6 }}>
           <Box sx={{ position: 'relative' }}>
-            <Box
-              component="img"
-              src={stockImages.outdoorDeck}
-              alt={t('starterBundle.imageAlt')}
-              loading="lazy"
+              <MediaImg
+                src={stockImages.outdoorDeck}
+                preset="gallery"
+                alt={t('starterBundle.imageAlt')}
+                loading="lazy"
               sx={{
                 width: '100%',
                 borderRadius: 4,
@@ -102,11 +103,11 @@ export default function StarterBundleSection() {
                 boxShadow: brand.shadowHover,
               }}
             />
-            <Box
-              component="img"
-              src={garden?.image ?? ''}
-              alt={garden?.name ?? ''}
-              loading="lazy"
+              <MediaImg
+                src={garden?.image ?? ''}
+                preset="card"
+                alt={garden?.name ?? ''}
+                loading="lazy"
               sx={{
                 position: 'absolute',
                 bottom: { xs: 16, md: 24 },

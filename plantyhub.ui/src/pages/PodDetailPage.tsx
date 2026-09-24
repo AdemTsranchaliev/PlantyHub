@@ -16,6 +16,9 @@ import ScheduleOutlined from '@mui/icons-material/ScheduleOutlined'
 import Inventory2Outlined from '@mui/icons-material/Inventory2Outlined'
 import WbSunnyOutlined from '@mui/icons-material/WbSunnyOutlined'
 import EnergySavingsLeafOutlined from '@mui/icons-material/EnergySavingsLeafOutlined'
+import SpaOutlined from '@mui/icons-material/SpaOutlined'
+import CircleOutlined from '@mui/icons-material/CircleOutlined'
+import WaterDropOutlined from '@mui/icons-material/WaterDropOutlined'
 import { useTranslation } from 'react-i18next'
 import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
@@ -23,9 +26,11 @@ import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
 import { useProduct, useSeedPodsCatalog, toProductCardData } from '../hooks/useProducts'
+import { resolveKit } from '../store/products'
 import { useSiteAsset } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 const trustItems = ['compatible', 'nonGmo', 'shipping'] as const
 
@@ -67,6 +72,7 @@ export default function PodDetailPage() {
   }
 
   const gallery = [pod.image, galleryExtra1, galleryExtra2]
+  const kit = resolveKit(pod)
   const specs = [
     { key: 'harvest', Icon: ScheduleOutlined, value: t('podDetail.specs.harvest.value') },
     { key: 'pack', Icon: Inventory2Outlined, value: t(`common.${pod.packKey}`) },
@@ -103,9 +109,9 @@ export default function PodDetailPage() {
                 bgcolor: brand.surface,
               }}
             >
-              <Box
-                component="img"
+              <MediaImg
                 src={gallery[active]}
+                preset="gallery"
                 alt={pod.name}
                 decoding="async"
                 fetchPriority="high"
@@ -138,7 +144,7 @@ export default function PodDetailPage() {
                     transition: 'border-color 0.2s ease',
                   }}
                 >
-                  <Box component="img" src={src} alt="" loading="lazy" decoding="async" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <MediaImg src={src} preset="thumb" alt="" loading="lazy" decoding="async" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </Box>
               ))}
             </Stack>
@@ -175,9 +181,48 @@ export default function PodDetailPage() {
                 </Typography>
               </Stack>
 
-              <Typography sx={{ color: brand.textSecondary, lineHeight: 1.75, fontSize: '1.05rem', mb: 3.5 }}>
+              <Typography sx={{ color: brand.textSecondary, lineHeight: 1.75, fontSize: '1.05rem', mb: 2.5 }}>
                 {pod.description}
               </Typography>
+
+              {kit.pods > 0 && (
+                <Box sx={{ mb: 3.5 }}>
+                  <Typography sx={{ fontWeight: 800, fontSize: '0.78rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: brand.textSecondary, mb: 1.25 }}>
+                    {t('podDetail.includesTitle')}
+                  </Typography>
+                  <Stack spacing={1}>
+                    {[
+                      { Icon: SpaOutlined, label: t('podDetail.includesPods', { count: kit.pods }) },
+                      { Icon: CircleOutlined, label: t('podDetail.includesCaps', { count: kit.caps }) },
+                      { Icon: WaterDropOutlined, label: t('podDetail.includesNutrient'), hint: t('podDetail.includesNutrientHint', { ml: kit.nutrientMl }) },
+                    ].map(({ Icon, label, hint }) => (
+                      <Stack key={label} direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+                        <Box
+                          sx={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: '12px',
+                            bgcolor: brand.plantGreenMuted,
+                            color: brand.plantGreenDark,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                          }}
+                        >
+                          <Icon sx={{ fontSize: 20 }} />
+                        </Box>
+                        <Box>
+                          <Typography sx={{ fontWeight: 700, color: brand.graphite, fontSize: '0.95rem', lineHeight: 1.3 }}>{label}</Typography>
+                          {hint && (
+                            <Typography sx={{ color: brand.textSecondary, fontSize: '0.8rem', fontWeight: 600 }}>{hint}</Typography>
+                          )}
+                        </Box>
+                      </Stack>
+                    ))}
+                  </Stack>
+                </Box>
+              )}
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' }, mb: 3.5 }}>
                 <Stack
@@ -248,7 +293,14 @@ export default function PodDetailPage() {
           {related.map((rel, index) => (
             <Grid key={rel.id} size={{ xs: 6, sm: 4, md: 3 }}>
               <Reveal delay={(index % 4) * 0.06}>
-                <ProductCard layout="grid" to={`/pods/${rel.id}`} product={toProductCardData(rel, t)} />
+                <ProductCard
+                  layout="grid"
+                  to={`/pods/${rel.id}`}
+                  product={{
+                    ...toProductCardData(rel, t),
+                    includes: resolveKit(rel),
+                  }}
+                />
               </Reveal>
             </Grid>
           ))}

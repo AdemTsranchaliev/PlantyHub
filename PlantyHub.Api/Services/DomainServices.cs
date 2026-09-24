@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using PlantyHub.Api.Data;
@@ -8,6 +9,8 @@ namespace PlantyHub.Api.Services;
 
 public class ProductMapper
 {
+    private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
+
     public static ProductDto ToDto(Product product) =>
         new(
             product.Slug,
@@ -15,14 +18,122 @@ public class ProductMapper
             PriceHelper.FormatEuro(product.Price),
             product.CompareAtPrice.HasValue ? PriceHelper.FormatEuro(product.CompareAtPrice.Value) : null,
             product.PackKey,
-            product.Image,
+            MediaUrls.Resolve(product.Image),
             EnumMapper.ToApi(product.ImageFit),
             product.Featured,
             product.Active,
             product.Colors.Select(c => new ProductColorDto(c.ColorId, c.Hex)).ToList(),
             product.Translations.ToDictionary(
                 t => t.Language,
-                t => new ProductLocaleDto(t.Name, t.Tagline, t.Description)));
+                t => ToLocale(t)),
+            ReadGallery(product.GalleryJson).Select(MediaUrls.Resolve).ToList(),
+            MediaUrls.ResolveOrNull(product.VideoUrl),
+            MediaUrls.ResolveOrNull(product.VideoPoster),
+            ReadKit(product.KitJson));
+
+    public static string WriteKit(ProductKitDto? kit)
+    {
+        if (kit is null || (kit.Pods <= 0 && kit.Caps <= 0 && kit.NutrientMl <= 0)) return "{}";
+        return JsonSerializer.Serialize(new ProductKitDto { Pods = Math.Max(0, kit.Pods), Caps = Math.Max(0, kit.Caps), NutrientMl = Math.Max(0, kit.NutrientMl) }, JsonOptions);
+    }
+
+    private static ProductKitDto? ReadKit(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json) || json.Trim() == "{}") return null;
+        try
+        {
+            return JsonSerializer.Deserialize<ProductKitDto>(json, JsonOptions);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    public static string WriteGallery(IReadOnlyList<string>? gallery) =>
+        JsonSerializer.Serialize(
+            gallery?.Where(url => !string.IsNullOrWhiteSpace(url)).Select(url => MediaUrls.Resolve(url.Trim())).ToList() ?? [],
+            JsonOptions);
+
+    public static string WriteContent(ProductLocaleDto locale)
+    {
+        var content = new ProductPageContentDto
+        {
+            Specs = locale.Specs?
+                .Where(s => !string.IsNullOrWhiteSpace(s.Label) || !string.IsNullOrWhiteSpace(s.Value))
+                .Select(s => new ProductSpecDto(s.Label.Trim(), s.Value.Trim()))
+                .ToList() ?? [],
+            HighlightsTitle = locale.HighlightsTitle,
+            HighlightsSubtitle = locale.HighlightsSubtitle,
+            SpecsTitle = locale.SpecsTitle,
+            HowTitle = locale.HowTitle,
+            BoxTitle = locale.BoxTitle,
+            FaqTitle = locale.FaqTitle,
+            Features = locale.Features?.Where(f => !string.IsNullOrWhiteSpace(f.Title) || !string.IsNullOrWhiteSpace(f.Text)).ToList() ?? [],
+            Steps = locale.Steps?.Where(s => !string.IsNullOrWhiteSpace(s)).Select(s => s.Trim()).ToList() ?? [],
+            InTheBox = locale.InTheBox?.Where(s => !string.IsNullOrWhiteSpace(s)).Select(s => s.Trim()).ToList() ?? [],
+            Faq = locale.Faq?.Where(f => !string.IsNullOrWhiteSpace(f.Q) || !string.IsNullOrWhiteSpace(f.A)).ToList() ?? [],
+        };
+        return JsonSerializer.Serialize(content, JsonOptions);
+    }
+
+    private static ProductLocaleDto ToLocale(ProductTranslation translation)
+    {
+        var content = ReadContent(translation.SpecsJson);
+        return new ProductLocaleDto(
+            translation.Name,
+            translation.Tagline,
+            translation.Description,
+            translation.VideoBadge,
+            translation.VideoTitle,
+            translation.VideoText,
+            content.Specs,
+            content.HighlightsTitle,
+            content.HighlightsSubtitle,
+            content.SpecsTitle,
+            content.HowTitle,
+            content.BoxTitle,
+            content.FaqTitle,
+            content.Features,
+            content.Steps,
+            content.InTheBox,
+            content.Faq);
+    }
+
+    private static ProductPageContentDto ReadContent(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json)) return new ProductPageContentDto();
+        try
+        {
+            var trimmed = json.TrimStart();
+            if (trimmed.StartsWith('['))
+            {
+                return new ProductPageContentDto
+                {
+                    Specs = JsonSerializer.Deserialize<List<ProductSpecDto>>(json, JsonOptions) ?? [],
+                };
+            }
+
+            return JsonSerializer.Deserialize<ProductPageContentDto>(json, JsonOptions) ?? new ProductPageContentDto();
+        }
+        catch
+        {
+            return new ProductPageContentDto();
+        }
+    }
+
+    private static IReadOnlyList<string> ReadGallery(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json)) return [];
+        try
+        {
+            return JsonSerializer.Deserialize<List<string>>(json, JsonOptions) ?? [];
+        }
+        catch
+        {
+            return [];
+        }
+    }
 
     public static ProductsByCategoryDto GroupByCategory(IEnumerable<Product> products)
     {
@@ -71,10 +182,10 @@ public class OrderMapper
                 i.Quantity,
                 PriceHelper.FormatEuro(i.UnitPrice),
                 PriceHelper.FormatEuro(i.Total),
-                i.Image,
+                MediaUrls.Resolve(i.Image),
                 string.IsNullOrWhiteSpace(i.GiftName)
                     ? null
-                    : new OrderLineGiftDto(i.GiftName, i.GiftImage ?? string.Empty, i.GiftCompareAt))).ToList(),
+                    : new OrderLineGiftDto(i.GiftName, MediaUrls.Resolve(i.GiftImage ?? string.Empty), i.GiftCompareAt))).ToList(),
             new OrderAddressDto(
                 order.ShippingName,
                 order.ShippingPhone,
@@ -270,7 +381,17 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
         {
             shipping = PriceHelper.StandardShippingCost;
         }
-        var vatQuote = await vat.QuoteAsync(country, subtotal, shipping, ct);
+        decimal discount = 0m;
+        PromoCode? promo = null;
+        if (!string.IsNullOrWhiteSpace(request.PromoCode))
+        {
+            var normalized = PromoCodeRules.Normalize(request.PromoCode);
+            promo = await db.PromoCodes.FirstOrDefaultAsync(p => p.Code == normalized, ct);
+            discount = PromoCodeRules.DiscountFor(promo, subtotal);
+            promo!.UsedCount += 1;
+        }
+
+        var vatQuote = await vat.QuoteAsync(country, subtotal - discount, shipping, ct);
         var tax = vatQuote.Tax;
         var total = vatQuote.Total;
         var now = DateTime.UtcNow;
@@ -287,6 +408,8 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
             Status = OrderStatus.Pending,
             PaymentMethod = paymentMethod,
             Subtotal = subtotal,
+            Discount = discount,
+            PromoCode = promo?.Code,
             ShippingCost = shipping,
             Tax = tax,
             TaxRate = vatQuote.Enabled ? vatQuote.RatePercent : null,
@@ -333,9 +456,9 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
                 Quantity = item.Quantity,
                 UnitPrice = unitPrice,
                 Total = unitPrice * item.Quantity,
-                Image = product.Image,
+                Image = MediaUrls.Resolve(product.Image),
                 GiftName = string.IsNullOrWhiteSpace(item.GiftName) ? null : item.GiftName.Trim(),
-                GiftImage = string.IsNullOrWhiteSpace(item.GiftImage) ? null : item.GiftImage.Trim(),
+                GiftImage = string.IsNullOrWhiteSpace(item.GiftImage) ? null : MediaUrls.Resolve(item.GiftImage.Trim()),
                 GiftCompareAt = string.IsNullOrWhiteSpace(item.GiftCompareAt) ? null : item.GiftCompareAt.Trim(),
             });
         }
@@ -484,8 +607,12 @@ public class ProductService(AppDbContext db)
             ? null
             : PriceHelper.ParseEuro(request.CompareAt);
         product.PackKey = request.PackKey;
-        product.Image = request.Image.Trim();
+        product.KitJson = ProductMapper.WriteKit(request.Kit);
+        product.Image = MediaUrls.Resolve(request.Image.Trim());
         product.ImageFit = EnumMapper.ParseImageFit(request.ImageFit);
+        product.GalleryJson = ProductMapper.WriteGallery(request.Gallery);
+        product.VideoUrl = MediaUrls.ResolveOrNull(request.VideoUrl);
+        product.VideoPoster = MediaUrls.ResolveOrNull(request.VideoPoster);
         product.Featured = request.Featured;
         product.Active = request.Active;
 
@@ -558,8 +685,12 @@ public class ProductService(AppDbContext db)
                 ? null
                 : PriceHelper.ParseEuro(request.CompareAt),
             PackKey = request.PackKey,
-            Image = request.Image.Trim(),
+            KitJson = ProductMapper.WriteKit(request.Kit),
+            Image = MediaUrls.Resolve(request.Image.Trim()),
             ImageFit = EnumMapper.ParseImageFit(request.ImageFit),
+            GalleryJson = ProductMapper.WriteGallery(request.Gallery),
+            VideoUrl = MediaUrls.ResolveOrNull(request.VideoUrl),
+            VideoPoster = MediaUrls.ResolveOrNull(request.VideoPoster),
             Featured = request.Featured,
             Active = request.Active
         };
@@ -579,7 +710,11 @@ public class ProductService(AppDbContext db)
                 Language = language,
                 Name = locale.Name.Trim(),
                 Tagline = locale.Tagline?.Trim(),
-                Description = locale.Description?.Trim()
+                Description = locale.Description?.Trim(),
+                VideoBadge = locale.VideoBadge?.Trim(),
+                VideoTitle = locale.VideoTitle?.Trim(),
+                VideoText = locale.VideoText?.Trim(),
+                SpecsJson = ProductMapper.WriteContent(locale)
             });
         }
     }

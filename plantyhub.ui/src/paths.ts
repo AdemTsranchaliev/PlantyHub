@@ -1,3 +1,5 @@
+import { toMediaUrl } from './media/cfImage'
+
 /** Repo subpath on GitHub Pages, e.g. `/PlantyHub`. Empty when served from domain root. */
 export const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '')
 
@@ -7,7 +9,7 @@ export function resolveHref(href: string): string {
   return `${BASE_PATH}${href}`
 }
 
-/** Public folder asset path (images, video, logos). */
+/** Public folder asset path — always served from Cloudflare R2. */
 export function assetUrl(path: string): string {
-  return resolveHref(path)
+  return toMediaUrl(path)
 }

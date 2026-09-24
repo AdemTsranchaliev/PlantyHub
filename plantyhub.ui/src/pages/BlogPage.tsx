@@ -13,6 +13,7 @@ import Reveal from '../components/Reveal'
 import { blogArticleIds, blogArticleImages, navHrefs } from '../data/catalog'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function BlogPage() {
   const { t } = useTranslation()
@@ -90,12 +91,12 @@ export default function BlogPage() {
                       },
                     }}
                   >
-                    <Box
-                      component="img"
-                      src={articleImage(id)}
-                      alt={t(`blogPage.articles.${id}.title`)}
-                      loading="lazy"
-                      decoding="async"
+                      <MediaImg
+                        src={articleImage(id)}
+                        preset="card"
+                        alt={t(`blogPage.articles.${id}.title`)}
+                        loading="lazy"
+                        decoding="async"
                       sx={{ width: '100%', height: { xs: 180, sm: 200 }, objectFit: 'cover', display: 'block' }}
                     />
                     <Box sx={{ p: { xs: 2.25, sm: 2.75 } }}>
