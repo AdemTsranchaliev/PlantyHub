@@ -37,8 +37,8 @@ export default function FaqPage() {
 
   return (
     <main>
-      <SectionContainer bgcolor={brand.surface} py={{ xs: 5, sm: 6, md: 8 }}>
-        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 3, md: 4 } }}>
+      <SectionContainer bgcolor={brand.surface} py={{ xs: 3, sm: 5, md: 8 }}>
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 2, md: 4 } }}>
           <Link component={RouterLink} to="/" underline="hover" sx={{ color: brand.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
             {t('pdp.home')}
           </Link>
@@ -59,21 +59,21 @@ export default function FaqPage() {
               borderRadius: 999,
               px: 1.5,
               py: 0.6,
-              mb: 2,
+              mb: 1.5,
             }}
           >
             {t('faqPage.eyebrow')}
           </Typography>
-          <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1.5 }}>
+          <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1.25, fontSize: { xs: '1.85rem', sm: undefined } }}>
             {t('faqPage.title')}
           </Typography>
-          <Typography sx={{ color: brand.textSecondary, fontSize: '1.08rem', lineHeight: 1.7 }}>
+          <Typography sx={{ color: brand.textSecondary, fontSize: { xs: '0.98rem', sm: '1.08rem' }, lineHeight: 1.65 }}>
             {t('faqPage.lead')}
           </Typography>
         </Reveal>
       </SectionContainer>
 
-      <SectionContainer bgcolor={brand.white} py={{ xs: 5, sm: 6, md: 8 }}>
+      <SectionContainer bgcolor={brand.white} py={{ xs: 3.5, sm: 5, md: 8 }}>
         <Stack
           direction="row"
           spacing={1}
@@ -90,6 +90,8 @@ export default function FaqPage() {
             clickable
             sx={{
               fontWeight: 700,
+              height: { xs: 40, sm: 36 },
+              px: 1.5,
               bgcolor: activeId === 'all' ? brand.plantGreen : brand.beige,
               color: activeId === 'all' ? brand.white : brand.graphite,
               '&:hover': { bgcolor: activeId === 'all' ? brand.plantGreenDark : brand.beigeDark },
@@ -103,6 +105,8 @@ export default function FaqPage() {
               clickable
               sx={{
                 fontWeight: 700,
+                height: { xs: 40, sm: 36 },
+                px: 1.5,
                 bgcolor: activeId === cat.id ? brand.plantGreen : brand.beige,
                 color: activeId === cat.id ? brand.white : brand.graphite,
                 '&:hover': { bgcolor: activeId === cat.id ? brand.plantGreenDark : brand.beigeDark },
@@ -140,7 +144,10 @@ export default function FaqPage() {
                     '&:before': { display: 'none' },
                   }}
                 >
-                  <AccordionSummary expandIcon={<ExpandMoreRounded sx={{ color: brand.plantGreen }} />} sx={{ px: { xs: 2, sm: 2.5 }, py: 0.25 }}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreRounded sx={{ color: brand.plantGreen }} />}
+                    sx={{ px: { xs: 2, sm: 2.5 }, py: { xs: 0.75, sm: 0.25 }, minHeight: { xs: 52, sm: 48 } }}
+                  >
                     <Typography sx={{ fontWeight: 700, fontSize: '0.98rem', color: brand.graphite, pr: 1 }}>{item.q}</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{ px: { xs: 2, sm: 2.5 }, pb: 2.25, pt: 0 }}>

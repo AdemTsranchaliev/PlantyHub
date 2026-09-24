@@ -15,12 +15,12 @@ export default function AccessoriesSection() {
   const subtitle = useHt('accessoriesSection.subtitle')
 
   return (
-    <SectionContainer id="accessories" bgcolor={brand.surface} py={{ xs: 7, sm: 9, md: 12 }}>
+    <SectionContainer id="accessories" bgcolor={brand.surface} py={{ xs: 4, sm: 6, md: 8 }}>
       <SectionHeading title={title} subtitle={subtitle} />
 
-      <Grid container spacing={{ xs: 2.5, md: 3 }}>
+      <Grid container spacing={{ xs: 1.5, md: 3 }}>
         {items.map((item, index) => (
-          <Grid key={item.id} size={{ xs: 12, sm: 4 }}>
+          <Grid key={item.id} size={{ xs: items.length % 2 === 1 && index === items.length - 1 ? 12 : 6, sm: 4 }}>
             <Reveal delay={index * 0.08}>
               <ProductCard layout="grid" product={toProductCardData(item, t)} />
             </Reveal>

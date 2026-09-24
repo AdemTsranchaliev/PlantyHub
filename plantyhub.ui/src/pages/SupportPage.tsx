@@ -177,8 +177,8 @@ export default function SupportPage() {
 
   return (
     <main>
-      <SectionContainer bgcolor={brand.surface} py={{ xs: 4, sm: 5, md: 6 }}>
-        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 3, md: 4 } }}>
+      <SectionContainer bgcolor={brand.surface} py={{ xs: 3, sm: 5, md: 6 }}>
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 2, md: 4 } }}>
           <Link component={RouterLink} to="/" underline="hover" sx={{ color: brand.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
             {t('pdp.home')}
           </Link>
@@ -257,8 +257,8 @@ export default function SupportPage() {
                           rel="noopener noreferrer"
                           aria-label={social.label}
                           sx={{
-                            width: 40,
-                            height: 40,
+                            width: 44,
+                            height: 44,
                             borderRadius: '12px',
                             bgcolor: brand.plantGreenMuted,
                             color: brand.plantGreenDark,

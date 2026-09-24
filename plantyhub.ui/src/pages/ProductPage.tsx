@@ -34,8 +34,9 @@ import { useProduct } from '../hooks/useProducts'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
+import { toMediaUrl } from '../media/cfImage'
+import MediaImg from '../components/MediaImg'
 
-const highlightKeys = ['pods', 'light', 'irrigation', 'growthHeight'] as const
 const trustItems = [
   { key: 'shipping', Icon: LocalShippingOutlined },
   { key: 'guarantee', Icon: VerifiedOutlined },
@@ -53,22 +54,48 @@ const bonusKitIds = ['basil', 'mint', 'parsley', 'arugula'] as const
 const BONUS_KIT_PRICE = '€19.99'
 
 export default function ProductPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const garden = useProduct('gardens', 'homegarder-one')
   const addProductToCart = useAddProductToCart()
   const { images } = useSiteAssetsStore()
   const [active, setActive] = useState(0)
   const [qty, setQty] = useState(1)
   const [bonusPod, setBonusPod] = useState<string | null>(null)
-  const faqItems = t('pdp.faqItems', { returnObjects: true }) as { q: string; a: string }[]
+  const faqCategories = t('faqPage.categories', { returnObjects: true }) as { items?: { q: string; a: string }[] }[]
+  const fallbackFaq = Array.isArray(faqCategories) ? faqCategories.flatMap((category) => category.items ?? []) : []
 
-  const gallery = [
-    images['pdp.gallery.homeGarden'] || lifestyleImages.homeGardenProduct,
-    images['pdp.gallery.kitchenBasil'] || lifestyleImages.kitchenBasil,
-    images['pdp.gallery.basilCloseup'] || lifestyleImages.basilCloseup,
-    images['pdp.gallery.mintKitchen'] || lifestyleImages.mintKitchen,
-    images['pdp.gallery.heroKitchen'] || lifestyleImages.heroKitchen,
-  ]
+  const gallery = garden?.gallery?.length
+    ? garden.gallery
+    : [
+        images['pdp.gallery.homeGarden'] || lifestyleImages.homeGardenProduct,
+        images['pdp.gallery.kitchenBasil'] || lifestyleImages.kitchenBasil,
+        images['pdp.gallery.basilCloseup'] || lifestyleImages.basilCloseup,
+        images['pdp.gallery.mintKitchen'] || lifestyleImages.mintKitchen,
+        images['pdp.gallery.heroKitchen'] || lifestyleImages.heroKitchen,
+      ]
+  const videoSrc = garden?.videoUrl || productVideo
+  const videoPoster = garden?.videoPoster || productVideoPoster
+  const lang = (i18n.language?.split('-')[0] ?? 'en') as 'en' | 'bg' | 'de' | 'fr'
+  const locale = garden?.locales[lang] ?? garden?.locales.en
+  const specRows = locale?.specs?.length
+    ? locale.specs
+    : productSpecRows.map((row) => ({ label: t(`product.specs.${row.key}`), value: t(`product.specs.${row.valueKey}`) }))
+  const productTitle = locale?.name?.trim() || t('product.title')
+  const productDescription = locale?.description?.trim() || t('product.description')
+  const highlightsTitle = locale?.highlightsTitle || t('pdp.highlightsTitle')
+  const highlightsSubtitle = locale?.highlightsSubtitle || t('pdp.highlightsSubtitle')
+  const howTitle = locale?.howTitle || t('pdp.howItWorksTitle')
+  const boxTitle = locale?.boxTitle || t('pdp.inTheBox')
+  const specsTitle = locale?.specsTitle || t('pdp.specsTitle')
+  const faqTitle = locale?.faqTitle || t('faqPage.title')
+  const features = locale?.features?.length
+    ? locale.features
+    : featureItems.map(({ key }) => ({ title: t(`pdp.features.${key}.title`), text: t(`pdp.features.${key}.text`) }))
+  const steps = locale?.steps?.length ? locale.steps : (t('pdp.steps', { returnObjects: true }) as string[])
+  const boxItems = locale?.inTheBox?.length
+    ? locale.inTheBox
+    : inTheBoxKeys.map((key) => t(`pdp.inTheBoxItems.${key}`))
+  const faqItems = locale?.faq?.length ? locale.faq : fallbackFaq
 
   const bonusKits = bonusKitIds.map((id) => ({
     id,
@@ -88,7 +115,7 @@ export default function ProductPage() {
           </Link>
           <NavigateNextRounded sx={{ fontSize: 16, color: brand.textSecondary }} />
           <Typography sx={{ color: brand.graphite, fontSize: '0.85rem', fontWeight: 700 }}>
-            {t('product.title')}
+            {productTitle}
           </Typography>
         </Stack>
 
@@ -103,10 +130,10 @@ export default function ProductPage() {
                 bgcolor: brand.white,
               }}
             >
-              <Box
-                component="img"
+              <MediaImg
                 src={gallery[active]}
-                alt={t('product.title')}
+                preset="gallery"
+                alt={productTitle}
                 decoding="async"
                 fetchPriority="high"
                 sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block', borderRadius: '20px' }}
@@ -115,10 +142,10 @@ export default function ProductPage() {
             <Stack direction="row" spacing={1.5} sx={{ mt: 2, overflowX: 'auto', pb: 0.5, '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
               {gallery.map((src, i) => (
                 <Box
-                  key={src}
+                  key={`${src}-${i}`}
                   component="button"
                   onClick={() => setActive(i)}
-                  aria-label={`${t('product.title')} ${i + 1}`}
+                  aria-label={`${productTitle} ${i + 1}`}
                   sx={{
                     flex: '0 0 auto',
                     width: { xs: 64, sm: 80 },
@@ -132,7 +159,7 @@ export default function ProductPage() {
                     transition: 'border-color 0.2s ease',
                   }}
                 >
-                  <Box component="img" src={src} alt="" loading="lazy" decoding="async" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <MediaImg src={src} preset="thumb" alt="" loading="lazy" decoding="async" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </Box>
               ))}
             </Stack>
@@ -152,7 +179,7 @@ export default function ProductPage() {
               </Stack>
 
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1.5 }}>
-                {t('product.title')}
+                {productTitle}
               </Typography>
 
               <Stack direction="row" spacing={1.5} sx={{ alignItems: 'baseline', mb: 2 }}>
@@ -169,7 +196,7 @@ export default function ProductPage() {
               </Stack>
 
               <Typography sx={{ color: brand.textSecondary, lineHeight: 1.75, fontSize: '1.05rem', mb: 3.5 }}>
-                {t('product.description')}
+                {productDescription}
               </Typography>
 
               <Typography sx={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: brand.graphite, mb: 1 }}>
@@ -245,7 +272,7 @@ export default function ProductPage() {
                   {bonusKits.map((kit) => {
                     const selected = bonusPod === kit.id
                     return (
-                      <Grid key={kit.id} size={6}>
+                      <Grid key={kit.id} size={{ xs: 12, sm: 6 }}>
                         <Box
                           component="button"
                           type="button"
@@ -257,25 +284,27 @@ export default function ProductPage() {
                             alignItems: 'center',
                             gap: 0.85,
                             textAlign: 'left',
-                            p: 0.65,
+                            p: { xs: 1, sm: 0.65 },
                             pr: 0.85,
+                            minHeight: { xs: 48, sm: 'auto' },
                             borderRadius: '12px',
                             bgcolor: brand.white,
                             cursor: 'pointer',
                             border: selected ? `2px solid ${brand.plantGreen}` : `1px solid ${brand.border}`,
                             boxShadow: selected ? brand.shadowGreen : 'none',
                             transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
+                            WebkitTapHighlightColor: 'transparent',
                           }}
                         >
-                          <Box
-                            component="img"
+                          <MediaImg
                             src={kit.image}
+                            preset="thumb"
                             alt=""
                             loading="lazy"
                             decoding="async"
-                            sx={{ flexShrink: 0, width: 40, height: 40, borderRadius: '9px', objectFit: 'contain', bgcolor: brand.surface, display: 'block' }}
+                            sx={{ flexShrink: 0, width: { xs: 44, sm: 40 }, height: { xs: 44, sm: 40 }, borderRadius: '9px', objectFit: 'contain', bgcolor: brand.surface, display: 'block' }}
                           />
-                          <Typography sx={{ fontWeight: 700, fontSize: '0.72rem', color: brand.graphite, lineHeight: 1.25 }}>
+                          <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.85rem', sm: '0.72rem' }, color: brand.graphite, lineHeight: 1.25 }}>
                             {t(`pdp.bonus.kits.${kit.id}`)}
                           </Typography>
                         </Box>
@@ -321,8 +350,8 @@ export default function ProductPage() {
               >
                 <Box
                   component="video"
-                  src={productVideo}
-                  poster={productVideoPoster}
+                  src={toMediaUrl(videoSrc)}
+                  poster={toMediaUrl(videoPoster)}
                   controls
                   playsInline
                   preload="none"
@@ -349,20 +378,20 @@ export default function ProductPage() {
                 }}
               >
                 <PlayArrowRounded sx={{ fontSize: 18 }} />
-                <Typography sx={{ fontSize: '0.78rem', fontWeight: 700 }}>{t('pdp.videoBadge')}</Typography>
+                <Typography sx={{ fontSize: '0.78rem', fontWeight: 700 }}>{locale?.videoBadge || t('pdp.videoBadge')}</Typography>
               </Stack>
               <Typography component="h2" variant="h2" sx={{ color: brand.graphite, mb: 2 }}>
-                {t('pdp.videoTitle')}
+                {locale?.videoTitle || t('pdp.videoTitle')}
               </Typography>
               <Typography sx={{ color: brand.textSecondary, fontSize: '1.05rem', lineHeight: 1.75, mb: 3, maxWidth: 480 }}>
-                {t('pdp.videoText')}
+                {locale?.videoText || t('pdp.videoText')}
               </Typography>
               <Stack spacing={1.5}>
-                {highlightKeys.slice(0, 3).map((key) => (
-                  <Stack key={key} direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
+                {specRows.slice(0, 3).map((row) => (
+                  <Stack key={row.label} direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
                     <CheckCircleRounded sx={{ color: brand.plantGreen, fontSize: 20 }} />
                     <Typography sx={{ color: brand.graphite, fontWeight: 600, fontSize: '0.95rem' }}>
-                      {t(`product.specs.${productSpecRows.find((r) => r.key === key)?.valueKey ?? key}`)}
+                      {row.value}
                     </Typography>
                   </Stack>
                 ))}
@@ -375,24 +404,31 @@ export default function ProductPage() {
       <SectionContainer bgcolor={brand.white} py={{ xs: 6, sm: 7, md: 8 }}>
         <Reveal sx={{ textAlign: 'center', maxWidth: 640, mx: 'auto', mb: { xs: 4, md: 6 } }}>
           <Typography component="h2" variant="h2" sx={{ color: brand.graphite, mb: 2 }}>
-            {t('pdp.highlightsTitle')}
+            {highlightsTitle}
           </Typography>
           <Typography sx={{ color: brand.textSecondary, fontSize: '1.05rem' }}>
-            {t('pdp.highlightsSubtitle')}
+            {highlightsSubtitle}
           </Typography>
         </Reveal>
 
         <Reveal>
           <Grid container sx={{ mb: { xs: 5, md: 7 } }}>
-            {featureItems.map(({ key, Icon }, i) => (
+            {features.map((feature, i) => {
+              const Icon = featureItems[i % featureItems.length].Icon
+              return (
               <Grid
-                key={key}
-                size={{ xs: 6, md: 3 }}
+                key={`${feature.title}-${i}`}
+                size={{ xs: 12, sm: 6, md: 3 }}
                 sx={{
                   textAlign: 'center',
                   px: { xs: 1.5, md: 3 },
-                  py: { xs: 2, md: 0 },
-                  borderRight: { md: i < featureItems.length - 1 ? `1px solid ${brand.border}` : 'none' },
+                  py: { xs: 2.25, sm: 2, md: 0 },
+                  borderRight: { md: i < features.length - 1 && (i + 1) % 4 !== 0 ? `1px solid ${brand.border}` : 'none' },
+                  borderBottom: {
+                    xs: i < features.length - 1 ? `1px solid ${brand.border}` : 'none',
+                    sm: i < features.length - (features.length % 2 || 2) ? `1px solid ${brand.border}` : 'none',
+                    md: 'none',
+                  },
                 }}
               >
                 <Box
@@ -411,13 +447,14 @@ export default function ProductPage() {
                   <Icon sx={{ color: brand.plantGreen, fontSize: 28 }} />
                 </Box>
                 <Typography sx={{ fontWeight: 800, fontSize: '1rem', color: brand.plantGreenDark, mb: 0.5 }}>
-                  {t(`pdp.features.${key}.title`)}
+                  {feature.title}
                 </Typography>
                 <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem', lineHeight: 1.5 }}>
-                  {t(`pdp.features.${key}.text`)}
+                  {feature.text}
                 </Typography>
               </Grid>
-            ))}
+              )
+            })}
           </Grid>
         </Reveal>
 
@@ -432,10 +469,10 @@ export default function ProductPage() {
               }}
             >
               <Typography component="h3" sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '1.4rem', color: brand.graphite, mb: 2.5 }}>
-                {t('pdp.howItWorksTitle')}
+                {howTitle}
               </Typography>
               <Stack spacing={2.25}>
-                {(t('pdp.steps', { returnObjects: true }) as string[]).map((step, i) => (
+                {steps.map((step, i) => (
                   <Stack key={i} direction="row" spacing={1.75} sx={{ alignItems: 'center' }}>
                     <Box
                       sx={{
@@ -471,14 +508,14 @@ export default function ProductPage() {
               }}
             >
               <Typography component="h3" sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '1.4rem', color: brand.graphite, mb: 2.5 }}>
-                {t('pdp.inTheBox')}
+                {boxTitle}
               </Typography>
               <Stack spacing={1.75}>
-                {inTheBoxKeys.map((key) => (
-                  <Stack key={key} direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+                {boxItems.map((item, i) => (
+                  <Stack key={`${item}-${i}`} direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
                     <Box sx={{ flexShrink: 0, width: 8, height: 8, borderRadius: '50%', bgcolor: brand.plantGreen }} />
                     <Typography sx={{ color: brand.graphite, fontSize: '1rem' }}>
-                      {t(`pdp.inTheBoxItems.${key}`)}
+                      {item}
                     </Typography>
                   </Stack>
                 ))}
@@ -492,26 +529,26 @@ export default function ProductPage() {
         <Grid container spacing={{ xs: 5, md: 7 }} sx={{ alignItems: 'flex-start' }}>
           <Grid size={{ xs: 12, md: 7 }}>
             <Typography component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, color: brand.graphite, mb: 3 }}>
-              {t('pdp.specsTitle')}
+              {specsTitle}
             </Typography>
             <Box sx={{ borderRadius: '20px', border: `1px solid ${brand.creamBorder}`, overflow: 'hidden', bgcolor: brand.white }}>
-              {productSpecRows.map((row, i) => (
+              {specRows.map((row, i) => (
                 <Stack
-                  key={row.key}
-                  direction="row"
+                  key={`${row.label}-${i}`}
+                  direction={{ xs: 'column', sm: 'row' }}
                   sx={{
                     px: { xs: 2, sm: 3 },
-                    py: 1.75,
-                    gap: 2,
+                    py: { xs: 1.5, sm: 1.75 },
+                    gap: { xs: 0.35, sm: 2 },
                     bgcolor: i % 2 === 0 ? brand.white : brand.surface,
-                    borderBottom: i < productSpecRows.length - 1 ? `1px solid ${brand.border}` : 'none',
+                    borderBottom: i < specRows.length - 1 ? `1px solid ${brand.border}` : 'none',
                   }}
                 >
-                  <Typography sx={{ flex: '0 0 42%', fontWeight: 700, fontSize: '0.9rem', color: brand.graphite }}>
-                    {t(`product.specs.${row.key}`)}
+                  <Typography sx={{ flex: { sm: '0 0 42%' }, fontWeight: 700, fontSize: { xs: '0.8rem', sm: '0.9rem' }, color: brand.graphite }}>
+                    {row.label}
                   </Typography>
-                  <Typography sx={{ flex: 1, fontSize: '0.9rem', color: brand.textSecondary }}>
-                    {t(`product.specs.${row.valueKey}`)}
+                  <Typography sx={{ flex: 1, fontSize: { xs: '0.88rem', sm: '0.9rem' }, color: brand.textSecondary, lineHeight: 1.45 }}>
+                    {row.value}
                   </Typography>
                 </Stack>
               ))}
@@ -521,7 +558,7 @@ export default function ProductPage() {
           <Grid size={{ xs: 12, md: 5 }}>
             <Box sx={{ p: { xs: 3, sm: 4 }, borderRadius: '24px', border: `1.5px solid ${brand.plantGreen}`, bgcolor: brand.white }}>
               <Typography component="h2" variant="h3" sx={{ fontSize: '1.4rem', color: brand.graphite, mb: 1 }}>
-                {t('product.title')}
+                {productTitle}
               </Typography>
               <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', mb: 2 }}>
                 <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: brand.plantGreen }} />
@@ -553,7 +590,7 @@ export default function ProductPage() {
       <SectionContainer bgcolor={brand.white} py={{ xs: 6, sm: 7, md: 8 }}>
         <Reveal sx={{ maxWidth: 820, mx: 'auto' }}>
           <Typography component="h2" variant="h2" sx={{ textAlign: 'center', color: brand.graphite, mb: { xs: 4, md: 5 } }}>
-            {t('pdp.faqTitle')}
+            {faqTitle}
           </Typography>
           <Box>
             {faqItems.map((item, i) => (

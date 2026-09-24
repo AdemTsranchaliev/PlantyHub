@@ -53,7 +53,7 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
 
   return (
     <main>
-      <SectionContainer bgcolor={brand.surface} py={{ xs: 4, sm: 5, md: 6 }}>
+      <SectionContainer bgcolor={brand.surface} py={{ xs: 3, sm: 5, md: 6 }}>
         <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 3, md: 4 } }}>
           <Link component={RouterLink} to="/" underline="hover" sx={{ color: brand.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
             {t('pdp.home')}
@@ -108,13 +108,13 @@ export default function LegalPage({ doc }: { doc: LegalDoc }) {
                   component={RouterLink}
                   to={legalDocHrefs[key]}
                   variant={active ? 'contained' : 'outlined'}
-                  size="small"
+                  size="medium"
                   sx={{
-                    px: 1.75,
-                    py: 0.85,
+                    px: 2,
+                    minHeight: 44,
                     borderRadius: '999px',
                     fontWeight: 700,
-                    fontSize: '0.82rem',
+                    fontSize: '0.85rem',
                     ...(active
                       ? {}
                       : {

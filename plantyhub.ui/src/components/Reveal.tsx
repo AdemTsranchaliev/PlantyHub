@@ -18,10 +18,26 @@ export default function Reveal({ delay = 0, sx, children, ...rest }: RevealProps
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      setShown(true)
+      return
+    }
+
+    // Already in view (common for above-the-fold content on mobile)
+    const rect = el.getBoundingClientRect()
+    const vh = window.innerHeight || document.documentElement.clientHeight
+    if (rect.top < vh * 0.92 && rect.bottom > 0) {
+      setShown(true)
+      return
+    }
+
     if (typeof IntersectionObserver === 'undefined') {
       setShown(true)
       return
     }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,7 +47,7 @@ export default function Reveal({ delay = 0, sx, children, ...rest }: RevealProps
           }
         })
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0.06, rootMargin: '48px 0px 48px 0px' },
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -42,8 +58,8 @@ export default function Reveal({ delay = 0, sx, children, ...rest }: RevealProps
       ref={ref}
       sx={{
         opacity: shown ? 1 : 0,
-        transform: shown ? 'none' : 'translateY(22px)',
-        transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
+        transform: shown ? 'none' : 'translateY(16px)',
+        transition: 'opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)',
         transitionDelay: `${delay}s`,
         '@media (prefers-reduced-motion: reduce)': {
           opacity: 1,

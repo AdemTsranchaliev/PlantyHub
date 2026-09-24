@@ -11,14 +11,14 @@ export default function PromoBar() {
       sx={{
         bgcolor: brand.plantGreenDark,
         color: brand.white,
-        py: { xs: 1, sm: 1.15 },
+        py: { xs: 0.65, sm: 1.15 },
         px: 2,
         textAlign: 'center',
         fontWeight: 700,
-        fontSize: { xs: '0.62rem', sm: '0.68rem', md: '0.72rem' },
-        letterSpacing: { xs: '0.08em', sm: '0.1em' },
+        fontSize: { xs: '0.68rem', sm: '0.7rem', md: '0.72rem' },
+        letterSpacing: { xs: '0.03em', sm: '0.08em', md: '0.1em' },
         textTransform: 'uppercase',
-        lineHeight: 1.4,
+        lineHeight: 1.35,
       }}
     >
       {t('promo')}

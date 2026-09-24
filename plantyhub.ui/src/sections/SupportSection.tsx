@@ -10,6 +10,7 @@ import Logo from '../components/Logo'
 import SectionContainer from '../components/SectionContainer'
 import { homeGardenImage, homeGardenPrice, homeGardenSpecKeys } from '../data/catalog'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function SupportSection() {
   const { t } = useTranslation()
@@ -46,17 +47,17 @@ export default function SupportSection() {
           <Typography variant="h4" sx={{ color: brand.white, mb: 2 }}>
             {homeGardenPrice}
           </Typography>
-          <Button variant="contained" size="large">
+          <Button variant="contained" size="large" fullWidth sx={{ maxWidth: { sm: 280 } }}>
             {t('common.addToCart')}
           </Button>
         </Grid>
 
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={3}>
-            <Box
-              component="img"
-              src={homeGardenImage}
-              alt={t('support.name')}
+              <MediaImg
+                src={homeGardenImage}
+                preset="card"
+                alt={t('support.name')}
               sx={{
                 width: '100%',
                 borderRadius: 2,

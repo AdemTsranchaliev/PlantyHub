@@ -9,6 +9,7 @@ import Reveal from '../components/Reveal'
 import { socialProofReviewIds, socialProofImages } from '../data/catalog'
 import { useHt, useHi } from '../hooks/useHomepage'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 function ReviewCard({ id, index }: { id: (typeof socialProofReviewIds)[number]; index: number }) {
   const review = useHt(`socialProof.reviews.${id}`)
@@ -34,11 +35,11 @@ function ReviewCard({ id, index }: { id: (typeof socialProofReviewIds)[number]; 
           },
         }}
       >
-        <Box component="img" src={image} alt="" loading="lazy" sx={{ width: '100%', height: 180, objectFit: 'cover', display: 'block' }} />
-        <Box sx={{ p: { xs: 3, sm: 3.5 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <FormatQuoteRounded sx={{ color: brand.plantGreen, fontSize: 32, mb: 1 }} />
-          <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontSize: '1.1rem', lineHeight: 1.55, flex: 1, color: brand.graphite }}>{review}</Typography>
-          <Typography sx={{ fontWeight: 700, fontSize: '0.85rem', mt: 2.5, color: brand.plantGreenDark }}>@{handle}</Typography>
+        <MediaImg src={image} preset="card" alt="" loading="lazy" sx={{ width: '100%', height: { xs: 150, sm: 180 }, objectFit: 'cover', display: 'block' }} />
+        <Box sx={{ p: { xs: 2.25, sm: 3.5 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <FormatQuoteRounded sx={{ color: brand.plantGreen, fontSize: { xs: 26, sm: 32 }, mb: 0.75 }} />
+          <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontSize: { xs: '1rem', sm: '1.1rem' }, lineHeight: 1.5, flex: 1, color: brand.graphite }}>{review}</Typography>
+          <Typography sx={{ fontWeight: 700, fontSize: '0.85rem', mt: { xs: 1.75, sm: 2.5 }, color: brand.plantGreenDark }}>@{handle}</Typography>
         </Box>
       </Reveal>
     </Grid>
@@ -51,19 +52,19 @@ export default function SocialProofSection() {
   const statLabel = useHt('socialProof.statLabel')
 
   return (
-    <SectionContainer bgcolor={brand.white} py={{ xs: 7, sm: 9, md: 12 }}>
-      <Reveal sx={{ textAlign: 'center', maxWidth: 640, mx: 'auto', mb: { xs: 5, md: 7 } }}>
-        <Stack direction="row" sx={{ color: '#CE8A4A', justifyContent: 'center', mb: 2 }}>
+    <SectionContainer bgcolor={brand.white} py={{ xs: 4, sm: 6, md: 8 }}>
+      <Reveal sx={{ textAlign: 'center', maxWidth: 640, mx: 'auto', mb: { xs: 2.75, md: 7 } }}>
+        <Stack direction="row" sx={{ color: '#CE8A4A', justifyContent: 'center', mb: { xs: 1.25, sm: 2 } }}>
           {[0, 1, 2, 3, 4].map((i) => (
-            <StarRounded key={i} sx={{ fontSize: 24 }} />
+            <StarRounded key={i} sx={{ fontSize: { xs: 20, sm: 24 } }} />
           ))}
         </Stack>
-        <Typography component="h2" variant="h2" sx={{ color: brand.graphite, mb: 2 }}>{subtitle}</Typography>
-        <Typography sx={{ color: brand.textSecondary, fontSize: '1.05rem' }}>
+        <Typography component="h2" variant="h2" sx={{ color: brand.graphite, mb: { xs: 1.25, sm: 2 }, fontSize: { xs: '1.65rem', sm: undefined } }}>{subtitle}</Typography>
+        <Typography sx={{ color: brand.textSecondary, fontSize: { xs: '0.95rem', sm: '1.05rem' } }}>
           <Box component="span" sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, color: brand.plantGreenDark }}>{stat}</Box> {statLabel}
         </Typography>
       </Reveal>
-      <Grid container spacing={{ xs: 2.5, md: 3 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }}>
         {socialProofReviewIds.slice(0, 2).map((id, index) => (
           <ReviewCard key={id} id={id} index={index} />
         ))}

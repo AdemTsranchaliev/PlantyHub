@@ -10,6 +10,7 @@ import { lifestyleImages } from '../data/images'
 import { useProduct } from '../hooks/useProducts'
 import { useHt, useHi } from '../hooks/useHomepage'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 export default function CtaSection() {
   const bundle = useProduct('gardens', 'starter-bundle')
@@ -28,11 +29,12 @@ export default function CtaSection() {
         overflow: 'hidden',
         background: brand.gradientCta,
         color: brand.white,
-        py: { xs: 7, sm: 9, md: 12 },
+        py: { xs: 4, sm: 6, md: 8 },
       }}
     >
       <Box
         sx={{
+          display: { xs: 'none', md: 'block' },
           position: 'absolute',
           top: '-25%',
           right: '-8%',
@@ -44,7 +46,7 @@ export default function CtaSection() {
         }}
       />
       <Box sx={{ position: 'relative', maxWidth: 1400, mx: 'auto', px: pagePaddingX }}>
-        <Grid container spacing={{ xs: 5, md: 7 }} sx={{ alignItems: 'center' }}>
+        <Grid container spacing={{ xs: 3.5, md: 7 }} sx={{ alignItems: 'center' }}>
           <Grid size={{ xs: 12, md: 7 }}>
             <Reveal>
               <Typography
@@ -52,16 +54,16 @@ export default function CtaSection() {
                 sx={{
                   fontFamily: '"Fraunces", Georgia, serif',
                   fontWeight: 600,
-                  fontSize: { xs: '2.1rem', sm: '2.6rem', md: '3rem' },
+                  fontSize: { xs: '1.75rem', sm: '2.6rem', md: '3rem' },
                   letterSpacing: '-0.015em',
-                  lineHeight: 1.05,
-                  mb: 2,
+                  lineHeight: 1.08,
+                  mb: { xs: 1.25, sm: 2 },
                 }}
               >
                 {title}
               </Typography>
               {subtitle && (
-                <Typography sx={{ fontSize: { xs: '1.05rem', sm: '1.15rem' }, lineHeight: 1.7, opacity: 0.92, mb: 4, maxWidth: 480 }}>
+                <Typography sx={{ fontSize: { xs: '0.95rem', sm: '1.15rem' }, lineHeight: 1.6, opacity: 0.92, mb: { xs: 2.5, sm: 4 }, maxWidth: 480 }}>
                   {subtitle}
                 </Typography>
               )}
@@ -69,7 +71,7 @@ export default function CtaSection() {
               <Stack
                 component="form"
                 direction={{ xs: 'column', sm: 'row' }}
-                spacing={1.5}
+                spacing={1.25}
                 onSubmit={(e) => e.preventDefault()}
                 sx={{ width: '100%', maxWidth: 500 }}
               >
@@ -82,7 +84,7 @@ export default function CtaSection() {
                     '& .MuiOutlinedInput-root': {
                       bgcolor: brand.white,
                       borderRadius: 999,
-                      minHeight: 52,
+                      minHeight: { xs: 48, sm: 52 },
                       '& fieldset': { border: 'none' },
                     },
                   }}
@@ -91,11 +93,13 @@ export default function CtaSection() {
                   type="submit"
                   variant="contained"
                   size="large"
+                  fullWidth
                   sx={{
                     bgcolor: brand.graphite,
                     color: brand.white,
                     px: 4,
-                    minHeight: 52,
+                    minHeight: { xs: 48, sm: 52 },
+                    width: { sm: 'auto' },
                     fontWeight: 700,
                     whiteSpace: 'nowrap',
                     '&:hover': { bgcolor: brand.graphiteSoft },
@@ -119,14 +123,14 @@ export default function CtaSection() {
                   '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } },
                 }}
               >
-                <Box
-                  component="img"
+                <MediaImg
                   src={ctaImage}
+                  preset="gallery"
                   alt={title}
                   loading="lazy"
                   sx={{
                     width: '100%',
-                    aspectRatio: '4/5',
+                    aspectRatio: '4/3',
                     objectFit: 'cover',
                     display: 'block',
                   }}

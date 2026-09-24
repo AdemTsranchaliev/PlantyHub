@@ -45,6 +45,20 @@ const mobileNavKeys = [
   { key: 'contact', href: navHrefs.contact },
 ] as const
 
+const headerTextButtonSx = {
+  display: { xs: 'none', md: 'inline-flex' },
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  color: brand.plantGreenDark,
+  fontWeight: 700,
+  fontSize: '0.85rem',
+  minHeight: 40,
+  height: 40,
+  px: 1.25,
+  py: 0,
+  lineHeight: 1,
+} as const
+
 export default function Header() {
   const { t } = useTranslation()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -71,12 +85,12 @@ export default function Header() {
             mx: 'auto',
             justifyContent: 'space-between',
             gap: { xs: 0.5, sm: 1 },
-            minHeight: { xs: 56, sm: 60, md: 68 },
-            py: { xs: 0.5, md: 1 },
+            minHeight: { xs: 48, sm: 60, md: 68 },
+            py: { xs: 0.25, md: 1 },
             px: pagePaddingX,
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.25, sm: 1 }, flex: 1, minWidth: 0 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.25, sm: 1 }, flex: '0 0 auto', minWidth: 0 }}>
             <IconButton
               edge="start"
               onClick={() => setMobileOpen(true)}
@@ -95,9 +109,10 @@ export default function Header() {
             aria-label="Main"
             sx={{
               display: { xs: 'none', lg: 'flex' },
-              gap: 3,
-              flex: 2,
+              gap: { lg: 2, xl: 3 },
+              flex: '1 1 auto',
               justifyContent: 'center',
+              minWidth: 0,
             }}
           >
             {desktopNavKeys.map((link) => (
@@ -109,6 +124,7 @@ export default function Header() {
                 sx={{
                   fontWeight: 700,
                   fontSize: '0.875rem',
+                  whiteSpace: 'nowrap',
                   position: 'relative',
                   py: 0.5,
                   '&::after': {
@@ -136,8 +152,8 @@ export default function Header() {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: { xs: 0.5, sm: 1 },
-              flex: 1,
+              gap: { xs: 0.25, sm: 0.75 },
+              flex: '0 0 auto',
               justifyContent: 'flex-end',
             }}
           >
@@ -148,12 +164,7 @@ export default function Header() {
                   <Button
                     component={RouterLink}
                     to="/admin"
-                    sx={{
-                      display: { xs: 'none', md: 'inline-flex' },
-                      color: brand.plantGreenDark,
-                      fontWeight: 700,
-                      fontSize: '0.85rem',
-                    }}
+                    sx={headerTextButtonSx}
                   >
                     {t('header.admin')}
                   </Button>
@@ -162,12 +173,7 @@ export default function Header() {
                   component={RouterLink}
                   to={navHrefs.myOrders}
                   startIcon={<PersonOutlineRounded />}
-                  sx={{
-                    display: { xs: 'none', md: 'inline-flex' },
-                    color: brand.graphite,
-                    fontWeight: 700,
-                    fontSize: '0.85rem',
-                  }}
+                  sx={{ ...headerTextButtonSx, color: brand.graphite }}
                 >
                   {customer?.name?.split(' ')[0] ?? t('header.account')}
                 </Button>
@@ -177,12 +183,7 @@ export default function Header() {
                 component={RouterLink}
                 to={navHrefs.login}
                 startIcon={<PersonOutlineRounded />}
-                sx={{
-                  display: { xs: 'none', md: 'inline-flex' },
-                  color: brand.graphite,
-                  fontWeight: 700,
-                  fontSize: '0.85rem',
-                }}
+                sx={{ ...headerTextButtonSx, color: brand.graphite }}
               >
                 {t('header.login')}
               </Button>
@@ -203,10 +204,16 @@ export default function Header() {
               to={navHrefs.buy}
               sx={{
                 display: { xs: 'none', sm: 'inline-flex' },
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
                 fontWeight: 800,
-                px: { sm: 2.5, md: 3 },
+                minHeight: 40,
+                height: 40,
+                px: 2.25,
+                py: 0,
                 fontSize: '0.85rem',
-                boxShadow: brand.shadowGreen,
+                lineHeight: 1,
+                boxShadow: 'none',
               }}
             >
               {t('nav.buyNow')}
@@ -269,7 +276,7 @@ export default function Header() {
                 component="a"
                 href={resolveHref(link.href)}
                 onClick={() => setMobileOpen(false)}
-                sx={{ borderRadius: 2, py: 1.5 }}
+                sx={{ borderRadius: 2, py: 1.75, minHeight: 52 }}
               >
                 <ListItemText
                   primary={t(`nav.${link.key}`)}

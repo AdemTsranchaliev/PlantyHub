@@ -3,9 +3,13 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
+import SpaOutlined from '@mui/icons-material/SpaOutlined'
+import CircleOutlined from '@mui/icons-material/CircleOutlined'
+import WaterDropOutlined from '@mui/icons-material/WaterDropOutlined'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { brand, carouselCardWidth } from '../theme'
+import MediaImg from './MediaImg'
 
 export type ProductCardData = {
   id: string
@@ -14,6 +18,7 @@ export type ProductCardData = {
   compareAt?: string
   image: string
   pack?: string
+  includes?: { pods: number; caps: number; nutrientMl: number }
   tagline?: string
   imageFit?: 'cover' | 'contain'
 }
@@ -47,7 +52,7 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
               scrollSnapAlign: 'start',
               maxWidth: { xs: carouselCardWidth.xs, sm: carouselCardWidth.sm },
             }
-          : { width: '100%', p: 2 }),
+          : { width: '100%', p: { xs: 0.75, sm: 2 } }),
       }}
     >
       <Box
@@ -57,10 +62,10 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
           position: 'relative',
           display: 'block',
           bgcolor: brand.white,
-          borderRadius: 4,
+          borderRadius: { xs: 3, sm: 4 },
           overflow: 'hidden',
           aspectRatio: '1',
-          mb: 1.75,
+          mb: { xs: 1.15, sm: 1.75 },
           border: `1px solid ${brand.border}`,
           transition: 'box-shadow 0.28s ease, transform 0.28s ease, border-color 0.28s ease',
           '& img': { transition: 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)' },
@@ -74,9 +79,9 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
           },
         }}
       >
-        <Box
-          component="img"
+        <MediaImg
           src={product.image}
+          preset="card"
           alt={product.name}
           loading="lazy"
           sx={{
@@ -119,8 +124,8 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
           {...(to ? { component: RouterLink, to } : {})}
           sx={{
             fontWeight: 700,
-            fontSize: { xs: '0.9rem', sm: '0.95rem' },
-            lineHeight: 1.35,
+            fontSize: { xs: '0.82rem', sm: '0.95rem' },
+            lineHeight: 1.3,
             color: 'inherit',
             textDecoration: 'none',
             '@media (hover: hover)': { '&:hover': to ? { color: brand.plantGreenDark } : {} },
@@ -128,11 +133,29 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
         >
           {product.name}
         </Typography>
-        {product.pack && (
+        {product.includes ? (
+          <Stack direction="row" spacing={0.5} sx={{ pt: 0.25, flexWrap: 'nowrap' }}>
+            {[
+              { key: 'pods', Icon: SpaOutlined, text: String(product.includes.pods) },
+              { key: 'caps', Icon: CircleOutlined, text: String(product.includes.caps) },
+              { key: 'nutrient', Icon: WaterDropOutlined, text: `${product.includes.nutrientMl} ml` },
+            ].map(({ key, Icon, text }) => (
+              <Stack
+                key={key}
+                direction="row"
+                spacing={0.35}
+                sx={{ alignItems: 'center', px: 0.7, py: 0.25, borderRadius: 999, bgcolor: brand.plantGreenMuted, color: brand.plantGreenDark }}
+              >
+                <Icon sx={{ fontSize: 13 }} />
+                <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, lineHeight: 1.2 }}>{text}</Typography>
+              </Stack>
+            ))}
+          </Stack>
+        ) : product.pack ? (
           <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
             {product.pack}
           </Typography>
-        )}
+        ) : null}
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center', pt: 0.25, flexWrap: 'wrap' }}>
           <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: { xs: '1rem', sm: '1.05rem' }, color: brand.plantGreenDark }}>{product.price}</Typography>
           {product.compareAt && (

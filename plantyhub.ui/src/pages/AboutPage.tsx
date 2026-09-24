@@ -18,6 +18,7 @@ import { lifestyleImages, productVideo, productVideoPoster } from '../data/image
 import { useSiteAsset } from '../hooks/useSiteAssets'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 const pillarKeys = ['easy', 'modern', 'home'] as const
 const statKeys = ['plants', 'countries', 'harvests'] as const
@@ -181,10 +182,10 @@ export default function AboutPage() {
                 {t('aboutPage.lead')}
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25}>
-                <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} sx={{ px: 3.5 }}>
+                <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} fullWidth sx={{ px: 3.5, maxWidth: { sm: 'none' } }}>
                   {t('nav.buyNow')}
                 </Button>
-                <Button variant="outlined" size="large" href={resolveHref(navHrefs.howItWorks)} sx={{ px: 3.5 }}>
+                <Button variant="outlined" size="large" href={resolveHref(navHrefs.howItWorks)} fullWidth sx={{ px: 3.5, maxWidth: { sm: 'none' } }}>
                   {t('nav.howItWorks')}
                 </Button>
               </Stack>
@@ -193,10 +194,10 @@ export default function AboutPage() {
 
           <Grid size={{ xs: 12, md: 6 }}>
             <Box sx={{ px: { xs: pagePaddingX.xs, sm: pagePaddingX.sm, md: 0 }, pb: { xs: 3.5, md: 0 }, height: { md: '100%' } }}>
-              <Box
-                component="img"
-                src={heroImage}
-                alt={t('aboutPage.title')}
+                <MediaImg
+                  src={heroImage}
+                  preset="hero"
+                  alt={t('aboutPage.title')}
                 sx={{
                   width: '100%',
                   height: { xs: 'auto', md: '100%' },
@@ -316,12 +317,12 @@ export default function AboutPage() {
 
           <Grid size={{ xs: 12, md: 7 }}>
             <Reveal>
-              <Box
-                component="img"
-                src={storyImage}
-                alt={t('aboutPage.storyTitle')}
-                loading="lazy"
-                decoding="async"
+                <MediaImg
+                  src={storyImage}
+                  preset="gallery"
+                  alt={t('aboutPage.storyTitle')}
+                  loading="lazy"
+                  decoding="async"
                 sx={{
                   width: '100%',
                   aspectRatio: { xs: '4 / 3', md: '5 / 4' },

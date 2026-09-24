@@ -29,7 +29,7 @@ export default function SectionHeading({
   return (
     <Reveal
       sx={{
-        mb: compact ? 0 : { xs: 3, sm: 4, md: 5 },
+        mb: compact ? 0 : { xs: 2.25, sm: 4, md: 5 },
         textAlign: align,
         maxWidth: align === 'center' ? { xs: '100%', sm: 700 } : 'none',
         mx: align === 'center' ? 'auto' : 0,
@@ -66,7 +66,7 @@ export default function SectionHeading({
         component="h2"
         sx={{
           fontFamily: '"Fraunces", Georgia, serif',
-          fontSize: size === 'lg' ? { xs: '1.85rem', sm: '2.2rem', md: '2.7rem' } : { xs: '1.5rem', sm: '1.7rem', md: '2.05rem' },
+          fontSize: size === 'lg' ? { xs: '1.65rem', sm: '2.2rem', md: '2.7rem' } : { xs: '1.4rem', sm: '1.7rem', md: '2.05rem' },
           fontWeight: 600,
           letterSpacing: '-0.015em',
           color: textColor,

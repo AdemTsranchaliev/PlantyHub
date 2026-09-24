@@ -138,7 +138,6 @@ export default function MyOrdersPage() {
                       <IconButton
                         component={RouterLink}
                         to={`/order/${order.id}`}
-                        size="small"
                         aria-label={t('account.viewOrder')}
                         sx={{ color: brand.textSecondary }}
                       >

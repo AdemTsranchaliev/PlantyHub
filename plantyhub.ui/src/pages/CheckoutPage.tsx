@@ -19,8 +19,9 @@ import { CheckoutOrderSummary, MobileOrderSummary, checkout } from '../component
 import { navHrefs } from '../data/catalog'
 import type { PaymentMethod } from '../admin/orderDetails'
 import { ApiError } from '../api/client'
-import { shippingApi, taxApi } from '../api'
+import { promoApi, shippingApi, taxApi } from '../api'
 import type { ShippingQuote, VatQuote } from '../api/types'
+import type { PromoQuote } from '../api'
 import { useCart } from '../hooks/useCart'
 import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { createCustomerOrder } from '../store/orders'
@@ -96,13 +97,15 @@ function PaymentOption({
         alignItems: 'center',
         gap: 1,
         px: 1.5,
-        py: 1.1,
+        py: { xs: 1.5, sm: 1.1 },
+        minHeight: 48,
         borderRadius: '5px',
         border: `1px solid ${selected ? checkout.link : checkout.inputBorder}`,
         bgcolor: selected ? 'rgba(47, 125, 83, 0.04)' : '#fff',
         boxShadow: selected ? `inset 0 0 0 1px ${checkout.link}` : 'none',
         cursor: 'pointer',
         textAlign: 'left',
+        WebkitTapHighlightColor: 'transparent',
       }}
     >
       <Box
@@ -135,6 +138,10 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [summaryOpen, setSummaryOpen] = useState(false)
+  const [promoInput, setPromoInput] = useState('')
+  const [appliedPromo, setAppliedPromo] = useState<PromoQuote | null>(null)
+  const [promoError, setPromoError] = useState<string | null>(null)
+  const [promoBusy, setPromoBusy] = useState(false)
   const [notesOpen, setNotesOpen] = useState(false)
   const [quotes, setQuotes] = useState<ShippingQuote[]>([])
   const [quotesLoading, setQuotesLoading] = useState(false)
@@ -193,11 +200,58 @@ export default function CheckoutPage() {
   const selectedQuote = quotes.find((quote) => quote.id === selectedQuoteId)
   const shippingAmount =
     subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : selectedQuote ? selectedQuote.priceEur : STANDARD_SHIPPING_COST
+  const discountAmount = appliedPromo?.discount ?? 0
+  const goodsAmount = Math.max(0, subtotal - discountAmount)
+
+  const promoErrorText = (code: string) => {
+    const key = `checkout.promoErrors.${code}`
+    const translated = t(key)
+    return translated === key ? t('checkout.promoErrors.invalid') : translated
+  }
+
+  const applyPromo = async (code: string) => {
+    const trimmed = code.trim()
+    if (!trimmed) {
+      setAppliedPromo(null)
+      setPromoError(null)
+      return
+    }
+    setPromoBusy(true)
+    setPromoError(null)
+    try {
+      const quote = await promoApi.validate(trimmed, subtotal)
+      setAppliedPromo(quote)
+      setPromoInput(quote.code)
+    } catch (err) {
+      setAppliedPromo(null)
+      setPromoError(err instanceof ApiError ? promoErrorText(err.message) : t('checkout.promoErrors.invalid'))
+    } finally {
+      setPromoBusy(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!appliedPromo) return
+    let cancelled = false
+    void promoApi
+      .validate(appliedPromo.code, subtotal)
+      .then((quote) => {
+        if (!cancelled) setAppliedPromo(quote)
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return
+        setAppliedPromo(null)
+        setPromoError(err instanceof ApiError ? promoErrorText(err.message) : t('checkout.promoErrors.invalid'))
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [subtotal, appliedPromo?.code, t])
 
   useEffect(() => {
     let cancelled = false
     void taxApi
-      .quote(form.country || 'BG', subtotal, shippingAmount)
+      .quote(form.country || 'BG', goodsAmount, shippingAmount)
       .then((data) => {
         if (!cancelled) setVat(data)
       })
@@ -207,7 +261,7 @@ export default function CheckoutPage() {
     return () => {
       cancelled = true
     }
-  }, [form.country, subtotal, shippingAmount])
+  }, [form.country, goodsAmount, shippingAmount])
 
   if (items.length === 0) {
     return (
@@ -270,16 +324,24 @@ export default function CheckoutPage() {
         delivery: selectedQuote?.delivery,
         officeCode: form.officeCode || selectedQuote?.officeCode || undefined,
         cityId: form.cityId || undefined,
+        promoCode: appliedPromo?.code,
       })
       clearCart()
       navigate(`/order/${order.id}`, { replace: true })
     } catch (err) {
-      setSubmitError(err instanceof ApiError ? err.message : t('checkout.failed'))
+      const promoCodes = new Set(['invalid', 'expired', 'not_started', 'used_up', 'min_subtotal'])
+      setSubmitError(
+        err instanceof ApiError
+          ? promoCodes.has(err.message)
+            ? promoErrorText(err.message)
+            : err.message
+          : t('checkout.failed'),
+      )
       setSubmitting(false)
     }
   }
 
-  const totalAmount = vat?.enabled ? vat.total : subtotal + shippingAmount
+  const totalAmount = vat?.enabled ? vat.total : goodsAmount + shippingAmount
   const vatHint =
     vat?.enabled && vat.ratePercent > 0
       ? vat.pricesIncludeVat
@@ -297,6 +359,7 @@ export default function CheckoutPage() {
     freeShipping: shippingAmount === 0,
     taxLabel: vat?.enabled && vat.tax > 0 ? formatEuro(vat.tax) : null,
     taxHint: vatHint,
+    discountLabel: discountAmount > 0 ? `−${formatEuro(discountAmount)}` : null,
   }
 
   return (
@@ -479,6 +542,47 @@ export default function CheckoutPage() {
                     </Collapse>
                   </Box>
                 </Stack>
+              </Box>
+
+              <Box>
+                <SectionHeading>{t('checkout.promo')}</SectionHeading>
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'flex-end' }}>
+                  <Box sx={{ flex: 1 }}>
+                    <CheckoutField
+                      label={t('checkout.promoCode')}
+                      value={promoInput}
+                      onChange={(e) => {
+                        setPromoInput(e.target.value.toUpperCase())
+                        setPromoError(null)
+                      }}
+                    />
+                  </Box>
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    disabled={promoBusy || !promoInput.trim()}
+                    onClick={() => void applyPromo(promoInput)}
+                    sx={{
+                      minHeight: 48,
+                      borderRadius: '5px',
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      borderColor: checkout.inputBorder,
+                      color: checkout.text,
+                    }}
+                  >
+                    {t('checkout.promoApply')}
+                  </Button>
+                </Stack>
+                {promoError ? (
+                  <Typography sx={{ color: '#C62828', fontSize: '0.75rem', fontWeight: 600, mt: 0.75 }}>
+                    {promoError}
+                  </Typography>
+                ) : appliedPromo ? (
+                  <Typography sx={{ color: checkout.link, fontSize: '0.75rem', fontWeight: 600, mt: 0.75 }}>
+                    {t('checkout.promoApplied', { code: appliedPromo.code })}
+                  </Typography>
+                ) : null}
               </Box>
 
               <Box>

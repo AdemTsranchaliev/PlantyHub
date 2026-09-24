@@ -18,6 +18,7 @@ import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { useCart } from '../hooks/useCart'
+import MediaImg from '../components/MediaImg'
 import { FREE_SHIPPING_THRESHOLD } from '../utils/price'
 import { brand } from '../theme'
 
@@ -86,9 +87,9 @@ export default function CartPage() {
                       alignItems: { sm: 'center' },
                     }}
                   >
-                    <Box
-                      component="img"
+                    <MediaImg
                       src={item.image}
+                      preset="thumb"
                       alt={item.name}
                       sx={{
                         width: { xs: '100%', sm: 96 },
@@ -124,9 +125,9 @@ export default function CartPage() {
                             bgcolor: brand.plantGreenMuted,
                           }}
                         >
-                          <Box
-                            component="img"
+                          <MediaImg
                             src={item.gift.image}
+                            preset="thumb"
                             alt=""
                             sx={{ width: 40, height: 40, borderRadius: '9px', objectFit: 'contain', bgcolor: brand.white, flexShrink: 0 }}
                           />
@@ -156,14 +157,18 @@ export default function CartPage() {
                       >
                         <IconButton
                           aria-label="−"
-                          size="small"
                           onClick={() => updateQuantity(item.key, item.quantity - 1)}
                           disabled={item.quantity <= 1}
+                          sx={{ width: brand.touchMin, height: brand.touchMin }}
                         >
                           <RemoveRounded fontSize="small" />
                         </IconButton>
                         <Typography sx={{ minWidth: 28, textAlign: 'center', fontWeight: 700 }}>{item.quantity}</Typography>
-                        <IconButton aria-label="+" size="small" onClick={() => updateQuantity(item.key, item.quantity + 1)}>
+                        <IconButton
+                          aria-label="+"
+                          onClick={() => updateQuantity(item.key, item.quantity + 1)}
+                          sx={{ width: brand.touchMin, height: brand.touchMin }}
+                        >
                           <AddRounded fontSize="small" />
                         </IconButton>
                       </Stack>

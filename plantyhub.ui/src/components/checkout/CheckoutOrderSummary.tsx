@@ -7,6 +7,7 @@ import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
 import { useTranslation } from 'react-i18next'
 import type { CartItem } from '../../store/cart'
 import { formatEuro, parseEuro, FREE_SHIPPING_THRESHOLD } from '../../utils/price'
+import MediaImg from '../MediaImg'
 
 export const checkout = {
   bg: '#FFFFFF',
@@ -27,6 +28,7 @@ type SummaryProps = {
   freeShipping: boolean
   taxLabel?: string | null
   taxHint?: string | null
+  discountLabel?: string | null
 }
 
 function lineTotal(item: CartItem) {
@@ -51,9 +53,9 @@ function LineItem({ item }: { item: CartItem }) {
             justifyContent: 'center',
           }}
         >
-          <Box
-            component="img"
+          <MediaImg
             src={item.image}
+            preset="thumb"
             alt={item.name}
             sx={{ width: '88%', height: '88%', objectFit: 'contain', display: 'block' }}
           />
@@ -112,7 +114,7 @@ function LineItem({ item }: { item: CartItem }) {
   )
 }
 
-function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, taxLabel, taxHint }: SummaryProps) {
+function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, taxLabel, taxHint, discountLabel }: SummaryProps) {
   const { t } = useTranslation()
 
   return (
@@ -123,6 +125,12 @@ function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipp
         </Typography>
         <Typography sx={{ fontSize: '0.8125rem', color: checkout.text }}>{subtotalLabel}</Typography>
       </Stack>
+      {discountLabel ? (
+        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>{t('checkout.discount')}</Typography>
+          <Typography sx={{ fontSize: '0.8125rem', color: checkout.link, fontWeight: 600 }}>{discountLabel}</Typography>
+        </Stack>
+      ) : null}
       <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>{t('cart.shipping')}</Typography>
         <Typography sx={{ fontSize: '0.8125rem', color: freeShipping ? checkout.link : checkout.text }}>
@@ -194,10 +202,12 @@ export function MobileOrderSummary({ open, onToggle, totalLabel, ...summary }: M
           justifyContent: 'space-between',
           gap: 2,
           px: 2,
-          py: 1.25,
+          py: 1.75,
+          minHeight: 52,
           border: 0,
           bgcolor: 'transparent',
           cursor: 'pointer',
+          WebkitTapHighlightColor: 'transparent',
         }}
       >
         <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', color: checkout.link }}>

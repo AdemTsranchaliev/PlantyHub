@@ -14,6 +14,7 @@ import { homeGardenSpecKeys, navHrefs } from '../data/catalog'
 import { useProduct } from '../hooks/useProducts'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
+import MediaImg from '../components/MediaImg'
 
 const specIcons = {
   pods: SpaOutlinedIcon,
@@ -49,9 +50,9 @@ export default function FeaturedGardenSection() {
                 bgcolor: brand.white,
               }}
             >
-              <Box
-                component="img"
+              <MediaImg
                 src={garden?.image ?? ''}
+                preset="gallery"
                 alt={garden?.name ?? ''}
                 sx={{ width: '100%', maxHeight: { md: 520 }, minHeight: { xs: 280, md: 400 }, objectFit: 'cover', display: 'block' }}
               />
@@ -69,16 +70,16 @@ export default function FeaturedGardenSection() {
                 subtitle={t('featured.description')}
               />
 
-              <Grid container spacing={2} sx={{ my: 3 }}>
+              <Grid container spacing={{ xs: 1.5, sm: 2 }} sx={{ my: 3 }}>
                 {homeGardenSpecKeys.map((key) => {
                   const Icon = specIcons[key]
                   return (
-                    <Grid key={key} size={{ xs: 6 }}>
-                      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'flex-start' }}>
+                    <Grid key={key} size={{ xs: 12, sm: 6 }}>
+                      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
                         <Box
                           sx={{
-                            width: 40,
-                            height: 40,
+                            width: 44,
+                            height: 44,
                             borderRadius: 2,
                             bgcolor: 'rgba(255,255,255,0.1)',
                             display: 'flex',
@@ -89,7 +90,7 @@ export default function FeaturedGardenSection() {
                         >
                           <Icon sx={{ color: brand.plantGreenLight, fontSize: 20 }} />
                         </Box>
-                        <Typography sx={{ fontWeight: 600, fontSize: '0.85rem', lineHeight: 1.4, color: 'rgba(255,255,255,0.9)' }}>
+                        <Typography sx={{ fontWeight: 600, fontSize: { xs: '0.92rem', sm: '0.85rem' }, lineHeight: 1.4, color: 'rgba(255,255,255,0.9)' }}>
                           {t(`support.specs.${key}`)}
                         </Typography>
                       </Stack>

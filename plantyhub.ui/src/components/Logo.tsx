@@ -7,7 +7,7 @@ type LogoProps = {
 
 const heights = {
   sm: { xs: 28, md: 32 },
-  md: { xs: 32, sm: 34, md: 38 },
+  md: { xs: 28, sm: 34, md: 38 },
   lg: { xs: 40, md: 48 },
 }
 
