@@ -28,4 +28,6 @@ dotnet run
 
 API: `http://localhost:5281` · UI dev server: `http://localhost:5173`
 
+The API uses Azure SQL (`plantyhub.database.windows.net`). Connection password is in user-secrets. Allow your IP on the SQL firewall, then `dotnet run` seeds the catalog.
+
 See each project's README for details.

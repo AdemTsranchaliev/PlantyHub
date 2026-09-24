@@ -11,7 +11,7 @@ dotnet run
 
 API: `http://localhost:5281` · Health: `GET /health`
 
-Development uses SQLite (`plantyhub.dev.db`). Production uses PostgreSQL — set `Database:UseSqlite` to `false` in `appsettings.json`.
+The API uses Azure SQL (`plantyhub.database.windows.net` / `plantyhub_shop`). The SQL password lives in user-secrets on this machine, not in git. Allow your IP on the SQL firewall. A paused free/serverless database may take ~30s to wake. App Service gets the full connection string from Application Settings (`ConnectionStrings__DefaultConnection`).
 
 ## Admin login
 

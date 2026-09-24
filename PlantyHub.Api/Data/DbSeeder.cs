@@ -72,6 +72,7 @@ public static class DbSeeder
         {
             db.HomepageSettings.Add(new HomepageSettings
             {
+                Id = 1,
                 LayoutVersion = 2,
                 SectionsJson = JsonSerializer.Serialize(new Dictionary<string, bool>
                 {

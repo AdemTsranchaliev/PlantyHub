@@ -35,6 +35,9 @@ PlantyHub.Api/*.dev.db
 PlantyHub.Api/*.dev.db-*
 *.user
 appsettings.*.local.json
+publish/
+deploy.zip
+.azure-publish
 
 # Secrets stay on this machine (dotnet user-secrets, env files)
 .env

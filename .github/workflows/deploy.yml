@@ -32,6 +32,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_BASE: /PlantyHub/
       - run: cp dist/index.html dist/404.html
 
       - uses: actions/upload-pages-artifact@v3
