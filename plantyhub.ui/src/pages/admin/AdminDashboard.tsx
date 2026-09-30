@@ -26,21 +26,22 @@ import { formatEuro, type OrderStatus } from '../../admin/mockData'
 import { useDashboard } from '../../hooks/useDashboard'
 import { useCustomers } from '../../hooks/useCustomers'
 import { useOrders } from '../../hooks/useOrders'
+import { orderStatusColors as statusColors } from '../../admin/orderStatus'
 import { brand } from '../../theme'
-
-const statusColors: Record<string, { bg: string; color: string }> = {
-  pending: { bg: 'rgba(227, 159, 118, 0.15)', color: '#C47A4A' },
-  processing: { bg: 'rgba(47, 125, 83, 0.12)', color: brand.plantGreenDark },
-  shipped: { bg: 'rgba(76, 163, 116, 0.15)', color: brand.plantGreen },
-  delivered: { bg: brand.plantGreenMuted, color: brand.plantGreenDark },
-  cancelled: { bg: 'rgba(28, 35, 30, 0.08)', color: brand.textSecondary },
-}
 
 const orderStatusBarColors: Record<string, string> = {
   pending: '#E39F76',
   processing: brand.plantGreenLight,
   shipped: brand.plantGreen,
   delivered: brand.plantGreenDark,
+  returned: '#B71C1C',
+  claim: '#A15C32',
+  replacement: brand.plantGreenLight,
+  replacementShipped: brand.plantGreen,
+  replaced: brand.plantGreenDark,
+  returnShipped: '#B71C1C',
+  returnedAfterReview: '#8E2424',
+  unclaimed: '#A15C32',
   cancelled: brand.textSecondary,
 }
 
@@ -86,10 +87,10 @@ export default function AdminDashboard() {
   const navigate = useNavigate()
   const { data: dashboard, loading: dashboardLoading } = useDashboard()
   const { customers } = useCustomers()
-  const gardens = useCategoryProducts('gardens')
-  const pods = useCategoryProducts('pods')
-  const consumables = useCategoryProducts('consumables')
-  const accessories = useCategoryProducts('accessories')
+  const gardens = useCategoryProducts('gardens', true)
+  const pods = useCategoryProducts('pods', true)
+  const consumables = useCategoryProducts('consumables', true)
+  const accessories = useCategoryProducts('accessories', true)
   const productCount = gardens.length + pods.length + consumables.length + accessories.length
   const allOrders = useOrders()
   const recentOrders = allOrders.slice(0, 5)
@@ -105,6 +106,14 @@ export default function AdminDashboard() {
       processing: 0,
       shipped: 0,
       delivered: 0,
+      returned: 0,
+      claim: 0,
+      replacement: 0,
+      replacementShipped: 0,
+      replaced: 0,
+      returnShipped: 0,
+      returnedAfterReview: 0,
+      unclaimed: 0,
       cancelled: 0,
     }
     for (const order of allOrders) counts[order.status]++

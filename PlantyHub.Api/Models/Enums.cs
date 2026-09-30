@@ -31,7 +31,15 @@ public enum OrderStatus
     Processing,
     Shipped,
     Delivered,
-    Cancelled
+    Cancelled,
+    Returned,
+    Claim,
+    Replacement,
+    ReplacementShipped,
+    Replaced,
+    ReturnShipped,
+    ReturnedAfterReview,
+    Unclaimed
 }
 
 public enum PaymentMethod
@@ -47,4 +55,11 @@ public enum CourierId
     Speedy,
     Dhl,
     Boxnow
+}
+
+public enum ReviewStatus
+{
+    Pending,
+    Published,
+    Hidden
 }

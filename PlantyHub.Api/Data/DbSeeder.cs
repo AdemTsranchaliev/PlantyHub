@@ -110,16 +110,23 @@ public static class DbSeeder
         var existing = await db.EmailTemplates.ToListAsync();
         var byKey = existing.ToDictionary(t => t.Key, StringComparer.OrdinalIgnoreCase);
 
-        // Always refresh the reference layout and all customer order emails on restart.
+        // Always refresh layouts on restart so design updates reach existing databases.
         var refreshKeys = new[]
         {
             "verify-email",
+            "password-reset",
+            "welcome",
+            "newsletter",
             "order-confirmation",
             "order-invoice",
             "order-processing",
             "order-shipped",
             "order-delivered",
             "order-cancelled",
+            "order-admin",
+            "order-return-label",
+            "order-replacement",
+            "review-request",
         };
         foreach (var key in refreshKeys)
         {

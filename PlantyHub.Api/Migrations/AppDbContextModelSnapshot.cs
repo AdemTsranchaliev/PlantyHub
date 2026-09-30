@@ -758,6 +758,64 @@ namespace PlantyHub.Api.Migrations
                     b.ToTable("ProductColors");
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.ProductReview", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AuthorName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("OrderId")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("PhotosJson")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("[]");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId", "Email");
+
+                    b.HasIndex("ProductId", "Status", "CreatedAt");
+
+                    b.HasIndex("ProductId", "Status", "Rating");
+
+                    b.ToTable("ProductReviews");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.ProductTranslation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -857,6 +915,58 @@ namespace PlantyHub.Api.Migrations
                     b.ToTable("PromoCodes");
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.ReviewRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("OrderId")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ReviewId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Token")
+                        .IsUnique();
+
+                    b.HasIndex("ProductId", "Email");
+
+                    b.ToTable("ReviewRequests");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.SiteAssets", b =>
                 {
                     b.Property<int>("Id")
@@ -907,9 +1017,24 @@ namespace PlantyHub.Api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal?>("DeliveryCost")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)")
+                        .HasDefaultValue("merchant_to_customer");
+
                     b.Property<string>("ExternalId")
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("LabelUrl")
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<string>("Mode")
                         .HasMaxLength(40)
@@ -932,6 +1057,20 @@ namespace PlantyHub.Api.Migrations
                     b.Property<int>("Packages")
                         .HasColumnType("int");
 
+                    b.Property<string>("Payer")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)")
+                        .HasDefaultValue("customer");
+
+                    b.Property<string>("Purpose")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)")
+                        .HasDefaultValue("shipment");
+
                     b.Property<string>("TrackingUrl")
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
@@ -945,8 +1084,7 @@ namespace PlantyHub.Api.Migrations
                     b.HasIndex("Number")
                         .IsUnique();
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Waybills");
                 });
@@ -1052,6 +1190,17 @@ namespace PlantyHub.Api.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.ProductReview", b =>
+                {
+                    b.HasOne("PlantyHub.Api.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.ProductTranslation", b =>
                 {
                     b.HasOne("PlantyHub.Api.Models.Product", "Product")
@@ -1063,11 +1212,22 @@ namespace PlantyHub.Api.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PlantyHub.Api.Models.ReviewRequest", b =>
+                {
+                    b.HasOne("PlantyHub.Api.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("PlantyHub.Api.Models.Waybill", b =>
                 {
                     b.HasOne("PlantyHub.Api.Models.Order", "Order")
-                        .WithOne("Waybill")
-                        .HasForeignKey("PlantyHub.Api.Models.Waybill", "OrderId")
+                        .WithMany("Waybills")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1085,7 +1245,7 @@ namespace PlantyHub.Api.Migrations
 
                     b.Navigation("Timeline");
 
-                    b.Navigation("Waybill");
+                    b.Navigation("Waybills");
                 });
 
             modelBuilder.Entity("PlantyHub.Api.Models.Product", b =>

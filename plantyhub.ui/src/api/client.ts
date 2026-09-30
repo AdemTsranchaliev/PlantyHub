@@ -50,6 +50,26 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
   return (await res.json()) as T
 }
 
+export async function apiBlob(path: string, auth: 'admin' | 'customer' = 'admin'): Promise<Blob> {
+  const token = auth === 'admin' ? getAdminToken() : getCustomerToken()
+  const res = await fetch(`${API_URL}${path}`, {
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  })
+  if (!res.ok) {
+    let message = res.statusText
+    try {
+      const data = (await res.json()) as { message?: string }
+      if (data.message) message = data.message
+    } catch {
+      // ignore
+    }
+    throw new ApiError(res.status, message)
+  }
+  return res.blob()
+}
+
 /** Binary download with admin/customer auth. Triggers a file save. */
 export async function apiDownload(path: string, auth: 'admin' | 'customer' = 'admin'): Promise<void> {
   const token = auth === 'admin' ? getAdminToken() : getCustomerToken()
@@ -85,6 +105,25 @@ export async function apiDownload(path: string, auth: 'admin' | 'customer' = 'ad
   link.click()
   link.remove()
   URL.revokeObjectURL(url)
+}
+
+/** Multipart form without auth. Do not set Content-Type — the browser sets the boundary. */
+export async function apiForm<T>(path: string, form: FormData): Promise<T> {
+  const res = await fetch(`${API_URL}${path}`, { method: 'POST', body: form })
+  if (!res.ok) {
+    let message = res.statusText
+    let code: string | undefined
+    try {
+      const data = (await res.json()) as { message?: string; code?: string }
+      if (data.message) message = data.message
+      code = data.code
+    } catch {
+      // ignore
+    }
+    throw new ApiError(res.status, message, code)
+  }
+  if (res.status === 204) return undefined as T
+  return (await res.json()) as T
 }
 
 /** Multipart upload (do not set Content-Type — browser sets boundary). */

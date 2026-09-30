@@ -23,15 +23,8 @@ import { useTranslation } from 'react-i18next'
 import { countryDisplayName } from '../../utils/country'
 import { AdminBreadcrumb } from '../../components/admin/AdminPageHeader'
 import { useCustomerDetail } from '../../hooks/useCustomers'
+import { orderStatusColors as statusColors } from '../../admin/orderStatus'
 import { brand } from '../../theme'
-
-const statusColors: Record<string, { bg: string; color: string }> = {
-  pending: { bg: 'rgba(227, 159, 118, 0.15)', color: '#C47A4A' },
-  processing: { bg: 'rgba(47, 125, 83, 0.12)', color: brand.plantGreenDark },
-  shipped: { bg: 'rgba(76, 163, 116, 0.15)', color: brand.plantGreen },
-  delivered: { bg: brand.plantGreenMuted, color: brand.plantGreenDark },
-  cancelled: { bg: 'rgba(28, 35, 30, 0.08)', color: brand.textSecondary },
-}
 
 function Panel({ title, children }: { title: string; children: React.ReactNode }) {
   return (

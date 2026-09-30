@@ -40,7 +40,10 @@ public class Order
     public string BillingPostalCode { get; set; } = string.Empty;
     public string BillingCountry { get; set; } = "BG";
 
-    public Waybill? Waybill { get; set; }
+    public ICollection<Waybill> Waybills { get; set; } = [];
+
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+    public Waybill? Waybill => Waybills.OrderByDescending(w => w.CreatedAt).FirstOrDefault();
     public ICollection<OrderItem> Items { get; set; } = [];
     public ICollection<OrderTimelineEntry> Timeline { get; set; } = [];
 }
@@ -87,4 +90,9 @@ public class Waybill
     public string? TrackingUrl { get; set; }
     public string? ExternalId { get; set; }
     public string? Mode { get; set; }
+    public string? LabelUrl { get; set; }
+    public string Purpose { get; set; } = "shipment";
+    public string Direction { get; set; } = "merchant_to_customer";
+    public string Payer { get; set; } = "customer";
+    public decimal? DeliveryCost { get; set; }
 }

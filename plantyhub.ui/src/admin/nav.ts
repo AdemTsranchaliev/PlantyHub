@@ -14,6 +14,8 @@ import LocalShippingRounded from '@mui/icons-material/LocalShippingRounded'
 import PercentRounded from '@mui/icons-material/PercentRounded'
 import LocalOfferRounded from '@mui/icons-material/LocalOfferRounded'
 import AssessmentRounded from '@mui/icons-material/AssessmentRounded'
+import RateReviewRounded from '@mui/icons-material/RateReviewRounded'
+import VisibilityOffRounded from '@mui/icons-material/VisibilityOffRounded'
 import type { SvgIconComponent } from '@mui/icons-material'
 
 export type AdminNavItem = {
@@ -41,6 +43,7 @@ export const adminNavGroups: AdminNavGroup[] = [
       { path: '/admin/pods', labelKey: 'admin.nav.pods', icon: SpaRounded },
       { path: '/admin/consumables', labelKey: 'admin.nav.consumables', icon: ScienceRounded },
       { path: '/admin/accessories', labelKey: 'admin.nav.accessories', icon: CategoryRounded },
+      { path: '/admin/hidden', labelKey: 'admin.nav.hidden', icon: VisibilityOffRounded },
     ],
   },
   {
@@ -48,6 +51,7 @@ export const adminNavGroups: AdminNavGroup[] = [
     labelKey: 'admin.nav.groups.sales',
     items: [
       { path: '/admin/orders', labelKey: 'admin.nav.orders', icon: ShoppingBagRounded },
+      { path: '/admin/reviews', labelKey: 'admin.nav.reviews', icon: RateReviewRounded },
       { path: '/admin/customers', labelKey: 'admin.nav.customers', icon: PeopleRounded },
       { path: '/admin/couriers', labelKey: 'admin.nav.couriers', icon: LocalShippingRounded },
       { path: '/admin/vat', labelKey: 'admin.nav.vat', icon: PercentRounded },

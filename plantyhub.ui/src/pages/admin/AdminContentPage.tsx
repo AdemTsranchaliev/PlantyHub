@@ -20,7 +20,7 @@ import {
 } from '../../admin/homepageSchema'
 import { useHomepageStore } from '../../hooks/useHomepage'
 import { subscribeHomepage } from '../../store/homepage'
-import { supportedLanguages, type LanguageCode } from '../../i18n/languages'
+import { defaultLanguage, isLanguageCode, supportedLanguages, type LanguageCode } from '../../i18n/languages'
 import { brand } from '../../theme'
 
 export default function AdminContentPage() {
@@ -28,9 +28,7 @@ export default function AdminContentPage() {
   const { state, resetHomepageState: reset } = useHomepageStore()
   const [sectionKey, setSectionKey] = useState<HomepageSectionKey>('hero')
   const uiLang = i18n.language?.split('-')[0]
-  const [lang, setLang] = useState<LanguageCode>(
-    uiLang === 'bg' || uiLang === 'de' || uiLang === 'fr' ? uiLang : 'en',
-  )
+  const [lang, setLang] = useState<LanguageCode>(isLanguageCode(uiLang) ? uiLang : defaultLanguage)
   const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop')
   const [previewTick, setPreviewTick] = useState(0)
 

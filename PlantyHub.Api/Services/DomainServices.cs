@@ -205,24 +205,39 @@ public class OrderMapper
             PriceHelper.FormatEuro(order.ShippingCost),
             PriceHelper.FormatEuro(order.Tax),
             order.Notes,
-            order.Waybill is null
-                ? null
-                : new WaybillDto(
-                    order.Waybill.Number,
-                    EnumMapper.ToApi(order.Waybill.Courier),
-                    order.Waybill.CreatedAt.ToString("o"),
-                    order.Waybill.WeightKg,
-                    order.Waybill.Packages,
-                    order.Waybill.CodAmount.HasValue ? PriceHelper.FormatEuro(order.Waybill.CodAmount.Value) : null,
-                    order.Waybill.Notes,
-                    order.Waybill.TrackingUrl,
-                    order.Waybill.ExternalId,
-                    order.Waybill.Mode),
+            order.Waybill is null ? null : ToWaybill(order.Waybill),
             order.Timeline
                 .OrderBy(t => t.At)
                 .Select(t => new OrderTimelineDto(t.At.ToString("o"), EnumMapper.ToApi(t.Status), t.Note))
                 .ToList(),
-            order.TaxRate);
+            order.TaxRate,
+            order.ShippingCourier,
+            order.ShippingDelivery,
+            order.ShippingOfficeCode,
+            order.Waybills.OrderBy(w => w.CreatedAt).Select(ToWaybill).ToList(),
+            order.Discount > 0 ? PriceHelper.FormatEuro(order.Discount) : null,
+            order.PromoCode);
+
+    static WaybillDto ToWaybill(Waybill bill) =>
+        new(
+            bill.Number,
+            EnumMapper.ToApi(bill.Courier),
+            bill.CreatedAt.ToString("o"),
+            bill.WeightKg,
+            bill.Packages,
+            bill.CodAmount.HasValue ? PriceHelper.FormatEuro(bill.CodAmount.Value) : null,
+            bill.Notes,
+            bill.TrackingUrl,
+            bill.ExternalId,
+            bill.Mode,
+            bill.LabelUrl,
+            string.IsNullOrWhiteSpace(bill.Purpose) ? "shipment" : bill.Purpose,
+            string.IsNullOrWhiteSpace(bill.Direction) ? DirectionOf(bill.Purpose) : bill.Direction,
+            string.IsNullOrWhiteSpace(bill.Payer) ? "customer" : bill.Payer,
+            bill.DeliveryCost.HasValue ? PriceHelper.FormatEuro(bill.DeliveryCost.Value) : null);
+
+    static string DirectionOf(string? purpose) =>
+        purpose == "return" ? "customer_to_merchant" : "merchant_to_customer";
 }
 
 public class CustomerService(AppDbContext db)
@@ -281,6 +296,8 @@ public class CustomerService(AppDbContext db)
         var customer = await db.Customers
             .Include(c => c.Orders)
             .ThenInclude(o => o.Items)
+            .Include(c => c.Orders)
+            .ThenInclude(o => o.Waybills)
             .FirstOrDefaultAsync(c => c.Id == id, ct);
 
         if (customer is null) return null;
@@ -304,20 +321,20 @@ public class CustomerService(AppDbContext db)
     }
 }
 
-public class OrderService(AppDbContext db, CustomerService customers, OrderEmailService orderEmails, CourierService couriers, CourierRateService rates, VatService vat)
+public class OrderService(AppDbContext db, CustomerService customers, IOrderEmailQueue orderEmails, CourierService couriers, CourierRateService rates, VatService vat, EcontLabelService econt)
 {
     public async Task<Order?> GetByIdAsync(string id, CancellationToken ct = default) =>
         await db.Orders
             .Include(o => o.Items)
             .Include(o => o.Timeline)
-            .Include(o => o.Waybill)
+            .Include(o => o.Waybills)
             .FirstOrDefaultAsync(o => o.Id == id, ct);
 
     public async Task<IReadOnlyList<Order>> GetAllAsync(CancellationToken ct = default) =>
         await db.Orders
             .Include(o => o.Items)
             .Include(o => o.Timeline)
-            .Include(o => o.Waybill)
+            .Include(o => o.Waybills)
             .OrderByDescending(o => o.CreatedAt)
             .ToListAsync(ct);
 
@@ -325,7 +342,7 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
         await db.Orders
             .Include(o => o.Items)
             .Include(o => o.Timeline)
-            .Include(o => o.Waybill)
+            .Include(o => o.Waybills)
             .Where(o => o.Email == email)
             .OrderByDescending(o => o.CreatedAt)
             .ToListAsync(ct);
@@ -334,9 +351,13 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
     {
         if (request.Items.Count == 0)
             throw new InvalidOperationException("Cart is empty.");
+        if (!request.TermsAccepted)
+            throw new InvalidOperationException("terms_required");
 
         var country = EnumMapper.ParseCountry(request.Country);
         var paymentMethod = EnumMapper.ParsePaymentMethod(request.PaymentMethod);
+        if (paymentMethod == PaymentMethod.Paypal)
+            throw new InvalidOperationException("payment_unavailable");
 
         var lineItems = new List<(CheckoutLineItemRequest Item, Product Product, decimal UnitPrice)>();
         foreach (var item in request.Items)
@@ -467,14 +488,7 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
         await db.SaveChangesAsync(ct);
         await customers.UpsertFromOrderAsync(order, ct);
 
-        try
-        {
-            await orderEmails.TrySendCheckoutAsync(order, ct);
-        }
-        catch
-        {
-            // Order is already saved — email failures should not roll back checkout.
-        }
+        orderEmails.EnqueueCheckout(order.Id);
 
         return order;
     }
@@ -493,21 +507,60 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
         return $"PH-{now:yyMMddHHmmss}{Guid.NewGuid().ToString("N")[..4]}";
     }
 
-    public async Task<Order?> UpdateStatusAsync(string id, string status, CancellationToken ct = default)
+    static void AddUnclaimedReturn(Order order)
+    {
+        var source = order.Waybills
+            .Where(w => w.Purpose is "shipment" or "replacement")
+            .OrderByDescending(w => w.CreatedAt)
+            .FirstOrDefault();
+        if (source is null) return;
+        if (order.Waybills.Any(w => w.Purpose == "unclaimed" && w.ExternalId == source.Number))
+            return;
+
+        var stem = source.Number.Length > 76 ? source.Number[..76] : source.Number;
+        order.Waybills.Add(new Waybill
+        {
+            OrderId = order.Id,
+            Number = $"{stem}-U",
+            Courier = source.Courier,
+            CreatedAt = DateTime.UtcNow,
+            WeightKg = source.WeightKg,
+            Packages = source.Packages,
+            TrackingUrl = source.TrackingUrl,
+            ExternalId = source.Number,
+            Mode = source.Mode,
+            Purpose = "unclaimed",
+            Direction = "customer_to_merchant",
+            Payer = "merchant",
+            DeliveryCost = source.DeliveryCost,
+            Notes = "Непотърсена пратка. Връща се за сметка на търговеца.",
+        });
+    }
+
+    public async Task<Order?> UpdateStatusAsync(string id, string status, string? note, CancellationToken ct = default)
     {
         var order = await GetByIdAsync(id, ct);
         if (order is null) return null;
 
         var orderStatus = EnumMapper.ParseOrderStatus(status);
+        if (!EnumMapper.CanChangeStatus(order.Status, orderStatus))
+            throw new InvalidOperationException("Този статус не следва от текущия. Смени само към следващата стъпка.");
+
+        var text = note?.Trim() ?? "";
+        if (text.Length > 480) text = text[..480];
+
         order.Status = orderStatus;
+        if (orderStatus == OrderStatus.Unclaimed)
+            AddUnclaimedReturn(order);
         order.Timeline.Add(new OrderTimelineEntry
         {
             At = DateTime.UtcNow,
-            Status = orderStatus
+            Status = orderStatus,
+            Note = string.IsNullOrWhiteSpace(text) ? null : text,
         });
 
         await db.SaveChangesAsync(ct);
-        await orderEmails.TrySendStatusAsync(order, ct);
+        orderEmails.EnqueueStatus(order.Id);
         return order;
     }
 
@@ -516,37 +569,139 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
         var order = await GetByIdAsync(id, ct);
         if (order is null) return null;
 
-        if (order.Waybill is not null)
-            throw new InvalidOperationException("Waybill already exists for this order.");
+        var (purpose, nextStatus) = order.Status switch
+        {
+            OrderStatus.Processing => ("shipment", OrderStatus.Shipped),
+            OrderStatus.Claim or OrderStatus.Returned => ("return", OrderStatus.ReturnShipped),
+            OrderStatus.Replacement => ("replacement", OrderStatus.ReplacementShipped),
+            _ => throw new InvalidOperationException("Товарителница се създава при обработка, връщане или замяна."),
+        };
+
+        var latest = order.Waybill;
+        if (purpose == "shipment" && order.Waybills.Any(w => w.Purpose == "shipment"))
+            throw new InvalidOperationException("Пратката към клиента вече има товарителница.");
+        if (purpose == "return" && latest?.Purpose == "return")
+            throw new InvalidOperationException("Връщането вече има товарителница.");
+        if (purpose == "replacement" && latest?.Purpose == "replacement")
+            throw new InvalidOperationException("Замяната вече има товарителница.");
 
         var courier = EnumMapper.ParseCourier(request.Courier);
-        var shipment = await couriers.CreateShipmentAsync(courier, request, ct);
+        var shipment = courier == CourierId.Econt
+            ? await econt.CreateAsync(order, request, purpose, ct)
+            : await couriers.CreateShipmentAsync(courier, request, ct);
 
         var now = DateTime.UtcNow;
-        order.Waybill = new Waybill
+        var cod = purpose == "shipment" && order.PaymentMethod == PaymentMethod.Cod ? order.Total : (decimal?)null;
+        var payer = request.Payer?.Trim().ToLowerInvariant();
+        if (payer is not ("customer" or "merchant"))
+            payer = purpose == "shipment" ? "customer" : "merchant";
+        var direction = purpose == "return" ? "customer_to_merchant" : "merchant_to_customer";
+        order.Waybills.Add(new Waybill
         {
+            OrderId = order.Id,
             Number = shipment.Number,
             Courier = courier,
             CreatedAt = now,
             WeightKg = request.WeightKg,
             Packages = request.Packages,
-            CodAmount = request.CodAmount,
+            CodAmount = cod,
             Notes = request.Notes,
             TrackingUrl = shipment.TrackingUrl,
             ExternalId = shipment.ExternalId,
             Mode = shipment.Mode,
+            LabelUrl = shipment.LabelUrl,
+            Purpose = purpose,
+            Direction = direction,
+            Payer = payer,
+            DeliveryCost = shipment.Price,
+        });
+        var waybillNote = purpose switch
+        {
+            "return" => $"Товарителница за връщане {shipment.Number}. Изпратена на клиента по имейл.",
+            "replacement" => $"Товарителница за замяна {shipment.Number}",
+            _ => $"Waybill {shipment.Number}",
         };
-        order.Status = OrderStatus.Shipped;
+        order.Status = nextStatus;
         order.Timeline.Add(new OrderTimelineEntry
         {
             At = now,
-            Status = OrderStatus.Shipped,
-            Note = $"Waybill {shipment.Number}"
+            Status = nextStatus,
+            Note = waybillNote.Length > 480 ? waybillNote[..480] : waybillNote,
         });
 
         await db.SaveChangesAsync(ct);
-        await orderEmails.TrySendStatusAsync(order, ct);
+        orderEmails.EnqueueStatus(order.Id);
         return order;
+    }
+
+    public async Task<EcontCheckDto?> CheckEcontAsync(string id, CreateWaybillRequest request, CancellationToken ct = default)
+    {
+        var order = await GetByIdAsync(id, ct);
+        if (order is null) return null;
+        var purpose = order.Status switch
+        {
+            OrderStatus.Claim or OrderStatus.Returned => "return",
+            OrderStatus.Replacement => "replacement",
+            _ => "shipment",
+        };
+        return await econt.CheckAsync(order, request, purpose, ct);
+    }
+
+    public async Task<(Order Order, EcontStatusDto Status)?> RefreshEcontStatusAsync(string id, string? number = null, CancellationToken ct = default)
+    {
+        var order = await GetByIdAsync(id, ct);
+        if (order is null) return null;
+        var bill = FindWaybill(order, number);
+        if (bill is null || bill.Courier != CourierId.Econt)
+            throw new InvalidOperationException("Няма товарителница от Еконт за тази поръчка.");
+
+        var status = await econt.GetStatusAsync(bill.Number, ct);
+        var note = status.Status.Length > 480 ? status.Status[..480] : status.Status;
+        var delivered = EcontLabelService.IsDelivered(status);
+        var next = delivered
+            ? bill.Purpose switch
+            {
+                "shipment" when order.Status == OrderStatus.Shipped => OrderStatus.Delivered,
+                "replacement" when order.Status == OrderStatus.ReplacementShipped => OrderStatus.Replaced,
+                _ => (OrderStatus?)null,
+            }
+            : null;
+        if (next is OrderStatus deliveredStatus)
+        {
+            order.Status = deliveredStatus;
+            order.Timeline.Add(new OrderTimelineEntry
+            {
+                At = DateTime.UtcNow,
+                Status = deliveredStatus,
+                Note = note,
+            });
+            await db.SaveChangesAsync(ct);
+            orderEmails.EnqueueStatus(order.Id);
+        }
+
+        return (order, status);
+    }
+
+    public async Task<(byte[] Bytes, string ContentType, string FileName)?> GetLabelAsync(string id, string? number = null, CancellationToken ct = default)
+    {
+        var order = await GetByIdAsync(id, ct);
+        var bill = order is null ? null : FindWaybill(order, number);
+        if (bill is null) return null;
+        if (string.IsNullOrWhiteSpace(bill.LabelUrl))
+            throw new InvalidOperationException("Няма стикер от Еконт за тази товарителница.");
+        var pdf = await econt.DownloadLabelAsync(bill.LabelUrl, ct);
+        var name = string.Concat(bill.Number.Select(ch => Path.GetInvalidFileNameChars().Contains(ch) ? '-' : ch));
+        var ext = pdf.ContentType.Contains("pdf", StringComparison.OrdinalIgnoreCase) ? "pdf" : "html";
+        return (pdf.Bytes, pdf.ContentType, $"{name}.{ext}");
+    }
+
+    static Waybill? FindWaybill(Order order, string? number)
+    {
+        if (string.IsNullOrWhiteSpace(number)) return order.Waybill;
+        var match = order.Waybills.FirstOrDefault(w => string.Equals(w.Number, number.Trim(), StringComparison.OrdinalIgnoreCase));
+        if (match is null)
+            throw new InvalidOperationException("Няма такава товарителница за тази поръчка.");
+        return match;
     }
 
     public async Task<bool> DeleteAsync(string id, CancellationToken ct = default)
@@ -560,7 +715,7 @@ public class OrderService(AppDbContext db, CustomerService customers, OrderEmail
     }
 
     public async Task<Order?> CancelAsync(string id, CancellationToken ct = default) =>
-        await UpdateStatusAsync(id, "cancelled", ct);
+        await UpdateStatusAsync(id, "cancelled", "Отказана от админ", ct);
 }
 
 public class ProductService(AppDbContext db)

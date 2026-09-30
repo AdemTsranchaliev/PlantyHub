@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { languageStorageKey, supportedLanguages, type LanguageCode } from '../i18n/languages'
+import { defaultLanguage, supportedLanguages, type LanguageCode } from '../i18n/languages'
 import { BASE_PATH, currentLocale } from '../paths'
 
 const privatePrefixes = [
@@ -62,13 +62,18 @@ export default function LocaleHead() {
 
   useEffect(() => {
     if (i18n.language !== locale) void i18n.changeLanguage(locale)
-    localStorage.setItem(languageStorageKey, locale)
     document.documentElement.lang = locale
 
     const path = publicPath(pathname)
     const skipTitle = path.startsWith('/pods/')
-    if (!skipTitle) document.title = t('seo.title')
-    upsertMeta('description', t('seo.description'))
+    const isContact = path === '/contact'
+    if (!skipTitle) {
+      document.title = isContact ? `${t('supportPage.heroTitle')} · PlantyHub` : t('seo.title')
+    }
+    upsertMeta(
+      'description',
+      isContact ? `${t('supportPage.subtitle')} ${t('supportPage.responseText')}` : t('seo.description'),
+    )
     upsertMeta('robots', isPrivatePath(path) ? 'noindex, follow' : 'index, follow')
 
     const canonical = absoluteUrl(locale, path)
@@ -76,7 +81,7 @@ export default function LocaleHead() {
     for (const language of supportedLanguages) {
       upsertLink('alternate', absoluteUrl(language.code, path), language.code)
     }
-    upsertLink('alternate', absoluteUrl('en', path), 'x-default')
+    upsertLink('alternate', absoluteUrl(defaultLanguage, path), 'x-default')
   }, [i18n, locale, pathname, t])
 
   return null

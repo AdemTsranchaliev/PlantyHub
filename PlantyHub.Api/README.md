@@ -58,15 +58,24 @@ Without R2 configured, the upload endpoint returns `503` — you can still paste
 
 ---
 
-## Email (SMTP + templates)
+## Email (Azure Communication Services + templates)
 
-Transactional and campaign emails use DB templates with `{{variable}}` placeholders. If `Email:SmtpHost` is empty, messages are logged to the console (`DevEmailSender`) instead of being sent.
+Transactional and campaign emails use DB templates with `{{variable}}` placeholders. If `Email:ConnectionString` is set, mail goes through Azure Communication Services Email. Otherwise, if `Email:SmtpHost` is set, SMTP is used. If neither is set, messages are logged to the console (`DevEmailSender`) and are not delivered.
+
+The sender must be a verified MailFrom address on that ACS resource (`Email:FromAddress`, default `DoNotReply@plantyhub.com`).
+
+```bash
+cd PlantyHub.Api
+dotnet user-secrets set "Email:ConnectionString" "endpoint=https://<resource>.communication.azure.com/;accesskey=<key>"
+```
+
+Env equivalent: `Email__ConnectionString`. The deploy script copies this secret into production.
 
 ### SMTP config
 
 ```json
 "Email": {
-  "FromAddress": "noreply@plantyhub.com",
+  "FromAddress": "DoNotReply@plantyhub.com",
   "FromName": "PlantyHub",
   "SmtpHost": "smtp.example.com",
   "SmtpPort": 587,
@@ -78,7 +87,7 @@ Transactional and campaign emails use DB templates with `{{variable}}` placehold
 
 Env equivalents: `Email__FromAddress`, `Email__FromName`, `Email__SmtpHost`, `Email__SmtpPort`, `Email__SmtpUser`, `Email__SmtpPassword`, `Email__UseSsl`.
 
-Seeded template keys: `verify-email`, `password-reset`, `welcome`, `order-confirmation`, `order-shipped`, `order-cancelled`, `newsletter`.
+Seeded template keys: `verify-email`, `password-reset`, `welcome`, `order-confirmation`, `order-invoice`, `order-admin`, `order-shipped`, `order-cancelled`, `newsletter`.
 
 ### Email templates (admin)
 

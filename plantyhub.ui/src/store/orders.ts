@@ -110,6 +110,7 @@ export type CheckoutInput = {
   officeCode?: string
   cityId?: string
   promoCode?: string
+  termsAccepted: boolean
 }
 
 export async function createCustomerOrder(cartItems: CartItem[], checkout: CheckoutInput): Promise<OrderDetail> {
@@ -134,8 +135,8 @@ export async function createCustomerOrder(cartItems: CartItem[], checkout: Check
   return order
 }
 
-export async function updateOrderStatus(id: string, status: OrderStatus) {
-  const order = await ordersApi.updateStatus(id, status)
+export async function updateOrderStatus(id: string, status: OrderStatus, note: string) {
+  const order = await ordersApi.updateStatus(id, status, note)
   orderDetails.set(id, order)
   cachedOrders = cachedOrders.map((o) => (o.id === id ? order : o))
   emit()
@@ -151,6 +152,7 @@ export async function createWaybill(
     packages: data.packages,
     codAmount: data.codAmount ? Number.parseFloat(data.codAmount.replace(/[^\d.,]/g, '').replace(',', '.')) : undefined,
     notes: data.notes,
+    payer: data.payer === 'merchant' || data.payer === 'customer' ? data.payer : undefined,
   })
   orderDetails.set(id, order)
   cachedOrders = cachedOrders.map((o) => (o.id === id ? order : o))

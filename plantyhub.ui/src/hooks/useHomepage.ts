@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useSyncExternalStore } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { LanguageCode } from '../i18n/languages'
+import { defaultLanguage, isLanguageCode, type LanguageCode } from '../i18n/languages'
 import type { HomepageSectionKey } from '../admin/homepageSchema'
 import {
   getHomepageState,
@@ -17,9 +17,8 @@ import {
 
 function useLang(): LanguageCode {
   const { i18n } = useTranslation()
-  const code = i18n.language?.split('-')[0] ?? 'en'
-  if (code === 'bg' || code === 'de' || code === 'fr') return code
-  return 'en'
+  const code = i18n.language?.split('-')[0]
+  return isLanguageCode(code) ? code : defaultLanguage
 }
 
 export function useHomepageBootstrap() {

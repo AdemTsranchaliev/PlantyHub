@@ -21,22 +21,28 @@ public class CourierRateService(
         var context = await couriers.GetQuoteContextAsync(ct);
         var weight = request.WeightKg is > 0 ? request.WeightKg.Value : 1.5m;
         var courier = request.Courier?.Trim().ToLowerInvariant();
-        var tasks = new List<Task<ShippingQuoteDto?>>();
-        if (QuoteRequested(courier, "econt"))
+        var quotes = new List<ShippingQuoteDto?>();
+        if (ShouldQuote(courier, "econt", context.Econt, allowDemo: true))
         {
-            tasks.Add(SafeQuote(() => QuoteEcontAsync(context, request, "address", weight, ct), ct));
-            tasks.Add(SafeQuote(() => QuoteEcontAsync(context, request, "office", weight, ct), ct));
+            var connection = await couriers.GetEcontConnectionAsync(ct);
+            quotes.Add(await SafeQuote(() => QuoteEcontAsync(context, connection, request, "address", weight, ct), ct));
+            quotes.Add(await SafeQuote(() => QuoteEcontAsync(context, connection, request, "office", weight, ct), ct));
         }
-        if (QuoteRequested(courier, "speedy"))
+        var tasks = new List<Task<ShippingQuoteDto?>>();
+        if (ShouldQuote(courier, "speedy", context.Speedy))
         {
             tasks.Add(SafeQuote(() => QuoteSpeedyAsync(context, request, "address", weight, ct), ct));
             tasks.Add(SafeQuote(() => QuoteSpeedyAsync(context, request, "office", weight, ct), ct));
         }
-        if (QuoteRequested(courier, "dhl"))
+        if (ShouldQuote(courier, "dhl", context.Dhl))
             tasks.Add(SafeQuote(() => QuoteDhlAsync(context, request, weight, ct), ct));
-        if (QuoteRequested(courier, "boxnow"))
+        if (ShouldQuote(courier, "boxnow", context.BoxNow))
             tasks.Add(SafeQuote(() => QuoteBoxNowAsync(context, request, ct), ct));
-        var quotes = await Task.WhenAll(tasks);
+        if (tasks.Count > 0)
+        {
+            var extra = await Task.WhenAll(tasks);
+            quotes.AddRange(extra);
+        }
         var items = quotes.Where(q => q is not null).Cast<ShippingQuoteDto>();
         if (!request.IncludeUnavailable)
         {
@@ -64,19 +70,27 @@ public class CourierRateService(
 
     async Task<ShippingQuoteDto?> QuoteEcontAsync(
         CourierQuoteContext context,
+        EcontApiConnection connection,
         ShippingQuoteRequest request,
         string delivery,
         decimal weight,
         CancellationToken ct)
     {
         var account = context.Econt;
-        if (!account.Enabled || !account.Configured) return Unavailable("econt", delivery, "needsCredentials");
+        if (!account.Enabled && !connection.BuiltInDemo)
+            return Unavailable("econt", delivery, "needsCredentials");
+        if (string.IsNullOrWhiteSpace(connection.Username) || string.IsNullOrWhiteSpace(connection.Password))
+            return Unavailable("econt", delivery, "needsCredentials");
 
         var sender = context.Sender;
+        var demoSender = connection.BuiltInDemo && string.IsNullOrWhiteSpace(sender.Street);
+        var senderCity = First(sender.City, demoSender ? CourierService.EcontDemoSenderCity : "София");
+        var senderPost = First(sender.PostalCode, demoSender ? CourierService.EcontDemoSenderPost : "1000");
         var (street, num) = SplitStreet(string.IsNullOrWhiteSpace(request.Street) ? "ул. 1" : request.Street);
-        var (senderStreet, senderNum) = SplitStreet(string.IsNullOrWhiteSpace(sender.Street) ? "ул. 1" : sender.Street);
+        var (senderStreet, senderNum) = SplitStreet(First(sender.Street, demoSender ? CourierService.EcontDemoSenderStreet : "ул. Витоша 1"));
+        if (demoSender) senderNum = CourierService.EcontDemoSenderNum;
         var iso3 = await locations.ToIso3Async(request.Country, ct);
-        var senderIso3 = await locations.ToIso3Async(sender.Country, ct);
+        var senderIso3 = await locations.ToIso3Async(string.IsNullOrWhiteSpace(sender.Country) ? "BG" : sender.Country, ct);
 
         object? receiverOffice = null;
         object? receiverAddress = null;
@@ -115,27 +129,25 @@ public class CourierRateService(
         else
             label["senderAddress"] = new
             {
-                city = new { name = sender.City, postCode = sender.PostalCode, country = new { code3 = senderIso3 } },
+                city = new { name = senderCity, postCode = senderPost, country = new { code3 = senderIso3 } },
                 street = senderStreet,
                 num = senderNum,
             };
         if (receiverOffice is not null) label["receiverOfficeCode"] = receiverOffice;
         if (receiverAddress is not null) label["receiverAddress"] = receiverAddress;
 
-        var root = string.IsNullOrWhiteSpace(account.ApiUrl)
-            ? (account.TestMode ? "https://demo.econt.com/ee/services" : "https://ee.econt.com/services")
-            : account.ApiUrl.TrimEnd('/');
+        var root = connection.Root;
         var json = await PostAuthenticatedJsonAsync(
             $"{root}/Shipments/LabelService.createLabel.json",
-            account.Username,
-            account.Password,
+            connection.Username,
+            connection.Password,
             new { mode = "calculate", label },
             ct);
 
         var price = Money(json, "label", "totalPrice") ?? Money(json, "label", "senderDueAmount");
         var currency = Text(json, "label", "currency") ?? "BGN";
         if (price is null) return Unavailable("econt", delivery, "quoteFailed");
-        return Quote("econt", delivery, officeCode, price.Value, currency);
+        return Quote("econt", delivery, delivery == "office" ? officeCode : null, price.Value, currency);
     }
 
     async Task<ShippingQuoteDto?> QuoteSpeedyAsync(
@@ -284,6 +296,7 @@ public class CourierRateService(
     async Task<ShippingQuoteDto?> QuoteBoxNowAsync(CourierQuoteContext context, ShippingQuoteRequest request, CancellationToken ct)
     {
         if (!context.BoxNow.Enabled) return null;
+        if (!context.BoxNow.Configured) return Unavailable("boxnow", "locker", "needsCredentials");
         var dest = await locations.ToIso2Async(request.Country, ct);
         if (!dest.Equals("BG", StringComparison.OrdinalIgnoreCase))
             return Unavailable("boxnow", "locker", "quoteFailed");
@@ -405,6 +418,14 @@ public class CourierRateService(
 
     static bool QuoteRequested(string? courier, string id) =>
         string.IsNullOrWhiteSpace(courier) || courier.Equals(id, StringComparison.OrdinalIgnoreCase);
+
+    static bool ShouldQuote(string? courier, string id, CourierQuoteAccount account, bool allowDemo = false)
+    {
+        if (!QuoteRequested(courier, id)) return false;
+        if (OnlyCourier(courier, id)) return true;
+        if (allowDemo && account.TestMode) return true;
+        return account.Enabled;
+    }
 
     static bool OnlyCourier(string? courier, string id) =>
         !string.IsNullOrWhiteSpace(courier) && courier.Equals(id, StringComparison.OrdinalIgnoreCase);

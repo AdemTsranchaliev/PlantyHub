@@ -26,6 +26,8 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<CourierLocationCache> CourierLocationCache => Set<CourierLocationCache>();
     public DbSet<StoreSettings> StoreSettings => Set<StoreSettings>();
     public DbSet<PromoCode> PromoCodes => Set<PromoCode>();
+    public DbSet<ProductReview> ProductReviews => Set<ProductReview>();
+    public DbSet<ReviewRequest> ReviewRequests => Set<ReviewRequest>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -168,14 +170,20 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(w => w.Number).HasMaxLength(80);
             entity.Property(w => w.Notes).HasMaxLength(500);
             entity.Property(w => w.TrackingUrl).HasMaxLength(2048);
+            entity.Property(w => w.LabelUrl).HasMaxLength(2048);
             entity.Property(w => w.ExternalId).HasMaxLength(120);
             entity.Property(w => w.Mode).HasMaxLength(40);
+            entity.Property(w => w.Purpose).HasMaxLength(32).HasDefaultValue("shipment");
+            entity.Property(w => w.Direction).HasMaxLength(32).HasDefaultValue("merchant_to_customer");
+            entity.Property(w => w.Payer).HasMaxLength(16).HasDefaultValue("customer");
+            entity.Property(w => w.DeliveryCost).HasPrecision(10, 2);
             entity.HasIndex(w => w.Number).IsUnique();
+            entity.HasIndex(w => w.OrderId);
             entity.Property(w => w.WeightKg).HasPrecision(6, 2);
             entity.Property(w => w.CodAmount).HasPrecision(10, 2);
             entity.HasOne(w => w.Order)
-                .WithOne(o => o.Waybill)
-                .HasForeignKey<Waybill>(w => w.OrderId)
+                .WithMany(o => o.Waybills)
+                .HasForeignKey(w => w.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
@@ -224,6 +232,37 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         {
             entity.HasKey(s => s.Id);
             entity.Property(s => s.Id).ValueGeneratedNever();
+        });
+
+        builder.Entity<ProductReview>(entity =>
+        {
+            entity.Property(r => r.AuthorName).HasMaxLength(80);
+            entity.Property(r => r.Email).HasMaxLength(256);
+            entity.Property(r => r.Language).HasMaxLength(8);
+            entity.Property(r => r.OrderId).HasMaxLength(64);
+            entity.Property(r => r.PhotosJson).HasDefaultValue("[]");
+            entity.HasIndex(r => new { r.ProductId, r.Status, r.CreatedAt });
+            entity.HasIndex(r => new { r.ProductId, r.Status, r.Rating });
+            entity.HasIndex(r => new { r.ProductId, r.Email });
+            entity.HasOne(r => r.Product)
+                .WithMany()
+                .HasForeignKey(r => r.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<ReviewRequest>(entity =>
+        {
+            entity.Property(r => r.Token).HasMaxLength(80);
+            entity.Property(r => r.Email).HasMaxLength(256);
+            entity.Property(r => r.CustomerName).HasMaxLength(200);
+            entity.Property(r => r.Language).HasMaxLength(8);
+            entity.Property(r => r.OrderId).HasMaxLength(64);
+            entity.HasIndex(r => r.Token).IsUnique();
+            entity.HasIndex(r => new { r.ProductId, r.Email });
+            entity.HasOne(r => r.Product)
+                .WithMany()
+                .HasForeignKey(r => r.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

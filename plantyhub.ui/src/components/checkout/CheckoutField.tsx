@@ -37,8 +37,8 @@ export default function CheckoutField({
         }}
         sx={{
           '& .MuiOutlinedInput-root': {
-            minHeight: 40,
-            borderRadius: '5px',
+            height: 44,
+            borderRadius: '10px',
             bgcolor: '#fff',
             fontSize: '0.875rem',
             color: brand.graphite,
@@ -47,8 +47,8 @@ export default function CheckoutField({
             '&.Mui-focused fieldset': { borderColor: brand.plantGreen, borderWidth: 1 },
             '&.Mui-error fieldset': { borderColor: '#C62828' },
           },
-          '& .MuiOutlinedInput-input': { py: 0.85, px: 1.25 },
-          '& .MuiSelect-select': { py: 0.85, px: 1.25 },
+          '& .MuiOutlinedInput-input': { py: 0, px: 1.5, height: '44px', boxSizing: 'border-box' },
+          '& .MuiSelect-select': { py: 0, px: 1.5, height: '44px', boxSizing: 'border-box', display: 'flex', alignItems: 'center' },
         }}
       >
         {children}

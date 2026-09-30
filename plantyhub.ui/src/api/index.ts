@@ -1,4 +1,4 @@
-import { apiRequest, apiUpload, apiDownload } from './client'
+import { apiRequest, apiUpload, apiDownload, apiForm } from './client'
 import { getCustomerToken } from '../auth/session'
 import type {
   ApiAuthResponse,
@@ -31,6 +31,8 @@ import type {
   VatQuote,
   StoreVatSettings,
   AccountingReportPreview,
+  EcontCheckResult,
+  EcontStatusResult,
 } from './types'
 import type { OrderStatus } from '../admin/mockData'
 import type { HomepageState } from '../store/homepage'
@@ -76,10 +78,17 @@ export const ordersApi = {
   getMy: () => apiRequest<ApiOrderSummary[]>('/api/orders/my', { auth: 'customer' }),
   getAdminAll: () => apiRequest<ApiOrderSummary[]>('/api/admin/orders', { auth: 'admin' }),
   getAdminById: (id: string) => apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}`, { auth: 'admin' }),
-  updateStatus: (id: string, status: OrderStatus) =>
-    apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/status`, { method: 'PATCH', body: { status }, auth: 'admin' }),
+  updateStatus: (id: string, status: OrderStatus, note: string) =>
+    apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/status`, { method: 'PATCH', body: { status, note }, auth: 'admin' }),
   createWaybill: (id: string, body: CreateWaybillPayload) =>
     apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/waybill`, { method: 'POST', body, auth: 'admin' }),
+  checkEcont: (id: string, body: { courier?: string; weightKg?: number; packages?: number }) =>
+    apiRequest<EcontCheckResult>(`/api/admin/orders/${id}/econt/check`, { method: 'POST', body, auth: 'admin' }),
+  refreshEcontStatus: (id: string, number?: string) =>
+    apiRequest<EcontStatusResult>(
+      `/api/admin/orders/${id}/econt/status${number ? `?number=${encodeURIComponent(number)}` : ''}`,
+      { method: 'POST', auth: 'admin' },
+    ),
   cancel: (id: string) => apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/cancel`, { method: 'POST', auth: 'admin' }),
 }
 
@@ -303,6 +312,90 @@ export const reportsApi = {
     const q = new URLSearchParams({ from, to, includeCancelled: String(includeCancelled) })
     return apiDownload(`/api/admin/reports/${kind}?${q}`, 'admin')
   },
+}
+
+export type ReviewStatus = 'pending' | 'published' | 'hidden'
+
+export type AdminReview = {
+  id: string
+  productSlug: string
+  productName: string
+  orderId?: string | null
+  authorName: string
+  email: string
+  rating: number
+  body: string
+  photos: string[]
+  status: ReviewStatus
+  language: string
+  createdAt: string
+}
+
+export type AdminReviewRequest = {
+  id: string
+  productSlug: string
+  productName: string
+  orderId?: string | null
+  email: string
+  customerName: string
+  language: string
+  sentAt: string
+  completedAt?: string | null
+  completed: boolean
+}
+
+export type PublicReview = {
+  id: string
+  authorName: string
+  rating: number
+  body: string
+  photos: string[]
+  createdAt: string
+}
+
+export type ReviewSort = 'newest' | 'highest' | 'lowest' | 'photos'
+
+export type PublicReviews = {
+  average: number
+  count: number
+  filtered: number
+  withPhotos: number
+  ratings: number[]
+  page: number
+  pageSize: number
+  sort: ReviewSort
+  rating?: number | null
+  photos: string[]
+  items: PublicReview[]
+}
+
+export type ReviewInvite = {
+  productName: string
+  productImage: string
+  customerName: string
+  completed: boolean
+}
+
+export const reviewsApi = {
+  adminList: () => apiRequest<{ reviews: AdminReview[]; requests: AdminReviewRequest[] }>('/api/admin/reviews', { auth: 'admin' }),
+  send: (body: { productSlug: string; email: string; customerName?: string; orderId?: string; language?: string }) =>
+    apiRequest<AdminReviewRequest>('/api/admin/reviews/requests', { method: 'POST', body, auth: 'admin' }),
+  resend: (id: string) =>
+    apiRequest<AdminReviewRequest>(`/api/admin/reviews/requests/${id}/resend`, { method: 'POST', auth: 'admin' }),
+  setStatus: (id: string, status: ReviewStatus) =>
+    apiRequest<AdminReview>(`/api/admin/reviews/${id}`, { method: 'PATCH', body: { status }, auth: 'admin' }),
+  remove: (id: string) => apiRequest<void>(`/api/admin/reviews/${id}`, { method: 'DELETE', auth: 'admin' }),
+  forProduct: (slug: string, query?: { sort?: ReviewSort; page?: number; rating?: number; summary?: boolean }) => {
+    const params = new URLSearchParams()
+    if (query?.sort) params.set('sort', query.sort)
+    if (query?.page) params.set('page', String(query.page))
+    if (query?.rating) params.set('rating', String(query.rating))
+    if (query?.summary) params.set('summary', 'true')
+    const qs = params.toString()
+    return apiRequest<PublicReviews>(`/api/reviews/product/${encodeURIComponent(slug)}${qs ? `?${qs}` : ''}`)
+  },
+  invite: (token: string) => apiRequest<ReviewInvite>(`/api/reviews/invite/${encodeURIComponent(token)}`),
+  submit: (token: string, form: FormData) => apiForm<{ id: string }>(`/api/reviews/invite/${encodeURIComponent(token)}`, form),
 }
 
 export { mapOrderSummaryToDetail, mapProductsResponse, toProductUpsert } from './types'

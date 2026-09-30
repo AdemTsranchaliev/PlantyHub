@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import StarRounded from '@mui/icons-material/StarRounded'
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
+import LocalShippingOutlined from '@mui/icons-material/LocalShippingOutlined'
 import { Link as RouterLink } from 'react-router-dom'
 import { pagePaddingX } from '../components/SectionContainer'
 import { navHrefs } from '../data/catalog'
@@ -16,27 +16,48 @@ import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
 const statKeys = ['pods', 'light', 'height'] as const
+const statFloatClass = ['hero-float', 'hero-float hero-float-late', 'hero-float hero-float-later'] as const
 
-function HeroStat({ statKey }: { statKey: (typeof statKeys)[number] }) {
+function HeroStat({ statKey, floatClassName }: { statKey: (typeof statKeys)[number]; floatClassName: string }) {
   const value = useHt(`hero.stats.${statKey}.value`)
   const label = useHt(`hero.stats.${statKey}.label`)
   return (
-    <Box sx={{ minWidth: 0 }}>
+    <Box
+      className={floatClassName}
+      sx={{
+        flex: '1 1 0',
+        minWidth: 0,
+        bgcolor: 'rgba(255,255,255,0.9)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid rgba(255,255,255,0.8)',
+        borderRadius: '16px',
+        boxShadow: '0 14px 34px rgba(28, 35, 30, 0.12)',
+        px: { xs: 1, sm: 1.4 },
+        py: { xs: 0.9, sm: 1.15 },
+      }}
+    >
       <Typography
         sx={{
           fontFamily: '"Fraunces", Georgia, serif',
           fontWeight: 600,
-          fontSize: { sm: '1.35rem', md: '1.5rem' },
+          fontSize: { xs: '1.05rem', sm: '1.25rem', lg: '1.35rem' },
           color: brand.plantGreenDark,
-          lineHeight: 1.15,
-          letterSpacing: '-0.02em',
+          lineHeight: 1.1,
+          letterSpacing: '-0.03em',
         }}
       >
         {value}
       </Typography>
       <Typography
-        variant="caption"
-        sx={{ fontWeight: 600, color: brand.textSecondary, fontSize: '0.7rem', lineHeight: 1.3, display: 'block', letterSpacing: '0.02em' }}
+        sx={{
+          fontWeight: 650,
+          color: brand.textSecondary,
+          fontSize: { xs: '0.62rem', sm: '0.7rem' },
+          lineHeight: 1.25,
+          display: 'block',
+          mt: 0.35,
+        }}
       >
         {label}
       </Typography>
@@ -54,6 +75,9 @@ export default function HeroSection() {
   const ctaPrimary = useHt('hero.ctaPrimary')
   const ctaSecondary = useHt('hero.ctaSecondary')
   const imageAlt = useHt('hero.imageAlt')
+  const priceLabel = useHt('hero.priceLabel')
+  const trustShipping = useHt('hero.trust.shipping')
+  const price = garden?.price
 
   return (
     <Box
@@ -62,85 +86,89 @@ export default function HeroSection() {
         position: 'relative',
         overflow: 'hidden',
         background: brand.gradientHero,
-        minHeight: { xs: 'auto', lg: 'min(92svh, 920px)' },
       }}
     >
-      {/* Soft atmosphere */}
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
           background: `
-            radial-gradient(ellipse 60% 55% at 70% 20%, ${brand.plantGreenGlow} 0%, transparent 65%),
-            radial-gradient(ellipse 45% 40% at 10% 90%, rgba(227, 159, 118, 0.10) 0%, transparent 55%)
+            radial-gradient(ellipse 48% 55% at 82% 38%, rgba(76, 163, 116, 0.22) 0%, transparent 68%),
+            radial-gradient(ellipse 36% 32% at 6% 92%, rgba(227, 159, 118, 0.16) 0%, transparent 62%)
           `,
           pointerEvents: 'none',
         }}
       />
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'radial-gradient(rgba(31, 90, 59, 0.14) 1px, transparent 1px)',
+          backgroundSize: '22px 22px',
+          maskImage: 'radial-gradient(ellipse 42% 55% at 78% 42%, #000 0%, transparent 72%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 42% 55% at 78% 42%, #000 0%, transparent 72%)',
+          pointerEvents: 'none',
+        }}
+      />
 
-      {/* ── Mobile: compact light hero ── */}
-      <Box sx={{ display: { xs: 'block', lg: 'none' }, position: 'relative', px: pagePaddingX, pt: 1.5, pb: 3.5 }}>
-        <Box
-          className="hero-fade-up-delay"
-          sx={{
-            position: 'relative',
-            borderRadius: '22px',
-            overflow: 'hidden',
-            mb: 2.25,
-            boxShadow: brand.shadowHover,
-            border: `3px solid ${brand.white}`,
-            maxHeight: 220,
-          }}
-        >
-          <MediaImg
-            className="hero-image-reveal"
-            src={heroImage}
-            preset="hero"
-            alt={imageAlt}
-            loading="eager"
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 1,
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.05fr) minmax(0, 0.95fr)' },
+          gap: { xs: 2.25, md: 4, lg: 6, xl: 8 },
+          alignItems: 'center',
+          maxWidth: 1320,
+          mx: 'auto',
+          px: pagePaddingX,
+          pt: { xs: 1.25, md: 4, lg: 4.5, xl: 5.5 },
+          pb: { xs: 3.5, md: 4, lg: 4.5, xl: 5.5 },
+        }}
+      >
+        <Box className="hero-fade-up" sx={{ maxWidth: { md: 560 }, order: { xs: 1, md: 0 } }}>
+          <Stack
+            direction="row"
+            spacing={0.75}
+            useFlexGap
             sx={{
-              width: '100%',
-              height: 220,
-              objectFit: 'cover',
-              objectPosition: 'center 30%',
-              display: 'block',
-            }}
-          />
-        </Box>
-
-        <Box className="hero-fade-up">
-          <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', mb: 1.25 }}>
-            <Stack direction="row" sx={{ color: '#CE8A4A' }}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <StarRounded key={i} sx={{ fontSize: 15 }} />
-              ))}
-            </Stack>
-            <Typography sx={{ fontSize: '0.78rem', fontWeight: 700, color: brand.graphite }}>{badge}</Typography>
-          </Stack>
-
-          <Typography
-            sx={{
-              fontFamily: '"Fraunces", Georgia, serif',
-              fontWeight: 600,
-              fontSize: '1rem',
-              letterSpacing: '-0.03em',
-              color: brand.plantGreenDark,
-              mb: 0.75,
+              display: 'inline-flex',
+              alignItems: 'center',
+              bgcolor: brand.white,
+              border: `1px solid ${brand.border}`,
+              boxShadow: brand.shadow,
+              borderRadius: 999,
+              pl: 0.85,
+              pr: 1.5,
+              py: 0.45,
+              mb: { xs: 1.5, md: 2, lg: 2.25 },
             }}
           >
-            PlantyHub
-          </Typography>
+            <Box
+              className="hero-dot"
+              sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: brand.plantGreen, flexShrink: 0 }}
+            />
+            <Stack direction="row" sx={{ color: '#CE8A4A' }}>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <StarRounded key={i} sx={{ fontSize: { xs: 14, lg: 16 } }} />
+              ))}
+            </Stack>
+            <Typography sx={{ fontSize: { xs: '0.75rem', lg: '0.8rem' }, fontWeight: 700, color: brand.graphite }}>
+              {badge}
+            </Typography>
+          </Stack>
 
           <Typography
             component="h1"
             sx={{
               fontFamily: '"Fraunces", Georgia, serif',
-              fontSize: 'clamp(1.85rem, 7.5vw, 2.35rem)',
+              fontSize: { xs: 'clamp(2.05rem, 7.4vw, 2.6rem)', md: '2.65rem', lg: '3.2rem', xl: '3.6rem' },
               fontWeight: 650,
               letterSpacing: '-0.04em',
-              lineHeight: 1.08,
-              mb: 1,
+              lineHeight: 1.02,
+              mb: { xs: 1.15, md: 1.5, lg: 1.75 },
               color: brand.graphite,
+              textWrap: 'balance',
             }}
           >
             {title}
@@ -148,11 +176,14 @@ export default function HeroSection() {
 
           <Typography
             sx={{
-              fontSize: '1rem',
-              fontWeight: 500,
+              fontFamily: '"Fraunces", Georgia, serif',
+              fontStyle: 'italic',
+              fontWeight: 560,
+              fontSize: { xs: '1.15rem', md: '1.25rem', lg: '1.4rem' },
               color: brand.plantGreenDark,
-              mb: 1,
-              lineHeight: 1.4,
+              mb: 1.15,
+              lineHeight: 1.3,
+              maxWidth: 480,
             }}
           >
             {promise}
@@ -161,217 +192,164 @@ export default function HeroSection() {
           <Typography
             sx={{
               color: brand.textSecondary,
-              fontSize: '0.95rem',
+              fontSize: { xs: '0.95rem', lg: '1.05rem' },
               lineHeight: 1.55,
-              mb: 2.5,
-              maxWidth: 420,
+              mb: { xs: 2.25, md: 2.5, lg: 3 },
+              maxWidth: 460,
             }}
           >
             {description}
           </Typography>
 
-          <Stack spacing={1.15}>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={1.25}
+            useFlexGap
+            sx={{ flexWrap: 'wrap', mb: trustShipping ? 1.75 : { xs: 2.5, lg: 3 } }}
+          >
             <Button
               variant="contained"
               size="large"
               component={RouterLink}
               to={navHrefs.buy}
-              fullWidth
               endIcon={<ArrowForwardRounded />}
               sx={{
-                minHeight: 50,
-                '&.MuiButton-sizeLarge': { minHeight: 50 },
+                px: { sm: 3.5 },
+                minHeight: 52,
+                '&.MuiButton-sizeLarge': { minHeight: 52 },
                 fontSize: '1rem',
               }}
             >
-              {ctaPrimary} · {garden?.price}
+              {price ? `${ctaPrimary} · ${price}` : ctaPrimary}
             </Button>
             <Button
               variant="outlined"
               size="large"
               href={resolveHref(navHrefs.howItWorks)}
-              fullWidth
-              sx={{ minHeight: 46, '&.MuiButton-sizeLarge': { minHeight: 46 } }}
+              sx={{ minHeight: 52, '&.MuiButton-sizeLarge': { minHeight: 52 } }}
             >
               {ctaSecondary}
             </Button>
           </Stack>
+
+          {trustShipping ? (
+            <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', color: brand.textSecondary }}>
+              <LocalShippingOutlined sx={{ fontSize: 18, color: brand.plantGreen }} />
+              <Typography sx={{ fontSize: '0.84rem', fontWeight: 650, lineHeight: 1.3 }}>{trustShipping}</Typography>
+            </Stack>
+          ) : null}
         </Box>
-      </Box>
 
-      {/* ── Desktop / tablet: editorial two-column ── */}
-      <Box sx={{ display: { xs: 'none', lg: 'block' }, position: 'relative', maxWidth: 1400, mx: 'auto', px: pagePaddingX, py: { lg: 6, xl: 7 } }}>
-        <Grid container spacing={{ lg: 8, xl: 10 }} sx={{ alignItems: 'center' }}>
-          <Grid size={{ lg: 6 }}>
-            <Box className="hero-fade-up" sx={{ maxWidth: 560 }}>
-              <Stack
-                direction="row"
-                spacing={1}
-                useFlexGap
-                sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  bgcolor: brand.white,
-                  border: `1px solid ${brand.border}`,
-                  boxShadow: brand.shadow,
-                  borderRadius: 999,
-                  pl: 1,
-                  pr: 1.75,
-                  py: 0.65,
-                  mb: 3,
-                }}
-              >
-                <Stack direction="row" sx={{ color: '#CE8A4A' }}>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <StarRounded key={i} sx={{ fontSize: 17 }} />
-                  ))}
-                </Stack>
-                <Typography sx={{ fontSize: '0.8rem', fontWeight: 700, color: brand.graphite }}>{badge}</Typography>
-              </Stack>
-
-              <Typography
-                sx={{
-                  fontFamily: '"Fraunces", Georgia, serif',
-                  fontWeight: 600,
-                  fontSize: '1.15rem',
-                  letterSpacing: '-0.03em',
-                  color: brand.plantGreenDark,
-                  mb: 1.5,
-                }}
-              >
-                PlantyHub
-              </Typography>
-
-              <Typography
-                component="h1"
-                sx={{
-                  fontFamily: '"Fraunces", Georgia, serif',
-                  fontSize: { lg: '3.75rem', xl: '4.35rem' },
-                  fontWeight: 650,
-                  letterSpacing: '-0.045em',
-                  lineHeight: 0.98,
-                  mb: 2.25,
-                  color: brand.graphite,
-                }}
-              >
-                {title}
-              </Typography>
-
-              <Typography
-                sx={{
-                  fontSize: '1.35rem',
-                  fontWeight: 500,
-                  color: brand.plantGreenDark,
-                  mb: 1.75,
-                  lineHeight: 1.35,
-                  maxWidth: 480,
-                }}
-              >
-                {promise}
-              </Typography>
-
-              <Typography
-                sx={{
-                  color: brand.textSecondary,
-                  fontSize: '1.08rem',
-                  lineHeight: 1.6,
-                  mb: 3.5,
-                  maxWidth: 480,
-                }}
-              >
-                {description}
-              </Typography>
-
-              <Stack direction="row" spacing={1.5} sx={{ mb: 4.5 }}>
-                <Button
-                  variant="contained"
-                  size="large"
-                  component={RouterLink}
-                  to={navHrefs.buy}
-                  endIcon={<ArrowForwardRounded />}
-                  sx={{ px: 4.5, minHeight: 52, '&.MuiButton-sizeLarge': { minHeight: 52 }, fontSize: '1.02rem' }}
-                >
-                  {ctaPrimary} · {garden?.price}
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  href={resolveHref(navHrefs.howItWorks)}
-                  sx={{ minHeight: 52, '&.MuiButton-sizeLarge': { minHeight: 52 } }}
-                >
-                  {ctaSecondary}
-                </Button>
-              </Stack>
-
-              <Stack
-                direction="row"
-                spacing={0}
-                divider={
-                  <Box sx={{ width: '1px', alignSelf: 'stretch', bgcolor: brand.border, mx: 2.5 }} />
-                }
-              >
-                {statKeys.map((key) => (
-                  <HeroStat key={key} statKey={key} />
-                ))}
-              </Stack>
-            </Box>
-          </Grid>
-
-          <Grid size={{ lg: 6 }}>
-            <Box sx={{ position: 'relative', maxWidth: 560, ml: 'auto' }}>
+        <Box
+          className="hero-fade-up-delay"
+          sx={{
+            position: 'relative',
+            pt: { md: 1 },
+          }}
+        >
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'block' },
+              position: 'absolute',
+              width: '86%',
+              aspectRatio: '1',
+              borderRadius: '50%',
+              border: '1.5px solid rgba(47, 125, 83, 0.28)',
+              top: '-8%',
+              right: '-10%',
+              pointerEvents: 'none',
+            }}
+          />
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 1,
+              borderRadius: { xs: '22px', lg: '32px' },
+              overflow: 'hidden',
+              boxShadow: '0 28px 60px rgba(28, 35, 30, 0.16)',
+              bgcolor: brand.beigeDark,
+              aspectRatio: { xs: '5 / 3.5', md: '4 / 4.15' },
+              maxHeight: { md: 520, lg: 580 },
+            }}
+          >
+            <MediaImg
+              className="hero-image-reveal"
+              src={heroImage}
+              preset="hero"
+              alt={imageAlt}
+              loading="eager"
+              fetchPriority="high"
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center 12%',
+              }}
+            />
+            {priceLabel ? (
               <Box
-                className="hero-fade-up-delay"
                 sx={{
                   position: 'absolute',
-                  inset: '-10% -4%',
-                  borderRadius: '50%',
-                  background: `linear-gradient(150deg, ${brand.plantGreenLight} 0%, ${brand.plantGreen} 50%, ${brand.plantGreenDark} 100%)`,
-                  opacity: 0.9,
-                  zIndex: 0,
-                }}
-              />
-              <Box
-                className="hero-fade-up-delay hero-device-float"
-                sx={{
-                  position: 'relative',
-                  zIndex: 1,
-                  borderRadius: '32px',
-                  overflow: 'hidden',
-                  boxShadow: '0 28px 64px rgba(28, 35, 30, 0.18)',
-                  border: `5px solid ${brand.white}`,
+                  left: { xs: 12, lg: 16 },
+                  bottom: { xs: 58, md: 72 },
+                  bgcolor: 'rgba(255,255,255,0.92)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  borderRadius: '14px',
+                  px: 1.5,
+                  py: 1,
+                  boxShadow: brand.shadow,
+                  maxWidth: '68%',
                 }}
               >
-                <MediaImg
-                  src={heroImage}
-                  preset="hero"
-                  alt={imageAlt}
-                  loading="eager"
+                <Typography
                   sx={{
-                    width: '100%',
-                    aspectRatio: '1 / 1',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    display: 'block',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: brand.plantGreen,
+                    lineHeight: 1.2,
                   }}
-                />
-                <Box
-                  className="hero-led-pulse"
-                  sx={{
-                    position: 'absolute',
-                    top: '12%',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: '72%',
-                    height: 8,
-                    borderRadius: 2,
-                    bgcolor: 'rgba(255,255,255,0.95)',
-                    boxShadow: `0 0 24px ${brand.plantGreenGlow}, 0 0 48px rgba(255,255,200,0.4)`,
-                  }}
-                />
+                >
+                  {priceLabel}
+                </Typography>
+                {price ? (
+                  <Typography
+                    sx={{
+                      fontFamily: '"Fraunces", Georgia, serif',
+                      fontWeight: 600,
+                      fontSize: '1.15rem',
+                      letterSpacing: '-0.02em',
+                      color: brand.graphite,
+                      lineHeight: 1.2,
+                      mt: 0.25,
+                    }}
+                  >
+                    {price}
+                  </Typography>
+                ) : null}
               </Box>
-            </Box>
-          </Grid>
-        </Grid>
+            ) : null}
+          </Box>
+
+          <Stack
+            direction="row"
+            spacing={{ xs: 0.75, sm: 1.25 }}
+            sx={{
+              position: 'relative',
+              zIndex: 2,
+              mt: { xs: -2.75, md: -3.5 },
+              mx: { xs: 1, md: 1.5 },
+            }}
+          >
+            {statKeys.map((key, index) => (
+              <HeroStat key={key} statKey={key} floatClassName={statFloatClass[index]} />
+            ))}
+          </Stack>
+        </Box>
       </Box>
     </Box>
   )

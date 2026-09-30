@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link as RouterLink, Navigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -13,6 +13,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import FileDownloadRounded from '@mui/icons-material/FileDownloadRounded'
 import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
@@ -21,18 +22,14 @@ import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { loadMyOrders } from '../store/orders'
 import { getCustomerToken } from '../auth/session'
 import { useMyOrders, useMyOrdersBootstrap, useOrdersStore } from '../hooks/useOrders'
+import { downloadOrderSheet } from '../admin/orderSheet'
+import { ordersApi } from '../api'
+import { orderStatusColors as statusColors } from '../admin/orderStatus'
 import { brand } from '../theme'
 
-const statusColors: Record<string, { bg: string; color: string }> = {
-  pending: { bg: 'rgba(227, 159, 118, 0.15)', color: '#C47A4A' },
-  processing: { bg: 'rgba(47, 125, 83, 0.12)', color: brand.plantGreenDark },
-  shipped: { bg: 'rgba(76, 163, 116, 0.15)', color: brand.plantGreen },
-  delivered: { bg: brand.plantGreenMuted, color: brand.plantGreenDark },
-  cancelled: { bg: 'rgba(28, 35, 30, 0.08)', color: brand.textSecondary },
-}
-
 export default function MyOrdersPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const [sheetBusy, setSheetBusy] = useState<string | null>(null)
   const { customer } = useCustomerAuth()
   const orders = useMyOrders()
   const { loading, error } = useOrdersStore()
@@ -135,6 +132,19 @@ export default function MyOrdersPage() {
                     </TableCell>
                     <TableCell sx={{ color: brand.textSecondary }}>{order.date}</TableCell>
                     <TableCell align="right">
+                      <IconButton
+                        aria-label={t('order.download')}
+                        disabled={sheetBusy === order.id}
+                        onClick={() => {
+                          setSheetBusy(order.id)
+                          void ordersApi.getById(order.id, true)
+                            .then((detail) => downloadOrderSheet(detail, t, i18n.language))
+                            .finally(() => setSheetBusy(null))
+                        }}
+                        sx={{ color: brand.textSecondary }}
+                      >
+                        {sheetBusy === order.id ? <CircularProgress size={16} sx={{ color: brand.plantGreen }} /> : <FileDownloadRounded fontSize="small" />}
+                      </IconButton>
                       <IconButton
                         component={RouterLink}
                         to={`/order/${order.id}`}

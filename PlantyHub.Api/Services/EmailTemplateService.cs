@@ -53,13 +53,14 @@ public class EmailTemplateService(AppDbContext db, IEmailSender emailSender, IOp
         string key,
         string to,
         Dictionary<string, string>? variables = null,
-        CancellationToken ct = default)
+        CancellationToken ct = default,
+        EmailAttachment? attachment = null)
     {
         var preview = await PreviewAsync(key, variables, ct);
         if (preview is null)
             throw new InvalidOperationException($"Email template '{key}' was not found.");
 
-        await emailSender.SendAsync(to, preview.Value.Subject, preview.Value.Html, ct);
+        await emailSender.SendAsync(to, preview.Value.Subject, preview.Value.Html, ct, attachment);
     }
 
     public static Dictionary<string, string> ParseSampleData(EmailTemplate template)

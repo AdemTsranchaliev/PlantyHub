@@ -26,19 +26,23 @@ public class CourierLocationService(
         PropertyNameCaseInsensitive = true,
     };
 
-    public Task<CourierLocationListDto> GetCountriesAsync(CourierId courier, bool refresh, CancellationToken ct) =>
-        GetCachedAsync(
-            Key(courier, "countries-served"),
+    public async Task<CourierLocationListDto> GetCountriesAsync(CourierId courier, bool refresh, CancellationToken ct)
+    {
+        var scope = await CacheScopeAsync(courier, ct);
+        return await GetCachedAsync(
+            Key(courier, scope, "countries-served"),
             refresh,
             () => FetchCountriesAsync(courier, ct),
             ct);
+    }
 
     public async Task<CourierLocationListDto> GetCitiesAsync(CourierId courier, string countryId, bool refresh, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(countryId))
             return EmptyPlaces("error", "countryRequired");
+        var scope = await CacheScopeAsync(courier, ct);
         return await GetCachedAsync(
-            Key(courier, "cities", countryId.Trim()),
+            Key(courier, scope, "cities", countryId.Trim()),
             refresh,
             () => FetchCitiesAsync(courier, countryId.Trim(), ct),
             ct);
@@ -85,14 +89,14 @@ public class CourierLocationService(
     async Task<IReadOnlyList<CourierPlaceDto>> IsoCountriesAsync(CancellationToken ct)
     {
         var list = await GetCachedAsync(
-            Key(CourierId.Econt, "countries-iso"),
+            Key(CourierId.Econt, await CacheScopeAsync(CourierId.Econt, ct), "countries-iso"),
             false,
             async () => (await FetchEcontCountriesRawAsync(ct), "econt-api", null),
             ct);
         return list.Items;
     }
 
-    public Task<CourierOfficeListDto> GetOfficesAsync(
+    public async Task<CourierOfficeListDto> GetOfficesAsync(
         CourierId courier,
         string countryId,
         string? cityId,
@@ -101,14 +105,20 @@ public class CourierLocationService(
         CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(countryId))
-            return Task.FromResult(EmptyOffices("error", "countryRequired"));
+            return EmptyOffices("error", "countryRequired");
 
         var cityKey = !string.IsNullOrWhiteSpace(cityId) ? cityId.Trim()
             : !string.IsNullOrWhiteSpace(cityName) ? cityName.Trim()
             : "-";
 
-        return GetCachedOfficesAsync(
-            Key(courier, "offices", countryId.Trim(), cityKey),
+        var scope = await CacheScopeAsync(courier, ct);
+        if (courier == CourierId.Econt)
+        {
+            var connection = await couriers.GetEcontConnectionAsync(ct);
+            if (connection.BuiltInDemo) scope = "demo";
+        }
+        return await GetCachedOfficesAsync(
+            Key(courier, scope, "offices", countryId.Trim(), cityKey),
             refresh,
             () => FetchOfficesAsync(courier, countryId.Trim(), cityId?.Trim(), cityName?.Trim(), ct),
             ct);
@@ -254,9 +264,9 @@ public class CourierLocationService(
     {
         var raw = await FetchEcontCountriesRawAsync(ct);
         var bulgaria = raw.Where(p => p.Code is "BG" || p.Id is "BGR").ToList();
-        var creds = await couriers.GetCredentialsAsync(CourierId.Econt, ct);
-        if (string.IsNullOrWhiteSpace(creds.Username) || string.IsNullOrWhiteSpace(creds.Password))
-            return bulgaria;
+        var connection = await couriers.GetEcontConnectionAsync(ct);
+        if (connection.BuiltInDemo || string.IsNullOrWhiteSpace(connection.Username))
+            return bulgaria.Count > 0 ? bulgaria : raw.Take(1).ToList();
 
         var served = new System.Collections.Concurrent.ConcurrentBag<CourierPlaceDto>(bulgaria);
         using var gate = new SemaphoreSlim(6);
@@ -634,25 +644,26 @@ public class CourierLocationService(
         return match.Success ? match.Groups[1].Value : "";
     }
 
+    async Task<string> CacheScopeAsync(CourierId courier, CancellationToken ct)
+    {
+        if (courier != CourierId.Econt) return "v1";
+        var connection = await couriers.GetEcontConnectionAsync(ct);
+        return connection.Root.Contains("demo.econt.com", StringComparison.OrdinalIgnoreCase) ? "demo" : "live";
+    }
+
     async Task<JsonElement> PostEcontAsync(string path, object body, CancellationToken ct)
     {
-        var creds = await couriers.GetCredentialsAsync(CourierId.Econt, ct);
-        var root = string.IsNullOrWhiteSpace(creds.ApiUrl)
-            ? (creds.TestMode ? "https://demo.econt.com/ee/services" : "https://ee.econt.com/services")
-            : creds.ApiUrl.TrimEnd('/');
-        // Nomenclatures are public on production even in test mode.
-        if (string.IsNullOrWhiteSpace(creds.ApiUrl) && creds.TestMode)
-            root = "https://ee.econt.com/services";
-
-        var request = new HttpRequestMessage(HttpMethod.Post, $"{root}/{path}")
+        var connection = await couriers.GetEcontConnectionAsync(ct);
+        var request = new HttpRequestMessage(HttpMethod.Post, $"{connection.Root.TrimEnd('/')}/{path}")
         {
             Content = JsonContent.Create(body),
         };
-        if (!string.IsNullOrWhiteSpace(creds.Username) && !string.IsNullOrWhiteSpace(creds.Password))
+        if (!string.IsNullOrWhiteSpace(connection.Username)
+            && !string.IsNullOrWhiteSpace(connection.Password))
         {
             request.Headers.Authorization = new AuthenticationHeaderValue(
                 "Basic",
-                Convert.ToBase64String(Encoding.UTF8.GetBytes($"{creds.Username}:{creds.Password}")));
+                Convert.ToBase64String(Encoding.UTF8.GetBytes($"{connection.Username}:{connection.Password}")));
         }
 
         var response = await Client().SendAsync(request, ct);

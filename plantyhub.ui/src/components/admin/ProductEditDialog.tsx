@@ -386,6 +386,9 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                 )}
               </AdminFieldGroup>
               <AdminFieldGroup title={t('admin.productEdit.visibility')}>
+                <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem', lineHeight: 1.55 }}>
+                  {t('admin.productEdit.activeHint')}
+                </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ flexWrap: 'wrap' }}>
                   <FormControlLabel control={<Switch checked={draft.active} onChange={(e) => setDraft((p) => ({ ...p, active: e.target.checked }))} />} label={t('admin.productEdit.active')} />
                   {hasFeatured && (

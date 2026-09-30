@@ -31,6 +31,18 @@ import { countryDisplayName } from '../../utils/country'
 const courierIds: CourierIdKey[] = ['econt', 'speedy', 'dhl', 'boxnow']
 type TabKey = 'sender' | 'calculator' | CourierIdKey
 
+function defaultCourierOptions(
+  accounts: Record<CourierIdKey, { enabled: boolean }> | null,
+  current: string,
+): CourierIdKey[] {
+  const enabled = accounts ? courierIds.filter((id) => accounts[id]?.enabled) : courierIds
+  const options = enabled.length > 0 ? enabled : (['econt'] as CourierIdKey[])
+  if (courierIds.includes(current as CourierIdKey) && !options.includes(current as CourierIdKey)) {
+    return [current as CourierIdKey, ...options]
+  }
+  return options
+}
+
 const emptySender: ApiCourierSender = {
   company: '',
   contactName: '',
@@ -217,7 +229,7 @@ export default function AdminCouriersPage() {
                   onChange={(e) => patchSender({ defaultCourier: e.target.value })}
                   helperText={t('admin.couriers.sender.defaultCourierHint')}
                 >
-                  {courierIds.map((id) => (
+                  {defaultCourierOptions(accounts, sender.defaultCourier).map((id) => (
                     <MenuItem key={id} value={id}>{t(`admin.orderDetail.couriers.${id}`)}</MenuItem>
                   ))}
                 </TextField>
@@ -271,6 +283,9 @@ function CourierAccountForm({
           control={<Switch checked={account.enabled} onChange={(e) => onChange({ enabled: e.target.checked })} />}
           label={t('admin.couriers.enabled')}
         />
+        <Typography sx={{ fontSize: '0.8rem', color: brand.textSecondary, lineHeight: 1.45 }}>
+          {t('admin.couriers.enabledHint')}
+        </Typography>
         <FormControlLabel
           control={<Switch checked={account.testMode} onChange={(e) => onChange({ testMode: e.target.checked })} />}
           label={t('admin.couriers.testMode')}

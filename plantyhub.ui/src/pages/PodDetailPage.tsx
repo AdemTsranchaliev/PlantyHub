@@ -31,6 +31,7 @@ import { useSiteAsset } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
+import ProductReviews, { ProductRatingRow, useProductReviews } from '../components/ProductReviews'
 
 const trustItems = ['compatible', 'nonGmo', 'shipping'] as const
 
@@ -38,6 +39,7 @@ export default function PodDetailPage() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
   const pod = useProduct('pods', id)
+  const reviews = useProductReviews(pod?.id)
   const allPods = useSeedPodsCatalog()
   const addProductToCart = useAddProductToCart()
   const [qty, setQty] = useState(1)
@@ -152,16 +154,20 @@ export default function PodDetailPage() {
 
           <Grid size={{ xs: 12, md: 6 }}>
             <Reveal>
-              <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
-                <Stack direction="row" sx={{ color: '#CE8A4A' }}>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <StarRounded key={i} sx={{ fontSize: 18 }} />
-                  ))}
+              {reviews && reviews.count > 0 ? (
+                <ProductRatingRow reviews={reviews} />
+              ) : (
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
+                  <Stack direction="row" sx={{ color: '#CE8A4A' }}>
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <StarRounded key={i} sx={{ fontSize: 18 }} />
+                    ))}
+                  </Stack>
+                  <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.textSecondary }}>
+                    {t('hero.badge')}
+                  </Typography>
                 </Stack>
-                <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.textSecondary }}>
-                  {t('hero.badge')}
-                </Typography>
-              </Stack>
+              )}
 
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1 }}>
                 {pod.name}
@@ -284,6 +290,8 @@ export default function PodDetailPage() {
           ))}
         </Grid>
       </SectionContainer>
+
+      <ProductReviews slug={pod.id} />
 
       <SectionContainer bgcolor={brand.white} py={{ xs: 6, sm: 7, md: 8 }}>
         <Typography component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, color: brand.graphite, mb: 3 }}>

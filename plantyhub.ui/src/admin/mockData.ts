@@ -1,6 +1,19 @@
 export type CountryCode = string
 
-export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+export type OrderStatus =
+  | 'pending'
+  | 'processing'
+  | 'shipped'
+  | 'delivered'
+  | 'cancelled'
+  | 'returned'
+  | 'claim'
+  | 'replacement'
+  | 'replacementShipped'
+  | 'replaced'
+  | 'returnShipped'
+  | 'returnedAfterReview'
+  | 'unclaimed'
 
 export type AdminOrder = {
   id: string
@@ -96,6 +109,14 @@ export const orderStatusCounts: Record<OrderStatus, number> = {
   shipped: 5,
   delivered: 14,
   cancelled: 1,
+  returned: 0,
+  claim: 0,
+  replacement: 0,
+  replacementShipped: 0,
+  replaced: 0,
+  returnShipped: 0,
+  returnedAfterReview: 0,
+  unclaimed: 0,
 }
 
 export const topProducts: TopProduct[] = [

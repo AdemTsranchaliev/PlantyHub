@@ -101,7 +101,7 @@ public class AccountingReportService(AppDbContext db, VatService vat)
         var query = db.Orders
             .AsNoTracking()
             .Include(o => o.Items)
-            .Include(o => o.Waybill)
+            .Include(o => o.Waybills)
             .Where(o => o.CreatedAt >= fromUtc && o.CreatedAt <= toUtc);
 
         var cancelledExcluded = includeCancelled
@@ -147,7 +147,11 @@ public class AccountingReportService(AppDbContext db, VatService vat)
         ["Поръчки", orders.Count.ToString(CultureInfo.InvariantCulture)],
         ["Анулирани изключени", includeCancelled ? "Не" : $"Да ({cancelledExcluded})"],
         ["Продукти", Money(orders.Sum(o => o.Subtotal))],
-        ["Доставка", Money(orders.Sum(o => o.ShippingCost))],
+        ["Доставка в поръчката", Money(orders.Sum(o => o.ShippingCost))],
+        ["Куриер търговец → клиент", Money(orders.SelectMany(o => o.Waybills).Where(w => w.Direction != "customer_to_merchant" && w.Purpose != "return").Sum(w => w.DeliveryCost ?? 0))],
+        ["Куриер клиент → търговец", Money(orders.SelectMany(o => o.Waybills).Where(w => w.Direction == "customer_to_merchant" || w.Purpose == "return").Sum(w => w.DeliveryCost ?? 0))],
+        ["Куриер за сметка на клиента", Money(orders.SelectMany(o => o.Waybills).Where(w => w.Payer != "merchant").Sum(w => w.DeliveryCost ?? 0))],
+        ["Куриер за сметка на търговеца", Money(orders.SelectMany(o => o.Waybills).Where(w => w.Payer == "merchant").Sum(w => w.DeliveryCost ?? 0))],
         ["Данъчна основа", Money(orders.Sum(Net))],
         ["ДДС", Money(orders.Sum(o => o.Tax))],
         ["Общо", Money(orders.Sum(o => o.Total))],
@@ -172,6 +176,11 @@ public class AccountingReportService(AppDbContext db, VatService vat)
             "Плащане",
             "Куриер",
             "Товарителница",
+            "Посока и плащане",
+            "Куриер търговец → клиент",
+            "Куриер клиент → търговец",
+            "За сметка на клиента",
+            "За сметка на търговеца",
             "Продукти",
             "Доставка",
             "Данъчна основа",
@@ -198,7 +207,12 @@ public class AccountingReportService(AppDbContext db, VatService vat)
                 order.BillingPostalCode.Length > 0 ? order.BillingPostalCode : order.ShippingPostalCode,
                 Payment(order.PaymentMethod),
                 order.ShippingCourier ?? order.Waybill?.Courier.ToString() ?? "",
-                order.Waybill?.Number ?? "",
+                string.Join(" · ", order.Waybills.OrderBy(w => w.CreatedAt).Select(w => w.Number)),
+                string.Join(" · ", order.Waybills.OrderBy(w => w.CreatedAt).Select(WaybillCostText)),
+                Money(LegCost(order, toCustomer: true)),
+                Money(LegCost(order, toCustomer: false)),
+                Money(order.Waybills.Where(w => w.Payer != "merchant").Sum(w => w.DeliveryCost ?? 0)),
+                Money(order.Waybills.Where(w => w.Payer == "merchant").Sum(w => w.DeliveryCost ?? 0)),
                 Money(order.Subtotal),
                 Money(order.ShippingCost),
                 Money(Net(order)),
@@ -296,6 +310,8 @@ public class AccountingReportService(AppDbContext db, VatService vat)
 
             Данъчна основа = общо − ДДС.
             ДДС е по държава на доставка. Извън ЕС ставката е 0% (износ).
+            Доставка в поръчката е сумата, начислена на клиента при покупка.
+            Куриерските редове са реалната цена на товарителницата, с посока и кой я плаща.
             """;
     }
 
@@ -344,6 +360,20 @@ public class AccountingReportService(AppDbContext db, VatService vat)
 
     static decimal Net(Order order) => order.Total - order.Tax;
     static decimal Round(decimal amount) => Math.Round(amount, 2, MidpointRounding.AwayFromZero);
+    static bool IsReturnLeg(Waybill bill) =>
+        bill.Direction == "customer_to_merchant" || bill.Purpose is "return" or "unclaimed";
+
+    static decimal LegCost(Order order, bool toCustomer) =>
+        order.Waybills.Where(w => toCustomer ? !IsReturnLeg(w) : IsReturnLeg(w)).Sum(w => w.DeliveryCost ?? 0);
+
+    static string WaybillCostText(Waybill bill)
+    {
+        var direction = IsReturnLeg(bill) ? "клиент → търговец" : "търговец → клиент";
+        var payer = bill.Payer == "merchant" ? "плаща търговец" : "плаща клиент";
+        var cost = bill.DeliveryCost is decimal amount ? Money(amount) : "—";
+        return $"{direction}, {payer}, {cost}";
+    }
+
     static string Money(decimal amount) => Round(amount).ToString("0.00", Bg);
     static string Rate(decimal? rate) => (rate ?? 0m).ToString("0.##", Bg);
     static string Date(DateTime value)
@@ -375,6 +405,14 @@ public class AccountingReportService(AppDbContext db, VatService vat)
         OrderStatus.Shipped => "Изпратена",
         OrderStatus.Delivered => "Доставена",
         OrderStatus.Cancelled => "Анулирана",
+        OrderStatus.Returned => "Върната след получаване",
+        OrderStatus.Claim => "Рекламация",
+        OrderStatus.Replacement => "За замяна",
+        OrderStatus.ReplacementShipped => "Товарителница за замяна",
+        OrderStatus.Replaced => "Заменена",
+        OrderStatus.ReturnShipped => "Връщане с товарителница",
+        OrderStatus.ReturnedAfterReview => "Върната след преглед",
+        OrderStatus.Unclaimed => "Непотърсена",
         _ => status.ToString(),
     };
 

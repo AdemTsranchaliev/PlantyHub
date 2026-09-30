@@ -133,6 +133,14 @@ public static class EnumMapper
         "shipped" => OrderStatus.Shipped,
         "delivered" => OrderStatus.Delivered,
         "cancelled" => OrderStatus.Cancelled,
+        "returned" => OrderStatus.Returned,
+        "claim" => OrderStatus.Claim,
+        "replacement" => OrderStatus.Replacement,
+        "replacementshipped" or "replacement_shipped" or "replacement-shipped" => OrderStatus.ReplacementShipped,
+        "replaced" => OrderStatus.Replaced,
+        "returnshipped" or "return_shipped" or "return-shipped" => OrderStatus.ReturnShipped,
+        "returnedafterreview" or "returned_after_review" or "returned-after-review" => OrderStatus.ReturnedAfterReview,
+        "unclaimed" or "notcollected" or "not_collected" or "непотърсена" => OrderStatus.Unclaimed,
         _ => throw new ArgumentException($"Unknown order status: {status}")
     };
 
@@ -166,7 +174,35 @@ public static class EnumMapper
         OrderStatus.Shipped => "shipped",
         OrderStatus.Delivered => "delivered",
         OrderStatus.Cancelled => "cancelled",
+        OrderStatus.Returned => "returned",
+        OrderStatus.Claim => "claim",
+        OrderStatus.Replacement => "replacement",
+        OrderStatus.ReplacementShipped => "replacementShipped",
+        OrderStatus.Replaced => "replaced",
+        OrderStatus.ReturnShipped => "returnShipped",
+        OrderStatus.ReturnedAfterReview => "returnedAfterReview",
+        OrderStatus.Unclaimed => "unclaimed",
         _ => status.ToString().ToLowerInvariant()
+    };
+
+    public static bool CanChangeStatus(OrderStatus from, OrderStatus to) =>
+        from != to && NextStatuses(from).Contains(to);
+
+    public static OrderStatus[] NextStatuses(OrderStatus from) => from switch
+    {
+        OrderStatus.Pending => [OrderStatus.Processing, OrderStatus.Cancelled],
+        OrderStatus.Processing => [OrderStatus.Shipped, OrderStatus.Cancelled],
+        OrderStatus.Shipped => [OrderStatus.Delivered, OrderStatus.ReturnedAfterReview, OrderStatus.Unclaimed],
+        OrderStatus.Delivered => [OrderStatus.Returned, OrderStatus.Claim],
+        OrderStatus.ReturnedAfterReview => [OrderStatus.Replacement],
+        OrderStatus.Unclaimed => [OrderStatus.Replacement],
+        OrderStatus.Returned => [OrderStatus.Claim],
+        OrderStatus.Claim => [OrderStatus.Returned],
+        OrderStatus.ReturnShipped => [OrderStatus.Replacement],
+        OrderStatus.Replacement => [OrderStatus.Cancelled],
+        OrderStatus.ReplacementShipped => [OrderStatus.Replaced, OrderStatus.ReturnedAfterReview, OrderStatus.Unclaimed],
+        OrderStatus.Replaced => [OrderStatus.Claim, OrderStatus.Returned],
+        _ => [],
     };
 
     public static string ToApi(PaymentMethod method) => method switch

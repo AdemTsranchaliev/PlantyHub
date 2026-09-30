@@ -105,7 +105,9 @@ public record CourierShipmentResult(
     string Number,
     string Mode,
     string? TrackingUrl,
-    string? ExternalId);
+    string? ExternalId,
+    string? LabelUrl = null,
+    decimal? Price = null);
 
 public record CourierPlaceDto(string Id, string Code, string Name, string? NameEn);
 
@@ -136,6 +138,13 @@ public record CourierApiCredentials(
     string Password,
     string SiteId,
     string ApiUrl);
+
+public record EcontApiConnection(
+    string Root,
+    string Username,
+    string Password,
+    bool TestMode,
+    bool BuiltInDemo);
 
 public record CourierQuoteSender(
     string Company,

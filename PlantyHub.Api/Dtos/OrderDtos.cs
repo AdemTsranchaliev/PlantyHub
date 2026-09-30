@@ -34,7 +34,12 @@ public record WaybillDto(
     string? Notes,
     string? TrackingUrl,
     string? ExternalId,
-    string? Mode);
+    string? Mode,
+    string? LabelUrl = null,
+    string Purpose = "shipment",
+    string Direction = "merchant_to_customer",
+    string Payer = "customer",
+    string? DeliveryCost = null);
 
 public record OrderTimelineDto(string At, string Status, string? Note);
 
@@ -71,7 +76,32 @@ public record OrderDetailDto(
     string? Notes,
     WaybillDto? Waybill,
     IReadOnlyList<OrderTimelineDto> Timeline,
-    decimal? TaxRate = null);
+    decimal? TaxRate = null,
+    string? ShippingCourier = null,
+    string? ShippingDelivery = null,
+    string? ShippingOfficeCode = null,
+    IReadOnlyList<WaybillDto>? Waybills = null,
+    string? Discount = null,
+    string? PromoCode = null);
+
+public record EcontCheckIssueDto(string Code, string Severity, string? Message);
+
+public record EcontCheckDto(
+    bool Ok,
+    bool Cod,
+    string? CodAmount,
+    IReadOnlyList<EcontCheckIssueDto> Issues,
+    decimal? Price,
+    string? Currency);
+
+public record EcontStatusEventDto(string Time, string Event, string? Place);
+
+public record EcontStatusDto(
+    string Status,
+    string? StatusEn,
+    IReadOnlyList<EcontStatusEventDto> Events);
+
+public record EcontStatusResponse(OrderDetailDto Order, EcontStatusDto Courier);
 
 public record CheckoutLineItemRequest(
     string ProductId,
@@ -101,13 +131,17 @@ public record CheckoutRequest(
     string? Delivery = null,
     string? OfficeCode = null,
     string? CityId = null,
-    string? PromoCode = null);
+    string? PromoCode = null,
+    bool TermsAccepted = false);
 
-public record UpdateOrderStatusRequest(string Status);
+public record UpdateOrderStatusRequest(string Status, string? Note = null);
 
 public record CreateWaybillRequest(
     string Courier,
     decimal WeightKg,
     int Packages,
     decimal? CodAmount,
-    string? Notes);
+    string? Notes,
+    string? Payer = null);
+
+public record EcontCheckRequest(string? Courier, decimal WeightKg = 1.5m, int Packages = 1);

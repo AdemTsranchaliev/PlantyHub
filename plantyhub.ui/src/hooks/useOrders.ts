@@ -58,7 +58,7 @@ export function useOrderDetail(id: string | undefined, admin = false) {
       setDetail(result)
       setLoading(false)
     })
-  }, [id, admin])
+  }, [id, admin, cached])
 
   return { order: detail ?? cached, loading }
 }
@@ -68,7 +68,7 @@ export function useOrdersStore() {
     loading: useSyncExternalStore(subscribeOrders, getOrdersLoading, getOrdersLoading),
     error: useSyncExternalStore(subscribeOrders, getOrdersError, getOrdersError),
     reload: loadOrders,
-    updateOrderStatus: (id: string, status: OrderStatus) => updateOrderStatus(id, status),
+    updateOrderStatus: (id: string, status: OrderStatus, note: string) => updateOrderStatus(id, status, note),
     createWaybill: (
       id: string,
       data: Omit<Waybill, 'number' | 'createdAt'>,

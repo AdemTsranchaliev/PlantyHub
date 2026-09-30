@@ -26,6 +26,7 @@ import EnergySavingsLeafOutlined from '@mui/icons-material/EnergySavingsLeafOutl
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded'
 import CardGiftcardRounded from '@mui/icons-material/CardGiftcardRounded'
 import { useTranslation } from 'react-i18next'
+import { defaultLanguage, isLanguageCode } from '../i18n/languages'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { productSpecRows } from '../data/catalog'
@@ -36,6 +37,7 @@ import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 import { toMediaUrl } from '../media/cfImage'
 import MediaImg from '../components/MediaImg'
+import ProductReviews, { ProductRatingRow, useProductReviews } from '../components/ProductReviews'
 
 const trustItems = [
   { key: 'shipping', Icon: LocalShippingOutlined },
@@ -56,6 +58,7 @@ const BONUS_KIT_PRICE = '€19.99'
 export default function ProductPage() {
   const { t, i18n } = useTranslation()
   const garden = useProduct('gardens', 'homegarder-one')
+  const reviews = useProductReviews(garden?.id)
   const addProductToCart = useAddProductToCart()
   const { images } = useSiteAssetsStore()
   const [active, setActive] = useState(0)
@@ -75,7 +78,8 @@ export default function ProductPage() {
       ]
   const videoSrc = garden?.videoUrl || productVideo
   const videoPoster = garden?.videoPoster || productVideoPoster
-  const lang = (i18n.language?.split('-')[0] ?? 'en') as 'en' | 'bg' | 'de' | 'fr'
+  const code = i18n.language?.split('-')[0]
+  const lang = isLanguageCode(code) ? code : defaultLanguage
   const locale = garden?.locales[lang] ?? garden?.locales.en
   const specRows = locale?.specs?.length
     ? locale.specs
@@ -167,16 +171,20 @@ export default function ProductPage() {
 
           <Grid size={{ xs: 12, md: 6 }}>
             <Reveal>
-              <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
-                <Stack direction="row" sx={{ color: '#CE8A4A' }}>
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <StarRounded key={i} sx={{ fontSize: 18 }} />
-                  ))}
+              {reviews && reviews.count > 0 ? (
+                <ProductRatingRow reviews={reviews} />
+              ) : (
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
+                  <Stack direction="row" sx={{ color: '#CE8A4A' }}>
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <StarRounded key={i} sx={{ fontSize: 18 }} />
+                    ))}
+                  </Stack>
+                  <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.textSecondary }}>
+                    {t('hero.badge')}
+                  </Typography>
                 </Stack>
-                <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.textSecondary }}>
-                  {t('hero.badge')}
-                </Typography>
-              </Stack>
+              )}
 
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1.5 }}>
                 {productTitle}
@@ -586,6 +594,8 @@ export default function ProductPage() {
           </Grid>
         </Grid>
       </SectionContainer>
+
+      <ProductReviews slug={garden?.id} />
 
       <SectionContainer bgcolor={brand.white} py={{ xs: 6, sm: 7, md: 8 }}>
         <Reveal sx={{ maxWidth: 820, mx: 'auto' }}>

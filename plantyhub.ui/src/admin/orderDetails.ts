@@ -43,6 +43,11 @@ export type Waybill = {
   trackingUrl?: string
   externalId?: string
   mode?: 'manual' | 'sandbox' | 'live' | string
+  labelUrl?: string | null
+  purpose?: 'shipment' | 'return' | 'replacement' | string
+  direction?: 'merchant_to_customer' | 'customer_to_merchant' | string
+  payer?: 'customer' | 'merchant' | string
+  deliveryCost?: string | null
 }
 
 export type OrderTimelineEntry = {
@@ -64,7 +69,13 @@ export type OrderDetail = AdminOrder & {
   taxRate?: number | null
   notes?: string
   waybill?: Waybill
+  waybills?: Waybill[]
   timeline: OrderTimelineEntry[]
+  shippingCourier?: string | null
+  shippingDelivery?: string | null
+  shippingOfficeCode?: string | null
+  discount?: string | null
+  promoCode?: string | null
 }
 
 const customerPhones: Record<string, string> = {

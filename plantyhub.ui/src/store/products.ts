@@ -197,20 +197,22 @@ export async function loadProducts(admin = false): Promise<ProductsState> {
 export async function addProduct(category: ProductCategory, product: StoredProduct): Promise<boolean> {
   await productsApi.create(toProductUpsert(product, category))
   await loadProducts(true)
-  await loadProducts(false)
   return true
 }
 
 export async function updateProduct(category: ProductCategory, id: string, product: StoredProduct) {
   await productsApi.update(id, toProductUpsert({ ...product, id }, category))
   await loadProducts(true)
-  await loadProducts(false)
+}
+
+export async function setProductActive(id: string, active: boolean) {
+  await productsApi.setActive(id, active)
+  await loadProducts(true)
 }
 
 export async function deleteProduct(_category: ProductCategory, id: string) {
   await productsApi.delete(id)
   await loadProducts(true)
-  await loadProducts(false)
 }
 
 export function getProduct(category: ProductCategory, id: string): StoredProduct | undefined {

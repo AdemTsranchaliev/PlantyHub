@@ -29,12 +29,16 @@ public class AdminOrdersController(OrderService orders) : ControllerBase
     {
         try
         {
-            var order = await orders.UpdateStatusAsync(id, request.Status, ct);
+            var order = await orders.UpdateStatusAsync(id, request.Status, request.Note, ct);
             return order is null ? NotFound() : Ok(OrderMapper.ToDetail(order));
         }
         catch (ArgumentException ex)
         {
             return BadRequest(new { message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
         }
     }
 
@@ -52,6 +56,56 @@ public class AdminOrdersController(OrderService orders) : ControllerBase
         {
             var order = await orders.CreateWaybillAsync(id, request, ct);
             return order is null ? NotFound() : Ok(OrderMapper.ToDetail(order));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
+
+    [HttpPost("{id}/econt/check")]
+    public async Task<ActionResult<EcontCheckDto>> CheckEcont(string id, [FromBody] EcontCheckRequest? request, CancellationToken ct)
+    {
+        try
+        {
+            var check = await orders.CheckEcontAsync(id, new CreateWaybillRequest(
+                request?.Courier ?? "econt",
+                request?.WeightKg > 0 ? request.WeightKg : 1.5m,
+                request?.Packages > 0 ? request.Packages : 1,
+                null,
+                null), ct);
+            return check is null ? NotFound() : Ok(check);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
+
+    [HttpPost("{id}/econt/status")]
+    public async Task<ActionResult<EcontStatusResponse>> RefreshEcontStatus(string id, [FromQuery] string? number, CancellationToken ct)
+    {
+        try
+        {
+            var result = await orders.RefreshEcontStatusAsync(id, number, ct);
+            return result is null
+                ? NotFound()
+                : Ok(new EcontStatusResponse(OrderMapper.ToDetail(result.Value.Order), result.Value.Status));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
+
+    [HttpGet("{id}/waybill/label")]
+    public async Task<IActionResult> Label(string id, [FromQuery] string? number, CancellationToken ct)
+    {
+        try
+        {
+            var label = await orders.GetLabelAsync(id, number, ct);
+            if (label is null) return NotFound();
+            return File(label.Value.Bytes, label.Value.ContentType, label.Value.FileName);
         }
         catch (InvalidOperationException ex)
         {

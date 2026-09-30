@@ -104,6 +104,9 @@ prod = {
         "BucketName": secrets.get("R2:BucketName", "plantyhub"),
         "PublicBaseUrl": secrets.get("R2:PublicBaseUrl", "https://media.plantyhub.com"),
     },
+    "Email": {
+        "ConnectionString": secrets.get("Email:ConnectionString", ""),
+    },
 }
 (root / "publish" / "appsettings.Production.json").write_text(json.dumps(prod, indent=2), encoding="utf-8")
 PY

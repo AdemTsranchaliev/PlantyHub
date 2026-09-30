@@ -76,6 +76,9 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<EmailTemplateService>();
 builder.Services.AddScoped<OrderEmailService>();
+builder.Services.AddSingleton<OrderEmailProcessor>();
+builder.Services.AddSingleton<IOrderEmailQueue>(sp => sp.GetRequiredService<OrderEmailProcessor>());
+builder.Services.AddHostedService(sp => sp.GetRequiredService<OrderEmailProcessor>());
 builder.Services.AddScoped<AuthEmailService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<ProductService>();
@@ -83,8 +86,10 @@ builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<CourierService>();
 builder.Services.AddScoped<CourierLocationService>();
 builder.Services.AddScoped<CourierRateService>();
+builder.Services.AddScoped<EcontLabelService>();
 builder.Services.AddScoped<VatService>();
 builder.Services.AddScoped<AccountingReportService>();
+builder.Services.AddScoped<ReviewService>();
 builder.Services.AddHttpClient("couriers", client =>
 {
     client.Timeout = TimeSpan.FromSeconds(45);
@@ -95,7 +100,9 @@ builder.Services.AddScoped<NewsletterService>();
 builder.Services.AddSingleton<IR2StorageService, R2StorageService>();
 
 var emailSettings = builder.Configuration.GetSection(EmailSettings.SectionName).Get<EmailSettings>() ?? new EmailSettings();
-if (emailSettings.IsSmtpConfigured)
+if (emailSettings.IsAcsConfigured)
+    builder.Services.AddSingleton<IEmailSender, AcsEmailSender>();
+else if (emailSettings.IsSmtpConfigured)
     builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 else
     builder.Services.AddSingleton<IEmailSender, DevEmailSender>();

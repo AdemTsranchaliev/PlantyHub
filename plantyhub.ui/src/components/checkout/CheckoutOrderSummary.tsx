@@ -1,11 +1,13 @@
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Collapse from '@mui/material/Collapse'
 import Divider from '@mui/material/Divider'
 import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
 import { useTranslation } from 'react-i18next'
-import type { CartItem } from '../../store/cart'
+import type { CartGift, CartItem } from '../../store/cart'
 import { formatEuro, parseEuro, FREE_SHIPPING_THRESHOLD } from '../../utils/price'
 import MediaImg from '../MediaImg'
 
@@ -29,6 +31,17 @@ type SummaryProps = {
   taxLabel?: string | null
   taxHint?: string | null
   discountLabel?: string | null
+  promo: PromoControls
+}
+
+export type PromoControls = {
+  input: string
+  busy: boolean
+  error: string | null
+  appliedCode: string | null
+  onInput: (value: string) => void
+  onApply: () => void
+  onClear: () => void
 }
 
 function lineTotal(item: CartItem) {
@@ -36,7 +49,6 @@ function lineTotal(item: CartItem) {
 }
 
 function LineItem({ item }: { item: CartItem }) {
-  const { t } = useTranslation()
   return (
     <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
       <Box sx={{ position: 'relative', flexShrink: 0 }}>
@@ -89,27 +101,10 @@ function LineItem({ item }: { item: CartItem }) {
         {item.pack && (
           <Typography sx={{ fontSize: '0.6875rem', color: checkout.muted }}>{item.pack}</Typography>
         )}
-        {item.gift && (
-          <Typography sx={{ fontSize: '0.6875rem', color: checkout.link, fontWeight: 600, mt: 0.25 }}>
-            {t('cart.freeGift')}: {item.gift.name}
-          </Typography>
-        )}
       </Box>
-      <Stack spacing={0} sx={{ alignItems: 'flex-end', flexShrink: 0 }}>
-        <Typography sx={{ fontSize: '0.8125rem', fontWeight: 500, color: checkout.text }}>
-          {lineTotal(item)}
-        </Typography>
-        {item.gift && (
-          <Stack direction="row" spacing={0.5} sx={{ alignItems: 'baseline' }}>
-            <Typography sx={{ fontSize: '0.6875rem', fontWeight: 700, color: checkout.link }}>
-              {t('pdp.bonus.free')}
-            </Typography>
-            <Typography sx={{ fontSize: '0.6875rem', color: checkout.muted, textDecoration: 'line-through' }}>
-              {item.gift.compareAt}
-            </Typography>
-          </Stack>
-        )}
-      </Stack>
+      <Typography sx={{ fontSize: '0.8125rem', fontWeight: 600, color: checkout.text, flexShrink: 0 }}>
+        {lineTotal(item)}
+      </Typography>
     </Stack>
   )
 }
@@ -162,14 +157,166 @@ function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipp
   )
 }
 
-export function CheckoutOrderSummary(props: SummaryProps) {
+function GiftLine({ gift }: { gift: CartGift }) {
+  const { t } = useTranslation()
   return (
-    <Stack spacing={2}>
+    <Stack
+      direction="row"
+      spacing={1.25}
+      sx={{
+        alignItems: 'center',
+        p: 1,
+        borderRadius: '12px',
+        border: `1.5px dashed ${checkout.link}`,
+        bgcolor: 'rgba(47, 125, 83, 0.08)',
+      }}
+    >
+      <Box
+        sx={{
+          width: 44,
+          height: 44,
+          borderRadius: '8px',
+          bgcolor: '#fff',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <MediaImg src={gift.image} preset="thumb" alt="" sx={{ width: '86%', height: '86%', objectFit: 'contain', display: 'block' }} />
+      </Box>
+      <Box sx={{ flex: 1, minWidth: 0 }}>
+        <Typography sx={{ fontSize: '0.8125rem', fontWeight: 600, color: checkout.text, lineHeight: 1.3 }}>
+          {gift.name}
+        </Typography>
+      </Box>
+      <Stack spacing={0} sx={{ alignItems: 'flex-end', flexShrink: 0 }}>
+        <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: checkout.link }}>{t('pdp.bonus.free')}</Typography>
+        {gift.compareAt ? (
+          <Typography sx={{ fontSize: '0.75rem', color: checkout.muted, textDecoration: 'line-through' }}>
+            {gift.compareAt}
+          </Typography>
+        ) : null}
+      </Stack>
+    </Stack>
+  )
+}
+
+function PromoField({ promo }: { promo: PromoControls }) {
+  const { t } = useTranslation()
+
+  return (
+    <Box>
+      <Typography sx={{ fontSize: '0.75rem', fontWeight: 600, color: checkout.muted, mb: 0.75 }}>
+        {t('checkout.promo')}
+      </Typography>
+      {promo.appliedCode ? (
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 1,
+            px: 1.25,
+            py: 1,
+            borderRadius: '12px',
+            border: `1.5px solid ${checkout.link}`,
+            bgcolor: 'rgba(47, 125, 83, 0.08)',
+          }}
+        >
+          <Box sx={{ minWidth: 0 }}>
+            <Typography sx={{ fontSize: '0.8125rem', fontWeight: 700, color: checkout.text }}>{promo.appliedCode}</Typography>
+            <Typography sx={{ fontSize: '0.75rem', color: checkout.link, fontWeight: 600 }}>
+              {t('checkout.promoApplied', { code: promo.appliedCode })}
+            </Typography>
+          </Box>
+          <Button
+            type="button"
+            onClick={promo.onClear}
+            sx={{ flexShrink: 0, minWidth: 0, px: 1, color: checkout.muted, textTransform: 'none', fontWeight: 600 }}
+          >
+            {t('cart.remove')}
+          </Button>
+        </Stack>
+      ) : (
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+          <TextField
+            fullWidth
+            placeholder={t('checkout.promoCode')}
+            value={promo.input}
+            onChange={(event) => promo.onInput(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key !== 'Enter') return
+              event.preventDefault()
+              promo.onApply()
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                minHeight: 40,
+                borderRadius: '10px',
+                bgcolor: '#fff',
+                fontSize: '0.875rem',
+                '& fieldset': { borderColor: checkout.inputBorder },
+                '&:hover fieldset': { borderColor: '#A8ACA6' },
+                '&.Mui-focused fieldset': { borderColor: checkout.link, borderWidth: 1 },
+              },
+              '& .MuiOutlinedInput-input': { py: 0.85, px: 1.25 },
+            }}
+          />
+          <Button
+            type="button"
+            variant="outlined"
+            disabled={promo.busy || !promo.input.trim()}
+            onClick={promo.onApply}
+            sx={{
+              flexShrink: 0,
+              minHeight: 40,
+              px: 1.75,
+              borderRadius: '10px',
+              textTransform: 'none',
+              fontWeight: 700,
+              borderColor: checkout.inputBorder,
+              color: checkout.text,
+              bgcolor: '#fff',
+            }}
+          >
+            {t('checkout.promoApply')}
+          </Button>
+        </Stack>
+      )}
+      {promo.error ? (
+        <Typography sx={{ color: '#C62828', fontSize: '0.75rem', fontWeight: 600, mt: 0.75 }}>{promo.error}</Typography>
+      ) : null}
+    </Box>
+  )
+}
+
+export function CheckoutOrderSummary(props: SummaryProps) {
+  const { t } = useTranslation()
+  const gifts = props.items.flatMap((item) => (item.gift ? [item.gift] : []))
+
+  return (
+    <Stack spacing={2.25}>
+      <Typography sx={{ fontSize: '1rem', fontWeight: 700, color: checkout.text }}>{t('checkout.orderSummary')}</Typography>
       <Stack spacing={1.5}>
         {props.items.map((item) => (
           <LineItem key={item.key} item={item} />
         ))}
       </Stack>
+      {gifts.length > 0 ? (
+        <Stack spacing={1}>
+          <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: checkout.link, letterSpacing: '0.02em' }}>
+            {t('checkout.freeKits')}
+          </Typography>
+          {props.items
+            .filter((item) => item.gift)
+            .map((item) => (
+              <GiftLine key={item.key} gift={item.gift!} />
+            ))}
+        </Stack>
+      ) : null}
+      <PromoField promo={props.promo} />
       <Totals {...props} />
     </Stack>
   )

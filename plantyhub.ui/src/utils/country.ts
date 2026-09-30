@@ -7,3 +7,9 @@ export function countryDisplayName(code: string, language = 'bg') {
     return iso
   }
 }
+
+export function countryFlag(code: string) {
+  const iso = code.trim().toUpperCase()
+  if (!/^[A-Z]{2}$/.test(iso)) return ''
+  return String.fromCodePoint(...iso.split('').map((char) => 0x1f1e6 + char.charCodeAt(0) - 65))
+}

@@ -8,6 +8,8 @@ import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import EditRounded from '@mui/icons-material/EditRounded'
+import VisibilityOffRounded from '@mui/icons-material/VisibilityOffRounded'
+import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useTranslation } from 'react-i18next'
 import { brand } from '../../theme'
 import MediaImg from '../MediaImg'
@@ -26,6 +28,9 @@ type ProductRow = {
 type Props = {
   rows: ProductRow[]
   onEdit?: (id: string) => void
+  onHide?: (id: string) => void
+  onRestore?: (id: string) => void
+  emptyLabel?: string
 }
 
 const headerCellSx = {
@@ -37,7 +42,7 @@ const headerCellSx = {
   borderBottom: `1px solid ${brand.border}`,
 } as const
 
-export default function AdminProductTable({ rows, onEdit }: Props) {
+export default function AdminProductTable({ rows, onEdit, onHide, onRestore, emptyLabel }: Props) {
   const { t } = useTranslation()
 
   return (
@@ -63,7 +68,7 @@ export default function AdminProductTable({ rows, onEdit }: Props) {
           {rows.length === 0 && (
             <TableRow>
               <TableCell colSpan={5} sx={{ color: brand.textSecondary, py: 4, border: 0 }}>
-                {t('admin.table.empty')}
+                {emptyLabel ?? t('admin.table.empty')}
               </TableCell>
             </TableRow>
           )}
@@ -123,7 +128,7 @@ export default function AdminProductTable({ rows, onEdit }: Props) {
               </TableCell>
               <TableCell>
                 <Chip
-                  label={row.active === false ? t('admin.table.inactive') : t('admin.table.active')}
+                  label={row.active === false ? t('admin.table.hidden') : t('admin.table.active')}
                   size="small"
                   sx={{
                     bgcolor: row.active === false ? 'rgba(28, 35, 30, 0.08)' : brand.plantGreenMuted,
@@ -145,6 +150,32 @@ export default function AdminProductTable({ rows, onEdit }: Props) {
                 >
                   <EditRounded fontSize="small" />
                 </IconButton>
+                {onHide && (
+                  <IconButton
+                    size="small"
+                    aria-label={t('admin.table.hide')}
+                    onClick={(event) => {
+                      event.stopPropagation()
+                      onHide(row.id)
+                    }}
+                    sx={{ color: brand.textSecondary, '&:hover': { color: '#C62828', bgcolor: 'rgba(198, 40, 40, 0.08)' } }}
+                  >
+                    <VisibilityOffRounded fontSize="small" />
+                  </IconButton>
+                )}
+                {onRestore && (
+                  <IconButton
+                    size="small"
+                    aria-label={t('admin.table.restore')}
+                    onClick={(event) => {
+                      event.stopPropagation()
+                      onRestore(row.id)
+                    }}
+                    sx={{ color: brand.textSecondary, '&:hover': { color: brand.plantGreen, bgcolor: brand.plantGreenMuted } }}
+                  >
+                    <VisibilityRounded fontSize="small" />
+                  </IconButton>
+                )}
               </TableCell>
             </TableRow>
           ))}

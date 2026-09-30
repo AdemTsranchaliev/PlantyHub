@@ -258,6 +258,7 @@ export type CheckoutPayload = {
   officeCode?: string
   cityId?: string
   promoCode?: string
+  termsAccepted: boolean
   items: {
     productId: string
     category: ProductCategory
@@ -292,6 +293,7 @@ export type CreateWaybillPayload = {
   packages: number
   codAmount?: number
   notes?: string
+  payer?: 'customer' | 'merchant'
 }
 
 export type CourierIdKey = 'econt' | 'speedy' | 'dhl' | 'boxnow'
@@ -443,4 +445,34 @@ export type AccountingReportPreview = {
   vat: number
   gross: number
   byCountry: AccountingVatCountry[]
+}
+
+export type EcontCheckIssue = {
+  code: string
+  severity: 'error' | 'warning' | string
+  message?: string | null
+}
+
+export type EcontCheckResult = {
+  ok: boolean
+  cod: boolean
+  codAmount?: string | null
+  issues: EcontCheckIssue[]
+  price?: number | null
+  currency?: string | null
+}
+
+export type EcontStatusEvent = {
+  time: string
+  event: string
+  place?: string | null
+}
+
+export type EcontStatusResult = {
+  order: ApiOrderDetail
+  courier: {
+    status: string
+    statusEn?: string | null
+    events: EcontStatusEvent[]
+  }
 }

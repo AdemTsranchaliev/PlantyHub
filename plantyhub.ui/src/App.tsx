@@ -36,6 +36,7 @@ const VerifyEmailPage = lazy(() => import('./pages/VerifyEmailPage'))
 const CartPage = lazy(() => import('./pages/CartPage'))
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'))
 const OrderConfirmationPage = lazy(() => import('./pages/OrderConfirmationPage'))
+const ReviewPage = lazy(() => import('./pages/ReviewPage'))
 const MyOrdersPage = lazy(() => import('./pages/MyOrdersPage'))
 
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout'))
@@ -44,6 +45,7 @@ const AdminGardensPage = lazy(() => import('./pages/admin/AdminGardensPage'))
 const AdminPodsPage = lazy(() => import('./pages/admin/AdminPodsPage'))
 const AdminConsumablesPage = lazy(() => import('./pages/admin/AdminConsumablesPage'))
 const AdminAccessoriesPage = lazy(() => import('./pages/admin/AdminAccessoriesPage'))
+const AdminHiddenProductsPage = lazy(() => import('./pages/admin/AdminHiddenProductsPage'))
 const AdminOrdersPage = lazy(() => import('./pages/admin/AdminOrdersPage'))
 const AdminOrderDetailPage = lazy(() => import('./pages/admin/AdminOrderDetailPage'))
 const AdminCustomersPage = lazy(() => import('./pages/admin/AdminCustomersPage'))
@@ -57,6 +59,7 @@ const AdminCouriersPage = lazy(() => import('./pages/admin/AdminCouriersPage'))
 const AdminVatPage = lazy(() => import('./pages/admin/AdminVatPage'))
 const AdminPromoCodesPage = lazy(() => import('./pages/admin/AdminPromoCodesPage'))
 const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage'))
+const AdminReviewsPage = lazy(() => import('./pages/admin/AdminReviewsPage'))
 
 function AdminLoginRedirect() {
   window.location.replace(resolveHref('/login'))
@@ -105,6 +108,7 @@ function StorefrontRoutes() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order/:orderId" element={<OrderConfirmationPage />} />
+          <Route path="/review/:token" element={<ReviewPage />} />
         </Routes>
       </Suspense>
       {!isCheckoutFlow && <Footer />}
@@ -127,7 +131,9 @@ function AdminRoutes() {
           <Route path="pods" element={<AdminPodsPage />} />
           <Route path="consumables" element={<AdminConsumablesPage />} />
           <Route path="accessories" element={<AdminAccessoriesPage />} />
+          <Route path="hidden" element={<AdminHiddenProductsPage />} />
           <Route path="orders" element={<AdminOrdersPage />} />
+          <Route path="reviews" element={<AdminReviewsPage />} />
           <Route path="orders/:orderId" element={<AdminOrderDetailPage />} />
           <Route path="customers" element={<AdminCustomersPage />} />
           <Route path="customers/:customerId" element={<AdminCustomerDetailPage />} />

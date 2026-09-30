@@ -2,19 +2,22 @@ import { useEffect, useState } from 'react'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import Checkbox from '@mui/material/Checkbox'
 import Collapse from '@mui/material/Collapse'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import CreditCardOutlined from '@mui/icons-material/CreditCardOutlined'
+import HomeOutlined from '@mui/icons-material/HomeOutlined'
 import LocalShippingOutlined from '@mui/icons-material/LocalShippingOutlined'
 import LockOutlined from '@mui/icons-material/LockOutlined'
-import PaymentsOutlined from '@mui/icons-material/PaymentsOutlined'
+import StorefrontOutlined from '@mui/icons-material/StorefrontOutlined'
 import { useTranslation } from 'react-i18next'
 import Logo from '../components/Logo'
 import CheckoutField from '../components/checkout/CheckoutField'
-import CheckoutPlaceFields from '../components/checkout/CheckoutPlaceFields'
+import CheckoutPlaceFields, { CheckoutOfficeField } from '../components/checkout/CheckoutPlaceFields'
 import { CheckoutOrderSummary, MobileOrderSummary, checkout } from '../components/checkout/CheckoutOrderSummary'
 import { navHrefs } from '../data/catalog'
 import type { PaymentMethod } from '../admin/orderDetails'
@@ -61,9 +64,8 @@ const emptyForm: FormState = {
   notes: '',
 }
 
-const paymentOptions: { id: PaymentMethod; Icon: typeof CreditCardOutlined }[] = [
-  { id: 'card', Icon: CreditCardOutlined },
-  { id: 'paypal', Icon: PaymentsOutlined },
+const paymentOptions: { id: PaymentMethod; Icon: typeof CreditCardOutlined; detailKey?: string }[] = [
+  { id: 'card', Icon: CreditCardOutlined, detailKey: 'checkout.stripe' },
   { id: 'cod', Icon: LocalShippingOutlined },
 ]
 
@@ -75,15 +77,21 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   )
 }
 
-function PaymentOption({
+function DeliveryOption({
   selected,
-  label,
+  title,
+  detail,
+  price,
+  badge,
   Icon,
   onSelect,
 }: {
   selected: boolean
-  label: string
-  Icon: typeof CreditCardOutlined
+  title: string
+  detail: string
+  price: string
+  badge?: string
+  Icon: typeof HomeOutlined
   onSelect: () => void
 }) {
   return (
@@ -95,14 +103,13 @@ function PaymentOption({
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        gap: 1,
+        gap: 1.25,
         px: 1.5,
-        py: { xs: 1.5, sm: 1.1 },
-        minHeight: 48,
-        borderRadius: '5px',
-        border: `1px solid ${selected ? checkout.link : checkout.inputBorder}`,
-        bgcolor: selected ? 'rgba(47, 125, 83, 0.04)' : '#fff',
-        boxShadow: selected ? `inset 0 0 0 1px ${checkout.link}` : 'none',
+        py: 1.25,
+        minHeight: 68,
+        borderRadius: '12px',
+        border: `1.5px solid ${selected ? checkout.link : checkout.inputBorder}`,
+        bgcolor: selected ? 'rgba(47, 125, 83, 0.07)' : '#fff',
         cursor: 'pointer',
         textAlign: 'left',
         WebkitTapHighlightColor: 'transparent',
@@ -122,8 +129,107 @@ function PaymentOption({
       >
         {selected && <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: checkout.link }} />}
       </Box>
-      <Icon sx={{ fontSize: 18, color: checkout.muted }} />
-      <Typography sx={{ fontSize: '0.875rem', fontWeight: 500, color: checkout.text }}>{label}</Typography>
+      <Box
+        sx={{
+          width: 34,
+          height: 34,
+          borderRadius: '8px',
+          bgcolor: selected ? '#fff' : '#F5F5F3',
+          color: selected ? checkout.link : checkout.muted,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <Icon sx={{ fontSize: 18 }} />
+      </Box>
+      <Box sx={{ flex: 1, minWidth: 0 }}>
+        <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
+          <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: checkout.text, lineHeight: 1.3 }}>
+            {title}
+          </Typography>
+          {badge ? (
+            <Box
+              component="span"
+              sx={{
+                px: 0.75,
+                py: '1px',
+                borderRadius: '999px',
+                bgcolor: 'rgba(47, 125, 83, 0.12)',
+                color: checkout.link,
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                lineHeight: 1.5,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {badge}
+            </Box>
+          ) : null}
+        </Stack>
+        <Typography sx={{ fontSize: '0.75rem', color: checkout.muted, lineHeight: 1.3, mt: 0.15 }}>{detail}</Typography>
+      </Box>
+      <Typography sx={{ fontSize: '0.9375rem', fontWeight: 700, color: checkout.text, flexShrink: 0 }}>{price}</Typography>
+    </Box>
+  )
+}
+
+function PaymentOption({
+  selected,
+  label,
+  detail,
+  Icon,
+  onSelect,
+}: {
+  selected: boolean
+  label: string
+  detail?: string
+  Icon: typeof CreditCardOutlined
+  onSelect: () => void
+}) {
+  return (
+    <Box
+      component="button"
+      type="button"
+      onClick={onSelect}
+      sx={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        px: 1.5,
+        py: { xs: 1.5, sm: 1.1 },
+        minHeight: 48,
+        borderRadius: '12px',
+        border: `1.5px solid ${selected ? checkout.link : checkout.inputBorder}`,
+        bgcolor: selected ? 'rgba(47, 125, 83, 0.07)' : '#fff',
+        cursor: 'pointer',
+        textAlign: 'left',
+        WebkitTapHighlightColor: 'transparent',
+      }}
+    >
+      <Box
+        sx={{
+          width: 16,
+          height: 16,
+          borderRadius: '50%',
+          border: `2px solid ${selected ? checkout.link : checkout.inputBorder}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        {selected && <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: checkout.link }} />}
+      </Box>
+      <Icon sx={{ fontSize: 18, color: selected ? checkout.link : checkout.muted }} />
+      <Box sx={{ minWidth: 0 }}>
+        <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: checkout.text, lineHeight: 1.3 }}>{label}</Typography>
+        {detail ? (
+          <Typography sx={{ fontSize: '0.75rem', color: checkout.muted, lineHeight: 1.3 }}>{detail}</Typography>
+        ) : null}
+      </Box>
     </Box>
   )
 }
@@ -137,12 +243,14 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
-  const [summaryOpen, setSummaryOpen] = useState(false)
+  const [summaryOpen, setSummaryOpen] = useState(true)
   const [promoInput, setPromoInput] = useState('')
   const [appliedPromo, setAppliedPromo] = useState<PromoQuote | null>(null)
   const [promoError, setPromoError] = useState<string | null>(null)
   const [promoBusy, setPromoBusy] = useState(false)
   const [notesOpen, setNotesOpen] = useState(false)
+  const [termsAccepted, setTermsAccepted] = useState(false)
+  const [termsError, setTermsError] = useState(false)
   const [quotes, setQuotes] = useState<ShippingQuote[]>([])
   const [quotesLoading, setQuotesLoading] = useState(false)
   const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>(null)
@@ -181,7 +289,7 @@ export default function CheckoutPage() {
           subtotal,
         })
         .then((data) => {
-          const curated = curateCheckoutQuotes(data.quotes, form.country)
+          const curated = curateCheckoutQuotes(data.quotes)
           setQuotes(curated)
           setSelectedQuoteId((current) => {
             if (current && curated.some((quote) => quote.id === current)) return current
@@ -295,13 +403,16 @@ export default function CheckoutPage() {
       name: form.name.trim().length < 2,
       email: !emailPattern.test(form.email.trim()),
       phone: form.phone.trim().length < 6,
-      street: form.street.trim().length < 3,
-      city: form.city.trim().length < 2,
-      postalCode: form.postalCode.trim().length < 3,
+      street: selectedQuote?.delivery === 'office' || selectedQuote?.delivery === 'locker'
+        ? false
+        : form.street.trim().length < 3,
+      city: form.city.trim().length < 2 || form.postalCode.trim().length < 3,
+      postalCode: false,
       officeCode: pickupCourier != null && form.officeCode.trim().length < 1,
     }
     setErrors(next)
-    return !Object.values(next).some(Boolean)
+    setTermsError(!termsAccepted)
+    return !Object.values(next).some(Boolean) && termsAccepted
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -325,16 +436,20 @@ export default function CheckoutPage() {
         officeCode: form.officeCode || selectedQuote?.officeCode || undefined,
         cityId: form.cityId || undefined,
         promoCode: appliedPromo?.code,
+        termsAccepted,
       })
       clearCart()
       navigate(`/order/${order.id}`, { replace: true })
     } catch (err) {
       const promoCodes = new Set(['invalid', 'expired', 'not_started', 'used_up', 'min_subtotal'])
+      if (err instanceof ApiError && err.message === 'terms_required') setTermsError(true)
       setSubmitError(
         err instanceof ApiError
-          ? promoCodes.has(err.message)
-            ? promoErrorText(err.message)
-            : err.message
+          ? err.message === 'terms_required'
+            ? t('checkout.termsRequired')
+            : promoCodes.has(err.message)
+              ? promoErrorText(err.message)
+              : err.message
           : t('checkout.failed'),
       )
       setSubmitting(false)
@@ -360,13 +475,68 @@ export default function CheckoutPage() {
     taxLabel: vat?.enabled && vat.tax > 0 ? formatEuro(vat.tax) : null,
     taxHint: vatHint,
     discountLabel: discountAmount > 0 ? `−${formatEuro(discountAmount)}` : null,
+    promo: {
+      input: promoInput,
+      busy: promoBusy,
+      error: promoError,
+      appliedCode: appliedPromo?.code ?? null,
+      onInput: (value: string) => {
+        setPromoInput(value.toUpperCase())
+        setPromoError(null)
+      },
+      onApply: () => void applyPromo(promoInput),
+      onClear: () => {
+        setAppliedPromo(null)
+        setPromoInput('')
+        setPromoError(null)
+      },
+    },
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: checkout.bg, color: checkout.text }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#F4F5F0', color: checkout.text }}>
+      {submitting ? (
+        <Box
+          sx={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 20,
+            bgcolor: 'rgba(244, 245, 240, 0.78)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            px: 2,
+          }}
+        >
+          <Stack
+            spacing={1.5}
+            sx={{
+              alignItems: 'center',
+              bgcolor: '#fff',
+              border: `1px solid ${checkout.border}`,
+              borderRadius: '16px',
+              px: 4,
+              py: 3,
+            }}
+          >
+            <CircularProgress size={28} sx={{ color: checkout.link }} />
+            <Typography sx={{ fontSize: '0.9375rem', fontWeight: 600 }}>{t('checkout.placing')}</Typography>
+          </Stack>
+        </Box>
+      ) : null}
       <MobileOrderSummary {...summaryProps} open={summaryOpen} onToggle={() => setSummaryOpen((v) => !v)} />
 
-      <Box sx={{ display: 'flex', minHeight: { md: '100vh' } }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: { md: 3 },
+          maxWidth: 1080,
+          mx: 'auto',
+          px: { xs: 0, md: 3 },
+          py: { md: 3.5 },
+        }}
+      >
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -374,6 +544,9 @@ export default function CheckoutPage() {
             flex: 1,
             display: 'flex',
             justifyContent: 'center',
+            bgcolor: '#fff',
+            borderRadius: { md: '20px' },
+            border: { md: `1px solid ${checkout.border}` },
             px: { xs: 2, sm: 3, md: 4 },
             py: { xs: 2.5, md: 3.5 },
           }}
@@ -445,14 +618,6 @@ export default function CheckoutPage() {
               <Box>
                 <SectionHeading>{t('checkout.shipping')}</SectionHeading>
                 <Stack spacing={1.25}>
-                  <CheckoutField
-                    label={t('checkout.street')}
-                    autoComplete="street-address"
-                    value={form.street}
-                    onChange={(e) => updateField('street', e.target.value)}
-                    error={errors.street}
-                    helperText={t('checkout.required')}
-                  />
                   <CheckoutPlaceFields
                     value={{
                       country: form.country,
@@ -462,21 +627,24 @@ export default function CheckoutPage() {
                       postalCode: form.postalCode,
                       officeCode: form.officeCode,
                     }}
-                    pickupCourier={pickupCourier}
-                    officeRequired={pickupCourier != null}
-                    errors={{ city: errors.city, postalCode: errors.postalCode, officeCode: errors.officeCode }}
+                    errors={{ city: errors.city }}
                     onChange={(patch) => {
                       setForm((prev) => ({ ...prev, ...patch }))
+                      if (patch.officeCode) {
+                        const officeQuote = quotes.find((quote) => quote.delivery === 'office' && quote.courier === 'econt')
+                        if (officeQuote) setSelectedQuoteId(officeQuote.id)
+                      }
                       setErrors((prev) => ({
                         ...prev,
                         city: patch.city !== undefined ? false : prev.city,
                         postalCode: patch.postalCode !== undefined ? false : prev.postalCode,
                         officeCode: patch.officeCode !== undefined ? false : prev.officeCode,
+                        street: patch.officeCode ? false : prev.street,
                       }))
                     }}
                   />
                   <Box>
-                    <Typography sx={{ fontSize: '0.8125rem', fontWeight: 600, color: checkout.muted, mb: 1 }}>
+                    <Typography sx={{ fontSize: '0.75rem', fontWeight: 500, color: checkout.muted, mb: 0.75 }}>
                       {t('checkout.deliveryMethod')}
                     </Typography>
                     {quotesLoading ? (
@@ -484,25 +652,40 @@ export default function CheckoutPage() {
                         {t('checkout.quoting')}
                       </Typography>
                     ) : quotes.length === 0 ? (
-                      <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>
-                        {t('checkout.quoteFallback')}
-                      </Typography>
+                      <Box
+                        sx={{
+                          px: 1.75,
+                          py: 1.5,
+                          borderRadius: '12px',
+                          border: `1px dashed ${checkout.inputBorder}`,
+                          bgcolor: '#F7F8F6',
+                        }}
+                      >
+                        <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted, lineHeight: 1.45 }}>
+                          {t('checkout.quoteFallback')}
+                        </Typography>
+                      </Box>
                     ) : (
                       <Stack spacing={0.75}>
                         {quotes.map((quote) => {
                           const cheapest = Math.min(...quotes.map((item) => item.priceEur))
                           const isCheapest = quotes.length > 1 && quote.priceEur === cheapest && subtotal < FREE_SHIPPING_THRESHOLD
+                          const deliveryLabel = t(`checkout.delivery.${quote.delivery}`, { defaultValue: quote.delivery })
+                          const title = deliveryLabel.charAt(0).toUpperCase() + deliveryLabel.slice(1)
                           return (
-                            <PaymentOption
+                            <DeliveryOption
                               key={quote.id}
                               selected={selectedQuoteId === quote.id}
-                              label={`${t(`checkout.couriers.${quote.courier}`, { defaultValue: quote.courier })} — ${t(`checkout.delivery.${quote.delivery}`, { defaultValue: quote.delivery })} · ${subtotal >= FREE_SHIPPING_THRESHOLD ? t('cart.freeShipping') : formatEuro(quote.priceEur)}${isCheapest ? ` · ${t('checkout.cheapest')}` : ''}`}
-                              Icon={LocalShippingOutlined}
+                              title={title}
+                              detail={t(`checkout.couriers.${quote.courier}`, { defaultValue: quote.courier })}
+                              price={subtotal >= FREE_SHIPPING_THRESHOLD ? t('cart.freeShipping') : formatEuro(quote.priceEur)}
+                              badge={isCheapest ? t('checkout.cheapest') : undefined}
+                              Icon={quote.delivery === 'address' ? HomeOutlined : quote.delivery === 'locker' ? LocalShippingOutlined : StorefrontOutlined}
                               onSelect={() => {
                                 setSelectedQuoteId(quote.id)
                                 setForm((prev) => ({
                                   ...prev,
-                                  officeCode: quote.courier === selectedQuote?.courier ? prev.officeCode : '',
+                                  officeCode: quote.delivery === 'address' ? '' : prev.officeCode,
                                 }))
                               }}
                             />
@@ -511,6 +694,42 @@ export default function CheckoutPage() {
                       </Stack>
                     )}
                   </Box>
+                  {selectedQuote?.delivery === 'address' ? (
+                    <CheckoutField
+                      label={t('checkout.street')}
+                      autoComplete="street-address"
+                      value={form.street}
+                      onChange={(e) => updateField('street', e.target.value)}
+                      error={errors.street}
+                      helperText={t('checkout.required')}
+                    />
+                  ) : null}
+                  {pickupCourier ? (
+                    <CheckoutOfficeField
+                      value={{
+                        country: form.country,
+                        countryId: form.countryId,
+                        city: form.city,
+                        cityId: form.cityId,
+                        postalCode: form.postalCode,
+                        officeCode: form.officeCode,
+                      }}
+                      pickupCourier={pickupCourier}
+                      officeRequired
+                      errors={{ officeCode: errors.officeCode }}
+                      onChange={(patch) => {
+                        setForm((prev) => ({ ...prev, ...patch }))
+                        if (patch.officeCode) {
+                          const officeQuote = quotes.find((quote) => quote.delivery === 'office' && quote.courier === 'econt')
+                          if (officeQuote) setSelectedQuoteId(officeQuote.id)
+                        }
+                        setErrors((prev) => ({
+                          ...prev,
+                          officeCode: patch.officeCode !== undefined ? false : prev.officeCode,
+                        }))
+                      }}
+                    />
+                  ) : null}
                   <Box>
                     <Link
                       component="button"
@@ -545,54 +764,14 @@ export default function CheckoutPage() {
               </Box>
 
               <Box>
-                <SectionHeading>{t('checkout.promo')}</SectionHeading>
-                <Stack direction="row" spacing={1} sx={{ alignItems: 'flex-end' }}>
-                  <Box sx={{ flex: 1 }}>
-                    <CheckoutField
-                      label={t('checkout.promoCode')}
-                      value={promoInput}
-                      onChange={(e) => {
-                        setPromoInput(e.target.value.toUpperCase())
-                        setPromoError(null)
-                      }}
-                    />
-                  </Box>
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    disabled={promoBusy || !promoInput.trim()}
-                    onClick={() => void applyPromo(promoInput)}
-                    sx={{
-                      minHeight: 48,
-                      borderRadius: '5px',
-                      textTransform: 'none',
-                      fontWeight: 600,
-                      borderColor: checkout.inputBorder,
-                      color: checkout.text,
-                    }}
-                  >
-                    {t('checkout.promoApply')}
-                  </Button>
-                </Stack>
-                {promoError ? (
-                  <Typography sx={{ color: '#C62828', fontSize: '0.75rem', fontWeight: 600, mt: 0.75 }}>
-                    {promoError}
-                  </Typography>
-                ) : appliedPromo ? (
-                  <Typography sx={{ color: checkout.link, fontSize: '0.75rem', fontWeight: 600, mt: 0.75 }}>
-                    {t('checkout.promoApplied', { code: appliedPromo.code })}
-                  </Typography>
-                ) : null}
-              </Box>
-
-              <Box>
                 <SectionHeading>{t('checkout.payment')}</SectionHeading>
                 <Stack spacing={0.75}>
-                  {paymentOptions.map(({ id, Icon }) => (
+                  {paymentOptions.map(({ id, Icon, detailKey }) => (
                     <PaymentOption
                       key={id}
                       selected={form.paymentMethod === id}
                       label={t(`checkout.paymentMethods.${id}`)}
+                      detail={detailKey ? t(detailKey) : undefined}
                       Icon={Icon}
                       onSelect={() => updateField('paymentMethod', id)}
                     />
@@ -601,6 +780,36 @@ export default function CheckoutPage() {
               </Box>
 
               <Box>
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'flex-start', mb: 1.5 }}>
+                  <Checkbox
+                    checked={termsAccepted}
+                    onChange={(event) => {
+                      setTermsAccepted(event.target.checked)
+                      if (event.target.checked) setTermsError(false)
+                    }}
+                    sx={{
+                      p: 0.25,
+                      color: termsError ? '#C62828' : checkout.inputBorder,
+                      '&.Mui-checked': { color: checkout.link },
+                    }}
+                  />
+                  <Typography sx={{ fontSize: '0.8125rem', color: termsError ? '#C62828' : checkout.text, lineHeight: 1.45, pt: 0.35 }}>
+                    {t('checkout.termsBefore')}{' '}
+                    <Link component={RouterLink} to={navHrefs.terms} underline="hover" sx={{ fontWeight: 700, color: checkout.link }}>
+                      {t('footer.links.terms')}
+                    </Link>
+                    {t('checkout.termsMiddle')}{' '}
+                    <Link component={RouterLink} to={navHrefs.privacy} underline="hover" sx={{ fontWeight: 700, color: checkout.link }}>
+                      {t('footer.links.privacy')}
+                    </Link>
+                    {t('checkout.termsAfter')}
+                  </Typography>
+                </Stack>
+                {termsError ? (
+                  <Typography sx={{ color: '#C62828', fontSize: '0.75rem', fontWeight: 600, mb: 1.25 }}>
+                    {t('checkout.termsRequired')}
+                  </Typography>
+                ) : null}
                 {submitError ? (
                   <Typography sx={{ color: '#C62828', fontSize: '0.8125rem', fontWeight: 600, mb: 1.25 }}>
                     {submitError}
@@ -612,8 +821,8 @@ export default function CheckoutPage() {
                   fullWidth
                   disabled={submitting}
                   sx={{
-                    minHeight: 44,
-                    borderRadius: '5px',
+                    minHeight: 48,
+                    borderRadius: '12px',
                     fontSize: '0.9375rem',
                     fontWeight: 600,
                     textTransform: 'none',
@@ -622,7 +831,14 @@ export default function CheckoutPage() {
                     '&:hover': { bgcolor: '#1F5A3B', boxShadow: 'none' },
                   }}
                 >
-                  {t('checkout.placeOrder')}
+                  {submitting ? (
+                    <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+                      <CircularProgress size={16} sx={{ color: '#fff' }} />
+                      <span>{t('checkout.placing')}</span>
+                    </Stack>
+                  ) : (
+                    t('checkout.placeOrder')
+                  )}
                 </Button>
 
                 <Stack
@@ -651,23 +867,20 @@ export default function CheckoutPage() {
 
         <Box
           sx={{
-            display: { xs: 'none', md: 'flex' },
+            display: { xs: 'none', md: 'block' },
             width: { md: 340, lg: 380 },
             flexShrink: 0,
-            bgcolor: checkout.sidebar,
-            borderLeft: `1px solid ${checkout.border}`,
-            justifyContent: 'center',
+            position: 'sticky',
+            top: 28,
           }}
         >
           <Box
             sx={{
-              position: 'sticky',
-              top: 0,
-              alignSelf: 'flex-start',
-              width: '100%',
-              maxWidth: 320,
-              px: 3,
-              py: 3.5,
+              bgcolor: '#fff',
+              borderRadius: '20px',
+              border: `1px solid ${checkout.border}`,
+              px: 2.5,
+              py: 2.5,
             }}
           >
             <CheckoutOrderSummary {...summaryProps} />
@@ -678,26 +891,17 @@ export default function CheckoutPage() {
   )
 }
 
-function curateCheckoutQuotes(quotes: ShippingQuote[], country: string): ShippingQuote[] {
-  const ok = quotes.filter((quote) => !quote.message)
-  const best = (delivery: string, couriers: string[]) =>
-    ok
-      .filter((quote) => quote.delivery === delivery && couriers.includes(quote.courier))
-      .sort((a, b) => a.priceEur - b.priceEur)[0]
+const deliveryRank: Record<string, number> = { address: 0, office: 1, locker: 2 }
+const courierRank: Record<string, number> = { econt: 0, speedy: 1, boxnow: 2, dhl: 3 }
 
-  const bulgaria = country.trim().toUpperCase() === 'BG'
-  const items: ShippingQuote[] = []
-  const address = best('address', bulgaria ? ['econt', 'speedy'] : ['econt', 'speedy', 'dhl'])
-  const office = best('office', ['econt', 'speedy'])
-  const locker = ok.find((quote) => quote.courier === 'boxnow' && quote.delivery === 'locker')
-  if (address) items.push(address)
-  if (office) items.push(office)
-  if (bulgaria && locker) items.push(locker)
-  if (!bulgaria) {
-    const dhl = best('address', ['dhl'])
-    if (dhl && dhl.id !== address?.id) items.push(dhl)
-  }
-  return items
+function curateCheckoutQuotes(quotes: ShippingQuote[]): ShippingQuote[] {
+  return quotes
+    .filter((quote) => !quote.message)
+    .sort((a, b) => {
+      const byCourier = (courierRank[a.courier] ?? 9) - (courierRank[b.courier] ?? 9)
+      if (byCourier !== 0) return byCourier
+      return (deliveryRank[a.delivery] ?? 9) - (deliveryRank[b.delivery] ?? 9)
+    })
 }
 
 function defaultQuoteId(quotes: ShippingQuote[], street: string, officeCode: string) {

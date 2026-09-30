@@ -46,9 +46,10 @@ public class CourierService(AppDbContext db)
     {
         var state = await LoadStateAsync(ct);
         var account = AccountFor(state, courier);
-        var configured = IsConfigured(courier, account);
+        var demoAccount = courier == CourierId.Econt && string.IsNullOrWhiteSpace(account.Password);
+        var configured = demoAccount || IsConfigured(courier, account);
         var live = account.Enabled && configured;
-        var mode = !live ? "manual" : account.TestMode ? "sandbox" : "live";
+        var mode = !live ? "manual" : demoAccount || account.TestMode ? "sandbox" : "live";
         var number = NextNumber(courier);
         var trackingUrl = TrackingUrl(courier, number);
 
@@ -60,11 +61,34 @@ public class CourierService(AppDbContext db)
         return new CourierShipmentResult(number, mode, trackingUrl, live ? number : null);
     }
 
+    public const string EcontDemoRoot = "https://demo.econt.com/ee/services";
+    public const string EcontLiveRoot = "https://ee.econt.com/services";
+    public const string EcontDemoUsername = "iasp-dev";
+    public const string EcontDemoPassword = "1Asp-dev";
+    public const string EcontDemoSenderCity = "Русе";
+    public const string EcontDemoSenderPost = "7000";
+    public const string EcontDemoSenderStreet = "ул. Алея Младост";
+    public const string EcontDemoSenderNum = "7";
+    public const string EcontDemoSenderPhone = "0888000000";
+
     public async Task<CourierApiCredentials> GetCredentialsAsync(CourierId courier, CancellationToken ct = default)
     {
         var state = await LoadStateAsync(ct);
         var account = AccountFor(state, courier);
         return new CourierApiCredentials(account.TestMode, account.Username, account.Password, account.SiteId, account.ApiUrl);
+    }
+
+    public async Task<EcontApiConnection> GetEcontConnectionAsync(CancellationToken ct = default)
+    {
+        var creds = await GetCredentialsAsync(CourierId.Econt, ct);
+        var own = !string.IsNullOrWhiteSpace(creds.Username) && !string.IsNullOrWhiteSpace(creds.Password);
+        var demo = !own || creds.TestMode;
+        var user = own ? creds.Username.Trim() : EcontDemoUsername;
+        var pass = own ? creds.Password : EcontDemoPassword;
+        var root = string.IsNullOrWhiteSpace(creds.ApiUrl)
+            ? (demo ? EcontDemoRoot : EcontLiveRoot)
+            : creds.ApiUrl.TrimEnd('/');
+        return new EcontApiConnection(root, user, pass, demo, !own);
     }
 
     public async Task<CourierQuoteContext> GetQuoteContextAsync(CancellationToken ct = default)
@@ -197,9 +221,10 @@ public class CourierService(AppDbContext db)
     static CourierAccountDto ToDto(string id, CourierAccountState account)
     {
         var courier = EnumMapper.ParseCourier(id);
-        var configured = IsConfigured(courier, account);
+        var demoAccount = courier == CourierId.Econt && string.IsNullOrWhiteSpace(account.Password);
+        var configured = demoAccount || IsConfigured(courier, account);
         var live = account.Enabled && configured;
-        var mode = !live ? "manual" : account.TestMode ? "sandbox" : "live";
+        var mode = !live ? "manual" : demoAccount || account.TestMode ? "sandbox" : "live";
         return new CourierAccountDto
         {
             Id = id,
@@ -272,10 +297,10 @@ public class CourierService(AppDbContext db)
     class CourierAccountsState
     {
         public CourierSenderState Sender { get; set; } = new();
-        public CourierAccountState Econt { get; set; } = new();
+        public CourierAccountState Econt { get; set; } = new() { Enabled = true };
         public CourierAccountState Speedy { get; set; } = new();
         public CourierAccountState Dhl { get; set; } = new();
-        public CourierAccountState BoxNow { get; set; } = new() { Enabled = true };
+        public CourierAccountState BoxNow { get; set; } = new();
     }
 
     class CourierSenderState

@@ -5,7 +5,27 @@ namespace PlantyHub.Api.Services;
 
 public static class LocaleSeo
 {
-    public static readonly string[] Languages = ["en", "bg", "de", "fr"];
+    public const string DefaultLanguage = "bg";
+
+    public static readonly string[] Languages = ["bg", "en", "de", "fr"];
+
+    private static readonly Dictionary<string, string> RegionLanguages = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["bg"] = "bg",
+        ["de"] = "de",
+        ["at"] = "de",
+        ["li"] = "de",
+        ["fr"] = "fr",
+        ["mc"] = "fr",
+        ["us"] = "en",
+        ["gb"] = "en",
+        ["uk"] = "en",
+        ["ie"] = "en",
+        ["au"] = "en",
+        ["nz"] = "en",
+        ["ca"] = "en",
+        ["za"] = "en",
+    };
 
     private static readonly string[] PrivatePrefixes =
     [
@@ -55,22 +75,37 @@ public static class LocaleSeo
 
     public static string PickLanguage(string? acceptLanguage)
     {
-        if (string.IsNullOrWhiteSpace(acceptLanguage)) return "en";
+        if (string.IsNullOrWhiteSpace(acceptLanguage)) return DefaultLanguage;
 
-        foreach (var part in acceptLanguage.Split(','))
+        var tags = acceptLanguage
+            .Split(',')
+            .Select(part => part.Split(';')[0].Trim().ToLowerInvariant())
+            .Where(tag => tag.Length > 0)
+            .ToArray();
+
+        if (tags.Any(IsBulgariaTag)) return DefaultLanguage;
+
+        foreach (var tag in tags)
         {
-            var tag = part.Split(';')[0].Trim().ToLowerInvariant();
-            var code = tag.Split('-')[0];
-            if (IsLanguage(code)) return code;
+            var language = tag.Split('-', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+            if (IsLanguage(language)) return language!;
         }
 
-        return "en";
+        foreach (var tag in tags)
+        {
+            var pieces = tag.Split('-', StringSplitOptions.RemoveEmptyEntries);
+            var region = pieces.Skip(1).FirstOrDefault(part => part.Length == 2 && part.All(char.IsAsciiLetter));
+            if (region is not null && RegionLanguages.TryGetValue(region, out var mapped))
+                return mapped;
+        }
+
+        return DefaultLanguage;
     }
 
     public static string Apply(string html, HttpRequest request)
     {
         var (locale, pagePath) = Split(request.Path.Value ?? "/");
-        if (!Copy.TryGetValue(locale, out var copy)) copy = Copy["en"];
+        if (!Copy.TryGetValue(locale, out var copy)) copy = Copy[DefaultLanguage];
 
         var origin = $"{request.Scheme}://{request.Host}";
         var canonicalPath = pagePath == "/" ? $"/{locale}/" : $"/{locale}{pagePath}";
@@ -85,17 +120,17 @@ public static class LocaleSeo
             links.Append($"<link rel=\"alternate\" hreflang=\"{language}\" href=\"{WebUtility.HtmlEncode(href)}\" />");
         }
 
-        var xDefault = origin + (pagePath == "/" ? "/en/" : $"/en{pagePath}");
+        var xDefault = origin + LocalizedPath(DefaultLanguage, pagePath);
         links.Append($"<link rel=\"alternate\" hreflang=\"x-default\" href=\"{WebUtility.HtmlEncode(xDefault)}\" />");
         links.Append($"<meta name=\"robots\" content=\"{robots}\" />");
 
-        html = html.Replace("<html lang=\"en\">", $"<html lang=\"{locale}\">", StringComparison.Ordinal);
+        html = html.Replace("<html lang=\"bg\">", $"<html lang=\"{locale}\">", StringComparison.Ordinal);
         html = html.Replace(
-            "<title>PlantyHub — Smart Hydroponic Indoor Garden</title>",
+            "<title>PlantyHub — Умна хидропонна градина за дома</title>",
             $"<title>{WebUtility.HtmlEncode(copy.Title)}</title>",
             StringComparison.Ordinal);
         html = html.Replace(
-            "content=\"PlantyHub Home Garden: 12-pod smart hydroponic kit with LED grow lights and automatic irrigation. Grow basil, mint, lettuce & more at home.\"",
+            "content=\"PlantyHub Home Garden: умна хидропонна градина с 12 капсули, LED осветление и автоматично поливане. Отглеждай босилек, мента, маруля и други у дома.\"",
             $"content=\"{WebUtility.HtmlEncode(copy.Description)}\"",
             StringComparison.Ordinal);
         html = html.Replace("</head>", $"{links}</head>", StringComparison.Ordinal);
@@ -122,7 +157,7 @@ public static class LocaleSeo
                         .Append("\" href=\"").Append(WebUtility.HtmlEncode(href)).Append("\" />");
                 }
 
-                var xDefault = origin + (path == "/" ? "/en/" : $"/en{path}");
+                var xDefault = origin + LocalizedPath(DefaultLanguage, path);
                 xml.Append("<xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"")
                     .Append(WebUtility.HtmlEncode(xDefault)).Append("\" />");
                 xml.Append("</url>");
@@ -153,13 +188,22 @@ public static class LocaleSeo
     private static (string Locale, string PagePath) Split(string path)
     {
         var parts = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
-        var locale = parts.FirstOrDefault(IsLanguage)?.ToLowerInvariant() ?? "en";
+        var locale = parts.FirstOrDefault(IsLanguage)?.ToLowerInvariant() ?? DefaultLanguage;
         if (parts.Length == 0 || !IsLanguage(parts[0])) return (locale, path.StartsWith('/') ? path : "/" + path);
 
         var rest = "/" + string.Join('/', parts.Skip(1));
         if (rest == "/") return (locale, "/");
         return (locale, rest.TrimEnd('/'));
     }
+
+    private static bool IsBulgariaTag(string tag)
+    {
+        var pieces = tag.Split('-', StringSplitOptions.RemoveEmptyEntries);
+        return pieces.FirstOrDefault() == "bg" || pieces.Skip(1).Any(part => part == "bg");
+    }
+
+    private static string LocalizedPath(string language, string pagePath) =>
+        pagePath == "/" ? $"/{language}/" : $"/{language}{pagePath}";
 
     private static bool IsPrivate(string rest) =>
         PrivatePrefixes.Any(prefix => rest == prefix || rest.StartsWith(prefix + "/", StringComparison.OrdinalIgnoreCase));
