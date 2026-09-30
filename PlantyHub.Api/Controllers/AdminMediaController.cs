@@ -20,7 +20,7 @@ public class AdminMediaController(IR2StorageService storage) : ControllerBase
         "video/quicktime",
     };
 
-    private const long MaxImageBytes = 8 * 1024 * 1024;
+    private const long MaxImageBytes = 80 * 1024 * 1024;
     private const long MaxVideoBytes = 80 * 1024 * 1024;
 
     [HttpPost("upload")]
@@ -44,7 +44,7 @@ public class AdminMediaController(IR2StorageService storage) : ControllerBase
         var isVideo = contentType.StartsWith("video/", StringComparison.OrdinalIgnoreCase);
         var maxBytes = isVideo ? MaxVideoBytes : MaxImageBytes;
         if (file.Length > maxBytes)
-            return BadRequest(new { message = isVideo ? "Video exceeds 80 MB limit." : "File exceeds 8 MB limit." });
+            return BadRequest(new { message = isVideo ? "Video exceeds 80 MB limit." : "Image exceeds 80 MB limit." });
 
         await using var stream = file.OpenReadStream();
         var (url, key) = await storage.UploadAsync(stream, file.FileName, contentType, ct);

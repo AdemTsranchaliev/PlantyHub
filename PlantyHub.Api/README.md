@@ -52,7 +52,7 @@ Without R2 configured, the upload endpoint returns `503` — you can still paste
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/admin/media/upload` | Multipart file upload (JPEG/PNG/WebP/GIF, max 8 MB) → `{ url, key }` |
+| POST | `/api/admin/media/upload` | Multipart file upload (JPEG/PNG/WebP/GIF, max 80 MB) → `{ url, key }` |
 | GET | `/api/site-assets` | Public site image overrides (blog, about, PDP extras) |
 | PUT | `/api/site-assets` | Admin update of site image map |
 

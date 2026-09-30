@@ -36,6 +36,7 @@ import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 import { toMediaUrl } from '../media/cfImage'
+import { objectPositionForKey } from '../media/imageFocus'
 import MediaImg from '../components/MediaImg'
 import ProductReviews, { ProductRatingRow, useProductReviews } from '../components/ProductReviews'
 
@@ -64,18 +65,20 @@ export default function ProductPage() {
   const [active, setActive] = useState(0)
   const [qty, setQty] = useState(1)
   const [bonusPod, setBonusPod] = useState<string | null>(null)
-  const faqCategories = t('faqPage.categories', { returnObjects: true }) as { items?: { q: string; a: string }[] }[]
-  const fallbackFaq = Array.isArray(faqCategories) ? faqCategories.flatMap((category) => category.items ?? []) : []
-
   const gallery = garden?.gallery?.length
-    ? garden.gallery
-    : [
-        images['pdp.gallery.homeGarden'] || lifestyleImages.homeGardenProduct,
-        images['pdp.gallery.kitchenBasil'] || lifestyleImages.kitchenBasil,
-        images['pdp.gallery.basilCloseup'] || lifestyleImages.basilCloseup,
-        images['pdp.gallery.mintKitchen'] || lifestyleImages.mintKitchen,
-        images['pdp.gallery.heroKitchen'] || lifestyleImages.heroKitchen,
-      ]
+    ? garden.gallery.map((src) => ({ src, position: '50% 50%' }))
+    : (
+        [
+          ['pdp.gallery.homeGarden', lifestyleImages.homeGardenProduct],
+          ['pdp.gallery.kitchenBasil', lifestyleImages.kitchenBasil],
+          ['pdp.gallery.basilCloseup', lifestyleImages.basilCloseup],
+          ['pdp.gallery.mintKitchen', lifestyleImages.mintKitchen],
+          ['pdp.gallery.heroKitchen', lifestyleImages.heroKitchen],
+        ] as const
+      ).map(([key, fallback]) => ({
+        src: images[key] || fallback,
+        position: objectPositionForKey(images, key, 'main'),
+      }))
   const videoSrc = garden?.videoUrl || productVideo
   const videoPoster = garden?.videoPoster || productVideoPoster
   const code = i18n.language?.split('-')[0]
@@ -91,7 +94,7 @@ export default function ProductPage() {
   const howTitle = locale?.howTitle || t('pdp.howItWorksTitle')
   const boxTitle = locale?.boxTitle || t('pdp.inTheBox')
   const specsTitle = locale?.specsTitle || t('pdp.specsTitle')
-  const faqTitle = locale?.faqTitle || t('faqPage.title')
+  const faqTitle = t('pdp.faqTitle')
   const features = locale?.features?.length
     ? locale.features
     : featureItems.map(({ key }) => ({ title: t(`pdp.features.${key}.title`), text: t(`pdp.features.${key}.text`) }))
@@ -99,7 +102,8 @@ export default function ProductPage() {
   const boxItems = locale?.inTheBox?.length
     ? locale.inTheBox
     : inTheBoxKeys.map((key) => t(`pdp.inTheBoxItems.${key}`))
-  const faqItems = locale?.faq?.length ? locale.faq : fallbackFaq
+  const previewFaq = t('pdp.faqItems', { returnObjects: true }) as { q: string; a: string }[]
+  const faqItems = Array.isArray(previewFaq) ? previewFaq : []
 
   const bonusKits = bonusKitIds.map((id) => ({
     id,
@@ -135,18 +139,18 @@ export default function ProductPage() {
               }}
             >
               <MediaImg
-                src={gallery[active]}
+                src={gallery[active]?.src ?? ''}
                 preset="gallery"
                 alt={productTitle}
                 decoding="async"
                 fetchPriority="high"
-                sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block', borderRadius: '20px' }}
+                sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', objectPosition: gallery[active]?.position ?? '50% 50%', display: 'block', borderRadius: '20px' }}
               />
             </Reveal>
             <Stack direction="row" spacing={1.5} sx={{ mt: 2, overflowX: 'auto', pb: 0.5, '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
-              {gallery.map((src, i) => (
+              {gallery.map((item, i) => (
                 <Box
-                  key={`${src}-${i}`}
+                  key={`${item.src}-${i}`}
                   component="button"
                   onClick={() => setActive(i)}
                   aria-label={`${productTitle} ${i + 1}`}
@@ -163,7 +167,7 @@ export default function ProductPage() {
                     transition: 'border-color 0.2s ease',
                   }}
                 >
-                  <MediaImg src={src} preset="thumb" alt="" loading="lazy" decoding="async" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <MediaImg src={item.src} preset="thumb" alt="" loading="lazy" decoding="async" sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.position, display: 'block' }} />
                 </Box>
               ))}
             </Stack>
@@ -628,6 +632,11 @@ export default function ProductPage() {
                 </AccordionDetails>
               </Accordion>
             ))}
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
+            <Button component={RouterLink} to="/faq" variant="outlined">
+              {t('pdp.faqSeeAll')}
+            </Button>
           </Box>
         </Reveal>
       </SectionContainer>

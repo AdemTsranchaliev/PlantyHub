@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import ImagePicker from '../../components/admin/ImagePicker'
 import { siteAssetGroups } from '../../admin/siteAssetsSchema'
+import { framesForImageKey, imageFocusKey, parseImageFocus, serializeImageFocus } from '../../media/imageFocus'
 import { useSiteAssetsStore } from '../../hooks/useSiteAssets'
 import { brand } from '../../theme'
 
@@ -50,16 +51,22 @@ export default function AdminMediaPage() {
               {t(group.labelKey)}
             </Typography>
             <Grid container spacing={2.5}>
-              {group.slots.map((slot) => (
-                <Grid key={slot.key} size={{ xs: 12, md: 6 }}>
-                  <ImagePicker
-                    label={t(slot.labelKey, { defaultValue: slot.key })}
-                    value={images[slot.key] ?? slot.defaultUrl}
-                    onChange={(url) => void handleChange(slot.key, url)}
-                    size="medium"
-                  />
-                </Grid>
-              ))}
+              {group.slots.map((slot) => {
+                const frames = framesForImageKey(slot.key)
+                return (
+                  <Grid key={slot.key} size={{ xs: 12, md: 6 }}>
+                    <ImagePicker
+                      label={t(slot.labelKey, { defaultValue: slot.key })}
+                      value={images[slot.key] ?? slot.defaultUrl}
+                      onChange={(url) => void handleChange(slot.key, url)}
+                      size="medium"
+                      frames={frames}
+                      focus={parseImageFocus(images[imageFocusKey(slot.key)], frames)}
+                      onFocusChange={(focus) => void handleChange(imageFocusKey(slot.key), serializeImageFocus(focus))}
+                    />
+                  </Grid>
+                )
+              })}
             </Grid>
           </Box>
         ))}

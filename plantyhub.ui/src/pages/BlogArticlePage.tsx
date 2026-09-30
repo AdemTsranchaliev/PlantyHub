@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import SectionContainer, { pagePaddingX } from '../components/SectionContainer'
 import { blogArticleIds, blogArticleImages, navHrefs } from '../data/catalog'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
+import { objectPositionForKey } from '../media/imageFocus'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
@@ -136,7 +137,7 @@ export default function BlogArticlePage() {
               width: '100%',
               aspectRatio: '16 / 10',
               objectFit: 'cover',
-              objectPosition: 'center 40%',
+              objectPosition: objectPositionForKey(images, `blog.${articleId}`, 'article'),
               display: 'block',
               borderRadius: { xs: '18px', md: '24px' },
               mb: { xs: 4, md: 5 },
@@ -248,6 +249,7 @@ export default function BlogArticlePage() {
                       width: '100%',
                       aspectRatio: '4 / 3',
                       objectFit: 'cover',
+                      objectPosition: objectPositionForKey(images, `blog.${id}`, 'related'),
                       display: 'block',
                       borderRadius: '20px',
                       mb: 2,

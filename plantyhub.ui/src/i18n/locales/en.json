@@ -806,6 +806,7 @@
       "manual": "Quick-start guide & QR pod guides"
     },
     "faqTitle": "Frequently asked questions",
+    "faqSeeAll": "See all",
     "faqItems": [
       {
         "q": "Do I need any gardening experience?",
@@ -2104,7 +2105,19 @@
       "add": "Add image",
       "replace": "Replace",
       "url": "Image URL",
-      "urlHint": "Upload a file or paste a link"
+      "urlHint": "Upload a file or paste a link",
+      "position": "How it will look",
+      "positionHint": "Drag the photo inside each frame. The frame matches the shape of that place on the site.",
+      "resetPosition": "Reset",
+      "frames": {
+        "mobile": "Phone",
+        "desktop": "Desktop",
+        "card": "Card",
+        "article": "Article",
+        "related": "Related",
+        "page": "On the page",
+        "gallery": "Gallery"
+      }
     },
     "media": {
       "title": "Media",

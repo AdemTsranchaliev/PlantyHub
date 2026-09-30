@@ -8,7 +8,8 @@ import { pagePaddingX } from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { lifestyleImages } from '../data/images'
 import { useProduct } from '../hooks/useProducts'
-import { useHt, useHi } from '../hooks/useHomepage'
+import { useHomepageImages, useHt, useHi } from '../hooks/useHomepage'
+import { objectPositionForKey } from '../media/imageFocus'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
@@ -18,6 +19,7 @@ export default function CtaSection() {
   const subtitle = useHt('cta.subtitle', { price: bundle?.price ?? '€129.00' })
   const emailPlaceholder = useHt('cta.emailPlaceholder')
   const button = useHt('cta.button')
+  const images = useHomepageImages()
   const ctaImage = useHi('cta.main', lifestyleImages.mintKitchen)
 
   return (
@@ -132,6 +134,7 @@ export default function CtaSection() {
                     width: '100%',
                     aspectRatio: '4/3',
                     objectFit: 'cover',
+                    objectPosition: objectPositionForKey(images, 'cta.main', 'main'),
                     display: 'block',
                   }}
                 />

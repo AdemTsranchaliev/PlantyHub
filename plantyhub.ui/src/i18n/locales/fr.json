@@ -806,6 +806,7 @@
       "manual": "Guide de démarrage rapide & QR"
     },
     "faqTitle": "Questions fréquentes",
+    "faqSeeAll": "Voir tout",
     "faqItems": [
       {
         "q": "Faut-il de l'expérience en jardinage ?",
@@ -1878,7 +1879,19 @@
       "add": "Ajouter une image",
       "replace": "Remplacer",
       "url": "URL de l'image",
-      "urlHint": "Téléversez un fichier ou collez un lien"
+      "urlHint": "Téléversez un fichier ou collez un lien",
+      "position": "Aperçu sur le site",
+      "positionHint": "Fais glisser la photo dans chaque cadre. Le cadre a la même forme que l'emplacement sur le site.",
+      "resetPosition": "Réinitialiser",
+      "frames": {
+        "mobile": "Téléphone",
+        "desktop": "Ordinateur",
+        "card": "Carte",
+        "article": "Article",
+        "related": "Similaires",
+        "page": "Sur la page",
+        "gallery": "Galerie"
+      }
     },
     "media": {
       "title": "Médias",

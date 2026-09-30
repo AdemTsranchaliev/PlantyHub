@@ -806,6 +806,7 @@
       "manual": "Schnellstart-Anleitung & QR-Guides"
     },
     "faqTitle": "Häufig gestellte Fragen",
+    "faqSeeAll": "Alle ansehen",
     "faqItems": [
       {
         "q": "Brauche ich Gartenerfahrung?",
@@ -1878,7 +1879,19 @@
       "add": "Bild hinzufügen",
       "replace": "Ersetzen",
       "url": "Bild-URL",
-      "urlHint": "Datei hochladen oder Link einfügen"
+      "urlHint": "Datei hochladen oder Link einfügen",
+      "position": "So wird es angezeigt",
+      "positionHint": "Ziehe das Foto in jedem Rahmen. Der Rahmen hat dieselbe Form wie die Stelle auf der Website.",
+      "resetPosition": "Zurücksetzen",
+      "frames": {
+        "mobile": "Telefon",
+        "desktop": "Desktop",
+        "card": "Karte",
+        "article": "Artikel",
+        "related": "Ähnliche",
+        "page": "Auf der Seite",
+        "gallery": "Galerie"
+      }
     },
     "media": {
       "title": "Medien",

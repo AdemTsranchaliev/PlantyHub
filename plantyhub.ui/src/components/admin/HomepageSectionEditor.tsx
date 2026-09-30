@@ -16,6 +16,7 @@ import {
   homepageSectionsSchema,
 } from '../../admin/homepageSchema'
 import { useHomepageStore } from '../../hooks/useHomepage'
+import { framesForImageKey, imageFocusKey, parseImageFocus, serializeImageFocus } from '../../media/imageFocus'
 import ImagePicker from './ImagePicker'
 import AdminFieldGroup from './AdminFieldGroup'
 import { brand } from '../../theme'
@@ -56,6 +57,7 @@ export default function HomepageSectionEditor({ sectionKey, lang }: Props) {
   const renderField = (field: SchemaField) => {
     if (field.kind === 'image') {
       const value = state.images[field.key] ?? field.defaultUrl
+      const frames = framesForImageKey(field.key)
       return (
         <ImagePicker
           key={field.key}
@@ -63,6 +65,9 @@ export default function HomepageSectionEditor({ sectionKey, lang }: Props) {
           value={value}
           onChange={(url) => setHomepageImage(field.key, url)}
           size="medium"
+          frames={frames}
+          focus={parseImageFocus(state.images[imageFocusKey(field.key)], frames)}
+          onFocusChange={(focus) => setHomepageImage(imageFocusKey(field.key), serializeImageFocus(focus))}
         />
       )
     }

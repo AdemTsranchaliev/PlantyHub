@@ -11,7 +11,9 @@ import { useTranslation } from 'react-i18next'
 import { mediaApi } from '../../api'
 import { ApiError } from '../../api/client'
 import { brand } from '../../theme'
+import type { FocusPoint, ImageFrame } from '../../media/imageFocus'
 import MediaImg from '../MediaImg'
+import ImagePositioner from './ImagePositioner'
 
 type Props = {
   label: string
@@ -19,9 +21,21 @@ type Props = {
   onChange: (url: string) => void
   size?: 'small' | 'medium'
   previewFit?: 'cover' | 'contain'
+  frames?: ImageFrame[]
+  focus?: Record<string, FocusPoint>
+  onFocusChange?: (focus: Record<string, FocusPoint>) => void
 }
 
-export default function ImagePicker({ label, value, onChange, size = 'small', previewFit = 'cover' }: Props) {
+export default function ImagePicker({
+  label,
+  value,
+  onChange,
+  size = 'small',
+  previewFit = 'cover',
+  frames = [],
+  focus,
+  onFocusChange,
+}: Props) {
   const { t } = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(false)
@@ -149,6 +163,9 @@ export default function ImagePicker({ label, value, onChange, size = 'small', pr
           onChange={(e) => void handleUpload(e.target.files?.[0])}
         />
       </Stack>
+      {showPreview && frames.length > 0 && focus && onFocusChange ? (
+        <ImagePositioner src={value} frames={frames} focus={focus} onChange={onFocusChange} />
+      ) : null}
     </Box>
   )
 }

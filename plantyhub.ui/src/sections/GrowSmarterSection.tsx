@@ -9,7 +9,8 @@ import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { growSmarterIds } from '../data/catalog'
 import { lifestyleImages } from '../data/images'
-import { useHt, useHi } from '../hooks/useHomepage'
+import { useHomepageImages, useHt, useHi } from '../hooks/useHomepage'
+import { objectPositionForKey } from '../media/imageFocus'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
@@ -37,6 +38,7 @@ function GrowItem({ id, index }: { id: (typeof growSmarterIds)[number]; index: n
 export default function GrowSmarterSection() {
   const subtitle = useHt('growSmarter.subtitle')
   const title = useHt('growSmarter.title')
+  const images = useHomepageImages()
   const image = useHi('growSmarter.main', lifestyleImages.basilCloseup)
 
   return (
@@ -46,7 +48,7 @@ export default function GrowSmarterSection() {
           <Reveal sx={{ position: 'relative' }}>
             <Box sx={{ position: 'absolute', inset: '-8%', borderRadius: '50%', background: `radial-gradient(circle, ${brand.peachGlow} 0%, transparent 70%)`, filter: 'blur(40px)', zIndex: 0 }} />
             <Box sx={{ position: 'relative', zIndex: 1, borderRadius: '28px', overflow: 'hidden', border: `1px solid ${brand.border}`, boxShadow: brand.shadowHover, '& img': { transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' }, '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } } }}>
-              <MediaImg src={image} preset="gallery" alt={title} loading="lazy" sx={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block', maxHeight: 560 }} />
+              <MediaImg src={image} preset="gallery" alt={title} loading="lazy" sx={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', objectPosition: objectPositionForKey(images, 'growSmarter.main', 'main'), display: 'block', maxHeight: 560 }} />
             </Box>
           </Reveal>
         </Grid>

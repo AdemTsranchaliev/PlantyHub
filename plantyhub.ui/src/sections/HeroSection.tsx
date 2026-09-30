@@ -9,41 +9,56 @@ import { Link as RouterLink } from 'react-router-dom'
 import { pagePaddingX } from '../components/SectionContainer'
 import { navHrefs } from '../data/catalog'
 import { useProduct } from '../hooks/useProducts'
-import { useHt, useHi } from '../hooks/useHomepage'
+import { useHomepageImages, useHt, useHi } from '../hooks/useHomepage'
+import { responsiveObjectPosition } from '../media/imageFocus'
 import { stockImages } from '../data/images'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
-const statKeys = ['pods', 'light', 'height'] as const
-const statFloatClass = ['hero-float', 'hero-float hero-float-late', 'hero-float hero-float-later'] as const
+const paper = '#F3F6F0'
+const line = 'rgba(31, 90, 59, 0.14)'
 
-function HeroStat({ statKey, floatClassName }: { statKey: (typeof statKeys)[number]; floatClassName: string }) {
+const statKeys = ['pods', 'light', 'height'] as const
+
+function HeroFacts() {
+  return (
+    <Box
+      className="hero-fade-up-late"
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+        mt: { xs: 3, md: 4, lg: 4.5 },
+        pt: { xs: 2, md: 2.5 },
+        borderTop: `1px solid ${line}`,
+      }}
+    >
+      {statKeys.map((statKey, index) => (
+        <HeroFact key={statKey} statKey={statKey} withRule={index > 0} />
+      ))}
+    </Box>
+  )
+}
+
+function HeroFact({ statKey, withRule }: { statKey: (typeof statKeys)[number]; withRule: boolean }) {
   const value = useHt(`hero.stats.${statKey}.value`)
   const label = useHt(`hero.stats.${statKey}.label`)
   return (
     <Box
-      className={floatClassName}
       sx={{
-        flex: '1 1 0',
         minWidth: 0,
-        bgcolor: 'rgba(255,255,255,0.9)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255,255,255,0.8)',
-        borderRadius: '16px',
-        boxShadow: '0 14px 34px rgba(28, 35, 30, 0.12)',
-        px: { xs: 1, sm: 1.4 },
-        py: { xs: 0.9, sm: 1.15 },
+        pl: withRule ? { xs: 1.25, sm: 2 } : 0,
+        pr: { xs: 1, sm: 1.5 },
+        borderLeft: withRule ? `1px solid ${line}` : 'none',
       }}
     >
       <Typography
         sx={{
           fontFamily: '"Fraunces", Georgia, serif',
-          fontWeight: 600,
-          fontSize: { xs: '1.05rem', sm: '1.25rem', lg: '1.35rem' },
+          fontWeight: 560,
+          fontSize: { xs: '1.2rem', sm: '1.45rem', lg: '1.6rem' },
           color: brand.plantGreenDark,
-          lineHeight: 1.1,
+          lineHeight: 1,
           letterSpacing: '-0.03em',
         }}
       >
@@ -51,12 +66,11 @@ function HeroStat({ statKey, floatClassName }: { statKey: (typeof statKeys)[numb
       </Typography>
       <Typography
         sx={{
-          fontWeight: 650,
+          mt: 0.6,
           color: brand.textSecondary,
-          fontSize: { xs: '0.62rem', sm: '0.7rem' },
-          lineHeight: 1.25,
-          display: 'block',
-          mt: 0.35,
+          fontSize: { xs: '0.68rem', sm: '0.75rem' },
+          fontWeight: 650,
+          lineHeight: 1.3,
         }}
       >
         {label}
@@ -67,6 +81,7 @@ function HeroStat({ statKey, floatClassName }: { statKey: (typeof statKeys)[numb
 
 export default function HeroSection() {
   const garden = useProduct('gardens', 'homegarder-one')
+  const images = useHomepageImages()
   const heroImage = useHi('hero.main', garden?.image ?? stockImages.homeGardenProduct)
   const badge = useHt('hero.badge')
   const title = useHt('hero.title')
@@ -83,50 +98,33 @@ export default function HeroSection() {
     <Box
       component="section"
       sx={{
-        position: 'relative',
+        display: 'grid',
+        gridTemplateColumns: { xs: '1fr', md: 'minmax(400px, 48%) minmax(0, 1fr)', lg: 'minmax(480px, 540px) minmax(0, 1fr)', xl: 'minmax(520px, 620px) minmax(0, 1fr)' },
+        minHeight: { md: 'max(640px, min(780px, calc(100svh - 108px)))' },
+        bgcolor: paper,
         overflow: 'hidden',
-        background: brand.gradientHero,
       }}
     >
       <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          background: `
-            radial-gradient(ellipse 48% 55% at 82% 38%, rgba(76, 163, 116, 0.22) 0%, transparent 68%),
-            radial-gradient(ellipse 36% 32% at 6% 92%, rgba(227, 159, 118, 0.16) 0%, transparent 62%)
-          `,
-          pointerEvents: 'none',
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: 'radial-gradient(rgba(31, 90, 59, 0.14) 1px, transparent 1px)',
-          backgroundSize: '22px 22px',
-          maskImage: 'radial-gradient(ellipse 42% 55% at 78% 42%, #000 0%, transparent 72%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 42% 55% at 78% 42%, #000 0%, transparent 72%)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      <Box
+        className="hero-fade-up"
         sx={{
           position: 'relative',
           zIndex: 1,
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.05fr) minmax(0, 0.95fr)' },
-          gap: { xs: 2.25, md: 4, lg: 6, xl: 8 },
-          alignItems: 'center',
-          maxWidth: 1320,
-          mx: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          order: { xs: 1, md: 0 },
           px: pagePaddingX,
-          pt: { xs: 1.25, md: 4, lg: 4.5, xl: 5.5 },
-          pb: { xs: 3.5, md: 4, lg: 4.5, xl: 5.5 },
+          pt: { xs: 3.25, md: 4.5, lg: 5.5 },
+          pb: { xs: 3.5, md: 4.5, lg: 5.5 },
+          backgroundColor: paper,
+          backgroundImage: `
+            radial-gradient(ellipse 72% 48% at 0% 108%, rgba(47, 125, 83, 0.13) 0%, transparent 58%),
+            radial-gradient(ellipse 46% 34% at 12% 0%, rgba(227, 159, 118, 0.20) 0%, transparent 68%)
+          `,
         }}
       >
-        <Box className="hero-fade-up" sx={{ maxWidth: { md: 560 }, order: { xs: 1, md: 0 } }}>
+        <Box sx={{ maxWidth: 520 }}>
           <Stack
             direction="row"
             spacing={0.75}
@@ -134,39 +132,48 @@ export default function HeroSection() {
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
-              bgcolor: brand.white,
               border: `1px solid ${brand.border}`,
+              bgcolor: brand.white,
               boxShadow: brand.shadow,
               borderRadius: 999,
               pl: 0.85,
-              pr: 1.5,
-              py: 0.45,
-              mb: { xs: 1.5, md: 2, lg: 2.25 },
+              pr: 1.4,
+              py: 0.4,
+              mb: { xs: 2, md: 2.5 },
             }}
           >
-            <Box
-              className="hero-dot"
-              sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: brand.plantGreen, flexShrink: 0 }}
-            />
-            <Stack direction="row" sx={{ color: '#CE8A4A' }}>
+            <Stack direction="row" sx={{ color: brand.peach }}>
               {[0, 1, 2, 3, 4].map((i) => (
-                <StarRounded key={i} sx={{ fontSize: { xs: 14, lg: 16 } }} />
+                <StarRounded key={i} sx={{ fontSize: 15 }} />
               ))}
             </Stack>
-            <Typography sx={{ fontSize: { xs: '0.75rem', lg: '0.8rem' }, fontWeight: 700, color: brand.graphite }}>
-              {badge}
-            </Typography>
+            <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: brand.graphite, lineHeight: 1.2 }}>{badge}</Typography>
           </Stack>
+
+          {priceLabel ? (
+            <Typography
+              sx={{
+                fontSize: '0.72rem',
+                fontWeight: 750,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: brand.plantGreen,
+                mb: 1.25,
+              }}
+            >
+              {priceLabel}
+            </Typography>
+          ) : null}
 
           <Typography
             component="h1"
             sx={{
               fontFamily: '"Fraunces", Georgia, serif',
-              fontSize: { xs: 'clamp(2.05rem, 7.4vw, 2.6rem)', md: '2.65rem', lg: '3.2rem', xl: '3.6rem' },
-              fontWeight: 650,
+              fontSize: { xs: 'clamp(2.25rem, 8vw, 2.85rem)', md: '2.9rem', lg: '3.55rem', xl: '3.9rem' },
+              fontWeight: 560,
               letterSpacing: '-0.04em',
-              lineHeight: 1.02,
-              mb: { xs: 1.15, md: 1.5, lg: 1.75 },
+              lineHeight: 0.98,
+              mb: { xs: 1.35, md: 1.6 },
               color: brand.graphite,
               textWrap: 'balance',
             }}
@@ -178,12 +185,12 @@ export default function HeroSection() {
             sx={{
               fontFamily: '"Fraunces", Georgia, serif',
               fontStyle: 'italic',
-              fontWeight: 560,
-              fontSize: { xs: '1.15rem', md: '1.25rem', lg: '1.4rem' },
+              fontWeight: 500,
+              fontSize: { xs: '1.2rem', md: '1.3rem', lg: '1.45rem' },
               color: brand.plantGreenDark,
-              mb: 1.15,
-              lineHeight: 1.3,
-              maxWidth: 480,
+              mb: 1.35,
+              lineHeight: 1.25,
+              maxWidth: 460,
             }}
           >
             {promise}
@@ -192,9 +199,9 @@ export default function HeroSection() {
           <Typography
             sx={{
               color: brand.textSecondary,
-              fontSize: { xs: '0.95rem', lg: '1.05rem' },
+              fontSize: { xs: '0.98rem', lg: '1.05rem' },
               lineHeight: 1.55,
-              mb: { xs: 2.25, md: 2.5, lg: 3 },
+              mb: { xs: 2.5, md: 3 },
               maxWidth: 460,
             }}
           >
@@ -205,7 +212,7 @@ export default function HeroSection() {
             direction={{ xs: 'column', sm: 'row' }}
             spacing={1.25}
             useFlexGap
-            sx={{ flexWrap: 'wrap', mb: trustShipping ? 1.75 : { xs: 2.5, lg: 3 } }}
+            sx={{ flexWrap: 'wrap', mb: trustShipping ? 1.75 : 0 }}
           >
             <Button
               variant="contained"
@@ -213,12 +220,7 @@ export default function HeroSection() {
               component={RouterLink}
               to={navHrefs.buy}
               endIcon={<ArrowForwardRounded />}
-              sx={{
-                px: { sm: 3.5 },
-                minHeight: 52,
-                '&.MuiButton-sizeLarge': { minHeight: 52 },
-                fontSize: '1rem',
-              }}
+              sx={{ px: { sm: 3.25 }, minHeight: 52 }}
             >
               {price ? `${ctaPrimary} · ${price}` : ctaPrimary}
             </Button>
@@ -226,7 +228,7 @@ export default function HeroSection() {
               variant="outlined"
               size="large"
               href={resolveHref(navHrefs.howItWorks)}
-              sx={{ minHeight: 52, '&.MuiButton-sizeLarge': { minHeight: 52 } }}
+              sx={{ minHeight: 52 }}
             >
               {ctaSecondary}
             </Button>
@@ -238,118 +240,47 @@ export default function HeroSection() {
               <Typography sx={{ fontSize: '0.84rem', fontWeight: 650, lineHeight: 1.3 }}>{trustShipping}</Typography>
             </Stack>
           ) : null}
-        </Box>
 
-        <Box
-          className="hero-fade-up-delay"
+          <HeroFacts />
+        </Box>
+      </Box>
+
+      <Box
+        className="hero-fade-up-delay"
+        sx={{
+          position: 'relative',
+          order: { xs: 0, md: 0 },
+          minHeight: { xs: 240, sm: 300, md: '100%' },
+          height: { xs: 'min(300px, 62vw)', sm: 'min(360px, 42vw)', md: 'auto' },
+        }}
+      >
+        <MediaImg
+          className="hero-image-reveal"
+          src={heroImage}
+          preset="hero"
+          alt={imageAlt}
+          loading="eager"
+          fetchPriority="high"
           sx={{
-            position: 'relative',
-            pt: { md: 1 },
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: responsiveObjectPosition(images, 'hero.main', 'mobile', 'desktop'),
           }}
-        >
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'block' },
-              position: 'absolute',
-              width: '86%',
-              aspectRatio: '1',
-              borderRadius: '50%',
-              border: '1.5px solid rgba(47, 125, 83, 0.28)',
-              top: '-8%',
-              right: '-10%',
-              pointerEvents: 'none',
-            }}
-          />
-          <Box
-            sx={{
-              position: 'relative',
-              zIndex: 1,
-              borderRadius: { xs: '22px', lg: '32px' },
-              overflow: 'hidden',
-              boxShadow: '0 28px 60px rgba(28, 35, 30, 0.16)',
-              bgcolor: brand.beigeDark,
-              aspectRatio: { xs: '5 / 3.5', md: '4 / 4.15' },
-              maxHeight: { md: 520, lg: 580 },
-            }}
-          >
-            <MediaImg
-              className="hero-image-reveal"
-              src={heroImage}
-              preset="hero"
-              alt={imageAlt}
-              loading="eager"
-              fetchPriority="high"
-              sx={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center 12%',
-              }}
-            />
-            {priceLabel ? (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  left: { xs: 12, lg: 16 },
-                  bottom: { xs: 58, md: 72 },
-                  bgcolor: 'rgba(255,255,255,0.92)',
-                  backdropFilter: 'blur(12px)',
-                  WebkitBackdropFilter: 'blur(12px)',
-                  borderRadius: '14px',
-                  px: 1.5,
-                  py: 1,
-                  boxShadow: brand.shadow,
-                  maxWidth: '68%',
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: '0.68rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: brand.plantGreen,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {priceLabel}
-                </Typography>
-                {price ? (
-                  <Typography
-                    sx={{
-                      fontFamily: '"Fraunces", Georgia, serif',
-                      fontWeight: 600,
-                      fontSize: '1.15rem',
-                      letterSpacing: '-0.02em',
-                      color: brand.graphite,
-                      lineHeight: 1.2,
-                      mt: 0.25,
-                    }}
-                  >
-                    {price}
-                  </Typography>
-                ) : null}
-              </Box>
-            ) : null}
-          </Box>
-
-          <Stack
-            direction="row"
-            spacing={{ xs: 0.75, sm: 1.25 }}
-            sx={{
-              position: 'relative',
-              zIndex: 2,
-              mt: { xs: -2.75, md: -3.5 },
-              mx: { xs: 1, md: 1.5 },
-            }}
-          >
-            {statKeys.map((key, index) => (
-              <HeroStat key={key} statKey={key} floatClassName={statFloatClass[index]} />
-            ))}
-          </Stack>
-        </Box>
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            background: {
+              xs: `linear-gradient(to top, ${paper} 0%, rgba(243, 246, 240, 0) 32%)`,
+              md: `linear-gradient(90deg, ${paper} 0%, rgba(243, 246, 240, 0) 12%)`,
+            },
+          }}
+        />
       </Box>
     </Box>
   )

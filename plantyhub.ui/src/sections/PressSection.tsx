@@ -10,6 +10,7 @@ import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import { blogArticleImages, navHrefs, pressArticleIds } from '../data/catalog'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
+import { objectPositionForKey } from '../media/imageFocus'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
@@ -80,7 +81,7 @@ function ArticleCard({ id }: { id: (typeof pressArticleIds)[number] }) {
           preset="card"
           alt={t(`blogPage.articles.${id}.title`)}
           loading="lazy"
-          sx={{ width: '100%', height: { xs: 160, sm: 180 }, objectFit: 'cover', display: 'block' }}
+          sx={{ width: '100%', height: { xs: 160, sm: 180 }, objectFit: 'cover', objectPosition: objectPositionForKey(images, `blog.${id}`, 'card'), display: 'block' }}
         />
         <Box sx={{ p: { xs: 2, sm: 2.5 } }}>
           <Typography variant="caption" color="text.secondary" sx={{ mb: 0.75, display: 'block', fontWeight: 600 }}>

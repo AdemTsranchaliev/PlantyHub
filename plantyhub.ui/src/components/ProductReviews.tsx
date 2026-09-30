@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 import IconButton from '@mui/material/IconButton'
@@ -17,7 +17,6 @@ import MediaImg from './MediaImg'
 import SectionContainer from './SectionContainer'
 
 const sorts: ReviewSort[] = ['newest', 'highest', 'lowest', 'photos']
-const previewLength = 280
 const starGold = '#CE8A4A'
 
 export function useProductReviews(slug?: string) {
@@ -112,7 +111,7 @@ export default function ProductReviews({ slug }: { slug?: string }) {
   }
 
   return (
-    <SectionContainer id="reviews" bgcolor={brand.plantGreenDark} py={{ xs: 6, sm: 7, md: 9 }}>
+    <SectionContainer id="reviews" bgcolor={brand.cream} py={{ xs: 6, sm: 7, md: 8 }}>
       <Box sx={{ maxWidth: 980, mx: 'auto' }}>
       <Stack spacing={1.25} sx={{ alignItems: 'center', mb: { xs: 3, md: 4 } }}>
         <Box
@@ -123,15 +122,15 @@ export default function ProductReviews({ slug }: { slug?: string }) {
             px: 1.5,
             py: 0.6,
             borderRadius: 999,
-            bgcolor: 'rgba(255,255,255,0.12)',
+            bgcolor: brand.plantGreenMuted,
           }}
         >
-          <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: brand.plantGreenLight }} />
-          <Typography sx={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: brand.white }}>
+          <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: brand.plantGreenDark }} />
+          <Typography sx={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: brand.plantGreenDark }}>
             {t('reviews.eyebrow')}
           </Typography>
         </Box>
-        <Typography component="h2" variant="h2" sx={{ textAlign: 'center', color: brand.white }}>
+        <Typography component="h2" variant="h2" sx={{ textAlign: 'center', color: brand.graphite }}>
           {t('reviews.title')}
         </Typography>
       </Stack>
@@ -146,7 +145,7 @@ export default function ProductReviews({ slug }: { slug?: string }) {
             borderRadius: '24px',
             bgcolor: brand.white,
             border: `1px solid ${brand.creamBorder}`,
-            boxShadow: '0 18px 40px rgba(0,0,0,0.18)',
+            boxShadow: brand.shadow,
           }}
         >
           <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
@@ -202,7 +201,7 @@ export default function ProductReviews({ slug }: { slug?: string }) {
 
         {data.photos.length > 0 ? (
           <Box>
-            <Typography sx={{ fontWeight: 800, mb: 1.25, color: brand.white }}>{t('reviews.photosTitle', { count: data.withPhotos })}</Typography>
+            <Typography sx={{ fontWeight: 800, mb: 1.25, color: brand.graphite }}>{t('reviews.photosTitle', { count: data.withPhotos })}</Typography>
             <Stack direction="row" spacing={1.25} sx={{ overflowX: 'auto', pb: 0.75, pr: { xs: 8, sm: 2 } }}>
               {data.photos.map((src, index) => (
                 <Box
@@ -212,7 +211,7 @@ export default function ProductReviews({ slug }: { slug?: string }) {
                   onClick={() => setViewer({ photos: data.photos, index })}
                   sx={{
                     p: 0,
-                    border: '2px solid rgba(255,255,255,0.85)',
+                    border: `1px solid ${brand.creamBorder}`,
                     borderRadius: '16px',
                     overflow: 'hidden',
                     width: { xs: 96, sm: 112 },
@@ -246,9 +245,9 @@ export default function ProductReviews({ slug }: { slug?: string }) {
                   borderRadius: 999,
                   px: 1.75,
                   py: 0.85,
-                  border: `1px solid ${active ? brand.white : 'rgba(255,255,255,0.28)'}`,
-                  bgcolor: active ? brand.white : 'rgba(255,255,255,0.08)',
-                  color: active ? brand.plantGreenDark : brand.white,
+                  border: `1px solid ${active ? brand.plantGreen : brand.creamBorder}`,
+                  bgcolor: active ? brand.plantGreen : brand.white,
+                  color: active ? brand.white : brand.graphite,
                   fontWeight: 700,
                   fontSize: '0.84rem',
                   cursor: 'pointer',
@@ -271,8 +270,8 @@ export default function ProductReviews({ slug }: { slug?: string }) {
                 borderRadius: 999,
                 px: 1.5,
                 py: 0.85,
-                border: `1px solid ${brand.white}`,
-                bgcolor: brand.white,
+                border: `1px solid ${brand.plantGreenDark}`,
+                bgcolor: brand.plantGreenMuted,
                 color: brand.plantGreenDark,
                 fontWeight: 800,
                 fontSize: '0.84rem',
@@ -290,7 +289,7 @@ export default function ProductReviews({ slug }: { slug?: string }) {
             <Typography sx={{ color: brand.textSecondary, fontWeight: 700 }}>{t('reviews.filterEmpty')}</Typography>
           </Box>
         ) : (
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 1.5, alignItems: 'start' }}>
+          <Stack spacing={1.5}>
             {data.items.map((review) => (
               <ReviewCard
                 key={review.id}
@@ -302,12 +301,12 @@ export default function ProductReviews({ slug }: { slug?: string }) {
                 onPhoto={(index) => setViewer({ photos: review.photos, index })}
               />
             ))}
-          </Box>
+          </Stack>
         )}
 
         {pages > 1 ? (
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ alignItems: { sm: 'center' }, justifyContent: 'space-between' }}>
-            <Typography sx={{ color: 'rgba(255,255,255,0.82)', fontWeight: 700, fontSize: '0.85rem' }}>
+            <Typography sx={{ color: brand.textSecondary, fontWeight: 700, fontSize: '0.85rem' }}>
               {t('reviews.range', { from, to, count: data.filtered })}
             </Typography>
             <Pagination
@@ -321,9 +320,8 @@ export default function ProductReviews({ slug }: { slug?: string }) {
               siblingCount={1}
               boundaryCount={1}
               sx={{
-                '& .MuiPaginationItem-root': { fontWeight: 700, color: brand.white },
-                '& .MuiPaginationItem-root:hover': { bgcolor: 'rgba(255,255,255,0.14)' },
-                '& .Mui-selected': { bgcolor: `${brand.white} !important`, color: brand.plantGreenDark },
+                '& .MuiPaginationItem-root': { fontWeight: 700 },
+                '& .Mui-selected': { bgcolor: `${brand.plantGreen} !important`, color: brand.white },
               }}
             />
           </Stack>
@@ -398,12 +396,36 @@ function ReviewCard({
 }) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
-  const long = body.length > previewLength
-  const text = long && !open ? `${body.slice(0, previewLength).trimEnd()}…` : body
+  const [overflows, setOverflows] = useState(false)
+  const textRef = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    const el = textRef.current
+    if (!el || open) return
+    setOverflows(el.scrollHeight > el.clientHeight + 1)
+  }, [body, open])
 
   return (
-    <Box sx={{ p: { xs: 2, sm: 2.5 }, borderRadius: '20px', bgcolor: brand.white, border: `1px solid ${brand.creamBorder}`, boxShadow: brand.shadow }}>
-      <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center', mb: body ? 1.25 : 0 }}>
+    <Box
+      sx={{
+        display: 'grid',
+        gap: 1.25,
+        p: 2,
+        borderRadius: '20px',
+        bgcolor: brand.white,
+        border: `1px solid ${brand.creamBorder}`,
+        boxShadow: brand.shadow,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: '40px minmax(0, 1fr) auto',
+          columnGap: 1.5,
+          alignItems: 'center',
+          minHeight: 40,
+        }}
+      >
         <Box
           sx={{
             width: 40,
@@ -415,42 +437,88 @@ function ReviewCard({
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 800,
-            flexShrink: 0,
+            fontSize: '0.95rem',
           }}
         >
           {(author || '?').slice(0, 1).toUpperCase()}
         </Box>
-        <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography sx={{ fontWeight: 800, color: brand.graphite, lineHeight: 1.2 }}>{author}</Typography>
-          <Typography sx={{ fontSize: '0.78rem', color: brand.textSecondary }}>{date}</Typography>
+        <Box sx={{ minWidth: 0 }}>
+          <Typography noWrap sx={{ fontWeight: 800, color: brand.graphite, lineHeight: 1.25 }}>{author}</Typography>
+          <Typography noWrap sx={{ fontSize: '0.78rem', color: brand.textSecondary, lineHeight: 1.3 }}>{date}</Typography>
         </Box>
-        <Rating value={rating} readOnly size="small" sx={{ color: starGold, flexShrink: 0 }} />
-      </Stack>
-      {body ? <Typography sx={{ color: brand.graphite, lineHeight: 1.65, whiteSpace: 'pre-wrap' }}>{text}</Typography> : null}
-      {long ? (
+        <Rating
+          value={rating}
+          readOnly
+          sx={{
+            color: starGold,
+            fontSize: '1.15rem',
+            '& .MuiRating-icon': { fontSize: '1.15rem' },
+          }}
+        />
+      </Box>
+      {body || photos.length > 0 ? (
         <Box
-          component="button"
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          sx={{ mt: 0.75, p: 0, border: 0, bgcolor: 'transparent', color: brand.plantGreenDark, fontWeight: 800, cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: photos.length > 0 ? { xs: '1fr', sm: 'minmax(0, 1fr) auto' } : '1fr',
+            gap: 1.5,
+            alignItems: 'start',
+          }}
         >
-          {open ? t('reviews.showLess') : t('reviews.showMore')}
-        </Box>
-      ) : null}
-      {photos.length > 0 ? (
-        <Stack direction="row" spacing={1} sx={{ mt: 1.5, flexWrap: 'wrap' }}>
-          {photos.map((src, index) => (
-            <Box
-              key={`${index}-${src}`}
-              component="button"
-              type="button"
-              onClick={() => onPhoto(index)}
-              sx={{ p: 0, border: `1px solid ${brand.border}`, borderRadius: '14px', overflow: 'hidden', width: 88, height: 88, cursor: 'pointer', bgcolor: brand.surface }}
-            >
-              <MediaImg src={src} preset="thumb" alt={t('reviews.photo')} loading="lazy" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          {body ? (
+            <Box sx={{ minWidth: 0, minHeight: open ? undefined : 52 }}>
+              <Typography
+                ref={textRef}
+                sx={{
+                  color: brand.graphite,
+                  fontSize: '0.95rem',
+                  lineHeight: 1.55,
+                  minHeight: open ? undefined : '3.1em',
+                  whiteSpace: 'pre-wrap',
+                  ...(open
+                    ? {}
+                    : {
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                      }),
+                }}
+              >
+                {body}
+              </Typography>
+              <Box sx={{ height: 22, mt: 0.25, display: 'flex', alignItems: 'center' }}>
+                {overflows || open ? (
+                  <Box
+                    component="button"
+                    type="button"
+                    onClick={() => setOpen((value) => !value)}
+                    sx={{ p: 0, border: 0, bgcolor: 'transparent', color: brand.plantGreenDark, fontWeight: 800, fontSize: '0.85rem', lineHeight: 1, cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
+                  >
+                    {open ? t('reviews.showLess') : t('reviews.showMore')}
+                  </Box>
+                ) : null}
+              </Box>
             </Box>
-          ))}
-        </Stack>
+          ) : (
+            <Box />
+          )}
+          {photos.length > 0 ? (
+            <Stack direction="row" spacing={1} sx={{ overflowX: 'auto' }}>
+              {photos.map((src, index) => (
+                <Box
+                  key={`${index}-${src}`}
+                  component="button"
+                  type="button"
+                  onClick={() => onPhoto(index)}
+                  sx={{ p: 0, border: `1px solid ${brand.border}`, borderRadius: '12px', overflow: 'hidden', width: 64, height: 64, flex: '0 0 auto', cursor: 'pointer', bgcolor: brand.surface }}
+                >
+                  <MediaImg src={src} preset="thumb" alt={t('reviews.photo')} loading="lazy" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                </Box>
+              ))}
+            </Stack>
+          ) : null}
+        </Box>
       ) : null}
     </Box>
   )

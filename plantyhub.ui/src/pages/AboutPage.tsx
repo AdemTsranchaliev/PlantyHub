@@ -15,7 +15,8 @@ import SectionContainer, { pagePaddingX } from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
-import { useSiteAsset } from '../hooks/useSiteAssets'
+import { useSiteAssetsStore } from '../hooks/useSiteAssets'
+import { objectPositionForKey } from '../media/imageFocus'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
@@ -116,7 +117,8 @@ function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: st
 
 export default function AboutPage() {
   const { t } = useTranslation()
-  const heroImage = useSiteAsset('about.hero', lifestyleImages.heroKitchen)
+  const { images } = useSiteAssetsStore()
+  const heroImage = images['about.hero'] || lifestyleImages.heroKitchen
   const storyImage = lifestyleImages.mintKitchen
 
   useEffect(() => {
@@ -204,7 +206,7 @@ export default function AboutPage() {
                   minHeight: { md: '100%' },
                   aspectRatio: { xs: '4 / 3', md: 'unset' },
                   objectFit: 'cover',
-                  objectPosition: 'center 42%',
+                  objectPosition: objectPositionForKey(images, 'about.hero', 'main'),
                   display: 'block',
                   borderRadius: { xs: '20px', md: 0 },
                 }}

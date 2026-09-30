@@ -12,6 +12,7 @@ import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { blogArticleIds, blogArticleImages, navHrefs } from '../data/catalog'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
+import { objectPositionForKey } from '../media/imageFocus'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
@@ -97,7 +98,7 @@ export default function BlogPage() {
                         alt={t(`blogPage.articles.${id}.title`)}
                         loading="lazy"
                         decoding="async"
-                      sx={{ width: '100%', height: { xs: 180, sm: 200 }, objectFit: 'cover', display: 'block' }}
+                      sx={{ width: '100%', height: { xs: 180, sm: 200 }, objectFit: 'cover', objectPosition: objectPositionForKey(images, `blog.${id}`, 'card'), display: 'block' }}
                     />
                     <Box sx={{ p: { xs: 2.25, sm: 2.75 } }}>
                       <Typography variant="caption" color="text.secondary" sx={{ mb: 0.75, display: 'block', fontWeight: 600 }}>

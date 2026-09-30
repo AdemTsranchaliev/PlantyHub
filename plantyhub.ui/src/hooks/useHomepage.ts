@@ -59,5 +59,10 @@ export function useHomepageImage(key: string, fallback: string): string {
   return useMemo(() => getHomepageImage(state, key, fallback), [state, key, fallback])
 }
 
+export function useHomepageImages(): Record<string, string> {
+  const state = useSyncExternalStore(subscribeHomepage, getHomepageState, getHomepageState)
+  return state.images
+}
+
 export const useHt = useHomepageText
 export const useHi = useHomepageImage

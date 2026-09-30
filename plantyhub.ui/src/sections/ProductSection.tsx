@@ -14,7 +14,8 @@ import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs, homepageProductSpecRows } from '../data/catalog'
 import { useProduct } from '../hooks/useProducts'
-import { useHt, useHi } from '../hooks/useHomepage'
+import { useHomepageImages, useHt, useHi } from '../hooks/useHomepage'
+import { responsiveObjectPosition } from '../media/imageFocus'
 import { lifestyleImages } from '../data/images'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
@@ -39,6 +40,7 @@ function SpecRow({ rowKey, valueKey }: { rowKey: string; valueKey: string }) {
 
 export default function ProductSection() {
   const garden = useProduct('gardens', 'homegarder-one')
+  const images = useHomepageImages()
   const image = useHi('product.main', lifestyleImages.kitchenBasil)
   const eyebrow = useHt('product.eyebrow')
   const title = useHt('product.title')
@@ -53,7 +55,7 @@ export default function ProductSection() {
         <Grid size={{ xs: 12, md: 6 }}>
           <Reveal sx={{ position: 'relative' }}>
             <Box sx={{ borderRadius: { xs: '20px', sm: '28px' }, overflow: 'hidden', border: `1px solid ${brand.border}`, boxShadow: brand.shadowHover, '& img': { transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' }, '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } } }}>
-              <MediaImg src={image} preset="gallery" alt={title} loading="lazy" sx={{ width: '100%', aspectRatio: { xs: '16/10', md: '1/1' }, objectFit: 'cover', display: 'block' }} />
+              <MediaImg src={image} preset="gallery" alt={title} loading="lazy" sx={{ width: '100%', aspectRatio: { xs: '16/10', md: '1/1' }, objectFit: 'cover', objectPosition: responsiveObjectPosition(images, 'product.main', 'mobile', 'desktop'), display: 'block' }} />
             </Box>
             <Box sx={{ position: 'absolute', top: { xs: 12, sm: 22 }, left: { xs: 12, sm: 22 }, bgcolor: brand.white, borderRadius: 999, px: { xs: 1.35, sm: 2 }, py: { xs: 0.65, sm: 0.9 }, boxShadow: brand.shadow, display: 'inline-flex', alignItems: 'center', gap: 1 }}>
               <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: brand.plantGreen }} />

@@ -7,13 +7,15 @@ import FormatQuoteRounded from '@mui/icons-material/FormatQuoteRounded'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { socialProofReviewIds, socialProofImages } from '../data/catalog'
-import { useHt, useHi } from '../hooks/useHomepage'
+import { useHomepageImages, useHt, useHi } from '../hooks/useHomepage'
+import { objectPositionForKey } from '../media/imageFocus'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
 function ReviewCard({ id, index }: { id: (typeof socialProofReviewIds)[number]; index: number }) {
   const review = useHt(`socialProof.reviews.${id}`)
   const handle = useHt(`community.handles.${id}`)
+  const images = useHomepageImages()
   const image = useHi(`socialProof.${id}`, socialProofImages[id])
   return (
     <Grid size={{ xs: 12, md: 6 }}>
@@ -35,7 +37,7 @@ function ReviewCard({ id, index }: { id: (typeof socialProofReviewIds)[number]; 
           },
         }}
       >
-        <MediaImg src={image} preset="card" alt="" loading="lazy" sx={{ width: '100%', height: { xs: 150, sm: 180 }, objectFit: 'cover', display: 'block' }} />
+        <MediaImg src={image} preset="card" alt="" loading="lazy" sx={{ width: '100%', height: { xs: 150, sm: 180 }, objectFit: 'cover', objectPosition: objectPositionForKey(images, `socialProof.${id}`, 'card'), display: 'block' }} />
         <Box sx={{ p: { xs: 2.25, sm: 3.5 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
           <FormatQuoteRounded sx={{ color: brand.plantGreen, fontSize: { xs: 26, sm: 32 }, mb: 0.75 }} />
           <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontSize: { xs: '1rem', sm: '1.1rem' }, lineHeight: 1.5, flex: 1, color: brand.graphite }}>{review}</Typography>
