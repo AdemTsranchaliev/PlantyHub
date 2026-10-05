@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import LanguageIcon from '@mui/icons-material/Language'
 import { useTranslation } from 'react-i18next'
-import { languageStorageKey, supportedLanguages, type LanguageCode } from '../i18n/languages'
+import { activeLanguages, languageStorageKey, type LanguageCode } from '../i18n/languages'
 import { BASE_PATH } from '../paths'
 import { brand } from '../theme'
 
@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
   const { i18n } = useTranslation()
   const location = useLocation()
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
-  const current = supportedLanguages.find((l) => l.code === i18n.language) ?? supportedLanguages[0]
+  const current = activeLanguages.find((l) => l.code === i18n.language) ?? activeLanguages[0]
   const onAdmin = location.pathname === '/admin' || location.pathname.startsWith('/admin/')
 
   const changeLanguage = (code: LanguageCode) => {
@@ -57,7 +57,7 @@ export default function LanguageSwitcher() {
         onClose={() => setAnchor(null)}
         slotProps={{ paper: { sx: { minWidth: 160 } } }}
       >
-        {supportedLanguages.map((lang) => (
+        {activeLanguages.map((lang) => (
           <MenuItem
             key={lang.code}
             selected={i18n.language === lang.code}

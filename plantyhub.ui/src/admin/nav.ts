@@ -1,7 +1,6 @@
 import DashboardRounded from '@mui/icons-material/DashboardRounded'
 import YardRounded from '@mui/icons-material/YardRounded'
 import SpaRounded from '@mui/icons-material/SpaRounded'
-import ScienceRounded from '@mui/icons-material/ScienceRounded'
 import CategoryRounded from '@mui/icons-material/CategoryRounded'
 import ShoppingBagRounded from '@mui/icons-material/ShoppingBagRounded'
 import PeopleRounded from '@mui/icons-material/PeopleRounded'
@@ -41,7 +40,6 @@ export const adminNavGroups: AdminNavGroup[] = [
     items: [
       { path: '/admin/gardens', labelKey: 'admin.nav.gardens', icon: YardRounded },
       { path: '/admin/pods', labelKey: 'admin.nav.pods', icon: SpaRounded },
-      { path: '/admin/consumables', labelKey: 'admin.nav.consumables', icon: ScienceRounded },
       { path: '/admin/accessories', labelKey: 'admin.nav.accessories', icon: CategoryRounded },
       { path: '/admin/hidden', labelKey: 'admin.nav.hidden', icon: VisibilityOffRounded },
     ],

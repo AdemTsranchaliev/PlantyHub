@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { reviewsApi } from '../../api'
 import { ApiError } from '../../api/client'
-import { supportedLanguages } from '../../i18n/languages'
+import { activeLanguages } from '../../i18n/languages'
 import { brand } from '../../theme'
 
 export type ReviewProductChoice = { slug: string; name: string }
@@ -101,7 +101,7 @@ export default function RequestReviewDialog({ open, onClose, email, customerName
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
         >
-          {supportedLanguages.map((language) => (
+          {activeLanguages.map((language) => (
             <MenuItem key={language.code} value={language.code}>{language.label}</MenuItem>
           ))}
         </TextField>

@@ -256,12 +256,20 @@ function PromoField({ promo }: { promo: PromoControls }) {
                 minHeight: 40,
                 borderRadius: '10px',
                 bgcolor: '#fff',
-                fontSize: '0.875rem',
+                fontSize: '16px',
                 '& fieldset': { borderColor: checkout.inputBorder },
-                '&:hover fieldset': { borderColor: '#A8ACA6' },
+                '@media (hover: hover) and (pointer: fine)': {
+                  '&:hover fieldset': { borderColor: '#A8ACA6' },
+                },
                 '&.Mui-focused fieldset': { borderColor: checkout.link, borderWidth: 1 },
               },
-              '& .MuiOutlinedInput-input': { py: 0.85, px: 1.25 },
+              '& .MuiOutlinedInput-input': {
+                py: 0.85,
+                px: 1.25,
+                fontSize: '16px',
+                scrollMarginTop: '20px',
+                scrollMarginBottom: '30vh',
+              },
             }}
           />
           <Button
@@ -372,7 +380,7 @@ export function MobileOrderSummary({ open, onToggle, totalLabel, ...summary }: M
         </Stack>
         <Typography sx={{ fontSize: '1rem', fontWeight: 600, color: checkout.text }}>{totalLabel}</Typography>
       </Box>
-      <Collapse in={open}>
+      <Collapse in={open} unmountOnExit>
         <Box sx={{ px: 2, pb: 2 }}>
           <CheckoutOrderSummary {...summary} totalLabel={totalLabel} />
         </Box>

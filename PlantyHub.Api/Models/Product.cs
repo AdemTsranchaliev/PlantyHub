@@ -8,6 +8,7 @@ public class Product
     public decimal Price { get; set; }
     public decimal? CompareAtPrice { get; set; }
     public string? PackKey { get; set; }
+    public GrowingDifficulty? GrowingDifficulty { get; set; }
     public string KitJson { get; set; } = "{}";
     public string Image { get; set; } = string.Empty;
     public ImageFit ImageFit { get; set; } = ImageFit.Cover;

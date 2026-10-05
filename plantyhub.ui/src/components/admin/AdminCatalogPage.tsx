@@ -88,13 +88,18 @@ export default function AdminCatalogPage({ category, titleKey, subtitleKey }: Pr
           ? t('admin.pods.podsOnly', { count: kit.pods })
           : undefined
       : undefined
+    const difficulty =
+      category === 'pods' && item.growingDifficulty
+        ? t(`growingDifficulty.${item.growingDifficulty}`)
+        : undefined
+    const extraParts = [difficulty, includes ?? item.tagline ?? item.description].filter(Boolean)
     return {
       id: item.id,
       name: item.name,
       price: item.price,
       compareAt: item.compareAt,
       image: item.image,
-      extra: includes ?? item.tagline ?? item.description,
+      extra: extraParts.length ? extraParts.join(' · ') : undefined,
       active: item.active,
       featured: item.featured,
     }

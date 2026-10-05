@@ -72,6 +72,7 @@ ensure_password() {
 
 build() {
   echo "→ Building UI"
+  # Optional, baked into the UI: VITE_GA_MEASUREMENT_ID, VITE_GTM_ID, VITE_META_PIXEL_ID, VITE_CLARITY_PROJECT_ID.
   (cd "$ROOT/plantyhub.ui" && npx vite build)
 
   echo "→ Publishing API"

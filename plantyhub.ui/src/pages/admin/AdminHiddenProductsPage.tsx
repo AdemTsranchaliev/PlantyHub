@@ -15,12 +15,10 @@ export default function AdminHiddenProductsPage() {
   const { t } = useTranslation()
   const gardens = useCategoryProducts('gardens').filter((item) => !item.active)
   const pods = useCategoryProducts('pods').filter((item) => !item.active)
-  const consumables = useCategoryProducts('consumables').filter((item) => !item.active)
   const accessories = useCategoryProducts('accessories').filter((item) => !item.active)
   const groups = [
     { category: 'gardens' as const, items: gardens },
     { category: 'pods' as const, items: pods },
-    { category: 'consumables' as const, items: consumables },
     { category: 'accessories' as const, items: accessories },
   ]
   const total = groups.reduce((sum, group) => sum + group.items.length, 0)

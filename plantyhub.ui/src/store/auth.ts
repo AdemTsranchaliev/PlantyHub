@@ -14,6 +14,13 @@ import {
 const listeners = new Set<() => void>()
 let customer: SessionUser | null = getCustomerUser()
 
+if (typeof window !== 'undefined') {
+  window.addEventListener('plantyhub-session-cleared', () => {
+    customer = getCustomerUser()
+    emit()
+  })
+}
+
 function emit() {
   listeners.forEach((listener) => listener())
 }

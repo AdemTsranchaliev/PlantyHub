@@ -69,6 +69,16 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = jwtSettings.Audience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
         };
+        options.Events = new JwtBearerEvents
+        {
+            OnTokenValidated = context =>
+            {
+                var version = context.Principal?.FindFirst("ver")?.Value;
+                if (version != jwtSettings.TokenVersion.ToString())
+                    context.Fail("Session ended.");
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddAuthorization();
@@ -161,7 +171,7 @@ app.Use(async (context, next) =>
 {
     if (HttpMethods.IsGet(context.Request.Method) && LocaleSeo.NeedsLocaleRedirect(context.Request.Path))
     {
-        var language = LocaleSeo.PickLanguage(context.Request.Headers.AcceptLanguage);
+        var language = LocaleSeo.PickLanguage();
         var path = context.Request.Path.Value ?? "/";
         var target = path == "/" ? $"/{language}/" : $"/{language}{path}";
         context.Response.Redirect($"{target}{context.Request.QueryString}", permanent: false);

@@ -17,6 +17,8 @@ public class JwtSettings
     public string Issuer { get; set; } = "PlantyHub";
     public string Audience { get; set; } = "PlantyHub";
     public int ExpiryMinutes { get; set; } = 60 * 24 * 7;
+    /// <summary>Bump to invalidate every existing JWT.</summary>
+    public int TokenVersion { get; set; } = 1;
 }
 
 public class JwtTokenService(IOptions<JwtSettings> options)
@@ -30,6 +32,7 @@ public class JwtTokenService(IOptions<JwtSettings> options)
             new(ClaimTypes.NameIdentifier, user.Id),
             new(ClaimTypes.Email, user.Email ?? string.Empty),
             new(ClaimTypes.Name, user.FullName ?? user.Email ?? string.Empty),
+            new("ver", _settings.TokenVersion.ToString(CultureInfo.InvariantCulture)),
         };
 
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
@@ -96,6 +99,18 @@ public static class EnumMapper
         "contain" => ImageFit.Contain,
         _ => ImageFit.Cover
     };
+
+    public static GrowingDifficulty? ParseGrowingDifficulty(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return null;
+        return value.Trim().ToLowerInvariant() switch
+        {
+            "easy" => GrowingDifficulty.Easy,
+            "medium" => GrowingDifficulty.Medium,
+            "hard" => GrowingDifficulty.Hard,
+            _ => throw new ArgumentException($"Unknown growing difficulty: {value}")
+        };
+    }
 
     public static string Slugify(string value)
     {
@@ -227,6 +242,14 @@ public static class EnumMapper
         ImageFit.Cover => "cover",
         ImageFit.Contain => "contain",
         _ => fit.ToString().ToLowerInvariant()
+    };
+
+    public static string? ToApi(GrowingDifficulty? difficulty) => difficulty switch
+    {
+        GrowingDifficulty.Easy => "easy",
+        GrowingDifficulty.Medium => "medium",
+        GrowingDifficulty.Hard => "hard",
+        _ => null
     };
 }
 

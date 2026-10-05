@@ -32,6 +32,20 @@ import { formatEuro, FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+const invalidFieldOrder = ['email', 'name', 'phone', 'city', 'street', 'officeCode'] as const
+
+function revealFirstProblem(errors: FieldErrors, termsMissing: boolean) {
+  const key = invalidFieldOrder.find((field) => errors[field])
+  const el = key
+    ? document.getElementById(key === 'officeCode' ? 'checkout-office' : `checkout-${key}`)
+    : termsMissing
+      ? document.getElementById('checkout-terms')
+      : null
+  if (!el) return
+  el.scrollIntoView({ block: 'center', behavior: 'auto' })
+  if (key) el.focus({ preventScroll: true })
+}
+
 type FormState = {
   name: string
   email: string
@@ -371,6 +385,27 @@ export default function CheckoutPage() {
     }
   }, [form.country, goodsAmount, shippingAmount])
 
+  if (submitting && items.length === 0) {
+    return (
+      <Box sx={{ minHeight: '100vh', bgcolor: '#F4F5F0', display: 'grid', placeItems: 'center', px: 2 }}>
+        <Stack
+          spacing={1.5}
+          sx={{
+            alignItems: 'center',
+            bgcolor: '#fff',
+            border: `1px solid ${checkout.border}`,
+            borderRadius: '16px',
+            px: 4,
+            py: 3,
+          }}
+        >
+          <CircularProgress size={28} sx={{ color: checkout.link }} />
+          <Typography sx={{ fontSize: '0.9375rem', fontWeight: 600 }}>{t('checkout.placing')}</Typography>
+        </Stack>
+      </Box>
+    )
+  }
+
   if (items.length === 0) {
     return (
       <Box sx={{ minHeight: '100vh', bgcolor: checkout.bg, display: 'grid', placeItems: 'center', px: 3 }}>
@@ -411,8 +446,11 @@ export default function CheckoutPage() {
       officeCode: pickupCourier != null && form.officeCode.trim().length < 1,
     }
     setErrors(next)
-    setTermsError(!termsAccepted)
-    return !Object.values(next).some(Boolean) && termsAccepted
+    const termsMissing = !termsAccepted
+    setTermsError(termsMissing)
+    const valid = !Object.values(next).some(Boolean) && !termsMissing
+    if (!valid) revealFirstProblem(next, termsMissing)
+    return valid
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -438,8 +476,8 @@ export default function CheckoutPage() {
         promoCode: appliedPromo?.code,
         termsAccepted,
       })
-      clearCart()
       navigate(`/order/${order.id}`, { replace: true })
+      clearCart()
     } catch (err) {
       const promoCodes = new Set(['invalid', 'expired', 'not_started', 'used_up', 'min_subtotal'])
       if (err instanceof ApiError && err.message === 'terms_required') setTermsError(true)
@@ -447,6 +485,8 @@ export default function CheckoutPage() {
         err instanceof ApiError
           ? err.message === 'terms_required'
             ? t('checkout.termsRequired')
+            : err.message === 'delivery_bulgaria_only'
+              ? t('checkout.deliveryBulgariaOnly')
             : promoCodes.has(err.message)
               ? promoErrorText(err.message)
               : err.message
@@ -582,6 +622,7 @@ export default function CheckoutPage() {
                 <SectionHeading>{t('checkout.contact')}</SectionHeading>
                 <Stack spacing={1.25}>
                   <CheckoutField
+                    id="checkout-email"
                     label={t('checkout.email')}
                     type="email"
                     autoComplete="email"
@@ -589,26 +630,32 @@ export default function CheckoutPage() {
                     onChange={(e) => updateField('email', e.target.value)}
                     error={errors.email}
                     helperText={t('checkout.invalidEmail')}
+                    slotProps={{ htmlInput: { inputMode: 'email', autoCapitalize: 'none', autoCorrect: 'off', spellCheck: false } }}
                   />
                   <Grid container spacing={1.25}>
                     <Grid size={{ xs: 12, sm: 6 }}>
                       <CheckoutField
+                        id="checkout-name"
                         label={t('checkout.name')}
                         autoComplete="name"
                         value={form.name}
                         onChange={(e) => updateField('name', e.target.value)}
                         error={errors.name}
                         helperText={t('checkout.required')}
+                        slotProps={{ htmlInput: { autoCapitalize: 'words' } }}
                       />
                     </Grid>
                     <Grid size={{ xs: 12, sm: 6 }}>
                       <CheckoutField
+                        id="checkout-phone"
                         label={t('checkout.phone')}
+                        type="tel"
                         autoComplete="tel"
                         value={form.phone}
                         onChange={(e) => updateField('phone', e.target.value)}
                         error={errors.phone}
                         helperText={t('checkout.required')}
+                        slotProps={{ htmlInput: { inputMode: 'tel' } }}
                       />
                     </Grid>
                   </Grid>
@@ -696,6 +743,7 @@ export default function CheckoutPage() {
                   </Box>
                   {selectedQuote?.delivery === 'address' ? (
                     <CheckoutField
+                      id="checkout-street"
                       label={t('checkout.street')}
                       autoComplete="street-address"
                       value={form.street}
@@ -748,7 +796,7 @@ export default function CheckoutPage() {
                     >
                       {notesOpen ? t('checkout.hideNotes') : t('checkout.addNotes')}
                     </Link>
-                    <Collapse in={notesOpen}>
+                    <Collapse in={notesOpen} unmountOnExit>
                       <Box sx={{ mt: 1.25 }}>
                         <CheckoutField
                           label={t('checkout.notes')}
@@ -782,6 +830,7 @@ export default function CheckoutPage() {
               <Box>
                 <Stack direction="row" spacing={1} sx={{ alignItems: 'flex-start', mb: 1.5 }}>
                   <Checkbox
+                    id="checkout-terms"
                     checked={termsAccepted}
                     onChange={(event) => {
                       setTermsAccepted(event.target.checked)

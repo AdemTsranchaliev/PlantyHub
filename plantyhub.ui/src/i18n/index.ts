@@ -4,11 +4,12 @@ import bg from './locales/bg.json'
 import de from './locales/de.json'
 import en from './locales/en.json'
 import fr from './locales/fr.json'
-import { defaultLanguage, localeFromPathname, preferredLanguage } from './languages'
+import { defaultLanguage, isActiveLanguage, localeFromPathname, preferredLanguage } from './languages'
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
 const saved = preferredLanguage()
-const initialLanguage = localeFromPathname(window.location.pathname, basePath) ?? saved ?? defaultLanguage
+const fromPath = localeFromPathname(window.location.pathname, basePath)
+const initialLanguage = fromPath && isActiveLanguage(fromPath) ? fromPath : saved ?? defaultLanguage
 
 void i18n.use(initReactI18next).init({
   resources: {

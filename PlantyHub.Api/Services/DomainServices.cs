@@ -29,7 +29,8 @@ public class ProductMapper
             ReadGallery(product.GalleryJson).Select(MediaUrls.Resolve).ToList(),
             MediaUrls.ResolveOrNull(product.VideoUrl),
             MediaUrls.ResolveOrNull(product.VideoPoster),
-            ReadKit(product.KitJson));
+            ReadKit(product.KitJson),
+            EnumMapper.ToApi(product.GrowingDifficulty));
 
     public static string WriteKit(ProductKitDto? kit)
     {
@@ -355,6 +356,8 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
             throw new InvalidOperationException("terms_required");
 
         var country = EnumMapper.ParseCountry(request.Country);
+        if (!string.Equals(country, "BG", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("delivery_bulgaria_only");
         var paymentMethod = EnumMapper.ParsePaymentMethod(request.PaymentMethod);
         if (paymentMethod == PaymentMethod.Paypal)
             throw new InvalidOperationException("payment_unavailable");
@@ -762,6 +765,9 @@ public class ProductService(AppDbContext db)
             ? null
             : PriceHelper.ParseEuro(request.CompareAt);
         product.PackKey = request.PackKey;
+        product.GrowingDifficulty = product.Category == ProductCategory.Pods
+            ? EnumMapper.ParseGrowingDifficulty(request.GrowingDifficulty)
+            : null;
         product.KitJson = ProductMapper.WriteKit(request.Kit);
         product.Image = MediaUrls.Resolve(request.Image.Trim());
         product.ImageFit = EnumMapper.ParseImageFit(request.ImageFit);
@@ -849,6 +855,9 @@ public class ProductService(AppDbContext db)
             Featured = request.Featured,
             Active = request.Active
         };
+        product.GrowingDifficulty = product.Category == ProductCategory.Pods
+            ? EnumMapper.ParseGrowingDifficulty(request.GrowingDifficulty)
+            : null;
 
         ApplyLocales(product, request.Locales);
         ApplyColors(product, request.Colors);

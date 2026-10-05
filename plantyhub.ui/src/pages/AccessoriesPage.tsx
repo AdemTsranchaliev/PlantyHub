@@ -12,14 +12,13 @@ import ProductCard from '../components/ProductCard'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
-import { useAccessoriesCatalog, useConsumablesCatalog, toProductCardData } from '../hooks/useProducts'
+import { useAccessoriesCatalog, toProductCardData } from '../hooks/useProducts'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 
 export default function AccessoriesPage() {
   const { t } = useTranslation()
   const accessories = useAccessoriesCatalog()
-  const consumables = useConsumablesCatalog()
   const addProductToCart = useAddProductToCart()
 
   useEffect(() => {
@@ -78,28 +77,6 @@ export default function AccessoriesPage() {
                   layout="grid"
                   product={toProductCardData(item, t)}
                   onAddToCart={() => addProductToCart('accessories', item)}
-                />
-              </Reveal>
-            </Grid>
-          ))}
-        </Grid>
-      </SectionContainer>
-
-      <SectionContainer bgcolor={brand.cream} py={{ xs: 5, sm: 6, md: 8 }}>
-        <Typography component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, color: brand.graphite, mb: 1 }}>
-          {t('consumablesSection.title')}
-        </Typography>
-        <Typography sx={{ color: brand.textSecondary, fontSize: '1rem', mb: 3, maxWidth: 560 }}>
-          {t('consumablesSection.subtitle')}
-        </Typography>
-        <Grid container spacing={{ xs: 2.5, md: 3 }}>
-          {consumables.map((item, index) => (
-            <Grid key={item.id} size={{ xs: 12, sm: 4 }}>
-              <Reveal delay={index * 0.08}>
-                <ProductCard
-                  layout="grid"
-                  product={toProductCardData(item, t)}
-                  onAddToCart={() => addProductToCart('consumables', item)}
                 />
               </Reveal>
             </Grid>

@@ -275,6 +275,23 @@
     "ctaSubtitle": "Get HomeGarder One and grow all your favourite herbs at home, year-round.",
     "ctaButton": "Shop HomeGarder One"
   },
+  "growingDifficulty": {
+    "label": "Growing difficulty",
+    "shortLabel": "Difficulty",
+    "sectionEyebrow": "For you",
+    "sectionLead": "Every seed is marked with one of three levels — so you know what to expect.",
+    "thisPod": "This seed",
+    "hint": "How easy this seed is for beginners.",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "easyHint": "Forgiving and fast — great for first harvests.",
+    "mediumHint": "Steady care helps — rewarding for regular growers.",
+    "hardHint": "Needs more attention — for confident growers.",
+    "easyHintShort": "Great for beginners",
+    "mediumHintShort": "Needs regular care",
+    "hardHintShort": "For confident growers"
+  },
   "podDetail": {
     "quantity": "Quantity",
     "detailsTitle": "Good to know",
@@ -308,9 +325,9 @@
     }
   },
   "accessoriesPage": {
-    "eyebrow": "Accessories & refills",
+    "eyebrow": "Accessories",
     "title": "Accessories",
-    "subtitle": "Everything to expand and care for your indoor garden — from stylish stands to nutrients and refill capsules."
+    "subtitle": "Everything to expand and care for your indoor garden — stylish stands, shelves and handy tools."
   },
   "aboutPage": {
     "eyebrow": "Our mission",
@@ -387,7 +404,7 @@
       },
       "shipping": {
         "title": "Shipping",
-        "text": "Bulgaria, the Balkans and the EU — dispatched within 24h.",
+        "text": "Bulgaria only — dispatched within 24h.",
         "action": "Track your order"
       },
       "returns": {
@@ -830,7 +847,7 @@
       },
       {
         "q": "Where do you ship?",
-        "a": "We ship across Bulgaria, the Balkans and the European Union, with dispatch within 24 hours."
+        "a": "For now we ship only in Bulgaria, with dispatch within 24 hours."
       }
     ]
   },
@@ -849,8 +866,15 @@
     "copied": "Copied!",
     "done": "Start shopping"
   },
+  "cookieConsent": {
+    "title": "Cookies",
+    "body": "We use cookies for analytics and ads.",
+    "policy": "Cookie policy",
+    "reject": "Reject",
+    "accept": "Accept"
+  },
   "footer": {
-    "shipping": "Shipping: Bulgaria · Balkans · European Union",
+    "shipping": "Shipping: Bulgaria only",
     "shippingNote": "Free shipping over €150. Prices in EUR.",
     "linksTitle": "Navigation",
     "legalTitle": "Legal",
@@ -863,7 +887,7 @@
       "blog": "Blog",
       "privacy": "Privacy",
       "cookies": "Cookies",
-      "terms": "Terms of use",
+      "terms": "Terms and conditions",
       "faq": "FAQ",
       "contact": "Contact",
       "learn": "Learn"
@@ -874,6 +898,7 @@
     "madeWith": "Grown with care in Bulgaria",
     "payments": "Card payments are processed securely by Stripe.",
     "paymentsLabel": "Accepted payment methods",
+    "cookieSettings": "Cookie settings",
     "rights": "© {{year}} PlantyHub. All rights reserved."
   },
   "auth": {
@@ -1086,7 +1111,9 @@
       "office": "to office",
       "address": "to address",
       "locker": "to locker"
-    }
+    },
+    "bulgariaOnly": "We deliver only in Bulgaria.",
+    "deliveryBulgariaOnly": "For now we deliver only in Bulgaria."
   },
   "order": {
     "successTitle": "Thank you for your order!",
@@ -1139,7 +1166,7 @@
       "email": "Email",
       "password": "Password",
       "submit": "Sign in",
-      "error": "Invalid credentials. Use admin@plantyhub.com / admin123",
+      "error": "Invalid credentials. Use admin@plantyhub.com / Admin123!",
       "errorNetwork": "Cannot reach the API. Start the backend with `dotnet run` in PlantyHub.Api, then try again.",
       "errorValidation": "Enter a valid email and a password with at least 6 characters.",
       "backToStore": "← Back to store"
@@ -2291,15 +2318,15 @@
         "items": [
           {
             "q": "Where do you ship?",
-            "a": "We ship to Bulgaria, the Balkans and the European Union. Orders usually leave within 24 hours on business days."
+            "a": "For now we ship only in Bulgaria. Orders usually leave within 24 hours on business days."
           },
           {
             "q": "How much is shipping?",
-            "a": "Shipping is calculated at checkout by destination. Over €150, shipping is free for most EU and Balkan destinations."
+            "a": "Shipping is calculated at checkout for an address in Bulgaria. Over €150, shipping is free."
           },
           {
             "q": "How long does delivery take?",
-            "a": "Typically 1–3 business days in Bulgaria and 3–7 business days in the EU, depending on courier and destination."
+            "a": "Typically 1–3 business days, depending on the courier and the town."
           },
           {
             "q": "How do I track my order?",
@@ -2314,8 +2341,8 @@
             "a": "Photograph the packaging and product and contact us within 48 hours. We will replace it or arrange a return at no extra cost to you."
           },
           {
-            "q": "Do you ship outside the EU?",
-            "a": "We currently focus on Bulgaria, the Balkans and the EU. Message us for other countries — we will confirm if it is possible."
+            "q": "Do you ship outside Bulgaria?",
+            "a": "Not at the moment. We deliver only in Bulgaria."
           },
           {
             "q": "Do I get an invoice?",
@@ -2553,96 +2580,129 @@
     "updatedLabel": "Last updated",
     "contentsLabel": "Contents",
     "contactTitle": "Questions?",
-    "contactLead": "Questions about these documents? Contact us — we usually reply within one business day.",
+    "contactLead": "Questions about these documents? Email us — we usually reply within one business day.",
     "contactCta": "Go to contact",
     "privacy": {
       "title": "Privacy policy",
       "eyebrow": "Legal",
-      "updated": "17 September 2026",
-      "lead": "This policy explains how PlantyHub (“we”) collects, uses and protects your personal data when you shop or contact us via plantyhub.com.",
+      "updated": "5 October 2026",
+      "lead": "This policy explains how ДИДЖИТАЛ КИТ ЕООД, the company behind the PlantyHub store (plantyhub.com), collects and uses personal data when you shop, create an account or contact us.",
       "sections": [
         {
-          "title": "Who we are",
+          "title": "Who controls the data",
           "paragraphs": [
-            "The data controller is PlantyHub, Bulgaria. We process data in line with the GDPR and applicable Bulgarian law."
+            "The controller is ДИДЖИТАЛ КИТ ЕООД, UIC 207270915, VAT BG207270915, registered office: ul. Nikifor P. Konstantinov, 4400 Pazardzhik, Bulgaria. The store trades as PlantyHub."
           ],
           "items": [
-            "Privacy requests: support@plantyhub.com"
+            "Privacy requests: support@plantyhub.com",
+            "We process data under Regulation (EU) 2016/679 (GDPR) and the Bulgarian Personal Data Protection Act"
           ]
         },
         {
           "title": "What we collect",
           "paragraphs": [
-            "Depending on how you use the site, we may process:"
+            "We collect only what a given step needs. Depending on how you use the site, that can include:"
           ],
           "items": [
-            "Account and order data — name, email, shipping address, phone (if provided)",
-            "Payment data — via our payment provider (we do not store full card numbers)",
-            "Communications — contact-form messages, emails and support requests",
-            "Technical data — IP address, browser/device type and basic usage stats (see Cookie policy)"
+            "Account — name, email, phone, country and a hashed password; we send a confirmation email when you register",
+            "Order — name, email, phone, shipping and billing address, country, courier notes, products, promo code and order status",
+            "Payment — the method you choose (card via Stripe, PayPal or cash on delivery). The full card number is handled by the payment provider and is not stored by us",
+            "Delivery — what the courier needs: recipient, phone, address or office/locker, and the amount to collect for cash on delivery",
+            "Messages — name, email, subject, message and an optional order number from the contact form, plus later email correspondence",
+            "Newsletter — your email and whether the subscription is active, only if you subscribe",
+            "Reviews — name, email, rating, text and optional photos; we may publish the review after moderation without showing the email",
+            "Technical data — IP address, browser and device type, site language and basic usage statistics, where needed for security or where you have accepted cookies"
           ]
         },
         {
-          "title": "How we use data",
+          "title": "Why we use it",
           "items": [
-            "Fulfil orders, delivery, invoicing and warranty support",
-            "Create and manage your account, sign-in and security",
-            "Answer enquiries and provide customer support",
-            "Improve the site and products (aggregated or pseudonymised analytics)",
-            "Marketing only with your consent (e.g. newsletter) — unsubscribe anytime"
+            "Taking and fulfilling orders, delivery, invoicing and tracking",
+            "Creating and securing an account, sign-in, password reset and email confirmation",
+            "Warranty, returns, replacements and support replies",
+            "Messages about the order itself (confirmation, dispatch, tracking)",
+            "Newsletter and a first-order promo code — only with consent, with an unsubscribe link in every such email",
+            "A review invitation after a purchase",
+            "Site security, fraud prevention and accounting",
+            "Usage statistics and ad measurement with Google Analytics, Google Tag Manager, Microsoft Clarity and Meta Pixel — only if you accept them in the cookie banner"
           ]
         },
         {
           "title": "Legal bases",
           "items": [
-            "Contract — to perform your order or account",
-            "Legal obligation — tax and accounting requirements",
-            "Legitimate interest — site security, fraud prevention and service improvement",
-            "Consent — newsletter, non-essential cookies and similar purposes"
+            "Contract — the order, delivery, account and messages the purchase cannot be completed without",
+            "Legal obligation — accounting, tax and invoicing",
+            "Legitimate interest — security, fraud prevention, defending a dispute and improving the service, where that does not override your rights",
+            "Consent — newsletter and non-essential cookies. You can withdraw consent at any time; withdrawal does not affect processing that already happened"
           ]
         },
         {
-          "title": "Sharing",
+          "title": "Who we share data with",
           "paragraphs": [
-            "We share data only with trusted processors needed to run the service. We do not sell personal data."
+            "We do not sell personal data. We share it only with providers the store needs, and only as far as that need goes.",
+            "For the payment itself, Stripe and PayPal are separate controllers and have their own policies: https://stripe.com/privacy and https://www.paypal.com/myaccount/privacy/privacyhub."
           ],
           "items": [
-            "Couriers / delivery partners",
-            "Payment providers",
-            "Hosting and email tools",
-            "Competent authorities — when required by law"
+            "Stripe Payments Europe, Ltd. — card payments",
+            "PayPal (Europe) S.à r.l. et Cie, S.C.A. — PayPal payments",
+            "Cloudflare, Inc. (R2) — storage of product photos and review photos",
+            "The store’s email service — Azure Communication Email or an SMTP provider, depending on configuration — for order, account and newsletter messages",
+            "Couriers depending on the option you choose: Econt, Speedy, BoxNow and DHL",
+            "Our hosting provider (Microsoft Azure) and email provider, so the site and order messages can run",
+            "Google Ireland Limited — Google Analytics 4 and Google Tag Manager, only with consent",
+            "Microsoft — Microsoft Clarity, only with consent",
+            "Meta Platforms Ireland Limited — Meta Pixel, only with consent",
+            "Public authorities — when the law requires it"
           ]
         },
         {
-          "title": "Retention and security",
+          "title": "Data outside the EU",
+          "paragraphs": [
+            "Some of these providers may process data outside the European Economic Area, including in the United States. Where that happens, we rely on an adequacy decision or on the provider’s standard contractual clauses and supplementary measures."
+          ]
+        },
+        {
+          "title": "How long we keep it",
           "items": [
-            "We keep data only as long as needed for the purpose or as required by law",
-            "We apply technical and organisational measures against unauthorised access, loss or misuse"
+            "Orders, invoices and payments — for the periods required by accounting and tax law, typically up to 10 years",
+            "Account — while you use it; after deletion we keep only records the law requires",
+            "Support messages — until the request is closed and for 3 years after that, or longer if a warranty claim or dispute is open",
+            "Newsletter — until you unsubscribe or ask us to delete it",
+            "Reviews — while they are published, or until you ask for deletion, unless we must keep a record for a dispute",
+            "Cookie choice — until you change it or clear your browser data"
+          ]
+        },
+        {
+          "title": "Security",
+          "paragraphs": [
+            "The site uses an encrypted connection. Access to customer data is limited to people and systems that need it. Passwords are not stored in readable form. Card details are processed by Stripe or PayPal, not on our servers."
           ]
         },
         {
           "title": "Your rights",
           "paragraphs": [
-            "You may exercise the following rights by emailing support@plantyhub.com:"
+            "You can ask for access, correction, deletion, restriction or portability, or object to processing based on legitimate interest. Where the basis is consent, you can withdraw it. Email support@plantyhub.com. We reply within one month."
           ],
           "items": [
-            "Access, rectification and erasure",
-            "Restriction and portability",
-            "Objection to certain processing",
-            "Withdraw consent where processing is based on consent",
-            "Lodge a complaint with the Bulgarian Commission for Personal Data Protection (CPDP)"
+            "You can lodge a complaint with the Bulgarian Commission for Personal Data Protection: 2 Prof. Tsvetan Lazarov Blvd., 1592 Sofia, kzld@cpdp.bg, www.cpdp.bg"
+          ]
+        },
+        {
+          "title": "Closing an account",
+          "paragraphs": [
+            "The site has no self-delete button. To close an account, email support@plantyhub.com from the address it was created with. We delete or anonymise data that the law does not require us to keep for orders, invoices or a dispute."
           ]
         },
         {
           "title": "Children",
           "paragraphs": [
-            "Our services are not directed at anyone under 16. If we learn we collected a child’s data without a lawful basis, we will delete it."
+            "The store is not directed at anyone under 16 and we do not knowingly collect their data. If we learn that we have received such data without a valid basis, we will delete it."
           ]
         },
         {
           "title": "Changes",
           "paragraphs": [
-            "We may update this policy. The last-updated date is shown above. Material changes will be noted on the site."
+            "We may update this policy when the store or the law changes. The date above is the latest version. We will note a material change on the site."
           ]
         }
       ]
@@ -2650,120 +2710,299 @@
     "cookies": {
       "title": "Cookie policy",
       "eyebrow": "Legal",
-      "updated": "17 September 2026",
-      "lead": "This page explains how PlantyHub uses cookies and similar technologies on the site.",
+      "updated": "5 October 2026",
+      "lead": "This policy describes the cookies and similar technologies plantyhub.com uses so the store can work and — only with your consent — measure visits and ads.",
       "sections": [
         {
-          "title": "What cookies are",
+          "title": "What they are",
           "paragraphs": [
-            "Cookies are small text files stored in your browser. They help the site work, remember preferences and — with consent — understand how the site is used."
+            "Cookies are small text files a site or an outside service stores in your browser. Entries in localStorage and sessionStorage play a similar role: they stay on your device and are not sent to our server on their own each time you open a page."
           ]
         },
         {
-          "title": "Cookies we use",
-          "items": [
-            "Essential — cart, session, sign-in, security and language; required for the site to work",
-            "Functional — remember preferences (e.g. language)",
-            "Analytics — help us see which pages are used most; loaded only with consent when enabled",
-            "Marketing — may measure campaigns; enabled only with consent"
+          "title": "Your choice",
+          "paragraphs": [
+            "On a first visit, if analytics or advertising tools are switched on, we show a banner. Accept turns on all non-essential tools at once. Reject leaves them off. Essential storage for the cart, language and sign-in does not depend on the banner.",
+            "The choice is stored locally in the browser under the key plantyhub.cookie-consent. You can change it at any time from Cookie settings in the footer. If you reject, we stop further collection and clear Google, Meta and Clarity cookies already set, as far as the browser allows."
           ]
         },
         {
-          "title": "Legal basis",
+          "title": "Essential",
+          "paragraphs": [
+            "These entries are needed to shop, stay signed in and remember the language. The basis is that the service cannot work without them. Without them the cart, sign-in or checkout may fail."
+          ],
           "items": [
-            "Essential cookies — legitimate interest / necessity for the service",
-            "Non-essential cookies — consent, which you can withdraw anytime"
+            "Cart (plantyhub_cart) — the products you added, until you remove them or clear the browser",
+            "Language (plantyhub-lang-choice) — the language you picked",
+            "Sign-in — an account token and basic account details in localStorage if you choose to be remembered, or in sessionStorage until you close the browser",
+            "Newsletter banner (ph_newsletter_seen) — so the popup does not return after you have seen it",
+            "Cookie choice (plantyhub.cookie-consent) — remembers whether you accepted or rejected",
+            "During payment, Stripe or PayPal may set their own cookies needed to take the payment and reduce fraud"
           ]
         },
         {
-          "title": "Managing cookies",
+          "title": "Analytics",
+          "paragraphs": [
+            "These load only if you accept. We use them to see which pages are opened and where the site is hard to use. We do not use them for a decision that produces legal effects for you.",
+            "The site loads only the tools listed here. A new tool will not start until we add it to this policy."
+          ],
           "items": [
+            "Google Analytics 4 and Google Tag Manager (Google Ireland Limited) — cookies such as _ga, _ga_* and _gid; they measure visits and pages",
+            "Microsoft Clarity (Microsoft) — cookies such as _clck and _clsk; they show, in aggregate, how pages are used, for example scrolling and clicks",
+            "If an ad click sets a _gcl_* cookie, it belongs to Google and usually lasts up to 90 days. If you reject, we clear it with the others."
+          ]
+        },
+        {
+          "title": "Marketing",
+          "paragraphs": [
+            "These load with the same consent as analytics. They measure ads and help show more relevant messages."
+          ],
+          "items": [
+            "Meta Pixel (Meta Platforms Ireland Limited) — cookies such as _fbp and _fbc; they record visits and actions that can be used for advertising on Facebook and Instagram"
+          ]
+        },
+        {
+          "title": "How long they last",
+          "paragraphs": [
+            "Essential entries stay until you delete them or the session ends. Google, Microsoft and Meta set their own cookie lifetimes, usually from one day to two years. If you reject, we try to delete them immediately."
+          ],
+          "items": [
+            "_ga and _ga_* (Google) — usually up to 2 years",
+            "_gid (Google) — usually up to 24 hours",
+            "_gcl_* (Google, ad click) — usually up to 90 days",
+            "_clck (Clarity) — usually up to 1 year",
+            "_clsk (Clarity) — usually up to 1 day",
+            "_fbp and _fbc (Meta) — usually up to 3 months",
+            "Essential browser storage stays until you delete it or the session ends"
+          ]
+        },
+        {
+          "title": "How to manage them",
+          "items": [
+            "Change your choice from Cookie settings in the footer",
             "Delete or block cookies in your browser settings",
-            "Blocking essential cookies may break cart or sign-in",
-            "If we show a consent banner, change your choice there or email support@plantyhub.com"
+            "If you also block essential storage, the cart and sign-in may stop working",
+            "Questions: support@plantyhub.com"
           ]
         },
         {
-          "title": "More information",
+          "title": "Provider policies",
+          "items": [
+            "Google — https://policies.google.com/privacy",
+            "Microsoft — https://privacy.microsoft.com/privacystatement",
+            "Meta — https://www.facebook.com/privacy/policy",
+            "Stripe — https://stripe.com/privacy",
+            "PayPal — https://www.paypal.com/myaccount/privacy/privacyhub",
+            "Cloudflare — https://www.cloudflare.com/privacypolicy/"
+          ]
+        },
+        {
+          "title": "More about personal data",
           "paragraphs": [
-            "For personal-data processing see our Privacy policy. Cookie questions: support@plantyhub.com."
+            "Who the controller is, the legal bases and your rights are set out in the Privacy policy. Google, Microsoft and Meta may process data outside the EU under their own rules and standard contractual clauses."
           ]
         }
       ]
     },
     "terms": {
-      "title": "Terms of use",
+      "title": "Terms and conditions",
       "eyebrow": "Legal",
-      "updated": "17 September 2026",
-      "lead": "These terms govern use of plantyhub.com and purchases from PlantyHub. By using the site or placing an order you accept them.",
+      "updated": "5 October 2026",
+      "lead": "These terms govern use of plantyhub.com and purchases from PlantyHub. By placing an order or creating an account you confirm that you have read them and accept them together with the Privacy policy.",
       "sections": [
         {
-          "title": "The store",
+          "title": "Seller",
           "items": [
-            "PlantyHub sells smart hydroponic gardens, pods, accessories and related products online",
-            "Delivery in Bulgaria, the Balkans and the EU (subject to availability)",
-            "Prices are in euro unless stated otherwise",
-            "The confirmed price is the one at checkout"
+            "ДИДЖИТАЛ КИТ ЕООД, UIC 207270915, VAT BG207270915",
+            "Address: ul. Nikifor P. Konstantinov, 4400 Pazardzhik, Bulgaria",
+            "Brand and site: PlantyHub, plantyhub.com",
+            "Contact: support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "What we sell",
+          "paragraphs": [
+            "We sell HomeGarder smart hydroponic gardens, seed pods, nutrients, accessories and related products. The description, what is in the box and availability are on the product page. Photos are illustrative; a small difference in colour is not a defect."
           ]
         },
         {
           "title": "Account",
           "items": [
-            "Shop as a guest or with an account",
-            "You are responsible for accurate details and password security",
-            "We may restrict or close accounts in case of abuse, fraud or breach of these terms"
+            "You can order as a guest or with an account. An account is not required to buy",
+            "When you register you provide accurate details and confirm your email",
+            "You keep your password safe. If you lose access, use Forgot password",
+            "We may restrict or close an account in case of abuse, fraud or a breach of these terms"
           ]
         },
         {
-          "title": "Orders and payment",
+          "title": "Prices",
           "items": [
-            "An order is an offer to buy; acceptance is confirmed by order confirmation / status email",
-            "Payment via the methods shown at checkout",
-            "We may cancel orders for failed payment, stock issues or suspected fraud"
+            "Prices are in euro and include VAT where VAT is due for the delivery address",
+            "Shipping is calculated at checkout and shown before you confirm",
+            "The price that applies is the one shown when you place the order",
+            "If a price is an obvious mistake, we may refuse the order and refund what was paid"
+          ]
+        },
+        {
+          "title": "Orders",
+          "paragraphs": [
+            "An order is an offer to buy. The contract is formed when we email you a confirmation or when the order status shows that it has been accepted. Before that we may contact you if the address, stock or payment needs to be clarified."
+          ],
+          "items": [
+            "We may refuse or cancel an order if payment fails, an item is out of stock, the address is incomplete or we suspect fraud",
+            "If an item is unavailable after payment, we offer a wait, a replacement or a refund"
+          ]
+        },
+        {
+          "title": "Payment",
+          "items": [
+            "Card — via Stripe. We do not see or store the full card number",
+            "PayPal — via PayPal",
+            "Cash on delivery — you pay the courier on receipt, when that method is shown at checkout",
+            "Checkout shows only the methods available for the address and the order"
           ]
         },
         {
           "title": "Delivery",
           "items": [
-            "Delivery times are estimates and depend on the courier and address",
-            "Risk passes in line with applicable consumer law for consumer deliveries",
-            "Free shipping may apply above a threshold (e.g. €150) — see checkout information"
+            "For now we deliver only to an address, office or locker in Bulgaria.",
+            "An order with an address outside Bulgaria is not accepted.",
+            "We dispatch within 24 hours on business days after payment is confirmed, or after a cash-on-delivery order is accepted.",
+            "The usual time is 1–3 business days and depends on the courier and the town.",
+            "You choose the courier at checkout — usually Econt, Speedy or BoxNow.",
+            "Shipping inside Bulgaria is free above €150. The exact threshold is shown before you confirm.",
+            "When the parcel ships you receive a tracking email. The same status is under My orders if you have an account.",
+            "The address can be changed only before dispatch, and only to another address in Bulgaria — email support@plantyhub.com straight away.",
+            "For a consumer purchase, risk of loss or damage passes to you when you receive the goods."
           ]
         },
         {
-          "title": "Withdrawal and returns",
+          "title": "Cancellation before dispatch",
+          "paragraphs": [
+            "You can cancel the order until the parcel is handed to the courier. Email support@plantyhub.com with the order number. If you have already paid, we refund the full amount by the same payment method."
+          ]
+        },
+        {
+          "title": "Uncollected parcels",
+          "paragraphs": [
+            "If you do not collect the parcel within the courier’s deadline, or you refuse cash on delivery, without using the right of withdrawal, the order may be cancelled. You owe the cost of delivery to you and of returning the parcel to us. Where a sum was paid, we deduct those costs from it. You do not owe them if the problem is our fault."
+          ]
+        },
+        {
+          "title": "Gifts",
+          "paragraphs": [
+            "A gift included with a product is part of that offer and is not sold on its own. If you return the product, return the gift as well, unused and complete."
+          ]
+        },
+        {
+          "title": "Damaged or incomplete parcels",
+          "paragraphs": [
+            "If the packaging or the product is damaged, or something is missing, take photos and email us within 48 hours of delivery. After we review the case we will arrange a replacement or a return at no extra cost to you."
+          ]
+        },
+        {
+          "title": "Right of withdrawal",
+          "paragraphs": [
+            "If you buy as a consumer you have 14 days to withdraw from the contract without giving a reason. The period starts on the day you, or someone you nominate, receive the goods. If one order contains several items, it starts when you receive the last item.",
+            "To withdraw, send a clear message to support@plantyhub.com before the period ends. You can use the model text below. We will tell you how to send the goods back.",
+            "Return the product within 14 days of telling us, complete and with reasonable care. You pay the direct cost of the return, unless the goods are defective, not as described or we sent the wrong item. We refund what you paid, including the original standard delivery, within 14 days after we receive the withdrawal or the goods — whichever is later. We refund by the same payment method unless we agree otherwise.",
+            "If during these 14 days you use the goods more than is needed to check their nature, characteristics and functioning, we may reduce the refund by the loss in value."
+          ],
           "items": [
-            "EU/EEA consumers generally have 14 days to withdraw from a distance contract",
-            "Legal exceptions may apply (e.g. sealed hygiene/consumable goods)",
-            "For warranty, defects and returns see the FAQ or email support@plantyhub.com"
+            "The right of withdrawal does not apply to sealed pods, seeds and nutrient solutions that you unseal after delivery and that cannot be returned for hygiene reasons",
+            "It also does not apply to goods made to your specification, if we offer any"
+          ]
+        },
+        {
+          "title": "Model withdrawal form",
+          "paragraphs": [
+            "To ДИДЖИТАЛ КИТ ЕООД, ul. Nikifor P. Konstantinov, 4400 Pazardzhik, support@plantyhub.com. I hereby withdraw from the contract for the purchase of the following goods: [description]. Ordered on [date], received on [date], order number [number]. Name, address and date."
+          ]
+        },
+        {
+          "title": "30-day returns",
+          "paragraphs": [
+            "Besides the statutory 14 days, we accept a return within 30 days of delivery if you are not satisfied. The goods must be complete, without use that makes them unsaleable as new, and in their original condition. Contact us before you send them. You pay the return courier unless the goods are defective, not as described or we sent the wrong item. After we receive them we usually inspect them within a few business days and then refund the product price. This period is a commercial service and does not remove the exception for unsealed pods and nutrients."
+          ]
+        },
+        {
+          "title": "Guarantee and conformity",
+          "items": [
+            "Consumer goods have a statutory 2-year guarantee of conformity from delivery",
+            "HomeGarder One also has a 2-year guarantee for manufacturing defects. Keep your order number",
+            "The guarantee does not cover misuse, drops, liquid on the electronics outside normal use, unauthorised repair, or pods and nutrients that have been used",
+            "A pod that does not germinate when the water, light and temperature instructions were followed is replaced under our germination policy — email us with the order number",
+            "For a claim, email support@plantyhub.com with a description, photos or video and the order number. We will tell you whether we need diagnostics, a repair or a replacement",
+            "For the first 12 months after delivery, a lack of conformity is presumed to have existed when you received the goods, unless we prove otherwise. After that, you show the lack of conformity."
+          ]
+        },
+        {
+          "title": "Safety",
+          "paragraphs": [
+            "Nutrient solution is not for drinking. Keep it, and the cables, away from children and pets. Do not look at the LED closely for a long time. Use the device as the manual describes: a stable surface and dry electronics. Harvest times on the site are estimates and depend on water, temperature, light and care."
+          ]
+        },
+        {
+          "title": "Invoice",
+          "paragraphs": [
+            "For individuals we issue the document required by tax rules. For a company, send the invoice details at checkout or straight after the order to support@plantyhub.com."
+          ]
+        },
+        {
+          "title": "Promo codes and the newsletter",
+          "items": [
+            "A newsletter code or any other code we publish applies on the conditions stated for that code — for example 5% off a first order.",
+            "One code per order, unless we say otherwise.",
+            "A code is not combined with another discount unless we say so.",
+            "We may refuse a code in case of abuse, if it has expired, if its uses are exhausted, or if the order is below the minimum for that code.",
+            "Unsubscribe with the link in any marketing email. Order emails continue, because the purchase needs them."
+          ]
+        },
+        {
+          "title": "Business and larger orders",
+          "paragraphs": [
+            "These terms apply to purchases made through the site, including when you buy as a consumer. For larger quantities email support@plantyhub.com and we will quote separately. That quote is not combined automatically with consumer codes."
+          ]
+        },
+        {
+          "title": "Reviews",
+          "paragraphs": [
+            "A review must be about a real purchase and must not contain insults, someone else’s personal data or advertising. We may withhold or hide a review that breaks this. By publishing you allow us to show the name, rating and text on the site. If you send a photo, you allow us to show it with the review. Do not upload a photo of another person without their consent."
           ]
         },
         {
           "title": "Intellectual property",
           "paragraphs": [
-            "Site content (text, design, logos, images, software elements) belongs to PlantyHub or its licensors. You may not copy or use it commercially without permission."
+            "The text, photos, design, logos and software on the site belong to ДИДЖИТАЛ КИТ ЕООД or are used under licence. You may not copy them or use them commercially without written permission. The HomeGarder and PlantyHub marks are used for the products in the store."
           ]
         },
         {
           "title": "Liability",
           "items": [
-            "We aim for accurate site information but do not guarantee error-free content",
-            "Liability for products and services is limited as allowed by consumer and contract law",
-            "We are not liable for force majeure or disruptions outside our control"
+            "We describe products in good faith, but we do not promise that every temporary technical error on the site is impossible",
+            "Growing results also depend on water, temperature, light and care. Harvest times on the pages are estimates",
+            "Nutrient solution is not for drinking. Use the device as the manual describes",
+            "We are not liable for delay caused by force majeure, a courier or an event outside our control",
+            "Nothing in these terms limits a right that the law does not allow to be limited"
           ]
         },
         {
-          "title": "Governing law",
-          "items": [
-            "These terms are governed by the laws of the Republic of Bulgaria",
-            "EU consumers also keep mandatory rights under local consumer law",
-            "Disputes should first be resolved amicably; otherwise by competent Bulgarian courts"
-          ]
-        },
-        {
-          "title": "Contact",
+          "title": "Disputes and law",
           "paragraphs": [
-            "Questions about these terms: support@plantyhub.com · PlantyHub, Bulgaria."
+            "We deliver only in Bulgaria, so the contract is ordinarily with a buyer there. These terms are governed by the law of the Republic of Bulgaria. If you are a consumer in another EU country, you also keep the mandatory rights under your local law.",
+            "Write to support@plantyhub.com first — we look for an amicable solution. You can also contact the Bulgarian Consumer Protection Commission (www.kzp.bg) and its conciliation bodies. If the dispute is not resolved, the Bulgarian courts have jurisdiction, without removing your right to use the court where you live when the law provides for that."
+          ]
+        },
+        {
+          "title": "Language",
+          "paragraphs": [
+            "The terms are written in Bulgarian. If a translation differs from the Bulgarian text, the Bulgarian text prevails."
+          ]
+        },
+        {
+          "title": "Changes",
+          "paragraphs": [
+            "We may update these terms. An order already placed stays under the version that was on the site when we accepted it. The date above is the current version."
           ]
         }
       ]

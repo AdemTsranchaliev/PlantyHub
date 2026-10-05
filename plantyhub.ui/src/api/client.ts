@@ -1,5 +1,6 @@
 import { API_URL } from './config'
-import { getAdminToken, getCustomerToken } from '../auth/session'
+import { clearAdminSession, clearCustomerSession, getAdminToken, getCustomerToken } from '../auth/session'
+import { resolveHref } from '../paths'
 
 export class ApiError extends Error {
   status: number
@@ -17,6 +18,20 @@ type RequestOptions = {
   body?: unknown
   auth?: 'admin' | 'customer' | 'none'
   headers?: Record<string, string>
+}
+
+/** Old JWTs are rejected after a password change. Drop the stored session so the UI logs out. */
+function endRejectedSession(status: number, auth: RequestOptions['auth']) {
+  if (status !== 401 || !auth || auth === 'none') return
+  if (auth === 'admin') {
+    clearAdminSession()
+    if (window.location.pathname.includes('/admin')) {
+      window.location.replace(resolveHref('/login'))
+    }
+    return
+  }
+  clearCustomerSession()
+  window.dispatchEvent(new Event('plantyhub-session-cleared'))
 }
 
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
@@ -43,6 +58,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
     } catch {
       // ignore
     }
+    endRejectedSession(res.status, auth)
     throw new ApiError(res.status, message, code)
   }
 
@@ -65,6 +81,7 @@ export async function apiBlob(path: string, auth: 'admin' | 'customer' = 'admin'
     } catch {
       // ignore
     }
+    endRejectedSession(res.status, auth)
     throw new ApiError(res.status, message)
   }
   return res.blob()
@@ -87,6 +104,7 @@ export async function apiDownload(path: string, auth: 'admin' | 'customer' = 'ad
     } catch {
       // ignore
     }
+    endRejectedSession(res.status, auth)
     throw new ApiError(res.status, message)
   }
 
@@ -150,6 +168,7 @@ export async function apiUpload<T>(path: string, file: File, auth: 'admin' | 'cu
     } catch {
       // ignore
     }
+    endRejectedSession(res.status, auth)
     throw new ApiError(res.status, message, code)
   }
 

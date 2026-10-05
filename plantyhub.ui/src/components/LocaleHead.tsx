@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { defaultLanguage, supportedLanguages, type LanguageCode } from '../i18n/languages'
+import { activeLanguages, defaultLanguage, type LanguageCode } from '../i18n/languages'
 import { BASE_PATH, currentLocale } from '../paths'
 
 const privatePrefixes = [
@@ -78,7 +78,7 @@ export default function LocaleHead() {
 
     const canonical = absoluteUrl(locale, path)
     upsertLink('canonical', canonical)
-    for (const language of supportedLanguages) {
+    for (const language of activeLanguages) {
       upsertLink('alternate', absoluteUrl(language.code, path), language.code)
     }
     upsertLink('alternate', absoluteUrl(defaultLanguage, path), 'x-default')

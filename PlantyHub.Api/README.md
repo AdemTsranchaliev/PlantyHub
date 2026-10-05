@@ -17,7 +17,7 @@ The API uses Azure SQL (`plantyhub.database.windows.net` / `plantyhub_shop`). Th
 
 | Email | Password |
 |-------|----------|
-| `admin@plantyhub.com` | `admin123` |
+| `admin@plantyhub.com` | `Admin123!` |
 
 Send JWT as `Authorization: Bearer <token>`.
 

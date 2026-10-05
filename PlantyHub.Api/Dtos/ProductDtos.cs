@@ -64,7 +64,8 @@ public record ProductDto(
     IReadOnlyList<string> Gallery,
     string? VideoUrl,
     string? VideoPoster,
-    ProductKitDto? Kit = null);
+    ProductKitDto? Kit = null,
+    string? GrowingDifficulty = null);
 
 public record ProductsByCategoryDto(
     IReadOnlyList<ProductDto> Gardens,
@@ -88,6 +89,7 @@ public record AdminProductUpsertRequest
     public string? VideoUrl { get; init; }
     public string? VideoPoster { get; init; }
     public ProductKitDto? Kit { get; init; }
+    public string? GrowingDifficulty { get; init; }
     public IReadOnlyList<ProductColorDto>? Colors { get; init; }
     public IReadOnlyDictionary<string, ProductLocaleDto> Locales { get; init; }
         = new Dictionary<string, ProductLocaleDto>();

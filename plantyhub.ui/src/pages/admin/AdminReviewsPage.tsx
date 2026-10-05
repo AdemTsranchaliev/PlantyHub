@@ -19,7 +19,7 @@ import AdminStatCard from '../../components/admin/AdminStatCard'
 import MediaImg from '../../components/MediaImg'
 import { productsApi, reviewsApi, type AdminReview, type AdminReviewRequest, type ReviewStatus } from '../../api'
 import { ApiError } from '../../api/client'
-import { supportedLanguages } from '../../i18n/languages'
+import { activeLanguages } from '../../i18n/languages'
 import type { ApiProductDto } from '../../api/types'
 import { brand } from '../../theme'
 
@@ -161,7 +161,7 @@ export default function AdminReviewsPage() {
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <TextField select fullWidth label={t('admin.reviews.language')} value={language} onChange={(e) => setLanguage(e.target.value)}>
-              {supportedLanguages.map((item) => (
+              {activeLanguages.map((item) => (
                 <MenuItem key={item.code} value={item.code}>{item.label}</MenuItem>
               ))}
             </TextField>

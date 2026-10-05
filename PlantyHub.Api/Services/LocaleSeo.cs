@@ -9,24 +9,6 @@ public static class LocaleSeo
 
     public static readonly string[] Languages = ["bg", "en", "de", "fr"];
 
-    private static readonly Dictionary<string, string> RegionLanguages = new(StringComparer.OrdinalIgnoreCase)
-    {
-        ["bg"] = "bg",
-        ["de"] = "de",
-        ["at"] = "de",
-        ["li"] = "de",
-        ["fr"] = "fr",
-        ["mc"] = "fr",
-        ["us"] = "en",
-        ["gb"] = "en",
-        ["uk"] = "en",
-        ["ie"] = "en",
-        ["au"] = "en",
-        ["nz"] = "en",
-        ["ca"] = "en",
-        ["za"] = "en",
-    };
-
     private static readonly string[] PrivatePrefixes =
     [
         "/cart", "/checkout", "/login", "/register", "/forgot-password",
@@ -73,34 +55,7 @@ public static class LocaleSeo
         return !IsLanguage(segment);
     }
 
-    public static string PickLanguage(string? acceptLanguage)
-    {
-        if (string.IsNullOrWhiteSpace(acceptLanguage)) return DefaultLanguage;
-
-        var tags = acceptLanguage
-            .Split(',')
-            .Select(part => part.Split(';')[0].Trim().ToLowerInvariant())
-            .Where(tag => tag.Length > 0)
-            .ToArray();
-
-        if (tags.Any(IsBulgariaTag)) return DefaultLanguage;
-
-        foreach (var tag in tags)
-        {
-            var language = tag.Split('-', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
-            if (IsLanguage(language)) return language!;
-        }
-
-        foreach (var tag in tags)
-        {
-            var pieces = tag.Split('-', StringSplitOptions.RemoveEmptyEntries);
-            var region = pieces.Skip(1).FirstOrDefault(part => part.Length == 2 && part.All(char.IsAsciiLetter));
-            if (region is not null && RegionLanguages.TryGetValue(region, out var mapped))
-                return mapped;
-        }
-
-        return DefaultLanguage;
-    }
+    public static string PickLanguage() => DefaultLanguage;
 
     public static string Apply(string html, HttpRequest request)
     {
@@ -194,12 +149,6 @@ public static class LocaleSeo
         var rest = "/" + string.Join('/', parts.Skip(1));
         if (rest == "/") return (locale, "/");
         return (locale, rest.TrimEnd('/'));
-    }
-
-    private static bool IsBulgariaTag(string tag)
-    {
-        var pieces = tag.Split('-', StringSplitOptions.RemoveEmptyEntries);
-        return pieces.FirstOrDefault() == "bg" || pieces.Skip(1).Any(part => part == "bg");
     }
 
     private static string LocalizedPath(string language, string pagePath) =>

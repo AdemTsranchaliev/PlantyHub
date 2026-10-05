@@ -75,6 +75,7 @@ export default function PodsPage() {
                   product={{
                     ...toProductCardData(pod, t),
                     includes: resolveKit(pod),
+                    growingDifficulty: pod.growingDifficulty,
                   }}
                 />
               </Reveal>

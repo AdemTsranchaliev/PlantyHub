@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { shippingApi } from '../../api'
 import type { CourierOfficePlace, CourierPlace } from '../../api/types'
-import { countryDisplayName } from '../../utils/country'
 export type CheckoutDestination = {
   country: string
   countryId: string
@@ -26,17 +25,11 @@ export default function CheckoutPlaceFields({
   errors: { city?: boolean }
   onChange: (patch: Partial<CheckoutDestination>) => void
 }) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const [countries, setCountries] = useState<CourierPlace[]>([])
   const [cities, setCities] = useState<CourierPlace[]>([])
-  const [countryLoading, setCountryLoading] = useState(false)
   const [cityLoading, setCityLoading] = useState(false)
 
-  const country = useMemo(
-    () =>
-      countries.find((item) => item.code === value.country || item.id === value.countryId) ?? null,
-    [countries, value.country, value.countryId],
-  )
   const city = useMemo(() => {
     return (
       cities.find((item) => item.id === value.cityId || item.name === value.city) ??
@@ -46,24 +39,16 @@ export default function CheckoutPlaceFields({
 
   useEffect(() => {
     let cancelled = false
-    setCountryLoading(true)
     void shippingApi
       .countries('econt')
       .then((data) => {
         if (cancelled) return
-        setCountries(
-          [...data.items].sort((a, b) =>
-            placeCountryLabel(a, i18n.language).localeCompare(placeCountryLabel(b, i18n.language), i18n.language),
-          ),
-        )
-      })
-      .finally(() => {
-        if (!cancelled) setCountryLoading(false)
+        setCountries(data.items.filter((item) => item.code === 'BG' || item.id === 'BGR'))
       })
     return () => {
       cancelled = true
     }
-  }, [i18n.language])
+  }, [])
 
   useEffect(() => {
     if (!value.countryId) {
@@ -89,38 +74,30 @@ export default function CheckoutPlaceFields({
   }, [value.countryId])
 
   useEffect(() => {
-    if (value.countryId || countries.length === 0) return
+    if (countries.length === 0) return
     const bulgaria = countries.find((item) => item.code === 'BG' || item.id === 'BGR')
-    if (bulgaria) {
-      onChange({
-        country: bulgaria.code || 'BG',
-        countryId: bulgaria.id,
-      })
-    }
+    if (!bulgaria) return
+    const code = bulgaria.code || 'BG'
+    if (value.country === code && value.countryId === bulgaria.id) return
+    onChange({
+      country: code,
+      countryId: bulgaria.id,
+      city: '',
+      cityId: '',
+      postalCode: '',
+      officeCode: '',
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countries, value.countryId])
+  }, [countries, value.country, value.countryId])
 
   return (
     <Stack spacing={1.25}>
+      <Typography sx={{ fontSize: '0.875rem', fontWeight: 700, lineHeight: 1.45 }}>
+        {t('checkout.bulgariaOnly')}
+      </Typography>
       <PlaceAutocomplete
-        label={t('checkout.country')}
-        options={countries}
-        loading={countryLoading}
-        value={country}
-        getOptionLabel={(item) => (typeof item === 'string' ? item : placeCountryLabel(item, i18n.language))}
-        onChange={(item) => {
-          if (!item || typeof item === 'string') return
-          onChange({
-            country: item.code || '',
-            countryId: item.id || '',
-            city: '',
-            cityId: '',
-            postalCode: '',
-            officeCode: '',
-          })
-        }}
-      />
-      <PlaceAutocomplete
+        id="checkout-city"
+        requireQuery
         label={t('checkout.city')}
         options={cities}
         loading={cityLoading}
@@ -201,6 +178,8 @@ export function CheckoutOfficeField({
 
   return (
     <PlaceAutocomplete
+      id="checkout-office"
+      requireQuery
       label={pickupCourier === 'boxnow' ? t('checkout.locker') : t('checkout.office')}
       options={offices}
       loading={officeLoading}
@@ -220,6 +199,7 @@ export function CheckoutOfficeField({
 }
 
 function PlaceAutocomplete<T extends { id: string }>({
+  id,
   label,
   options,
   loading,
@@ -229,9 +209,11 @@ function PlaceAutocomplete<T extends { id: string }>({
   helperText,
   placeholder,
   freeSolo,
+  requireQuery,
   getOptionLabel,
   onChange,
 }: {
+  id?: string
   label: string
   options: T[]
   loading: boolean
@@ -241,14 +223,18 @@ function PlaceAutocomplete<T extends { id: string }>({
   helperText?: string
   placeholder?: string
   freeSolo?: boolean
+  requireQuery?: boolean
   getOptionLabel: (item: T | string) => string
   onChange: (item: T | string | null) => void
 }) {
   const { t } = useTranslation()
+  const [showMatches, setShowMatches] = useState(false)
+
   return (
     <Box>
       <Typography
         component="label"
+        htmlFor={id}
         sx={{
           display: 'block',
           fontSize: '0.75rem',
@@ -260,62 +246,85 @@ function PlaceAutocomplete<T extends { id: string }>({
         {label}
       </Typography>
       <Autocomplete
+        id={id}
         freeSolo={freeSolo}
         options={options}
         loading={loading}
         value={value}
         disabled={disabled}
+        openOnFocus={false}
+        selectOnFocus={false}
         getOptionLabel={(item) => getOptionLabel(item)}
-        isOptionEqualToValue={(a, b) => a.id === b.id}
+        isOptionEqualToValue={(a, b) => (typeof a === 'string' ? a : a.id) === (typeof b === 'string' ? b : b.id)}
         filterOptions={(items, state) => {
           const q = state.inputValue.trim().toLowerCase()
-          const filtered = q
-            ? items.filter((item) => getOptionLabel(item).toLowerCase().includes(q))
-            : items
-          return q ? filtered.slice(0, 200) : filtered.slice(0, 80)
+          if (q.length < 2) return requireQuery ? [] : items.slice(0, 40)
+          return items.filter((item) => getOptionLabel(item).toLowerCase().includes(q)).slice(0, 30)
         }}
         onChange={(_, item) => onChange(item)}
         onInputChange={(_, input, reason) => {
+          if (requireQuery) setShowMatches(reason === 'input' && input.trim().length >= 2)
           if (freeSolo && reason === 'input') onChange(input)
         }}
         noOptionsText={t('checkout.placesNone')}
         loadingText={t('checkout.quoting')}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            placeholder={placeholder}
-            error={error}
-            helperText={error ? helperText : undefined}
-            slotProps={{
-              ...params.slotProps,
-              formHelperText: { sx: { mx: 0, mt: 0.4, fontSize: '0.75rem' } },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                height: 44,
-                borderRadius: '10px',
-                bgcolor: '#fff',
-                fontSize: '0.875rem',
-                py: 0,
-                pl: 0.5,
-                '& fieldset': { borderColor: '#D4D7D2' },
-                '&:hover fieldset': { borderColor: '#A8ACA6' },
-                '&.Mui-focused fieldset': { borderColor: '#2F7D53', borderWidth: 1 },
-                '&.Mui-error fieldset': { borderColor: '#C62828' },
-              },
-              '& .MuiAutocomplete-input': { py: '0 !important', px: '8px !important' },
-            }}
-          />
-        )}
+        slotProps={{
+          popper: {
+            sx: requireQuery && !showMatches ? { display: 'none' } : undefined,
+          },
+          listbox: {
+            sx: { maxHeight: { xs: 220, sm: 280 }, scrollBehavior: 'auto' },
+          },
+        }}
+        renderInput={(params) => {
+          const incoming = params.slotProps?.htmlInput
+          const htmlInput = typeof incoming === 'object' && incoming ? incoming : undefined
+          return (
+            <TextField
+              {...params}
+              placeholder={placeholder}
+              error={error}
+              helperText={error ? helperText : undefined}
+              slotProps={{
+                ...params.slotProps,
+                htmlInput: {
+                  ...htmlInput,
+                  autoComplete: 'off',
+                  autoCorrect: 'off',
+                  spellCheck: false,
+                  enterKeyHint: 'done',
+                },
+                formHelperText: { sx: { mx: 0, mt: 0.4, fontSize: '0.75rem' } },
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  height: 44,
+                  borderRadius: '10px',
+                  bgcolor: '#fff',
+                  fontSize: '16px',
+                  py: 0,
+                  pl: 0.5,
+                  '& fieldset': { borderColor: '#D4D7D2' },
+                  '@media (hover: hover) and (pointer: fine)': {
+                    '&:hover fieldset': { borderColor: '#A8ACA6' },
+                  },
+                  '&.Mui-focused fieldset': { borderColor: '#2F7D53', borderWidth: 1 },
+                  '&.Mui-error fieldset': { borderColor: '#C62828' },
+                },
+                '& .MuiAutocomplete-input': {
+                  py: '0 !important',
+                  px: '8px !important',
+                  fontSize: '16px',
+                  scrollMarginTop: '20px',
+                  scrollMarginBottom: '30vh',
+                },
+              }}
+            />
+          )
+        }}
       />
     </Box>
   )
-}
-
-function placeCountryLabel(place: CourierPlace, language: string) {
-  const iso = (place.code.length === 2 ? place.code : place.id.length === 2 ? place.id : '').toUpperCase()
-  if (iso.length === 2) return countryDisplayName(iso, language)
-  return place.name
 }
 
 function cityLabel(place: CourierPlace) {

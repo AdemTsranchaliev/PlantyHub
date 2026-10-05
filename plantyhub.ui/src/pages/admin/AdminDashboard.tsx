@@ -89,9 +89,8 @@ export default function AdminDashboard() {
   const { customers } = useCustomers()
   const gardens = useCategoryProducts('gardens', true)
   const pods = useCategoryProducts('pods', true)
-  const consumables = useCategoryProducts('consumables', true)
   const accessories = useCategoryProducts('accessories', true)
-  const productCount = gardens.length + pods.length + consumables.length + accessories.length
+  const productCount = gardens.length + pods.length + accessories.length
   const allOrders = useOrders()
   const recentOrders = allOrders.slice(0, 5)
 
@@ -124,14 +123,13 @@ export default function AdminDashboard() {
     const categories = [
       { key: 'gardens' as const, count: gardens.length },
       { key: 'pods' as const, count: pods.length },
-      { key: 'consumables' as const, count: consumables.length },
       { key: 'accessories' as const, count: accessories.length },
     ]
     return categories.map((cat) => ({
       key: cat.key,
       count: cat.count,
     }))
-  }, [gardens.length, pods.length, consumables.length, accessories.length])
+  }, [gardens.length, pods.length, accessories.length])
 
   const trendLabel = (value: number) => (value > 0 ? t('admin.dashboard.stats.trendUp', { value }) : undefined)
   const secondaryStats = [

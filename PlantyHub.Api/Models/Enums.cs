@@ -14,6 +14,13 @@ public enum ImageFit
     Contain
 }
 
+public enum GrowingDifficulty
+{
+    Easy = 1,
+    Medium = 2,
+    Hard = 3
+}
+
 public enum CountryCode
 {
     BG,

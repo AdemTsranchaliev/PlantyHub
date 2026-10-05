@@ -686,6 +686,9 @@ namespace PlantyHub.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("GrowingDifficulty")
+                        .HasColumnType("int");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasMaxLength(2048)

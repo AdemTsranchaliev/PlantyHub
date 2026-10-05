@@ -5,6 +5,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import PromoBar from './components/PromoBar'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import AnalyticsConsent from './components/AnalyticsConsent'
 import FloatingBuyButton from './components/FloatingBuyButton'
 import NewsletterDialog from './components/NewsletterDialog'
 import CartSnackbar from './components/CartSnackbar'
@@ -43,7 +44,6 @@ const AdminLayout = lazy(() => import('./components/admin/AdminLayout'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminGardensPage = lazy(() => import('./pages/admin/AdminGardensPage'))
 const AdminPodsPage = lazy(() => import('./pages/admin/AdminPodsPage'))
-const AdminConsumablesPage = lazy(() => import('./pages/admin/AdminConsumablesPage'))
 const AdminAccessoriesPage = lazy(() => import('./pages/admin/AdminAccessoriesPage'))
 const AdminHiddenProductsPage = lazy(() => import('./pages/admin/AdminHiddenProductsPage'))
 const AdminOrdersPage = lazy(() => import('./pages/admin/AdminOrdersPage'))
@@ -113,6 +113,7 @@ function StorefrontRoutes() {
       </Suspense>
       {!isCheckoutFlow && <Footer />}
       {!isCheckoutFlow && <FloatingBuyButton />}
+      <AnalyticsConsent />
       <NewsletterDialog />
       <CartSnackbar />
     </Box>
@@ -129,7 +130,7 @@ function AdminRoutes() {
           <Route index element={<AdminDashboard />} />
           <Route path="gardens" element={<AdminGardensPage />} />
           <Route path="pods" element={<AdminPodsPage />} />
-          <Route path="consumables" element={<AdminConsumablesPage />} />
+          <Route path="consumables" element={<Navigate to="/admin" replace />} />
           <Route path="accessories" element={<AdminAccessoriesPage />} />
           <Route path="hidden" element={<AdminHiddenProductsPage />} />
           <Route path="orders" element={<AdminOrdersPage />} />

@@ -13,6 +13,8 @@ import { mapProductsResponse, productsApi, toProductUpsert } from '../api'
 
 export type ProductCategory = 'gardens' | 'pods' | 'consumables' | 'accessories'
 
+export type GrowingDifficulty = 'easy' | 'medium' | 'hard'
+
 export type ProductSpec = {
   label: string
   value: string
@@ -62,6 +64,7 @@ export type StoredProduct = {
   compareAt?: string
   packKey?: string
   kit?: ProductKit
+  growingDifficulty?: GrowingDifficulty
   image: string
   imageFit: 'cover' | 'contain'
   gallery?: string[]

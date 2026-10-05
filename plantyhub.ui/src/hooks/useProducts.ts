@@ -107,8 +107,9 @@ export function useSeedPodsCatalog(activeOnly = true) {
   return useCategoryProducts('pods', activeOnly)
 }
 
-export function useConsumablesCatalog(activeOnly = true) {
-  return useCategoryProducts('consumables', activeOnly)
+export function useConsumablesCatalog(_activeOnly = true) {
+  // Consumables are hidden from the storefront for now.
+  return []
 }
 
 export function useAccessoriesCatalog(activeOnly = true) {
@@ -128,5 +129,6 @@ export function toProductCardData(
     imageFit: product.imageFit,
     pack: product.packKey ? t(`common.${product.packKey}`) : undefined,
     tagline: product.tagline,
+    growingDifficulty: product.growingDifficulty,
   }
 }

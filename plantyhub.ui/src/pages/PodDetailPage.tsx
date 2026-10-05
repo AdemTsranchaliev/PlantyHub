@@ -31,6 +31,7 @@ import { useSiteAsset } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
+import { GrowingDifficultyPanel } from '../components/GrowingDifficultyBadge'
 import ProductReviews, { ProductRatingRow, useProductReviews } from '../components/ProductReviews'
 
 const trustItems = ['compatible', 'nonGmo', 'shipping'] as const
@@ -172,9 +173,11 @@ export default function PodDetailPage() {
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1 }}>
                 {pod.name}
               </Typography>
-              <Typography sx={{ color: brand.textSecondary, fontWeight: 600, mb: 2 }}>
+              <Typography sx={{ color: brand.textSecondary, fontWeight: 600, mb: pod.growingDifficulty ? 1.5 : 2 }}>
                 {t(`common.${pod.packKey}`)}
               </Typography>
+
+              {pod.growingDifficulty && <GrowingDifficultyPanel difficulty={pod.growingDifficulty} />}
 
               <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '2.4rem', color: brand.plantGreenDark, lineHeight: 1, mb: 2 }}>
                 {pod.price}

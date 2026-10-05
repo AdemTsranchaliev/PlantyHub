@@ -17,6 +17,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import { pagePaddingX } from './SectionContainer'
+import { trackingEnabled } from '../analytics/config'
+import { openCookieSettings } from '../analytics/consent'
 import { footerLinkKeys, navHrefs, socialLinks } from '../data/catalog'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
@@ -236,6 +238,16 @@ export default function Footer() {
                   {t(`footer.links.${linkKey}`)}
                 </Link>
               ))}
+              {trackingEnabled && (
+                <Box
+                  component="button"
+                  type="button"
+                  onClick={openCookieSettings}
+                  sx={{ ...linkSx, background: 'none', border: 0, p: 0, cursor: 'pointer', font: 'inherit', textAlign: 'left' }}
+                >
+                  {t('footer.cookieSettings')}
+                </Box>
+              )}
             </Stack>
           </Grid>
 

@@ -275,6 +275,23 @@
     "ctaSubtitle": "Procurez-vous le HomeGarder One et cultivez toutes vos herbes préférées chez vous, toute l'année.",
     "ctaButton": "Voir le HomeGarder One"
   },
+  "growingDifficulty": {
+    "label": "Difficulté de culture",
+    "shortLabel": "Difficulté",
+    "sectionEyebrow": "Pour vous",
+    "sectionLead": "Chaque graine est marquée avec l’un des trois niveaux — pour savoir à quoi s’attendre.",
+    "thisPod": "Cette graine",
+    "hint": "À quel point cette graine est facile pour les débutants.",
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile",
+    "easyHint": "Indulgent et rapide — idéal pour les premières récoltes.",
+    "mediumHint": "Un soin régulier aide — gratifiant pour les cultivateurs habitués.",
+    "hardHint": "Demande plus d’attention — pour les cultivateurs confiants.",
+    "easyHintShort": "Idéal pour débuter",
+    "mediumHintShort": "Demande un soin régulier",
+    "hardHintShort": "Pour cultivateurs confiants"
+  },
   "podDetail": {
     "quantity": "Quantité",
     "detailsTitle": "Bon à savoir",
@@ -308,9 +325,9 @@
     }
   },
   "accessoriesPage": {
-    "eyebrow": "Accessoires & recharges",
+    "eyebrow": "Accessoires",
     "title": "Accessoires",
-    "subtitle": "Tout pour étendre et entretenir votre jardin d'intérieur — des supports élégants aux nutriments et capsules de recharge."
+    "subtitle": "Tout pour étendre et entretenir votre jardin d'intérieur — supports élégants, étagères et outils pratiques."
   },
   "aboutPage": {
     "eyebrow": "Notre mission",
@@ -387,7 +404,7 @@
       },
       "shipping": {
         "title": "Livraison",
-        "text": "Bulgarie, Balkans et UE — expédié sous 24h.",
+        "text": "Bulgarie uniquement — expédié sous 24h.",
         "action": "Suivre ma commande"
       },
       "returns": {
@@ -830,7 +847,7 @@
       },
       {
         "q": "Où livrez-vous ?",
-        "a": "Nous livrons en Bulgarie, dans les Balkans et dans l'Union européenne, avec expédition sous 24 heures."
+        "a": "Pour l'instant, nous livrons uniquement en Bulgarie, avec expédition sous 24 heures."
       }
     ]
   },
@@ -849,8 +866,15 @@
     "copied": "Copié !",
     "done": "Voir la boutique"
   },
+  "cookieConsent": {
+    "title": "Cookies",
+    "body": "Nous utilisons des cookies pour l’analyse et la publicité.",
+    "policy": "Politique cookies",
+    "reject": "Refuser",
+    "accept": "Accepter"
+  },
   "footer": {
-    "shipping": "Livraison : Bulgarie · Balkans · Union européenne",
+    "shipping": "Livraison : Bulgarie uniquement",
     "shippingNote": "Livraison gratuite dès €150. Prix en EUR.",
     "linksTitle": "Navigation",
     "legalTitle": "Mentions légales",
@@ -874,6 +898,7 @@
     "madeWith": "Cultivé avec soin en Bulgarie",
     "payments": "Les paiements par carte sont traités de façon sécurisée par Stripe.",
     "paymentsLabel": "Moyens de paiement acceptés",
+    "cookieSettings": "Paramètres cookies",
     "rights": "© {{year}} PlantyHub. Tous droits réservés."
   },
   "auth": {
@@ -1088,7 +1113,7 @@
       "email": "E-mail",
       "password": "Mot de passe",
       "submit": "Se connecter",
-      "error": "Identifiants invalides. Utilisez admin@plantyhub.com / admin123",
+      "error": "Identifiants invalides. Utilisez admin@plantyhub.com / Admin123!",
       "errorNetwork": "Impossible de joindre l'API. Démarrez le backend avec `dotnet run` dans PlantyHub.Api, puis réessayez.",
       "errorValidation": "Saisissez un e-mail valide et un mot de passe d'au moins 6 caractères.",
       "backToStore": "← Retour à la boutique"
@@ -2031,15 +2056,15 @@
         "items": [
           {
             "q": "Où livrez-vous ?",
-            "a": "Nous livrons en Bulgarie, dans les Balkans et dans l'UE. Les commandes partent généralement sous 24 h les jours ouvrés."
+            "a": "Pour l'instant, nous livrons uniquement en Bulgarie. Les commandes partent généralement sous 24 h les jours ouvrés."
           },
           {
             "q": "Combien coûte la livraison ?",
-            "a": "Le frais est calculé à la caisse selon la destination. Au-delà de €150, la livraison est gratuite pour la plupart des destinations UE et Balkans."
+            "a": "Les frais sont calculés à la caisse pour une adresse en Bulgarie. Au-delà de €150, la livraison est gratuite."
           },
           {
             "q": "Combien de temps pour la livraison ?",
-            "a": "En général 1–3 jours ouvrés en Bulgarie et 3–7 dans l'UE, selon le transporteur et la destination."
+            "a": "En général 1–3 jours ouvrés, selon le transporteur et la ville."
           },
           {
             "q": "Comment suivre ma commande ?",
@@ -2054,8 +2079,8 @@
             "a": "Photographiez l'emballage et le produit et contactez-nous sous 48 h. Nous remplaçons ou organisons un retour sans frais supplémentaires pour vous."
           },
           {
-            "q": "Livrez-vous hors UE ?",
-            "a": "Nous nous concentrons sur la Bulgarie, les Balkans et l'UE. Écrivez-nous pour d'autres pays — nous confirmerons la faisabilité."
+            "q": "Livrez-vous hors de Bulgarie ?",
+            "a": "Pas pour le moment. Nous livrons uniquement en Bulgarie."
           },
           {
             "q": "Ai-je une facture ?",
@@ -2298,7 +2323,7 @@
     "privacy": {
       "title": "Politique de confidentialité",
       "eyebrow": "Mentions légales",
-      "updated": "17 septembre 2026",
+      "updated": "5 octobre 2026",
       "lead": "Cette politique explique comment PlantyHub (« nous ») collecte, utilise et protège tes données personnelles lorsque tu achetes ou nous contactes via plantyhub.com.",
       "sections": [
         {
@@ -2328,7 +2353,7 @@
             "Exécution des commandes, livraison, facturation et SAV / garantie",
             "Gestion du compte, connexion et sécurité",
             "Réponse aux demandes et support client",
-            "Amélioration du site et des produits (analytique agrégée ou pseudonymisée)",
+            "Amélioration du site et mesure des publicités via Google Analytics, Microsoft Clarity et Meta — uniquement si tu acceptes dans la bannière",
             "Marketing uniquement avec consentement (ex. newsletter) — désinscription à tout moment"
           ]
         },
@@ -2350,6 +2375,9 @@
             "Transporteurs / livraison",
             "Prestataires de paiement",
             "Hébergement et e-mail",
+            "Google Ireland Limited (Google Analytics et Google Tag Manager) — uniquement avec consentement",
+            "Microsoft Corporation (Microsoft Clarity) — uniquement si tu acceptes les cookies analytiques",
+            "Meta Platforms Ireland Limited (Meta Pixel) — uniquement si tu acceptes les cookies marketing",
             "Autorités compétentes — si la loi l’exige"
           ]
         },
@@ -2390,7 +2418,7 @@
     "cookies": {
       "title": "Politique cookies",
       "eyebrow": "Mentions légales",
-      "updated": "17 septembre 2026",
+      "updated": "5 octobre 2026",
       "lead": "Cette page explique comment PlantyHub utilise les cookies et technologies similaires sur le site.",
       "sections": [
         {
@@ -2404,8 +2432,8 @@
           "items": [
             "Essentiels — panier, session, connexion, sécurité et langue ; nécessaires au fonctionnement",
             "Fonctionnels — mémorisent des préférences (ex. langue)",
-            "Analytiques — pages les plus utilisées ; uniquement avec consentement s’ils sont actifs",
-            "Marketing — peuvent mesurer des campagnes ; uniquement avec consentement"
+            "Analytiques — Google Tag Manager et Google Analytics 4 (Google Ireland Limited), cookies _ga et _ga_*, et Microsoft Clarity (Microsoft Corporation), cookies _clck et _clsk ; chargés seulement si tu acceptes dans la bannière",
+            "Marketing — Meta Pixel (Meta Platforms Ireland Limited), cookies _fbp et _fbc ; chargés seulement si tu acceptes dans la bannière"
           ]
         },
         {
@@ -2420,7 +2448,7 @@
           "items": [
             "Supprimer ou bloquer les cookies dans les paramètres du navigateur",
             "Bloquer les essentiels peut casser panier ou connexion",
-            "Si une bannière est affichée, modifier ton choix ou écrire à support@plantyhub.com"
+            "Le choix se modifie dans la bannière ou via Paramètres cookies en bas de page, ou à support@plantyhub.com"
           ]
         },
         {
@@ -2441,7 +2469,7 @@
           "title": "La boutique",
           "items": [
             "PlantyHub vend des jardins hydroponiques connectés, capsules, accessoires et produits associés en ligne",
-            "Livraison en Bulgarie, dans les Balkans et l’UE (selon disponibilité)",
+            "Livraison pour l'instant uniquement en Bulgarie",
             "Prix en euros sauf indication contraire",
             "Le prix confirmé est celui du paiement"
           ]

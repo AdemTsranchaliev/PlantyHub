@@ -11,7 +11,7 @@ public static class DbSeeder
     public const string AdminRole = "Admin";
     public const string CustomerRole = "Customer";
     public const string AdminEmail = "admin@plantyhub.com";
-    public const string AdminPassword = "admin123";
+    public const string AdminPassword = "Admin123!";
 
     public static async Task SeedAsync(IServiceProvider services)
     {

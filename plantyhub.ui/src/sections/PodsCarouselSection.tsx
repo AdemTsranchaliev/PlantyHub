@@ -21,7 +21,14 @@ export default function PodsCarouselSection() {
 
       <HorizontalScroll gap={2}>
         {pods.map((pod) => (
-          <ProductCard key={pod.id} product={{ ...toProductCardData(pod, t), includes: resolveKit(pod) }} />
+          <ProductCard
+            key={pod.id}
+            product={{
+              ...toProductCardData(pod, t),
+              includes: resolveKit(pod),
+              growingDifficulty: pod.growingDifficulty,
+            }}
+          />
         ))}
       </HorizontalScroll>
 

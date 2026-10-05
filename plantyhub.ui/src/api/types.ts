@@ -1,7 +1,7 @@
 import type { CountryCode, OrderStatus } from '../admin/mockData'
 import type { CourierId, OrderDetail, PaymentMethod } from '../admin/orderDetails'
 import type { HomepageState } from '../store/homepage'
-import type { ProductCategory, ProductLocaleContent, ProductsState, StoredProduct } from '../store/products'
+import type { GrowingDifficulty, ProductCategory, ProductLocaleContent, ProductsState, StoredProduct } from '../store/products'
 
 export type ApiProductDto = {
   id: string
@@ -15,6 +15,7 @@ export type ApiProductDto = {
   videoUrl?: string | null
   videoPoster?: string | null
   kit?: { pods: number; caps: number; nutrientMl: number } | null
+  growingDifficulty?: GrowingDifficulty | null
   featured: boolean
   active: boolean
   colors: { id: string; hex: string }[]
@@ -159,6 +160,7 @@ export type ApiProductUpsert = {
   videoUrl?: string
   videoPoster?: string
   kit?: { pods: number; caps: number; nutrientMl: number }
+  growingDifficulty?: GrowingDifficulty
   featured?: boolean
   active: boolean
   colors?: { id: string; hex: string }[]
@@ -177,6 +179,7 @@ export function mapProductDto(dto: ApiProductDto): StoredProduct {
     videoUrl: dto.videoUrl || undefined,
     videoPoster: dto.videoPoster || undefined,
     kit: dto.kit && (dto.kit.pods || dto.kit.caps || dto.kit.nutrientMl) ? dto.kit : undefined,
+    growingDifficulty: dto.growingDifficulty ?? undefined,
     featured: dto.featured,
     active: dto.active,
     colors: dto.colors?.length ? dto.colors : undefined,
@@ -206,6 +209,7 @@ export function toProductUpsert(product: StoredProduct, category: ProductCategor
     videoUrl: product.videoUrl,
     videoPoster: product.videoPoster,
     kit: product.kit,
+    growingDifficulty: category === 'pods' ? product.growingDifficulty : undefined,
     featured: product.featured ?? false,
     active: product.active,
     colors: product.colors?.map((c) => ({ id: c.id, hex: c.hex })),

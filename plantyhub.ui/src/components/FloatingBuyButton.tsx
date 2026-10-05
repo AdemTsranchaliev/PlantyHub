@@ -3,6 +3,7 @@ import Fab from '@mui/material/Fab'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useCookieConsent } from '../analytics/consent'
 import { navHrefs } from '../data/catalog'
 import { brand } from '../theme'
 
@@ -11,6 +12,7 @@ const hiddenPathPrefixes = ['/cart', '/checkout', '/login', '/register', '/forgo
 export default function FloatingBuyButton() {
   const { t } = useTranslation()
   const { pathname } = useLocation()
+  const { bannerOpen } = useCookieConsent()
   const [visible, setVisible] = useState(false)
 
   const hidden = hiddenPathPrefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`))
@@ -36,7 +38,9 @@ export default function FloatingBuyButton() {
       aria-label={t('nav.buyNow')}
       sx={{
         position: 'fixed',
-        bottom: { xs: 'calc(16px + env(safe-area-inset-bottom))', sm: 24 },
+        bottom: bannerOpen
+          ? { xs: 'calc(132px + env(safe-area-inset-bottom))', sm: 24 }
+          : { xs: 'calc(16px + env(safe-area-inset-bottom))', sm: 24 },
         right: { xs: 16, sm: 24 },
         zIndex: 1200,
         bgcolor: brand.plantGreen,

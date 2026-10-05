@@ -3,6 +3,14 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* iOS animates the focused field into view. Smooth scrolling fights the keyboard
+   and jumps the checkout form through every input. */
+@media (max-width: 899px) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

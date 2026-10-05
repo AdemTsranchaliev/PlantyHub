@@ -7,30 +7,21 @@ export const supportedLanguages = [
 
 export type LanguageCode = (typeof supportedLanguages)[number]['code']
 
+/** Languages offered in the switcher. German and French stay in the content model, hidden for now. */
+export const activeLanguages = supportedLanguages.filter(
+  (language) => language.code === 'bg' || language.code === 'en',
+)
+
 export const defaultLanguage: LanguageCode = 'bg'
 
 export const languageStorageKey = 'plantyhub-lang-choice'
 
-/** Region subtag used only when the language subtag is not one we ship. */
-const regionLanguage: Record<string, LanguageCode> = {
-  bg: 'bg',
-  de: 'de',
-  at: 'de',
-  li: 'de',
-  fr: 'fr',
-  mc: 'fr',
-  us: 'en',
-  gb: 'en',
-  uk: 'en',
-  ie: 'en',
-  au: 'en',
-  nz: 'en',
-  ca: 'en',
-  za: 'en',
-}
-
 export function isLanguageCode(value: string | null | undefined): value is LanguageCode {
   return supportedLanguages.some((language) => language.code === value)
+}
+
+export function isActiveLanguage(value: string | null | undefined): value is LanguageCode {
+  return activeLanguages.some((language) => language.code === value)
 }
 
 /** First path segment when it is a supported language, ignoring the deploy base path. */
@@ -43,45 +34,13 @@ export function localeFromPathname(pathname: string, basePath = ''): LanguageCod
   return isLanguageCode(segment) ? segment : null
 }
 
-function tagParts(tag: string): string[] {
-  return tag.toLowerCase().replace('_', '-').split('-').filter(Boolean)
-}
-
-function isBulgariaTag(tag: string): boolean {
-  const parts = tagParts(tag)
-  return parts[0] === 'bg' || parts.slice(1).includes('bg')
-}
-
-function deviceLanguageTags(): string[] {
-  const tags = navigator.languages?.length ? [...navigator.languages] : [navigator.language]
-  try {
-    const intl = Intl.DateTimeFormat().resolvedOptions().locale
-    if (intl) tags.push(intl)
-  } catch {
-    /* Intl unavailable */
-  }
-  return tags.filter(Boolean)
-}
-
+/** Saved switcher choice, otherwise Bulgarian. Browser language does not change the site. */
 export function preferredLanguage(): LanguageCode {
   try {
     const saved = localStorage.getItem(languageStorageKey)
-    if (isLanguageCode(saved)) return saved
+    if (isActiveLanguage(saved)) return saved
   } catch {
     /* private mode */
-  }
-
-  const tags = deviceLanguageTags()
-  if (tags.some(isBulgariaTag)) return defaultLanguage
-
-  for (const tag of tags) {
-    const language = tagParts(tag)[0]
-    if (isLanguageCode(language)) return language
-  }
-
-  for (const tag of tags) {
-    const region = tagParts(tag).slice(1).find((part) => /^[a-z]{2}$/.test(part))
-    if (region && regionLanguage[region]) return regionLanguage[region]
   }
 
   return defaultLanguage

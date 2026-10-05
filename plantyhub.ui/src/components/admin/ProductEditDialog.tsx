@@ -20,7 +20,7 @@ import Alert from '@mui/material/Alert'
 import SaveRounded from '@mui/icons-material/SaveRounded'
 import CloseRounded from '@mui/icons-material/CloseRounded'
 import { useTranslation } from 'react-i18next'
-import { supportedLanguages } from '../../i18n/languages'
+import { activeLanguages, supportedLanguages } from '../../i18n/languages'
 import type { LanguageCode } from '../../i18n/languages'
 import {
   type ProductCategory,
@@ -35,6 +35,7 @@ import AdminFieldGroup from './AdminFieldGroup'
 import ProductGalleryEditor from './ProductGalleryEditor'
 import ProductSpecEditor from './ProductSpecEditor'
 import ProductLineList, { ProductFaqEditor, ProductFeatureEditor } from './ProductLineList'
+import { GrowingDifficultyPicker } from '../GrowingDifficultyBadge'
 import { mediaApi } from '../../api'
 import { ApiError } from '../../api/client'
 import {
@@ -66,6 +67,7 @@ function emptyProduct(category: ProductCategory): StoredProduct {
     active: true,
     featured: category === 'gardens' ? false : undefined,
     packKey: category === 'pods' || category === 'consumables' ? 'pack3' : undefined,
+    growingDifficulty: category === 'pods' ? 'easy' : undefined,
     locales: { en: emptyLocale() },
   }
 }
@@ -84,6 +86,7 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
     if (!open) return
     const next = product ? structuredClone(product) : emptyProduct(category)
     if (category === 'pods' && !next.kit) next.kit = resolveKit(next)
+    if (category === 'pods' && !next.growingDifficulty) next.growingDifficulty = 'easy'
     if (category === 'gardens') {
       if (!next.gallery?.length) next.gallery = [...defaultGardenGallery]
       if (!next.image) next.image = next.gallery[0] ?? ''
@@ -173,7 +176,7 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
 
   const languageTabs = (
     <Tabs value={langTab} onChange={(_, v) => setLangTab(v)} sx={{ borderBottom: `1px solid ${brand.border}`, mb: 0.5 }}>
-      {supportedLanguages.map((l) => (
+      {activeLanguages.map((l) => (
         <Tab key={l.code} value={l.code} label={l.short} />
       ))}
     </Tabs>
@@ -385,6 +388,14 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                   </Stack>
                 )}
               </AdminFieldGroup>
+              {category === 'pods' && (
+                <AdminFieldGroup title={t('growingDifficulty.label')} hint={t('growingDifficulty.hint')}>
+                  <GrowingDifficultyPicker
+                    value={draft.growingDifficulty}
+                    onChange={(growingDifficulty) => setDraft((p) => ({ ...p, growingDifficulty }))}
+                  />
+                </AdminFieldGroup>
+              )}
               <AdminFieldGroup title={t('admin.productEdit.visibility')}>
                 <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem', lineHeight: 1.55 }}>
                   {t('admin.productEdit.activeHint')}

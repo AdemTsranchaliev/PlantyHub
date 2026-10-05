@@ -20,7 +20,7 @@ import {
 } from '../../admin/homepageSchema'
 import { useHomepageStore } from '../../hooks/useHomepage'
 import { subscribeHomepage } from '../../store/homepage'
-import { defaultLanguage, isLanguageCode, supportedLanguages, type LanguageCode } from '../../i18n/languages'
+import { activeLanguages, defaultLanguage, isActiveLanguage, type LanguageCode } from '../../i18n/languages'
 import { brand } from '../../theme'
 
 export default function AdminContentPage() {
@@ -28,7 +28,7 @@ export default function AdminContentPage() {
   const { state, resetHomepageState: reset } = useHomepageStore()
   const [sectionKey, setSectionKey] = useState<HomepageSectionKey>('hero')
   const uiLang = i18n.language?.split('-')[0]
-  const [lang, setLang] = useState<LanguageCode>(isLanguageCode(uiLang) ? uiLang : defaultLanguage)
+  const [lang, setLang] = useState<LanguageCode>(isActiveLanguage(uiLang) ? uiLang : defaultLanguage)
   const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop')
   const [previewTick, setPreviewTick] = useState(0)
 
@@ -84,7 +84,7 @@ export default function AdminContentPage() {
           }}
           size="small"
         >
-          {supportedLanguages.map((item) => (
+          {activeLanguages.map((item) => (
             <ToggleButton key={item.code} value={item.code} sx={{ px: 1.75, fontWeight: 800, textTransform: 'none' }}>
               {item.short}
             </ToggleButton>

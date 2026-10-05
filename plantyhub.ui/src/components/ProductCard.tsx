@@ -8,7 +8,9 @@ import CircleOutlined from '@mui/icons-material/CircleOutlined'
 import WaterDropOutlined from '@mui/icons-material/WaterDropOutlined'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import type { GrowingDifficulty } from '../store/products'
 import { brand, carouselCardWidth } from '../theme'
+import GrowingDifficultyBadge from './GrowingDifficultyBadge'
 import MediaImg from './MediaImg'
 
 export type ProductCardData = {
@@ -21,6 +23,7 @@ export type ProductCardData = {
   includes?: { pods: number; caps: number; nutrientMl: number }
   tagline?: string
   imageFit?: 'cover' | 'contain'
+  growingDifficulty?: GrowingDifficulty
 }
 
 type ProductCardProps = {
@@ -133,6 +136,7 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
         >
           {product.name}
         </Typography>
+        {product.growingDifficulty && <GrowingDifficultyBadge difficulty={product.growingDifficulty} />}
         {product.includes ? (
           <Stack direction="row" spacing={0.5} sx={{ pt: 0.25, flexWrap: 'nowrap' }}>
             {[
