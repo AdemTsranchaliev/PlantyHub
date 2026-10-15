@@ -12,46 +12,18 @@ import NavigateNextRounded from '@mui/icons-material/NavigateNextRounded'
 import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import { schoolPackFor } from '../content/school'
+import {
+  isSchoolSection as isSectionId,
+  isSchoolTopic as isTopicId,
+  schoolSections as sectionIds,
+  schoolSectionTopics as sectionTopics,
+  type SchoolSectionId as SectionId,
+  type SchoolTopicId as TopicId,
+} from '../content/school/outline'
 import { navHrefs } from '../data/catalog'
 import { productImages } from '../data/images'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
-
-const sectionIds = ['start', 'grow', 'harvest', 'care', 'plants'] as const
-type SectionId = (typeof sectionIds)[number]
-
-const topicIds = [
-  'box',
-  'hydro',
-  'firstRun',
-  'water',
-  'lamp',
-  'solution',
-  'pods',
-  'place',
-  'weeks',
-  'harvest',
-  'sprout',
-  'cycle',
-  'clean',
-  'trouble',
-  'away',
-  'safety',
-  'basil',
-  'parsley',
-  'lettuce',
-  'arugula',
-  'mint',
-] as const
-type TopicId = (typeof topicIds)[number]
-
-const sectionTopics: Record<SectionId, TopicId[]> = {
-  start: ['box', 'hydro', 'firstRun', 'water'],
-  grow: ['lamp', 'solution', 'pods', 'place'],
-  harvest: ['weeks', 'harvest', 'sprout', 'cycle'],
-  care: ['clean', 'trouble', 'away', 'safety'],
-  plants: ['basil', 'parsley', 'lettuce', 'arugula', 'mint'],
-}
 
 const topicImages: Partial<Record<TopicId, string>> = {
   basil: productImages.basil,
@@ -122,14 +94,6 @@ const kickerSx = {
   textTransform: 'uppercase',
   color: brand.plantGreenDark,
 } as const
-
-function isSectionId(value: string | null): value is SectionId {
-  return !!value && (sectionIds as readonly string[]).includes(value)
-}
-
-function isTopicId(value: string | null): value is TopicId {
-  return !!value && (topicIds as readonly string[]).includes(value)
-}
 
 function formatCount(template: string, count: number) {
   return template.replace('{{count}}', String(count))

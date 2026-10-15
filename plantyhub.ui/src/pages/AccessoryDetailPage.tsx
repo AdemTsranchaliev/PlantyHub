@@ -45,15 +45,6 @@ export default function AccessoryDetailPage() {
     setQty(1)
   }, [id])
 
-  useEffect(() => {
-    if (item) {
-      document.title = `${item.name} · PlantyHub`
-      return () => {
-        document.title = 'PlantyHub'
-      }
-    }
-  }, [item])
-
   if (!item) {
     return (
       <SectionContainer py={{ xs: 8, md: 12 }}>

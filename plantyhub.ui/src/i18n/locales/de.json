@@ -1,7 +1,70 @@
 {
   "seo": {
     "title": "PlantyHub — Smarter Hydrokultur-Garten für zu Hause",
-    "description": "PlantyHub HomeGarder One: smarter Hydrokultur-Garten mit 12 Plätzen, LED-Licht und automatischer Bewässerung. Basilikum, Minze, Petersilie und mehr zu Hause anbauen."
+    "description": "HomeGarder One: Hydrokultur mit 12 Plätzen, LED-Licht und automatischer Bewässerung. Basilikum, Minze und Salat zu Hause anbauen, ohne Erde. Versand in Bulgarien.",
+    "podTitle": "{{name}} — Hydroponik-Pod · PlantyHub",
+    "accessoryTitle": "{{name}} — Zubehör für den Garten · PlantyHub",
+    "lessonTitle": "{{title}} · PlantyHub Schule",
+    "articleTitle": "{{title}} · PlantyHub",
+    "podFallback": "{{name}} für den PlantyHub HomeGarder One. Frische Kräuter zu Hause anbauen, ohne Erde.",
+    "pages": {
+      "home": {
+        "title": "PlantyHub — Smarter Hydrokultur-Garten für zu Hause",
+        "description": "HomeGarder One: Hydrokultur mit 12 Plätzen, LED-Licht und automatischer Bewässerung. Basilikum, Minze und Salat zu Hause anbauen, ohne Erde. Versand in Bulgarien."
+      },
+      "product": {
+        "title": "HomeGarder One — Hydrokultur-Garten mit 12 Plätzen",
+        "description": "Garten für die Arbeitsplatte: 12 Plätze, LED-Zyklus 16/8 und 4-Liter-Tank. Pods einsetzen, er gießt allein, du erntest. Versand in Bulgarien."
+      },
+      "pods": {
+        "title": "Saat-Pods für Hydrokultur · PlantyHub",
+        "description": "Vorgesäte Pods für HomeGarder One: Basilikum, Minze, Petersilie, Rucola und mehr. Einen einsetzen und frische Kräuter zu Hause ernten."
+      },
+      "accessories": {
+        "title": "Zubehör für den Indoor-Garten · PlantyHub",
+        "description": "Schrank, Regal, Kräuterschere und alles für die Pflege von HomeGarder One."
+      },
+      "about": {
+        "title": "Über PlantyHub — Hydrokultur zu Hause",
+        "description": "PlantyHub baut HomeGarder One, damit du in der Wohnung frische Kräuter hast — ohne Garten, ohne Erde und ohne tägliches Gießen."
+      },
+      "blog": {
+        "title": "Blog über Hydrokultur und Ernte · PlantyHub",
+        "description": "Rezepte, Anbau-Guides und Küchengeschichten: vom ersten Keimling bis auf den Teller. Praktische Tipps für HomeGarder One."
+      },
+      "contact": {
+        "title": "Kontakt · PlantyHub",
+        "description": "Fragen zu Bestellung, Versand oder dem Garten? Schreib uns — wir antworten innerhalb eines Werktags. support@plantyhub.com"
+      },
+      "faq": {
+        "title": "Häufige Fragen · PlantyHub",
+        "description": "Versand in Bulgarien, Keimgarantie, Pods, Wasser und Licht. Kurze Antworten zu HomeGarder One."
+      },
+      "learn": {
+        "title": "PlantyHub Schule — Lektionen zur Hydrokultur",
+        "description": "21 kurze Lektionen: erster Start, Licht, Wasser, Ernte und Pflege. Dieselben Zahlen wie in der Anleitung von HomeGarder One."
+      },
+      "how": {
+        "title": "So funktioniert der Hydrokultur-Garten · PlantyHub",
+        "description": "HomeGarder One kommt ohne Erde aus. Der Tank gießt die Wurzeln, die Lampe hält den 16/8-Zyklus, du setzt Pods ein und erntest."
+      },
+      "start": {
+        "title": "HomeGarder One starten · PlantyHub",
+        "description": "Sechs Schritte, etwa fünf Minuten: Wasser, Nährlösung A und B, Pods und Lampe. Anleitung zur ersten Ernte."
+      },
+      "privacy": {
+        "title": "Datenschutzerklärung · PlantyHub",
+        "description": "Wie ДИДЖИТАЛ КИТ ЕООД personenbezogene Daten bei Bestellung, Konto und Kontakt mit PlantyHub verarbeitet."
+      },
+      "cookies": {
+        "title": "Cookie-Richtlinie · PlantyHub",
+        "description": "Welche Cookies plantyhub.com für den Shop nutzt und welche nur mit Einwilligung laufen."
+      },
+      "terms": {
+        "title": "Allgemeine Geschäftsbedingungen · PlantyHub",
+        "description": "Bedingungen für plantyhub.com und Käufe bei PlantyHub: Bestellung, Versand, Rückgabe und Garantie."
+      }
+    }
   },
   "promo": "KOSTENLOSER VERSAND AB €150 · NUR BULGARIEN",
   "nav": {

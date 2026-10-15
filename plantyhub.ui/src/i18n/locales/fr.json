@@ -1,7 +1,70 @@
 {
   "seo": {
     "title": "PlantyHub — Jardin hydroponique intelligent",
-    "description": "PlantyHub HomeGarder One : jardin hydroponique intelligent à 12 emplacements, éclairage LED et arrosage automatique. Basilic, menthe, persil et plus, à la maison."
+    "description": "HomeGarder One : jardin hydroponique à 12 emplacements, lumière LED et arrosage automatique. Basilic, menthe et laitue à la maison, sans terre. Livraison en Bulgarie.",
+    "podTitle": "{{name}} — capsule hydroponique · PlantyHub",
+    "accessoryTitle": "{{name}} — accessoire pour le jardin · PlantyHub",
+    "lessonTitle": "{{title}} · École PlantyHub",
+    "articleTitle": "{{title}} · PlantyHub",
+    "podFallback": "{{name}} pour le PlantyHub HomeGarder One. Des herbes fraîches à la maison, sans terre.",
+    "pages": {
+      "home": {
+        "title": "PlantyHub — Jardin hydroponique intelligent",
+        "description": "HomeGarder One : jardin hydroponique à 12 emplacements, lumière LED et arrosage automatique. Basilic, menthe et laitue à la maison, sans terre. Livraison en Bulgarie."
+      },
+      "product": {
+        "title": "HomeGarder One — jardin hydroponique à 12 emplacements",
+        "description": "Un jardin de plan de travail : 12 emplacements, cycle LED 16/8 et réservoir de 4 L. Tu poses les capsules, il arrose, tu récoltes. Livraison en Bulgarie."
+      },
+      "pods": {
+        "title": "Capsules de graines hydroponiques · PlantyHub",
+        "description": "Capsules pré-ensemencées pour HomeGarder One : basilic, menthe, persil, roquette et plus. Une dans l'emplacement, des herbes fraîches à la maison."
+      },
+      "accessories": {
+        "title": "Accessoires pour le jardin d'intérieur · PlantyHub",
+        "description": "Rangement, étagère, ciseaux à herbes et le nécessaire pour entretenir HomeGarder One."
+      },
+      "about": {
+        "title": "À propos de PlantyHub — l'hydroponie à la maison",
+        "description": "PlantyHub conçoit HomeGarder One pour avoir des herbes fraîches en appartement — sans jardin, sans terre et sans arrosage quotidien."
+      },
+      "blog": {
+        "title": "Blog hydroponie et récolte · PlantyHub",
+        "description": "Recettes, guides de culture et histoires de cuisine : du premier germe à l'assiette. Conseils pratiques pour HomeGarder One."
+      },
+      "contact": {
+        "title": "Contact · PlantyHub",
+        "description": "Une question sur une commande, la livraison ou le jardin ? Écris-nous — réponse sous un jour ouvré. support@plantyhub.com"
+      },
+      "faq": {
+        "title": "Questions fréquentes · PlantyHub",
+        "description": "Livraison en Bulgarie, garantie de germination, capsules, eau et lumière. Réponses courtes sur HomeGarder One."
+      },
+      "learn": {
+        "title": "École PlantyHub — leçons d'hydroponie",
+        "description": "21 leçons courtes : premier démarrage, lumière, eau, récolte et entretien. Les mêmes chiffres que la notice de HomeGarder One."
+      },
+      "how": {
+        "title": "Comment fonctionne le jardin hydroponique · PlantyHub",
+        "description": "HomeGarder One n'utilise pas de terre. Le réservoir arrose les racines, la lampe tient le cycle 16/8, tu poses les capsules et tu récoltes."
+      },
+      "start": {
+        "title": "Démarrer HomeGarder One · PlantyHub",
+        "description": "Six étapes, environ cinq minutes : eau, solutions A et B, capsules et lampe. Le guide de la première récolte."
+      },
+      "privacy": {
+        "title": "Politique de confidentialité · PlantyHub",
+        "description": "Comment ДИДЖИТАЛ КИТ ЕООД traite les données personnelles lors d'une commande, d'un compte ou d'un contact avec PlantyHub."
+      },
+      "cookies": {
+        "title": "Politique de cookies · PlantyHub",
+        "description": "Quels cookies plantyhub.com utilise pour la boutique, et lesquels ne tournent qu'avec ton accord."
+      },
+      "terms": {
+        "title": "Conditions générales · PlantyHub",
+        "description": "Conditions d'utilisation de plantyhub.com et d'achat chez PlantyHub : commandes, livraison, retours et garantie."
+      }
+    }
   },
   "promo": "LIVRAISON GRATUITE DÈS €150 · BULGARIE UNIQUEMENT",
   "nav": {

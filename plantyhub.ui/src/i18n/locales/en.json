@@ -1,8 +1,71 @@
 {
   "promo": "FREE SHIPPING OVER €150 · BULGARIA ONLY",
   "seo": {
-    "title": "PlantyHub — Smart Hydroponic Indoor Garden",
-    "description": "PlantyHub HomeGarder One: 12-pod smart hydroponic garden with LED light and automatic watering. Grow basil, mint, parsley and more at home."
+    "title": "PlantyHub — Smart Hydroponic Garden for Home",
+    "description": "HomeGarder One: 12-pod hydroponic garden with LED light and automatic watering. Grow basil, mint and lettuce at home, with no soil. Shipping in Bulgaria.",
+    "podTitle": "{{name}} — Hydroponic Seed Pod · PlantyHub",
+    "accessoryTitle": "{{name}} — Garden Accessory · PlantyHub",
+    "lessonTitle": "{{title}} · PlantyHub School",
+    "articleTitle": "{{title}} · PlantyHub",
+    "podFallback": "{{name}} for the PlantyHub HomeGarder One. Grow fresh herbs at home, with no soil.",
+    "pages": {
+      "home": {
+        "title": "PlantyHub — Smart Hydroponic Garden for Home",
+        "description": "HomeGarder One: 12-pod hydroponic garden with LED light and automatic watering. Grow basil, mint and lettuce at home, with no soil. Shipping in Bulgaria."
+      },
+      "product": {
+        "title": "HomeGarder One — 12-Pod Hydroponic Garden",
+        "description": "A countertop garden with 12 pods, a 16/8 LED cycle and a 4 L tank. Add pods, it waters itself, you harvest. Ships in Bulgaria."
+      },
+      "pods": {
+        "title": "Hydroponic Seed Pods · PlantyHub",
+        "description": "Pre-seeded pods for HomeGarder One: basil, mint, parsley, arugula and more. Drop one in a slot and harvest fresh herbs at home."
+      },
+      "accessories": {
+        "title": "Indoor Garden Accessories · PlantyHub",
+        "description": "Storage, a shelf, herb scissors and the extras that keep a HomeGarder One easy to live with."
+      },
+      "about": {
+        "title": "About PlantyHub — Hydroponics at Home",
+        "description": "PlantyHub makes HomeGarder One so you can grow fresh herbs in an apartment — no yard, no soil and no daily watering."
+      },
+      "blog": {
+        "title": "Hydroponic Growing Blog · PlantyHub",
+        "description": "Recipes, growing guides and kitchen stories, from the first sprout to the plate. Practical advice for HomeGarder One."
+      },
+      "contact": {
+        "title": "Contact · PlantyHub",
+        "description": "Questions about an order, shipping or the garden? Write to us — we reply within one business day. support@plantyhub.com"
+      },
+      "faq": {
+        "title": "FAQ · PlantyHub Hydroponic Garden",
+        "description": "Shipping in Bulgaria, the sprouting guarantee, pods, water and light. Short answers about HomeGarder One."
+      },
+      "learn": {
+        "title": "PlantyHub School — Hydroponic Lessons",
+        "description": "21 short lessons: first setup, light, water, harvest and care. The same numbers as the HomeGarder One manual."
+      },
+      "how": {
+        "title": "How the Hydroponic Garden Works · PlantyHub",
+        "description": "HomeGarder One uses no soil. The tank waters the roots, the lamp keeps a 16/8 cycle, and you add pods and harvest."
+      },
+      "start": {
+        "title": "How to Start HomeGarder One · PlantyHub",
+        "description": "Six steps and about five minutes: water, nutrient A and B, pods and the lamp. A guide to your first harvest."
+      },
+      "privacy": {
+        "title": "Privacy Policy · PlantyHub",
+        "description": "How ДИДЖИТАЛ КИТ ЕООД handles personal data when you order, create an account or contact PlantyHub."
+      },
+      "cookies": {
+        "title": "Cookie Policy · PlantyHub",
+        "description": "Which cookies plantyhub.com uses to run the store, and which run only with your consent."
+      },
+      "terms": {
+        "title": "Terms of Use · PlantyHub",
+        "description": "Terms for using plantyhub.com and buying from PlantyHub: orders, shipping, returns and warranty."
+      }
+    }
   },
   "nav": {
     "product": "Product",

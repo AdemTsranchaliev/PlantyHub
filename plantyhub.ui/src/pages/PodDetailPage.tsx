@@ -55,15 +55,6 @@ export default function PodDetailPage() {
     setQty(1)
   }, [id])
 
-  useEffect(() => {
-    if (pod) {
-      document.title = `${pod.name} · PlantyHub`
-      return () => {
-        document.title = 'PlantyHub'
-      }
-    }
-  }, [pod])
-
   if (!pod) {
     return (
       <SectionContainer py={{ xs: 8, md: 12 }}>

@@ -169,13 +169,14 @@ app.UseAuthorization();
 
 app.Use(async (context, next) =>
 {
-    if (HttpMethods.IsGet(context.Request.Method) && LocaleSeo.NeedsLocaleRedirect(context.Request.Path))
+    if (HttpMethods.IsGet(context.Request.Method) || HttpMethods.IsHead(context.Request.Method))
     {
-        var language = LocaleSeo.PickLanguage();
-        var path = context.Request.Path.Value ?? "/";
-        var target = path == "/" ? $"/{language}/" : $"/{language}{path}";
-        context.Response.Redirect($"{target}{context.Request.QueryString}", permanent: false);
-        return;
+        var target = LocaleSeo.RedirectTarget(context.Request.Path);
+        if (target is not null)
+        {
+            context.Response.Redirect($"{target}{context.Request.QueryString}", permanent: true);
+            return;
+        }
     }
 
     await next();
@@ -185,10 +186,10 @@ app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "PlantyHub.Api" }));
 app.MapGet("/robots.txt", (HttpContext context) =>
     Results.Text(LocaleSeo.Robots(context.Request), "text/plain; charset=utf-8"));
-app.MapGet("/sitemap.xml", (HttpContext context) =>
-    Results.Text(LocaleSeo.Sitemap(context.Request), "application/xml; charset=utf-8"));
+app.MapGet("/sitemap.xml", async (HttpContext context, AppDbContext db, CancellationToken ct) =>
+    Results.Text(LocaleSeo.Sitemap(context.Request, await LocaleSeo.LoadSitemapProductsAsync(db, ct)), "application/xml; charset=utf-8"));
 
-app.MapFallback(async context =>
+app.MapFallback(async (HttpContext context, AppDbContext db, CancellationToken ct) =>
 {
     if (context.Request.Path.StartsWithSegments("/api") ||
         context.Request.Path.StartsWithSegments("/health"))
@@ -205,7 +206,8 @@ app.MapFallback(async context =>
     }
 
     var html = await File.ReadAllTextAsync(index);
-    html = LocaleSeo.Apply(html, context.Request);
+    var product = await LocaleSeo.LoadPageProductAsync(db, context.Request.Path.Value ?? "/", ct);
+    html = LocaleSeo.Apply(html, context.Request, product);
     context.Response.ContentType = "text/html; charset=utf-8";
     await context.Response.WriteAsync(html);
 });
