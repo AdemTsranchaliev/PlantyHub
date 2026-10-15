@@ -1,11 +1,14 @@
+import { Link as RouterLink } from 'react-router-dom'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
 import { useHt } from '../hooks/useHomepage'
 import SectionContainer from '../components/SectionContainer'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
-import { howItWorksStepIds } from '../data/catalog'
+import { howItWorksStepIds, navHrefs } from '../data/catalog'
 import { brand } from '../theme'
 
 function StepCard({ stepId, index }: { stepId: (typeof howItWorksStepIds)[number]; index: number }) {
@@ -26,6 +29,7 @@ function StepCard({ stepId, index }: { stepId: (typeof howItWorksStepIds)[number
 }
 
 export default function HowItWorksSection() {
+  const { t } = useTranslation()
   const eyebrow = useHt('howItWorks.eyebrow')
   const title = useHt('howItWorks.title')
   const subtitle = useHt('howItWorks.subtitle')
@@ -42,6 +46,16 @@ export default function HowItWorksSection() {
             </Grid>
           ))}
         </Grid>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 3, md: 4 } }}>
+          <Button
+            component={RouterLink}
+            to={navHrefs.howItWorks}
+            variant="contained"
+            sx={{ bgcolor: brand.white, color: brand.graphite, '&:hover': { bgcolor: brand.beige } }}
+          >
+            {t('howPage.homeLink')}
+          </Button>
+        </Box>
       </SectionContainer>
     </Box>
   )

@@ -75,6 +75,7 @@ export default function AccessoriesPage() {
               <Reveal delay={index * 0.08}>
                 <ProductCard
                   layout="grid"
+                  to={`/accessories/${item.id}`}
                   product={toProductCardData(item, t)}
                   onAddToCart={() => addProductToCart('accessories', item)}
                 />

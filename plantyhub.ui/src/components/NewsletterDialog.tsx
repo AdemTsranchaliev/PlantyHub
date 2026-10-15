@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const NewsletterDialogContent = lazy(() => import('./NewsletterDialogContent'))
 
@@ -6,11 +7,13 @@ const STORAGE_KEY = 'ph_newsletter_seen'
 const TIMER_MS = 8000
 
 export default function NewsletterDialog() {
+  const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const triggeredRef = useRef(false)
 
   useEffect(() => {
+    if (pathname === '/start') return
     let seen = false
     try {
       seen = localStorage.getItem(STORAGE_KEY) === '1'
@@ -37,7 +40,7 @@ export default function NewsletterDialog() {
       window.clearTimeout(timer)
       document.removeEventListener('mouseout', onExitIntent)
     }
-  }, [])
+  }, [pathname])
 
   const markSeen = () => {
     try {

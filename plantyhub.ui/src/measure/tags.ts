@@ -1,6 +1,6 @@
 import { clarityEnabled, CLARITY_PROJECT_ID, gtmEnabled, GTM_ID, metaPixelEnabled, META_PIXEL_ID } from './config'
 import { getCookieConsent, type CookieConsent } from './consent'
-import { clearTrackingCookies } from './googleAnalytics'
+import { clearTrackingCookies } from './visits'
 
 type Fbq = {
   (...args: unknown[]): void

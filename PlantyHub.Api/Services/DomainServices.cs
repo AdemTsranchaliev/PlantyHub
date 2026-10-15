@@ -322,7 +322,7 @@ public class CustomerService(AppDbContext db)
     }
 }
 
-public class OrderService(AppDbContext db, CustomerService customers, IOrderEmailQueue orderEmails, CourierService couriers, CourierRateService rates, VatService vat, EcontLabelService econt)
+public class OrderService(AppDbContext db, CustomerService customers, IOrderEmailQueue orderEmails, CourierService couriers, VatService vat, EcontLabelService econt, CourierRateService rates)
 {
     public async Task<Order?> GetByIdAsync(string id, CancellationToken ct = default) =>
         await db.Orders
@@ -376,35 +376,7 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
         }
 
         var subtotal = lineItems.Sum(x => x.UnitPrice * x.Item.Quantity);
-        decimal shipping;
-        if (subtotal >= PriceHelper.FreeShippingThreshold)
-        {
-            shipping = 0m;
-        }
-        else if (!string.IsNullOrWhiteSpace(request.Courier) && !string.IsNullOrWhiteSpace(request.Delivery))
-        {
-            var quotes = await rates.QuoteAsync(new ShippingQuoteRequest
-            {
-                Country = request.Country,
-                City = request.City,
-                CityId = request.CityId,
-                PostalCode = request.PostalCode,
-                Street = request.Street,
-                OfficeCode = request.OfficeCode,
-                PaymentMethod = request.PaymentMethod,
-                Subtotal = subtotal,
-            }, ct);
-            var match = quotes.FirstOrDefault(q =>
-                q.Courier.Equals(request.Courier, StringComparison.OrdinalIgnoreCase)
-                && q.Delivery.Equals(request.Delivery, StringComparison.OrdinalIgnoreCase));
-            if (match is null)
-                throw new InvalidOperationException("Shipping quote is no longer valid. Refresh delivery options.");
-            shipping = match.PriceEur;
-        }
-        else
-        {
-            shipping = PriceHelper.StandardShippingCost;
-        }
+        var shipping = await QuotedShippingAsync(request, country, subtotal, ct);
         decimal discount = 0m;
         PromoCode? promo = null;
         if (!string.IsNullOrWhiteSpace(request.PromoCode))
@@ -494,6 +466,36 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
         orderEmails.EnqueueCheckout(order.Id);
 
         return order;
+    }
+
+    async Task<decimal> QuotedShippingAsync(CheckoutRequest request, string country, decimal subtotal, CancellationToken ct)
+    {
+        if (subtotal >= PriceHelper.FreeShippingThreshold)
+            return 0m;
+
+        var delivery = request.Delivery?.Trim().ToLowerInvariant();
+        if (delivery is not ("address" or "office"))
+            throw new InvalidOperationException("shipping_unavailable");
+
+        var quotes = await rates.QuoteAsync(new ShippingQuoteRequest
+        {
+            Country = country,
+            City = request.City.Trim(),
+            CityId = request.CityId,
+            PostalCode = request.PostalCode.Trim(),
+            Subtotal = subtotal,
+            Courier = "econt",
+        }, ct);
+
+        var match = quotes.FirstOrDefault(quote =>
+            string.Equals(quote.Courier, "econt", StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(quote.Delivery, delivery, StringComparison.OrdinalIgnoreCase) &&
+            string.IsNullOrWhiteSpace(quote.Message));
+
+        if (match is null)
+            throw new InvalidOperationException("shipping_unavailable");
+
+        return match.PriceEur;
     }
 
     async Task<string> NextOrderIdAsync(DateTime now, CancellationToken ct)

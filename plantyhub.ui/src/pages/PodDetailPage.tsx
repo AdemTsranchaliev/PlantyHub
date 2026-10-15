@@ -7,7 +7,6 @@ import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import StarRounded from '@mui/icons-material/StarRounded'
 import AddRounded from '@mui/icons-material/AddRounded'
 import RemoveRounded from '@mui/icons-material/RemoveRounded'
 import NavigateNextRounded from '@mui/icons-material/NavigateNextRounded'
@@ -29,6 +28,7 @@ import { useProduct, useSeedPodsCatalog, toProductCardData } from '../hooks/useP
 import { resolveKit } from '../store/products'
 import { useSiteAsset } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
+import { useTrackViewItem } from '../measure/commerce'
 import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 import { GrowingDifficultyPanel } from '../components/GrowingDifficultyBadge'
@@ -40,6 +40,7 @@ export default function PodDetailPage() {
   const { t } = useTranslation()
   const { id } = useParams<{ id: string }>()
   const pod = useProduct('pods', id)
+  useTrackViewItem('pods', pod)
   const reviews = useProductReviews(pod?.id)
   const allPods = useSeedPodsCatalog()
   const addProductToCart = useAddProductToCart()
@@ -155,20 +156,7 @@ export default function PodDetailPage() {
 
           <Grid size={{ xs: 12, md: 6 }}>
             <Reveal>
-              {reviews && reviews.count > 0 ? (
-                <ProductRatingRow reviews={reviews} />
-              ) : (
-                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
-                  <Stack direction="row" sx={{ color: '#CE8A4A' }}>
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <StarRounded key={i} sx={{ fontSize: 18 }} />
-                    ))}
-                  </Stack>
-                  <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.textSecondary }}>
-                    {t('hero.badge')}
-                  </Typography>
-                </Stack>
-              )}
+              {reviews && reviews.count > 0 ? <ProductRatingRow reviews={reviews} /> : null}
 
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1 }}>
                 {pod.name}

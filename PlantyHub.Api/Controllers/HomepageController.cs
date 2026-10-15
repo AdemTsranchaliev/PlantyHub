@@ -66,7 +66,7 @@ public class HomepageController(AppDbContext db) : ControllerBase
             ["product"] = true,
             ["howItWorks"] = true,
             ["podsGrid"] = true,
-            ["socialProof"] = true,
+            ["socialProof"] = false,
             ["cta"] = true
         }, JsonDefaults.Options);
         settings.TextsJson = "{}";

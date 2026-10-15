@@ -16,6 +16,8 @@ import { downloadOrderSheet } from '../admin/orderSheet'
 import { useOrderDetail } from '../hooks/useOrders'
 import { checkout } from '../components/checkout/CheckoutOrderSummary'
 import Logo from '../components/Logo'
+import { trackPurchase } from '../measure/commerce'
+import { parseEuro } from '../utils/price'
 import MediaImg from '../components/MediaImg'
 
 export default function OrderConfirmationPage() {
@@ -26,6 +28,26 @@ export default function OrderConfirmationPage() {
   useEffect(() => {
     window.scrollTo({ top: 0 })
   }, [])
+
+  useEffect(() => {
+    if (!order) return
+    trackPurchase(
+      order.id,
+      order.lineItems.map((item) => ({
+        id: item.productId,
+        name: item.name ?? item.productId,
+        category: item.categoryKey,
+        price: item.unitPrice,
+        quantity: item.quantity,
+      })),
+      {
+        value: parseEuro(order.total),
+        tax: parseEuro(order.tax),
+        shipping: parseEuro(order.shippingCost),
+        coupon: order.promoCode ?? undefined,
+      },
+    )
+  }, [order])
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#F4F5F0', color: checkout.text, px: 2, py: { xs: 3, md: 5 } }}>

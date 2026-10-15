@@ -22,7 +22,7 @@ export default function AccessoriesSection() {
         {items.map((item, index) => (
           <Grid key={item.id} size={{ xs: items.length % 2 === 1 && index === items.length - 1 ? 12 : 6, sm: 4 }}>
             <Reveal delay={index * 0.08}>
-              <ProductCard layout="grid" product={toProductCardData(item, t)} />
+              <ProductCard layout="grid" to={`/accessories/${item.id}`} product={toProductCardData(item, t)} />
             </Reveal>
           </Grid>
         ))}

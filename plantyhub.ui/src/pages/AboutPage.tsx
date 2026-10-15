@@ -2,27 +2,34 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import NavigateNextRounded from '@mui/icons-material/NavigateNextRounded'
-import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded'
 import PauseRounded from '@mui/icons-material/PauseRounded'
+import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded'
 import { useTranslation } from 'react-i18next'
-import SectionContainer, { pagePaddingX } from '../components/SectionContainer'
-import Reveal from '../components/Reveal'
+import SectionContainer from '../components/SectionContainer'
+import MediaImg from '../components/MediaImg'
 import { navHrefs } from '../data/catalog'
 import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { objectPositionForKey } from '../media/imageFocus'
-import { resolveHref } from '../paths'
 import { brand } from '../theme'
-import MediaImg from '../components/MediaImg'
 
-const pillarKeys = ['easy', 'modern', 'home'] as const
+const serif = '"Fraunces", Georgia, serif'
+const missionPointKeys = ['home', 'dig', 'child', 'grow'] as const
 const statKeys = ['plants', 'countries', 'harvests'] as const
+const aimKeys = ['wanted', 'next', 'future'] as const
+
+const kickerSx = {
+  fontSize: '0.72rem',
+  fontWeight: 800,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  color: brand.plantGreenDark,
+} as const
 
 function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: string; poster: string; title: string; playLabel: string; pauseLabel: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -58,11 +65,17 @@ function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: st
 
   return (
     <Box
+      className="about-video"
       sx={{
         position: 'relative',
-        borderRadius: { xs: '18px', md: '24px' },
+        width: '100%',
+        maxWidth: 300,
+        mx: { xs: 'auto', md: 0 },
+        borderRadius: '28px',
         overflow: 'hidden',
         bgcolor: brand.graphite,
+        boxShadow: brand.shadowHover,
+        '&:hover .about-video-toggle, &:focus-within .about-video-toggle': { opacity: 1 },
       }}
     >
       <Box
@@ -90,26 +103,27 @@ function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: st
         onLoadedData={() => {
           void tryPlay()
         }}
-        sx={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', display: 'block' }}
+        sx={{ width: '100%', aspectRatio: '9 / 16', objectFit: 'cover', display: 'block' }}
       />
       <IconButton
+        className="about-video-toggle"
         onClick={toggle}
         aria-label={playing ? pauseLabel : playLabel}
         sx={{
           position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 64,
-          height: 64,
+          right: 12,
+          bottom: 12,
+          width: 44,
+          height: 44,
           bgcolor: 'rgba(28, 35, 30, 0.72)',
           color: brand.white,
           opacity: playing ? 0 : 1,
-          transition: 'opacity 0.2s ease, background-color 0.2s ease',
-          '&:hover': { bgcolor: brand.plantGreen, opacity: 1 },
+          transition: 'opacity 0.2s ease',
+          '@media (hover: none)': { opacity: 1 },
+          '&:hover': { bgcolor: brand.plantGreen },
         }}
       >
-        {playing ? <PauseRounded sx={{ fontSize: 32 }} /> : <PlayArrowRounded sx={{ fontSize: 36 }} />}
+        {playing ? <PauseRounded /> : <PlayArrowRounded sx={{ ml: '2px' }} />}
       </IconButton>
     </Box>
   )
@@ -127,237 +141,257 @@ export default function AboutPage() {
 
   return (
     <main>
-      <Box component="section" sx={{ background: brand.gradientHero, overflow: 'hidden' }}>
-        <Grid container sx={{ alignItems: 'stretch' }}>
-          <Grid
-            size={{ xs: 12, md: 6 }}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              py: { xs: 3.5, md: 6 },
-            }}
-          >
-            <Box
-              sx={{
-                width: '100%',
-                maxWidth: 540,
-                mx: { xs: 0, md: 'auto' },
-                px: pagePaddingX,
-                pr: { md: 5 },
-              }}
-            >
-              <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 2.5, md: 3 } }}>
-                <Link component={RouterLink} to="/" underline="hover" sx={{ color: brand.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
-                  {t('pdp.home')}
-                </Link>
-                <NavigateNextRounded sx={{ fontSize: 16, color: brand.textSecondary }} />
-                <Typography sx={{ color: brand.graphite, fontSize: '0.85rem', fontWeight: 700 }}>{t('nav.about')}</Typography>
-              </Stack>
+      <SectionContainer bgcolor={brand.surface} py={{ xs: 2.5, sm: 4, md: 6 }}>
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mb: { xs: 2.5, md: 4 } }}>
+          <Link component={RouterLink} to="/" underline="hover" sx={{ color: brand.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
+            {t('pdp.home')}
+          </Link>
+          <NavigateNextRounded sx={{ fontSize: 16, color: brand.textSecondary }} />
+          <Typography sx={{ color: brand.graphite, fontSize: '0.85rem', fontWeight: 700 }}>{t('nav.about')}</Typography>
+        </Stack>
 
-              <Typography
-                sx={{
-                  fontSize: '0.72rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: brand.plantGreenDark,
-                  mb: 1.75,
-                }}
-              >
-                {t('aboutPage.eyebrow')}
-              </Typography>
-              <Typography
-                component="h1"
-                sx={{
-                  fontFamily: '"Fraunces", Georgia, serif',
-                  fontWeight: 600,
-                  fontSize: { xs: '2.6rem', sm: '3.4rem', md: '3.9rem' },
-                  letterSpacing: '-0.04em',
-                  lineHeight: 0.96,
-                  color: brand.graphite,
-                  mb: 2,
-                }}
-              >
-                {t('aboutPage.title')}
-              </Typography>
-              <Typography sx={{ color: brand.textSecondary, fontSize: { xs: '1.05rem', md: '1.12rem' }, lineHeight: 1.65, mb: 3, maxWidth: 440 }}>
-                {t('aboutPage.lead')}
-              </Typography>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25}>
-                <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} fullWidth sx={{ px: 3.5, maxWidth: { sm: 'none' } }}>
-                  {t('nav.buyNow')}
-                </Button>
-                <Button variant="outlined" size="large" href={resolveHref(navHrefs.howItWorks)} fullWidth sx={{ px: 3.5, maxWidth: { sm: 'none' } }}>
-                  {t('nav.howItWorks')}
-                </Button>
-              </Stack>
-            </Box>
-          </Grid>
-
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box sx={{ px: { xs: pagePaddingX.xs, sm: pagePaddingX.sm, md: 0 }, pb: { xs: 3.5, md: 0 }, height: { md: '100%' } }}>
-                <MediaImg
-                  src={heroImage}
-                  preset="hero"
-                  alt={t('aboutPage.title')}
-                sx={{
-                  width: '100%',
-                  height: { xs: 'auto', md: '100%' },
-                  minHeight: { md: '100%' },
-                  aspectRatio: { xs: '4 / 3', md: 'unset' },
-                  objectFit: 'cover',
-                  objectPosition: objectPositionForKey(images, 'about.hero', 'main'),
-                  display: 'block',
-                  borderRadius: { xs: '20px', md: 0 },
-                }}
-              />
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <SectionContainer bgcolor={brand.cream} py={{ xs: 6, sm: 7, md: 8 }}>
-        <Typography
+        <Box
           sx={{
-            fontSize: '0.72rem',
-            fontWeight: 800,
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
-            color: brand.plantGreen,
-            mb: 1.5,
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.05fr) minmax(280px, 0.95fr)' },
+            gap: { xs: 2.5, md: 6 },
+            alignItems: 'center',
           }}
         >
-          {t('aboutPage.missionKicker')}
-        </Typography>
+          <Box sx={{ minWidth: 0 }}>
+            <Typography sx={{ ...kickerSx, mb: 1.25 }}>{t('aboutPage.eyebrow')}</Typography>
+            <Typography
+              component="h1"
+              sx={{
+                fontFamily: serif,
+                fontWeight: 600,
+                fontSize: { xs: '2.35rem', sm: '3rem', md: '3.6rem' },
+                letterSpacing: '-0.03em',
+                lineHeight: 1.02,
+                color: brand.graphite,
+                mb: 1.75,
+                maxWidth: 560,
+              }}
+            >
+              {t('aboutPage.title')}
+            </Typography>
+            <Typography sx={{ color: brand.textSecondary, fontSize: { xs: '1.02rem', md: '1.12rem' }, lineHeight: 1.6, maxWidth: 480, mb: 2.75 }}>
+              {t('aboutPage.lead')}
+            </Typography>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25}>
+              <Button component={RouterLink} to={navHrefs.buy} variant="contained" size="large" sx={{ minHeight: 48 }}>
+                {t('nav.buyNow')}
+              </Button>
+              <Button component={RouterLink} to={navHrefs.howItWorks} variant="outlined" size="large" sx={{ minHeight: 48 }}>
+                {t('nav.howItWorks')}
+              </Button>
+            </Stack>
+          </Box>
+          <MediaImg
+            src={heroImage}
+            preset="hero"
+            alt={t('aboutPage.title')}
+            sx={{
+              width: '100%',
+              minWidth: 0,
+              aspectRatio: { xs: '4 / 3', md: '5 / 4' },
+              objectFit: 'cover',
+              objectPosition: objectPositionForKey(images, 'about.hero', 'main'),
+              display: 'block',
+              borderRadius: { xs: '22px', md: '28px' },
+              boxShadow: brand.shadow,
+            }}
+          />
+        </Box>
+      </SectionContainer>
+
+      <SectionContainer bgcolor={brand.cream} py={{ xs: 4, sm: 6, md: 8 }}>
+        <Typography sx={{ ...kickerSx, mb: 1.25 }}>{t('aboutPage.missionKicker')}</Typography>
         <Typography
+          component="h2"
           sx={{
-            fontFamily: '"Fraunces", Georgia, serif',
+            fontFamily: serif,
             fontWeight: 600,
-            fontSize: { xs: '1.85rem', md: '2.55rem' },
-            lineHeight: 1.15,
+            fontSize: { xs: '1.85rem', sm: '2.35rem', md: '2.75rem' },
+            lineHeight: 1.12,
             letterSpacing: '-0.03em',
             color: brand.graphite,
             whiteSpace: 'pre-line',
-            mb: { xs: 4, md: 5 },
-            maxWidth: 640,
+            maxWidth: 680,
+            mb: 1.5,
           }}
         >
           {t('aboutPage.quote')}
         </Typography>
-
-        <Grid container spacing={{ xs: 3.5, md: 5 }}>
-          {pillarKeys.map((key, index) => (
-            <Grid key={key} size={{ xs: 12, md: 4 }}>
-              <Box sx={{ borderTop: `1.5px solid ${brand.plantGreen}`, pt: 2 }}>
-                <Typography sx={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.08em', color: brand.plantGreen, mb: 0.75 }}>
-                  {String(index + 1).padStart(2, '0')}
-                </Typography>
-                <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '1.35rem', color: brand.graphite, mb: 0.75 }}>
-                  {t(`aboutPage.pillars.${key}.title`)}
-                </Typography>
-                <Typography sx={{ color: brand.textSecondary, fontSize: '0.98rem', lineHeight: 1.65 }}>
-                  {t(`aboutPage.pillars.${key}.text`)}
-                </Typography>
-              </Box>
-            </Grid>
+        <Typography sx={{ color: brand.graphite, fontSize: { xs: '1rem', md: '1.08rem' }, lineHeight: 1.65, maxWidth: 720, mb: { xs: 3, md: 4 } }}>
+          {t('aboutPage.missionBody')}
+        </Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 1.5 }}>
+          {missionPointKeys.map((key) => (
+            <Box key={key} sx={{ bgcolor: brand.white, borderRadius: '22px', p: { xs: 2, md: 2.5 }, borderTop: `3px solid ${brand.plantGreen}` }}>
+              <Typography sx={{ fontFamily: serif, fontWeight: 600, fontSize: '1.3rem', color: brand.graphite, mb: 0.75, lineHeight: 1.2 }}>
+                {t(`aboutPage.missionPoints.${key}.title`)}
+              </Typography>
+              <Typography sx={{ color: brand.textSecondary, fontSize: '0.95rem', lineHeight: 1.55 }}>
+                {t(`aboutPage.missionPoints.${key}.text`)}
+              </Typography>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </SectionContainer>
 
-      <Box component="section" sx={{ bgcolor: brand.graphiteSoft, py: { xs: 5, md: 7 } }}>
-        <Box sx={{ maxWidth: 1400, mx: 'auto', px: pagePaddingX }}>
-          <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.72)', mb: 2 }}>
-            {t('aboutPage.videoBadge')}
-          </Typography>
-          <AboutDemoVideo
-            src={productVideo}
-            poster={productVideoPoster}
-            title={t('aboutPage.videoBadge')}
-            playLabel={t('aboutPage.playVideo')}
-            pauseLabel={t('aboutPage.pauseVideo')}
-          />
-        </Box>
-      </Box>
-
-      <SectionContainer bgcolor={brand.white} py={{ xs: 6, sm: 7, md: 8 }}>
-        <Grid container spacing={{ xs: 4, md: 7 }} sx={{ alignItems: 'center' }}>
-          <Grid size={{ xs: 12, md: 5 }}>
+      <SectionContainer py={{ xs: 4, sm: 6, md: 8 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '300px minmax(0, 1fr)' },
+            gap: { xs: 2.5, md: 6 },
+            alignItems: 'center',
+          }}
+        >
+          <Box sx={{ order: { xs: 2, md: 1 }, minWidth: 0 }}>
+            <AboutDemoVideo
+              src={productVideo}
+              poster={productVideoPoster}
+              title={t('aboutPage.videoBadge')}
+              playLabel={t('aboutPage.playVideo')}
+              pauseLabel={t('aboutPage.pauseVideo')}
+            />
+          </Box>
+          <Box sx={{ order: { xs: 1, md: 2 }, minWidth: 0 }}>
+            <Typography sx={{ ...kickerSx, mb: 1.25 }}>{t('aboutPage.videoBadge')}</Typography>
             <Typography
+              component="h2"
               sx={{
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: brand.plantGreen,
-                mb: 1.25,
+                fontFamily: serif,
+                fontWeight: 600,
+                fontSize: { xs: '1.7rem', md: '2.15rem' },
+                letterSpacing: '-0.02em',
+                color: brand.graphite,
+                lineHeight: 1.2,
+                maxWidth: 520,
               }}
             >
-              {t('aboutPage.storyKicker')}
+              {t('aboutPage.mission')}
             </Typography>
-            <Typography component="h2" variant="h2" sx={{ color: brand.graphite, mb: 2, fontSize: { xs: '1.85rem', md: '2.35rem' } }}>
+          </Box>
+        </Box>
+      </SectionContainer>
+
+      <SectionContainer bgcolor={brand.surface} py={{ xs: 4, sm: 6, md: 8 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 0.9fr) minmax(0, 1.1fr)' },
+            gap: { xs: 2.5, md: 6 },
+            alignItems: 'center',
+          }}
+        >
+          <Box sx={{ minWidth: 0 }}>
+            <Typography sx={{ ...kickerSx, mb: 1 }}>{t('aboutPage.storyKicker')}</Typography>
+            <Typography
+              component="h2"
+              sx={{
+                fontFamily: serif,
+                fontWeight: 600,
+                fontSize: { xs: '1.7rem', md: '2.2rem' },
+                letterSpacing: '-0.02em',
+                color: brand.graphite,
+                mb: 1.5,
+              }}
+            >
               {t('aboutPage.storyTitle')}
             </Typography>
-            <Typography sx={{ color: brand.textSecondary, fontSize: '1.02rem', lineHeight: 1.75, mb: 1.75 }}>
+            <Typography sx={{ color: brand.textSecondary, fontSize: '1.02rem', lineHeight: 1.65, mb: 1.5 }}>
               {t('aboutPage.story1')}
             </Typography>
-            <Typography sx={{ color: brand.textSecondary, fontSize: '1.02rem', lineHeight: 1.75, mb: 3.5 }}>
+            <Typography sx={{ color: brand.textSecondary, fontSize: '1.02rem', lineHeight: 1.65, mb: 2.5 }}>
               {t('aboutPage.story2')}
             </Typography>
-            <Stack direction="row" spacing={{ xs: 2.5, md: 4 }} sx={{ pt: 2.5, borderTop: `1px solid ${brand.border}` }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 1 }}>
               {statKeys.map((key) => (
-                <Box key={key}>
-                  <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: { xs: '1.25rem', md: '1.55rem' }, color: brand.graphite, lineHeight: 1.1 }}>
+                <Box key={key} sx={{ bgcolor: brand.white, borderRadius: '16px', border: `1px solid ${brand.border}`, px: 1.25, py: 1.15 }}>
+                  <Typography sx={{ fontFamily: serif, fontWeight: 600, fontSize: '1.25rem', color: brand.graphite, lineHeight: 1.1 }}>
                     {t(`aboutPage.stats.${key}.value`)}
                   </Typography>
-                  <Typography sx={{ color: brand.textSecondary, fontSize: '0.75rem', fontWeight: 600, mt: 0.4 }}>
+                  <Typography sx={{ color: brand.textSecondary, fontSize: '0.75rem', lineHeight: 1.3, mt: 0.4 }}>
                     {t(`aboutPage.stats.${key}.label`)}
                   </Typography>
                 </Box>
               ))}
-            </Stack>
-          </Grid>
-
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Reveal>
-                <MediaImg
-                  src={storyImage}
-                  preset="gallery"
-                  alt={t('aboutPage.storyTitle')}
-                  loading="lazy"
-                  decoding="async"
-                sx={{
-                  width: '100%',
-                  aspectRatio: { xs: '4 / 3', md: '5 / 4' },
-                  objectFit: 'cover',
-                  display: 'block',
-                  borderRadius: { xs: '18px', md: '24px' },
-                }}
-              />
-            </Reveal>
-          </Grid>
-        </Grid>
+            </Box>
+          </Box>
+          <MediaImg
+            src={storyImage}
+            preset="gallery"
+            alt={t('aboutPage.storyTitle')}
+            loading="lazy"
+            decoding="async"
+            sx={{
+              width: '100%',
+              minWidth: 0,
+              aspectRatio: { xs: '4 / 3', md: '5 / 4' },
+              objectFit: 'cover',
+              display: 'block',
+              borderRadius: { xs: '22px', md: '28px' },
+            }}
+          />
+        </Box>
       </SectionContainer>
 
-      <Box component="section" sx={{ background: brand.gradientCta, color: brand.white, py: { xs: 6.5, md: 8 } }}>
-        <Box sx={{ maxWidth: 560, mx: 'auto', px: pagePaddingX, textAlign: 'center' }}>
-          <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.85, mb: 1.5 }}>
+      <SectionContainer py={{ xs: 4, sm: 6, md: 8 }}>
+        <Typography sx={{ ...kickerSx, mb: 1 }}>{t('aboutPage.foundersKicker')}</Typography>
+        <Typography
+          component="h2"
+          sx={{
+            fontFamily: serif,
+            fontWeight: 600,
+            fontSize: { xs: '1.7rem', md: '2.35rem' },
+            letterSpacing: '-0.02em',
+            lineHeight: 1.15,
+            color: brand.graphite,
+            maxWidth: 680,
+            mb: 1.5,
+          }}
+        >
+          {t('aboutPage.foundersTitle')}
+        </Typography>
+        <Typography sx={{ color: brand.textSecondary, fontSize: '1.02rem', lineHeight: 1.65, maxWidth: 640, mb: { xs: 2.5, md: 3.5 } }}>
+          {t('aboutPage.foundersLead')}
+        </Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 1.5 }}>
+          {aimKeys.map((key, index) => (
+            <Box key={key} sx={{ bgcolor: brand.surface, borderRadius: '22px', p: { xs: 2, md: 2.5 } }}>
+              <Typography sx={{ fontFamily: serif, fontWeight: 600, color: brand.plantGreen, fontSize: '1.2rem', lineHeight: 1, mb: 1.25 }}>
+                0{index + 1}
+              </Typography>
+              <Typography sx={{ fontFamily: serif, fontWeight: 600, fontSize: '1.25rem', color: brand.graphite, mb: 0.75, lineHeight: 1.2 }}>
+                {t(`aboutPage.aims.${key}.title`)}
+              </Typography>
+              <Typography sx={{ color: brand.textSecondary, fontSize: '0.95rem', lineHeight: 1.55 }}>
+                {t(`aboutPage.aims.${key}.text`)}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </SectionContainer>
+
+      <Box component="section" sx={{ background: brand.gradientCta, color: brand.white, py: { xs: 4, sm: 5, md: 6 } }}>
+        <Box sx={{ maxWidth: 640, mx: 'auto', px: { xs: 2, sm: 3 }, textAlign: 'center' }}>
+          <Typography sx={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', opacity: 0.85, mb: 1 }}>
             {t('aboutPage.originEyebrow')}
           </Typography>
-          <Typography
-            component="h2"
-            sx={{
-              fontFamily: '"Fraunces", Georgia, serif',
-              fontWeight: 600,
-              fontSize: { xs: '1.85rem', md: '2.4rem' },
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-              mb: 1.75,
-            }}
-          >
+          <Typography component="h2" sx={{ fontFamily: serif, fontWeight: 600, fontSize: { xs: '1.7rem', md: '2.15rem' }, letterSpacing: '-0.02em', lineHeight: 1.15, mb: 1.25 }}>
             {t('aboutPage.originTitle')}
           </Typography>
-          <Typography sx={{ fontSize: '1.02rem', lineHeight: 1.7, opacity: 0.9, mb: 3.5 }}>{t('aboutPage.originText')}</Typography>
-          <Button variant="contained" size="large" component={RouterLink} to={navHrefs.buy} sx={{ px: 4.5, bgcolor: brand.white, color: brand.graphite, '&:hover': { bgcolor: brand.beige } }}>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.6, opacity: 0.92, mb: 2.5 }}>{t('aboutPage.originText')}</Typography>
+          <Button
+            component={RouterLink}
+            to={navHrefs.buy}
+            variant="contained"
+            size="large"
+            sx={{ minHeight: 48, bgcolor: brand.white, color: brand.graphite, '&:hover': { bgcolor: brand.beige } }}
+          >
             {t('aboutPage.ctaButton')}
           </Button>
         </Box>

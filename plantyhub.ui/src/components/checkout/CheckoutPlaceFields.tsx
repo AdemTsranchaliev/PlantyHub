@@ -79,6 +79,10 @@ export default function CheckoutPlaceFields({
     if (!bulgaria) return
     const code = bulgaria.code || 'BG'
     if (value.country === code && value.countryId === bulgaria.id) return
+    if (!value.countryId) {
+      onChange({ country: code, countryId: bulgaria.id })
+      return
+    }
     onChange({
       country: code,
       countryId: bulgaria.id,

@@ -6,26 +6,27 @@ export const campaignBundleCatalog: Record<
   { price: string; image: string; nameKey: string; packKey: string; imageFit?: 'cover' | 'contain' }
 > = {
   'herb-mix-12': {
-    price: '€19.99',
+    price: '€14.99',
     image: stockImages.outdoorDeck,
     nameKey: 'herb-mix-12',
     packKey: 'pack12',
     imageFit: 'cover',
   },
-  basil: { price: '€9.99', image: stockImages.basil, nameKey: 'basil', packKey: 'pack3', imageFit: 'contain' },
-  mint: { price: '€9.99', image: stockImages.mint, nameKey: 'mint', packKey: 'pack3', imageFit: 'contain' },
-  arugula: { price: '€9.99', image: stockImages.arugula, nameKey: 'arugula', packKey: 'pack3', imageFit: 'contain' },
+  basil: { price: '€14.99', image: stockImages.basil, nameKey: 'basil', packKey: 'pack3', imageFit: 'contain' },
+  mint: { price: '€14.99', image: stockImages.mint, nameKey: 'mint', packKey: 'pack3', imageFit: 'contain' },
+  arugula: { price: '€14.99', image: stockImages.arugula, nameKey: 'arugula', packKey: 'pack3', imageFit: 'contain' },
 }
 
 export const navHrefs = {
   product: '/#product',
-  howItWorks: '/#how-it-works',
+  howItWorks: '/how-it-works',
   pods: '/pods',
   accessories: '/accessories',
   about: '/about',
   blog: '/blog',
   faq: '/faq',
   learn: '/learn',
+  start: '/start',
   contact: '/contact',
   /** @deprecated use contact — kept for old links */
   support: '/contact',
@@ -91,7 +92,7 @@ export const socialProofImages = {
 export const gardensCatalog = [
   {
     id: 'homegarder-one',
-    price: '€99.00',
+    price: '€99.99',
     colors: [{ id: 'white', hex: '#FFFFFF' }],
     image: stockImages.homeGardenProduct,
     imageFit: 'cover' as const,
@@ -137,28 +138,28 @@ export const starterBundleDetailKeys = [
 
 /** PlantyHub Pods — seed capsule refills (3-pack) */
 export const seedPodsCatalog = [
-  { id: 'basil', packKey: 'pack3', price: '€9.99', image: stockImages.basil, imageFit: 'contain' as const },
-  { id: 'mint', packKey: 'pack3', price: '€9.99', image: stockImages.mint, imageFit: 'contain' as const },
-  { id: 'parsley', packKey: 'pack3', price: '€9.99', image: stockImages.parsley, imageFit: 'contain' as const },
-  { id: 'cilantro', packKey: 'pack3', price: '€9.99', image: stockImages.cilantro, imageFit: 'contain' as const },
-  { id: 'dill', packKey: 'pack3', price: '€9.99', image: stockImages.dill, imageFit: 'contain' as const },
-  { id: 'arugula', packKey: 'pack3', price: '€9.99', image: stockImages.arugula, imageFit: 'contain' as const },
-  { id: 'thyme', packKey: 'pack3', price: '€9.99', image: stockImages.thyme, imageFit: 'cover' as const },
-  { id: 'oregano', packKey: 'pack3', price: '€9.99', image: stockImages.oregano, imageFit: 'cover' as const },
-  { id: 'rosemary', packKey: 'pack3', price: '€9.99', image: stockImages.rosemary, imageFit: 'cover' as const },
-  { id: 'chives', packKey: 'pack3', price: '€9.99', image: stockImages.chives, imageFit: 'contain' as const },
-  { id: 'chili', packKey: 'pack3', price: '€9.99', image: stockImages.chili, imageFit: 'contain' as const },
+  { id: 'basil', packKey: 'pack3', price: '€14.99', image: stockImages.basil, imageFit: 'contain' as const },
+  { id: 'mint', packKey: 'pack3', price: '€14.99', image: stockImages.mint, imageFit: 'contain' as const },
+  { id: 'parsley', packKey: 'pack3', price: '€14.99', image: stockImages.parsley, imageFit: 'contain' as const },
+  { id: 'cilantro', packKey: 'pack3', price: '€14.99', image: stockImages.cilantro, imageFit: 'contain' as const },
+  { id: 'dill', packKey: 'pack3', price: '€14.99', image: stockImages.dill, imageFit: 'contain' as const },
+  { id: 'arugula', packKey: 'pack3', price: '€14.99', image: stockImages.arugula, imageFit: 'contain' as const },
+  { id: 'thyme', packKey: 'pack3', price: '€14.99', image: stockImages.thyme, imageFit: 'cover' as const },
+  { id: 'oregano', packKey: 'pack3', price: '€14.99', image: stockImages.oregano, imageFit: 'cover' as const },
+  { id: 'rosemary', packKey: 'pack3', price: '€14.99', image: stockImages.rosemary, imageFit: 'cover' as const },
+  { id: 'chives', packKey: 'pack3', price: '€14.99', image: stockImages.chives, imageFit: 'contain' as const },
+  { id: 'chili', packKey: 'pack3', price: '€14.99', image: stockImages.chili, imageFit: 'contain' as const },
   {
     id: 'herb-mix-12',
     packKey: 'pack12',
-    price: '€19.99',
+    price: '€14.99',
     image: stockImages.outdoorDeck,
     imageFit: 'cover' as const,
   },
   {
     id: 'spice-mix-12',
     packKey: 'pack12',
-    price: '€19.99',
+    price: '€14.99',
     image: stockImages.spiceMix,
     imageFit: 'cover' as const,
   },
@@ -246,7 +247,8 @@ export const pressArticleImages = blogArticleImages
 export const homeGardenSpecKeys = ['pods', 'irrigation', 'lightCycle', 'qr'] as const
 
 export const footerLinkKeys = {
-  nav: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'blog', 'learn', 'faq', 'contact'] as const,
+  nav: ['product', 'howItWorks', 'pods', 'accessories', 'about', 'contact'] as const,
+  guides: ['faq', 'learn', 'blog', 'instructions'] as const,
   legal: ['privacy', 'cookies', 'terms'] as const,
 }
 
@@ -260,7 +262,7 @@ export const socialLinks = [
 
 export const campaignHeroImage = stockImages.heroKitchen
 export const homeGardenImage = stockImages.homeGardenProduct
-export const homeGardenPrice = '€99.00'
+export const homeGardenPrice = '€99.99'
 export const starterBundlePrice = '€129.00'
 export const podsKitPrice = '€39.90'
 

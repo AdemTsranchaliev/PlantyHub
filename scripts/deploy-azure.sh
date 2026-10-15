@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deploy UI (site root) + API (/api) to Azure App Service.
-# Publish password lives in .azure-publish (gitignored). On 401 the script asks for a new one.
+# Uses the signed-in Azure CLI. SCM basic auth is disabled on this app.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,9 +9,11 @@ PUBLISH_DIR="$ROOT/publish"
 ZIP="$ROOT/deploy.zip"
 SECRETS="$HOME/.microsoft/usersecrets/8f3c1a2e-9d4b-4e71-a6c8-2b1f0e7d5c94/secrets.json"
 
-AZURE_SCM_HOST="${AZURE_SCM_HOST:-plantyhubsite-fpg0ctgyfdcya9cx.scm.westeurope-01.azurewebsites.net}"
-AZURE_PUBLISH_USER="${AZURE_PUBLISH_USER:-\$PlantyHubSite}"
-AZURE_SITE_URL="${AZURE_SITE_URL:-https://plantyhubsite-fpg0ctgyfdcya9cx.westeurope-01.azurewebsites.net}"
+AZURE_RESOURCE_GROUP="${AZURE_RESOURCE_GROUP:-plantyhub-site_group}"
+AZURE_APP_NAME="${AZURE_APP_NAME:-plantyhub-site}"
+AZURE_SCM_HOST="${AZURE_SCM_HOST:-plantyhub-site-d4c5aqddbxbde3a3.scm.italynorth-01.azurewebsites.net}"
+AZURE_PUBLISH_USER="${AZURE_PUBLISH_USER:-\$plantyhub-site}"
+AZURE_SITE_URL="${AZURE_SITE_URL:-https://plantyhub-site-d4c5aqddbxbde3a3.italynorth-01.azurewebsites.net}"
 
 load_cred() {
   if [[ -f "$CRED" ]]; then
@@ -125,15 +127,12 @@ PY
 }
 
 zipdeploy() {
-  local code
-  code="$(
-    curl -4 --http1.1 --max-time 180 -sS -o /tmp/plantyhub-zipdeploy.body -w '%{http_code}' \
-      -X POST --data-binary @"$ZIP" \
-      -H 'Content-Type: application/octet-stream' \
-      -u "${AZURE_PUBLISH_USER}:${AZURE_PUBLISH_PASSWORD}" \
-      "https://${AZURE_SCM_HOST}/api/zipdeploy?isAsync=true"
-  )"
-  printf '%s' "$code"
+  az webapp deploy \
+    --resource-group "$AZURE_RESOURCE_GROUP" \
+    --name "$AZURE_APP_NAME" \
+    --src-path "$ZIP" \
+    --type zip \
+    --timeout 600000
 }
 
 wait_deploy() {
@@ -177,41 +176,13 @@ verify() {
 }
 
 deploy_once() {
-  local code
-  code="$(zipdeploy)"
-  echo "→ ZipDeploy HTTP $code"
-  if [[ "$code" == "401" || "$code" == "403" ]]; then
-    return 77
-  fi
-  if [[ "$code" != "200" && "$code" != "202" ]]; then
-    echo "ZipDeploy failed:" >&2
-    head -c 400 /tmp/plantyhub-zipdeploy.body >&2 || true
-    echo >&2
-    return 1
-  fi
-  wait_deploy
+  zipdeploy
   verify
 }
 
-ensure_password
+load_cred
 build
-
-while true; do
-  set +e
-  deploy_once
-  status=$?
-  set -e
-  if [[ "$status" -eq 0 ]]; then
-    echo
-    echo "Live: $AZURE_SITE_URL"
-    echo "API:  $AZURE_SITE_URL/api/products"
-    exit 0
-  fi
-  if [[ "$status" -eq 77 ]]; then
-    echo "Publish password rejected (HTTP 401/403)."
-    ask_password
-    load_cred
-    continue
-  fi
-  exit "$status"
-done
+deploy_once
+echo
+echo "Live: $AZURE_SITE_URL"
+echo "API:  $AZURE_SITE_URL/api/products"

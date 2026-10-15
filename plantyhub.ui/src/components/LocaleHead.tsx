@@ -67,12 +67,26 @@ export default function LocaleHead() {
     const path = publicPath(pathname)
     const skipTitle = path.startsWith('/pods/')
     const isContact = path === '/contact'
+    const isStart = path === '/start'
+    const isHow = path === '/how-it-works'
     if (!skipTitle) {
-      document.title = isContact ? `${t('supportPage.heroTitle')} · PlantyHub` : t('seo.title')
+      document.title = isContact
+        ? `${t('supportPage.heroTitle')} · PlantyHub`
+        : isStart
+          ? `${t('startPage.title')} · PlantyHub`
+          : isHow
+            ? `${t('howPage.title')} · PlantyHub`
+            : t('seo.title')
     }
     upsertMeta(
       'description',
-      isContact ? `${t('supportPage.subtitle')} ${t('supportPage.responseText')}` : t('seo.description'),
+      isContact
+        ? `${t('supportPage.subtitle')} ${t('supportPage.responseText')}`
+        : isStart
+          ? t('startPage.lead')
+          : isHow
+            ? t('howPage.lead')
+            : t('seo.description'),
     )
     upsertMeta('robots', isPrivatePath(path) ? 'noindex, follow' : 'index, follow')
 

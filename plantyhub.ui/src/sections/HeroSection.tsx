@@ -2,7 +2,6 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import StarRounded from '@mui/icons-material/StarRounded'
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
 import LocalShippingOutlined from '@mui/icons-material/LocalShippingOutlined'
 import { Link as RouterLink } from 'react-router-dom'
@@ -83,7 +82,6 @@ export default function HeroSection() {
   const garden = useProduct('gardens', 'homegarder-one')
   const images = useHomepageImages()
   const heroImage = useHi('hero.main', garden?.image ?? stockImages.homeGardenProduct)
-  const badge = useHt('hero.badge')
   const title = useHt('hero.title')
   const promise = useHt('hero.promise')
   const description = useHt('hero.description')
@@ -125,31 +123,6 @@ export default function HeroSection() {
         }}
       >
         <Box sx={{ maxWidth: 520 }}>
-          <Stack
-            direction="row"
-            spacing={0.75}
-            useFlexGap
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              border: `1px solid ${brand.border}`,
-              bgcolor: brand.white,
-              boxShadow: brand.shadow,
-              borderRadius: 999,
-              pl: 0.85,
-              pr: 1.4,
-              py: 0.4,
-              mb: { xs: 2, md: 2.5 },
-            }}
-          >
-            <Stack direction="row" sx={{ color: brand.peach }}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <StarRounded key={i} sx={{ fontSize: 15 }} />
-              ))}
-            </Stack>
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: brand.graphite, lineHeight: 1.2 }}>{badge}</Typography>
-          </Stack>
-
           {priceLabel ? (
             <Typography
               sx={{

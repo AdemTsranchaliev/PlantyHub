@@ -17,8 +17,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import { pagePaddingX } from './SectionContainer'
-import { trackingEnabled } from '../analytics/config'
-import { openCookieSettings } from '../analytics/consent'
+import { trackingEnabled } from '../measure/config'
+import { openCookieSettings } from '../measure/consent'
 import { footerLinkKeys, navHrefs, socialLinks } from '../data/catalog'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
@@ -29,10 +29,14 @@ const navHrefsMap: Record<(typeof footerLinkKeys.nav)[number], string> = {
   pods: navHrefs.pods,
   accessories: navHrefs.accessories,
   about: navHrefs.about,
-  blog: navHrefs.blog,
-  learn: navHrefs.learn,
-  faq: navHrefs.faq,
   contact: navHrefs.contact,
+}
+
+const guideHrefs: Record<(typeof footerLinkKeys.guides)[number], string> = {
+  faq: navHrefs.faq,
+  learn: navHrefs.learn,
+  blog: navHrefs.blog,
+  instructions: navHrefs.start,
 }
 
 const legalHrefs: Record<(typeof footerLinkKeys.legal)[number], string> = {
@@ -166,7 +170,7 @@ export default function Footer() {
     >
       <Box sx={{ maxWidth: 1400, mx: 'auto', px: pagePaddingX }}>
         <Grid container spacing={{ xs: 4, md: 3 }} sx={{ mb: 5 }}>
-          <Grid size={{ xs: 12, md: 4 }}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <Box sx={{ mb: 3, filter: 'brightness(0) invert(1)' }}>
               <Logo size="lg" />
             </Box>
@@ -215,7 +219,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid size={{ xs: 6, sm: 4, md: 3 }}>
+          <Grid size={{ xs: 6, sm: 3, md: 2 }}>
             <Typography variant="subtitle2" sx={sectionTitleSx}>
               {t('footer.linksTitle')}
             </Typography>
@@ -228,7 +232,20 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid size={{ xs: 6, sm: 4, md: 2 }}>
+          <Grid size={{ xs: 6, sm: 3, md: 2 }}>
+            <Typography variant="subtitle2" sx={sectionTitleSx}>
+              {t('footer.guidesTitle')}
+            </Typography>
+            <Stack spacing={1}>
+              {footerLinkKeys.guides.map((linkKey) => (
+                <Link key={linkKey} href={resolveHref(guideHrefs[linkKey])} underline="hover" sx={linkSx}>
+                  {t(`footer.links.${linkKey}`)}
+                </Link>
+              ))}
+            </Stack>
+          </Grid>
+
+          <Grid size={{ xs: 6, sm: 3, md: 2 }}>
             <Typography variant="subtitle2" sx={sectionTitleSx}>
               {t('footer.legalTitle')}
             </Typography>
@@ -251,7 +268,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid size={{ xs: 12, sm: 4, md: 3 }}>
+          <Grid size={{ xs: 6, sm: 3, md: 3 }}>
             <Typography variant="subtitle2" sx={sectionTitleSx}>
               {t('footer.contactTitle')}
             </Typography>
@@ -317,9 +334,6 @@ export default function Footer() {
         >
           <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem' }}>
             {t('footer.rights', { year })}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.82rem' }}>
-            {t('footer.madeWith')}
           </Typography>
         </Box>
       </Box>

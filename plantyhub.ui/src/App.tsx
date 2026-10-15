@@ -21,6 +21,7 @@ import { brand } from './theme'
 const ProductPage = lazy(() => import('./pages/ProductPage'))
 const PodsPage = lazy(() => import('./pages/PodsPage'))
 const PodDetailPage = lazy(() => import('./pages/PodDetailPage'))
+const AccessoryDetailPage = lazy(() => import('./pages/AccessoryDetailPage'))
 const AccessoriesPage = lazy(() => import('./pages/AccessoriesPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
@@ -28,6 +29,8 @@ const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'))
 const SupportPage = lazy(() => import('./pages/SupportPage'))
 const FaqPage = lazy(() => import('./pages/FaqPage'))
 const LearnPage = lazy(() => import('./pages/LearnPage'))
+const HowPage = lazy(() => import('./pages/HowPage'))
+const StartPage = lazy(() => import('./pages/StartPage'))
 const LegalPage = lazy(() => import('./pages/LegalPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
@@ -89,6 +92,7 @@ function StorefrontRoutes() {
           <Route path="/pods" element={<PodsPage />} />
           <Route path="/pods/:id" element={<PodDetailPage />} />
           <Route path="/accessories" element={<AccessoriesPage />} />
+          <Route path="/accessories/:id" element={<AccessoryDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogArticlePage />} />
@@ -96,6 +100,8 @@ function StorefrontRoutes() {
           <Route path="/support" element={<Navigate to="/contact" replace />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/learn" element={<LearnPage />} />
+          <Route path="/how-it-works" element={<HowPage />} />
+          <Route path="/start" element={<StartPage />} />
           <Route path="/privacy" element={<LegalPage doc="privacy" />} />
           <Route path="/cookies" element={<LegalPage doc="cookies" />} />
           <Route path="/terms" element={<LegalPage doc="terms" />} />

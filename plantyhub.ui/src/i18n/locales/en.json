@@ -1,8 +1,8 @@
 {
-  "promo": "FREE SHIPPING OVER €150 · DELIVERED ACROSS THE EU & BALKANS",
+  "promo": "FREE SHIPPING OVER €150 · BULGARIA ONLY",
   "seo": {
     "title": "PlantyHub — Smart Hydroponic Indoor Garden",
-    "description": "PlantyHub Home Garden: 12-pod smart hydroponic kit with LED grow lights and automatic irrigation. Grow basil, mint, lettuce and more at home."
+    "description": "PlantyHub HomeGarder One: 12-pod smart hydroponic garden with LED light and automatic watering. Grow basil, mint, parsley and more at home."
   },
   "nav": {
     "product": "Product",
@@ -42,15 +42,15 @@
   },
   "hero": {
     "title": "Fresh herbs, grown at home",
-    "promise": "From seed to seasoning in 18 days",
+    "promise": "Grow the plants you love, easily, all year round.",
     "description": "12-pod smart garden with self-watering and automatic LED light.",
     "ctaPrimary": "Buy now",
     "ctaSecondary": "How it works",
     "priceLabel": "HomeGarder One",
     "imageAlt": "PlantyHub HomeGarder One with fresh herbs",
-    "badge": "4.9/5 · 500+ growers",
+    "badge": "12 pods · LED 16/8",
     "trust": {
-      "shipping": "Free EU shipping over €150",
+      "shipping": "Free shipping over €150 in Bulgaria",
       "guarantee": "Sprouting guarantee",
       "setup": "Ready in 5 minutes"
     },
@@ -72,16 +72,16 @@
   "product": {
     "eyebrow": "Product",
     "title": "PlantyHub HomeGarder One",
-    "description": "12 pods, full-spectrum LED and self-watering — ready for your counter.",
+    "description": "12 growing holes, full-spectrum LED and self-watering — ready for your counter.",
     "cta": "Add to cart",
     "trust": {
-      "shipping": "Free shipping over €150",
+      "shipping": "Free shipping over €150 in Bulgaria",
       "guarantee": "Sprouting guarantee",
       "returns": "30-day returns"
     },
     "specs": {
       "pods": "Growing holes",
-      "podsValue": "12 capsules",
+      "podsValue": "12 holes",
       "light": "Light",
       "lightValue": "Full-spectrum LED · 16h on / 8h off",
       "growthHeight": "Growth height",
@@ -89,7 +89,7 @@
       "irrigation": "Watering",
       "irrigationValue": "Automatic hydroponic",
       "nutrients": "Nutrients",
-      "nutrientsValue": "Sana A + B (included in starter kit)",
+      "nutrientsValue": "Solution A and B, 100 ml each",
       "dimensions": "Dimensions",
       "dimensionsValue": "39.5 × 19.8 × 18.7 cm"
     }
@@ -154,9 +154,9 @@
     }
   },
   "socialProof": {
-    "stat": "500+",
-    "statLabel": "happy growers",
-    "subtitle": "Loved by home gardeners across Europe.",
+    "stat": "",
+    "statLabel": "",
+    "subtitle": "Fresh herbs on your counter, all year round.",
     "reviews": {
       "elena": "Morning mint tea from my own garden — nothing beats it.",
       "urbanherbs": "Perfect if you usually kill plants. It just works.",
@@ -174,7 +174,7 @@
       },
       "addSolution": {
         "title": "Add water",
-        "description": "Fill and dose Sana A & B."
+        "description": "Fill the tank and add nutrient solution A and B."
       },
       "turnOn": {
         "title": "Turn it on",
@@ -182,7 +182,7 @@
       },
       "harvest": {
         "title": "Harvest",
-        "description": "Fresh herbs in ~18 days."
+        "description": "Watch them grow. Pick when they're ready."
       }
     }
   },
@@ -236,7 +236,7 @@
       },
       "diyKit": {
         "title": "Plant Yourself kit",
-        "description": "12 ready capsules (peel and place), Sana A & B (100 ml each) and 12 germination caps."
+        "description": "12 ready capsules (peel and place), nutrient solution A and B (100 ml each) and 12 germination caps."
       },
       "unifiedShipping": {
         "title": "One shipping box",
@@ -251,7 +251,7 @@
       "dill": "Dill ×2",
       "arugula": "Arugula ×2",
       "emptyCapsules": "12 capsules",
-      "sanaAb": "Sana A + B (100 ml)",
+      "sanaAb": "Solution A + B (100 ml)",
       "germCaps": "12 germ caps",
       "instructions": "Dosing instructions"
     }
@@ -260,7 +260,8 @@
     "eyebrow": "Our gardens",
     "title": "Built for everyday kitchens",
     "subtitle": "Our indoor gardens let you grow like a pro — without the knowing-what-you're-doing part.",
-    "discoverAll": "Discover all gardens"
+    "discoverAll": "Discover all gardens",
+    "discoverPods": "See all pods"
   },
   "podsSection": {
     "eyebrow": "PlantyHub Pods",
@@ -327,15 +328,35 @@
   "accessoriesPage": {
     "eyebrow": "Accessories",
     "title": "Accessories",
-    "subtitle": "Everything to expand and care for your indoor garden — stylish stands, shelves and handy tools."
+    "subtitle": "Everything to expand and care for your indoor garden — stylish stands, shelves and handy tools.",
+    "relatedTitle": "More accessories"
   },
   "aboutPage": {
     "eyebrow": "Our mission",
     "title": "The future is here",
-    "lead": "Growing can be easy and modern. Fresh herbs on your counter — no garden, no soil, no expertise required.",
-    "missionKicker": "Why we exist",
-    "quote": "Easier. More modern.\nA harvest at home.",
-    "mission": "We want every home to pick fresh flavour — not after years of practice, but from week one. The future of growing is on your counter.",
+    "lead": "You can live in an apartment and still have a garden — no yard and no digging. Many plants, faster than the season, and a lesson a child can see.",
+    "missionKicker": "Our mission",
+    "quote": "A garden without a yard.\nAnd without digging.",
+    "missionBody": "Our mission is for every home to have a garden, even when that home is an apartment. You do not need a yard, a bed or a spade. You need a counter. The light is the same every day, so it grows faster than the season outside, and 12 slots grow many things at once. A child can place the pod, watch the sprout and pick. The future of food is not somewhere outside. It is in the kitchen.",
+    "mission": "The garden fits in an apartment. No digging, and clear enough to show a child.",
+    "missionPoints": {
+      "home": {
+        "title": "An apartment is enough",
+        "text": "You do not need a garden outside, a balcony full of beds or a house with a yard. The garden sits on the kitchen counter and takes the space of a tray. You live on a floor and you still harvest your own. The season outside the window does not decide what is on the plate."
+      },
+      "dig": {
+        "title": "Nothing gets dug",
+        "text": "No spade, no soil on the floor and no pots to drag toward the light. You add water and a pod. The lamp keeps its cycle and the watering starts on its own. Your hands pick. They do not dig."
+      },
+      "child": {
+        "title": "A lesson you can pick",
+        "text": "A child sees how food begins. They place the pod, watch the first sprout and then pick a leaf that is actually eaten. They learn where a meal comes from — not from a lecture, but from something they grew."
+      },
+      "grow": {
+        "title": "Faster, and many at once",
+        "text": "12 plants in one kitchen, without waiting for spring. Sprouts start in days, the first harvest comes in weeks. If a pod does not sprout and you followed the steps, we send a new one."
+      }
+    },
     "pillars": {
       "easy": {
         "title": "Easier",
@@ -347,13 +368,13 @@
       },
       "home": {
         "title": "Harvest at home",
-        "text": "Fresh flavour on your counter from the first week."
+        "text": "Fresh flavour on your counter, all year round."
       }
     },
     "storyKicker": "How it started",
-    "storyTitle": "From one kitchen to thousands of homes",
+    "storyTitle": "It started in one kitchen",
     "story1": "PlantyHub began in a small kitchen with one idea: make it effortless to grow real, fresh flavour indoors — all year round.",
-    "story2": "Today our smart gardens and pre-seeded pods help thousands of homes across Europe harvest fresh herbs in weeks — with nothing but water, light and a little care.",
+    "story2": "The garden and the pods are made so fresh herbs can grow at home — with water, light and a little care. For now we ship in Bulgaria.",
     "videoBadge": "See it grow",
     "playVideo": "Play video",
     "pauseVideo": "Pause video",
@@ -374,16 +395,33 @@
     },
     "stats": {
       "plants": {
-        "value": "500k+",
-        "label": "plants grown"
+        "value": "12",
+        "label": "growing holes"
       },
       "countries": {
-        "value": "12",
-        "label": "countries served"
+        "value": "16/8",
+        "label": "hours of light and rest"
       },
       "harvests": {
-        "value": "98%",
-        "label": "sprouting success"
+        "value": "BG",
+        "label": "delivery in Bulgaria"
+      }
+    },
+    "foundersKicker": "The people behind it",
+    "foundersTitle": "We wanted food to grow next to the plate",
+    "foundersLead": "We are the people behind PlantyHub. We are not agronomists by trade — we were just tired of herbs that wilt in two days. We wanted flavour you pick yourself, in the kitchen, when you need it.",
+    "aims": {
+      "wanted": {
+        "title": "What we wanted",
+        "text": "A garden that looks after itself. You add water and a pod, the lamp runs on its own, and in a few weeks you harvest. No yard, no soil, and no watching the season outside."
+      },
+      "next": {
+        "title": "What we want to build",
+        "text": "More than a garnish. More plants, better pods, and gardens with which a home grows part of its food. HomeGarder One is the first step. We are starting in Bulgaria."
+      },
+      "future": {
+        "title": "The future of food",
+        "text": "We believe the future of food is on the counter. Fresh, picked when you need it, with less travel and less thrown away. Growing at home will become normal, not a hobby for a few."
       }
     },
     "originEyebrow": "Ready to harvest",
@@ -497,7 +535,7 @@
   "consumablesSection": {
     "eyebrow": "Consumables",
     "title": "Capsules, nutrients & caps",
-    "subtitle": "Keep your garden going — empty capsules, Sana A & B, and germination caps."
+    "subtitle": "Keep your garden going — empty capsules, nutrient solution A and B, and germination caps."
   },
   "accessoriesSection": {
     "title": "Accessories",
@@ -591,8 +629,8 @@
     "subtitle": "Learn indoor gardening with us",
     "items": {
       "zero": {
-        "title": "Zero learning curve",
-        "description": "5 minutes to set up. A few days to sprout. A couple of weeks to harvest. No gardening skills needed."
+        "title": "Easy from the start",
+        "description": "Place the pods, add water and watch them grow. PlantyHub takes care of the rest."
       },
       "noSoil": {
         "title": "No soil, no doubt",
@@ -605,7 +643,7 @@
     }
   },
   "guarantees": {
-    "title": "Why people can't get enough of us",
+    "title": "Why choose PlantyHub?",
     "items": {
       "sprouting": {
         "title": "Sprouting guarantee",
@@ -739,7 +777,7 @@
         "name": "Empty Capsules"
       },
       "sana-ab": {
-        "name": "Sana A + B Nutrients"
+        "name": "Nutrient solution A + B"
       },
       "germination-caps": {
         "name": "Germination Caps"
@@ -759,7 +797,7 @@
   },
   "cta": {
     "title": "Start your first harvest",
-    "subtitle": "Starter bundle from {{price}}.",
+    "subtitle": "HomeGarder One · {{price}}",
     "emailPlaceholder": "Email for the offer",
     "button": "Get the offer"
   },
@@ -786,60 +824,61 @@
     "quantity": "Quantity",
     "videoBadge": "60-second demo",
     "videoTitle": "See HomeGarder One in action",
-    "videoText": "From unboxing to first harvest — watch how simple it is to set up, plant and grow fresh herbs on your counter.",
+    "videoText": "A short demo: water, pods and the lamp starting on its own.",
     "highlightsTitle": "Everything you need to grow",
-    "highlightsSubtitle": "One smart garden — soil-free, guesswork-free, year-round.",
+    "highlightsSubtitle": "No soil. The lamp and the pump do the daily work — on the counter, all year.",
     "features": {
       "easy": {
-        "title": "Easy",
-        "text": "No soil, no mess — just insert and grow."
+        "title": "No soil",
+        "text": "Nothing to dig, and no dirt on the counter. You add water and a pod."
       },
       "fast": {
-        "title": "Fast growth",
-        "text": "Tuned for quick, healthy harvests."
+        "title": "Within about 6 weeks",
+        "text": "Sprouts start in days. Arugula and basil can be cut from about 3 weeks, parsley around 5."
       },
       "smart": {
-        "title": "Smart system",
-        "text": "Built for PlantyHub indoor gardens."
+        "title": "It just plugs in",
+        "text": "The lamp stays on for 16 hours and rests for 8. The pump waters from the reservoir."
       },
       "natural": {
-        "title": "Natural",
-        "text": "Non-GMO, natural ingredients."
+        "title": "If it does not sprout",
+        "text": "If a pod does not sprout and you followed the steps, we send a new one."
       }
     },
     "howItWorksTitle": "How it works",
     "steps": [
-      "Drop the pod into your garden.",
-      "Add water & nutrients.",
-      "Snip a fresh harvest in weeks."
+      "Pour 4 L of water into the reservoir.",
+      "Add 5 ml of A, stir, then 5 ml of B.",
+      "Set the pods and germination caps, then turn the lamp on.",
+      "Harvest from about 3 weeks, and never take more than about a third at once."
     ],
     "specsTitle": "Full specifications",
     "inTheBox": "What's in the box",
     "inTheBoxItems": {
-      "garden": "HomeGarder One garden (matte white)",
-      "led": "Adjustable full-spectrum LED arm",
-      "pods": "3 starter seed pods",
-      "nutrients": "Sana A + B nutrient set",
-      "manual": "Quick-start guide & QR pod guides"
+      "garden": "HomeGarder One with a reservoir and 12 holes (matte white)",
+      "led": "LED lamp with an adjustable stand and power supply",
+      "pods": "12 seed pods and 12 germination caps",
+      "nutrients": "Nutrient solution A and B, 100 ml each",
+      "manual": "Dosing instructions and a QR guide"
     },
     "faqTitle": "Frequently asked questions",
     "faqSeeAll": "See all",
     "faqItems": [
       {
         "q": "Do I need any gardening experience?",
-        "a": "None at all. Drop in a pod, add water and nutrients, and the LED runs on an automatic 16/8 cycle. The pod guides walk you through every step."
+        "a": "No. Pour in 4 L of water, add 5 ml of A and then 5 ml of B, set the pods and plug it in. The lamp keeps 16 hours of light and 8 hours of rest on its own."
       },
       {
         "q": "How long until my first harvest?",
-        "a": "Most herbs and spices are ready to pick in about 2–3 weeks, and keep producing for months afterwards."
+        "a": "Sprouts start in days. Arugula and basil can be cut from about 3 weeks, mint, cilantro and dill from about 4, parsley from about 5. The first harvest is within about 6 weeks."
       },
       {
         "q": "How much electricity does it use?",
-        "a": "Very little — the full-spectrum LED is as efficient as a couple of household bulbs, roughly a few euros a month."
+        "a": "The lamp stays on for 16 hours and rests for 8. What that costs each month depends on your electricity price."
       },
       {
         "q": "What can I grow in it?",
-        "a": "Basil, mint, parsley, cilantro, dill, arugula and more — 12 pods at once. Any HomeGarder pod fits the slots."
+        "a": "Basil, mint, parsley, cilantro, dill and arugula — up to 12 holes at once."
       },
       {
         "q": "Is it covered by a warranty?",
@@ -877,6 +916,7 @@
     "shipping": "Shipping: Bulgaria only",
     "shippingNote": "Free shipping over €150. Prices in EUR.",
     "linksTitle": "Navigation",
+    "guidesTitle": "Help",
     "legalTitle": "Legal",
     "links": {
       "product": "Product",
@@ -890,12 +930,13 @@
       "terms": "Terms and conditions",
       "faq": "FAQ",
       "contact": "Contact",
-      "learn": "Learn"
+      "learn": "Learn",
+      "instructions": "Instructions"
     },
     "followUs": "Follow us",
     "contactTitle": "Contact",
     "address": "PlantyHub · Bulgaria",
-    "madeWith": "Grown with care in Bulgaria",
+    "madeWith": "",
     "payments": "Card payments are processed securely by Stripe.",
     "paymentsLabel": "Accepted payment methods",
     "cookieSettings": "Cookie settings",
@@ -1095,6 +1136,7 @@
     "deliveryMethod": "Courier and delivery",
     "quoting": "Econt is calculating the price…",
     "quoteFallback": "Pick a city from the Econt list to calculate delivery.",
+    "shippingUnavailable": "We couldn't calculate delivery for this city. Pick the city again.",
     "cheapest": "best price",
     "office": "Pickup office",
     "locker": "BOX NOW locker",
@@ -2360,7 +2402,7 @@
           },
           {
             "q": "What is in the box?",
-            "a": "The garden unit, LED arm, power supply, starter pods (depending on bundle), Sana A + B nutrients and a quick-start guide with QR instructions."
+            "a": "The garden unit, LED arm, power supply, starter pods (depending on bundle), nutrient solution A and B and a quick-start guide with QR instructions."
           },
           {
             "q": "How long does first setup take?",
@@ -2447,7 +2489,7 @@
             "a": "Store dry and cool in the original packaging. Check the date on the pack — do not use heavily expired pods."
           },
           {
-            "q": "What are Sana A and Sana B?",
+            "q": "What are solutions A and B?",
             "a": "A two-part nutrient system for hydroponics. Mix with water as directed — never mix concentrates together undiluted."
           },
           {
@@ -2585,7 +2627,7 @@
     "privacy": {
       "title": "Privacy policy",
       "eyebrow": "Legal",
-      "updated": "5 October 2026",
+      "updated": "13 October 2026",
       "lead": "This policy explains how ДИДЖИТАЛ КИТ ЕООД, the company behind the PlantyHub store (plantyhub.com), collects and uses personal data when you shop, create an account or contact us.",
       "sections": [
         {
@@ -2624,7 +2666,7 @@
             "Newsletter and a first-order promo code — only with consent, with an unsubscribe link in every such email",
             "A review invitation after a purchase",
             "Site security, fraud prevention and accounting",
-            "Usage statistics and ad measurement with Google Analytics, Google Tag Manager, Microsoft Clarity and Meta Pixel — only if you accept them in the cookie banner"
+            "Usage statistics, ad measurement and remarketing with Google Analytics, Google Tag Manager, Google Ads, Microsoft Clarity and Meta Pixel — only if you accept them in the cookie banner. The site then tells Google and Meta which products you view and add to the cart and, for a completed order, its number, value, products and promo code. If you open the start page from a QR code, the same consent also shows us which label was scanned (box, pods or instructions). That does not identify you. We do not send them your name, email, phone or address"
           ]
         },
         {
@@ -2649,7 +2691,7 @@
             "The store’s email service — Azure Communication Email or an SMTP provider, depending on configuration — for order, account and newsletter messages",
             "Couriers depending on the option you choose: Econt, Speedy, BoxNow and DHL",
             "Our hosting provider (Microsoft Azure) and email provider, so the site and order messages can run",
-            "Google Ireland Limited — Google Analytics 4 and Google Tag Manager, only with consent",
+            "Google Ireland Limited — Google Analytics 4, Google Tag Manager and Google Ads, only with consent",
             "Microsoft — Microsoft Clarity, only with consent",
             "Meta Platforms Ireland Limited — Meta Pixel, only with consent",
             "Public authorities — when the law requires it"
@@ -2710,7 +2752,7 @@
     "cookies": {
       "title": "Cookie policy",
       "eyebrow": "Legal",
-      "updated": "5 October 2026",
+      "updated": "13 October 2026",
       "lead": "This policy describes the cookies and similar technologies plantyhub.com uses so the store can work and — only with your consent — measure visits and ads.",
       "sections": [
         {
@@ -2753,12 +2795,21 @@
           ]
         },
         {
+          "title": "QR codes on the packaging",
+          "paragraphs": [
+            "The box, the pods and the printed guide carry a QR code to plantyhub.com/start. The address may include a from parameter with the value box, pods or instr. It only shows which label was scanned and does not identify you. The parameter itself is not a cookie.",
+            "If you accept cookies, the page address — including that parameter — is recorded by the tools in this policy, because they measure the page you open. We also send Google Analytics and Google Tag Manager a qr_open event with the label, so we can see where people scan from. If you reject, we send neither the address to those tools nor the event."
+          ]
+        },
+        {
           "title": "Marketing",
           "paragraphs": [
-            "These load with the same consent as analytics. They measure ads and help show more relevant messages."
+            "These load with the same consent as analytics. They show which ads lead to visits and purchases, and can be used to show our ads again to people who have visited the site (remarketing).",
+            "With consent, the site tells these tools which products you viewed or added to the cart and, after an order, its number, value, products and promo code. It does not send your name, email, phone or address."
           ],
           "items": [
-            "Meta Pixel (Meta Platforms Ireland Limited) — cookies such as _fbp and _fbc; they record visits and actions that can be used for advertising on Facebook and Instagram"
+            "Meta Pixel (Meta Platforms Ireland Limited) — cookies such as _fbp and _fbc; they record visits and actions that can be used for advertising on Facebook and Instagram",
+            "Google Ads (Google Ireland Limited), through Google Tag Manager — cookies such as _gcl_*; they measure purchases that come from Google ads and can be used for remarketing"
           ]
         },
         {
@@ -3008,132 +3059,316 @@
       ]
     }
   },
-  "learnPage": {
-    "title": "PlantyHub Learn",
-    "eyebrow": "Education",
-    "lead": "Pick a section, then a topic — and open the lesson with photos, video and clear steps.",
-    "pickSection": "Choose a section",
-    "backToSections": "All sections",
-    "backToTopics": "Back to topics",
-    "openTopic": "Open lesson",
-    "tipLabel": "Tip",
-    "stepsLabel": "Steps",
-    "videoLabel": "Video example",
-    "galleryLabel": "Practice photos",
-    "sections": {
-      "start": {
-        "title": "Start here",
-        "description": "Hydroponics basics and your first garden setup.",
-        "topicsLabel": "Topics in this section"
-      },
-      "grow": {
-        "title": "Grow smarter",
-        "description": "Light, water, pods and feeding for steady growth.",
-        "topicsLabel": "Topics in this section"
-      },
-      "harvest": {
-        "title": "Harvest & care",
-        "description": "How to cut correctly and fix common issues.",
-        "topicsLabel": "Topics in this section"
-      }
+  "startPage": {
+    "title": "Your garden in 6 steps",
+    "eyebrow": "HomeGarder One",
+    "lead": "Ready to plant in about 5 minutes.",
+    "nav": {
+      "label": "On this page",
+      "steps": "Steps",
+      "doses": "Doses",
+      "water": "Water",
+      "care": "Care",
+      "plants": "Plants",
+      "video": "Video",
+      "after": "Harvest",
+      "more": "More",
+      "faq": "Questions"
     },
-    "topics": {
-      "basics": {
-        "title": "What hydroponics is",
-        "duration": "3 min",
-        "summary": "Why plants grow in water and what PlantyHub does differently.",
-        "lead": "Plants grow in nutrient-rich water — no soil, less mess, more control over light and moisture.",
-        "videoLabel": "Video: hydroponics at home",
-        "galleryLabel": "Photos: water, roots and fresh leaves",
-        "steps": [
-          "Roots take water and nutrients from the tray solution — not from soil.",
-          "The LED replaces sunlight with a predictable 16/8 cycle (16 h light / 8 h rest).",
-          "A closed system typically uses less water than traditional gardening.",
-          "Result: fresh herbs on the counter, year-round, without waiting for a season."
-        ],
-        "tip": "Hydroponics isn’t “advanced science” here — the pod carries seeds and nutrients, and the device handles light and watering."
+    "videoLabel": "How to start it",
+    "videoCaption": "A short upright video of the setup.",
+    "videoMissing": "The video is not uploaded yet. It will play here once the file is ready.",
+    "watchVideo": "Watch the video",
+    "hideVideo": "Hide the video",
+    "moreTitle": "If you need more",
+    "moreLead": "Doses, care and timing. Open only what you need.",
+    "stepsTitle": "Six steps",
+    "stepsLead": "From an empty garden to the first leaves. Each step takes about a minute.",
+    "tipLabel": "Also",
+    "steps": [
+      {
+        "title": "Fill with water",
+        "text": "Pour 4 L of water into the tank. Filtered or low-mineral bottled water is better; tap water is fine. Aim for about 18–24 °C. Set the garden on a stable counter, near a socket."
       },
-      "setup": {
-        "title": "First setup",
-        "duration": "5 min",
-        "summary": "From unboxing to a running garden in a few minutes.",
-        "lead": "From unboxing to a running garden in a few clear steps.",
-        "videoLabel": "Video: unboxing and first power-on",
-        "galleryLabel": "Photos: device, water and pods",
-        "steps": [
-          "Place the unit on a stable counter, away from strong direct heat sources.",
-          "Fill clean water to the marked level in the reservoir / tray.",
-          "Insert pods into the slots as shown on the packaging.",
-          "Turn the light on and let the automatic cycle run — avoid moving the unit often in the first days."
-        ],
-        "tip": "Use room-temperature water. If your tap water is very hard, boiled-and-cooled water can help more stable germination."
+      {
+        "title": "Add A and B",
+        "text": "On the first fill, add 5 ml of A, stir, then 5 ml of B — up to the green line on the cap. Always A first, then B, and do not mix them undiluted. On a water change, use 8 ml of A and 8 ml of B, up to the red line."
       },
-      "light": {
-        "title": "Light and water",
-        "duration": "4 min",
-        "summary": "The 16/8 cycle and how to keep water at the right level.",
-        "lead": "The two things that matter most: steady light and enough water.",
-        "videoLabel": "Video: lamp height and growth",
-        "galleryLabel": "Photos: light, water level, healthy growth",
-        "steps": [
-          "The lamp follows a 16/8 cycle — don’t switch it off overnight “to save power”; plants need rhythm.",
-          "Check water 1–2 times a week and top up to the mark.",
-          "Don’t overfill past the maximum — more water doesn’t mean faster growth.",
-          "Keep the lamp at the right height for plant size (adjustable arm)."
-        ],
-        "tip": "Yellow lower leaves often mean too little light or stale water — start by checking level and lamp height."
+      {
+        "title": "Place the pods",
+        "text": "Peel off the sticker, put one pod in each slot, and set a cap on top. Do not open a pod before you place it. Keep unused pods cool and dry, in the original pack."
       },
-      "pods": {
-        "title": "Pods and feeding",
-        "duration": "4 min",
-        "summary": "What’s inside a pod and how to use it correctly.",
-        "lead": "Each pod is a starter pack: seeds, medium and nutrients for the first cycle.",
-        "galleryLabel": "Photos: pods, varieties and slots",
-        "steps": [
-          "Don’t open the pod early — moisture and light should reach it only inside the device.",
-          "Scan the QR on the pod for variety-specific timelines and tips.",
-          "Crops grow at different speeds — basil and lettuce don’t mature the same way.",
-          "After a cycle, remove the old pod and clean the slot before a new one."
-        ],
-        "tip": "If one pod lags behind, don’t pull the others — variation is normal. Wait a few more days before requesting a replacement."
+      {
+        "title": "Set the lamp",
+        "text": "Lower the lamp close over the caps. Once leaves appear, keep it at least 2 cm above them. It runs on its own: 16 hours of light and 8 hours of rest. The cycle starts when you switch it on — do not turn it off at night."
       },
-      "harvest": {
-        "title": "Harvest like a pro",
-        "duration": "5 min",
-        "summary": "When and how to cut so the plant keeps producing.",
-        "lead": "The right cut keeps the plant productive longer and yields more leaves over time.",
-        "galleryLabel": "Photos: harvest, cutting and cooking",
-        "steps": [
-          "Start harvesting once enough mature leaves are ready (often week 2–4 by variety).",
-          "Cut above a node / leaf pair — that encourages branching.",
-          "Don’t take more than about ⅓ of the plant at once.",
-          "Use clean scissors; herbs taste best right after cutting."
-        ],
-        "tip": "Light, regular cuts beat rare “clear-cuts” of the whole plant — your garden stays green for weeks."
+      {
+        "title": "Remove the caps",
+        "text": "Take the cap off as soon as the sprout reaches it. Until then the cap holds moisture and shades the water. If a sprout reaches the cap sooner, take it off straight away."
       },
-      "care": {
-        "title": "Care and common issues",
-        "duration": "6 min",
-        "summary": "Quick checks for no sprouts, pale leaves or cloudy water.",
-        "lead": "Most problems come down to water, light or room temperature.",
-        "galleryLabel": "Photos: maintenance and a clean tray",
-        "steps": [
-          "No sprouts after 10–14 days: check water, lamp and room temp (ideally ~18–24°C).",
-          "Pale plants: raise/lower the lamp and confirm the daily cycle is running.",
-          "Smell or cloudy water: change water and rinse the tray.",
-          "After each full cycle: a short clean of tray and slots."
-        ],
-        "tip": "You have a germination guarantee — if a pod fails with proper care, contact us. Better a quick message than weeks of guessing."
+      {
+        "title": "Harvest and trim",
+        "text": "Between water changes, top up with clean water only and harvest regularly. Cut above a pair of leaves and take no more than about a third at once. The plant branches and grows back."
       }
+    ],
+    "doseTitle": "Doses",
+    "doseLead": "Both fills are for 4 L of water. The line is on the bottle cap.",
+    "doseMix": "A and B",
+    "doseWater": "Water",
+    "doseVisual": {
+      "firstMix": "5 ml A + 5 ml B",
+      "changeMix": "8 ml A + 8 ml B",
+      "green": "Green line",
+      "red": "Red line"
     },
-    "ctaTitle": "Ready to put this into practice?",
-    "ctaText": "Browse the FAQ for quick answers, contact us if something’s off, or start with HomeGarder One.",
-    "ctaFaq": "Go to FAQ",
-    "ctaContact": "Contact",
-    "ctaBuy": "See the product",
-    "topicsCount": "{{count}} topics",
-    "nextTopic": "Next",
-    "playVideo": "Play video",
-    "pauseVideo": "Pause"
+    "doses": [
+      {
+        "label": "First fill",
+        "mix": "5 ml A + 5 ml B",
+        "cap": "Green line on the cap",
+        "water": "4 L water"
+      },
+      {
+        "label": "Water change",
+        "mix": "8 ml A + 8 ml B",
+        "cap": "Red line on the cap",
+        "water": "4 L water"
+      }
+    ],
+    "doseNote": "Between changes, top up with clean water only. One pack lasts about 12 fills. The lamp runs automatically. The cycle starts when you switch it on.",
+    "facts": [
+      { "value": "18–24 °C", "label": "Room temperature" },
+      { "value": "2–3 weeks", "label": "Change and clean" },
+      { "value": "Auto 16 h / 8 h", "label": "Light / rest" },
+      { "value": "≥ 2 cm", "label": "Lamp above the leaves" }
+    ],
+    "careTitle": "Care without the fuss",
+    "careLead": "Change the water and clean every 2–3 weeks. Unplug before you do.",
+    "careItems": [
+      {
+        "title": "Topping up",
+        "text": "Between changes, add clean water only."
+      },
+      {
+        "title": "Change and clean",
+        "text": "Every 2–3 weeks, rinse and refill with 8 ml A + 8 ml B in 4 L."
+      },
+      {
+        "title": "Lamp",
+        "text": "At least 2 cm above the leaves. Do not break the 16/8 cycle."
+      },
+      {
+        "title": "Safety",
+        "text": "Keep away from children. The water is not for drinking. Indoor only. Fit a new pod after harvest."
+      }
+    ],
+    "careLink": "Tips and help",
+    "plantsTitle": "When they sprout and when to harvest",
+    "plantsLead": "These times are a guide. They depend on water, temperature and light.",
+    "plantsSprout": "Sprouts",
+    "plantsHarvest": "First harvest",
+    "plants": {
+      "basil": { "name": "Basil", "sprout": "5–10 days", "harvest": "from about 3 weeks" },
+      "mint": { "name": "Mint", "sprout": "7–14 days", "harvest": "from about 4 weeks" },
+      "parsley": { "name": "Parsley", "sprout": "10–20 days", "harvest": "from about 5 weeks" },
+      "cilantro": { "name": "Cilantro", "sprout": "7–14 days", "harvest": "from about 4 weeks" },
+      "dill": { "name": "Dill", "sprout": "7–14 days", "harvest": "from about 4 weeks" },
+      "arugula": { "name": "Arugula", "sprout": "3–7 days", "harvest": "from about 3 weeks" }
+    },
+    "waterTitle": "Which water to use",
+    "waterLead": "Water is the base of hydroponics.",
+    "waterBestLabel": "Best",
+    "waterBestHint": "We recommend",
+    "waterBest": [
+      "Filtered water — from a filter jug or a reverse-osmosis system. Soft, without chlorine, and the most predictable result.",
+      "Bottled spring or table water with low mineral content. On the label: total mineralisation under about 300 mg/L.",
+      "Distilled water. It works well — solution A and B add the calcium and magnesium the plants need."
+    ],
+    "waterOkLabel": "Fine",
+    "waterOkHint": "Tap water",
+    "waterOk": "Leave it uncovered for a few hours so the chlorine leaves. Hard water can leave limescale on the tank walls — switch to filtered water if that happens.",
+    "waterNoLabel": "Do not use",
+    "waterNoHint": "These waters harm the plants",
+    "waterNo": [
+      "Mineral or alkaline water — high pH and a lot of salts",
+      "Sparkling water",
+      "Water from a salt softener — the sodium harms the roots",
+      "Hot water from the boiler",
+      "Rainwater — it can be contaminated"
+    ],
+    "waterPrepTitle": "Preparation",
+    "waterPrep": [
+      "Use water at room temperature, about 18–24 °C.",
+      "Pour 4 L into the tank and add the solution: 5 ml of A up to the green line on the cap, stir, then 5 ml of B.",
+      "Between changes, top up with the same kind of water, without solution."
+    ],
+    "waterCareTitle": "Water care",
+    "waterCareLead": "Six things that keep the garden healthy.",
+    "waterCare": [
+      { "title": "Water level", "text": "Do not let it drop below the minimum mark. The pump then runs dry, gets noisy and can be damaged. Check every 2–3 days, especially when the plants are large." },
+      { "title": "Cloudy water or a smell", "text": "Change the water straight away. Do not wait the usual 2–3 weeks." },
+      { "title": "Algae", "text": "Green in the tank. Cover the empty slots and do not leave the garden in direct sun." },
+      { "title": "Cleaning", "text": "Water and a soft sponge only, no detergents. For limescale you can use diluted vinegar, then rinse well." },
+      { "title": "Old water", "text": "You can pour it on potted plants or in the garden. It is diluted fertiliser." },
+      { "title": "Warm water", "text": "Above about 26 °C the roots do not get enough oxygen and they rot. This matters in summer." }
+    ],
+    "afterTitle": "After planting",
+    "afterLead": "Everything you need once the garden is planted.",
+    "stageTitle": "When the first harvest comes",
+    "stageNote": "The first harvest is within 6 weeks of planting. Plants grow faster in a warmer room and with filtered water. After the first cut they keep growing, and if you harvest properly they give fresh leaves for weeks.",
+    "stages": [
+      { "when": "1–2 weeks", "title": "Sprouting", "text": "The first small sprouts under the cap." },
+      { "when": "within 6 weeks", "title": "First harvest", "text": "Enough leaves for the first handful." },
+      { "when": "6–7 weeks", "title": "Full size", "text": "The plants are dense and you can harvest every day." }
+    ],
+    "harvestTitle": "How to harvest each kind",
+    "harvestRule": "Do not take more than a third at once. Cut with clean scissors — do not pull by hand, or you may lift the whole pod out.",
+    "harvestRows": [
+      { "name": "Basil", "how": "Pinch the tip just above a pair of leaves.", "why": "Two new shoots appear and the plant grows denser." },
+      { "name": "Parsley", "how": "Cut the outer stems at the base.", "why": "New stems grow from the centre." },
+      { "name": "Lettuce", "how": "Take the outer leaves and leave the centre.", "why": "The centre keeps making new leaves." },
+      { "name": "Arugula", "how": "Cut 2–3 cm above the base.", "why": "The plant grows back." }
+    ],
+    "harvestNote": "When the plants reach the lamp raised all the way, trim the tips the same way. If basil flowers, pinch the flowers off — otherwise the leaves turn bitter.",
+    "faqTitle": "If something is wrong",
+    "faqLead": "Most problems take a minute to fix. Find what you see.",
+    "faqMore": "All questions",
+    "faqs": [
+      {
+        "q": "No sprout after 2 weeks",
+        "a": "The room is too cold, the cap came off too early, or the pod is not reaching the water. Check the cap, the temperature (18–24 °C) and the water level. If it still does not sprout, email us."
+      },
+      {
+        "q": "Pale, stretched plants",
+        "a": "The lamp is too far away and the plants are reaching for the light. Lower it to 2 cm above the leaves."
+      },
+      {
+        "q": "Yellow leaves",
+        "a": "The solution is used up or the water is old. Change the water and add 8 ml A + 8 ml B, up to the red line on the cap."
+      },
+      {
+        "q": "Brown or slimy roots",
+        "a": "The water is too warm, above about 26 °C, and the roots are short of oxygen. Change it for cooler water and move the garden away from a radiator or the sun."
+      },
+      {
+        "q": "Cloudy water or a smell",
+        "a": "Bacteria have grown in the water. Change it straight away and rinse the tank."
+      },
+      {
+        "q": "Green in the tank",
+        "a": "That is algae — light is reaching the water. Cover the empty slots and do not leave the garden in direct sun."
+      },
+      {
+        "q": "The pump is noisy",
+        "a": "The level has dropped below the minimum mark. Top up with clean water. Run dry, the pump gets noisy and can be damaged."
+      }
+    ],
+    "order": "Order new pods",
+    "orderHint": "When the harvest is done, take out the old pods, rinse the tank and start again. 12 new pods including VAT are €14.99 and fill the whole garden. One pack of solution A and B lasts about 12 fills.",
+    "contactTitle": "Sprouting guarantee",
+    "warranty": "If a pod does not sprout and you followed the instructions, we send a new one free.",
+    "claimSteps": [
+      "Wait 3 weeks from planting. Some seeds are simply slower.",
+      "Photograph the garden so the pod without sprouts is visible.",
+      "Send the photo to sales@plantyhub.com with your order number and the batch from the box.",
+      "We will send a new pod of the same kind."
+    ],
+    "contactLink": "Contact form",
+    "academyTitle": "Academy",
+    "academyText": "If you want more lessons, photos and video, open the academy.",
+    "academyLink": "Go to the academy",
+    "safetyTitle": "Warning",
+    "safetyText": "Solution B — DANGER: causes serious eye damage. Solution A — WARNING: causes serious eye irritation. Keep the solutions and pods away from children — the pods are small parts. Not for drinking. Wear eye protection. If in eyes: rinse carefully with water for several minutes, remove contact lenses if you can, and keep rinsing. Get medical help. Toxicology centre: 02 9154 233. Store the solutions tightly closed, at 10–30 °C, away from heat, freezing and direct sunlight. Unplug the garden before you change the water or clean it. Do not overfill the tank, and keep the adapter and cable dry. Keep the garden on a stable, level surface."
+  },
+  "howPage": {
+    "eyebrow": "How it works",
+    "title": "The garden waters and lights itself",
+    "lead": "HomeGarder One has no soil. The roots drink from the tank, the lamp keeps its own cycle, and you add pods and harvest.",
+    "imageAlt": "PlantyHub HomeGarder One on a kitchen counter",
+    "buy": "See HomeGarder One",
+    "guide": "Already have one? The guide",
+    "facts": [
+      { "value": "12", "label": "pods at once" },
+      { "value": "4 L", "label": "water in the tank" },
+      { "value": "16 / 8", "label": "hours of light and rest" },
+      { "value": "up to 6 wks", "label": "to the first harvest" }
+    ],
+    "videoLabel": "In one minute",
+    "videoTitle": "See the garden up close",
+    "videoText": "Water, pods and the lamp starting on its own. The same steps are written out below.",
+    "systemEyebrow": "The machine",
+    "systemTitle": "Three things do the work",
+    "systemLead": "You do not water every day, and you do not move the lamp on a clock.",
+    "systems": [
+      { "title": "Water from below", "text": "The tank holds 4 litres. A pump lifts water to the roots — no watering can and no soil." },
+      { "title": "Food in two steps", "text": "On the first fill you add 5 ml of A, stir, then 5 ml of B. Between changes you only top up with plain water." },
+      { "title": "Light on a clock", "text": "The cycle starts when you plug it in: 16 hours of light and 8 hours of rest. Do not switch it off at night." }
+    ],
+    "stepsEyebrow": "Your part",
+    "stepsTitle": "Six things, about five minutes",
+    "stepsLead": "Then the garden carries on by itself until it is time to harvest.",
+    "steps": [
+      { "title": "Fill with water", "text": "Pour in 4 L. Filtered or bottled is better; tap water works too. About 18–24 °C, on a stable counter near a socket." },
+      { "title": "Add A and B", "text": "First 5 ml of A to the green line, stir, then 5 ml of B. Do not mix them undiluted. When you change the water, the dose is 8 ml of each." },
+      { "title": "Place the pods", "text": "Peel the sticker, set one pod in each slot and a dome on top. The dome holds moisture until it sprouts." },
+      { "title": "Set the lamp", "text": "Lower it close to the domes. Once there are leaves, keep it at least 2 cm above them. The cycle is already running." },
+      { "title": "Remove the domes", "text": "Take the dome off as soon as the sprout touches it. Until then it shades the water and keeps the moisture in." },
+      { "title": "Harvest and trim", "text": "Cut above a pair of leaves and never take more than about a third at once. The plant branches and grows again." }
+    ],
+    "waterEyebrow": "The water",
+    "waterTitle": "Which water keeps the garden healthy",
+    "waterLead": "Solutions A and B add the food. The water should be soft and about 18–24 °C.",
+    "waterGroups": [
+      { "hint": "We recommend", "title": "Best", "text": "Filtered or reverse osmosis. Bottled water with mineralisation under about 300 mg/l. Distilled works too — A and B add the calcium and magnesium." },
+      { "hint": "Tap water", "title": "Fine", "text": "Leave it uncovered for a few hours so the chlorine leaves. If limescale appears on the tank walls, switch to filtered." },
+      { "hint": "They harm the roots", "title": "Don't use", "text": "Mineral or alkaline, sparkling, salt-softened water, hot water from the boiler, and rainwater." }
+    ],
+    "growEyebrow": "After planting",
+    "growTitle": "The first harvest is within six weeks",
+    "growLead": "The times are a guide. In a warmer room and with filtered water the plants grow faster.",
+    "stages": [
+      { "when": "1–2 weeks", "title": "Sprouting", "text": "The first sprouts show under the dome." },
+      { "when": "within 6 weeks", "title": "First harvest", "text": "Enough leaves for the first handful." },
+      { "when": "6–7 weeks", "title": "Every day", "text": "The plants are full and keep giving fresh leaves for weeks." }
+    ],
+    "plantsTitle": "When each plant sprouts",
+    "sprout": "Sprouts",
+    "harvest": "First harvest",
+    "plants": [
+      { "name": "Arugula", "sprout": "3–7 days", "harvest": "from 3 weeks" },
+      { "name": "Basil", "sprout": "5–10 days", "harvest": "from 3 weeks" },
+      { "name": "Mint", "sprout": "7–14 days", "harvest": "from 4 weeks" },
+      { "name": "Cilantro", "sprout": "7–14 days", "harvest": "from 4 weeks" },
+      { "name": "Dill", "sprout": "7–14 days", "harvest": "from 4 weeks" },
+      { "name": "Parsley", "sprout": "10–20 days", "harvest": "from 5 weeks" }
+    ],
+    "harvestNote": "Don't take more than a third at once, and cut with scissors so you don't pull the pod out. Pinch basil just above a pair of leaves — if it flowers, remove the flowers or the leaves turn bitter. Cut parsley from the outer stems. Cut arugula 2–3 cm above the base.",
+    "rhythmEyebrow": "After that",
+    "rhythmTitle": "Between harvests there is one water change",
+    "rhythm": [
+      { "title": "Top up", "text": "Between changes, plain water only, no solution. Check every 2–3 days, especially when the plants are large." },
+      { "title": "Change", "text": "Every 2–3 weeks rinse the tank and add 8 ml of A and 8 ml of B to 4 L — to the red line. One pack lasts about 12 fills." },
+      { "title": "The pump", "text": "Don't let the level fall below the minimum mark. Running dry, the pump gets noisy and can be damaged." },
+      { "title": "Empty slots", "text": "Cover them. Light on the water grows algae. Don't keep the garden in direct sun." }
+    ],
+    "rolesEyebrow": "The split",
+    "rolesTitle": "You plant. It finishes the job.",
+    "gardenTitle": "The garden",
+    "garden": [
+      "Waters the roots from the tank",
+      "Keeps 16 hours of light and 8 hours of rest",
+      "Runs up to 12 pods at once"
+    ],
+    "youTitle": "You",
+    "you": [
+      "Fill the water and add A, then B",
+      "Top up with plain water and change it every 2–3 weeks",
+      "Harvest little and often, up to a third at a time"
+    ],
+    "ctaTitle": "Ready for the kitchen counter",
+    "ctaText": "Matte white, 12 slots and a lamp that does not ask for attention. If you already have one, the guide has the doses, the water and what to do if something stops.",
+    "ctaBuy": "Go to HomeGarder One",
+    "ctaGuide": "Setup guide",
+    "homeLink": "See the full story"
   }
 }

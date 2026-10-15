@@ -11,7 +11,6 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
-import StarRounded from '@mui/icons-material/StarRounded'
 import CheckCircleRounded from '@mui/icons-material/CheckCircleRounded'
 import AddRounded from '@mui/icons-material/AddRounded'
 import RemoveRounded from '@mui/icons-material/RemoveRounded'
@@ -34,6 +33,7 @@ import { lifestyleImages, productVideo, productVideoPoster, stockImages } from '
 import { useProduct } from '../hooks/useProducts'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
+import { useTrackViewItem } from '../measure/commerce'
 import { brand } from '../theme'
 import { toMediaUrl } from '../media/cfImage'
 import { objectPositionForKey } from '../media/imageFocus'
@@ -59,6 +59,7 @@ const BONUS_KIT_PRICE = '€19.99'
 export default function ProductPage() {
   const { t, i18n } = useTranslation()
   const garden = useProduct('gardens', 'homegarder-one')
+  useTrackViewItem('gardens', garden)
   const reviews = useProductReviews(garden?.id)
   const addProductToCart = useAddProductToCart()
   const { images } = useSiteAssetsStore()
@@ -175,20 +176,7 @@ export default function ProductPage() {
 
           <Grid size={{ xs: 12, md: 6 }}>
             <Reveal>
-              {reviews && reviews.count > 0 ? (
-                <ProductRatingRow reviews={reviews} />
-              ) : (
-                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 2 }}>
-                  <Stack direction="row" sx={{ color: '#CE8A4A' }}>
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <StarRounded key={i} sx={{ fontSize: 18 }} />
-                    ))}
-                  </Stack>
-                  <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: brand.textSecondary }}>
-                    {t('hero.badge')}
-                  </Typography>
-                </Stack>
-              )}
+              {reviews && reviews.count > 0 ? <ProductRatingRow reviews={reviews} /> : null}
 
               <Typography component="h1" variant="h2" sx={{ color: brand.graphite, mb: 1.5 }}>
                 {productTitle}
@@ -349,10 +337,12 @@ export default function ProductPage() {
       <SectionContainer bgcolor={brand.cream} py={{ xs: 6, sm: 7, md: 8 }}>
         <Grid container spacing={{ xs: 4, md: 6 }} sx={{ alignItems: 'center' }}>
           <Grid size={{ xs: 12, md: 5 }}>
-            <Reveal sx={{ maxWidth: 340, mx: 'auto' }}>
+            <Reveal sx={{ width: '100%', maxWidth: 300, mx: 'auto' }}>
               <Box
                 sx={{
-                  position: 'relative',
+                  width: '100%',
+                  maxWidth: 300,
+                  mx: 'auto',
                   borderRadius: '28px',
                   overflow: 'hidden',
                   border: `4px solid ${brand.white}`,

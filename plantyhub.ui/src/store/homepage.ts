@@ -27,7 +27,6 @@ const defaultSectionEnabled = Object.fromEntries(
       key === 'product' ||
       key === 'howItWorks' ||
       key === 'podsGrid' ||
-      key === 'socialProof' ||
       key === 'cta',
   ]),
 ) as Record<HomepageSectionKey, boolean>
@@ -84,7 +83,7 @@ function mergeWithDefaults(remote: HomepageState): HomepageState {
   const defaults = createDefaultHomepageState()
   return {
     layoutVersion: remote.layoutVersion ?? LAYOUT_VERSION,
-    sections: { ...defaults.sections, ...remote.sections },
+    sections: { ...defaults.sections, ...remote.sections, socialProof: false },
     texts: {
       en: { ...defaults.texts.en, ...remote.texts?.en },
       bg: { ...defaults.texts.bg, ...remote.texts?.bg },

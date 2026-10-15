@@ -3,11 +3,11 @@ import Fab from '@mui/material/Fab'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useCookieConsent } from '../analytics/consent'
+import { useCookieConsent } from '../measure/consent'
 import { navHrefs } from '../data/catalog'
 import { brand } from '../theme'
 
-const hiddenPathPrefixes = ['/cart', '/checkout', '/login', '/register', '/forgot-password', '/reset-password', '/verify-email', '/account', '/order', '/learn', '/privacy', '/cookies', '/terms', '/faq', '/contact', '/support']
+const hiddenPathPrefixes = ['/cart', '/checkout', '/login', '/register', '/forgot-password', '/reset-password', '/verify-email', '/account', '/order', '/learn', '/start', '/privacy', '/cookies', '/terms', '/faq', '/contact', '/support', navHrefs.buy]
 
 export default function FloatingBuyButton() {
   const { t } = useTranslation()

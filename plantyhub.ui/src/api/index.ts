@@ -240,6 +240,7 @@ export const shippingApi = {
     paymentMethod?: string
     subtotal?: number
     weightKg?: number
+    courier?: string
   }) => apiRequest<ShippingQuotesResponse>('/api/shipping/quotes', { method: 'POST', body }),
 }
 

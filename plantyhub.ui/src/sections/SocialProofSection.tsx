@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import StarRounded from '@mui/icons-material/StarRounded'
 import FormatQuoteRounded from '@mui/icons-material/FormatQuoteRounded'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
@@ -50,21 +48,11 @@ function ReviewCard({ id, index }: { id: (typeof socialProofReviewIds)[number]; 
 
 export default function SocialProofSection() {
   const subtitle = useHt('socialProof.subtitle')
-  const stat = useHt('socialProof.stat')
-  const statLabel = useHt('socialProof.statLabel')
 
   return (
     <SectionContainer bgcolor={brand.white} py={{ xs: 4, sm: 6, md: 8 }}>
       <Reveal sx={{ textAlign: 'center', maxWidth: 640, mx: 'auto', mb: { xs: 2.75, md: 7 } }}>
-        <Stack direction="row" sx={{ color: '#CE8A4A', justifyContent: 'center', mb: { xs: 1.25, sm: 2 } }}>
-          {[0, 1, 2, 3, 4].map((i) => (
-            <StarRounded key={i} sx={{ fontSize: { xs: 20, sm: 24 } }} />
-          ))}
-        </Stack>
-        <Typography component="h2" variant="h2" sx={{ color: brand.graphite, mb: { xs: 1.25, sm: 2 }, fontSize: { xs: '1.65rem', sm: undefined } }}>{subtitle}</Typography>
-        <Typography sx={{ color: brand.textSecondary, fontSize: { xs: '0.95rem', sm: '1.05rem' } }}>
-          <Box component="span" sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, color: brand.plantGreenDark }}>{stat}</Box> {statLabel}
-        </Typography>
+        <Typography component="h2" variant="h2" sx={{ color: brand.graphite, fontSize: { xs: '1.65rem', sm: undefined } }}>{subtitle}</Typography>
       </Reveal>
       <Grid container spacing={{ xs: 2, md: 3 }}>
         {socialProofReviewIds.slice(0, 2).map((id, index) => (

@@ -37,7 +37,7 @@ export default function PodsGridSection() {
         })}
       </Grid>
 
-      <SectionLink href={navHrefs.pods} label={t('sleek.discoverAll')} />
+      <SectionLink href={navHrefs.pods} label={t('sleek.discoverPods')} />
     </SectionContainer>
   )
 }

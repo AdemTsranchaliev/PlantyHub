@@ -13,6 +13,7 @@ import {
   type CartItem,
 } from '../store/cart'
 import { calcShipping, formatEuro, parseEuro } from '../utils/price'
+import { trackAddToCart } from '../measure/commerce'
 
 function useCartState() {
   return useSyncExternalStore(subscribeCart, getCartState, getCartState)
@@ -67,5 +68,6 @@ export function useAddProductToCart() {
       pack: product.packKey ? t(`common.${product.packKey}`) : undefined,
       gift,
     })
+    trackAddToCart({ id: product.id, name: product.name, category, price: product.price, quantity })
   }
 }

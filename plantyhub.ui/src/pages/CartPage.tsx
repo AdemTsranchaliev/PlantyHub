@@ -21,6 +21,7 @@ import SectionContainer, { pagePaddingX } from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
 import { useCart } from '../hooks/useCart'
+import { cartTrackingItems, trackViewCart } from '../measure/commerce'
 import MediaImg from '../components/MediaImg'
 import type { CartItem } from '../store/cart'
 import { formatEuro, parseEuro, FREE_SHIPPING_THRESHOLD } from '../utils/price'
@@ -286,6 +287,8 @@ export default function CartPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
+    trackViewCart(cartTrackingItems(items))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -1,9 +1,9 @@
 {
   "seo": {
     "title": "PlantyHub — Jardin hydroponique intelligent",
-    "description": "PlantyHub Home Garden : jardin hydroponique intelligent à 12 capsules, éclairage LED et arrosage automatique. Basilic, menthe, laitue et plus, à la maison."
+    "description": "PlantyHub HomeGarder One : jardin hydroponique intelligent à 12 emplacements, éclairage LED et arrosage automatique. Basilic, menthe, persil et plus, à la maison."
   },
-  "promo": "LIVRAISON GRATUITE DÈS €150 · UE & BALKANS",
+  "promo": "LIVRAISON GRATUITE DÈS €150 · BULGARIE UNIQUEMENT",
   "nav": {
     "product": "Produit",
     "howItWorks": "Comment ça marche",
@@ -42,15 +42,15 @@
   },
   "hero": {
     "title": "Des herbes fraîches à la maison",
-    "promise": "De la graine à l'assaisonnement en 18 jours",
+    "promise": "Fais pousser tes plantes préférées facilement, toute l'année.",
     "description": "Jardin 12 pods avec arrosage automatique et LED.",
     "ctaPrimary": "Acheter",
     "ctaSecondary": "Comment ça marche",
     "priceLabel": "HomeGarder One",
     "imageAlt": "PlantyHub HomeGarder One",
-    "badge": "4,9/5 · 500+ clients",
+    "badge": "12 emplacements · LED 16/8",
     "trust": {
-      "shipping": "Livraison UE offerte dès 150 €",
+      "shipping": "Livraison offerte dès 150 € en Bulgarie",
       "guarantee": "Garantie de germination",
       "setup": "Prêt en 5 minutes"
     },
@@ -72,16 +72,16 @@
   "product": {
     "eyebrow": "Produit",
     "title": "PlantyHub HomeGarder One",
-    "description": "12 pods, LED spectre complet et arrosage auto — prêt pour le plan de travail.",
+    "description": "12 emplacements, LED spectre complet et arrosage auto — prêt pour le plan de travail.",
     "cta": "Ajouter au panier",
     "trust": {
-      "shipping": "Livraison offerte dès 150 €",
+      "shipping": "Livraison offerte dès 150 € en Bulgarie",
       "guarantee": "Garantie de germination",
       "returns": "Retours sous 30 jours"
     },
     "specs": {
       "pods": "Emplacements",
-      "podsValue": "12 capsules",
+      "podsValue": "12 emplacements",
       "light": "Lumière",
       "lightValue": "LED spectre complet · 16h / 8h repos",
       "growthHeight": "Hauteur",
@@ -89,7 +89,7 @@
       "irrigation": "Arrosage",
       "irrigationValue": "Automatique",
       "nutrients": "Nutriments",
-      "nutrientsValue": "Sana A + B",
+      "nutrientsValue": "Solution A et B, 100 ml chacune",
       "dimensions": "Dimensions",
       "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
     }
@@ -154,9 +154,9 @@
     }
   },
   "socialProof": {
-    "stat": "500+",
-    "statLabel": "clients satisfaits",
-    "subtitle": "Adoré par les jardiniers à domicile en Europe.",
+    "stat": "",
+    "statLabel": "",
+    "subtitle": "Des herbes fraîches sur le plan de travail, toute l'année.",
     "reviews": {
       "elena": "Thé à la menthe du matin de mon propre jardin.",
       "urbanherbs": "Parfait si vous tuez vos plantes. Ça marche tout seul.",
@@ -174,7 +174,7 @@
       },
       "addSolution": {
         "title": "Ajoutez l'eau",
-        "description": "Remplissez et dosez Sana A & B."
+        "description": "Remplis le réservoir et ajoute la solution nutritive A et B."
       },
       "turnOn": {
         "title": "Allumez",
@@ -182,7 +182,7 @@
       },
       "harvest": {
         "title": "Récoltez",
-        "description": "Herbes fraîches en ~18 jours."
+        "description": "Regarde-les pousser. Cueille quand elles sont prêtes."
       }
     }
   },
@@ -236,7 +236,7 @@
       },
       "diyKit": {
         "title": "Kit Plantez-vous",
-        "description": "12 capsules, Sana A & B 100 ml, 12 bouchons de germination."
+        "description": "12 capsules, solution nutritive A et B (100 ml) et 12 bouchons de germination."
       },
       "unifiedShipping": {
         "title": "Une seule boîte",
@@ -251,7 +251,7 @@
       "dill": "Aneth ×2",
       "arugula": "Roquette ×2",
       "emptyCapsules": "12 capsules",
-      "sanaAb": "Sana A + B (100 ml)",
+      "sanaAb": "Solution A + B (100 ml)",
       "germCaps": "12 bouchons",
       "instructions": "Instructions de dosage"
     }
@@ -260,7 +260,8 @@
     "eyebrow": "Nos jardins",
     "title": "Conçus pour la cuisine du quotidien",
     "subtitle": "Nos jardins d'intérieur vous aident à cultiver comme un pro — sans avoir besoin de savoir quoi faire.",
-    "discoverAll": "Découvrir tous les jardins"
+    "discoverAll": "Découvrir tous les jardins",
+    "discoverPods": "Voir toutes les capsules"
   },
   "podsSection": {
     "eyebrow": "PlantyHub Pods",
@@ -327,15 +328,35 @@
   "accessoriesPage": {
     "eyebrow": "Accessoires",
     "title": "Accessoires",
-    "subtitle": "Tout pour étendre et entretenir votre jardin d'intérieur — supports élégants, étagères et outils pratiques."
+    "subtitle": "Tout pour étendre et entretenir votre jardin d'intérieur — supports élégants, étagères et outils pratiques.",
+    "relatedTitle": "Plus d'accessoires"
   },
   "aboutPage": {
     "eyebrow": "Notre mission",
     "title": "Le futur est déjà là",
-    "lead": "Cultiver peut être simple et moderne. Des herbes fraîches sur le plan de travail — sans jardin, sans terre, sans être expert.",
-    "missionKicker": "Pourquoi nous existons",
-    "quote": "Plus simple. Plus moderne.\nUne récolte à la maison.",
-    "mission": "Nous voulons que chaque foyer cueille une saveur fraîche — dès la première semaine, pas après des années d'expérience. L'avenir de la culture est sur votre plan de travail.",
+    "lead": "Tu vis en appartement et tu as quand même un jardin — sans cour et sans creuser. Beaucoup de plantes, plus vite que la saison, et une leçon qu'un enfant voit.",
+    "missionKicker": "Notre mission",
+    "quote": "Un jardin sans cour.\nEt sans creuser.",
+    "missionBody": "Notre mission, c'est que chaque foyer ait un jardin, même quand ce foyer est un appartement. Tu n'as pas besoin d'une cour, d'une plate-bande ou d'une bêche. Tu as besoin d'un plan de travail. La lumière est la même chaque jour, alors ça pousse plus vite que la saison dehors, et 12 emplacements font pousser beaucoup de choses à la fois. Un enfant peut poser la capsule, voir le germe et cueillir. L'avenir de l'alimentation n'est pas quelque part dehors. Il est dans la cuisine.",
+    "mission": "Le jardin tient dans un appartement. Sans creuser, et assez clair pour le montrer à un enfant.",
+    "missionPoints": {
+      "home": {
+        "title": "L'appartement suffit",
+        "text": "Tu n'as pas besoin d'un jardin dehors, d'un balcon rempli de plates-bandes ou d'une maison avec une cour. Le jardin tient sur le plan de travail et prend la place d'un plateau. Tu vis à un étage et tu récoltes quand même le tien. La saison derrière la fenêtre ne décide pas de ce qu'il y a dans l'assiette."
+      },
+      "dig": {
+        "title": "Rien ne se creuse",
+        "text": "Pas de bêche, pas de terre sur le sol et pas de pots à pousser vers la lumière. Tu mets de l'eau et une capsule. La lampe tient son cycle, l'arrosage démarre seul. Tes mains cueillent. Elles ne creusent pas."
+      },
+      "child": {
+        "title": "Une leçon que l'on cueille",
+        "text": "Un enfant voit comment la nourriture commence. Il pose la capsule, regarde le premier germe, puis cueille une feuille qui se mange vraiment. Il apprend d'où vient un repas — pas dans une leçon, mais avec quelque chose qu'il a fait pousser."
+      },
+      "grow": {
+        "title": "Plus vite, et beaucoup à la fois",
+        "text": "12 plantes dans une cuisine, sans attendre le printemps. Les germes démarrent en quelques jours, la première récolte arrive en quelques semaines. Si une capsule ne germe pas et que tu as suivi les étapes, nous en envoyons une nouvelle."
+      }
+    },
     "pillars": {
       "easy": {
         "title": "Plus simple",
@@ -347,13 +368,13 @@
       },
       "home": {
         "title": "Récolte à la maison",
-        "text": "Une saveur fraîche sur le plan de travail dès la première semaine."
+        "text": "Une saveur fraîche sur le plan de travail, toute l'année."
       }
     },
     "storyKicker": "Comment tout a commencé",
-    "storyTitle": "D'une cuisine à des milliers de foyers",
+    "storyTitle": "Tout a commencé dans une cuisine",
     "story1": "PlantyHub est né dans une petite cuisine avec une idée : rendre la culture d'une vraie saveur fraîche à l'intérieur simple, toute l'année.",
-    "story2": "Aujourd'hui, nos jardins intelligents et capsules pré-ensemencées aident des milliers de foyers en Europe à récolter des herbes fraîches en quelques semaines — avec seulement de l'eau, de la lumière et un peu de soin.",
+    "story2": "Le jardin et les capsules sont faits pour que des herbes fraîches poussent à la maison — avec de l'eau, de la lumière et un peu de soin. Pour l'instant, nous livrons en Bulgarie.",
     "videoBadge": "Voyez-le pousser",
     "playVideo": "Lire la vidéo",
     "pauseVideo": "Mettre en pause",
@@ -374,16 +395,33 @@
     },
     "stats": {
       "plants": {
-        "value": "500k+",
-        "label": "plantes cultivées"
+        "value": "12",
+        "label": "emplacements de culture"
       },
       "countries": {
-        "value": "12",
-        "label": "pays desservis"
+        "value": "16/8",
+        "label": "heures de lumière et de repos"
       },
       "harvests": {
-        "value": "98%",
-        "label": "taux de germination"
+        "value": "BG",
+        "label": "livraison en Bulgarie"
+      }
+    },
+    "foundersKicker": "Celles et ceux qui l'ont fait",
+    "foundersTitle": "On voulait que la nourriture pousse à côté de l'assiette",
+    "foundersLead": "Nous sommes les gens derrière PlantyHub. Nous ne sommes pas agronomes de métier — nous en avions juste assez des herbes qui fanent en deux jours. On voulait un goût que tu cueilles toi-même, dans la cuisine, quand tu en as besoin.",
+    "aims": {
+      "wanted": {
+        "title": "Ce qu'on voulait",
+        "text": "Un jardin qui s'occupe de lui-même. Tu mets de l'eau et une capsule, la lampe tourne seule, et en quelques semaines tu récoltes. Pas de jardin dehors, pas de terre, et pas de saison à surveiller."
+      },
+      "next": {
+        "title": "Ce qu'on veut développer",
+        "text": "Plus qu'une garniture. Plus de plantes, de meilleures capsules, et des jardins avec lesquels une maison fait pousser une partie de sa nourriture. HomeGarder One est le premier pas. On commence en Bulgarie."
+      },
+      "future": {
+        "title": "L'avenir de l'alimentation",
+        "text": "On croit que l'avenir de l'alimentation est sur le plan de travail. Fraîche, cueillie quand tu en as besoin, avec moins de route et moins de gaspillage. Cultiver à la maison deviendra normal, pas un loisir pour quelques-uns."
       }
     },
     "originEyebrow": "Prêt à récolter",
@@ -497,7 +535,7 @@
   "consumablesSection": {
     "eyebrow": "Consommables",
     "title": "Capsules, nutriments & bouchons",
-    "subtitle": "Capsules vides, Sana A & B et bouchons de germination."
+    "subtitle": "Capsules vides, solution nutritive A et B et bouchons de germination."
   },
   "accessoriesSection": {
     "title": "Accessoires",
@@ -591,8 +629,8 @@
     "subtitle": "Débutez le jardinage d'intérieur avec nous",
     "items": {
       "zero": {
-        "title": "Zéro courbe d'apprentissage",
-        "description": "5 minutes d'installation. Quelques jours pour germer. Quelques semaines pour récolter. Aucune compétence requise."
+        "title": "Facile dès le début",
+        "description": "Place les capsules, ajoute de l'eau et regarde-les pousser. PlantyHub s'occupe du reste."
       },
       "noSoil": {
         "title": "Pas de terre, pas de doute",
@@ -605,7 +643,7 @@
     }
   },
   "guarantees": {
-    "title": "Pourquoi ils ne s'en lassent pas",
+    "title": "Pourquoi choisir PlantyHub ?",
     "items": {
       "sprouting": {
         "title": "Garantie de germination",
@@ -739,7 +777,7 @@
         "name": "Capsules vides"
       },
       "sana-ab": {
-        "name": "Nutriments Sana A + B"
+        "name": "Solution nutritive A + B"
       },
       "germination-caps": {
         "name": "Bouchons de germination"
@@ -759,7 +797,7 @@
   },
   "cta": {
     "title": "Commencez votre première récolte",
-    "subtitle": "Pack de démarrage à partir de {{price}}.",
+    "subtitle": "HomeGarder One · {{price}}",
     "emailPlaceholder": "E-mail pour l'offre",
     "button": "Obtenir l'offre"
   },
@@ -786,60 +824,61 @@
     "quantity": "Quantité",
     "videoBadge": "Démo en 60 secondes",
     "videoTitle": "HomeGarder One en action",
-    "videoText": "Du déballage à la première récolte — découvrez comme il est simple d'installer, de planter et de cultiver des herbes fraîches sur votre plan de travail.",
+    "videoText": "Une courte démo : l'eau, les capsules et la lampe qui démarre seule.",
     "highlightsTitle": "Tout ce qu'il faut pour cultiver",
-    "highlightsSubtitle": "Un jardin intelligent — sans terre, sans prise de tête, toute l'année.",
+    "highlightsSubtitle": "Sans terre. La lampe et la pompe font le quotidien — sur le plan de travail, toute l'année.",
     "features": {
       "easy": {
-        "title": "Facile",
-        "text": "Sans terre, sans dégât — insérez et cultivez."
+        "title": "Sans terre",
+        "text": "Rien à creuser, et pas de terre sur le plan de travail. Tu ajoutes de l'eau et une capsule."
       },
       "fast": {
-        "title": "Croissance rapide",
-        "text": "Optimisé pour des récoltes rapides et saines."
+        "title": "Dans les 6 semaines",
+        "text": "Les germes partent en quelques jours. La roquette et le basilic se cueillent vers 3 semaines, le persil vers 5."
       },
       "smart": {
-        "title": "Système intelligent",
-        "text": "Conçu pour les jardins d'intérieur PlantyHub."
+        "title": "Tu branches, c'est tout",
+        "text": "La lampe éclaire 16 heures et se repose 8. La pompe arrose depuis le réservoir."
       },
       "natural": {
-        "title": "Naturel",
-        "text": "Sans OGM, ingrédients naturels."
+        "title": "Si ça ne germe pas",
+        "text": "Si une capsule ne germe pas et que tu as suivi les étapes, on en envoie une nouvelle."
       }
     },
     "howItWorksTitle": "Comment ça marche",
     "steps": [
-      "Insérez la capsule dans le jardin.",
-      "Ajoutez de l'eau et des nutriments.",
-      "Récoltez frais en quelques semaines."
+      "Verse 4 l d'eau dans le réservoir.",
+      "Ajoute 5 ml de A, mélange, puis 5 ml de B.",
+      "Pose les capsules et les capuchons, puis allume la lampe.",
+      "Récolte à partir d'environ 3 semaines, et ne prends jamais plus d'environ un tiers à la fois."
     ],
     "specsTitle": "Caractéristiques complètes",
     "inTheBox": "Contenu de la boîte",
     "inTheBoxItems": {
-      "garden": "Jardin HomeGarder One (blanc mat)",
-      "led": "Bras LED spectre complet réglable",
-      "pods": "3 capsules de graines de démarrage",
-      "nutrients": "Kit de nutriments Sana A + B",
-      "manual": "Guide de démarrage rapide & QR"
+      "garden": "HomeGarder One avec réservoir et 12 emplacements (blanc mat)",
+      "led": "Lampe LED avec support réglable et alimentation",
+      "pods": "12 capsules de graines et 12 capuchons de germination",
+      "nutrients": "Solution nutritive A et B, 100 ml chacune",
+      "manual": "Notice des doses et QR"
     },
     "faqTitle": "Questions fréquentes",
     "faqSeeAll": "Voir tout",
     "faqItems": [
       {
         "q": "Faut-il de l'expérience en jardinage ?",
-        "a": "Aucune. Insérez une capsule, ajoutez de l'eau et des nutriments, et la LED fonctionne automatiquement en cycle 16/8. L'appli et les guides QR vous accompagnent à chaque étape."
+        "a": "Non. Tu verses 4 l d'eau, tu ajoutes 5 ml de A puis 5 ml de B, tu poses les capsules et tu branches. La lampe garde seule 16 heures de lumière et 8 heures de repos."
       },
       {
         "q": "Combien de temps avant la première récolte ?",
-        "a": "La plupart des herbes et épices se récoltent en 2 à 3 semaines et continuent de produire pendant des mois."
+        "a": "Les germes partent en quelques jours. La roquette et le basilic se cueillent vers 3 semaines, la menthe, la coriandre et l'aneth vers 4, le persil vers 5. La première récolte arrive dans les 6 semaines."
       },
       {
         "q": "Quelle est sa consommation électrique ?",
-        "a": "Très faible — la LED spectre complet est aussi efficace que quelques ampoules domestiques, soit quelques euros par mois."
+        "a": "La lampe éclaire 16 heures et se repose 8. Ce que ça coûte par mois dépend du prix de ton électricité."
       },
       {
         "q": "Que puis-je cultiver ?",
-        "a": "Basilic, menthe, persil, coriandre, aneth, roquette et plus — 12 capsules à la fois. Toute capsule HomeGarder s'adapte aux emplacements."
+        "a": "Basilic, menthe, persil, coriandre, aneth et roquette — jusqu'à 12 emplacements à la fois."
       },
       {
         "q": "Y a-t-il une garantie ?",
@@ -877,6 +916,7 @@
     "shipping": "Livraison : Bulgarie uniquement",
     "shippingNote": "Livraison gratuite dès €150. Prix en EUR.",
     "linksTitle": "Navigation",
+    "guidesTitle": "Aide",
     "legalTitle": "Mentions légales",
     "links": {
       "product": "Produit",
@@ -890,12 +930,13 @@
       "terms": "Conditions d'utilisation",
       "faq": "FAQ",
       "contact": "Contact",
-      "learn": "Apprendre"
+      "learn": "Apprendre",
+      "instructions": "Instructions"
     },
     "followUs": "Suivez-nous",
     "contactTitle": "Contact",
     "address": "PlantyHub · Bulgarie",
-    "madeWith": "Cultivé avec soin en Bulgarie",
+    "madeWith": "",
     "payments": "Les paiements par carte sont traités de façon sécurisée par Stripe.",
     "paymentsLabel": "Moyens de paiement acceptés",
     "cookieSettings": "Paramètres cookies",
@@ -1044,7 +1085,8 @@
     "secureCheckout": "Toutes les transactions sont sécurisées et chiffrées",
     "deliveryMethod": "Transporteur et livraison",
     "quoting": "Calcul des tarifs…",
-    "quoteFallback": "Choisissez pays et ville dans la liste du transporteur. Livraison standard en attendant.",
+    "quoteFallback": "Choisis une ville dans la liste Econt pour calculer la livraison.",
+    "shippingUnavailable": "Impossible de calculer la livraison pour cette ville. Choisis la ville à nouveau.",
     "cheapest": "meilleur prix",
     "office": "Bureau de retrait",
     "locker": "Casier BOX NOW",
@@ -2098,7 +2140,7 @@
           },
           {
             "q": "Que contient la boîte ?",
-            "a": "L'appareil, le bras LED, l'alimentation, des capsules de démarrage (selon le pack), nutriments Sana A + B et un guide avec QR."
+            "a": "L'appareil, le bras LED, l'alimentation, des capsules de démarrage (selon le pack), solution nutritive A et B et un guide avec QR."
           },
           {
             "q": "Combien de temps pour démarrer ?",
@@ -2185,7 +2227,7 @@
             "a": "Au sec et au frais dans l'emballage d'origine. Vérifiez la date — n'utilisez pas de capsules trop périmées."
           },
           {
-            "q": "Que sont Sana A et Sana B ?",
+            "q": "Que sont les solutions A et B ?",
             "a": "Nutriments en deux parties pour l'hydroponie. Mélangez avec de l'eau selon le mode d'emploi — ne mélangez jamais les concentrés purs."
           },
           {
@@ -2323,94 +2365,124 @@
     "privacy": {
       "title": "Politique de confidentialité",
       "eyebrow": "Mentions légales",
-      "updated": "5 octobre 2026",
-      "lead": "Cette politique explique comment PlantyHub (« nous ») collecte, utilise et protège tes données personnelles lorsque tu achetes ou nous contactes via plantyhub.com.",
+      "updated": "13 octobre 2026",
+      "lead": "Cette politique explique comment ДИДЖИТАЛ КИТ ЕООД, la société derrière la boutique PlantyHub (plantyhub.com), collecte et utilise tes données personnelles lorsque tu achètes, crées un compte ou nous contactes.",
       "sections": [
         {
-          "title": "Qui nous sommes",
+          "title": "Qui est responsable des données",
           "paragraphs": [
-            "Le responsable du traitement est PlantyHub, Bulgarie. Nous traitons les données conformément au RGPD et au droit bulgare applicable."
+            "Le responsable du traitement est ДИДЖИТАЛ КИТ ЕООД, UIC 207270915, TVA BG207270915, siège : ul. Nikifor P. Konstantinov, 4400 Pazardzhik, Bulgarie. La boutique opère sous le nom PlantyHub."
           ],
           "items": [
-            "Demandes relatives aux données : support@plantyhub.com"
+            "Demandes relatives aux données : support@plantyhub.com",
+            "Nous traitons les données conformément au règlement (UE) 2016/679 (RGPD) et à la loi bulgare sur la protection des données personnelles"
           ]
         },
         {
           "title": "Données collectées",
           "paragraphs": [
-            "Selon ton usage du site, nous pouvons traiter :"
+            "Nous ne collectons que ce dont une étape a besoin. Selon ton usage du site, cela peut inclure :"
           ],
           "items": [
-            "Compte et commandes — nom, e-mail, adresse de livraison, téléphone (si fourni)",
-            "Paiement — via le prestataire (pas de numéros de carte complets chez nous)",
-            "Communications — formulaires de contact, e-mails et demandes d’assistance",
-            "Données techniques — adresse IP, navigateur/appareil et statistiques (voir politique cookies)"
+            "Compte — nom, e-mail, téléphone, pays et mot de passe haché ; nous envoyons un e-mail de confirmation à l’inscription",
+            "Commande — nom, e-mail, téléphone, adresse de livraison et de facturation, pays, notes pour le transporteur, produits, code promo et statut de la commande",
+            "Paiement — le moyen choisi (carte via Stripe, PayPal ou paiement à la livraison). Le numéro complet de la carte est traité par le prestataire de paiement et n’est pas conservé chez nous",
+            "Livraison — ce dont le transporteur a besoin : destinataire, téléphone, adresse ou point relais/consigne, et le montant à encaisser en cas de paiement à la livraison",
+            "Messages — nom, e-mail, sujet, message et numéro de commande facultatif du formulaire de contact, ainsi que les échanges d’e-mails ultérieurs",
+            "Newsletter — ton e-mail et l’état de l’abonnement, uniquement si tu t’abonnes",
+            "Avis — nom, e-mail, note, texte et photos facultatives ; nous pouvons publier l’avis après modération sans afficher l’e-mail",
+            "Données techniques — adresse IP, type de navigateur et d’appareil, langue du site et statistiques d’usage de base, lorsque c’est nécessaire pour la sécurité ou si tu as accepté les cookies"
           ]
         },
         {
-          "title": "Finalités",
+          "title": "Pourquoi nous les utilisons",
           "items": [
-            "Exécution des commandes, livraison, facturation et SAV / garantie",
-            "Gestion du compte, connexion et sécurité",
-            "Réponse aux demandes et support client",
-            "Amélioration du site et mesure des publicités via Google Analytics, Microsoft Clarity et Meta — uniquement si tu acceptes dans la bannière",
-            "Marketing uniquement avec consentement (ex. newsletter) — désinscription à tout moment"
+            "Prise en charge et exécution des commandes, livraison, facturation et suivi",
+            "Création et sécurisation du compte, connexion, réinitialisation du mot de passe et confirmation de l’e-mail",
+            "Garantie, retours, remplacements et réponses du support",
+            "Messages liés à la commande elle-même (confirmation, expédition, suivi)",
+            "Newsletter et code promo pour la première commande — uniquement avec consentement, avec un lien de désinscription dans chaque e-mail de ce type",
+            "Une invitation à laisser un avis après un achat",
+            "Sécurité du site, prévention de la fraude et comptabilité",
+            "Statistiques d’usage, mesure publicitaire et remarketing avec Google Analytics, Google Tag Manager, Google Ads, Microsoft Clarity et Meta Pixel — uniquement si tu acceptes dans la bannière cookies. Le site indique alors à Google et Meta les produits que tu consultes et ajoutes au panier et, pour une commande finalisée, son numéro, sa valeur, ses produits et son code promo. Si tu ouvres la page de démarrage depuis un QR code, le même consentement nous montre aussi quelle étiquette a été scannée (boîte, capsules ou notice). Cela ne t’identifie pas. Nous ne leur envoyons pas ton nom, ton e-mail, ton téléphone ni ton adresse"
           ]
         },
         {
           "title": "Bases légales",
           "items": [
-            "Contrat — pour exécuter commande ou compte",
-            "Obligation légale — fiscalité et comptabilité",
-            "Intérêt légitime — sécurité, fraude, amélioration du service",
-            "Consentement — newsletter, cookies non essentiels et finalités similaires"
+            "Contrat — commande, livraison, compte et messages sans lesquels l’achat ne peut pas être exécuté",
+            "Obligation légale — comptabilité, fiscalité et facturation",
+            "Intérêt légitime — sécurité, prévention de la fraude, défense en cas de litige et amélioration du service, lorsque cela ne prévaut pas sur tes droits",
+            "Consentement — newsletter et cookies non essentiels. Tu peux retirer ton consentement à tout moment ; le retrait n’affecte pas le traitement déjà effectué"
           ]
         },
         {
-          "title": "Partage",
+          "title": "Avec qui nous partageons les données",
           "paragraphs": [
-            "Partage uniquement avec des sous-traitants de confiance. Nous ne vendons pas de données personnelles."
+            "Nous ne vendons pas de données personnelles. Nous les partageons uniquement avec les prestataires dont la boutique a besoin, et seulement dans cette mesure.",
+            "Pour le paiement lui-même, Stripe et PayPal sont des responsables distincts avec leurs propres politiques : https://stripe.com/privacy et https://www.paypal.com/myaccount/privacy/privacyhub."
           ],
           "items": [
-            "Transporteurs / livraison",
-            "Prestataires de paiement",
-            "Hébergement et e-mail",
-            "Google Ireland Limited (Google Analytics et Google Tag Manager) — uniquement avec consentement",
-            "Microsoft Corporation (Microsoft Clarity) — uniquement si tu acceptes les cookies analytiques",
-            "Meta Platforms Ireland Limited (Meta Pixel) — uniquement si tu acceptes les cookies marketing",
-            "Autorités compétentes — si la loi l’exige"
+            "Stripe Payments Europe, Ltd. — paiements par carte",
+            "PayPal (Europe) S.à r.l. et Cie, S.C.A. — paiements PayPal",
+            "Cloudflare, Inc. (R2) — stockage des photos de produits et d’avis",
+            "Le service e-mail de la boutique — Azure Communication Email ou un fournisseur SMTP, selon la configuration — pour les messages de commande, de compte et de newsletter",
+            "Transporteurs selon l’option choisie : Econt, Speedy, BoxNow et DHL",
+            "Notre hébergeur (Microsoft Azure) et notre fournisseur d’e-mail, pour faire fonctionner le site et les messages de commande",
+            "Google Ireland Limited — Google Analytics 4, Google Tag Manager et Google Ads, uniquement avec consentement",
+            "Microsoft — Microsoft Clarity, uniquement avec consentement",
+            "Meta Platforms Ireland Limited — Meta Pixel, uniquement avec consentement",
+            "Autorités publiques — lorsque la loi l’exige"
           ]
         },
         {
-          "title": "Conservation et sécurité",
+          "title": "Données hors de l’UE",
+          "paragraphs": [
+            "Certains de ces prestataires peuvent traiter des données hors de l’Espace économique européen, y compris aux États-Unis. Dans ce cas, nous nous appuyons sur une décision d’adéquation ou sur les clauses contractuelles types et mesures complémentaires du prestataire."
+          ]
+        },
+        {
+          "title": "Durée de conservation",
           "items": [
-            "Conservation uniquement le temps nécessaire ou exigé par la loi",
-            "Mesures techniques et organisationnelles contre l’accès non autorisé, la perte ou l’usage abusif"
+            "Commandes, factures et paiements — pendant les durées imposées par le droit comptable et fiscal, généralement jusqu’à 10 ans",
+            "Compte — tant que tu l’utilises ; après suppression, nous ne gardons que ce que la loi exige",
+            "Messages au support — jusqu’à la clôture de la demande puis 3 ans, ou plus longtemps si une garantie ou un litige est en cours",
+            "Newsletter — jusqu’à ta désinscription ou ta demande de suppression",
+            "Avis — tant qu’ils sont publiés ou jusqu’à ta demande de suppression, sauf si nous devons les conserver pour un litige",
+            "Choix des cookies — jusqu’à ce que tu le modifies ou effaces les données du navigateur"
+          ]
+        },
+        {
+          "title": "Sécurité",
+          "paragraphs": [
+            "Le site utilise une connexion chiffrée. L’accès aux données clients est limité aux personnes et systèmes qui en ont besoin. Les mots de passe ne sont pas stockés sous forme lisible. Les données de carte sont traitées par Stripe ou PayPal, pas sur nos serveurs."
           ]
         },
         {
           "title": "Tes droits",
           "paragraphs": [
-            "Tu peux exercer les droits suivants en écrivant à support@plantyhub.com :"
+            "Tu peux demander l’accès, la rectification, l’effacement, la limitation ou la portabilité, ou t’opposer à un traitement fondé sur l’intérêt légitime. Lorsque la base est le consentement, tu peux le retirer. Écris à support@plantyhub.com. Nous répondons dans un délai d’un mois."
           ],
           "items": [
-            "Accès, rectification et effacement",
-            "Limitation et portabilité",
-            "Opposition à certains traitements",
-            "Retrait du consentement le cas échéant",
-            "Réclamation auprès de la Commission bulgare de protection des données (CPDP)"
+            "Tu peux déposer une réclamation auprès de la Commission bulgare de protection des données personnelles : 2 bd Prof. Tsvetan Lazarov, 1592 Sofia, kzld@cpdp.bg, www.cpdp.bg"
+          ]
+        },
+        {
+          "title": "Fermer un compte",
+          "paragraphs": [
+            "Le site n’a pas de bouton de suppression automatique. Pour fermer un compte, écris à support@plantyhub.com depuis l’adresse avec laquelle il a été créé. Nous supprimons ou anonymisons les données que la loi ne nous oblige pas à garder pour des commandes, des factures ou un litige."
           ]
         },
         {
           "title": "Enfants",
           "paragraphs": [
-            "Nos services ne s’adressent pas aux moins de 16 ans. Les données d’enfant collectées sans base légale seront effacées."
+            "La boutique ne s’adresse pas aux moins de 16 ans et nous ne collectons pas sciemment leurs données. Si nous apprenons avoir reçu de telles données sans base valable, nous les supprimons."
           ]
         },
         {
           "title": "Modifications",
           "paragraphs": [
-            "Nous pouvons mettre à jour cette politique. La date de mise à jour figure ci-dessus. Les changements importants seront indiqués sur le site."
+            "Nous pouvons mettre à jour cette politique lorsque la boutique ou la loi change. La date ci-dessus correspond à la version actuelle. Nous signalerons tout changement important sur le site."
           ]
         }
       ]
@@ -2418,43 +2490,105 @@
     "cookies": {
       "title": "Politique cookies",
       "eyebrow": "Mentions légales",
-      "updated": "5 octobre 2026",
-      "lead": "Cette page explique comment PlantyHub utilise les cookies et technologies similaires sur le site.",
+      "updated": "13 octobre 2026",
+      "lead": "Cette politique décrit les cookies et technologies similaires que plantyhub.com utilise pour faire fonctionner la boutique et — uniquement avec ton consentement — mesurer les visites et les publicités.",
       "sections": [
         {
-          "title": "Qu’est-ce qu’un cookie",
+          "title": "Ce que c’est",
           "paragraphs": [
-            "Les cookies sont de petits fichiers texte stockés dans le navigateur. Ils aident le site à fonctionner, à mémoriser des préférences et — avec consentement — à comprendre l’usage."
+            "Les cookies sont de petits fichiers texte qu’un site ou un service externe enregistre dans ton navigateur. Les entrées localStorage et sessionStorage jouent un rôle similaire : elles restent sur ton appareil et ne sont pas envoyées d’elles-mêmes à notre serveur à chaque page."
           ]
         },
         {
-          "title": "Cookies utilisés",
-          "items": [
-            "Essentiels — panier, session, connexion, sécurité et langue ; nécessaires au fonctionnement",
-            "Fonctionnels — mémorisent des préférences (ex. langue)",
-            "Analytiques — Google Tag Manager et Google Analytics 4 (Google Ireland Limited), cookies _ga et _ga_*, et Microsoft Clarity (Microsoft Corporation), cookies _clck et _clsk ; chargés seulement si tu acceptes dans la bannière",
-            "Marketing — Meta Pixel (Meta Platforms Ireland Limited), cookies _fbp et _fbc ; chargés seulement si tu acceptes dans la bannière"
-          ]
-        },
-        {
-          "title": "Base légale",
-          "items": [
-            "Cookies essentiels — intérêt légitime / nécessité du service",
-            "Cookies non essentiels — consentement, révocable à tout moment"
-          ]
-        },
-        {
-          "title": "Gérer les cookies",
-          "items": [
-            "Supprimer ou bloquer les cookies dans les paramètres du navigateur",
-            "Bloquer les essentiels peut casser panier ou connexion",
-            "Le choix se modifie dans la bannière ou via Paramètres cookies en bas de page, ou à support@plantyhub.com"
-          ]
-        },
-        {
-          "title": "Plus d’informations",
+          "title": "Ton choix",
           "paragraphs": [
-            "Pour le traitement des données personnelles, voir la politique de confidentialité. Questions cookies : support@plantyhub.com."
+            "Lors d’une première visite, si des outils d’analyse ou de publicité sont activés, nous affichons une bannière. « Accepter » active tous les outils non essentiels en une fois. « Refuser » les laisse désactivés. Le stockage essentiel pour le panier, la langue et la connexion ne dépend pas de la bannière.",
+            "Le choix est enregistré localement dans le navigateur sous la clé plantyhub.cookie-consent. Tu peux le modifier à tout moment via Paramètres cookies en bas de page. En cas de refus, nous arrêtons toute collecte supplémentaire et effaçons les cookies Google, Meta et Clarity déjà déposés, dans la mesure où le navigateur le permet."
+          ]
+        },
+        {
+          "title": "Essentiels",
+          "paragraphs": [
+            "Ces entrées sont nécessaires pour acheter, rester connecté et mémoriser la langue. La base est que le service ne peut pas fonctionner sans elles. Sans elles, le panier, la connexion ou le paiement peuvent échouer."
+          ],
+          "items": [
+            "Panier (plantyhub_cart) — les produits ajoutés, jusqu’à ce que tu les retires ou vides le navigateur",
+            "Langue (plantyhub-lang-choice) — la langue choisie",
+            "Connexion — un jeton de compte et les informations de base du compte dans localStorage si tu choisis de rester connecté, sinon dans sessionStorage jusqu’à la fermeture du navigateur",
+            "Bannière newsletter (ph_newsletter_seen) — pour que la fenêtre ne réapparaisse pas",
+            "Choix des cookies (plantyhub.cookie-consent) — retient si tu as accepté ou refusé",
+            "Lors du paiement, Stripe ou PayPal peuvent déposer leurs propres cookies, nécessaires au paiement et à la lutte contre la fraude"
+          ]
+        },
+        {
+          "title": "Analytiques",
+          "paragraphs": [
+            "Ils ne se chargent que si tu acceptes. Ils nous montrent quelles pages sont ouvertes et où le site est difficile à utiliser. Nous ne les utilisons pas pour une décision produisant des effets juridiques te concernant.",
+            "Le site ne charge que les outils listés ici. Un nouvel outil ne démarrera pas avant d’être ajouté à cette politique."
+          ],
+          "items": [
+            "Google Analytics 4 et Google Tag Manager (Google Ireland Limited) — cookies comme _ga, _ga_* et _gid ; ils mesurent les visites et les pages",
+            "Microsoft Clarity (Microsoft) — cookies comme _clck et _clsk ; ils montrent de façon agrégée l’usage des pages, par exemple le défilement et les clics",
+            "Si un clic sur une publicité dépose un cookie _gcl_*, il appartient à Google et dure généralement jusqu’à 90 jours. En cas de refus, nous l’effaçons avec les autres."
+          ]
+        },
+        {
+          "title": "QR codes sur l’emballage",
+          "paragraphs": [
+            "La boîte, les capsules et la notice imprimée portent un QR code vers plantyhub.com/start. L’adresse peut contenir un paramètre from avec la valeur box, pods ou instr. Il indique seulement quelle étiquette a été scannée et ne t’identifie pas. Le paramètre lui-même n’est pas un cookie.",
+            "Si tu acceptes les cookies, l’adresse de la page — y compris ce paramètre — est enregistrée par les outils de cette politique, parce qu’ils mesurent la page ouverte. Nous envoyons aussi à Google Analytics et à Google Tag Manager un événement qr_open avec l’étiquette, pour voir d’où les gens scannent. Si tu refuses, nous n’envoyons ni l’adresse à ces outils, ni l’événement."
+          ]
+        },
+        {
+          "title": "Marketing",
+          "paragraphs": [
+            "Ils se chargent avec le même consentement que les cookies analytiques. Ils montrent quelles publicités mènent à des visites et des achats, et peuvent servir à montrer à nouveau nos publicités aux personnes ayant visité le site (remarketing).",
+            "Avec ton consentement, le site indique à ces outils les produits que tu as consultés ou ajoutés au panier et, après une commande, son numéro, sa valeur, ses produits et son code promo. Il n’envoie pas ton nom, ton e-mail, ton téléphone ni ton adresse."
+          ],
+          "items": [
+            "Meta Pixel (Meta Platforms Ireland Limited) — cookies comme _fbp et _fbc ; ils enregistrent des visites et des actions pouvant servir à la publicité sur Facebook et Instagram",
+            "Google Ads (Google Ireland Limited), via Google Tag Manager — cookies comme _gcl_* ; mesure les achats issus des publicités Google et peut servir au remarketing"
+          ]
+        },
+        {
+          "title": "Durée",
+          "paragraphs": [
+            "Les entrées essentielles restent jusqu’à ce que tu les supprimes ou que la session se termine. Google, Microsoft et Meta fixent eux-mêmes la durée de leurs cookies, généralement d’un jour à deux ans. En cas de refus, nous essayons de les supprimer immédiatement."
+          ],
+          "items": [
+            "_ga et _ga_* (Google) — généralement jusqu’à 2 ans",
+            "_gid (Google) — généralement jusqu’à 24 heures",
+            "_gcl_* (Google, clic publicitaire) — généralement jusqu’à 90 jours",
+            "_clck (Clarity) — généralement jusqu’à 1 an",
+            "_clsk (Clarity) — généralement jusqu’à 1 jour",
+            "_fbp et _fbc (Meta) — généralement jusqu’à 3 mois",
+            "Le stockage essentiel du navigateur reste jusqu’à ce que tu le supprimes ou que la session se termine"
+          ]
+        },
+        {
+          "title": "Comment les gérer",
+          "items": [
+            "Modifie ton choix via Paramètres cookies en bas de page",
+            "Supprime ou bloque les cookies dans les paramètres du navigateur",
+            "Si tu bloques aussi le stockage essentiel, le panier et la connexion peuvent ne plus fonctionner",
+            "Questions : support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "Politiques des prestataires",
+          "items": [
+            "Google — https://policies.google.com/privacy",
+            "Microsoft — https://privacy.microsoft.com/privacystatement",
+            "Meta — https://www.facebook.com/privacy/policy",
+            "Stripe — https://stripe.com/privacy",
+            "PayPal — https://www.paypal.com/myaccount/privacy/privacyhub",
+            "Cloudflare — https://www.cloudflare.com/privacypolicy/"
+          ]
+        },
+        {
+          "title": "En savoir plus sur les données personnelles",
+          "paragraphs": [
+            "Le responsable du traitement, les bases légales et tes droits sont décrits dans la politique de confidentialité. Google, Microsoft et Meta peuvent traiter des données hors de l’UE selon leurs propres règles et des clauses contractuelles types."
           ]
         }
       ]
@@ -2537,132 +2671,316 @@
       ]
     }
   },
-  "learnPage": {
-    "title": "PlantyHub Apprendre",
-    "eyebrow": "Formation",
-    "lead": "Choisis une section, puis un sujet — et ouvre la leçon avec photos, vidéo et étapes claires.",
-    "pickSection": "Choisir une section",
-    "backToSections": "Toutes les sections",
-    "backToTopics": "Retour aux sujets",
-    "openTopic": "Ouvrir la leçon",
-    "tipLabel": "Conseil",
-    "stepsLabel": "Étapes",
-    "videoLabel": "Exemple vidéo",
-    "galleryLabel": "Photos pratiques",
-    "sections": {
-      "start": {
-        "title": "Commencer ici",
-        "description": "Bases de l’hydroponie et premier démarrage du jardin.",
-        "topicsLabel": "Sujets de cette section"
-      },
-      "grow": {
-        "title": "Faire pousser malin",
-        "description": "Lumière, eau, capsules et nutrition pour une croissance stable.",
-        "topicsLabel": "Sujets de cette section"
-      },
-      "harvest": {
-        "title": "Récolte et entretien",
-        "description": "Couper correctement et résoudre les problèmes courants.",
-        "topicsLabel": "Sujets de cette section"
-      }
+  "startPage": {
+    "title": "Ton jardin en 6 étapes",
+    "eyebrow": "HomeGarder One",
+    "lead": "Prêt à planter en environ 5 minutes.",
+    "nav": {
+      "label": "Sommaire",
+      "steps": "Étapes",
+      "doses": "Doses",
+      "water": "Eau",
+      "care": "Entretien",
+      "plants": "Plantes",
+      "video": "Vidéo",
+      "after": "Récolte",
+      "more": "Plus",
+      "faq": "Questions"
     },
-    "topics": {
-      "basics": {
-        "title": "Qu’est-ce que l’hydroponie",
-        "duration": "3 min",
-        "summary": "Pourquoi les plantes poussent dans l’eau et ce que PlantyHub change.",
-        "lead": "Les plantes poussent dans l’eau nutritive — sans terre, avec plus de contrôle sur la lumière et l’humidité.",
-        "videoLabel": "Vidéo : hydroponie à la maison",
-        "galleryLabel": "Photos : eau, racines et feuilles fraîches",
-        "steps": [
-          "Les racines prennent eau et nutriments dans le bac — pas dans la terre.",
-          "La LED remplace le soleil avec un cycle 16/8 (16 h lumière / 8 h repos).",
-          "Un système fermé utilise généralement moins d’eau que le jardinage classique.",
-          "Résultat : des herbes fraîches sur le plan de travail, toute l’année."
-        ],
-        "tip": "Ici, l’hydroponie n’est pas « trop technique » — la capsule apporte graines et nutriments, l’appareil gère lumière et arrosage."
+    "videoLabel": "Comment le lancer",
+    "videoCaption": "Une courte vidéo verticale du démarrage.",
+    "videoMissing": "La vidéo n’est pas encore en ligne. Elle se lit ici dès que le fichier est prêt.",
+    "watchVideo": "Voir la vidéo",
+    "hideVideo": "Masquer la vidéo",
+    "moreTitle": "Si tu veux en savoir plus",
+    "moreLead": "Doses, entretien et délais. Ouvre seulement ce dont tu as besoin.",
+    "stepsTitle": "Six étapes",
+    "stepsLead": "Du jardin vide aux premières feuilles. Chaque étape prend environ une minute.",
+    "tipLabel": "En plus",
+    "steps": [
+      {
+        "title": "Remplis d’eau",
+        "text": "Verse 4 l d’eau dans le réservoir. Filtrée ou peu minéralisée, c’est mieux ; l’eau du robinet convient. Vise environ 18–24 °C. Pose le jardin sur un plan stable, près d’une prise."
       },
-      "setup": {
-        "title": "Premier démarrage",
-        "duration": "5 min",
-        "summary": "De l’ouverture du carton à un jardin en marche en quelques minutes.",
-        "lead": "De l’ouverture du carton à un jardin en marche, en quelques étapes claires.",
-        "videoLabel": "Vidéo : déballage et première mise en marche",
-        "galleryLabel": "Photos : appareil, eau et capsules",
-        "steps": [
-          "Place l’appareil sur un plan stable, loin d’une forte chaleur directe.",
-          "Remplis d’eau propre jusqu’au repère.",
-          "Insère les capsules selon l’emballage.",
-          "Allume la lampe et laisse le cycle automatique — évite de déplacer l’appareil les premiers jours."
-        ],
-        "tip": "Utilise de l’eau à température ambiante. Si l’eau du robinet est très dure, de l’eau bouillie puis refroidie peut aider."
+      {
+        "title": "Ajoute A et B",
+        "text": "Au premier remplissage, ajoute 5 ml de A, mélange, puis 5 ml de B — jusqu’à la ligne verte du bouchon. Toujours A d’abord, puis B, et ne les mélange pas purs. Au changement d’eau, prends 8 ml de A et 8 ml de B, jusqu’à la ligne rouge."
       },
-      "light": {
-        "title": "Lumière et eau",
-        "duration": "4 min",
-        "summary": "Le cycle 16/8 et le bon niveau d’eau.",
-        "lead": "Les deux leviers principaux : une lumière régulière et assez d’eau.",
-        "videoLabel": "Vidéo : hauteur de lampe et croissance",
-        "galleryLabel": "Photos : lumière, niveau d’eau, croissance saine",
-        "steps": [
-          "La lampe suit un cycle 16/8 — ne l’éteins pas la nuit « pour économiser ».",
-          "Vérifie l’eau 1–2 fois par semaine et complète jusqu’au repère.",
-          "Ne dépasse pas le maximum.",
-          "Ajuste la hauteur de la lampe selon la croissance."
-        ],
-        "tip": "Feuilles basses jaunies : souvent trop peu de lumière ou une eau fatiguée — commence par le niveau et la hauteur de lampe."
+      {
+        "title": "Place les capsules",
+        "text": "Retire l’autocollant, pose une capsule par emplacement et un capuchon par-dessus. N’ouvre pas la capsule avant de la poser. Garde celles qui restent au sec et au frais, dans l’emballage d’origine."
       },
-      "pods": {
-        "title": "Capsules et nutrition",
-        "duration": "4 min",
-        "summary": "Ce qu’il y a dans une capsule et comment bien l’utiliser.",
-        "lead": "Chaque capsule est un kit de démarrage : graines, support et nutriments pour le premier cycle.",
-        "galleryLabel": "Photos : capsules, variétés et slots",
-        "steps": [
-          "N’ouvre pas la capsule trop tôt.",
-          "Scanne le QR pour les conseils propres à la variété.",
-          "Les cultures ne poussent pas toutes à la même vitesse.",
-          "Après un cycle, retire l’ancienne capsule et nettoie le slot."
-        ],
-        "tip": "Si une capsule est en retard, ne retire pas les autres — la variation est normale. Attends encore quelques jours."
+      {
+        "title": "Règle la lampe",
+        "text": "Descends la lampe juste au-dessus des capuchons. Dès que les feuilles sortent, garde au moins 2 cm au-dessus. Elle tourne seule : 16 heures de lumière et 8 heures de repos. Le cycle commence à l’allumage — ne l’éteins pas la nuit."
       },
-      "harvest": {
-        "title": "Récolter comme un pro",
-        "duration": "5 min",
-        "summary": "Quand et comment couper pour que ça repousse.",
-        "lead": "La bonne coupe garde la plante productive plus longtemps.",
-        "galleryLabel": "Photos : récolte, coupe et cuisine",
-        "steps": [
-          "Récolte dès qu’il y a assez de feuilles matures (souvent semaines 2–4).",
-          "Coupe au-dessus d’un nœud / paire de feuilles — cela favorise le branchage.",
-          "Ne prends pas plus d’environ ⅓ de la plante d’un coup.",
-          "Ciseaux propres ; les herbes sont meilleures juste après la coupe."
-        ],
-        "tip": "De petites coupes régulières valent mieux qu’une rare coupe radicale."
+      {
+        "title": "Retire les capuchons",
+        "text": "Retire le capuchon dès que la pousse le touche. Jusque-là, il garde l’humidité et ombrage l’eau. Si une pousse touche plus tôt, retire le capuchon tout de suite."
       },
-      "care": {
-        "title": "Entretien et problèmes courants",
-        "duration": "6 min",
-        "summary": "Vérifications rapides si pas de germination, feuilles pâles ou eau trouble.",
-        "lead": "La plupart des soucis viennent de l’eau, de la lumière ou de la température.",
-        "galleryLabel": "Photos : entretien et bac propre",
-        "steps": [
-          "Pas de germination après 10–14 jours : vérifier eau, lampe et température (~18–24°C).",
-          "Plantes pâles : ajuster la lampe et confirmer le cycle quotidien.",
-          "Odeur ou eau trouble : changer l’eau et rincer le bac.",
-          "Après chaque cycle : nettoyage rapide du bac et des slots."
-        ],
-        "tip": "Garantie de germination — si une capsule échoue malgré une bonne pratique, écris-nous."
+      {
+        "title": "Récolte et taille",
+        "text": "Entre les changements, complète seulement avec de l’eau propre et récolte régulièrement. Coupe au-dessus d’une paire de feuilles et ne prends pas plus d’environ un tiers à la fois. La plante se ramifie et repousse."
       }
+    ],
+    "doseTitle": "Dosage",
+    "doseLead": "Les deux remplissages sont pour 4 l d’eau. La ligne est sur le bouchon.",
+    "doseMix": "A et B",
+    "doseWater": "Eau",
+    "doseVisual": {
+      "firstMix": "5 ml A + 5 ml B",
+      "changeMix": "8 ml A + 8 ml B",
+      "green": "Ligne verte",
+      "red": "Ligne rouge"
     },
-    "ctaTitle": "Prêt à mettre en pratique ?",
-    "ctaText": "Consulte la FAQ, contacte-nous en cas de souci, ou commence avec HomeGarder One.",
-    "ctaFaq": "Vers la FAQ",
-    "ctaContact": "Contact",
-    "ctaBuy": "Voir le produit",
-    "topicsCount": "{{count}} sujets",
-    "nextTopic": "Suivant",
-    "playVideo": "Lire la vidéo",
-    "pauseVideo": "Pause"
+    "doses": [
+      {
+        "label": "Premier remplissage",
+        "mix": "5 ml A + 5 ml B",
+        "cap": "Ligne verte du bouchon",
+        "water": "4 l d’eau"
+      },
+      {
+        "label": "Changement d’eau",
+        "mix": "8 ml A + 8 ml B",
+        "cap": "Ligne rouge du bouchon",
+        "water": "4 l d’eau"
+      }
+    ],
+    "doseNote": "Entre les changements, complète seulement avec de l’eau propre. Un flacon suffit pour environ 12 remplissages. La lampe fonctionne automatiquement. Le cycle commence à l’allumage.",
+    "facts": [
+      { "value": "18–24 °C", "label": "Température ambiante" },
+      { "value": "2–3 sem.", "label": "Changement et nettoyage" },
+      { "value": "Auto 16 h / 8 h", "label": "Lumière / repos" },
+      { "value": "≥ 2 cm", "label": "Lampe au-dessus des feuilles" }
+    ],
+    "careTitle": "L’entretien sans effort",
+    "careLead": "Change l’eau et nettoie toutes les 2–3 semaines. Débranche avant.",
+    "careItems": [
+      {
+        "title": "Compléter",
+        "text": "Entre les changements, ajoute seulement de l’eau propre."
+      },
+      {
+        "title": "Changement et nettoyage",
+        "text": "Toutes les 2–3 semaines, rince et remplis avec 8 ml de A + 8 ml de B dans 4 l."
+      },
+      {
+        "title": "Lampe",
+        "text": "Au moins 2 cm au-dessus des feuilles. N’interromps pas le cycle 16/8."
+      },
+      {
+        "title": "Sécurité",
+        "text": "Hors de portée des enfants. L’eau n’est pas potable. Intérieur seulement. Nouvelle capsule après la récolte."
+      }
+    ],
+    "careLink": "Conseils et aide",
+    "plantsTitle": "Quand elles germent et quand les récolter",
+    "plantsLead": "Ces délais sont indicatifs. Ils dépendent de l’eau, de la température et de la lumière.",
+    "plantsSprout": "Germination",
+    "plantsHarvest": "Première récolte",
+    "plants": {
+      "basil": { "name": "Basilic", "sprout": "5–10 jours", "harvest": "dès environ 3 semaines" },
+      "mint": { "name": "Menthe", "sprout": "7–14 jours", "harvest": "dès environ 4 semaines" },
+      "parsley": { "name": "Persil", "sprout": "10–20 jours", "harvest": "dès environ 5 semaines" },
+      "cilantro": { "name": "Coriandre", "sprout": "7–14 jours", "harvest": "dès environ 4 semaines" },
+      "dill": { "name": "Aneth", "sprout": "7–14 jours", "harvest": "dès environ 4 semaines" },
+      "arugula": { "name": "Roquette", "sprout": "3–7 jours", "harvest": "dès environ 3 semaines" }
+    },
+    "waterTitle": "Quelle eau utiliser",
+    "waterLead": "L’eau est la base de l’hydroponie.",
+    "waterBestLabel": "Le mieux",
+    "waterBestHint": "On recommande",
+    "waterBest": [
+      "Eau filtrée — d’une carafe filtrante ou d’un osmoseur. Douce, sans chlore, avec le résultat le plus prévisible.",
+      "Eau de source ou de table en bouteille, peu minéralisée. Sur l’étiquette : minéralisation totale sous environ 300 mg/l.",
+      "Eau distillée. Elle convient — la solution A et B apporte le calcium et le magnésium nécessaires."
+    ],
+    "waterOkLabel": "Ça va",
+    "waterOkHint": "Eau du robinet",
+    "waterOk": "Laisse-la quelques heures sans couvercle pour que le chlore parte. Avec une eau dure, du calcaire peut apparaître sur les parois — passe alors à l’eau filtrée.",
+    "waterNoLabel": "À ne pas utiliser",
+    "waterNoHint": "Ces eaux nuisent aux plantes",
+    "waterNo": [
+      "Eau minérale ou alcaline — pH élevé et beaucoup de sels",
+      "Eau gazeuse",
+      "Eau d’un adoucisseur au sel — le sodium nuit aux racines",
+      "Eau chaude du chauffe-eau",
+      "Eau de pluie — elle peut être polluée"
+    ],
+    "waterPrepTitle": "Préparation",
+    "waterPrep": [
+      "Utilise de l’eau à température ambiante, environ 18–24 °C.",
+      "Verse 4 l dans le réservoir et ajoute la solution : 5 ml de A jusqu’à la ligne verte du bouchon, mélange, puis 5 ml de B.",
+      "Entre les changements, complète avec la même eau, sans solution."
+    ],
+    "waterCareTitle": "Entretien de l’eau",
+    "waterCareLead": "Six choses qui gardent le jardin en bonne santé.",
+    "waterCare": [
+      { "title": "Niveau d’eau", "text": "Ne le laisse pas descendre sous le repère minimum. La pompe tourne alors à sec, fait du bruit et peut s’abîmer. Vérifie tous les 2–3 jours, surtout quand les plantes sont grandes." },
+      { "title": "Eau trouble ou odeur", "text": "Change l’eau tout de suite, sans attendre les 2–3 semaines habituelles." },
+      { "title": "Algues", "text": "Du vert dans le réservoir. Couvre les emplacements vides et ne laisse pas le jardin au soleil direct." },
+      { "title": "Nettoyage", "text": "Seulement de l’eau et une éponge douce, sans détergent. Pour le calcaire, du vinaigre dilué, puis un bon rinçage." },
+      { "title": "L’ancienne eau", "text": "Tu peux la verser dans des pots ou au jardin. C’est un engrais dilué." },
+      { "title": "Eau chaude", "text": "Au-dessus d’environ 26 °C, les racines manquent d’oxygène et pourrissent. C’est important en été." }
+    ],
+    "afterTitle": "Après la plantation",
+    "afterLead": "Tout ce qu’il te faut après la première plantation.",
+    "stageTitle": "Quand arrive la première récolte",
+    "stageNote": "La première récolte arrive dans les 6 semaines après la plantation. Dans une pièce plus chaude et avec de l’eau filtrée, les plantes poussent plus vite. Après la première coupe elles continuent de pousser et, si tu récoltes bien, donnent des feuilles fraîches pendant des semaines.",
+    "stages": [
+      { "when": "1–2 semaines", "title": "Germination", "text": "Les premières petites pousses sous le capuchon." },
+      { "when": "jusqu’à 6 semaines", "title": "Première récolte", "text": "Assez de feuilles pour la première poignée." },
+      { "when": "6–7 semaines", "title": "Pleine taille", "text": "Les plantes sont denses et tu peux récolter chaque jour." }
+    ],
+    "harvestTitle": "Comment récolter chaque plante",
+    "harvestRule": "Ne prends pas plus d’un tiers à la fois. Coupe avec des ciseaux propres — ne tire pas à la main, sinon tu sors toute la capsule.",
+    "harvestRows": [
+      { "name": "Basilic", "how": "Pince la pointe juste au-dessus d’une paire de feuilles.", "why": "Deux nouvelles tiges poussent et la plante devient plus dense." },
+      { "name": "Persil", "how": "Coupe les tiges extérieures à la base.", "why": "Les nouvelles tiges poussent depuis le centre." },
+      { "name": "Laitue", "how": "Prends les feuilles extérieures, le centre reste.", "why": "Le centre continue de faire de nouvelles feuilles." },
+      { "name": "Roquette", "how": "Coupe à 2–3 cm au-dessus de la base.", "why": "La plante repousse." }
+    ],
+    "harvestNote": "Quand les plantes atteignent la lampe montée au maximum, raccourcis les pointes de la même façon. Si le basilic fleurit, pince les fleurs — sinon les feuilles deviennent amères.",
+    "faqTitle": "Si quelque chose ne va pas",
+    "faqLead": "La plupart des problèmes se règlent en quelques minutes. Trouve ce que tu vois.",
+    "faqMore": "Toutes les questions",
+    "faqs": [
+      {
+        "q": "Pas de germe après 2 semaines",
+        "a": "La pièce est trop froide, le capuchon a été retiré trop tôt ou la capsule n’atteint pas l’eau. Vérifie le capuchon, la température (18–24 °C) et le niveau d’eau. Si elle ne germe toujours pas, écris-nous."
+      },
+      {
+        "q": "Plantes pâles et allongées",
+        "a": "La lampe est trop loin et les plantes se tendent vers la lumière. Descends-la à 2 cm au-dessus des feuilles."
+      },
+      {
+        "q": "Feuilles jaunes",
+        "a": "La solution est épuisée ou l’eau est vieille. Change l’eau et ajoute 8 ml de A + 8 ml de B, jusqu’à la ligne rouge du bouchon."
+      },
+      {
+        "q": "Racines brunes ou gluantes",
+        "a": "L’eau est trop chaude, au-dessus d’environ 26 °C, et les racines manquent d’oxygène. Remplace-la par de l’eau plus fraîche et éloigne le jardin d’un radiateur ou du soleil."
+      },
+      {
+        "q": "Eau trouble ou odeur",
+        "a": "Des bactéries se sont développées dans l’eau. Change-la tout de suite et rince le réservoir."
+      },
+      {
+        "q": "Du vert dans le réservoir",
+        "a": "Ce sont des algues — la lumière atteint l’eau. Couvre les emplacements vides et ne laisse pas le jardin au soleil direct."
+      },
+      {
+        "q": "La pompe fait du bruit",
+        "a": "Le niveau est passé sous le repère minimum. Complète avec de l’eau propre. À sec, la pompe fait du bruit et peut s’abîmer."
+      }
+    ],
+    "order": "Commander de nouvelles capsules",
+    "orderHint": "Quand la récolte est finie, retire les anciennes capsules, rince le réservoir et recommence. 12 nouvelles capsules TTC coûtent 14,99 € et remplissent tout le jardin. Un pack de solution A et B suffit pour environ 12 remplissages.",
+    "contactTitle": "Garantie de germination",
+    "warranty": "Si une capsule ne germe pas et que tu as suivi les instructions, nous en envoyons une nouvelle gratuitement.",
+    "claimSteps": [
+      "Attends 3 semaines après la plantation. Certaines graines sont simplement plus lentes.",
+      "Photographie le jardin pour que la capsule sans germe se voie.",
+      "Envoie la photo à sales@plantyhub.com avec le numéro de commande et le lot indiqué sur la boîte.",
+      "Nous t’enverrons une nouvelle capsule de la même variété."
+    ],
+    "contactLink": "Formulaire de contact",
+    "academyTitle": "Académie",
+    "academyText": "Si tu veux plus de leçons, de photos et de vidéo, ouvre l'académie.",
+    "academyLink": "Vers l'académie",
+    "safetyTitle": "Attention",
+    "safetyText": "Solution B — DANGER : provoque des lésions oculaires graves. Solution A — ATTENTION : provoque une sévère irritation des yeux. Garde les solutions et les capsules hors de portée des enfants — les capsules sont de petites pièces. Non potable. Porte une protection des yeux. En cas de contact avec les yeux : rince avec précaution à l’eau pendant plusieurs minutes, retire les lentilles si possible et continue de rincer. Consulte un médecin. Centre antipoison : 02 9154 233. Conserve les solutions bien fermées, entre 10 et 30 °C, à l’abri de la chaleur, du gel et du soleil direct. Débranche le jardin avant de changer l’eau ou de le nettoyer. Ne remplis pas le réservoir à ras bord et garde l’adaptateur et le câble au sec. Pose le jardin sur une surface stable et plane."
+  },
+  "howPage": {
+    "eyebrow": "Comment ça marche",
+    "title": "Le jardin arrose et éclaire tout seul",
+    "lead": "HomeGarder One n’a pas de terre. Les racines boivent dans le réservoir, la lampe tient son propre cycle, et toi tu poses les capsules et tu récoltes.",
+    "imageAlt": "PlantyHub HomeGarder One sur un plan de travail",
+    "buy": "Voir HomeGarder One",
+    "guide": "Tu l’as déjà ? Le guide",
+    "facts": [
+      { "value": "12", "label": "capsules à la fois" },
+      { "value": "4 L", "label": "d’eau dans le réservoir" },
+      { "value": "16 / 8", "label": "heures de lumière et de repos" },
+      { "value": "jusqu’à 6 sem.", "label": "avant la première récolte" }
+    ],
+    "videoLabel": "En une minute",
+    "videoTitle": "Voir le jardin de près",
+    "videoText": "L'eau, les capsules et la lampe qui démarre seule. Les mêmes étapes sont écrites plus bas.",
+    "systemEyebrow": "La machine",
+    "systemTitle": "Trois choses font le travail",
+    "systemLead": "Tu n’arroses pas chaque jour et tu ne déplaces pas la lampe à la montre.",
+    "systems": [
+      { "title": "L’eau par le bas", "text": "Le réservoir contient 4 litres. Une pompe monte l’eau jusqu’aux racines — pas d’arrosoir et pas de terre." },
+      { "title": "La nourriture en deux temps", "text": "Au premier remplissage tu mets 5 ml de A, tu mélanges, puis 5 ml de B. Entre les changements tu complètes seulement avec de l’eau claire." },
+      { "title": "La lumière à l’horloge", "text": "Le cycle démarre à la mise en route : 16 heures de lumière et 8 heures de repos. Ne l’éteins pas la nuit." }
+    ],
+    "stepsEyebrow": "Ta part",
+    "stepsTitle": "Six gestes, environ cinq minutes",
+    "stepsLead": "Ensuite le jardin continue seul, jusqu’au moment de récolter.",
+    "steps": [
+      { "title": "Remplir d’eau", "text": "Verse 4 L. Filtrée ou en bouteille, c’est mieux ; l’eau du robinet convient aussi. Environ 18–24 °C, sur un plan stable près d’une prise." },
+      { "title": "Ajouter A et B", "text": "D’abord 5 ml de A jusqu’à la ligne verte, mélange, puis 5 ml de B. Ne les mélange pas purs. Au changement d’eau, la dose est de 8 ml de chaque." },
+      { "title": "Poser les capsules", "text": "Retire l’autocollant, mets une capsule dans chaque logement et un dôme dessus. Le dôme garde l’humidité jusqu’à la germination." },
+      { "title": "Régler la lampe", "text": "Descends-la près des dômes. Dès qu’il y a des feuilles, laisse-la à au moins 2 cm au-dessus. Le cycle tourne déjà." },
+      { "title": "Retirer les dômes", "text": "Dès que le germe touche le dôme, retire-le. Jusque-là il ombre l’eau et garde l’humidité." },
+      { "title": "Récolter et tailler", "text": "Coupe au-dessus d’une paire de feuilles et ne prends jamais plus d’environ un tiers à la fois. La plante se ramifie et repousse." }
+    ],
+    "waterEyebrow": "L'eau",
+    "waterTitle": "Quelle eau garde le jardin en bonne santé",
+    "waterLead": "Les solutions A et B apportent la nourriture. L'eau doit être douce et autour de 18–24 °C.",
+    "waterGroups": [
+      { "hint": "On recommande", "title": "Le mieux", "text": "Filtrée ou par osmose inverse. En bouteille, avec une minéralisation sous environ 300 mg/l. Distillée convient aussi — A et B ajoutent le calcium et le magnésium." },
+      { "hint": "Eau du robinet", "title": "Ça va", "text": "Laisse-la quelques heures sans couvercle pour que le chlore parte. Si du calcaire apparaît sur les parois du réservoir, passe à l'eau filtrée." },
+      { "hint": "Elles abîment les racines", "title": "À ne pas utiliser", "text": "Minérale ou alcaline, gazeuse, adoucie au sel, chaude du chauffe-eau et eau de pluie." }
+    ],
+    "growEyebrow": "Après la plantation",
+    "growTitle": "La première récolte arrive en six semaines",
+    "growLead": "Les délais sont indicatifs. Dans une pièce plus chaude et avec de l’eau filtrée, les plantes poussent plus vite.",
+    "stages": [
+      { "when": "1–2 semaines", "title": "Germination", "text": "Les premiers germes apparaissent sous le dôme." },
+      { "when": "jusqu’à 6 semaines", "title": "Première récolte", "text": "Assez de feuilles pour la première poignée." },
+      { "when": "6–7 semaines", "title": "Chaque jour", "text": "Les plantes sont denses et donnent des feuilles fraîches pendant des semaines." }
+    ],
+    "plantsTitle": "Quand chaque plante germe",
+    "sprout": "Germe",
+    "harvest": "Première récolte",
+    "plants": [
+      { "name": "Roquette", "sprout": "3–7 jours", "harvest": "dès 3 semaines" },
+      { "name": "Basilic", "sprout": "5–10 jours", "harvest": "dès 3 semaines" },
+      { "name": "Menthe", "sprout": "7–14 jours", "harvest": "dès 4 semaines" },
+      { "name": "Coriandre", "sprout": "7–14 jours", "harvest": "dès 4 semaines" },
+      { "name": "Aneth", "sprout": "7–14 jours", "harvest": "dès 4 semaines" },
+      { "name": "Persil", "sprout": "10–20 jours", "harvest": "dès 5 semaines" }
+    ],
+    "harvestNote": "Ne prends pas plus d'un tiers à la fois et coupe aux ciseaux pour ne pas arracher la capsule. Pince le basilic juste au-dessus d'une paire de feuilles — s'il fleurit, retire les fleurs, sinon les feuilles deviennent amères. Coupe le persil par les tiges extérieures. La roquette, à 2–3 cm au-dessus de la base.",
+    "rhythmEyebrow": "Ensuite",
+    "rhythmTitle": "Entre les récoltes, un changement d'eau",
+    "rhythm": [
+      { "title": "Compléter", "text": "Entre les changements, seulement de l'eau claire, sans solution. Vérifie tous les 2–3 jours, surtout quand les plantes sont grandes." },
+      { "title": "Changement", "text": "Toutes les 2–3 semaines, rince le réservoir et ajoute 8 ml de A et 8 ml de B dans 4 L — jusqu'à la ligne rouge. Un pack suffit pour environ 12 remplissages." },
+      { "title": "La pompe", "text": "Ne laisse pas le niveau passer sous le repère minimum. À sec, la pompe fait du bruit et peut s'abîmer." },
+      { "title": "Emplacements vides", "text": "Couvre-les. La lumière sur l'eau fait pousser des algues. Ne laisse pas le jardin au soleil direct." }
+    ],
+    "rolesEyebrow": "Le partage",
+    "rolesTitle": "Tu plantes. Elle finit le travail.",
+    "gardenTitle": "Le jardin",
+    "garden": [
+      "Arrose les racines depuis le réservoir",
+      "Tient 16 heures de lumière et 8 heures de repos",
+      "Fonctionne avec jusqu’à 12 capsules à la fois"
+    ],
+    "youTitle": "Toi",
+    "you": [
+      "Tu remplis l’eau et tu ajoutes A, puis B",
+      "Tu complètes avec de l’eau claire et tu changes toutes les 2–3 semaines",
+      "Tu récoltes peu et souvent, un tiers au maximum à la fois"
+    ],
+    "ctaTitle": "Prêt pour le plan de travail",
+    "ctaText": "Blanc mat, 12 logements et une lampe qui ne demande pas d’attention. Si tu l’as déjà, le guide a les doses, l’eau et quoi faire si quelque chose s’arrête.",
+    "ctaBuy": "Vers HomeGarder One",
+    "ctaGuide": "Guide de démarrage",
+    "homeLink": "Voir en détail"
   }
 }

@@ -34,7 +34,7 @@ public static class LocaleSeo
     public static readonly string[] IndexablePaths =
     [
         "/", "/homegarder-one", "/pods", "/accessories", "/about", "/blog",
-        "/contact", "/faq", "/learn", "/privacy", "/cookies", "/terms",
+        "/contact", "/faq", "/learn", "/how-it-works", "/privacy", "/cookies", "/terms",
     ];
 
     public static bool IsLanguage(string? value) =>

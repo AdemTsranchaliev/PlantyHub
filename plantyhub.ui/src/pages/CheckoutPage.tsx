@@ -28,7 +28,8 @@ import type { PromoQuote } from '../api'
 import { useCart } from '../hooks/useCart'
 import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { createCustomerOrder } from '../store/orders'
-import { formatEuro, FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../utils/price'
+import { cartTrackingItems, markPendingPurchase, trackBeginCheckout } from '../measure/commerce'
+import { formatEuro, FREE_SHIPPING_THRESHOLD } from '../utils/price'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -254,6 +255,9 @@ export default function CheckoutPage() {
   const { items, itemCount, subtotal, subtotalLabel, clearCart } = useCart()
   const { customer } = useCustomerAuth()
   const [form, setForm] = useState<FormState>(emptyForm)
+  const [delivery, setDelivery] = useState<'address' | 'office'>('address')
+  const [quotes, setQuotes] = useState<ShippingQuote[]>([])
+  const [quoteKey, setQuoteKey] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -265,13 +269,64 @@ export default function CheckoutPage() {
   const [notesOpen, setNotesOpen] = useState(false)
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [termsError, setTermsError] = useState(false)
-  const [quotes, setQuotes] = useState<ShippingQuote[]>([])
-  const [quotesLoading, setQuotesLoading] = useState(false)
-  const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>(null)
   const [vat, setVat] = useState<VatQuote | null>(null)
+  const shippingFree = subtotal >= FREE_SHIPPING_THRESHOLD
+  const cityReady = form.city.trim().length >= 2 && form.postalCode.trim().length >= 3
+  const requestKey = `${form.country}|${form.cityId}|${form.city.trim()}|${form.postalCode.trim()}|${subtotal.toFixed(2)}`
+  const freshQuotes = !shippingFree && quoteKey === requestKey ? quotes : []
+  const addressQuote = freshQuotes.find((quote) => quote.delivery === 'address')
+  const officeQuote = freshQuotes.find((quote) => quote.delivery === 'office')
+  const selectedQuote = delivery === 'office' ? officeQuote : addressQuote
+  const shippingKnown = shippingFree || selectedQuote != null
+  const shippingAmount = shippingFree ? 0 : (selectedQuote?.priceEur ?? null)
+  const chargedShipping = shippingAmount ?? 0
+  const cheaper =
+    addressQuote && officeQuote && addressQuote.priceEur !== officeQuote.priceEur
+      ? addressQuote.priceEur < officeQuote.priceEur
+        ? 'address'
+        : 'office'
+      : null
+
+  useEffect(() => {
+    if (shippingFree || !cityReady) return
+    let cancelled = false
+    const timer = window.setTimeout(() => {
+      void shippingApi
+        .quotes({
+          country: form.country || 'BG',
+          city: form.city.trim(),
+          cityId: form.cityId || undefined,
+          postalCode: form.postalCode.trim(),
+          subtotal,
+          courier: 'econt',
+        })
+        .then((data) => {
+          if (cancelled) return
+          setQuotes(
+            data.quotes.filter(
+              (quote) =>
+                quote.courier === 'econt' &&
+                (quote.delivery === 'address' || quote.delivery === 'office') &&
+                !quote.message,
+            ),
+          )
+          setQuoteKey(requestKey)
+        })
+        .catch(() => {
+          // Keep the options on screen. A failed refresh must not wipe the prices already shown.
+        })
+    }, 400)
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [shippingFree, cityReady, requestKey, form.country, form.city, form.cityId, form.postalCode, subtotal])
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
+    trackBeginCheckout(cartTrackingItems(items))
+    // Count the checkout once, with the cart it was opened with.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -283,45 +338,6 @@ export default function CheckoutPage() {
     }))
   }, [customer])
 
-  useEffect(() => {
-    if (form.city.trim().length < 2 || form.postalCode.trim().length < 3) {
-      setQuotes([])
-      setSelectedQuoteId(null)
-      return
-    }
-    const timer = window.setTimeout(() => {
-      setQuotesLoading(true)
-      void shippingApi
-        .quotes({
-          country: form.country,
-          city: form.city.trim(),
-          cityId: form.cityId || undefined,
-          postalCode: form.postalCode.trim(),
-          street: form.street.trim() || undefined,
-          officeCode: form.officeCode || undefined,
-          paymentMethod: form.paymentMethod,
-          subtotal,
-        })
-        .then((data) => {
-          const curated = curateCheckoutQuotes(data.quotes)
-          setQuotes(curated)
-          setSelectedQuoteId((current) => {
-            if (current && curated.some((quote) => quote.id === current)) return current
-            return defaultQuoteId(curated, form.street, form.officeCode)
-          })
-        })
-        .catch(() => {
-          setQuotes([])
-          setSelectedQuoteId(null)
-        })
-        .finally(() => setQuotesLoading(false))
-    }, 500)
-    return () => window.clearTimeout(timer)
-  }, [form.country, form.city, form.cityId, form.postalCode, form.street, form.officeCode, form.paymentMethod, subtotal])
-
-  const selectedQuote = quotes.find((quote) => quote.id === selectedQuoteId)
-  const shippingAmount =
-    subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : selectedQuote ? selectedQuote.priceEur : STANDARD_SHIPPING_COST
   const discountAmount = appliedPromo?.discount ?? 0
   const goodsAmount = Math.max(0, subtotal - discountAmount)
 
@@ -373,7 +389,7 @@ export default function CheckoutPage() {
   useEffect(() => {
     let cancelled = false
     void taxApi
-      .quote(form.country || 'BG', goodsAmount, shippingAmount)
+      .quote(form.country || 'BG', goodsAmount, chargedShipping)
       .then((data) => {
         if (!cancelled) setVat(data)
       })
@@ -383,7 +399,7 @@ export default function CheckoutPage() {
     return () => {
       cancelled = true
     }
-  }, [form.country, goodsAmount, shippingAmount])
+  }, [form.country, goodsAmount, chargedShipping])
 
   if (submitting && items.length === 0) {
     return (
@@ -426,7 +442,7 @@ export default function CheckoutPage() {
     )
   }
 
-  const pickupCourier = pickupCourierFor(selectedQuote)
+  const pickupCourier = delivery === 'office' ? 'econt' : null
 
   const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
@@ -438,9 +454,7 @@ export default function CheckoutPage() {
       name: form.name.trim().length < 2,
       email: !emailPattern.test(form.email.trim()),
       phone: form.phone.trim().length < 6,
-      street: selectedQuote?.delivery === 'office' || selectedQuote?.delivery === 'locker'
-        ? false
-        : form.street.trim().length < 3,
+      street: delivery === 'office' ? false : form.street.trim().length < 3,
       city: form.city.trim().length < 2 || form.postalCode.trim().length < 3,
       postalCode: false,
       officeCode: pickupCourier != null && form.officeCode.trim().length < 1,
@@ -456,6 +470,10 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
+    if (!shippingKnown) {
+      setSubmitError(cityReady ? t('checkout.shippingUnavailable') : t('checkout.quoteFallback'))
+      return
+    }
     setSubmitting(true)
     setSubmitError(null)
     try {
@@ -469,13 +487,14 @@ export default function CheckoutPage() {
         country: form.country,
         paymentMethod: form.paymentMethod,
         notes: form.notes.trim() || undefined,
-        courier: selectedQuote?.courier,
-        delivery: selectedQuote?.delivery,
-        officeCode: form.officeCode || selectedQuote?.officeCode || undefined,
+        courier: 'econt',
+        delivery,
+        officeCode: delivery === 'office' ? form.officeCode : undefined,
         cityId: form.cityId || undefined,
         promoCode: appliedPromo?.code,
         termsAccepted,
       })
+      markPendingPurchase(order.id)
       navigate(`/order/${order.id}`, { replace: true })
       clearCart()
     } catch (err) {
@@ -487,6 +506,8 @@ export default function CheckoutPage() {
             ? t('checkout.termsRequired')
             : err.message === 'delivery_bulgaria_only'
               ? t('checkout.deliveryBulgariaOnly')
+            : err.message === 'shipping_unavailable'
+              ? t('checkout.shippingUnavailable')
             : promoCodes.has(err.message)
               ? promoErrorText(err.message)
               : err.message
@@ -496,7 +517,14 @@ export default function CheckoutPage() {
     }
   }
 
-  const totalAmount = vat?.enabled ? vat.total : goodsAmount + shippingAmount
+  const totalAmount = vat?.enabled ? vat.total : goodsAmount + chargedShipping
+  const summaryShipping = shippingFree
+    ? t('cart.freeShipping')
+    : shippingKnown && shippingAmount != null
+      ? formatEuro(shippingAmount)
+      : cityReady
+        ? t('checkout.quoting')
+        : '—'
   const vatHint =
     vat?.enabled && vat.ratePercent > 0
       ? vat.pricesIncludeVat
@@ -509,9 +537,9 @@ export default function CheckoutPage() {
     items,
     itemCount,
     subtotalLabel,
-    shippingLabel: formatEuro(shippingAmount),
+    shippingLabel: summaryShipping,
     totalLabel: formatEuro(totalAmount),
-    freeShipping: shippingAmount === 0,
+    freeShipping: shippingFree,
     taxLabel: vat?.enabled && vat.tax > 0 ? formatEuro(vat.tax) : null,
     taxHint: vatHint,
     discountLabel: discountAmount > 0 ? `−${formatEuro(discountAmount)}` : null,
@@ -677,16 +705,11 @@ export default function CheckoutPage() {
                     errors={{ city: errors.city }}
                     onChange={(patch) => {
                       setForm((prev) => ({ ...prev, ...patch }))
-                      if (patch.officeCode) {
-                        const officeQuote = quotes.find((quote) => quote.delivery === 'office' && quote.courier === 'econt')
-                        if (officeQuote) setSelectedQuoteId(officeQuote.id)
-                      }
                       setErrors((prev) => ({
                         ...prev,
                         city: patch.city !== undefined ? false : prev.city,
                         postalCode: patch.postalCode !== undefined ? false : prev.postalCode,
                         officeCode: patch.officeCode !== undefined ? false : prev.officeCode,
-                        street: patch.officeCode ? false : prev.street,
                       }))
                     }}
                   />
@@ -694,54 +717,45 @@ export default function CheckoutPage() {
                     <Typography sx={{ fontSize: '0.75rem', fontWeight: 500, color: checkout.muted, mb: 0.75 }}>
                       {t('checkout.deliveryMethod')}
                     </Typography>
-                    {quotesLoading ? (
-                      <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>
-                        {t('checkout.quoting')}
+                    <Stack spacing={0.75}>
+                      {(['address', 'office'] as const).map((mode) => {
+                        const quote = mode === 'address' ? addressQuote : officeQuote
+                        const price = shippingFree
+                          ? t('cart.freeShipping')
+                          : quote
+                            ? formatEuro(quote.priceEur)
+                            : cityReady
+                              ? t('checkout.quoting')
+                              : '—'
+                        return (
+                          <DeliveryOption
+                            key={mode}
+                            selected={delivery === mode}
+                            title={t(`checkout.delivery.${mode}`).replace(/^./, (letter) => letter.toUpperCase())}
+                            detail={t('checkout.couriers.econt')}
+                            price={price}
+                            badge={cheaper === mode ? t('checkout.cheapest') : undefined}
+                            Icon={mode === 'address' ? HomeOutlined : StorefrontOutlined}
+                            onSelect={() => {
+                              setDelivery(mode)
+                              if (mode === 'address') {
+                                setForm((prev) => ({ ...prev, officeCode: '' }))
+                                setErrors((prev) => ({ ...prev, officeCode: false }))
+                              } else {
+                                setErrors((prev) => ({ ...prev, street: false }))
+                              }
+                            }}
+                          />
+                        )
+                      })}
+                    </Stack>
+                    {!cityReady && !shippingFree ? (
+                      <Typography sx={{ fontSize: '0.75rem', color: checkout.muted, mt: 0.75 }}>
+                        {t('checkout.quoteFallback')}
                       </Typography>
-                    ) : quotes.length === 0 ? (
-                      <Box
-                        sx={{
-                          px: 1.75,
-                          py: 1.5,
-                          borderRadius: '12px',
-                          border: `1px dashed ${checkout.inputBorder}`,
-                          bgcolor: '#F7F8F6',
-                        }}
-                      >
-                        <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted, lineHeight: 1.45 }}>
-                          {t('checkout.quoteFallback')}
-                        </Typography>
-                      </Box>
-                    ) : (
-                      <Stack spacing={0.75}>
-                        {quotes.map((quote) => {
-                          const cheapest = Math.min(...quotes.map((item) => item.priceEur))
-                          const isCheapest = quotes.length > 1 && quote.priceEur === cheapest && subtotal < FREE_SHIPPING_THRESHOLD
-                          const deliveryLabel = t(`checkout.delivery.${quote.delivery}`, { defaultValue: quote.delivery })
-                          const title = deliveryLabel.charAt(0).toUpperCase() + deliveryLabel.slice(1)
-                          return (
-                            <DeliveryOption
-                              key={quote.id}
-                              selected={selectedQuoteId === quote.id}
-                              title={title}
-                              detail={t(`checkout.couriers.${quote.courier}`, { defaultValue: quote.courier })}
-                              price={subtotal >= FREE_SHIPPING_THRESHOLD ? t('cart.freeShipping') : formatEuro(quote.priceEur)}
-                              badge={isCheapest ? t('checkout.cheapest') : undefined}
-                              Icon={quote.delivery === 'address' ? HomeOutlined : quote.delivery === 'locker' ? LocalShippingOutlined : StorefrontOutlined}
-                              onSelect={() => {
-                                setSelectedQuoteId(quote.id)
-                                setForm((prev) => ({
-                                  ...prev,
-                                  officeCode: quote.delivery === 'address' ? '' : prev.officeCode,
-                                }))
-                              }}
-                            />
-                          )
-                        })}
-                      </Stack>
-                    )}
+                    ) : null}
                   </Box>
-                  {selectedQuote?.delivery === 'address' ? (
+                  {delivery === 'address' ? (
                     <CheckoutField
                       id="checkout-street"
                       label={t('checkout.street')}
@@ -767,10 +781,6 @@ export default function CheckoutPage() {
                       errors={{ officeCode: errors.officeCode }}
                       onChange={(patch) => {
                         setForm((prev) => ({ ...prev, ...patch }))
-                        if (patch.officeCode) {
-                          const officeQuote = quotes.find((quote) => quote.delivery === 'office' && quote.courier === 'econt')
-                          if (officeQuote) setSelectedQuoteId(officeQuote.id)
-                        }
                         setErrors((prev) => ({
                           ...prev,
                           officeCode: patch.officeCode !== undefined ? false : prev.officeCode,
@@ -938,38 +948,4 @@ export default function CheckoutPage() {
       </Box>
     </Box>
   )
-}
-
-const deliveryRank: Record<string, number> = { address: 0, office: 1, locker: 2 }
-const courierRank: Record<string, number> = { econt: 0, speedy: 1, boxnow: 2, dhl: 3 }
-
-function curateCheckoutQuotes(quotes: ShippingQuote[]): ShippingQuote[] {
-  return quotes
-    .filter((quote) => !quote.message)
-    .sort((a, b) => {
-      const byCourier = (courierRank[a.courier] ?? 9) - (courierRank[b.courier] ?? 9)
-      if (byCourier !== 0) return byCourier
-      return (deliveryRank[a.delivery] ?? 9) - (deliveryRank[b.delivery] ?? 9)
-    })
-}
-
-function defaultQuoteId(quotes: ShippingQuote[], street: string, officeCode: string) {
-  if (officeCode.trim()) {
-    const locker = quotes.find((quote) => quote.delivery === 'locker')
-    const office = quotes.find((quote) => quote.delivery === 'office')
-    if (locker) return locker.id
-    if (office) return office.id
-  }
-  if (street.trim().length >= 3) {
-    const address = quotes.find((quote) => quote.delivery === 'address')
-    if (address) return address.id
-  }
-  return [...quotes].sort((a, b) => a.priceEur - b.priceEur)[0]?.id ?? null
-}
-
-function pickupCourierFor(quote: ShippingQuote | undefined): 'econt' | 'speedy' | 'boxnow' | null {
-  if (!quote) return null
-  if (quote.delivery === 'locker' && quote.courier === 'boxnow') return 'boxnow'
-  if (quote.delivery === 'office' && (quote.courier === 'econt' || quote.courier === 'speedy')) return quote.courier
-  return null
 }

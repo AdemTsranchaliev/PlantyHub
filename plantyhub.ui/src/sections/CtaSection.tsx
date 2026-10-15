@@ -14,9 +14,9 @@ import { brand } from '../theme'
 import MediaImg from '../components/MediaImg'
 
 export default function CtaSection() {
-  const bundle = useProduct('gardens', 'starter-bundle')
+  const garden = useProduct('gardens', 'homegarder-one')
   const title = useHt('cta.title')
-  const subtitle = useHt('cta.subtitle', { price: bundle?.price ?? '€129.00' })
+  const subtitle = useHt('cta.subtitle', { price: garden?.price ?? '€99.99' })
   const emailPlaceholder = useHt('cta.emailPlaceholder')
   const button = useHt('cta.button')
   const images = useHomepageImages()

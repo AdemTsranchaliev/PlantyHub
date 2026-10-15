@@ -1,9 +1,9 @@
 {
   "seo": {
     "title": "PlantyHub — Smarter Hydrokultur-Garten für zu Hause",
-    "description": "PlantyHub Home Garden: smarter Hydrokultur-Garten mit 12 Pods, LED-Licht und automatischer Bewässerung. Basilikum, Minze, Salat und mehr zu Hause anbauen."
+    "description": "PlantyHub HomeGarder One: smarter Hydrokultur-Garten mit 12 Plätzen, LED-Licht und automatischer Bewässerung. Basilikum, Minze, Petersilie und mehr zu Hause anbauen."
   },
-  "promo": "KOSTENLOSER VERSAND AB €150 · EU & BALKAN",
+  "promo": "KOSTENLOSER VERSAND AB €150 · NUR BULGARIEN",
   "nav": {
     "product": "Produkt",
     "howItWorks": "So funktioniert's",
@@ -42,15 +42,15 @@
   },
   "hero": {
     "title": "Frische Kräuter zuhause",
-    "promise": "Vom Samen zum Gewürz in 18 Tagen",
+    "promise": "Züchte deine Lieblingspflanzen leicht, das ganze Jahr über.",
     "description": "12-Pod-Garten mit Selbstbewässerung und automatischer LED.",
     "ctaPrimary": "Jetzt kaufen",
     "ctaSecondary": "So funktioniert's",
     "priceLabel": "HomeGarder One",
     "imageAlt": "PlantyHub HomeGarder One",
-    "badge": "4,9/5 · 500+ Kunden",
+    "badge": "12 Plätze · LED 16/8",
     "trust": {
-      "shipping": "Gratis EU-Versand ab 150 €",
+      "shipping": "Gratis Versand ab 150 € in Bulgarien",
       "guarantee": "Keim-Garantie",
       "setup": "In 5 Minuten startklar"
     },
@@ -72,16 +72,16 @@
   "product": {
     "eyebrow": "Produkt",
     "title": "PlantyHub HomeGarder One",
-    "description": "12 Pods, Vollspektrum-LED und Selbstbewässerung — bereit für die Arbeitsfläche.",
+    "description": "12 Plätze, Vollspektrum-LED und Selbstbewässerung — bereit für die Arbeitsfläche.",
     "cta": "In den Warenkorb",
     "trust": {
-      "shipping": "Gratis Versand ab 150 €",
+      "shipping": "Gratis Versand ab 150 € in Bulgarien",
       "guarantee": "Keim-Garantie",
       "returns": "30 Tage Rückgabe"
     },
     "specs": {
       "pods": "Plätze",
-      "podsValue": "12 Kapseln",
+      "podsValue": "12 Plätze",
       "light": "Licht",
       "lightValue": "Vollspektrum-LED · 16h an / 8h aus",
       "growthHeight": "Wuchshöhe",
@@ -89,7 +89,7 @@
       "irrigation": "Bewässerung",
       "irrigationValue": "Automatisch",
       "nutrients": "Nährstoffe",
-      "nutrientsValue": "Sana A + B",
+      "nutrientsValue": "Nährlösung A und B, je 100 ml",
       "dimensions": "Maße",
       "dimensionsValue": "39,5 × 19,8 × 18,7 cm"
     }
@@ -154,9 +154,9 @@
     }
   },
   "socialProof": {
-    "stat": "500+",
-    "statLabel": "zufriedene Kunden",
-    "subtitle": "Beliebt bei Hobbygärtnern in ganz Europa.",
+    "stat": "",
+    "statLabel": "",
+    "subtitle": "Frische Kräuter auf der Arbeitsplatte, das ganze Jahr.",
     "reviews": {
       "elena": "Morgendlicher Minztee aus meinem eigenen Garten.",
       "urbanherbs": "Perfekt, wenn man sonst Pflanzen umbringt. Es funktioniert einfach.",
@@ -174,7 +174,7 @@
       },
       "addSolution": {
         "title": "Wasser hinzufügen",
-        "description": "Füllen und Sana A & B dosieren."
+        "description": "Tank füllen und Nährlösung A und B dazugeben."
       },
       "turnOn": {
         "title": "Einschalten",
@@ -182,7 +182,7 @@
       },
       "harvest": {
         "title": "Ernten",
-        "description": "Frische Kräuter in ~18 Tagen."
+        "description": "Schau ihnen beim Wachsen zu. Ernte, wenn sie soweit sind."
       }
     }
   },
@@ -236,7 +236,7 @@
       },
       "diyKit": {
         "title": "Pflanz-es-selbst-Kit",
-        "description": "12 Kapseln, Sana A & B je 100 ml, 12 Keimkappen."
+        "description": "12 Kapseln, Nährlösung A und B je 100 ml, 12 Keimkappen."
       },
       "unifiedShipping": {
         "title": "Eine Versandbox",
@@ -251,7 +251,7 @@
       "dill": "Dill ×2",
       "arugula": "Rucola ×2",
       "emptyCapsules": "12 Kapseln",
-      "sanaAb": "Sana A + B (100 ml)",
+      "sanaAb": "Nährlösung A + B (100 ml)",
       "germCaps": "12 Keimkappen",
       "instructions": "Dosieranleitung"
     }
@@ -260,7 +260,8 @@
     "eyebrow": "Unsere Gärten",
     "title": "Für den Alltag in der Küche",
     "subtitle": "Unsere Indoor-Gärten helfen dir, wie ein Profi zu wachsen — ohne dass du wissen musst, was du tust.",
-    "discoverAll": "Alle Gärten entdecken"
+    "discoverAll": "Alle Gärten entdecken",
+    "discoverPods": "Alle Pods ansehen"
   },
   "podsSection": {
     "eyebrow": "PlantyHub Pods",
@@ -327,15 +328,35 @@
   "accessoriesPage": {
     "eyebrow": "Zubehör",
     "title": "Zubehör",
-    "subtitle": "Alles, um deinen Indoor-Garten zu erweitern und zu pflegen — stilvolle Ständer, Regale und praktische Tools."
+    "subtitle": "Alles, um deinen Indoor-Garten zu erweitern und zu pflegen — stilvolle Ständer, Regale und praktische Tools.",
+    "relatedTitle": "Weiteres Zubehör"
   },
   "aboutPage": {
     "eyebrow": "Unsere Mission",
     "title": "Die Zukunft ist hier",
-    "lead": "Anbauen kann leicht und modern sein. Frische Kräuter auf der Arbeitsplatte — ohne Garten, ohne Erde, ohne Expertenwissen.",
-    "missionKicker": "Warum es uns gibt",
-    "quote": "Einfacher. Moderner.\nErnte zu Hause.",
-    "mission": "Wir wollen, dass jedes Zuhause frischen Geschmack erntet — nicht nach Jahren Übung, sondern ab der ersten Woche. Die Zukunft des Anbaus steht auf deiner Arbeitsplatte.",
+    "lead": "Du wohnst in einer Wohnung und hast trotzdem einen Garten — ohne Hof und ohne zu graben. Viele Pflanzen, schneller als die Saison, und eine Lektion, die ein Kind sieht.",
+    "missionKicker": "Unsere Mission",
+    "quote": "Ein Garten ohne Hof.\nUnd ohne zu graben.",
+    "missionBody": "Unsere Mission ist, dass jedes Zuhause einen Garten hat, auch wenn das Zuhause eine Wohnung ist. Du brauchst keinen Hof, kein Beet und keinen Spaten. Du brauchst eine Arbeitsplatte. Das Licht ist jeden Tag gleich, deshalb wächst es schneller als die Saison draußen, und in 12 Plätzen wächst vieles auf einmal. Ein Kind kann die Kapsel setzen, den Keim sehen und ernten. Die Zukunft des Essens ist nicht irgendwo draußen. Sie ist in der Küche.",
+    "mission": "Der Garten passt in eine Wohnung. Ohne Graben und klar genug, um ihn einem Kind zu zeigen.",
+    "missionPoints": {
+      "home": {
+        "title": "Die Wohnung reicht",
+        "text": "Du brauchst keinen Garten draußen, keinen Balkon voller Beete und kein Haus mit Hof. Der Garten steht auf der Arbeitsplatte und nimmt den Platz eines Tabletts ein. Du wohnst in einem Stockwerk und erntest trotzdem dein Eigenes. Die Saison hinter dem Fenster entscheidet nicht, was auf dem Teller liegt."
+      },
+      "dig": {
+        "title": "Nichts wird gegraben",
+        "text": "Kein Spaten, keine Erde auf dem Boden und keine Töpfe, die du zum Licht schiebst. Du gibst Wasser und eine Kapsel dazu. Die Lampe hält ihren Zyklus, das Gießen startet von allein. Deine Hände ernten. Sie graben nicht."
+      },
+      "child": {
+        "title": "Eine Lektion, die man erntet",
+        "text": "Ein Kind sieht, wie Essen anfängt. Es setzt die Kapsel, schaut den ersten Keim und pflückt dann ein Blatt, das wirklich gegessen wird. So lernt es, wo eine Mahlzeit herkommt — nicht aus einem Vortrag, sondern aus etwas, das es selbst gezogen hat."
+      },
+      "grow": {
+        "title": "Schneller und viel auf einmal",
+        "text": "12 Pflanzen in einer Küche, ohne auf den Frühling zu warten. Keime starten in Tagen, die erste Ernte kommt in Wochen. Wenn eine Kapsel nicht keimt und du die Schritte befolgt hast, schicken wir eine neue."
+      }
+    },
     "pillars": {
       "easy": {
         "title": "Einfacher",
@@ -347,13 +368,13 @@
       },
       "home": {
         "title": "Ernte zu Hause",
-        "text": "Frischer Geschmack auf der Arbeitsplatte ab der ersten Woche."
+        "text": "Frischer Geschmack auf der Arbeitsplatte, das ganze Jahr."
       }
     },
     "storyKicker": "Wie alles begann",
-    "storyTitle": "Von einer Küche zu Tausenden Haushalten",
+    "storyTitle": "Es begann in einer Küche",
     "story1": "PlantyHub begann in einer kleinen Küche mit einer Idee: echten, frischen Geschmack das ganze Jahr über mühelos drinnen anzubauen.",
-    "story2": "Heute helfen unsere smarten Gärten und vorgesäten Kapseln Tausenden Haushalten in Europa, in wenigen Wochen frische Kräuter zu ernten — nur mit Wasser, Licht und ein wenig Fürsorge.",
+    "story2": "Garten und Kapseln sind dafür gemacht, dass frische Kräuter zu Hause wachsen — mit Wasser, Licht und ein wenig Pflege. Zurzeit liefern wir nach Bulgarien.",
     "videoBadge": "Sieh es wachsen",
     "playVideo": "Video abspielen",
     "pauseVideo": "Video pausieren",
@@ -374,16 +395,33 @@
     },
     "stats": {
       "plants": {
-        "value": "500k+",
-        "label": "gewachsene Pflanzen"
+        "value": "12",
+        "label": "Pflanzplätze"
       },
       "countries": {
-        "value": "12",
-        "label": "belieferte Länder"
+        "value": "16/8",
+        "label": "Stunden Licht und Ruhe"
       },
       "harvests": {
-        "value": "98%",
-        "label": "Keimerfolg"
+        "value": "BG",
+        "label": "Lieferung nach Bulgarien"
+      }
+    },
+    "foundersKicker": "Die Menschen dahinter",
+    "foundersTitle": "Wir wollten, dass Essen neben dem Teller wächst",
+    "foundersLead": "Wir sind die Menschen hinter PlantyHub. Wir sind keine Agronomen von Beruf — wir waren nur müde von Kräutern, die in zwei Tagen welken. Wir wollten Geschmack, den du selbst pflückst, in der Küche, wenn du ihn brauchst.",
+    "aims": {
+      "wanted": {
+        "title": "Was wir wollten",
+        "text": "Einen Garten, der sich selbst kümmert. Du gibst Wasser und eine Kapsel dazu, die Lampe läuft allein, und nach ein paar Wochen erntest du. Kein Garten draußen, keine Erde und keine Saison vor dem Fenster."
+      },
+      "next": {
+        "title": "Was wir aufbauen wollen",
+        "text": "Mehr als eine Garnitur. Mehr Pflanzen, bessere Kapseln und Gärten, mit denen ein Zuhause einen Teil seines Essens zieht. HomeGarder One ist der erste Schritt. Wir fangen in Bulgarien an."
+      },
+      "future": {
+        "title": "Die Zukunft des Essens",
+        "text": "Wir glauben, die Zukunft des Essens steht auf der Arbeitsfläche. Frisch, gepflückt wenn du es brauchst, mit weniger Weg und weniger Weggeworfenem. Ziehen zu Hause wird normal, kein Hobby für wenige."
       }
     },
     "originEyebrow": "Bereit zur Ernte",
@@ -497,7 +535,7 @@
   "consumablesSection": {
     "eyebrow": "Verbrauchsmaterial",
     "title": "Kapseln, Nährstoffe & Kappen",
-    "subtitle": "Leere Kapseln, Sana A & B und Keimkappen für deinen Garten."
+    "subtitle": "Leere Kapseln, Nährlösung A und B und Keimkappen für deinen Garten."
   },
   "accessoriesSection": {
     "title": "Zubehör",
@@ -591,8 +629,8 @@
     "subtitle": "Starte mit uns ins Indoor-Gärtnern",
     "items": {
       "zero": {
-        "title": "Keine Lernkurve",
-        "description": "5 Minuten Aufbau. Ein paar Tage bis zum Keimen. Ein paar Wochen bis zur Ernte. Keine Gartenkenntnisse nötig."
+        "title": "Leicht von Anfang an",
+        "description": "Kapseln einsetzen, Wasser dazugeben und zusehen, wie sie wachsen. PlantyHub kümmert sich um den Rest."
       },
       "noSoil": {
         "title": "Keine Erde, kein Zweifel",
@@ -605,7 +643,7 @@
     }
   },
   "guarantees": {
-    "title": "Warum sie nicht genug von uns bekommen können",
+    "title": "Warum PlantyHub?",
     "items": {
       "sprouting": {
         "title": "Keim-Garantie",
@@ -739,7 +777,7 @@
         "name": "Leere Kapseln"
       },
       "sana-ab": {
-        "name": "Sana A + B Nährlösung"
+        "name": "Nährlösung A + B"
       },
       "germination-caps": {
         "name": "Keimkappen"
@@ -759,7 +797,7 @@
   },
   "cta": {
     "title": "Starte deine erste Ernte",
-    "subtitle": "Starter-Paket ab {{price}}.",
+    "subtitle": "HomeGarder One · {{price}}",
     "emailPlaceholder": "E-Mail für das Angebot",
     "button": "Angebot sichern"
   },
@@ -786,60 +824,61 @@
     "quantity": "Menge",
     "videoBadge": "60-Sekunden-Demo",
     "videoTitle": "HomeGarder One in Aktion",
-    "videoText": "Vom Auspacken bis zur ersten Ernte — sieh, wie einfach du frische Kräuter auf der Arbeitsfläche aufstellst, pflanzt und ziehst.",
+    "videoText": "Eine kurze Demo: Wasser, Kapseln und die Lampe, die von allein startet.",
     "highlightsTitle": "Alles, was du zum Wachsen brauchst",
-    "highlightsSubtitle": "Ein smarter Garten — ohne Erde, ohne Rätselraten, das ganze Jahr.",
+    "highlightsSubtitle": "Ohne Erde. Lampe und Pumpe erledigen den Alltag — auf der Arbeitsfläche, das ganze Jahr.",
     "features": {
       "easy": {
-        "title": "Einfach",
-        "text": "Keine Erde, kein Schmutz — einfach einsetzen und wachsen."
+        "title": "Ohne Erde",
+        "text": "Nichts zu graben, und keine Erde auf der Arbeitsfläche. Du gibst Wasser und eine Kapsel dazu."
       },
       "fast": {
-        "title": "Schnelles Wachstum",
-        "text": "Optimiert für schnelle, gesunde Ernten."
+        "title": "In etwa 6 Wochen",
+        "text": "Keime zeigen sich in Tagen. Rucola und Basilikum kannst du ab etwa 3 Wochen schneiden, Petersilie um die 5."
       },
       "smart": {
-        "title": "Smartes System",
-        "text": "Für PlantyHub Indoor-Gärten entwickelt."
+        "title": "Einfach einstecken",
+        "text": "Die Lampe leuchtet 16 Stunden und ruht 8. Die Pumpe gießt aus dem Tank."
       },
       "natural": {
-        "title": "Natürlich",
-        "text": "Gentechnikfrei, natürliche Zutaten."
+        "title": "Wenn nichts keimt",
+        "text": "Wenn eine Kapsel nicht keimt und du die Schritte befolgt hast, schicken wir eine neue."
       }
     },
     "howItWorksTitle": "So funktioniert's",
     "steps": [
-      "Kapsel in den Garten einsetzen.",
-      "Wasser & Nährstoffe hinzufügen.",
-      "In wenigen Wochen frisch ernten."
+      "Fülle 4 l Wasser in den Tank.",
+      "Gib 5 ml A dazu, rühr um, dann 5 ml B.",
+      "Setze die Kapseln und die Keimhauben ein und schalte die Lampe ein.",
+      "Ernte ab etwa 3 Wochen und nimm nie mehr als etwa ein Drittel auf einmal."
     ],
     "specsTitle": "Alle technischen Daten",
     "inTheBox": "Im Lieferumfang",
     "inTheBoxItems": {
-      "garden": "HomeGarder One Garten (Weiß matt)",
-      "led": "Verstellbarer Vollspektrum-LED-Arm",
-      "pods": "3 Start-Saatkapseln",
-      "nutrients": "Sana A + B Nährstoff-Set",
-      "manual": "Schnellstart-Anleitung & QR-Guides"
+      "garden": "HomeGarder One mit Tank und 12 Plätzen (Weiß matt)",
+      "led": "LED-Lampe mit verstellbarer Halterung und Netzteil",
+      "pods": "12 Saatkapseln und 12 Keimhauben",
+      "nutrients": "Nährlösung A und B, je 100 ml",
+      "manual": "Dosieranleitung und QR"
     },
     "faqTitle": "Häufig gestellte Fragen",
     "faqSeeAll": "Alle ansehen",
     "faqItems": [
       {
         "q": "Brauche ich Gartenerfahrung?",
-        "a": "Überhaupt nicht. Kapsel einsetzen, Wasser und Nährstoffe hinzufügen — die LED läuft automatisch im 16/8-Zyklus. App und QR-Guides führen dich Schritt für Schritt."
+        "a": "Nein. Du füllst 4 l Wasser ein, gibst 5 ml A und danach 5 ml B dazu, setzt die Kapseln ein und steckst ein. Die Lampe hält allein 16 Stunden Licht und 8 Stunden Ruhe."
       },
       {
         "q": "Wie lange bis zur ersten Ernte?",
-        "a": "Die meisten Kräuter und Gewürze sind in etwa 2–3 Wochen erntereif und tragen danach monatelang weiter."
+        "a": "Keime zeigen sich in Tagen. Rucola und Basilikum kannst du ab etwa 3 Wochen schneiden, Minze, Koriander und Dill ab etwa 4, Petersilie ab etwa 5. Die erste Ernte ist innerhalb von etwa 6 Wochen."
       },
       {
         "q": "Wie viel Strom verbraucht er?",
-        "a": "Sehr wenig — die Vollspektrum-LED ist so effizient wie ein paar Haushaltslampen, rund ein paar Euro pro Monat."
+        "a": "Die Lampe leuchtet 16 Stunden und ruht 8. Was das im Monat kostet, hängt von deinem Strompreis ab."
       },
       {
         "q": "Was kann ich anbauen?",
-        "a": "Basilikum, Minze, Petersilie, Koriander, Dill, Rucola und mehr — 12 Kapseln gleichzeitig. Jede HomeGarder-Kapsel passt in die Slots."
+        "a": "Basilikum, Minze, Petersilie, Koriander, Dill und Rucola — bis zu 12 Plätze auf einmal."
       },
       {
         "q": "Gibt es eine Garantie?",
@@ -877,6 +916,7 @@
     "shipping": "Versand: nur Bulgarien",
     "shippingNote": "Kostenloser Versand ab €150. Preise in EUR.",
     "linksTitle": "Navigation",
+    "guidesTitle": "Hilfe",
     "legalTitle": "Rechtliches",
     "links": {
       "product": "Produkt",
@@ -890,12 +930,13 @@
       "terms": "Nutzungsbedingungen",
       "faq": "FAQ",
       "contact": "Kontakt",
-      "learn": "Lernen"
+      "learn": "Lernen",
+      "instructions": "Anleitung"
     },
     "followUs": "Folge uns",
     "contactTitle": "Kontakt",
     "address": "PlantyHub · Bulgarien",
-    "madeWith": "Mit Sorgfalt in Bulgarien angebaut",
+    "madeWith": "",
     "payments": "Kartenzahlungen werden sicher über Stripe abgewickelt.",
     "paymentsLabel": "Akzeptierte Zahlungsmethoden",
     "cookieSettings": "Cookie-Einstellungen",
@@ -1044,7 +1085,8 @@
     "secureCheckout": "Alle Transaktionen sind sicher und verschlüsselt",
     "deliveryMethod": "Kurier und Zustellung",
     "quoting": "Preise werden berechnet…",
-    "quoteFallback": "Land und Stadt aus der Kurierliste wählen. Bis dahin gilt Standardversand.",
+    "quoteFallback": "Wähle eine Stadt aus der Econt-Liste, damit die Lieferung berechnet wird.",
+    "shippingUnavailable": "Die Lieferung für diese Stadt konnte nicht berechnet werden. Wähle die Stadt erneut.",
     "cheapest": "günstigster Preis",
     "office": "Abhol-Office",
     "locker": "BOX NOW-Locker",
@@ -2098,7 +2140,7 @@
           },
           {
             "q": "Was ist im Karton?",
-            "a": "Das Gerät, LED-Arm, Netzteil, Starterkapseln (je nach Bundle), Nährstoffe Sana A + B und eine Kurzanleitung mit QR."
+            "a": "Das Gerät, LED-Arm, Netzteil, Starterkapseln (je nach Bundle), Nährlösung A und B und eine Kurzanleitung mit QR."
           },
           {
             "q": "Wie lange dauert die erste Einrichtung?",
@@ -2185,7 +2227,7 @@
             "a": "Trocken und kühl in der Originalverpackung lagern. Datum auf der Packung prüfen — stark abgelaufene Kapseln nicht verwenden."
           },
           {
-            "q": "Was sind Sana A und Sana B?",
+            "q": "Was sind Lösung A und Lösung B?",
             "a": "Zweiteiliges Nährstoffsystem für Hydroponik. Mit Wasser laut Anleitung mischen — Konzentrate nie unverdünnt zusammenmischen."
           },
           {
@@ -2323,94 +2365,124 @@
     "privacy": {
       "title": "Datenschutzerklärung",
       "eyebrow": "Rechtliches",
-      "updated": "5. Oktober 2026",
-      "lead": "Diese Erklärung beschreibt, wie PlantyHub („wir“) personenbezogene Daten erhebt, nutzt und schützt, wenn du über plantyhub.com einkaufst oder uns kontaktierst.",
+      "updated": "13. Oktober 2026",
+      "lead": "Diese Erklärung beschreibt, wie ДИДЖИТАЛ КИТ ЕООД, das Unternehmen hinter dem PlantyHub-Shop (plantyhub.com), personenbezogene Daten erhebt und nutzt, wenn du einkaufst, ein Konto anlegst oder uns kontaktierst.",
       "sections": [
         {
-          "title": "Wer wir sind",
+          "title": "Wer verantwortlich ist",
           "paragraphs": [
-            "Verantwortlicher ist PlantyHub, Bulgarien. Wir verarbeiten Daten gemäß DSGVO und geltendem bulgarischem Recht."
+            "Verantwortlicher ist ДИДЖИТАЛ КИТ ЕООД, UIC 207270915, USt-IdNr. BG207270915, Sitz: ul. Nikifor P. Konstantinov, 4400 Pazardzhik, Bulgarien. Der Shop tritt als PlantyHub auf."
           ],
           "items": [
-            "Datenschutzanfragen: support@plantyhub.com"
+            "Datenschutzanfragen: support@plantyhub.com",
+            "Wir verarbeiten Daten nach der Verordnung (EU) 2016/679 (DSGVO) und dem bulgarischen Datenschutzgesetz"
           ]
         },
         {
           "title": "Welche Daten wir erheben",
           "paragraphs": [
-            "Je nach Nutzung der Website können wir verarbeiten:"
+            "Wir erheben nur, was ein Schritt tatsächlich braucht. Je nach Nutzung der Website kann das sein:"
           ],
           "items": [
-            "Konto- und Bestelldaten — Name, E-Mail, Lieferadresse, Telefon (falls angegeben)",
-            "Zahlungsdaten — über den Zahlungsdienstleister (keine vollständigen Kartendaten bei uns)",
-            "Kommunikation — Kontaktformular, E-Mails und Support-Anfragen",
-            "Technische Daten — IP-Adresse, Browser/Gerät und Nutzungsstatistiken (siehe Cookie-Richtlinie)"
+            "Konto — Name, E-Mail, Telefon, Land und ein gehashtes Passwort; nach der Registrierung senden wir eine Bestätigungs-E-Mail",
+            "Bestellung — Name, E-Mail, Telefon, Liefer- und Rechnungsadresse, Land, Hinweise für den Kurier, Produkte, Promo-Code und Bestellstatus",
+            "Zahlung — die gewählte Methode (Karte über Stripe, PayPal oder Nachnahme). Die vollständige Kartennummer verarbeitet der Zahlungsdienstleister, wir speichern sie nicht",
+            "Lieferung — was der Kurier braucht: Empfänger, Telefon, Adresse oder Filiale/Paketstation und bei Nachnahme der einzuziehende Betrag",
+            "Nachrichten — Name, E-Mail, Betreff, Nachricht und optional eine Bestellnummer aus dem Kontaktformular sowie spätere E-Mail-Korrespondenz",
+            "Newsletter — deine E-Mail und ob das Abo aktiv ist, nur wenn du dich anmeldest",
+            "Bewertungen — Name, E-Mail, Bewertung, Text und optional Fotos; nach Prüfung können wir die Bewertung ohne E-Mail veröffentlichen",
+            "Technische Daten — IP-Adresse, Browser- und Gerätetyp, Sprache der Website und grundlegende Nutzungsstatistiken, soweit für die Sicherheit nötig oder wenn du Cookies akzeptiert hast"
           ]
         },
         {
-          "title": "Zwecke der Verarbeitung",
+          "title": "Wofür wir sie nutzen",
           "items": [
-            "Bestellung, Lieferung, Rechnung und Garantieabwicklung",
-            "Kontoverwaltung, Anmeldung und Sicherheit",
-            "Beantwortung von Anfragen und Kundensupport",
-            "Verbesserung der Website und Messung von Werbung mit Google Analytics, Microsoft Clarity und Meta — nur nach Zustimmung im Banner",
-            "Marketing nur mit Einwilligung (z. B. Newsletter) — Abmeldung jederzeit möglich"
+            "Annahme und Abwicklung von Bestellungen, Lieferung, Rechnungsstellung und Sendungsverfolgung",
+            "Anlegen und Absichern eines Kontos, Anmeldung, Passwort-Zurücksetzung und E-Mail-Bestätigung",
+            "Garantie, Rücksendungen, Ersatz und Antworten des Supports",
+            "Nachrichten zur Bestellung selbst (Bestätigung, Versand, Sendungsverfolgung)",
+            "Newsletter und Promo-Code für die erste Bestellung — nur mit Einwilligung, mit Abmeldelink in jeder solchen E-Mail",
+            "Eine Einladung zur Bewertung nach einem Kauf",
+            "Sicherheit der Website, Betrugsprävention und Buchhaltung",
+            "Nutzungsstatistik, Werbemessung und Remarketing mit Google Analytics, Google Tag Manager, Google Ads, Microsoft Clarity und Meta Pixel — nur wenn du im Cookie-Banner zustimmst. Dann teilt die Website Google und Meta mit, welche Produkte du ansiehst und in den Warenkorb legst, und bei einer abgeschlossenen Bestellung deren Nummer, Wert, Produkte und Promo-Code. Wenn du die Startseite über einen QR-Code öffnest, sehen wir mit derselben Einwilligung auch, welches Etikett gescannt wurde (Schachtel, Kapseln oder Anleitung). Das identifiziert dich nicht. Name, E-Mail, Telefon oder Adresse senden wir ihnen nicht"
           ]
         },
         {
           "title": "Rechtsgrundlagen",
           "items": [
-            "Vertrag — zur Erfüllung von Bestellung oder Konto",
-            "Rechtliche Pflicht — Steuer- und Buchhaltungspflichten",
-            "Berechtigtes Interesse — Sicherheit, Betrugsprävention, Serviceverbesserung",
-            "Einwilligung — Newsletter, nicht notwendige Cookies und ähnliche Zwecke"
+            "Vertrag — Bestellung, Lieferung, Konto und Nachrichten, ohne die der Kauf nicht abgewickelt werden kann",
+            "Rechtliche Pflicht — Buchhaltung, Steuern und Rechnungsstellung",
+            "Berechtigtes Interesse — Sicherheit, Betrugsprävention, Verteidigung in einem Streitfall und Verbesserung des Service, soweit deine Rechte nicht überwiegen",
+            "Einwilligung — Newsletter und nicht notwendige Cookies. Du kannst die Einwilligung jederzeit widerrufen; das berührt die Verarbeitung vor dem Widerruf nicht"
           ]
         },
         {
-          "title": "Weitergabe",
+          "title": "An wen wir Daten weitergeben",
           "paragraphs": [
-            "Weitergabe nur an vertrauenswürdige Auftragsverarbeiter. Wir verkaufen keine personenbezogenen Daten."
+            "Wir verkaufen keine personenbezogenen Daten. Wir geben sie nur an Dienstleister weiter, die der Shop braucht, und nur in dem Umfang, in dem er sie braucht.",
+            "Für die Zahlung selbst sind Stripe und PayPal eigene Verantwortliche mit eigenen Richtlinien: https://stripe.com/privacy und https://www.paypal.com/myaccount/privacy/privacyhub."
           ],
           "items": [
-            "Versand / Kurierdienste",
-            "Zahlungsdienstleister",
-            "Hosting und E-Mail-Dienste",
-            "Google Ireland Limited (Google Analytics und Google Tag Manager) — nur mit Einwilligung",
-            "Microsoft Corporation (Microsoft Clarity) — nur bei Einwilligung in Analyse-Cookies",
-            "Meta Platforms Ireland Limited (Meta Pixel) — nur bei Einwilligung in Marketing-Cookies",
-            "Zuständige Behörden — nur bei gesetzlicher Pflicht"
+            "Stripe Payments Europe, Ltd. — Kartenzahlungen",
+            "PayPal (Europe) S.à r.l. et Cie, S.C.A. — PayPal-Zahlungen",
+            "Cloudflare, Inc. (R2) — Speicherung von Produkt- und Bewertungsfotos",
+            "Der E-Mail-Dienst des Shops — Azure Communication Email oder ein SMTP-Anbieter, je nach Konfiguration — für Nachrichten zu Bestellung, Konto und Newsletter",
+            "Kuriere je nach gewählter Option: Econt, Speedy, BoxNow und DHL",
+            "Unser Hosting-Anbieter (Microsoft Azure) und E-Mail-Anbieter, damit Website und Bestellnachrichten funktionieren",
+            "Google Ireland Limited — Google Analytics 4, Google Tag Manager und Google Ads, nur mit Einwilligung",
+            "Microsoft — Microsoft Clarity, nur mit Einwilligung",
+            "Meta Platforms Ireland Limited — Meta Pixel, nur mit Einwilligung",
+            "Behörden — wenn das Gesetz es verlangt"
           ]
         },
         {
-          "title": "Speicherung und Sicherheit",
+          "title": "Daten außerhalb der EU",
+          "paragraphs": [
+            "Einige dieser Anbieter können Daten außerhalb des Europäischen Wirtschaftsraums verarbeiten, auch in den USA. In diesem Fall stützen wir uns auf einen Angemessenheitsbeschluss oder auf die Standardvertragsklauseln und ergänzenden Maßnahmen des jeweiligen Anbieters."
+          ]
+        },
+        {
+          "title": "Wie lange wir sie speichern",
           "items": [
-            "Speicherung nur so lange wie nötig oder gesetzlich vorgeschrieben",
-            "Technische und organisatorische Maßnahmen gegen unbefugten Zugriff, Verlust oder Missbrauch"
+            "Bestellungen, Rechnungen und Zahlungen — für die Fristen nach Buchhaltungs- und Steuerrecht, in der Regel bis zu 10 Jahre",
+            "Konto — solange du es nutzt; nach der Löschung behalten wir nur, was das Gesetz verlangt",
+            "Support-Nachrichten — bis die Anfrage abgeschlossen ist und 3 Jahre danach, oder länger bei offenem Garantiefall oder Streit",
+            "Newsletter — bis du dich abmeldest oder die Löschung verlangst",
+            "Bewertungen — solange sie veröffentlicht sind oder bis du die Löschung verlangst, sofern wir sie nicht für einen Streitfall aufbewahren müssen",
+            "Cookie-Auswahl — bis du sie änderst oder die Browserdaten löschst"
+          ]
+        },
+        {
+          "title": "Sicherheit",
+          "paragraphs": [
+            "Die Website nutzt eine verschlüsselte Verbindung. Zugriff auf Kundendaten haben nur Personen und Systeme, die ihn brauchen. Passwörter werden nicht lesbar gespeichert. Kartendaten verarbeiten Stripe oder PayPal, nicht unsere Server."
           ]
         },
         {
           "title": "Deine Rechte",
           "paragraphs": [
-            "Du kannst folgende Rechte per E-Mail an support@plantyhub.com ausüben:"
+            "Du kannst Auskunft, Berichtigung, Löschung, Einschränkung oder Datenübertragbarkeit verlangen oder einer Verarbeitung auf Grundlage berechtigten Interesses widersprechen. Beruht die Verarbeitung auf Einwilligung, kannst du sie widerrufen. Schreib an support@plantyhub.com. Wir antworten innerhalb eines Monats."
           ],
           "items": [
-            "Auskunft, Berichtigung und Löschung",
-            "Einschränkung und Datenübertragbarkeit",
-            "Widerspruch gegen bestimmte Verarbeitung",
-            "Widerruf der Einwilligung, soweit einschlägig",
-            "Beschwerde bei der bulgarischen Datenschutzkommission (CPDP)"
+            "Du kannst dich bei der bulgarischen Datenschutzkommission beschweren: Prof. Tsvetan Lazarov Blvd. 2, 1592 Sofia, kzld@cpdp.bg, www.cpdp.bg"
+          ]
+        },
+        {
+          "title": "Konto schließen",
+          "paragraphs": [
+            "Die Website hat keinen Button zum Selbstlöschen. Um ein Konto zu schließen, schreib an support@plantyhub.com von der E-Mail-Adresse, mit der es angelegt wurde. Wir löschen oder anonymisieren die Daten, die wir nicht wegen Bestellungen, Rechnungen oder eines Streitfalls aufbewahren müssen."
           ]
         },
         {
           "title": "Kinder",
           "paragraphs": [
-            "Unsere Dienste richten sich nicht an Personen unter 16 Jahren. Unrechtmäßig erhobene Daten von Kindern löschen wir."
+            "Der Shop richtet sich nicht an Personen unter 16 Jahren, und wir erheben ihre Daten nicht wissentlich. Erfahren wir, dass wir solche Daten ohne gültige Grundlage erhalten haben, löschen wir sie."
           ]
         },
         {
           "title": "Änderungen",
           "paragraphs": [
-            "Wir können diese Erklärung aktualisieren. Das Datum der letzten Aktualisierung steht oben. Wesentliche Änderungen weisen wir auf der Website aus."
+            "Wir können diese Erklärung anpassen, wenn sich der Shop oder das Recht ändert. Das Datum oben ist die aktuelle Fassung. Wesentliche Änderungen weisen wir auf der Website aus."
           ]
         }
       ]
@@ -2418,43 +2490,105 @@
     "cookies": {
       "title": "Cookie-Richtlinie",
       "eyebrow": "Rechtliches",
-      "updated": "5. Oktober 2026",
-      "lead": "Hier erklären wir, wie PlantyHub Cookies und ähnliche Technologien auf der Website einsetzt.",
+      "updated": "13. Oktober 2026",
+      "lead": "Diese Richtlinie beschreibt die Cookies und ähnlichen Technologien, die plantyhub.com nutzt, damit der Shop funktioniert und — nur mit deiner Einwilligung — Besuche und Werbung gemessen werden.",
       "sections": [
         {
-          "title": "Was sind Cookies",
+          "title": "Was sie sind",
           "paragraphs": [
-            "Cookies sind kleine Textdateien im Browser. Sie helfen der Website zu funktionieren, Einstellungen zu speichern und — mit Einwilligung — die Nutzung zu verstehen."
+            "Cookies sind kleine Textdateien, die eine Website oder ein externer Dienst in deinem Browser speichert. Einträge in localStorage und sessionStorage erfüllen eine ähnliche Rolle: Sie bleiben auf deinem Gerät und werden nicht von selbst bei jedem Seitenaufruf an unseren Server gesendet."
           ]
         },
         {
-          "title": "Welche Cookies wir nutzen",
-          "items": [
-            "Notwendig — Warenkorb, Sitzung, Login, Sicherheit und Sprache; ohne sie funktioniert die Website nicht korrekt",
-            "Funktional — speichern Präferenzen (z. B. Sprache)",
-            "Analyse — Google Tag Manager und Google Analytics 4 (Google Ireland Limited), Cookies _ga und _ga_*, und Microsoft Clarity (Microsoft Corporation), Cookies _clck und _clsk; nur nach Zustimmung im Banner",
-            "Marketing — Meta Pixel (Meta Platforms Ireland Limited), Cookies _fbp und _fbc; nur nach Zustimmung im Banner"
-          ]
-        },
-        {
-          "title": "Rechtsgrundlage",
-          "items": [
-            "Notwendige Cookies — berechtigtes Interesse / Erforderlichkeit",
-            "Nicht notwendige Cookies — Einwilligung, jederzeit widerrufbar"
-          ]
-        },
-        {
-          "title": "Cookies verwalten",
-          "items": [
-            "Cookies in den Browsereinstellungen löschen oder blockieren",
-            "Das Blockieren notwendiger Cookies kann Warenkorb oder Login beeinträchtigen",
-            "Die Wahl lässt sich im Banner oder über Cookie-Einstellungen in der Fußzeile ändern, oder per support@plantyhub.com"
-          ]
-        },
-        {
-          "title": "Weitere Informationen",
+          "title": "Deine Wahl",
           "paragraphs": [
-            "Zur Verarbeitung personenbezogener Daten siehe die Datenschutzerklärung. Cookie-Fragen: support@plantyhub.com."
+            "Beim ersten Besuch zeigen wir ein Banner, wenn Analyse- oder Werbe-Tools aktiviert sind. „Akzeptieren“ schaltet alle nicht notwendigen Tools auf einmal ein. „Ablehnen“ lässt sie aus. Notwendige Speicherung für Warenkorb, Sprache und Anmeldung hängt nicht vom Banner ab.",
+            "Die Wahl wird lokal im Browser unter dem Schlüssel plantyhub.cookie-consent gespeichert. Du kannst sie jederzeit über die Cookie-Einstellungen in der Fußzeile ändern. Bei Ablehnung stoppen wir die weitere Erfassung und löschen bereits gesetzte Cookies von Google, Meta und Clarity, soweit der Browser es zulässt."
+          ]
+        },
+        {
+          "title": "Notwendig",
+          "paragraphs": [
+            "Diese Einträge braucht man zum Einkaufen, um angemeldet zu bleiben und die Sprache zu speichern. Grundlage ist, dass der Dienst ohne sie nicht funktioniert. Ohne sie können Warenkorb, Anmeldung oder Kasse ausfallen."
+          ],
+          "items": [
+            "Warenkorb (plantyhub_cart) — die hinzugefügten Produkte, bis du sie entfernst oder den Browser leerst",
+            "Sprache (plantyhub-lang-choice) — die gewählte Sprache",
+            "Anmeldung — ein Konto-Token und grundlegende Kontodaten in localStorage, wenn du angemeldet bleiben willst, sonst in sessionStorage bis zum Schließen des Browsers",
+            "Newsletter-Banner (ph_newsletter_seen) — damit das Popup nicht erneut erscheint",
+            "Cookie-Auswahl (plantyhub.cookie-consent) — speichert, ob du akzeptiert oder abgelehnt hast",
+            "Bei der Zahlung können Stripe oder PayPal eigene Cookies setzen, die für die Zahlung und den Betrugsschutz nötig sind"
+          ]
+        },
+        {
+          "title": "Analyse",
+          "paragraphs": [
+            "Diese werden nur geladen, wenn du zustimmst. Wir sehen damit, welche Seiten aufgerufen werden und wo die Website schwer zu bedienen ist. Wir nutzen sie nicht für Entscheidungen mit rechtlicher Wirkung für dich.",
+            "Die Website lädt nur die hier genannten Tools. Ein neues Tool startet erst, wenn wir es in diese Richtlinie aufgenommen haben."
+          ],
+          "items": [
+            "Google Analytics 4 und Google Tag Manager (Google Ireland Limited) — Cookies wie _ga, _ga_* und _gid; sie messen Besuche und Seiten",
+            "Microsoft Clarity (Microsoft) — Cookies wie _clck und _clsk; sie zeigen zusammengefasst, wie Seiten genutzt werden, z. B. Scrollen und Klicks",
+            "Setzt ein Anzeigenklick ein _gcl_*-Cookie, gehört es Google und bleibt meist bis zu 90 Tage. Bei Ablehnung löschen wir es mit den anderen."
+          ]
+        },
+        {
+          "title": "QR-Codes auf der Verpackung",
+          "paragraphs": [
+            "Auf der Schachtel, auf den Kapseln und in der gedruckten Anleitung steht ein QR-Code zu plantyhub.com/start. Die Adresse kann einen Parameter from mit dem Wert box, pods oder instr enthalten. Er zeigt nur, welches Etikett gescannt wurde, und identifiziert dich nicht. Der Parameter selbst ist kein Cookie.",
+            "Wenn du Cookies akzeptierst, wird die Seitenadresse — einschließlich dieses Parameters — von den Tools in dieser Richtlinie erfasst, weil sie die geöffnete Seite messen. Zusätzlich senden wir an Google Analytics und Google Tag Manager ein Ereignis qr_open mit dem Etikett, damit wir sehen, woher gescannt wird. Wenn du ablehnst, senden wir weder die Adresse an diese Tools noch das Ereignis."
+          ]
+        },
+        {
+          "title": "Marketing",
+          "paragraphs": [
+            "Diese werden mit derselben Einwilligung wie die Analyse geladen. Sie zeigen, welche Anzeigen zu Besuchen und Käufen führen, und können genutzt werden, um Besuchern der Website unsere Anzeigen erneut zu zeigen (Remarketing).",
+            "Mit Einwilligung teilt die Website diesen Tools mit, welche Produkte du angesehen oder in den Warenkorb gelegt hast, und nach einer Bestellung deren Nummer, Wert, Produkte und Promo-Code. Name, E-Mail, Telefon oder Adresse werden nicht gesendet."
+          ],
+          "items": [
+            "Meta Pixel (Meta Platforms Ireland Limited) — Cookies wie _fbp und _fbc; sie erfassen Besuche und Aktionen, die für Werbung auf Facebook und Instagram genutzt werden können",
+            "Google Ads (Google Ireland Limited), über Google Tag Manager — Cookies wie _gcl_*; misst Käufe aus Google-Anzeigen und kann für Remarketing genutzt werden"
+          ]
+        },
+        {
+          "title": "Wie lange sie bestehen",
+          "paragraphs": [
+            "Notwendige Einträge bleiben, bis du sie löschst oder die Sitzung endet. Google, Microsoft und Meta legen die Laufzeit ihrer Cookies selbst fest, meist von einem Tag bis zu zwei Jahren. Bei Ablehnung versuchen wir, sie sofort zu löschen."
+          ],
+          "items": [
+            "_ga und _ga_* (Google) — meist bis zu 2 Jahre",
+            "_gid (Google) — meist bis zu 24 Stunden",
+            "_gcl_* (Google, Anzeigenklick) — meist bis zu 90 Tage",
+            "_clck (Clarity) — meist bis zu 1 Jahr",
+            "_clsk (Clarity) — meist bis zu 1 Tag",
+            "_fbp und _fbc (Meta) — meist bis zu 3 Monate",
+            "Notwendige Browserspeicherung bleibt, bis du sie löschst oder die Sitzung endet"
+          ]
+        },
+        {
+          "title": "Wie du sie verwaltest",
+          "items": [
+            "Ändere deine Wahl über die Cookie-Einstellungen in der Fußzeile",
+            "Lösche oder blockiere Cookies in den Browsereinstellungen",
+            "Blockierst du auch die notwendige Speicherung, funktionieren Warenkorb und Anmeldung eventuell nicht",
+            "Fragen: support@plantyhub.com"
+          ]
+        },
+        {
+          "title": "Richtlinien der Anbieter",
+          "items": [
+            "Google — https://policies.google.com/privacy",
+            "Microsoft — https://privacy.microsoft.com/privacystatement",
+            "Meta — https://www.facebook.com/privacy/policy",
+            "Stripe — https://stripe.com/privacy",
+            "PayPal — https://www.paypal.com/myaccount/privacy/privacyhub",
+            "Cloudflare — https://www.cloudflare.com/privacypolicy/"
+          ]
+        },
+        {
+          "title": "Mehr zu personenbezogenen Daten",
+          "paragraphs": [
+            "Wer verantwortlich ist, die Rechtsgrundlagen und deine Rechte stehen in der Datenschutzerklärung. Google, Microsoft und Meta können Daten nach eigenen Regeln und Standardvertragsklauseln außerhalb der EU verarbeiten."
           ]
         }
       ]
@@ -2537,132 +2671,316 @@
       ]
     }
   },
-  "learnPage": {
-    "title": "PlantyHub Lernen",
-    "eyebrow": "Wissen",
-    "lead": "Wähle einen Bereich, dann ein Thema — und öffne die Lektion mit Fotos, Video und klaren Schritten.",
-    "pickSection": "Bereich wählen",
-    "backToSections": "Alle Bereiche",
-    "backToTopics": "Zurück zu den Themen",
-    "openTopic": "Lektion öffnen",
-    "tipLabel": "Tipp",
-    "stepsLabel": "Schritte",
-    "videoLabel": "Video-Beispiel",
-    "galleryLabel": "Praxis-Fotos",
-    "sections": {
-      "start": {
-        "title": "Hier starten",
-        "description": "Hydrokultur-Basics und der erste Start deines Gartens.",
-        "topicsLabel": "Themen in diesem Bereich"
-      },
-      "grow": {
-        "title": "Klug wachsen lassen",
-        "description": "Licht, Wasser, Kapseln und Nährstoffe für stabiles Wachstum.",
-        "topicsLabel": "Themen in diesem Bereich"
-      },
-      "harvest": {
-        "title": "Ernte & Pflege",
-        "description": "Richtig schneiden und häufige Probleme lösen.",
-        "topicsLabel": "Themen in diesem Bereich"
-      }
+  "startPage": {
+    "title": "Dein Garten in 6 Schritten",
+    "eyebrow": "HomeGarder One",
+    "lead": "In etwa 5 Minuten bereit zum Bepflanzen.",
+    "nav": {
+      "label": "Inhalt",
+      "steps": "Schritte",
+      "doses": "Dosierung",
+      "water": "Wasser",
+      "care": "Pflege",
+      "plants": "Pflanzen",
+      "video": "Video",
+      "after": "Ernte",
+      "more": "Mehr",
+      "faq": "Fragen"
     },
-    "topics": {
-      "basics": {
-        "title": "Was ist Hydrokultur",
-        "duration": "3 Min.",
-        "summary": "Warum Pflanzen im Wasser wachsen und was PlantyHub anders macht.",
-        "lead": "Pflanzen wachsen in nährstoffreichem Wasser — ohne Erde, mit mehr Kontrolle über Licht und Feuchtigkeit.",
-        "videoLabel": "Video: Hydrokultur zu Hause",
-        "galleryLabel": "Fotos: Wasser, Wurzeln und frische Blätter",
-        "steps": [
-          "Wurzeln nehmen Wasser und Nährstoffe aus der Wanne — nicht aus Erde.",
-          "Die LED ersetzt Sonnenlicht mit einem 16/8-Zyklus (16 Std. Licht / 8 Std. Pause).",
-          "Geschlossene Systeme verbrauchen typischerweise weniger Wasser als klassisches Gärtnern.",
-          "Ergebnis: frische Kräuter auf der Theke — das ganze Jahr."
-        ],
-        "tip": "Hydrokultur muss nicht kompliziert sein — die Kapsel bringt Samen und Nährstoffe, das Gerät regelt Licht und Bewässerung."
+    "videoLabel": "So startest du ihn",
+    "videoCaption": "Ein kurzes Hochformat-Video zum Start.",
+    "videoMissing": "Das Video ist noch nicht hochgeladen. Sobald die Datei bereit ist, läuft es hier.",
+    "watchVideo": "Video ansehen",
+    "hideVideo": "Video ausblenden",
+    "moreTitle": "Wenn du mehr brauchst",
+    "moreLead": "Dosierung, Pflege und Zeiten. Öffne nur, was du brauchst.",
+    "stepsTitle": "Sechs Schritte",
+    "stepsLead": "Vom leeren Garten bis zu den ersten Blättern. Jeder Schritt dauert etwa eine Minute.",
+    "tipLabel": "Dazu",
+    "steps": [
+      {
+        "title": "Mit Wasser füllen",
+        "text": "Gieße 4 l Wasser in den Tank. Gefiltert oder stilles Wasser ist besser, Leitungswasser geht auch. Etwa 18–24 °C. Stell den Garten auf eine stabile Fläche, nah an eine Steckdose."
       },
-      "setup": {
-        "title": "Erster Start",
-        "duration": "5 Min.",
-        "summary": "Vom Auspacken zum laufenden Garten in wenigen Minuten.",
-        "lead": "Vom Auspacken zum laufenden Garten in wenigen klaren Schritten.",
-        "videoLabel": "Video: Auspacken und erstes Einschalten",
-        "galleryLabel": "Fotos: Gerät, Wasser und Kapseln",
-        "steps": [
-          "Stelle das Gerät auf eine stabile Fläche, weg von starker Hitze.",
-          "Fülle sauberes Wasser bis zur Markierung.",
-          "Setze die Kapseln gemäß Verpackung in die Slots.",
-          "Schalte die Lampe ein und lass den Automodus laufen — Gerät in den ersten Tagen wenig bewegen."
-        ],
-        "tip": "Zimmertemperatur-Wasser verwenden. Bei sehr hartem Leitungswasser kann abgekochtes, abgekühltes Wasser helfen."
+      {
+        "title": "A und B zugeben",
+        "text": "Bei der ersten Füllung 5 ml A zugeben, umrühren, dann 5 ml B — bis zur grünen Linie am Deckel. Immer zuerst A, dann B, und nicht unverdünnt mischen. Beim Wasserwechsel nimm 8 ml A und 8 ml B, bis zur roten Linie."
       },
-      "light": {
-        "title": "Licht und Wasser",
-        "duration": "4 Min.",
-        "summary": "Der 16/8-Zyklus und das richtige Wasserlevel.",
-        "lead": "Die zwei wichtigsten Faktoren: gleichmäßiges Licht und genug Wasser.",
-        "videoLabel": "Video: Lampenhöhe und Wachstum",
-        "galleryLabel": "Fotos: Licht, Wasserstand, gesundes Wachstum",
-        "steps": [
-          "Die Lampe folgt 16/8 — nachts nicht „zum Sparen“ ausschalten.",
-          "Wasser 1–2× pro Woche prüfen und bis zur Marke nachfüllen.",
-          "Nicht über das Maximum füllen.",
-          "Lampenhöhe an das Pflanzenwachstum anpassen."
-        ],
-        "tip": "Gelbe untere Blätter oft: zu wenig Licht oder altes Wasser — zuerst Stand und Lampenhöhe prüfen."
+      {
+        "title": "Kapseln einsetzen",
+        "text": "Zieh den Aufkleber ab, setze eine Kapsel pro Slot ein und eine Kappe darüber. Öffne die Kapsel nicht vor dem Einsetzen. Unbenutzte kühl und trocken in der Originalpackung lagern."
       },
-      "pods": {
-        "title": "Kapseln und Nährstoffe",
-        "duration": "4 Min.",
-        "summary": "Was in der Kapsel steckt und wie du sie richtig nutzt.",
-        "lead": "Jede Kapsel ist ein Starterpaket: Samen, Medium und Nährstoffe für den ersten Zyklus.",
-        "galleryLabel": "Fotos: Kapseln, Sorten und Slots",
-        "steps": [
-          "Kapsel nicht vorzeitig öffnen.",
-          "QR-Code scannen für sortenspezifische Tipps.",
-          "Kulturen wachsen unterschiedlich schnell.",
-          "Nach dem Zyklus alte Kapsel entfernen und Slot reinigen."
-        ],
-        "tip": "Wenn eine Kapsel hinterherhinkt: die anderen nicht herausnehmen — Variation ist normal. Noch ein paar Tage warten."
+      {
+        "title": "Lampe einstellen",
+        "text": "Senke die Lampe knapp über die Kappen. Sobald Blätter da sind, halte mindestens 2 cm Abstand. Sie läuft von allein: 16 Stunden Licht und 8 Stunden Pause. Der Zyklus beginnt beim Einschalten — nachts nicht ausschalten."
       },
-      "harvest": {
-        "title": "Ernten wie ein Profi",
-        "duration": "5 Min.",
-        "summary": "Wann und wie schneiden, damit mehr nachwächst.",
-        "lead": "Der richtige Schnitt hält die Pflanze länger produktiv.",
-        "galleryLabel": "Fotos: Ernte, Schnitt und Küche",
-        "steps": [
-          "Ernten, sobald genug reife Blätter da sind (oft Woche 2–4).",
-          "Über einem Knoten / Blattpaar schneiden — fördert Verzweigung.",
-          "Nicht mehr als etwa ⅓ der Pflanze auf einmal nehmen.",
-          "Saubere Schere verwenden; frisch schmeckt’s am besten."
-        ],
-        "tip": "Regelmäßige leichte Schnitte sind besser als seltene Radikalschnitte."
+      {
+        "title": "Kappen abnehmen",
+        "text": "Nimm die Kappe ab, sobald der Keim sie berührt. Bis dahin hält sie die Feuchtigkeit und schattet das Wasser ab. Stößt ein Keim früher an, nimm die Kappe sofort ab."
       },
-      "care": {
-        "title": "Pflege und häufige Probleme",
-        "duration": "6 Min.",
-        "summary": "Schnelle Checks bei keinem Keimen, blassen Blättern oder trübem Wasser.",
-        "lead": "Die meisten Probleme hängen mit Wasser, Licht oder Temperatur zusammen.",
-        "galleryLabel": "Fotos: Pflege und saubere Wanne",
-        "steps": [
-          "Kein Keimen nach 10–14 Tagen: Wasser, Lampe und Raumtemperatur (~18–24°C) prüfen.",
-          "Blasse Pflanzen: Lampenhöhe und Tageszyklus prüfen.",
-          "Geruch oder trübes Wasser: Wasser wechseln und Wanne spülen.",
-          "Nach jedem Zyklus: kurze Reinigung von Wanne und Slots."
-        ],
-        "tip": "Es gibt eine Keimgarantie — bei korrekter Pflege und ohne Erfolg einfach schreiben."
+      {
+        "title": "Ernten und zurückschneiden",
+        "text": "Zwischen den Wechseln nur sauberes Wasser nachfüllen und regelmäßig ernten. Schneide über einem Blattpaar und nimm höchstens etwa ein Drittel auf einmal. Die Pflanze verzweigt sich und wächst nach."
       }
+    ],
+    "doseTitle": "Dosierung",
+    "doseLead": "Beide Füllungen sind für 4 l Wasser. Die Linie ist am Flaschendeckel.",
+    "doseMix": "A und B",
+    "doseWater": "Wasser",
+    "doseVisual": {
+      "firstMix": "5 ml A + 5 ml B",
+      "changeMix": "8 ml A + 8 ml B",
+      "green": "Grüne Linie",
+      "red": "Rote Linie"
     },
-    "ctaTitle": "Bereit zum Anwenden?",
-    "ctaText": "FAQ für schnelle Antworten, Kontakt bei Problemen — oder starte mit HomeGarder One.",
-    "ctaFaq": "Zur FAQ",
-    "ctaContact": "Kontakt",
-    "ctaBuy": "Zum Produkt",
-    "topicsCount": "{{count}} Themen",
-    "nextTopic": "Weiter",
-    "playVideo": "Video abspielen",
-    "pauseVideo": "Pause"
+    "doses": [
+      {
+        "label": "Erstes Füllen",
+        "mix": "5 ml A + 5 ml B",
+        "cap": "Grüne Linie am Deckel",
+        "water": "4 l Wasser"
+      },
+      {
+        "label": "Wasserwechsel",
+        "mix": "8 ml A + 8 ml B",
+        "cap": "Rote Linie am Deckel",
+        "water": "4 l Wasser"
+      }
+    ],
+    "doseNote": "Zwischen den Wechseln nur sauberes Wasser nachfüllen. Eine Packung reicht für etwa 12 Füllungen. Die Lampe läuft automatisch. Der Zyklus beginnt beim Einschalten.",
+    "facts": [
+      { "value": "18–24 °C", "label": "Zimmertemperatur" },
+      { "value": "2–3 Wochen", "label": "Wechsel und Reinigung" },
+      { "value": "Auto 16 Std. / 8 Std.", "label": "Licht / Pause" },
+      { "value": "≥ 2 cm", "label": "Lampe über den Blättern" }
+    ],
+    "careTitle": "Pflege ohne Aufwand",
+    "careLead": "Wasserwechsel und Reinigung alle 2–3 Wochen. Vorher den Stecker ziehen.",
+    "careItems": [
+      {
+        "title": "Nachfüllen",
+        "text": "Zwischen den Wechseln nur sauberes Wasser nachfüllen."
+      },
+      {
+        "title": "Wechsel und Reinigung",
+        "text": "Alle 2–3 Wochen spülen und mit 8 ml A + 8 ml B auf 4 l neu ansetzen."
+      },
+      {
+        "title": "Lampe",
+        "text": "Mindestens 2 cm über den Blättern. Den 16/8-Zyklus nicht unterbrechen."
+      },
+      {
+        "title": "Sicherheit",
+        "text": "Von Kindern fernhalten. Das Wasser ist nicht zum Trinken. Nur drinnen. Nach der Ernte eine neue Kapsel."
+      }
+    ],
+    "careLink": "Tipps und Hilfe",
+    "plantsTitle": "Wann sie keimen und wann du erntest",
+    "plantsLead": "Die Zeiten sind Richtwerte. Sie hängen von Wasser, Temperatur und Licht ab.",
+    "plantsSprout": "Keimt",
+    "plantsHarvest": "Erste Ernte",
+    "plants": {
+      "basil": { "name": "Basilikum", "sprout": "5–10 Tage", "harvest": "ab etwa 3 Wochen" },
+      "mint": { "name": "Minze", "sprout": "7–14 Tage", "harvest": "ab etwa 4 Wochen" },
+      "parsley": { "name": "Petersilie", "sprout": "10–20 Tage", "harvest": "ab etwa 5 Wochen" },
+      "cilantro": { "name": "Koriander", "sprout": "7–14 Tage", "harvest": "ab etwa 4 Wochen" },
+      "dill": { "name": "Dill", "sprout": "7–14 Tage", "harvest": "ab etwa 4 Wochen" },
+      "arugula": { "name": "Rucola", "sprout": "3–7 Tage", "harvest": "ab etwa 3 Wochen" }
+    },
+    "waterTitle": "Welches Wasser du nimmst",
+    "waterLead": "Wasser ist die Grundlage der Hydrokultur.",
+    "waterBestLabel": "Am besten",
+    "waterBestHint": "Das empfehlen wir",
+    "waterBest": [
+      "Gefiltertes Wasser — aus einer Filterkanne oder einer Umkehrosmose. Weich, ohne Chlor, mit dem berechenbarsten Ergebnis.",
+      "Abgefülltes Quell- oder Tafelwasser mit wenig Mineralien. Auf dem Etikett: Gesamtmineralisation unter etwa 300 mg/l.",
+      "Destilliertes Wasser. Es funktioniert gut — Lösung A und B liefern das nötige Kalzium und Magnesium."
+    ],
+    "waterOkLabel": "Geht",
+    "waterOkHint": "Leitungswasser",
+    "waterOk": "Lass es ein paar Stunden offen stehen, damit das Chlor entweicht. Bei hartem Wasser kann sich Kalk an den Tankwänden zeigen — dann wechsle auf gefiltertes Wasser.",
+    "waterNoLabel": "Nicht verwenden",
+    "waterNoHint": "Dieses Wasser schadet den Pflanzen",
+    "waterNo": [
+      "Mineral- oder alkalisches Wasser — hoher pH und viele Salze",
+      "Sprudelwasser",
+      "Wasser aus einem Salzenthärter — das Natrium schadet den Wurzeln",
+      "Heißes Wasser aus dem Boiler",
+      "Regenwasser — es kann verunreinigt sein"
+    ],
+    "waterPrepTitle": "Vorbereitung",
+    "waterPrep": [
+      "Nimm Wasser mit Raumtemperatur, etwa 18–24 °C.",
+      "Gieße 4 l in den Tank und gib die Lösung dazu: 5 ml A bis zur grünen Linie am Deckel, umrühren, dann 5 ml B.",
+      "Zwischen den Wechseln mit derselben Wasserart nachfüllen, ohne Lösung."
+    ],
+    "waterCareTitle": "Wasserpflege",
+    "waterCareLead": "Sechs Dinge, die den Garten gesund halten.",
+    "waterCare": [
+      { "title": "Wasserstand", "text": "Lass ihn nicht unter die Mindestmarke fallen. Die Pumpe läuft dann trocken, wird laut und kann kaputtgehen. Alle 2–3 Tage prüfen, besonders wenn die Pflanzen groß sind." },
+      { "title": "Trübes Wasser oder Geruch", "text": "Wechsle das Wasser sofort. Warte nicht die üblichen 2–3 Wochen." },
+      { "title": "Algen", "text": "Grün im Tank. Decke leere Slots ab und lass den Garten nicht in der direkten Sonne." },
+      { "title": "Reinigen", "text": "Nur mit Wasser und einem weichen Schwamm, ohne Reinigungsmittel. Kalk kannst du mit verdünntem Essig lösen, danach gut spülen." },
+      { "title": "Altes Wasser", "text": "Du kannst es in Töpfe oder in den Garten gießen. Es ist verdünnter Dünger." },
+      { "title": "Warmes Wasser", "text": "Über etwa 26 °C bekommen die Wurzeln zu wenig Sauerstoff und faulen. Das ist im Sommer wichtig." }
+    ],
+    "afterTitle": "Nach dem Pflanzen",
+    "afterLead": "Alles, was du nach dem ersten Pflanzen brauchst.",
+    "stageTitle": "Wann die erste Ernte kommt",
+    "stageNote": "Die erste Ernte ist bis zu 6 Wochen nach dem Pflanzen. In einem wärmeren Raum und mit gefiltertem Wasser wachsen die Pflanzen schneller. Nach dem ersten Schnitt wachsen sie weiter und geben bei richtigem Ernten wochenlang frische Blätter.",
+    "stages": [
+      { "when": "1–2 Wochen", "title": "Keimen", "text": "Die ersten kleinen Keime unter der Kappe." },
+      { "when": "bis 6 Wochen", "title": "Erste Ernte", "text": "Genug Blätter für die erste Handvoll." },
+      { "when": "6–7 Wochen", "title": "Volle Größe", "text": "Die Pflanzen sind dicht und du kannst jeden Tag ernten." }
+    ],
+    "harvestTitle": "So erntest du jede Sorte",
+    "harvestRule": "Nimm nicht mehr als ein Drittel auf einmal. Schneide mit einer sauberen Schere — zieh nicht mit der Hand, sonst hebst du die ganze Kapsel heraus.",
+    "harvestRows": [
+      { "name": "Basilikum", "how": "Knipse die Spitze direkt über einem Blattpaar ab.", "why": "Zwei neue Triebe kommen und die Pflanze wird dichter." },
+      { "name": "Petersilie", "how": "Schneide die äußeren Stiele an der Basis.", "why": "Neue Stiele wachsen aus der Mitte." },
+      { "name": "Salat", "how": "Ernte die äußeren Blätter, die Mitte bleibt.", "why": "Die Mitte macht weiter neue Blätter." },
+      { "name": "Rucola", "how": "Schneide 2–3 cm über der Basis.", "why": "Die Pflanze treibt wieder aus." }
+    ],
+    "harvestNote": "Wenn die Pflanzen die ganz hochgestellte Lampe erreichen, kürze die Spitzen auf dieselbe Weise. Wenn Basilikum blüht, knipse die Blüten ab — sonst werden die Blätter bitter.",
+    "faqTitle": "Wenn etwas nicht stimmt",
+    "faqLead": "Die meisten Probleme sind in Minuten behoben. Such, was du siehst.",
+    "faqMore": "Alle Fragen",
+    "faqs": [
+      {
+        "q": "Kein Keim nach 2 Wochen",
+        "a": "Der Raum ist zu kalt, die Kappe wurde zu früh abgenommen oder die Kapsel erreicht das Wasser nicht. Prüfe Kappe, Temperatur (18–24 °C) und Wasserstand. Wenn sie weiter nicht keimt, schreib uns."
+      },
+      {
+        "q": "Blasse, lange Pflanzen",
+        "a": "Die Lampe ist zu weit weg und die Pflanzen strecken sich zum Licht. Senke sie auf 2 cm über die Blätter."
+      },
+      {
+        "q": "Gelbe Blätter",
+        "a": "Die Lösung ist aufgebraucht oder das Wasser ist alt. Wechsle das Wasser und gib 8 ml A + 8 ml B dazu, bis zur roten Linie am Deckel."
+      },
+      {
+        "q": "Braune oder schleimige Wurzeln",
+        "a": "Das Wasser ist zu warm, über etwa 26 °C, und die Wurzeln bekommen zu wenig Sauerstoff. Tausche es gegen kühleres und stell den Garten weg von Heizung oder Sonne."
+      },
+      {
+        "q": "Trübes Wasser oder Geruch",
+        "a": "Im Wasser sind Bakterien gewachsen. Wechsle es sofort und spüle den Tank."
+      },
+      {
+        "q": "Grün im Tank",
+        "a": "Das sind Algen — Licht erreicht das Wasser. Decke leere Slots ab und lass den Garten nicht in der direkten Sonne."
+      },
+      {
+        "q": "Die Pumpe ist laut",
+        "a": "Der Stand ist unter die Mindestmarke gefallen. Fülle sauberes Wasser nach. Trocken wird die Pumpe laut und kann kaputtgehen."
+      }
+    ],
+    "order": "Neue Kapseln bestellen",
+    "orderHint": "Wenn die Ernte vorbei ist, nimm die alten Kapseln heraus, spüle den Tank und fang von vorn an. 12 neue Kapseln inklusive MwSt. kosten €14,99 und füllen den ganzen Garten. Eine Packung Lösung A und B reicht für etwa 12 Füllungen.",
+    "contactTitle": "Keimgarantie",
+    "warranty": "Wenn eine Kapsel nicht keimt und du die Anleitung befolgt hast, schicken wir kostenlos eine neue.",
+    "claimSteps": [
+      "Warte 3 Wochen ab dem Pflanzen. Manche Samen sind einfach langsamer.",
+      "Fotografiere den Garten so, dass die Kapsel ohne Keime zu sehen ist.",
+      "Schick das Foto an sales@plantyhub.com mit der Bestellnummer und der Charge von der Schachtel.",
+      "Wir schicken eine neue Kapsel derselben Sorte."
+    ],
+    "contactLink": "Kontaktformular",
+    "academyTitle": "Akademie",
+    "academyText": "Wenn du mehr Lektionen, Fotos und Video willst, öffne die Akademie.",
+    "academyLink": "Zur Akademie",
+    "safetyTitle": "Achtung",
+    "safetyText": "Lösung B — GEFAHR: verursacht schwere Augenschäden. Lösung A — ACHTUNG: verursacht schwere Augenreizung. Lösungen und Kapseln von Kindern fernhalten — die Kapseln sind Kleinteile. Nicht zum Trinken. Augenschutz tragen. Bei Kontakt mit den Augen: einige Minuten behutsam mit Wasser spülen, Kontaktlinsen nach Möglichkeit entfernen und weiter spülen. Arzt aufsuchen. Toxikologisches Zentrum: 02 9154 233. Lösungen dicht geschlossen bei 10–30 °C lagern, fern von Hitze, Frost und direkter Sonne. Den Garten vor dem Wasserwechsel oder dem Reinigen vom Strom trennen. Den Tank nicht überfüllen und Netzteil und Kabel trocken halten. Den Garten auf eine stabile, ebene Fläche stellen."
+  },
+  "howPage": {
+    "eyebrow": "So funktioniert's",
+    "title": "Der Garten gießt und leuchtet selbst",
+    "lead": "HomeGarder One hat keine Erde. Die Wurzeln trinken aus dem Tank, die Lampe hält ihren eigenen Zyklus, und du setzt Kapseln und erntest.",
+    "imageAlt": "PlantyHub HomeGarder One auf der Küchenzeile",
+    "buy": "HomeGarder One ansehen",
+    "guide": "Schon einen? Zur Anleitung",
+    "facts": [
+      { "value": "12", "label": "Kapseln gleichzeitig" },
+      { "value": "4 L", "label": "Wasser im Tank" },
+      { "value": "16 / 8", "label": "Stunden Licht und Ruhe" },
+      { "value": "bis 6 Wo.", "label": "bis zur ersten Ernte" }
+    ],
+    "videoLabel": "In einer Minute",
+    "videoTitle": "Sieh den Garten aus der Nähe",
+    "videoText": "Wasser, Kapseln und die Lampe, die von allein startet. Dieselben Schritte stehen darunter.",
+    "systemEyebrow": "Die Maschine",
+    "systemTitle": "Drei Dinge erledigen die Arbeit",
+    "systemLead": "Du gießt nicht jeden Tag und schiebst die Lampe nicht nach der Uhr.",
+    "systems": [
+      { "title": "Wasser von unten", "text": "Der Tank fasst 4 Liter. Eine Pumpe hebt das Wasser zu den Wurzeln — keine Gießkanne und keine Erde." },
+      { "title": "Nahrung in zwei Schritten", "text": "Beim ersten Füllen gibst du 5 ml A dazu, rührst um, dann 5 ml B. Zwischen den Wechseln füllst du nur klares Wasser nach." },
+      { "title": "Licht nach der Uhr", "text": "Der Zyklus startet beim Einschalten: 16 Stunden Licht und 8 Stunden Ruhe. Nachts nicht ausschalten." }
+    ],
+    "stepsEyebrow": "Dein Teil",
+    "stepsTitle": "Sechs Dinge, etwa fünf Minuten",
+    "stepsLead": "Danach macht der Garten allein weiter, bis es Zeit zum Ernten ist.",
+    "steps": [
+      { "title": "Mit Wasser füllen", "text": "4 L einfüllen. Gefiltert oder aus der Flasche ist besser, Leitungswasser geht auch. Etwa 18–24 °C, auf einer stabilen Fläche nahe einer Steckdose." },
+      { "title": "A und B dazugeben", "text": "Zuerst 5 ml A bis zur grünen Linie, umrühren, dann 5 ml B. Nicht unverdünnt mischen. Beim Wasserwechsel sind es 8 ml von jedem." },
+      { "title": "Kapseln einsetzen", "text": "Sticker abziehen, eine Kapsel in jeden Slot und eine Haube darauf. Die Haube hält die Feuchtigkeit, bis es keimt." },
+      { "title": "Lampe einstellen", "text": "Tief über die Hauben senken. Sobald Blätter da sind, mindestens 2 cm darüber lassen. Der Zyklus läuft schon." },
+      { "title": "Hauben abnehmen", "text": "Sobald der Keim die Haube berührt, nimm sie ab. Bis dahin beschattet sie das Wasser und hält die Feuchtigkeit." },
+      { "title": "Ernten und kürzen", "text": "Über einem Blattpaar schneiden und nie mehr als etwa ein Drittel auf einmal nehmen. Die Pflanze verzweigt sich und wächst nach." }
+    ],
+    "waterEyebrow": "Das Wasser",
+    "waterTitle": "Welches Wasser den Garten gesund hält",
+    "waterLead": "Lösung A und B bringt die Nahrung. Das Wasser soll weich sein und etwa 18–24 °C haben.",
+    "waterGroups": [
+      { "hint": "Wir empfehlen", "title": "Am besten", "text": "Gefiltert oder mit Umkehrosmose. Aus der Flasche, mit Mineralisierung unter etwa 300 mg/l. Destilliert geht auch — A und B bringen Kalzium und Magnesium dazu." },
+      { "hint": "Leitungswasser", "title": "Geht", "text": "Ein paar Stunden ohne Deckel stehen lassen, damit das Chlor entweicht. Wenn an den Tankwänden Kalk kommt, wechsle zu gefiltertem Wasser." },
+      { "hint": "Schaden den Wurzeln", "title": "Nicht verwenden", "text": "Mineral- oder alkalisches Wasser, Sprudel, Wasser aus einem Salzenthärter, warmes Wasser aus dem Boiler und Regenwasser." }
+    ],
+    "growEyebrow": "Nach dem Pflanzen",
+    "growTitle": "Die erste Ernte kommt innerhalb von sechs Wochen",
+    "growLead": "Die Zeiten sind Richtwerte. In einem wärmeren Raum und mit gefiltertem Wasser wachsen die Pflanzen schneller.",
+    "stages": [
+      { "when": "1–2 Wochen", "title": "Keimen", "text": "Die ersten Keime zeigen sich unter der Haube." },
+      { "when": "bis 6 Wochen", "title": "Erste Ernte", "text": "Genug Blätter für die erste Handvoll." },
+      { "when": "6–7 Wochen", "title": "Jeden Tag", "text": "Die Pflanzen sind dicht und geben wochenlang frische Blätter." }
+    ],
+    "plantsTitle": "Wann jede Pflanze keimt",
+    "sprout": "Keimt",
+    "harvest": "Erste Ernte",
+    "plants": [
+      { "name": "Rucola", "sprout": "3–7 Tage", "harvest": "ab 3 Wochen" },
+      { "name": "Basilikum", "sprout": "5–10 Tage", "harvest": "ab 3 Wochen" },
+      { "name": "Minze", "sprout": "7–14 Tage", "harvest": "ab 4 Wochen" },
+      { "name": "Koriander", "sprout": "7–14 Tage", "harvest": "ab 4 Wochen" },
+      { "name": "Dill", "sprout": "7–14 Tage", "harvest": "ab 4 Wochen" },
+      { "name": "Petersilie", "sprout": "10–20 Tage", "harvest": "ab 5 Wochen" }
+    ],
+    "harvestNote": "Nimm nie mehr als ein Drittel auf einmal und schneide mit der Schere, damit du die Kapsel nicht herausziehst. Basilikum knapp über einem Blattpaar abknipsen — wenn es blüht, die Blüten entfernen, sonst werden die Blätter bitter. Petersilie an den äußeren Stielen schneiden. Rucola 2–3 cm über der Basis.",
+    "rhythmEyebrow": "Danach",
+    "rhythmTitle": "Zwischen den Ernten gibt es einen Wasserwechsel",
+    "rhythm": [
+      { "title": "Nachfüllen", "text": "Zwischen den Wechseln nur klares Wasser, ohne Lösung. Alle 2–3 Tage prüfen, besonders wenn die Pflanzen groß sind." },
+      { "title": "Wechsel", "text": "Alle 2–3 Wochen den Tank spülen und 8 ml A und 8 ml B in 4 L geben — bis zur roten Linie. Eine Packung reicht für etwa 12 Füllungen." },
+      { "title": "Die Pumpe", "text": "Den Stand nicht unter die Mindestmarke fallen lassen. Trocken wird die Pumpe laut und kann kaputtgehen." },
+      { "title": "Leere Slots", "text": "Abdecken. Licht auf dem Wasser lässt Algen wachsen. Den Garten nicht in die direkte Sonne stellen." }
+    ],
+    "rolesEyebrow": "Die Aufteilung",
+    "rolesTitle": "Du pflanzt. Sie macht den Rest.",
+    "gardenTitle": "Der Garten",
+    "garden": [
+      "Gießt die Wurzeln aus dem Tank",
+      "Hält 16 Stunden Licht und 8 Stunden Ruhe",
+      "Läuft mit bis zu 12 Kapseln gleichzeitig"
+    ],
+    "youTitle": "Du",
+    "you": [
+      "Füllst Wasser ein und gibst A, dann B dazu",
+      "Füllst klares Wasser nach und wechselst alle 2–3 Wochen",
+      "Erntest wenig und oft, höchstens ein Drittel auf einmal"
+    ],
+    "ctaTitle": "Bereit für die Küchenzeile",
+    "ctaText": "Mattweiß, 12 Slots und eine Lampe, die keine Aufmerksamkeit will. Wenn du schon einen hast, stehen in der Anleitung die Dosen, das Wasser und was du tust, wenn etwas stoppt.",
+    "ctaBuy": "Zu HomeGarder One",
+    "ctaGuide": "Anleitung zum Start",
+    "homeLink": "Ausführlich ansehen"
   }
 }

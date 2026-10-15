@@ -17,7 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import CloseIcon from '@mui/icons-material/Close'
 import PersonOutlineRounded from '@mui/icons-material/PersonOutlineRounded'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Logo from './Logo'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -61,6 +61,8 @@ const headerTextButtonSx = {
 
 export default function Header() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
+  const onProduct = pathname === navHrefs.buy
   const [mobileOpen, setMobileOpen] = useState(false)
   const { itemCount: cartCount } = useCart()
   const { customer, isLoggedIn, logout } = useCustomerAuth()
@@ -198,26 +200,28 @@ export default function Header() {
                 <ShoppingBagOutlinedIcon fontSize="small" />
               </Badge>
             </IconButton>
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to={navHrefs.buy}
-              sx={{
-                display: { xs: 'none', sm: 'inline-flex' },
-                flexShrink: 0,
-                whiteSpace: 'nowrap',
-                fontWeight: 800,
-                minHeight: 40,
-                height: 40,
-                px: 2.25,
-                py: 0,
-                fontSize: '0.85rem',
-                lineHeight: 1,
-                boxShadow: 'none',
-              }}
-            >
-              {t('nav.buyNow')}
-            </Button>
+            {!onProduct && (
+              <Button
+                variant="contained"
+                component={RouterLink}
+                to={navHrefs.buy}
+                sx={{
+                  display: { xs: 'none', sm: 'inline-flex' },
+                  flexShrink: 0,
+                  whiteSpace: 'nowrap',
+                  fontWeight: 800,
+                  minHeight: 40,
+                  height: 40,
+                  px: 2.25,
+                  py: 0,
+                  fontSize: '0.85rem',
+                  lineHeight: 1,
+                  boxShadow: 'none',
+                }}
+              >
+                {t('nav.buyNow')}
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -286,11 +290,13 @@ export default function Header() {
             </ListItem>
           ))}
         </List>
-        <Box sx={{ p: 2, px: pagePaddingX }}>
-          <Button variant="contained" fullWidth size="large" component={RouterLink} to={navHrefs.buy} onClick={() => setMobileOpen(false)}>
-            {t('nav.buyNow')}
-          </Button>
-        </Box>
+        {!onProduct && (
+          <Box sx={{ p: 2, px: pagePaddingX }}>
+            <Button variant="contained" fullWidth size="large" component={RouterLink} to={navHrefs.buy} onClick={() => setMobileOpen(false)}>
+              {t('nav.buyNow')}
+            </Button>
+          </Box>
+        )}
       </Drawer>
     </>
   )
