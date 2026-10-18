@@ -29,13 +29,13 @@ import { defaultLanguage, isLanguageCode } from '../i18n/languages'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { productSpecRows } from '../data/catalog'
-import { lifestyleImages, productVideo, productVideoPoster, stockImages } from '../data/images'
+import { lifestyleImages, productVideo, stockImages } from '../data/images'
 import { useProduct } from '../hooks/useProducts'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
 import { useAddProductToCart } from '../hooks/useCart'
 import { useTrackViewItem } from '../measure/commerce'
 import { brand } from '../theme'
-import { toMediaUrl } from '../media/cfImage'
+import { resolveGardenVideo } from '../media/cfImage'
 import { objectPositionForKey } from '../media/imageFocus'
 import MediaImg from '../components/MediaImg'
 import ProductReviews, { ProductRatingRow, useProductReviews } from '../components/ProductReviews'
@@ -80,8 +80,7 @@ export default function ProductPage() {
         src: images[key] || fallback,
         position: objectPositionForKey(images, key, 'main'),
       }))
-  const videoSrc = garden?.videoUrl || productVideo
-  const videoPoster = garden?.videoPoster || productVideoPoster
+  const { src: videoSrc, poster: videoPoster } = resolveGardenVideo(garden?.videoUrl, garden?.videoPoster, productVideo)
   const code = i18n.language?.split('-')[0]
   const lang = isLanguageCode(code) ? code : defaultLanguage
   const locale = garden?.locales[lang] ?? garden?.locales.en
@@ -351,12 +350,13 @@ export default function ProductPage() {
                 }}
               >
                 <Box
+                  key={videoSrc}
                   component="video"
-                  src={toMediaUrl(videoSrc)}
-                  poster={toMediaUrl(videoPoster)}
+                  src={videoSrc}
+                  poster={videoPoster}
                   controls
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   sx={{ width: '100%', aspectRatio: '9 / 16', objectFit: 'cover', display: 'block' }}
                 />
               </Box>

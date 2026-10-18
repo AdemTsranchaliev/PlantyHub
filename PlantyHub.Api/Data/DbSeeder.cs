@@ -56,18 +56,6 @@ public static class DbSeeder
         await EnsureProductsAsync(db);
         await RemapLocalMediaAsync(db);
 
-        if (!await db.Orders.AnyAsync())
-            await SeedOrdersAsync(db);
-
-        if (!await db.Customers.AnyAsync())
-            await SeedCustomersAsync(db);
-
-        if (!await db.NewsletterSubscribers.AnyAsync())
-        {
-            db.NewsletterSubscribers.Add(new NewsletterSubscriber { Email = "news@plantyhub.com" });
-            await db.SaveChangesAsync();
-        }
-
         if (!await db.HomepageSettings.AnyAsync())
         {
             db.HomepageSettings.Add(new HomepageSettings
@@ -301,49 +289,6 @@ public static class DbSeeder
             en: "Herb Knife", bg: "Нож за билки");
     }
 
-    private static async Task SeedOrdersAsync(AppDbContext db)
-    {
-        var orders = new[]
-        {
-            MockOrder("PH-1042", "Elena Petrova", "elena.p@email.com", "+359 88 123 4567", CountryCode.BG, OrderStatus.Shipped, 108.99m, 2, "2026-07-07"),
-            MockOrder("PH-1041", "Markus Weber", "m.weber@email.de", "+49 170 234 5678", CountryCode.DE, OrderStatus.Processing, 99.00m, 1, "2026-07-06"),
-            MockOrder("PH-1040", "Sophie Martin", "sophie.m@email.fr", "+33 6 12 34 56 78", CountryCode.FR, OrderStatus.Delivered, 49.86m, 4, "2026-07-05"),
-            MockOrder("PH-1039", "Ivan Dimitrov", "ivan.d@email.bg", "+359 87 654 3210", CountryCode.BG, OrderStatus.Pending, 129.00m, 1, "2026-07-05"),
-            MockOrder("PH-1038", "Anna Kowalski", "anna.k@email.pl", "+48 501 234 567", CountryCode.PL, OrderStatus.Delivered, 34.77m, 3, "2026-07-04"),
-            MockOrder("PH-1037", "Luca Rossi", "luca.r@email.it", "+39 333 456 7890", CountryCode.IT, OrderStatus.Cancelled, 24.90m, 1, "2026-07-03"),
-            MockOrder("PH-1036", "Maria Santos", "maria.s@email.pt", "+351 912 345 678", CountryCode.PT, OrderStatus.Delivered, 119.89m, 2, "2026-07-02"),
-            MockOrder("PH-1035", "Jan Novak", "jan.n@email.cz", "+420 601 234 567", CountryCode.CZ, OrderStatus.Delivered, 99.00m, 1, "2026-07-01"),
-        };
-
-        db.Orders.AddRange(orders);
-        await db.SaveChangesAsync();
-    }
-
-    private static async Task SeedCustomersAsync(AppDbContext db)
-    {
-        var orders = await db.Orders.OrderBy(o => o.CreatedAt).ToListAsync();
-        var index = 1;
-        foreach (var group in orders.GroupBy(o => o.Email))
-        {
-            var first = group.OrderBy(o => o.CreatedAt).First();
-            var customer = new Customer
-            {
-                Id = $"C-{index:D3}",
-                Email = first.Email,
-                Name = first.CustomerName,
-                Phone = first.Phone,
-                Country = first.Country,
-                JoinedAt = first.CreatedAt
-            };
-            db.Customers.Add(customer);
-            foreach (var order in group)
-                order.CustomerId = customer.Id;
-            index++;
-        }
-
-        await db.SaveChangesAsync();
-    }
-
     private static Product Garden(
         string slug, decimal price, string image, ImageFit fit,
         (string id, string hex)[]? colors = null,
@@ -415,58 +360,4 @@ public static class DbSeeder
         return product;
     }
 
-    private static Order MockOrder(
-        string id, string name, string email, string phone, CountryCode country,
-        OrderStatus status, decimal total, int itemCount, string date)
-    {
-        var created = DateTime.SpecifyKind(
-            DateTime.Parse(date, System.Globalization.CultureInfo.InvariantCulture),
-            DateTimeKind.Utc);
-        var subtotal = total;
-        return new Order
-        {
-            Id = id,
-            CustomerName = name,
-            Email = email,
-            Phone = phone,
-            Country = country.ToString(),
-            Status = status,
-            PaymentMethod = PaymentMethod.Card,
-            Subtotal = subtotal,
-            ShippingCost = 0,
-            Tax = 0,
-            Total = total,
-            CreatedAt = created,
-            ShippingName = name,
-            ShippingPhone = phone,
-            ShippingStreet = "Demo street 1",
-            ShippingCity = "Demo city",
-            ShippingPostalCode = "1000",
-            ShippingCountry = country.ToString(),
-            BillingName = name,
-            BillingPhone = phone,
-            BillingStreet = "Demo street 1",
-            BillingCity = "Demo city",
-            BillingPostalCode = "1000",
-            BillingCountry = country.ToString(),
-            Items =
-            [
-                new OrderItem
-                {
-                    ProductSlug = "basil",
-                    Category = ProductCategory.Pods,
-                    Name = "Basil Seed Pods",
-                    Quantity = itemCount,
-                    UnitPrice = total / itemCount,
-                    Total = total,
-                    Image = MediaUrls.Resolve("/images/stock/basil.jpg")
-                }
-            ],
-            Timeline =
-            [
-                new OrderTimelineEntry { At = created, Status = OrderStatus.Pending, Note = "Order placed" },
-                new OrderTimelineEntry { At = created.AddHours(2), Status = status }
-            ]
-        };
-    }
 }

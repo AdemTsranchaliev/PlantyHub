@@ -28,6 +28,9 @@ import PhoneRounded from '@mui/icons-material/PhoneRounded'
 import FileDownloadRounded from '@mui/icons-material/FileDownloadRounded'
 import PrintRounded from '@mui/icons-material/PrintRounded'
 import PublicRounded from '@mui/icons-material/PublicRounded'
+import GroupsRounded from '@mui/icons-material/GroupsRounded'
+import MenuBookRounded from '@mui/icons-material/MenuBookRounded'
+import ReplayRounded from '@mui/icons-material/ReplayRounded'
 import StarRounded from '@mui/icons-material/StarRounded'
 import RateReviewRounded from '@mui/icons-material/RateReviewRounded'
 import { useTranslation } from 'react-i18next'
@@ -35,12 +38,12 @@ import { countryDisplayName, countryFlag } from '../../utils/country'
 import { ordersApi } from '../../api'
 import { ApiError, apiBlob } from '../../api/client'
 import type { EcontCheckResult, EcontStatusResult } from '../../api/types'
-import { fetchOrderDetail } from '../../store/orders'
+import { deleteWaybill, fetchOrderDetail } from '../../store/orders'
 import { AdminBreadcrumb } from '../../components/admin/AdminPageHeader'
 import CreateWaybillDialog from '../../components/admin/CreateWaybillDialog'
 import RequestReviewDialog from '../../components/admin/RequestReviewDialog'
 import type { OrderStatus } from '../../admin/mockData'
-import type { OrderTimelineEntry, Waybill } from '../../admin/orderDetails'
+import { isCustomerFirstOrder, type OrderTimelineEntry, type Waybill } from '../../admin/orderDetails'
 import { downloadOrderSheet } from '../../admin/orderSheet'
 import { nextOrderStatuses, orderStatusColors as statusColors } from '../../admin/orderStatus'
 import OrderGiftLine from '../../components/OrderGiftLine'
@@ -406,6 +409,8 @@ export default function AdminOrderDetailPage() {
   const [tracks, setTracks] = useState<Record<string, EcontStatusResult['courier']>>({})
   const [actionError, setActionError] = useState<string | null>(null)
   const [busy, setBusy] = useState<'check' | 'print' | null>(null)
+  const [pendingDelete, setPendingDelete] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState(false)
   const [loadingNumbers, setLoadingNumbers] = useState<Record<string, boolean>>({})
   const waybills = (
     order?.waybills && order.waybills.length > 0 ? order.waybills : order?.waybill ? [order.waybill] : []
@@ -479,7 +484,7 @@ export default function AdminOrderDetailPage() {
     )
   }
 
-  const firstOrder = customerOrders[customerOrders.length - 1]?.id === order.id
+  const firstOrder = isCustomerFirstOrder(customerOrders.some((item) => item.id === order.id) ? customerOrders : [...customerOrders, order], order)
   const orderNumber = customerOrders.findIndex((o) => o.id === order.id) + 1
   const colors = statusColors[order.status]
   const courierId = order.waybill?.courier || order.shippingCourier || ''
@@ -609,10 +614,15 @@ export default function AdminOrderDetailPage() {
               />
               {firstOrder && (
                 <Chip
-                  icon={<StarRounded sx={{ fontSize: '1rem !important' }} />}
+                  icon={<StarRounded sx={{ fontSize: '1.05rem !important', color: '#8A5A00 !important' }} />}
                   label={t('admin.orderDetail.firstOrder')}
-                  size="small"
-                  sx={{ bgcolor: 'rgba(255, 193, 7, 0.15)', color: '#B8860B', fontWeight: 700 }}
+                  sx={{
+                    height: 32,
+                    bgcolor: '#FFF1CC',
+                    color: '#8A5A00',
+                    fontWeight: 800,
+                    border: '1.5px solid #E2B34A',
+                  }}
                 />
               )}
             </Stack>
@@ -628,7 +638,7 @@ export default function AdminOrderDetailPage() {
           <Button
             variant="outlined"
             startIcon={<FileDownloadRounded />}
-            onClick={() => { void downloadOrderSheet(order, t, i18n.language) }}
+            onClick={() => { void downloadOrderSheet(order, t, i18n.language, { firstOrder }) }}
           >
             {t('admin.orderDetail.downloadSheet')}
           </Button>
@@ -641,6 +651,8 @@ export default function AdminOrderDetailPage() {
           </Button>
         </Stack>
       </Stack>
+
+      <PackStrip firstOrder={firstOrder} />
 
       <Box
         sx={{
@@ -922,6 +934,11 @@ export default function AdminOrderDetailPage() {
                           </Typography>
                         </Box>
                         <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
+                          {bill.courier === 'econt' ? (
+                            <Button variant="outlined" color="error" onClick={() => setPendingDelete(bill.number)} disabled={deleting}>
+                              {t('admin.orderDetail.deleteWaybill')}
+                            </Button>
+                          ) : null}
                           {purpose === 'unclaimed' ? null : bill.labelUrl ? (
                             <Button variant="outlined" startIcon={<PrintRounded />} onClick={() => void openSticker(bill.number)} disabled={busy === 'print'}>
                               {t('admin.orderDetail.printSticker')}
@@ -1019,14 +1036,15 @@ export default function AdminOrderDetailPage() {
                     <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem' }}>{t('admin.orderDetail.shippingCost')}</Typography>
                     <Typography sx={{ fontSize: '0.9rem' }}>{order.shippingCost}</Typography>
                   </Stack>
-                  <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem' }}>
-                      {order.taxRate
-                        ? t('admin.orderDetail.taxRate', { rate: order.taxRate })
-                        : t('admin.orderDetail.tax')}
-                    </Typography>
-                    <Typography sx={{ fontSize: '0.9rem' }}>{order.tax}</Typography>
-                  </Stack>
+                  {order.codFee && order.codFee !== '€0.00' ? (
+                    <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
+                      <Typography sx={{ color: brand.textSecondary, fontSize: '0.9rem' }}>{t('checkout.codFee')}</Typography>
+                      <Typography sx={{ fontSize: '0.9rem' }}>{order.codFee}</Typography>
+                    </Stack>
+                  ) : null}
+                  {order.tax && order.tax !== '€0.00' ? (
+                    <Typography sx={{ color: brand.textSecondary, fontSize: '0.8rem' }}>{t('cart.vatIncluded')}</Typography>
+                  ) : null}
                   <Divider />
                   <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                     <Typography sx={{ fontWeight: 700 }}>{t('admin.orders.table.total')}</Typography>
@@ -1130,6 +1148,36 @@ export default function AdminOrderDetailPage() {
           .filter((item, index, all) => all.findIndex((other) => other.productId === item.productId) === index)
           .map((item) => ({ slug: item.productId, name: item.name || item.productId }))}
       />
+      <Dialog open={Boolean(pendingDelete)} onClose={() => { if (!deleting) setPendingDelete(null) }} fullWidth maxWidth="xs">
+          <DialogTitle sx={{ fontWeight: 800 }}>{t('admin.orderDetail.deleteWaybillTitle')}</DialogTitle>
+          <DialogContent>
+            <Typography sx={{ color: brand.textSecondary, lineHeight: 1.6 }}>
+              {t('admin.orderDetail.deleteWaybillBody', { number: pendingDelete ?? '' })}
+            </Typography>
+          </DialogContent>
+          <DialogActions sx={{ px: 3, pb: 2 }}>
+            <Button onClick={() => setPendingDelete(null)} disabled={deleting}>{t('admin.productEdit.cancel')}</Button>
+            <Button
+              variant="contained"
+              color="error"
+              disabled={deleting || !pendingDelete}
+              onClick={() => {
+                if (!pendingDelete) return
+                setDeleting(true)
+                setActionError(null)
+                void deleteWaybill(order.id, pendingDelete)
+                  .then(() => setPendingDelete(null))
+                  .catch((err: unknown) => {
+                    setActionError(err instanceof ApiError ? err.message : t('admin.orderDetail.deleteWaybillFailed'))
+                    setPendingDelete(null)
+                  })
+                  .finally(() => setDeleting(false))
+              }}
+            >
+              {deleting ? t('admin.orderDetail.deletingWaybill') : t('admin.orderDetail.deleteWaybillConfirm')}
+            </Button>
+          </DialogActions>
+        </Dialog>
       <CreateWaybillDialog
         open={waybillOpen}
         orderId={order.id}
@@ -1138,6 +1186,123 @@ export default function AdminOrderDetailPage() {
         purpose={returning ? 'return' : order.status === 'replacement' ? 'replacement' : 'shipment'}
         onClose={() => setWaybillOpen(false)}
       />
+    </Box>
+  )
+}
+
+function PackStrip({ firstOrder }: { firstOrder: boolean }) {
+  const { t } = useTranslation()
+  const cards = [
+    firstOrder
+      ? {
+          key: 'first',
+          icon: StarRounded,
+          title: t('admin.orderDetail.pack.first'),
+          hint: t('admin.orderDetail.pack.firstHint'),
+          bg: 'linear-gradient(160deg, #FFF9EE 0%, #FFE7B8 100%)',
+          border: '#E2B34A',
+          mark: '#FFE08A',
+          titleColor: '#6B4A08',
+        }
+      : {
+          key: 'repeat',
+          icon: ReplayRounded,
+          title: t('admin.orderDetail.pack.repeat'),
+          hint: t('admin.orderDetail.pack.repeatHint'),
+          bg: brand.beige,
+          border: brand.border,
+          mark: '#E4E7E1',
+          titleColor: brand.textSecondary,
+        },
+    {
+      key: 'community',
+      icon: GroupsRounded,
+      title: t('admin.orderDetail.pack.community'),
+      hint: t('admin.orderDetail.pack.communityHint'),
+      bg: '#F3FAF6',
+      border: '#8FCBAA',
+      mark: '#C8E6D4',
+      titleColor: brand.plantGreenDark,
+    },
+    {
+      key: 'instructions',
+      icon: MenuBookRounded,
+      title: t('admin.orderDetail.pack.instructions'),
+      hint: t('admin.orderDetail.pack.instructionsHint'),
+      bg: '#F4F8FB',
+      border: '#9BB8C9',
+      mark: '#C5DCE8',
+      titleColor: '#1C3A4A',
+    },
+  ]
+
+  return (
+    <Box
+      sx={{
+        mb: 2.5,
+        p: { xs: 1.5, sm: 2 },
+        borderRadius: '22px',
+        bgcolor: '#F7F4EC',
+        border: '1px solid #E6E1D2',
+      }}
+    >
+      <Typography
+        sx={{
+          mb: 1.25,
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          letterSpacing: '0.14em',
+          textTransform: 'uppercase',
+          color: brand.plantGreenDark,
+        }}
+      >
+        {t('admin.orderDetail.pack.title')}
+      </Typography>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' }, gap: 1.25 }}>
+        {cards.map((card) => {
+          const Icon = card.icon
+          return (
+            <Stack
+              key={card.key}
+              direction="row"
+              spacing={1.5}
+              sx={{
+                alignItems: 'center',
+                minHeight: 84,
+                p: 1.5,
+                borderRadius: '16px',
+                background: card.bg,
+                border: `1.5px solid ${card.border}`,
+                boxShadow: card.key === 'first' ? '0 10px 24px rgba(226, 179, 74, 0.28)' : 'none',
+              }}
+            >
+              <Box
+                sx={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: '14px',
+                  bgcolor: card.mark,
+                  color: brand.graphite,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <Icon sx={{ fontSize: 26 }} />
+              </Box>
+              <Box sx={{ minWidth: 0 }}>
+                <Typography sx={{ fontWeight: 800, fontSize: '1rem', lineHeight: 1.2, color: card.titleColor }}>
+                  {card.title}
+                </Typography>
+                <Typography sx={{ mt: 0.35, fontSize: '0.8rem', lineHeight: 1.35, color: brand.textSecondary }}>
+                  {card.hint}
+                </Typography>
+              </Box>
+            </Stack>
+          )
+        })}
+      </Box>
     </Box>
   )
 }

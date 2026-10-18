@@ -13,7 +13,9 @@ namespace PlantyHub.Api.Services;
 public static class LocaleSeo
 {
     public const string DefaultLanguage = "bg";
-    public const string OgImage = "https://media.plantyhub.com/logo-og.png";
+    public const string OgImage = "https://plantyhub.com/logo-wordmark.png";
+    public const int OgImageWidth = 1200;
+    public const int OgImageHeight = 630;
 
     public static readonly string[] Languages = ["bg", "en", "de", "fr"];
 
@@ -65,24 +67,33 @@ public static class LocaleSeo
         if (IsExempt(value)) return null;
 
         var parts = value.Split('/', StringSplitOptions.RemoveEmptyEntries);
-        if (parts.Length == 0) return $"/{DefaultLanguage}/";
+        if (parts.Length == 0) return null;
+
+        if (IsLanguage(parts[0]) && (parts[0].Equals(DefaultLanguage, StringComparison.OrdinalIgnoreCase) || !IsIndexableLanguage(parts[0])))
+        {
+            var rest = CanonicalTail(parts.Skip(1));
+            return rest.Length == 0 ? "/" : "/" + string.Join('/', rest);
+        }
 
         if (!IsLanguage(parts[0]))
         {
             var rest = CanonicalTail(parts);
-            return rest.Length == 0 ? $"/{DefaultLanguage}/" : $"/{DefaultLanguage}/{string.Join('/', rest)}";
-        }
-
-        if (!IsIndexableLanguage(parts[0]))
-        {
-            var rest = CanonicalTail(parts.Skip(1));
-            return rest.Length == 0 ? $"/{DefaultLanguage}/" : $"/{DefaultLanguage}/{string.Join('/', rest)}";
+            var canonical = rest.Length == 0 ? "/" : "/" + string.Join('/', rest);
+            return string.Equals(value, canonical, StringComparison.Ordinal) ? null : canonical;
         }
 
         var locale = parts[0].ToLowerInvariant();
         var tail = CanonicalTail(parts.Skip(1));
-        var canonical = tail.Length == 0 ? $"/{locale}/" : $"/{locale}/{string.Join('/', tail)}";
-        return string.Equals(value, canonical, StringComparison.Ordinal) ? null : canonical;
+        var localized = tail.Length == 0 ? $"/{locale}/" : $"/{locale}/{string.Join('/', tail)}";
+        return string.Equals(value, localized, StringComparison.Ordinal) ? null : localized;
+    }
+
+    /// <summary>Storefront path. Bulgarian has no prefix; other languages use /en, /de, /fr.</summary>
+    public static string PublicPath(string? language, string pagePath)
+    {
+        var locale = IsIndexableLanguage(language) ? language!.ToLowerInvariant() : DefaultLanguage;
+        if (!pagePath.StartsWith('/')) pagePath = "/" + pagePath;
+        return Localized(locale, pagePath);
     }
 
     public static async Task<SeoProduct?> LoadPageProductAsync(AppDbContext db, string path, CancellationToken ct)
@@ -184,6 +195,11 @@ public static class LocaleSeo
         head.Append($"<meta property=\"og:description\" content=\"{Encode(description)}\" />");
         head.Append($"<meta property=\"og:url\" content=\"{Encode(canonical)}\" />");
         head.Append($"<meta property=\"og:image\" content=\"{Encode(image)}\" />");
+        if (image == OgImage)
+        {
+            head.Append($"<meta property=\"og:image:width\" content=\"{OgImageWidth}\" />");
+            head.Append($"<meta property=\"og:image:height\" content=\"{OgImageHeight}\" />");
+        }
         head.Append($"<meta property=\"og:image:alt\" content=\"{Encode(title)}\" />");
         head.Append("<meta name=\"twitter:card\" content=\"summary_large_image\" />");
         head.Append($"<meta name=\"twitter:title\" content=\"{Encode(title)}\" />");
@@ -228,7 +244,9 @@ public static class LocaleSeo
         text.AppendLine("Disallow: /admin");
         text.AppendLine("Disallow: /api");
         text.AppendLine("Disallow: /health");
-        foreach (var language in Languages)
+        foreach (var prefix in PrivatePrefixes)
+            text.AppendLine($"Disallow: {prefix}");
+        foreach (var language in Languages.Where(language => language != DefaultLanguage))
         {
             foreach (var prefix in PrivatePrefixes)
                 text.AppendLine($"Disallow: /{language}{prefix}");
@@ -306,7 +324,13 @@ public static class LocaleSeo
                 ["name"] = "PlantyHub",
                 ["legalName"] = "ДИДЖИТАЛ КИТ ЕООД",
                 ["url"] = origin + "/",
-                ["logo"] = OgImage,
+                ["logo"] = new Dictionary<string, object?>
+                {
+                    ["@type"] = "ImageObject",
+                    ["url"] = OgImage,
+                    ["width"] = OgImageWidth,
+                    ["height"] = OgImageHeight,
+                },
                 ["email"] = "support@plantyhub.com",
                 ["address"] = new Dictionary<string, object?>
                 {
@@ -552,6 +576,9 @@ public static class LocaleSeo
             query = pagePath[mark..];
             path = mark == 0 ? "/" : pagePath[..mark];
         }
+
+        if (language.Equals(DefaultLanguage, StringComparison.OrdinalIgnoreCase))
+            return (path == "/" ? "/" : path) + query;
 
         return (path == "/" ? $"/{language}/" : $"/{language}{path}") + query;
     }

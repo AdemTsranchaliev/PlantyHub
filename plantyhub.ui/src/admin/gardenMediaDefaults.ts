@@ -1,5 +1,5 @@
 import { productSpecRows } from '../data/catalog'
-import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
+import { lifestyleImages, productVideo } from '../data/images'
 import type { LanguageCode } from '../i18n/languages'
 import bg from '../i18n/locales/bg.json'
 import de from '../i18n/locales/de.json'
@@ -18,7 +18,6 @@ export const defaultGardenGallery = [
 ]
 
 export const defaultGardenVideo = productVideo
-export const defaultGardenVideoPoster = productVideoPoster
 
 export function defaultGardenLocale(lang: LanguageCode): Omit<ProductLocaleContent, 'name' | 'tagline' | 'description'> {
   const pack = locales[lang]

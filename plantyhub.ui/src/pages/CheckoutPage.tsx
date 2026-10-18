@@ -22,14 +22,14 @@ import { CheckoutOrderSummary, MobileOrderSummary, checkout } from '../component
 import { navHrefs } from '../data/catalog'
 import type { PaymentMethod } from '../admin/orderDetails'
 import { ApiError } from '../api/client'
-import { promoApi, shippingApi, taxApi } from '../api'
+import { promoApi, shippingApi, storeApi, taxApi } from '../api'
 import type { ShippingQuote, VatQuote } from '../api/types'
 import type { PromoQuote } from '../api'
 import { useCart } from '../hooks/useCart'
 import { useCustomerAuth } from '../hooks/useCustomerAuth'
 import { createCustomerOrder } from '../store/orders'
 import { cartTrackingItems, markPendingPurchase, trackBeginCheckout } from '../measure/commerce'
-import { formatEuro, FREE_SHIPPING_THRESHOLD } from '../utils/price'
+import { formatEuro, FREE_SHIPPING_THRESHOLD, COD_FEE_PERCENT, codFeeAmount } from '../utils/price'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -79,9 +79,9 @@ const emptyForm: FormState = {
   notes: '',
 }
 
-const paymentOptions: { id: PaymentMethod; Icon: typeof CreditCardOutlined; detailKey?: string }[] = [
+const allPaymentOptions: { id: PaymentMethod; Icon: typeof CreditCardOutlined; detailKey?: string }[] = [
   { id: 'card', Icon: CreditCardOutlined, detailKey: 'checkout.stripe' },
-  { id: 'cod', Icon: LocalShippingOutlined },
+  { id: 'cod', Icon: LocalShippingOutlined, detailKey: 'checkout.codFeeHint' },
 ]
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -250,7 +250,7 @@ function PaymentOption({
 }
 
 export default function CheckoutPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const { items, itemCount, subtotal, subtotalLabel, clearCart } = useCart()
   const { customer } = useCustomerAuth()
@@ -270,6 +270,8 @@ export default function CheckoutPage() {
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [termsError, setTermsError] = useState(false)
   const [vat, setVat] = useState<VatQuote | null>(null)
+  const [cardEnabled, setCardEnabled] = useState(true)
+  const paymentOptions = allPaymentOptions.filter((option) => option.id !== 'card' || cardEnabled)
   const shippingFree = subtotal >= FREE_SHIPPING_THRESHOLD
   const cityReady = form.city.trim().length >= 2 && form.postalCode.trim().length >= 3
   const requestKey = `${form.country}|${form.cityId}|${form.city.trim()}|${form.postalCode.trim()}|${subtotal.toFixed(2)}`
@@ -286,6 +288,20 @@ export default function CheckoutPage() {
         ? 'address'
         : 'office'
       : null
+
+  useEffect(() => {
+    let cancelled = false
+    void storeApi.getPayments().then((settings) => {
+      if (cancelled) return
+      setCardEnabled(settings.cardEnabled)
+      if (!settings.cardEnabled) {
+        setForm((prev) => (prev.paymentMethod === 'card' ? { ...prev, paymentMethod: 'cod' } : prev))
+      }
+    }).catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     if (shippingFree || !cityReady) return
@@ -508,6 +524,8 @@ export default function CheckoutPage() {
               ? t('checkout.deliveryBulgariaOnly')
             : err.message === 'shipping_unavailable'
               ? t('checkout.shippingUnavailable')
+            : err.message === 'card_unavailable'
+              ? t('checkout.failed')
             : promoCodes.has(err.message)
               ? promoErrorText(err.message)
               : err.message
@@ -517,7 +535,10 @@ export default function CheckoutPage() {
     }
   }
 
-  const totalAmount = vat?.enabled ? vat.total : goodsAmount + chargedShipping
+  const payableBeforeCod = vat?.enabled ? vat.total : goodsAmount + chargedShipping
+  const codFee = form.paymentMethod === 'cod' ? codFeeAmount(payableBeforeCod) : 0
+  const totalAmount = payableBeforeCod + codFee
+  const codPercent = `${new Intl.NumberFormat(i18n.language, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(COD_FEE_PERCENT)}%`
   const summaryShipping = shippingFree
     ? t('cart.freeShipping')
     : shippingKnown && shippingAmount != null
@@ -540,9 +561,15 @@ export default function CheckoutPage() {
     shippingLabel: summaryShipping,
     totalLabel: formatEuro(totalAmount),
     freeShipping: shippingFree,
-    taxLabel: vat?.enabled && vat.tax > 0 ? formatEuro(vat.tax) : null,
+    taxLabel: vat?.enabled && !vat.pricesIncludeVat && vat.tax > 0 ? formatEuro(vat.tax) : null,
     taxHint: vatHint,
     discountLabel: discountAmount > 0 ? `−${formatEuro(discountAmount)}` : null,
+    codFeeLabel: codFee > 0 ? formatEuro(codFee) : null,
+    codPercent,
+    deliveryTotalLabel:
+      codFee > 0 && (shippingFree || (shippingKnown && shippingAmount != null))
+        ? formatEuro((shippingAmount ?? 0) + codFee)
+        : null,
     promo: {
       input: promoInput,
       busy: promoBusy,
@@ -829,7 +856,7 @@ export default function CheckoutPage() {
                       key={id}
                       selected={form.paymentMethod === id}
                       label={t(`checkout.paymentMethods.${id}`)}
-                      detail={detailKey ? t(detailKey) : undefined}
+                      detail={detailKey ? t(detailKey, { percent: codPercent }) : undefined}
                       Icon={Icon}
                       onSelect={() => updateField('paymentMethod', id)}
                     />
@@ -900,14 +927,16 @@ export default function CheckoutPage() {
                   )}
                 </Button>
 
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ alignItems: 'center', justifyContent: 'center', mt: 1.25, color: checkout.muted }}
-                >
-                  <LockOutlined sx={{ fontSize: 14 }} />
-                  <Typography sx={{ fontSize: '0.6875rem' }}>{t('checkout.secureCheckout')}</Typography>
-                </Stack>
+                {cardEnabled ? (
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{ alignItems: 'center', justifyContent: 'center', mt: 1.25, color: checkout.muted }}
+                  >
+                    <LockOutlined sx={{ fontSize: 14 }} />
+                    <Typography sx={{ fontSize: '0.6875rem' }}>{t('checkout.secureCheckout')}</Typography>
+                  </Stack>
+                ) : null}
 
                 <Box sx={{ textAlign: 'center', mt: 1.5 }}>
                   <Link

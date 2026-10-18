@@ -36,9 +36,9 @@ public static class OrderSheetDocument
         var discount = order.Discount > 0
             ? Sum(string.IsNullOrWhiteSpace(order.PromoCode) ? "Отстъпка" : $"Отстъпка ({order.PromoCode})", "−" + PriceHelper.FormatEuro(order.Discount))
             : "";
-        var vatLabel = order.TaxRate is > 0
-            ? $"ДДС {order.TaxRate.Value.ToString("0.##", CultureInfo.InvariantCulture)}%"
-            : "ДДС";
+        var vatNote = order.Tax > 0
+            ? "<p style=\"margin:6px 0 0;font-size:12px;color:#5c675f;\">Цената е с ДДС.</p>"
+            : "";
         var waybills = bills.Count == 0
             ? ""
             : "<h2 class=\"section\">Товарителница</h2><div class=\"bills\">" + string.Concat(bills.Select(bill =>
@@ -167,8 +167,9 @@ public static class OrderSheetDocument
                   {{Sum("Междинна сума", PriceHelper.FormatEuro(order.Subtotal))}}
                   {{discount}}
                   {{Sum("Доставка", PriceHelper.FormatEuro(order.ShippingCost))}}
-                  {{Sum(vatLabel, PriceHelper.FormatEuro(order.Tax))}}
+                  {{(order.CodFee > 0 ? Sum("Такса наложен платеж", PriceHelper.FormatEuro(order.CodFee)) : "")}}
                   <div class="sum grand"><span>Общо</span><strong>{{H(PriceHelper.FormatEuro(order.Total))}}</strong></div>
+                  {{vatNote}}
                 </div>
                 {{notes}}
                 {{waybills}}

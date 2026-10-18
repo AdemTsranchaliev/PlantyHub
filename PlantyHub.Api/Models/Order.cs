@@ -17,6 +17,7 @@ public class Order
     public decimal Discount { get; set; }
     public string? PromoCode { get; set; }
     public decimal ShippingCost { get; set; }
+    public decimal CodFee { get; set; }
     public decimal Tax { get; set; }
     public decimal? TaxRate { get; set; }
     public decimal Total { get; set; }

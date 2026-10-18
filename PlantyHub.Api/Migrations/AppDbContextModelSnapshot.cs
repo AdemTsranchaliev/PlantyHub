@@ -448,6 +448,10 @@ namespace PlantyHub.Api.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<decimal>("CodFee")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasMaxLength(2)

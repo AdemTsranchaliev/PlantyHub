@@ -58,6 +58,23 @@ public class VatService(AppDbContext db)
             .Select(kv => new StoreVatRateDto(kv.Key.ToUpperInvariant(), kv.Value))
             .ToList();
 
+    public async Task<bool> CardPaymentsEnabledAsync(CancellationToken ct = default) =>
+        (await LoadStateAsync(ct)).CardPaymentsEnabled;
+
+    public async Task<StorePaymentsDto> GetPaymentsAsync(CancellationToken ct = default) =>
+        new(await CardPaymentsEnabledAsync(ct));
+
+    public async Task<StorePaymentsDto> SetCardPaymentsAsync(bool enabled, CancellationToken ct = default)
+    {
+        var row = await GetOrCreateRowAsync(ct);
+        var state = Deserialize(row.Json);
+        state.CardPaymentsEnabled = enabled;
+        row.Json = JsonSerializer.Serialize(state, JsonOptions);
+        row.UpdatedAt = DateTime.UtcNow;
+        await db.SaveChangesAsync(ct);
+        return new StorePaymentsDto(enabled);
+    }
+
     public async Task<StoreVatSettingsDto> GetSettingsAsync(CancellationToken ct = default)
     {
         var state = await LoadStateAsync(ct);
@@ -155,5 +172,6 @@ public class VatService(AppDbContext db)
         public bool VatEnabled { get; set; }
         public bool PricesIncludeVat { get; set; } = true;
         public string VatNumber { get; set; } = "";
+        public bool CardPaymentsEnabled { get; set; } = true;
     }
 }

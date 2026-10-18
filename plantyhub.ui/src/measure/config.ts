@@ -1,4 +1,7 @@
-/** IDs are baked in at build time. Empty values leave that tool off. */
+/**
+ * IDs are baked in at build time. Empty values leave that tool off.
+ * GA4, Meta and Clarity belong in the GTM container. Keep their IDs empty here.
+ */
 export const GA_MEASUREMENT_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID ?? '').trim()
 export const GTM_ID = (import.meta.env.VITE_GTM_ID ?? '').trim()
 export const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID ?? '').trim()

@@ -113,6 +113,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(o => o.Subtotal).HasPrecision(10, 2);
             entity.Property(o => o.Discount).HasPrecision(10, 2);
             entity.Property(o => o.ShippingCost).HasPrecision(10, 2);
+            entity.Property(o => o.CodFee).HasPrecision(10, 2);
             entity.Property(o => o.Tax).HasPrecision(10, 2);
             entity.Property(o => o.TaxRate).HasPrecision(5, 2);
             entity.Property(o => o.Total).HasPrecision(10, 2);

@@ -163,7 +163,7 @@ public static class EmailTemplateSeeder
             {
                 ["name"] = "Elena",
                 ["productName"] = "HomeGarder One",
-                ["reviewUrl"] = "https://plantyhub.com/bg/review/demo",
+                ["reviewUrl"] = "https://plantyhub.com/review/demo",
             });
 
         yield return T(
@@ -282,7 +282,7 @@ public static class EmailTemplateSeeder
         <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#68706A;">Доставка до</p>
         <p style="margin:0;font-size:14px;line-height:1.6;color:#1C231E;">{{shippingAddress}}</p>
         """, "0 0 16px") + """
-        <p style="margin:0;font-size:12px;line-height:1.55;color:#68706A;">Сумите са в евро. ДДС е стандартната ставка за държавата на доставка. Данъчната основа е общата сума минус ДДС.</p>
+        <p style="margin:0;font-size:12px;line-height:1.55;color:#68706A;">Сумите са в евро. Цената е с ДДС.</p>
         """;
 
     private static string ProcessingHtml() => OrderIntro(

@@ -98,6 +98,22 @@ public class AdminOrdersController(OrderService orders) : ControllerBase
         }
     }
 
+    [HttpDelete("{id}/waybill")]
+    public async Task<ActionResult<OrderDetailDto>> DeleteWaybill(string id, [FromQuery] string? number, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(number))
+            return BadRequest(new { message = "Липсва номер на товарителница." });
+        try
+        {
+            var order = await orders.DeleteWaybillAsync(id, number, ct);
+            return order is null ? NotFound() : Ok(OrderMapper.ToDetail(order));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
+
     [HttpGet("{id}/waybill/label")]
     public async Task<IActionResult> Label(string id, [FromQuery] string? number, CancellationToken ct)
     {

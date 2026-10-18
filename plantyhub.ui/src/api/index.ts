@@ -82,6 +82,8 @@ export const ordersApi = {
     apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/status`, { method: 'PATCH', body: { status, note }, auth: 'admin' }),
   createWaybill: (id: string, body: CreateWaybillPayload) =>
     apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/waybill`, { method: 'POST', body, auth: 'admin' }),
+  deleteWaybill: (id: string, number: string) =>
+    apiRequest<ApiOrderDetail>(`/api/admin/orders/${id}/waybill?number=${encodeURIComponent(number)}`, { method: 'DELETE', auth: 'admin' }),
   checkEcont: (id: string, body: { courier?: string; weightKg?: number; packages?: number }) =>
     apiRequest<EcontCheckResult>(`/api/admin/orders/${id}/econt/check`, { method: 'POST', body, auth: 'admin' }),
   refreshEcontStatus: (id: string, number?: string) =>
@@ -300,6 +302,9 @@ export const storeApi = {
   get: () => apiRequest<StoreVatSettings>('/api/admin/store', { auth: 'admin' }),
   update: (body: { enabled: boolean; pricesIncludeVat: boolean; vatNumber?: string }) =>
     apiRequest<StoreVatSettings>('/api/admin/store', { method: 'PUT', body, auth: 'admin' }),
+  getPayments: () => apiRequest<{ cardEnabled: boolean }>('/api/store/payments'),
+  setCardPayments: (cardEnabled: boolean) =>
+    apiRequest<{ cardEnabled: boolean }>('/api/admin/store/payments', { method: 'PUT', body: { cardEnabled }, auth: 'admin' }),
 }
 
 export type AccountingReportKind = 'pack' | 'sales' | 'vat' | 'items'

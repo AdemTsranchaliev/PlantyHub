@@ -56,6 +56,22 @@ public static class PriceHelper
 {
     public const decimal FreeShippingThreshold = 150m;
     public const decimal StandardShippingCost = 4.99m;
+    public const decimal CodFeePercent = 1.65m;
+
+    public static decimal CodFeeFor(decimal amount)
+    {
+        if (amount <= 0) return 0m;
+        var rate = CodFeePercent / 100m;
+        var guess = Math.Round(amount * rate / (1m - rate), 2, MidpointRounding.AwayFromZero);
+        for (var delta = -3; delta <= 3; delta++)
+        {
+            var candidate = guess + delta * 0.01m;
+            if (candidate < 0) continue;
+            var charged = Math.Round((amount + candidate) * rate, 2, MidpointRounding.AwayFromZero);
+            if (charged == candidate) return candidate;
+        }
+        return guess;
+    }
 
     public static decimal ParseEuro(string value)
     {

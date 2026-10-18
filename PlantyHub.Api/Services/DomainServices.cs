@@ -217,7 +217,8 @@ public class OrderMapper
             order.ShippingOfficeCode,
             order.Waybills.OrderBy(w => w.CreatedAt).Select(ToWaybill).ToList(),
             order.Discount > 0 ? PriceHelper.FormatEuro(order.Discount) : null,
-            order.PromoCode);
+            order.PromoCode,
+            order.CodFee > 0 ? PriceHelper.FormatEuro(order.CodFee) : null);
 
     static WaybillDto ToWaybill(Waybill bill) =>
         new(
@@ -361,6 +362,8 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
         var paymentMethod = EnumMapper.ParsePaymentMethod(request.PaymentMethod);
         if (paymentMethod == PaymentMethod.Paypal)
             throw new InvalidOperationException("payment_unavailable");
+        if (paymentMethod == PaymentMethod.Card && !await vat.CardPaymentsEnabledAsync(ct))
+            throw new InvalidOperationException("card_unavailable");
 
         var lineItems = new List<(CheckoutLineItemRequest Item, Product Product, decimal UnitPrice)>();
         foreach (var item in request.Items)
@@ -389,7 +392,8 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
 
         var vatQuote = await vat.QuoteAsync(country, subtotal - discount, shipping, ct);
         var tax = vatQuote.Tax;
-        var total = vatQuote.Total;
+        var codFee = paymentMethod == PaymentMethod.Cod ? PriceHelper.CodFeeFor(vatQuote.Total) : 0m;
+        var total = vatQuote.Total + codFee;
         var now = DateTime.UtcNow;
         var orderId = await NextOrderIdAsync(now, ct);
 
@@ -407,6 +411,7 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
             Discount = discount,
             PromoCode = promo?.Code,
             ShippingCost = shipping,
+            CodFee = codFee,
             Tax = tax,
             TaxRate = vatQuote.Enabled ? vatQuote.RatePercent : null,
             Total = total,
@@ -637,6 +642,57 @@ public class OrderService(AppDbContext db, CustomerService customers, IOrderEmai
         await db.SaveChangesAsync(ct);
         orderEmails.EnqueueStatus(order.Id);
         return order;
+    }
+
+    public async Task<Order?> DeleteWaybillAsync(string id, string number, CancellationToken ct = default)
+    {
+        var order = await GetByIdAsync(id, ct);
+        if (order is null) return null;
+        var bill = FindWaybill(order, number);
+        if (bill is null)
+            throw new InvalidOperationException("Няма такава товарителница по поръчката.");
+        if (bill.Courier != CourierId.Econt)
+            throw new InvalidOperationException("През API се трият само товарителници на Еконт.");
+
+        await econt.DeleteAsync(bill.Number, ct);
+
+        var purpose = bill.Purpose;
+        order.Waybills.Remove(bill);
+        db.Waybills.Remove(bill);
+
+        if (!order.Waybills.Any(w => w.Purpose == purpose))
+        {
+            var revert = purpose switch
+            {
+                "shipment" when order.Status == OrderStatus.Shipped => OrderStatus.Processing,
+                "return" when order.Status == OrderStatus.ReturnShipped => PreviousStatus(order, OrderStatus.ReturnShipped),
+                "replacement" when order.Status == OrderStatus.ReplacementShipped => OrderStatus.Replacement,
+                _ => (OrderStatus?)null,
+            };
+            if (revert is OrderStatus next)
+                order.Status = next;
+        }
+
+        var note = $"Товарителница {bill.Number} е изтрита от Еконт.";
+        order.Timeline.Add(new OrderTimelineEntry
+        {
+            At = DateTime.UtcNow,
+            Status = order.Status,
+            Note = note,
+        });
+
+        await db.SaveChangesAsync(ct);
+        return order;
+    }
+
+    static OrderStatus? PreviousStatus(Order order, OrderStatus current)
+    {
+        foreach (var entry in order.Timeline.OrderByDescending(entry => entry.At))
+        {
+            if (entry.Status != current)
+                return entry.Status;
+        }
+        return null;
     }
 
     public async Task<EcontCheckDto?> CheckEcontAsync(string id, CreateWaybillRequest request, CancellationToken ct = default)

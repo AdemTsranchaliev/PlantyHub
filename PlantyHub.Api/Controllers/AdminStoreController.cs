@@ -17,4 +17,12 @@ public class AdminStoreController(VatService vat) : ControllerBase
     [HttpPut]
     public async Task<ActionResult<StoreVatSettingsDto>> Update([FromBody] UpdateStoreVatSettingsRequest request, CancellationToken ct) =>
         Ok(await vat.UpdateSettingsAsync(request, ct));
+
+    [HttpGet("payments")]
+    public async Task<ActionResult<StorePaymentsDto>> Payments(CancellationToken ct) =>
+        Ok(await vat.GetPaymentsAsync(ct));
+
+    [HttpPut("payments")]
+    public async Task<ActionResult<StorePaymentsDto>> UpdatePayments([FromBody] UpdateStorePaymentsRequest request, CancellationToken ct) =>
+        Ok(await vat.SetCardPaymentsAsync(request.CardEnabled, ct));
 }

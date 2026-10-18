@@ -11,9 +11,9 @@ import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import MediaImg from '../components/MediaImg'
 import { navHrefs } from '../data/catalog'
-import { lifestyleImages, productImages, productVideo, productVideoPoster } from '../data/images'
+import { lifestyleImages, productImages, productVideo } from '../data/images'
 import { useProduct } from '../hooks/useProducts'
-import { toMediaUrl } from '../media/cfImage'
+import { resolveGardenVideo } from '../media/cfImage'
 import { brand } from '../theme'
 import stepWater from '../assets/start/water.jpg'
 import stepNutrients from '../assets/start/nutrients.jpg'
@@ -54,8 +54,7 @@ const kickerSx = {
 export default function HowPage() {
   const { t } = useTranslation()
   const garden = useProduct('gardens', 'homegarder-one')
-  const videoSrc = toMediaUrl(garden?.videoUrl || productVideo)
-  const videoPoster = toMediaUrl(garden?.videoPoster || productVideoPoster)
+  const { src: videoSrc, poster: videoPoster } = resolveGardenVideo(garden?.videoUrl, garden?.videoPoster, productVideo)
   const facts = asList<Fact>(t('howPage.facts', { returnObjects: true }))
   const systems = asList<Copy>(t('howPage.systems', { returnObjects: true }))
   const steps = asList<Copy>(t('howPage.steps', { returnObjects: true }))
@@ -179,6 +178,7 @@ export default function HowPage() {
             }}
           >
             <Box
+              key={videoSrc}
               component="video"
               src={videoSrc}
               poster={videoPoster}

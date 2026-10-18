@@ -106,6 +106,40 @@ public class EcontLabelService(
             price);
     }
 
+    public async Task DeleteAsync(string shipmentNumber, CancellationToken ct = default)
+    {
+        var number = shipmentNumber.Trim();
+        if (string.IsNullOrWhiteSpace(number))
+            throw new InvalidOperationException("Липсва номер на товарителница.");
+
+        var connection = await couriers.GetEcontConnectionAsync(ct);
+        if (string.IsNullOrWhiteSpace(connection.Username) || string.IsNullOrWhiteSpace(connection.Password))
+            throw new InvalidOperationException("Няма връзка с Еконт. Попълни потребител и парола в Куриери.");
+
+        var json = await PostAsync(
+            connection,
+            "Shipments/LabelService.deleteLabels.json",
+            new { shipmentNumbers = new[] { number } },
+            ct);
+
+        if (!json.TryGetProperty("results", out var results) || results.ValueKind != JsonValueKind.Array || results.GetArrayLength() == 0)
+        {
+            var message = ReadError(json);
+            throw new InvalidOperationException(message ?? "Еконт не потвърди изтриването.");
+        }
+
+        foreach (var item in results.EnumerateArray())
+        {
+            if (item.ValueKind != JsonValueKind.Object || !item.TryGetProperty("error", out var error))
+                continue;
+            var message = error.ValueKind == JsonValueKind.Object
+                ? ReadError(error)
+                : error.ValueKind == JsonValueKind.String ? error.GetString()?.Trim() : null;
+            if (!string.IsNullOrWhiteSpace(message))
+                throw new InvalidOperationException(message);
+        }
+    }
+
     public async Task<EcontStatusDto> GetStatusAsync(string shipmentNumber, CancellationToken ct = default)
     {
         var connection = await couriers.GetEcontConnectionAsync(ct);
@@ -260,16 +294,70 @@ public class EcontLabelService(
 
         if (cod is > 0)
         {
-            label["services"] = new
+            var services = new Dictionary<string, object?>
             {
-                cdAmount = cod.Value,
-                cdCurrency = "EUR",
-                cdType = "get",
+                ["cdAmount"] = cod.Value,
+                ["cdCurrency"] = "EUR",
+                ["cdType"] = "get",
             };
+            var agreement = await CdAgreementAsync(ct);
+            if (agreement is not null)
+            {
+                services["cdPayOptionsTemplate"] = agreement.Number;
+                if (!returning && !string.IsNullOrWhiteSpace(agreement.ClientName))
+                {
+                    label["senderClient"] = new { name = agreement.ClientName, phones = new[] { shopPhone } };
+                    var agent = string.IsNullOrWhiteSpace(shopName) ? agreement.ClientName : shopName;
+                    label["senderAgent"] = new { name = agent, phones = new[] { shopPhone } };
+                    AddDepartmentPackingList(label, order, request, cod.Value);
+                }
+            }
+            label["services"] = services;
             label["payAfterAccept"] = true;
         }
 
         return label;
+    }
+
+    static void AddDepartmentPackingList(Dictionary<string, object?> label, Order order, CreateWaybillRequest request, decimal cod)
+    {
+        var rows = new List<Dictionary<string, object?>>();
+        var next = 1;
+        void AddRow(string description, int count, decimal price, decimal weight)
+        {
+            if (count <= 0 || price == 0) return;
+            rows.Add(new Dictionary<string, object?>
+            {
+                ["inventoryNum"] = next.ToString(CultureInfo.InvariantCulture),
+                ["description"] = Trim(string.IsNullOrWhiteSpace(description) ? "Поръчка" : description.Trim(), 120),
+                ["weight"] = weight > 0 ? weight : 0.1m,
+                ["count"] = count,
+                ["price"] = price,
+            });
+            next++;
+        }
+
+        var items = order.Items.Where(item => item.Quantity > 0 && item.UnitPrice > 0).ToList();
+        var units = Math.Max(1, items.Sum(item => item.Quantity));
+        var shipmentWeight = request.WeightKg > 0 ? request.WeightKg : 1m;
+        var unitWeight = Math.Round(shipmentWeight / units, 3, MidpointRounding.AwayFromZero);
+        if (unitWeight <= 0) unitWeight = 0.1m;
+        foreach (var item in items)
+            AddRow(item.Name, item.Quantity, item.UnitPrice, unitWeight);
+
+        AddRow("Отстъпка", 1, -order.Discount, 0.1m);
+        AddRow("Доставка", 1, order.ShippingCost, 0.1m);
+        AddRow("Такса наложен платеж", 1, order.CodFee, 0.1m);
+
+        var listed = rows.Sum(row => Convert.ToDecimal(row["price"], CultureInfo.InvariantCulture) * Convert.ToInt32(row["count"], CultureInfo.InvariantCulture));
+        var gap = cod - listed;
+        if (rows.Count == 0)
+            AddRow(order.Id, 1, cod, shipmentWeight);
+        else if (gap != 0)
+            AddRow(gap > 0 ? "ДДС" : "Корекция", 1, gap, 0.1m);
+
+        label["packingListType"] = "digital";
+        label["packingList"] = rows;
     }
 
     static bool SenderReady(CourierQuoteContext context) =>
@@ -330,6 +418,43 @@ public class EcontLabelService(
         street,
         num,
     };
+
+    async Task<CdAgreement?> CdAgreementAsync(CancellationToken ct)
+    {
+        try
+        {
+            var connection = await couriers.GetEcontConnectionAsync(ct);
+            if (string.IsNullOrWhiteSpace(connection.Username) || string.IsNullOrWhiteSpace(connection.Password) || connection.BuiltInDemo)
+                return null;
+            var json = await PostAsync(connection, "Profile/ProfileService.getClientProfiles.json", new { }, ct);
+            if (!json.TryGetProperty("profiles", out var profiles) || profiles.ValueKind != JsonValueKind.Array)
+                return null;
+
+            CdAgreement? fallback = null;
+            foreach (var profile in profiles.EnumerateArray())
+            {
+                if (!profile.TryGetProperty("cdPayOptions", out var options) || options.ValueKind != JsonValueKind.Array)
+                    continue;
+                foreach (var option in options.EnumerateArray())
+                {
+                    var number = Text(option, "num");
+                    if (string.IsNullOrWhiteSpace(number)) continue;
+                    var agreement = new CdAgreement(number, Text(option, "client", "name"));
+                    if (string.Equals(Text(option, "method"), "bank", StringComparison.OrdinalIgnoreCase))
+                        return agreement;
+                    fallback ??= agreement;
+                }
+            }
+            return fallback;
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Econt cash-on-delivery agreement lookup failed");
+            return null;
+        }
+    }
+
+    sealed record CdAgreement(string Number, string? ClientName);
 
     async Task<JsonElement> PostAsync(EcontApiConnection connection, string path, object body, CancellationToken ct)
     {

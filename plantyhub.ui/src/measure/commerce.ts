@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { analyticsEnabled, gtmEnabled, metaPixelEnabled } from './config'
+import { analyticsEnabled, gtmEnabled } from './config'
 import { getCookieConsent, useCookieConsent } from './consent'
 import { parseEuro } from '../utils/price'
 import type { CartItem } from '../store/cart'
@@ -71,12 +71,15 @@ function send(gaEvent: string, ecommerce: Record<string, unknown>, metaEvent: st
     if (gtmEnabled) {
       window.dataLayer = window.dataLayer ?? []
       window.dataLayer.push({ ecommerce: null })
-      window.dataLayer.push({ event: gaEvent, ecommerce })
+      window.dataLayer.push({
+        event: gaEvent,
+        ecommerce,
+        ...(metaEvent ? { meta_event: metaEvent, meta } : {}),
+        ...(eventId ? { event_id: eventId } : {}),
+      })
     }
 
     if (analyticsEnabled) window.gtag?.('event', gaEvent, ecommerce)
-
-    if (metaPixelEnabled && metaEvent) window.fbq?.('track', metaEvent, meta, eventId ? { eventID: eventId } : undefined)
   }, 0)
 }
 

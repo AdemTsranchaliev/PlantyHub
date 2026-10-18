@@ -142,6 +142,13 @@ export async function updateOrderStatus(id: string, status: OrderStatus, note: s
   emit()
 }
 
+export async function deleteWaybill(id: string, number: string) {
+  const order = await ordersApi.deleteWaybill(id, number)
+  orderDetails.set(id, order)
+  cachedOrders = cachedOrders.map((o) => (o.id === id ? order : o))
+  emit()
+}
+
 export async function createWaybill(
   id: string,
   data: Omit<Waybill, 'number' | 'createdAt'>,

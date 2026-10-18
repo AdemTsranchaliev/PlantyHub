@@ -7,9 +7,16 @@ import fr from './locales/fr.json'
 import { defaultLanguage, isActiveLanguage, localeFromPathname, preferredLanguage } from './languages'
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
-const saved = preferredLanguage()
 const fromPath = localeFromPathname(window.location.pathname, basePath)
-const initialLanguage = fromPath && isActiveLanguage(fromPath) ? fromPath : saved ?? defaultLanguage
+const rest = basePath && (window.location.pathname === basePath || window.location.pathname.startsWith(`${basePath}/`))
+  ? window.location.pathname.slice(basePath.length)
+  : window.location.pathname
+const onAdmin = rest === '/admin' || rest.startsWith('/admin/')
+const initialLanguage = fromPath && isActiveLanguage(fromPath)
+  ? fromPath
+  : onAdmin
+    ? preferredLanguage()
+    : defaultLanguage
 
 void i18n.use(initReactI18next).init({
   resources: {

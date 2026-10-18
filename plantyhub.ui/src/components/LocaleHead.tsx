@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useProductReviews } from './ProductReviews'
 import { activeLanguages } from '../i18n/languages'
 import { currentLocale } from '../paths'
-import { absoluteCanonical, alternateUrls, buildHead, type HeadDocument } from '../seo/buildHead'
+import { absoluteCanonical, alternateUrls, buildHead, OG_IMAGE, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, type HeadDocument } from '../seo/buildHead'
 import { getProductsError, getProductsLoading, getProductsState, subscribeProducts } from '../store/products'
 
 const ogLocales: Record<string, string> = { bg: 'bg_BG', en: 'en_US', de: 'de_DE', fr: 'fr_FR' }
@@ -74,6 +74,13 @@ function applyDocument(model: HeadDocument, locale: string) {
   upsertMeta('property', 'og:description', model.description)
   upsertMeta('property', 'og:url', canonical)
   upsertMeta('property', 'og:image', model.image)
+  if (model.image === OG_IMAGE) {
+    upsertMeta('property', 'og:image:width', String(OG_IMAGE_WIDTH))
+    upsertMeta('property', 'og:image:height', String(OG_IMAGE_HEIGHT))
+  } else {
+    document.head.querySelector('meta[property="og:image:width"]')?.remove()
+    document.head.querySelector('meta[property="og:image:height"]')?.remove()
+  }
   upsertMeta('property', 'og:image:alt', model.title)
   upsertMeta('name', 'twitter:card', 'summary_large_image')
   upsertMeta('name', 'twitter:title', model.title)

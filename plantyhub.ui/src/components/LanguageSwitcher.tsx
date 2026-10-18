@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import LanguageIcon from '@mui/icons-material/Language'
 import { useTranslation } from 'react-i18next'
 import { activeLanguages, languageStorageKey, type LanguageCode } from '../i18n/languages'
-import { BASE_PATH } from '../paths'
+import { BASE_PATH, localizePath } from '../paths'
 import { brand } from '../theme'
 
 export default function LanguageSwitcher() {
@@ -29,7 +29,7 @@ export default function LanguageSwitcher() {
     }
 
     const path = location.pathname === '/' ? '/' : location.pathname
-    window.location.assign(`${BASE_PATH}/${code}${path}${location.search}${location.hash}`)
+    window.location.assign(`${BASE_PATH}${localizePath(path, code)}${location.search}${location.hash}`)
   }
 
   return (

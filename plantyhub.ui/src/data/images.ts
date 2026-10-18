@@ -58,7 +58,6 @@ export const logoIconSrc = assetUrl('/logo-icon.png')
 
 /** Vertical (9:16) product demo video — drop the file at this path in /public */
 export const productVideo = assetUrl('/videos/homegarder-one.mp4')
-export const productVideoPoster = lifestyleImages.kitchenBasil
 
 /** Community avatars — placeholders until real photos */
 export const avatarPlaceholder = placeholders.avatar

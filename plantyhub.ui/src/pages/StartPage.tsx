@@ -41,7 +41,7 @@ import SectionContainer, { pagePaddingX } from '../components/SectionContainer'
 import MediaImg from '../components/MediaImg'
 import { useTrackQrSource } from '../measure/commerce'
 import { navHrefs } from '../data/catalog'
-import { lifestyleImages, productImages, productVideo, productVideoPoster } from '../data/images'
+import { lifestyleImages, productImages, productVideo } from '../data/images'
 import stepWater from '../assets/start/water.jpg'
 import stepNutrients from '../assets/start/nutrients.jpg'
 import stepPods from '../assets/start/pods.jpg'
@@ -49,7 +49,7 @@ import stepLamp from '../assets/start/lamp.jpg'
 import stepDome from '../assets/start/dome.jpg'
 import stepHarvest from '../assets/start/harvest.jpg'
 import { useProduct } from '../hooks/useProducts'
-import { toMediaUrl } from '../media/cfImage'
+import { resolveGardenVideo } from '../media/cfImage'
 import { brand } from '../theme'
 
 const plantIds = ['basil', 'mint', 'parsley', 'cilantro', 'dill', 'arugula'] as const
@@ -277,7 +277,7 @@ const stepCellSx = {
   '&:nth-of-type(1)': { borderTop: 'none' },
 } as const
 
-function StartVideo({ src, poster, label }: { src: string; poster: string; label: string }) {
+function StartVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
   const { t } = useTranslation()
   const videoRef = useRef<HTMLVideoElement>(null)
   const [failed, setFailed] = useState(false)
@@ -303,8 +303,8 @@ function StartVideo({ src, poster, label }: { src: string; poster: string; label
     return (
       <Box sx={{ width: '100%', maxWidth: 520, mx: 'auto' }}>
         <Box sx={{ position: 'relative', aspectRatio: '16 / 9', borderRadius: '18px', overflow: 'hidden', bgcolor: brand.graphite }}>
-          <MediaImg src={poster} preset="card" alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 42%, rgba(28,35,30,0.82) 100%)' }} />
+          {poster ? <MediaImg src={poster} preset="card" alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} /> : null}
+          <Box sx={{ position: 'absolute', inset: 0, background: poster ? 'linear-gradient(180deg, transparent 42%, rgba(28,35,30,0.82) 100%)' : 'rgba(28,35,30,0.55)' }} />
           <Typography sx={{ position: 'absolute', left: 16, right: 16, bottom: 16, color: brand.white, fontSize: '0.9rem', lineHeight: 1.45 }}>
             {t('startPage.videoMissing')}
           </Typography>
@@ -316,6 +316,7 @@ function StartVideo({ src, poster, label }: { src: string; poster: string; label
   return (
     <Box
       component="video"
+      key={src}
       ref={videoRef}
       src={src}
       poster={poster}
@@ -354,8 +355,7 @@ export default function StartPage() {
   const stages = asList<Stage>(t('startPage.stages', { returnObjects: true }))
   const harvestRows = asList<HarvestRow>(t('startPage.harvestRows', { returnObjects: true }))
   const claimSteps = asList<string>(t('startPage.claimSteps', { returnObjects: true }))
-  const videoSrc = toMediaUrl(garden?.videoUrl || productVideo)
-  const videoPoster = toMediaUrl(garden?.videoPoster || productVideoPoster)
+  const { src: videoSrc, poster: videoPoster } = resolveGardenVideo(garden?.videoUrl, garden?.videoPoster, productVideo)
   const [videoOpen, setVideoOpen] = useState(false)
   const [extra, setExtra] = useState<ExtraId | null>(null)
   const [activeId, setActiveId] = useState('start-steps')
@@ -525,7 +525,20 @@ export default function StartPage() {
                 }}
               >
                 <Box sx={{ position: 'relative', width: 72, height: 96, borderRadius: '16px', overflow: 'hidden', flexShrink: 0, bgcolor: brand.graphite }}>
-                  <MediaImg src={videoPoster} preset="thumb" alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  {videoPoster ? (
+                    <MediaImg src={videoPoster} preset="thumb" alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  ) : (
+                    <Box
+                      component="video"
+                      src={videoSrc}
+                      muted
+                      playsInline
+                      preload="metadata"
+                      tabIndex={-1}
+                      aria-hidden
+                      sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                    />
+                  )}
                   <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'rgba(28, 35, 30, 0.22)' }}>
                     <Box sx={{ width: 36, height: 36, borderRadius: '50%', bgcolor: brand.white, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: brand.shadowHover }}>
                       <PlayArrowRounded sx={{ color: brand.plantGreenDark, fontSize: 22, ml: '2px' }} />

@@ -6,23 +6,51 @@
     <link rel="apple-touch-icon" href="https://media.plantyhub.com/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#4CAF50" />
+    <meta name="facebook-domain-verification" content="idrj89u8cxjrtcq537a7763are6ecj" />
     <link rel="preconnect" href="https://media.plantyhub.com" />
+    <script>
+      (function () {
+        var id = "%VITE_GTM_ID%";
+        if (!id || id.charAt(0) === "%") return;
+        try {
+          if (localStorage.getItem("plantyhub.cookie-consent") !== "granted") return;
+        } catch (e) {
+          return;
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        gtag("consent", "default", {
+          analytics_storage: "granted",
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted",
+        });
+        window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+        var script = document.createElement("script");
+        script.id = "gtm-script";
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtm.js?id=" + encodeURIComponent(id);
+        document.head.appendChild(script);
+      })();
+    </script>
     <title>PlantyHub — Умна хидропонна градина за дома</title>
     <meta name="description" content="HomeGarder One: 12 гнезда, LED светлина и автоматично поливане. Отглеждай босилек, мента и маруля у дома, без почва. Доставка в България." />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://plantyhub.com/bg/" />
+    <link rel="canonical" href="https://plantyhub.com/" />
     <meta property="og:site_name" content="PlantyHub" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="bg_BG" />
     <meta property="og:title" content="PlantyHub — Умна хидропонна градина за дома" />
     <meta property="og:description" content="HomeGarder One: 12 гнезда, LED светлина и автоматично поливане. Отглеждай босилек, мента и маруля у дома, без почва. Доставка в България." />
-    <meta property="og:url" content="https://plantyhub.com/bg/" />
-    <meta property="og:image" content="https://media.plantyhub.com/logo-og.png" />
+    <meta property="og:url" content="https://plantyhub.com/" />
+    <meta property="og:image" content="https://plantyhub.com/logo-wordmark.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="PlantyHub — Умна хидропонна градина за дома" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="PlantyHub — Умна хидропонна градина за дома" />
     <meta name="twitter:description" content="HomeGarder One: 12 гнезда, LED светлина и автоматично поливане. Отглеждай босилек, мента и маруля у дома, без почва. Доставка в България." />
-    <meta name="twitter:image" content="https://media.plantyhub.com/logo-og.png" />
+    <meta name="twitter:image" content="https://plantyhub.com/logo-wordmark.png" />
   </head>
   <body>
     <div id="root"></div>

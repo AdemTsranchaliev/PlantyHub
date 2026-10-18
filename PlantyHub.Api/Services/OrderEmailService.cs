@@ -158,8 +158,8 @@ public class OrderEmailService(
             ["adminUrl"] = $"{frontend}/admin/orders/{Uri.EscapeDataString(order.Id)}",
             ["itemsSummary"] = ItemsSummary(order),
             ["itemsHtml"] = ItemsTable(order),
-            ["totalsHtml"] = TotalsTable(order, net),
-            ["totalsHtmlBg"] = TotalsTableBg(order, net),
+            ["totalsHtml"] = TotalsTable(order),
+            ["totalsHtmlBg"] = TotalsTableBg(order),
             ["deliveryHtml"] = DeliveryDetailsHtml(
                 Courier(order.Waybill?.Courier.ToString() ?? order.ShippingCourier),
                 Delivery(order.ShippingDelivery),
@@ -204,15 +204,13 @@ public class OrderEmailService(
         var totals = string.Concat(
             MoneyRow("Subtotal", "€99.00"),
             MoneyRow("Shipping", "€4.99"),
-            MoneyRow("Taxable amount", "€86.66"),
-            MoneyRow("VAT 20%", "€17.33"),
-            MoneyRow("Total", "€103.99", final: true));
+            MoneyRow("Total", "€103.99", final: true),
+            VatNote("Price includes VAT."));
         var totalsBg = string.Concat(
             MoneyRow("Междинна сума", "€99.00"),
             MoneyRow("Доставка", "€4.99"),
-            MoneyRow("Данъчна основа", "€86.66"),
-            MoneyRow("ДДС 20%", "€17.33"),
-            MoneyRow("Общо", "€103.99", final: true));
+            MoneyRow("Общо", "€103.99", final: true),
+            VatNote("Цената е с ДДС."));
 
         return new Dictionary<string, string>
         {
@@ -347,16 +345,18 @@ public class OrderEmailService(
         return $"""<tr><td style="padding:5px 0;font-size:14px;line-height:1.4;color:{labelColor};">{label}</td><td style="padding:5px 0;text-align:right;font-size:14px;line-height:1.4;color:{color};">{value}</td></tr>""";
     }
 
-    static string TotalsTable(Order order, decimal net)
+    static string VatNote(string text) =>
+        $"""<tr><td colspan="2" style="padding:6px 0 0;font-size:12px;line-height:1.4;color:#68706A;">{text}</td></tr>""";
+
+    static string TotalsTable(Order order)
     {
-        var vatLabel = order.TaxRate is > 0 ? $"VAT {order.TaxRate.Value.ToString("0.##", CultureInfo.InvariantCulture)}%" : "VAT";
         return string.Concat(
             MoneyRow("Subtotal", PriceHelper.FormatEuro(order.Subtotal)),
             DiscountRow(order),
             MoneyRow("Shipping", PriceHelper.FormatEuro(order.ShippingCost)),
-            MoneyRow("Taxable amount", PriceHelper.FormatEuro(net)),
-            MoneyRow(vatLabel, PriceHelper.FormatEuro(order.Tax)),
-            MoneyRow("Total", PriceHelper.FormatEuro(order.Total), final: true));
+            CodFeeRow(order, "Cash on delivery fee"),
+            MoneyRow("Total", PriceHelper.FormatEuro(order.Total), final: true),
+            order.Tax > 0 ? VatNote("Price includes VAT.") : "");
     }
 
     static bool AttachWaybill(string key) =>
@@ -431,18 +431,15 @@ public class OrderEmailService(
         return recipients.ToList();
     }
 
-    static string TotalsTableBg(Order order, decimal net)
+    static string TotalsTableBg(Order order)
     {
-        var vatLabel = order.TaxRate is > 0
-            ? $"ДДС {order.TaxRate.Value.ToString("0.##", CultureInfo.InvariantCulture)}%"
-            : "ДДС";
         return string.Concat(
             MoneyRow("Междинна сума", PriceHelper.FormatEuro(order.Subtotal)),
             DiscountRow(order, "Отстъпка"),
             MoneyRow("Доставка", PriceHelper.FormatEuro(order.ShippingCost)),
-            MoneyRow("Данъчна основа", PriceHelper.FormatEuro(net)),
-            MoneyRow(vatLabel, PriceHelper.FormatEuro(order.Tax)),
-            MoneyRow("Общо", PriceHelper.FormatEuro(order.Total), final: true));
+            CodFeeRow(order, "Такса наложен платеж"),
+            MoneyRow("Общо", PriceHelper.FormatEuro(order.Total), final: true),
+            order.Tax > 0 ? VatNote("Цената е с ДДС.") : "");
     }
 
     static string DeliveryDetailsHtml(string courier, string delivery, string? officeCode, string addressHtml)
@@ -465,6 +462,9 @@ public class OrderEmailService(
             <p style="margin:0;font-size:14px;line-height:1.55;color:#1C231E;">{Notes(notes)}</p>
             """, "16px 0 0");
     }
+
+    static string CodFeeRow(Order order, string label) =>
+        order.CodFee > 0 ? MoneyRow(label, PriceHelper.FormatEuro(order.CodFee)) : "";
 
     static string DiscountRow(Order order) => DiscountRow(order, "Discount");
 

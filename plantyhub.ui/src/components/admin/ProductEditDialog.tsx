@@ -42,10 +42,9 @@ import {
   defaultGardenGallery,
   defaultGardenLocale,
   defaultGardenVideo,
-  defaultGardenVideoPoster,
 } from '../../admin/gardenMediaDefaults'
 import { brand } from '../../theme'
-import { toMediaUrl } from '../../media/cfImage'
+import { isStockGardenVideo, isVideoUrl, toMediaUrl } from '../../media/cfImage'
 
 type Props = {
   open: boolean
@@ -61,7 +60,7 @@ const emptyLocale = (): ProductLocaleContent => ({ name: '', tagline: '', descri
 function emptyProduct(category: ProductCategory): StoredProduct {
   return {
     id: '',
-    price: '€0.00',
+    price: '',
     image: '',
     imageFit: 'cover',
     active: true,
@@ -90,8 +89,13 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
     if (category === 'gardens') {
       if (!next.gallery?.length) next.gallery = [...defaultGardenGallery]
       if (!next.image) next.image = next.gallery[0] ?? ''
+      if (isVideoUrl(next.videoPoster ?? '') && (!next.videoUrl || isStockGardenVideo(next.videoUrl))) {
+        next.videoUrl = next.videoPoster
+        next.videoPoster = ''
+      } else if (isVideoUrl(next.videoPoster ?? '')) {
+        next.videoPoster = ''
+      }
       if (!next.videoUrl) next.videoUrl = defaultGardenVideo
-      if (!next.videoPoster) next.videoPoster = defaultGardenVideoPoster
       for (const language of supportedLanguages) {
         const defaults = defaultGardenLocale(language.code)
         const current = { ...emptyLocale(), ...next.locales[language.code] }
@@ -147,8 +151,9 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
       setError(t('admin.productEdit.errors.nameRequired'))
       return
     }
-    if (!draft.price.trim()) {
-      setError(t('admin.productEdit.errors.priceRequired'))
+    const price = Number(draft.price.replace(/[^\d.,-]/g, '').replace(',', '.'))
+    if (!draft.price.trim() || !Number.isFinite(price) || price <= 0) {
+      setError(t('admin.productEdit.errors.pricePositive'))
       return
     }
     const image = (category === 'gardens' ? draft.gallery?.[0] : draft.image) || draft.image
@@ -161,8 +166,9 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
     try {
       await onSave({ ...draft, id, image })
       onClose()
-    } catch {
-      setError(t('admin.productEdit.errors.saveFailed', { defaultValue: 'Could not save product.' }))
+    } catch (err) {
+      const serverMessage = err instanceof ApiError ? err.message.trim() : ''
+      setError(serverMessage || t('admin.productEdit.errors.saveFailed', { defaultValue: 'Could not save product.' }))
     } finally {
       setSaving(false)
     }
@@ -221,7 +227,7 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
           ))}
         </Tabs>
       )}
-      <DialogContent sx={{ p: 0, display: 'flex', overflow: 'hidden', bgcolor: brand.surface }}>
+      <DialogContent sx={{ p: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', minHeight: 0, bgcolor: brand.surface }}>
         {isGarden && (
           <Stack
             spacing={0.5}
@@ -251,7 +257,7 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
             ))}
           </Stack>
         )}
-        <Box sx={{ flex: 1, overflow: 'auto', p: { xs: 2, sm: 2.5 } }}>
+        <Box sx={{ flex: 1, minHeight: 0, overflow: 'auto', p: { xs: 2, sm: 2.5 } }}>
           {error && (
             <Alert severity="error" sx={{ mb: 2, borderRadius: '12px' }} onClose={() => setError('')}>
               {error}
@@ -283,10 +289,12 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
               <AdminFieldGroup title={t('admin.productEdit.video')}>
                 {draft.videoUrl && (
                   <Box
+                    key={draft.videoUrl}
                     component="video"
                     src={toMediaUrl(draft.videoUrl)}
-                    poster={draft.videoPoster ? toMediaUrl(draft.videoPoster) : undefined}
                     controls
+                    playsInline
+                    preload="metadata"
                     sx={{ width: '100%', maxHeight: 280, borderRadius: '12px', bgcolor: brand.graphite }}
                   />
                 )}
@@ -296,7 +304,7 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                 <input
                   ref={videoInputRef}
                   type="file"
-                  accept="video/mp4,video/webm,video/quicktime"
+                  accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov"
                   hidden
                   onChange={(e) => {
                     const file = e.target.files?.[0]
@@ -304,19 +312,13 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                     setVideoUploading(true)
                     setError('')
                     void mediaApi.upload(file)
-                      .then((result) => setDraft((p) => ({ ...p, videoUrl: result.url })))
+                      .then((result) => setDraft((p) => ({ ...p, videoUrl: result.url, videoPoster: '' })))
                       .catch((err) => setError(err instanceof ApiError ? err.message : t('admin.productEdit.errors.saveFailed')))
                       .finally(() => {
                         setVideoUploading(false)
                         if (videoInputRef.current) videoInputRef.current.value = ''
                       })
                   }}
-                />
-                <ImagePicker
-                  label={t('admin.productEdit.videoPoster')}
-                  value={draft.videoPoster ?? ''}
-                  onChange={(url) => setDraft((p) => ({ ...p, videoPoster: url }))}
-                  size="small"
                 />
               </AdminFieldGroup>
               <AdminFieldGroup title={t('admin.productEdit.content')} hint={t('admin.productEdit.contentHint')}>
@@ -330,6 +332,52 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
 
           {section === 'details' && (
             <Stack spacing={2}>
+              <AdminFieldGroup title={t('admin.productEdit.content')} hint={t('admin.productEdit.contentHint')}>
+                {languageTabs}
+                <TextField label={t('admin.productEdit.name')} value={locale.name} onChange={(e) => updateLocale(langTab, 'name', e.target.value)} required helperText={langTab === 'en' ? t('admin.productEdit.nameHint') : undefined} />
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75}>
+                  <TextField fullWidth required label={t('admin.productEdit.price')} value={draft.price} onChange={(e) => setDraft((p) => ({ ...p, price: e.target.value }))} placeholder="€14.99" sx={{ flex: 1 }} />
+                  {hasCompareAt && (
+                    <TextField
+                      fullWidth
+                      label={t('admin.productEdit.compareAt')}
+                      value={draft.compareAt ?? ''}
+                      onChange={(e) => setDraft((p) => ({ ...p, compareAt: e.target.value || undefined }))}
+                      placeholder="€129.00"
+                      helperText={t('admin.productEdit.compareAtHint')}
+                      sx={{ flex: 1 }}
+                    />
+                  )}
+                  {hasPack && (
+                    <FormControl sx={{ minWidth: 160 }}>
+                      <InputLabel>{t('admin.productEdit.pack')}</InputLabel>
+                      <SelectMui label={t('admin.productEdit.pack')} value={draft.packKey ?? 'pack3'} onChange={(e) => setDraft((p) => ({ ...p, packKey: e.target.value }))}>
+                        {packKeyOptions.map((key) => (
+                          <MenuItem key={key} value={key}>{t(`common.${key}`)}</MenuItem>
+                        ))}
+                      </SelectMui>
+                    </FormControl>
+                  )}
+                </Stack>
+                {hasTagline && (
+                  <TextField label={t('admin.productEdit.tagline')} value={locale.tagline ?? ''} onChange={(e) => updateLocale(langTab, 'tagline', e.target.value)} />
+                )}
+                <TextField label={t('admin.productEdit.description')} value={locale.description ?? ''} onChange={(e) => updateLocale(langTab, 'description', e.target.value)} multiline minRows={3} />
+              </AdminFieldGroup>
+              <AdminFieldGroup title={t('admin.productEdit.visibility')}>
+                <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem', lineHeight: 1.55 }}>
+                  {t('admin.productEdit.activeHint')}
+                </Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ flexWrap: 'wrap' }}>
+                  <FormControlLabel control={<Switch checked={draft.active} onChange={(e) => setDraft((p) => ({ ...p, active: e.target.checked }))} />} label={t('admin.productEdit.active')} />
+                  {hasFeatured && (
+                    <FormControlLabel control={<Switch checked={!!draft.featured} onChange={(e) => setDraft((p) => ({ ...p, featured: e.target.checked }))} />} label={t('admin.productEdit.featured')} />
+                  )}
+                </Stack>
+                {isNew && (
+                  <TextField label={t('admin.productEdit.id')} value={draft.id} onChange={(e) => setDraft((p) => ({ ...p, id: e.target.value }))} helperText={t('admin.productEdit.idHint')} />
+                )}
+              </AdminFieldGroup>
               {!isGarden && (
                 <AdminFieldGroup title={t('admin.productEdit.photo')}>
                   <ImagePicker
@@ -352,42 +400,15 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                   </FormControl>
                 </AdminFieldGroup>
               )}
-              <AdminFieldGroup title={t('admin.productEdit.pricing')} hint={t('admin.productEdit.pricingHint')}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75}>
-                  <TextField fullWidth label={t('admin.productEdit.price')} value={draft.price} onChange={(e) => setDraft((p) => ({ ...p, price: e.target.value }))} placeholder="€9.99" sx={{ flex: 1 }} />
-                  {hasCompareAt && (
-                    <TextField
-                      fullWidth
-                      label={t('admin.productEdit.compareAt')}
-                      value={draft.compareAt ?? ''}
-                      onChange={(e) => setDraft((p) => ({ ...p, compareAt: e.target.value || undefined }))}
-                      placeholder="€129.00"
-                      helperText={t('admin.productEdit.compareAtHint')}
-                      sx={{ flex: 1 }}
-                    />
-                  )}
-                  {hasPack && (
-                    <FormControl>
-                      <InputLabel>{t('admin.productEdit.pack')}</InputLabel>
-                      <SelectMui label={t('admin.productEdit.pack')} value={draft.packKey ?? 'pack3'} onChange={(e) => setDraft((p) => ({ ...p, packKey: e.target.value }))}>
-                        {packKeyOptions.map((key) => (
-                          <MenuItem key={key} value={key}>{t(`common.${key}`)}</MenuItem>
-                        ))}
-                      </SelectMui>
-                    </FormControl>
-                  )}
-                </Stack>
-                {category === 'pods' && (
-                  <Stack spacing={1.25}>
-                    <Typography sx={{ fontWeight: 700, color: brand.graphite, fontSize: '0.9rem' }}>{t('admin.productEdit.kit')}</Typography>
-                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25}>
-                      <TextField type="number" label={t('admin.productEdit.kitPods')} value={draft.kit?.pods ?? 0} onChange={(e) => setDraft((p) => ({ ...p, kit: { pods: Number(e.target.value) || 0, caps: p.kit?.caps ?? 0, nutrientMl: p.kit?.nutrientMl ?? 0 } }))} />
-                      <TextField type="number" label={t('admin.productEdit.kitCaps')} value={draft.kit?.caps ?? 0} onChange={(e) => setDraft((p) => ({ ...p, kit: { pods: p.kit?.pods ?? 0, caps: Number(e.target.value) || 0, nutrientMl: p.kit?.nutrientMl ?? 0 } }))} />
-                      <TextField type="number" label={t('admin.productEdit.kitNutrient')} value={draft.kit?.nutrientMl ?? 0} onChange={(e) => setDraft((p) => ({ ...p, kit: { pods: p.kit?.pods ?? 0, caps: p.kit?.caps ?? 0, nutrientMl: Number(e.target.value) || 0 } }))} />
-                    </Stack>
+              {category === 'pods' && (
+                <AdminFieldGroup title={t('admin.productEdit.kit')}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.25}>
+                    <TextField type="number" label={t('admin.productEdit.kitPods')} value={draft.kit?.pods ?? 0} onChange={(e) => setDraft((p) => ({ ...p, kit: { pods: Number(e.target.value) || 0, caps: p.kit?.caps ?? 0, nutrientMl: p.kit?.nutrientMl ?? 0 } }))} />
+                    <TextField type="number" label={t('admin.productEdit.kitCaps')} value={draft.kit?.caps ?? 0} onChange={(e) => setDraft((p) => ({ ...p, kit: { pods: p.kit?.pods ?? 0, caps: Number(e.target.value) || 0, nutrientMl: p.kit?.nutrientMl ?? 0 } }))} />
+                    <TextField type="number" label={t('admin.productEdit.kitNutrient')} value={draft.kit?.nutrientMl ?? 0} onChange={(e) => setDraft((p) => ({ ...p, kit: { pods: p.kit?.pods ?? 0, caps: p.kit?.caps ?? 0, nutrientMl: Number(e.target.value) || 0 } }))} />
                   </Stack>
-                )}
-              </AdminFieldGroup>
+                </AdminFieldGroup>
+              )}
               {category === 'pods' && (
                 <AdminFieldGroup title={t('growingDifficulty.label')} hint={t('growingDifficulty.hint')}>
                   <GrowingDifficultyPicker
@@ -396,28 +417,6 @@ export default function ProductEditDialog({ open, category, product, isNew, onCl
                   />
                 </AdminFieldGroup>
               )}
-              <AdminFieldGroup title={t('admin.productEdit.visibility')}>
-                <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem', lineHeight: 1.55 }}>
-                  {t('admin.productEdit.activeHint')}
-                </Typography>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ flexWrap: 'wrap' }}>
-                  <FormControlLabel control={<Switch checked={draft.active} onChange={(e) => setDraft((p) => ({ ...p, active: e.target.checked }))} />} label={t('admin.productEdit.active')} />
-                  {hasFeatured && (
-                    <FormControlLabel control={<Switch checked={!!draft.featured} onChange={(e) => setDraft((p) => ({ ...p, featured: e.target.checked }))} />} label={t('admin.productEdit.featured')} />
-                  )}
-                </Stack>
-                {isNew && (
-                  <TextField label={t('admin.productEdit.id')} value={draft.id} onChange={(e) => setDraft((p) => ({ ...p, id: e.target.value }))} helperText={t('admin.productEdit.idHint')} />
-                )}
-              </AdminFieldGroup>
-              <AdminFieldGroup title={t('admin.productEdit.content')} hint={t('admin.productEdit.contentHint')}>
-                {languageTabs}
-                <TextField label={t('admin.productEdit.name')} value={locale.name} onChange={(e) => updateLocale(langTab, 'name', e.target.value)} required helperText={langTab === 'en' ? t('admin.productEdit.nameHint') : undefined} />
-                {hasTagline && (
-                  <TextField label={t('admin.productEdit.tagline')} value={locale.tagline ?? ''} onChange={(e) => updateLocale(langTab, 'tagline', e.target.value)} />
-                )}
-                <TextField label={t('admin.productEdit.description')} value={locale.description ?? ''} onChange={(e) => updateLocale(langTab, 'description', e.target.value)} multiline minRows={3} />
-              </AdminFieldGroup>
             </Stack>
           )}
 

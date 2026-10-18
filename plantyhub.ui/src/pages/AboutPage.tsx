@@ -13,9 +13,11 @@ import { useTranslation } from 'react-i18next'
 import SectionContainer from '../components/SectionContainer'
 import MediaImg from '../components/MediaImg'
 import { navHrefs } from '../data/catalog'
-import { lifestyleImages, productVideo, productVideoPoster } from '../data/images'
+import { lifestyleImages } from '../data/images'
 import { useSiteAssetsStore } from '../hooks/useSiteAssets'
+import { useProduct } from '../hooks/useProducts'
 import { objectPositionForKey } from '../media/imageFocus'
+import { resolveGardenVideo } from '../media/cfImage'
 import { brand } from '../theme'
 
 const serif = '"Fraunces", Georgia, serif'
@@ -31,7 +33,7 @@ const kickerSx = {
   color: brand.plantGreenDark,
 } as const
 
-function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: string; poster: string; title: string; playLabel: string; pauseLabel: string }) {
+function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: string; poster?: string; title: string; playLabel: string; pauseLabel: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [playing, setPlaying] = useState(false)
 
@@ -80,6 +82,7 @@ function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: st
     >
       <Box
         component="video"
+        key={src}
         ref={(el: HTMLVideoElement | null) => {
           videoRef.current = el
           if (!el) return
@@ -132,6 +135,8 @@ function AboutDemoVideo({ src, poster, title, playLabel, pauseLabel }: { src: st
 export default function AboutPage() {
   const { t } = useTranslation()
   const { images } = useSiteAssetsStore()
+  const garden = useProduct('gardens', 'homegarder-one')
+  const { src: videoSrc, poster: videoPoster } = resolveGardenVideo(garden?.videoUrl, garden?.videoPoster)
   const heroImage = images['about.hero'] || lifestyleImages.heroKitchen
   const storyImage = lifestyleImages.mintKitchen
 
@@ -250,13 +255,15 @@ export default function AboutPage() {
           }}
         >
           <Box sx={{ order: { xs: 2, md: 1 }, minWidth: 0 }}>
-            <AboutDemoVideo
-              src={productVideo}
-              poster={productVideoPoster}
-              title={t('aboutPage.videoBadge')}
-              playLabel={t('aboutPage.playVideo')}
-              pauseLabel={t('aboutPage.pauseVideo')}
-            />
+            {videoSrc ? (
+              <AboutDemoVideo
+                src={videoSrc}
+                poster={videoPoster}
+                title={t('aboutPage.videoBadge')}
+                playLabel={t('aboutPage.playVideo')}
+                pauseLabel={t('aboutPage.pauseVideo')}
+              />
+            ) : null}
           </Box>
           <Box sx={{ order: { xs: 1, md: 2 }, minWidth: 0 }}>
             <Typography sx={{ ...kickerSx, mb: 1.25 }}>{t('aboutPage.videoBadge')}</Typography>

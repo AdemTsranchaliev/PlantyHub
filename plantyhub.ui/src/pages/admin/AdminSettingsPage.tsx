@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
@@ -5,19 +6,54 @@ import Switch from '@mui/material/Switch'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import AdminFieldGroup from '../../components/admin/AdminFieldGroup'
+import { storeApi } from '../../api'
 import { resetProductsState } from '../../store/products'
+import { brand } from '../../theme'
 
 export default function AdminSettingsPage() {
   const { t } = useTranslation()
+  const [cardEnabled, setCardEnabled] = useState(true)
+  const [cardBusy, setCardBusy] = useState(false)
+  const [cardNote, setCardNote] = useState('')
+
+  useEffect(() => {
+    void storeApi.getPayments().then((settings) => setCardEnabled(settings.cardEnabled)).catch(() => {
+      setCardNote(t('admin.settings.cardSaveFailed'))
+    })
+  }, [t])
+
+  const toggleCard = (enabled: boolean) => {
+    const previous = cardEnabled
+    setCardEnabled(enabled)
+    setCardBusy(true)
+    setCardNote('')
+    void storeApi.setCardPayments(enabled).then((settings) => {
+      setCardEnabled(settings.cardEnabled)
+      setCardNote(t('admin.settings.cardSaved'))
+    }).catch(() => {
+      setCardEnabled(previous)
+      setCardNote(t('admin.settings.cardSaveFailed'))
+    }).finally(() => setCardBusy(false))
+  }
 
   return (
     <>
       <AdminPageHeader title={t('admin.settings.title')} subtitle={t('admin.settings.subtitle')} />
 
       <Stack spacing={2.5}>
+        <AdminFieldGroup title={t('admin.settings.payments')} hint={t('admin.settings.cardPaymentsHint')}>
+          <FormControlLabel
+            control={<Switch checked={cardEnabled} disabled={cardBusy} onChange={(e) => toggleCard(e.target.checked)} />}
+            label={t('admin.settings.cardPayments')}
+          />
+          {cardNote ? (
+            <Typography sx={{ color: brand.textSecondary, fontSize: '0.85rem' }}>{cardNote}</Typography>
+          ) : null}
+        </AdminFieldGroup>
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
             <AdminFieldGroup title={t('admin.settings.store')}>

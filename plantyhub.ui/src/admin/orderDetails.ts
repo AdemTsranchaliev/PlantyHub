@@ -76,6 +76,20 @@ export type OrderDetail = AdminOrder & {
   shippingOfficeCode?: string | null
   discount?: string | null
   promoCode?: string | null
+  codFee?: string | null
+}
+
+export function isCustomerFirstOrder(
+  orders: readonly { id: string; email: string; date: string }[],
+  order: { id: string; email: string },
+) {
+  const email = order.email.trim().toLowerCase()
+  let first: { id: string; date: string } | undefined
+  for (const item of orders) {
+    if (item.email.trim().toLowerCase() !== email) continue
+    if (!first || item.date < first.date || (item.date === first.date && item.id < first.id)) first = item
+  }
+  return first?.id === order.id
 }
 
 const customerPhones: Record<string, string> = {

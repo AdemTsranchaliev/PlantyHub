@@ -6,7 +6,10 @@ import { toMediaUrl } from '../media/cfImage'
 import { BASE_PATH } from '../paths'
 import { getLocalizedField, type ProductCategory, type ProductsState, type StoredProduct } from '../store/products'
 
-export const OG_IMAGE = 'https://media.plantyhub.com/logo-og.png'
+/** Wordmark on a 1200×630 card. Shown in link previews and as the organization logo. */
+export const OG_IMAGE = 'https://plantyhub.com/logo-wordmark.png'
+export const OG_IMAGE_WIDTH = 1200
+export const OG_IMAGE_HEIGHT = 630
 
 const privatePrefixes = [
   '/cart',
@@ -125,8 +128,13 @@ function productDetail(path: string): { category: ProductCategory; id: string } 
 }
 
 function originUrl(origin: string, locale: LanguageCode, path: string) {
-  const localized = path === '/' ? `/${locale}/` : `/${locale}${path}`
-  return `${origin}${BASE_PATH}${localized}`
+  const mark = path.indexOf('?')
+  const pathname = (mark < 0 ? path : path.slice(0, mark)) || '/'
+  const query = mark < 0 ? '' : path.slice(mark)
+  const localized = locale === defaultLanguage
+    ? (pathname === '/' ? '/' : pathname)
+    : (pathname === '/' ? `/${locale}/` : `/${locale}${pathname}`)
+  return `${origin}${BASE_PATH}${localized}${query}`
 }
 
 export function buildHead(input: {
@@ -274,7 +282,12 @@ function graphNode(
         name: 'PlantyHub',
         legalName: 'ДИДЖИТАЛ КИТ ЕООД',
         url: `${input.origin}/`,
-        logo: OG_IMAGE,
+        logo: {
+          '@type': 'ImageObject',
+          url: OG_IMAGE,
+          width: OG_IMAGE_WIDTH,
+          height: OG_IMAGE_HEIGHT,
+        },
         email: 'support@plantyhub.com',
         address: {
           '@type': 'PostalAddress',

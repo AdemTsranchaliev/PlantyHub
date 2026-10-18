@@ -22,8 +22,10 @@ import ArrowUpwardRounded from '@mui/icons-material/ArrowUpwardRounded'
 import CloseRounded from '@mui/icons-material/CloseRounded'
 import FileDownloadRounded from '@mui/icons-material/FileDownloadRounded'
 import SearchRounded from '@mui/icons-material/SearchRounded'
+import StarRounded from '@mui/icons-material/StarRounded'
 import VisibilityRounded from '@mui/icons-material/VisibilityRounded'
 import { useTranslation } from 'react-i18next'
+import { isCustomerFirstOrder } from '../../admin/orderDetails'
 import type { AdminOrder, OrderStatus } from '../../admin/mockData'
 import { orderStatusColors, orderStatusOrder } from '../../admin/orderStatus'
 import { downloadOrderSheet } from '../../admin/orderSheet'
@@ -92,13 +94,27 @@ export default function AdminOrdersPage() {
     setSheetError(null)
     try {
       const detail = await ordersApi.getAdminById(id)
-      await downloadOrderSheet(detail, t, i18n.language)
+      await downloadOrderSheet(detail, t, i18n.language, { firstOrder: isCustomerFirstOrder(orders, detail) })
     } catch (err) {
       setSheetError(err instanceof ApiError ? err.message : t('admin.orderDetail.downloadSheetFailed'))
     } finally {
       setSheetBusy(null)
     }
   }
+
+  const firstOrderIds = useMemo(() => {
+    const ids = new Set<string>()
+    const seen = new Set<string>()
+    for (const order of orders) {
+      const email = order.email.trim().toLowerCase()
+      if (seen.has(email)) continue
+      if (isCustomerFirstOrder(orders, order)) {
+        ids.add(order.id)
+        seen.add(email)
+      }
+    }
+    return ids
+  }, [orders])
 
   const query = params.get('q') ?? ''
   const status: StatusFilter = isStatus(params.get('status')) ? (params.get('status') as OrderStatus) : 'all'
@@ -377,7 +393,17 @@ export default function AdminOrdersPage() {
                       onClick={() => openOrder(order.id)}
                       sx={{ cursor: 'pointer', '&:last-child td': { borderBottom: 0 } }}
                     >
-                      <TableCell sx={{ fontFamily: 'monospace', fontWeight: 800, color: brand.graphite, whiteSpace: 'nowrap' }}>{order.id}</TableCell>
+                      <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                        <Box sx={{ fontFamily: 'monospace', fontWeight: 800, color: brand.graphite }}>{order.id}</Box>
+                        {firstOrderIds.has(order.id) ? (
+                          <Chip
+                            size="small"
+                            icon={<StarRounded sx={{ fontSize: '0.95rem !important', color: '#8A5A00 !important' }} />}
+                            label={t('admin.orderDetail.firstOrder')}
+                            sx={{ mt: 0.6, height: 24, bgcolor: '#FFF1CC', color: '#8A5A00', fontWeight: 800, border: '1px solid #E2B34A' }}
+                          />
+                        ) : null}
+                      </TableCell>
                       <TableCell>
                         <Box sx={{ fontWeight: 700, color: brand.graphite }}>{order.customer}</Box>
                         <Box sx={{ fontSize: '0.8rem', color: brand.textSecondary }}>{order.email}</Box>

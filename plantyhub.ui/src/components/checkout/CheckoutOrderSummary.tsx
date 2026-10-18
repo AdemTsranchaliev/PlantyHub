@@ -31,6 +31,9 @@ type SummaryProps = {
   taxLabel?: string | null
   taxHint?: string | null
   discountLabel?: string | null
+  codFeeLabel?: string | null
+  codPercent?: string | null
+  deliveryTotalLabel?: string | null
   promo: PromoControls
 }
 
@@ -109,8 +112,18 @@ function LineItem({ item }: { item: CartItem }) {
   )
 }
 
-function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, taxLabel, taxHint, discountLabel }: SummaryProps) {
+function MoneyRow({ label, value, hint = false }: { label: string; value: string; hint?: boolean }) {
+  return (
+    <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center', gap: 1.5 }}>
+      <Typography sx={{ fontSize: hint ? '0.75rem' : '0.8125rem', color: checkout.muted, pl: hint ? 1.25 : 0 }}>{label}</Typography>
+      <Typography sx={{ fontSize: hint ? '0.75rem' : '0.8125rem', color: hint ? checkout.muted : checkout.text, flexShrink: 0 }}>{value}</Typography>
+    </Stack>
+  )
+}
+
+function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipping, taxLabel, taxHint, discountLabel, codFeeLabel, codPercent, deliveryTotalLabel }: SummaryProps) {
   const { t } = useTranslation()
+  const courierLabel = freeShipping ? t('cart.freeShipping') : shippingLabel
 
   return (
     <Stack spacing={0.75}>
@@ -126,12 +139,18 @@ function Totals({ itemCount, subtotalLabel, shippingLabel, totalLabel, freeShipp
           <Typography sx={{ fontSize: '0.8125rem', color: checkout.link, fontWeight: 600 }}>{discountLabel}</Typography>
         </Stack>
       ) : null}
-      <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>{t('cart.shipping')}</Typography>
-        <Typography sx={{ fontSize: '0.8125rem', color: freeShipping ? checkout.link : checkout.text }}>
-          {freeShipping ? t('cart.freeShipping') : shippingLabel}
-        </Typography>
-      </Stack>
+      {codFeeLabel ? (
+        <Stack spacing={0.35}>
+          <MoneyRow label={t('cart.shipping')} value={deliveryTotalLabel ?? shippingLabel} />
+          <MoneyRow label={t('checkout.courier')} value={courierLabel} hint />
+          <MoneyRow label={t('checkout.codFeeRate', { percent: codPercent ?? '' })} value={codFeeLabel} hint />
+        </Stack>
+      ) : (
+        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted }}>{t('cart.shipping')}</Typography>
+          <Typography sx={{ fontSize: '0.8125rem', color: freeShipping ? checkout.link : checkout.text }}>{courierLabel}</Typography>
+        </Stack>
+      )}
       {!freeShipping && (
         <Typography sx={{ fontSize: '0.6875rem', color: checkout.muted }}>
           {t('cart.freeShippingHint', { amount: `€${FREE_SHIPPING_THRESHOLD}` })}

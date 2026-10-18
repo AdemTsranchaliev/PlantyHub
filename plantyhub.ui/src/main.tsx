@@ -16,7 +16,7 @@ import './index.css'
 import './i18n/setup'
 import theme from './theme'
 import App from './App.tsx'
-import { isActiveLanguage, localeFromPathname, preferredLanguage } from './i18n/languages'
+import { defaultLanguage, isActiveLanguage, localeFromPathname } from './i18n/languages'
 import { BASE_PATH } from './paths'
 
 function isAdminPath(pathname: string) {
@@ -39,18 +39,23 @@ function AppRouter() {
   }
 
   const locale = localeFromPathname(pathname, BASE_PATH)
-  if (!locale || !isActiveLanguage(locale)) {
+  if (locale === defaultLanguage || (locale && !isActiveLanguage(locale))) {
     const base = BASE_PATH
     const rest = base && (pathname === base || pathname.startsWith(`${base}/`))
       ? pathname.slice(base.length) || '/'
       : pathname
-    const withoutLocale = locale
-      ? `/${rest.split('/').filter(Boolean).slice(1).join('/')}`
-      : rest
-    const path = withoutLocale === '/' ? '/' : withoutLocale.replace(/\/$/, '') || '/'
-    const target = `${base}/${preferredLanguage()}${path}${search}${hash}`
-    window.location.replace(target)
+    const tail = `/${rest.split('/').filter(Boolean).slice(1).join('/')}`
+    const path = tail === '/' ? '/' : tail.replace(/\/$/, '')
+    window.location.replace(`${base}${path}${search}${hash}`)
     return null
+  }
+
+  if (!locale) {
+    return (
+      <BrowserRouter basename={BASE_PATH || undefined}>
+        <App />
+      </BrowserRouter>
+    )
   }
 
   return (

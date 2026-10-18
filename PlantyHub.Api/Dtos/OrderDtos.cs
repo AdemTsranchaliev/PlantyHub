@@ -82,7 +82,8 @@ public record OrderDetailDto(
     string? ShippingOfficeCode = null,
     IReadOnlyList<WaybillDto>? Waybills = null,
     string? Discount = null,
-    string? PromoCode = null);
+    string? PromoCode = null,
+    string? CodFee = null);
 
 public record EcontCheckIssueDto(string Code, string Severity, string? Message);
 

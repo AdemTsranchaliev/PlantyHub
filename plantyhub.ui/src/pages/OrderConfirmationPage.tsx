@@ -188,11 +188,12 @@ function ConfirmedOrder({ order, language }: { order: OrderDetail; language: str
       <Stack spacing={0.85}>
         <Row label={t('cart.subtotal', { count: order.items })} value={order.subtotal} />
         <Row label={t('cart.shipping')} value={order.shippingCost} />
-        {order.tax && order.tax !== '€0.00' ? (
-          <Row label={order.taxRate ? t('cart.vatRate', { rate: order.taxRate }) : t('cart.vat')} value={order.tax} />
-        ) : null}
+        {order.codFee && order.codFee !== '€0.00' ? <Row label={t('checkout.codFee')} value={order.codFee} /> : null}
         <Divider sx={{ borderColor: checkout.border }} />
         <Row label={t('cart.total')} value={order.total} strong />
+        {order.tax && order.tax !== '€0.00' ? (
+          <Typography sx={{ fontSize: '0.75rem', color: checkout.muted }}>{t('cart.vatIncluded')}</Typography>
+        ) : null}
         <Typography sx={{ fontSize: '0.8125rem', color: checkout.muted, pt: 0.25 }}>
           {t(`checkout.paymentMethods.${order.paymentMethod}`)}
           {order.paymentMethod === 'card' ? ` · ${t('checkout.stripe')}` : ''}

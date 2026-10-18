@@ -9,6 +9,38 @@ const PRESETS: Record<ImagePreset, string> = {
 }
 
 const VIDEO_EXT = /\.(mp4|webm|mov|m4v)(\?|#|$)/i
+const STOCK_GARDEN_VIDEO = /\/videos\/homegarder-one\.mp4(?:[?#]|$)/i
+
+export function isVideoUrl(url: string): boolean {
+  return VIDEO_EXT.test(url.trim())
+}
+
+export function isStockGardenVideo(url: string): boolean {
+  return STOCK_GARDEN_VIDEO.test(url.trim())
+}
+
+/**
+ * The file that should actually play.
+ * A video saved in the poster slot is the upload, not a thumbnail.
+ */
+export function resolveGardenVideo(
+  videoUrl?: string | null,
+  videoPoster?: string | null,
+  fallbackSrc = '',
+): { src: string; poster?: string } {
+  const url = (videoUrl || '').trim()
+  const poster = (videoPoster || '').trim()
+  const posterIsVideo = poster.length > 0 && isVideoUrl(poster)
+  let src = url
+  if (posterIsVideo && (!url || isStockGardenVideo(url))) src = poster
+  if (!src) src = fallbackSrc
+  const imagePoster = posterIsVideo ? '' : poster
+  return {
+    src: src ? toMediaUrl(src) : '',
+    poster: imagePoster ? toMediaUrl(imagePoster) : undefined,
+  }
+}
+
 export const MEDIA_ORIGIN = (import.meta.env.VITE_MEDIA_ORIGIN || 'https://media.plantyhub.com').replace(/\/$/, '')
 
 function mediaHost(): string {
@@ -93,14 +125,24 @@ export function isR2MediaUrl(url: string): boolean {
  * Videos and already-transformed URLs are returned unchanged.
  * Store the original R2 URL in the database — never persist a /cdn-cgi/image/ link.
  */
-export function cfImage(url: string, preset: ImagePreset = 'card'): string {
+function cfImageUrl(url: string, options: string): string {
   const resolved = toMediaUrl(url)
   if (!resolved || import.meta.env.VITE_CF_IMAGE_TRANSFORMS === 'false' || !isR2MediaUrl(resolved)) return resolved
 
   try {
     const parsed = new URL(resolved)
-    return `${MEDIA_ORIGIN}/cdn-cgi/image/${PRESETS[preset]}${parsed.pathname}${parsed.search}`
+    return `${MEDIA_ORIGIN}/cdn-cgi/image/${options}${parsed.pathname}${parsed.search}`
   } catch {
     return resolved
   }
+}
+
+export function cfImage(url: string, preset: ImagePreset = 'card'): string {
+  return cfImageUrl(url, PRESETS[preset])
+}
+
+/** Width cap for files shown far below their pixel size, such as the wordmark. */
+export function cfImageWidth(url: string, width: number, quality = 90): string {
+  const safe = Math.max(1, Math.round(width))
+  return cfImageUrl(url, `width=${safe},fit=scale-down,format=auto,quality=${quality}`)
 }

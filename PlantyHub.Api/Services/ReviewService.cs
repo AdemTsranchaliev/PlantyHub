@@ -326,7 +326,7 @@ public class ReviewService(
     private async Task SendEmailAsync(ReviewRequest request, CancellationToken ct)
     {
         var frontend = appOptions.Value.FrontendUrl.TrimEnd('/');
-        var reviewUrl = $"{frontend}/{request.Language}/review/{request.Token}";
+        var reviewUrl = frontend + LocaleSeo.PublicPath(request.Language, $"/review/{request.Token}");
         try
         {
             await templates.SendTemplatedAsync(TemplateKey, request.Email, new Dictionary<string, string>

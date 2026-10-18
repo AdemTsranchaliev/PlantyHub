@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deploy UI (site root) + API (/api) to Azure App Service.
-# Uses the signed-in Azure CLI. SCM basic auth is disabled on this app.
+# Publish password lives in .azure-publish (gitignored). On 401 the script asks for a new one.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -9,8 +9,6 @@ PUBLISH_DIR="$ROOT/publish"
 ZIP="$ROOT/deploy.zip"
 SECRETS="$HOME/.microsoft/usersecrets/8f3c1a2e-9d4b-4e71-a6c8-2b1f0e7d5c94/secrets.json"
 
-AZURE_RESOURCE_GROUP="${AZURE_RESOURCE_GROUP:-plantyhub-site_group}"
-AZURE_APP_NAME="${AZURE_APP_NAME:-plantyhub-site}"
 AZURE_SCM_HOST="${AZURE_SCM_HOST:-plantyhub-site-d4c5aqddbxbde3a3.scm.italynorth-01.azurewebsites.net}"
 AZURE_PUBLISH_USER="${AZURE_PUBLISH_USER:-\$plantyhub-site}"
 AZURE_SITE_URL="${AZURE_SITE_URL:-https://plantyhub-site-d4c5aqddbxbde3a3.italynorth-01.azurewebsites.net}"
@@ -126,35 +124,56 @@ PY
   echo "→ Packed $(du -h "$ZIP" | awk '{print $1}')"
 }
 
+scm_curl() {
+  curl -4 --http1.1 --max-time 30 -sS \
+    -u "${AZURE_PUBLISH_USER}:${AZURE_PUBLISH_PASSWORD}" \
+    "$@"
+}
+
+latest_deployment_id() {
+  scm_curl "https://${AZURE_SCM_HOST}/api/deployments/latest" \
+    | python3 -c 'import json,sys
+raw=sys.stdin.read().strip()
+if not raw:
+    raise SystemExit(0)
+try:
+    print(json.loads(raw).get("id") or "")
+except json.JSONDecodeError:
+    raise SystemExit(0)'
+}
+
 zipdeploy() {
-  az webapp deploy \
-    --resource-group "$AZURE_RESOURCE_GROUP" \
-    --name "$AZURE_APP_NAME" \
-    --src-path "$ZIP" \
-    --type zip \
-    --timeout 600000
+  local code
+  code="$(
+    curl -4 --http1.1 --max-time 300 -sS -o /tmp/plantyhub-zipdeploy.body -w '%{http_code}' \
+      -X POST --data-binary @"$ZIP" \
+      -H 'Content-Type: application/octet-stream' \
+      -u "${AZURE_PUBLISH_USER}:${AZURE_PUBLISH_PASSWORD}" \
+      "https://${AZURE_SCM_HOST}/api/zipdeploy?isAsync=true"
+  )"
+  printf '%s' "$code"
 }
 
 wait_deploy() {
+  local previous="${1:-}"
   local i json st
   for i in $(seq 1 40); do
-    json="$(
-      curl -4 --http1.1 --max-time 30 -sS \
-        -u "${AZURE_PUBLISH_USER}:${AZURE_PUBLISH_PASSWORD}" \
-        "https://${AZURE_SCM_HOST}/api/deployments/latest" || true
-    )"
+    json="$(scm_curl "https://${AZURE_SCM_HOST}/api/deployments/latest" || true)"
     st=0
-    printf '%s' "$json" | python3 -c '
-import json, sys
+    printf '%s' "$json" | PREVIOUS_ID="$previous" python3 -c '
+import json, os, sys
 raw = sys.stdin.read().strip()
 if not raw:
     raise SystemExit(2)
 d = json.loads(raw)
+if d.get("id") == os.environ.get("PREVIOUS_ID"):
+    raise SystemExit(2)
 complete = bool(d.get("complete"))
 status = int(d.get("status") or 0)
 if complete and status == 4:
     raise SystemExit(0)
 if complete and status == 3:
+    sys.stderr.write((d.get("status_text") or d.get("message") or "failed") + "\n")
     raise SystemExit(1)
 raise SystemExit(2)
 ' || st=$?
@@ -176,13 +195,42 @@ verify() {
 }
 
 deploy_once() {
-  zipdeploy
+  local code previous
+  previous="$(latest_deployment_id || true)"
+  code="$(zipdeploy)"
+  echo "→ ZipDeploy HTTP $code"
+  if [[ "$code" == "401" || "$code" == "403" ]]; then
+    return 77
+  fi
+  if [[ "$code" != "200" && "$code" != "202" ]]; then
+    echo "ZipDeploy failed:" >&2
+    head -c 400 /tmp/plantyhub-zipdeploy.body >&2 || true
+    echo >&2
+    return 1
+  fi
+  wait_deploy "$previous"
   verify
 }
 
-load_cred
+ensure_password
 build
-deploy_once
-echo
-echo "Live: $AZURE_SITE_URL"
-echo "API:  $AZURE_SITE_URL/api/products"
+
+while true; do
+  set +e
+  deploy_once
+  status=$?
+  set -e
+  if [[ "$status" -eq 0 ]]; then
+    echo
+    echo "Live: $AZURE_SITE_URL"
+    echo "API:  $AZURE_SITE_URL/api/products"
+    exit 0
+  fi
+  if [[ "$status" -eq 77 ]]; then
+    echo "Publish password rejected (HTTP 401/403)."
+    ask_password
+    load_cred
+    continue
+  fi
+  exit "$status"
+done

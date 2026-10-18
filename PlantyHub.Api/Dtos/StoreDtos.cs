@@ -18,6 +18,10 @@ public class UpdateStoreVatSettingsRequest
     public string? VatNumber { get; set; }
 }
 
+public record StorePaymentsDto(bool CardEnabled);
+
+public record UpdateStorePaymentsRequest(bool CardEnabled);
+
 public record VatQuoteDto(
     bool Enabled,
     string Country,
