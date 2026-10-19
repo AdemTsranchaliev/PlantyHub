@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import AdminPageHeader from '../../components/admin/AdminPageHeader'
 import ImagePicker from '../../components/admin/ImagePicker'
+import VideoAssetPicker from '../../components/admin/VideoAssetPicker'
 import { siteAssetGroups } from '../../admin/siteAssetsSchema'
 import { framesForImageKey, imageFocusKey, parseImageFocus, serializeImageFocus } from '../../media/imageFocus'
 import { useSiteAssetsStore } from '../../hooks/useSiteAssets'
@@ -52,6 +53,17 @@ export default function AdminMediaPage() {
             </Typography>
             <Grid container spacing={2.5}>
               {group.slots.map((slot) => {
+                if (slot.kind === 'video') {
+                  return (
+                    <Grid key={slot.key} size={{ xs: 12, md: 6 }}>
+                      <VideoAssetPicker
+                        label={t(slot.labelKey, { defaultValue: slot.key })}
+                        value={images[slot.key] ?? slot.defaultUrl}
+                        onChange={(url) => void handleChange(slot.key, url)}
+                      />
+                    </Grid>
+                  )
+                }
                 const frames = framesForImageKey(slot.key)
                 return (
                   <Grid key={slot.key} size={{ xs: 12, md: 6 }}>

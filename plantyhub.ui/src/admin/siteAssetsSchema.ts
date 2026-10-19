@@ -1,19 +1,32 @@
 import { blogArticleIds, blogArticleImages } from '../data/catalog'
-import { lifestyleImages, stockImages } from '../data/images'
+import { lifestyleImages, productVideo, stockImages } from '../data/images'
 
 export type SiteAssetSlot = {
   key: string
   labelKey: string
   defaultUrl: string
+  kind?: 'image' | 'video'
 }
 
 export type SiteAssetGroup = {
-  id: 'blog' | 'about' | 'pdp'
+  id: 'pods' | 'blog' | 'about' | 'pdp'
   labelKey: string
   slots: SiteAssetSlot[]
 }
 
 export const siteAssetGroups: SiteAssetGroup[] = [
+  {
+    id: 'pods',
+    labelKey: 'admin.media.groups.pods',
+    slots: [
+      {
+        key: 'pods.video',
+        labelKey: 'admin.media.slots.pods.video',
+        defaultUrl: productVideo,
+        kind: 'video',
+      },
+    ],
+  },
   {
     id: 'blog',
     labelKey: 'admin.media.groups.blog',

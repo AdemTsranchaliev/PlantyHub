@@ -219,6 +219,7 @@ export default function ProductPage() {
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' }, mb: 3.5 }}>
                 <Stack
+                  data-clarity-unmask="true"
                   direction="row"
                   sx={{ alignItems: 'center', border: `1px solid ${brand.border}`, borderRadius: 999, px: 0.5, alignSelf: { xs: 'flex-start', sm: 'auto' } }}
                 >

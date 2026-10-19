@@ -106,8 +106,10 @@ export default function LoginPage() {
       if (err instanceof ApiError && err.code === 'email_not_verified') {
         setNeedsVerification(true)
         setAuthError(err.message)
+      } else if (err instanceof ApiError && (err.status === 401 || err.status === 400)) {
+        setAuthError(t('auth.login.invalidCredentials'))
       } else {
-        setAuthError(t('auth.login.invalidCredentials', { defaultValue: 'Invalid email or password.' }))
+        setAuthError(t('auth.login.unavailable'))
       }
     } finally {
       setSubmitting(false)

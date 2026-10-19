@@ -481,7 +481,7 @@ public static class EmailTemplateSeeder
                 SocialLink("Instagram", "https://instagram.com/plantyhub.official"),
                 SocialLink("TikTok", "https://tiktok.com/@plantyhub.official"),
                 SocialLink("Facebook", "https://facebook.com/plantyhub"),
-                SocialLink("YouTube", "https://youtube.com/@plantyhub"),
+                SocialLink("YouTube", "https://www.youtube.com/@PlantyHub1"),
             });
 
         return """

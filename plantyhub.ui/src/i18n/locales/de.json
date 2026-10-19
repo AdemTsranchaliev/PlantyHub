@@ -349,7 +349,7 @@
     "easy": "Leicht",
     "medium": "Mittel",
     "hard": "Schwer",
-    "easyHint": "Verzeihend und schnell — ideal für die erste Ernte.",
+    "easyHint": "Verzeihend und schnell — gut für Einsteiger.",
     "mediumHint": "Gleichmäßige Pflege hilft — lohnend für regelmäßige Grower.",
     "hardHint": "Braucht mehr Aufmerksamkeit — für geübte Grower.",
     "easyHintShort": "Ideal für Einsteiger",
@@ -366,27 +366,72 @@
     "includesNutrientHint": "je {{ml}} ml",
     "relatedTitle": "Weitere Pods zum Anbauen",
     "specs": {
-      "harvest": {
-        "label": "Erste Ernte",
-        "value": "2–4 Wochen"
-      },
       "pack": {
         "label": "Packungsgröße"
       },
       "light": {
         "label": "Licht",
         "value": "LED · auto 16/8"
-      },
-      "nature": {
-        "label": "Samen",
-        "value": "Gentechnikfrei"
       }
     },
     "trust": {
       "compatible": "Passt in alle PlantyHub Gärten",
-      "nonGmo": "Gentechnikfrei & natürlich",
       "shipping": "Versand innerhalb 24h"
     }
+  },
+  "podGuide": {
+    "videoBadge": "Demo in 60 Sekunden",
+    "videoTitle": "So setzt du eine Kapsel ein",
+    "videoText": "Sticker ab, Kapsel ins Nest und Haube drauf. Wasser und Lampe erledigen den Rest.",
+    "points": [
+      "Die Samen sind schon drin — bereit fürs Nest",
+      "Die Haube hält die Feuchtigkeit, bis es keimt",
+      "Wenn nichts keimt und du die Schritte befolgt hast, schicken wir eine neue"
+    ],
+    "stepsTitle": "Vier Schritte bis zum Keim",
+    "stepsLead": "Etwa fünf Minuten. Danach macht der Garten allein weiter.",
+    "steps": [
+      { "title": "Sticker ab", "text": "Setze eine Kapsel in jedes Nest." },
+      { "title": "Haube drauf", "text": "Sie hält die Feuchtigkeit, bis der Keim sie berührt. Dann nimmst du sie ab." },
+      { "title": "Wasser und Nahrung", "text": "4 l Wasser, dann 5 ml A, umrühren, dann 5 ml B. Nicht unverdünnt mischen." },
+      { "title": "Lampe an", "text": "16 Stunden Licht und 8 Stunden Ruhe. Der Zyklus startet von selbst." }
+    ],
+    "timingTitle": "Wann es keimt",
+    "timingLead": "Die Zeiten sind Richtwerte. In einem wärmeren Raum und mit gefiltertem Wasser geht es schneller.",
+    "thisPlant": "Für diesen Samen",
+    "sprout": "Keimt",
+    "harvest": "Erste Ernte",
+    "timingFallback": "Die Keime starten in Tagen. Die erste Ernte kommt innerhalb von etwa 6 Wochen.",
+    "plants": {
+      "arugula": { "name": "Rucola", "sprout": "3–7 Tage", "harvest": "ab 3 Wochen" },
+      "basil": { "name": "Basilikum", "sprout": "5–10 Tage", "harvest": "ab 3 Wochen" },
+      "lettuce": { "name": "Salat", "sprout": "unter den ersten", "harvest": "ab 3 Wochen" },
+      "mint": { "name": "Minze", "sprout": "10–16 Tage", "harvest": "etwa 8–9 Wochen" },
+      "cilantro": { "name": "Koriander", "sprout": "7–14 Tage", "harvest": "ab 4 Wochen" },
+      "dill": { "name": "Dill", "sprout": "7–14 Tage", "harvest": "ab 4 Wochen" },
+      "parsley": { "name": "Petersilie", "sprout": "2–4 Wochen", "harvest": "ab 5 Wochen" },
+      "plant-everything": { "name": "Alles einpflanzen", "note": "Leere Kapseln — die Zeit hängt von den Samen ab, die du einsetzt." }
+    },
+    "faqTitle": "Zu den Kapseln",
+    "faqSeeAll": "Alle ansehen",
+    "faq": [
+      {
+        "q": "Was steckt in einer Kapsel?",
+        "a": "Vorgesäte Samen in einem hydroponischen Medium — bereit zum Einsetzen."
+      },
+      {
+        "q": "Wann ist die erste Ernte?",
+        "a": "Jede Sorte hat ihre eigene Zeit. Rucola keimt in 3–7 Tagen und ist ab 3 Wochen erntereif, Basilikum in 5–10 Tagen und ab 3 Wochen. Salat gehört zu den ersten und ist ab 3 Wochen erntereif. Minze keimt in 10–16 Tagen und ist nach etwa 8–9 Wochen erntereif. Petersilie keimt in 2–4 Wochen und ist ab 5 Wochen erntereif."
+      },
+      {
+        "q": "Die Kapsel keimt nicht — was tun?",
+        "a": "Warte das Fenster der Sorte ab — bei Petersilie bis zu 4 Wochen. Prüfe Wasser, Licht und Temperatur. Wenn nichts passiert, schreib uns mit der Bestellnummer — wir ersetzen die Kapsel."
+      },
+      {
+        "q": "Kann ich eine Kapsel wiederverwenden?",
+        "a": "Besser nicht. Nach der Ernte setzt du eine neue Kapsel ein — frischer Start und saubereres System."
+      }
+    ]
   },
   "accessoriesPage": {
     "eyebrow": "Zubehör",
@@ -449,7 +494,7 @@
       },
       "sustainability": {
         "title": "Gut für den Planeten",
-        "text": "Gentechnikfreie Samen, recycelbare Materialien und Hydroponik, die deutlich weniger Wasser braucht als Erde."
+        "text": "Recycelbare Materialien und Hydroponik, die deutlich weniger Wasser braucht als Erde."
       },
       "simplicity": {
         "title": "Einfacher für alle",
@@ -1019,6 +1064,8 @@
       "registerLink": "Jetzt registrieren",
       "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
       "invalidPassword": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+      "invalidCredentials": "Falsche E-Mail oder falsches Passwort.",
+      "unavailable": "Die Anmeldung ist gerade nicht durchgegangen. Versuch es gleich noch einmal.",
       "success": "Du bist angemeldet. Willkommen zurück bei PlantyHub!",
       "continue": "Weiter einkaufen"
     },
@@ -2052,14 +2099,18 @@
     },
     "media": {
       "title": "Medien",
-      "subtitle": "Bilder für Blog, Über uns und Produktseiten hochladen und austauschen.",
+      "subtitle": "Bilder für Blog, Über uns und Produktseiten austauschen, und das Video der Kapseln.",
       "saveFailed": "Bild konnte nicht gespeichert werden. Bitte erneut versuchen.",
       "groups": {
+        "pods": "Kapseln",
         "blog": "Blog-Artikel",
         "about": "Über-uns-Seite",
         "pdp": "Produkt- & Pod-Seiten"
       },
       "slots": {
+        "pods": {
+          "video": "Video auf der Kapselseite"
+        },
         "blog": {
           "pesto": "Artikel — Basilikum-Pesto",
           "hydroponics": "Artikel — Hydroponik",
@@ -2310,7 +2361,7 @@
           },
           {
             "q": "Was ist in einer Kapsel?",
-            "a": "Vorgesäte Samen in hydroponischem Medium, einsatzbereit. Gentechnikfreie Samen gemäß unserer Produktpolitik."
+            "a": "Vorgesäte Samen in hydroponischem Medium, einsatzbereit."
           },
           {
             "q": "Wie lange halten unbenutzte Kapseln?",

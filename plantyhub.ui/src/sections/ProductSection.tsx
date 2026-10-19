@@ -27,7 +27,7 @@ function SpecRow({ rowKey, valueKey }: { rowKey: string; valueKey: string }) {
   const value = useHt(`product.specs.${valueKey}`)
   return (
     <Grid size={{ xs: 12, sm: 6 }}>
-      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'flex-start' }}>
+      <Stack data-clarity-unmask="true" direction="row" spacing={1.5} sx={{ alignItems: 'flex-start' }}>
         <Icon sx={{ color: brand.plantGreen, fontSize: 22, mt: 0.25, flexShrink: 0 }} />
         <Box>
           <Typography sx={{ fontWeight: 700, fontSize: '0.9rem', color: brand.graphite, lineHeight: 1.3 }}>{label}</Typography>
@@ -57,7 +57,7 @@ export default function ProductSection() {
             <Box sx={{ borderRadius: { xs: '20px', sm: '28px' }, overflow: 'hidden', border: `1px solid ${brand.border}`, boxShadow: brand.shadowHover, '& img': { transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' }, '@media (hover: hover)': { '&:hover img': { transform: 'scale(1.05)' } } }}>
               <MediaImg src={image} preset="gallery" alt={title} loading="lazy" sx={{ width: '100%', aspectRatio: { xs: '16/10', md: '1/1' }, objectFit: 'cover', objectPosition: responsiveObjectPosition(images, 'product.main', 'mobile', 'desktop'), display: 'block' }} />
             </Box>
-            <Box sx={{ position: 'absolute', top: { xs: 12, sm: 22 }, left: { xs: 12, sm: 22 }, bgcolor: brand.white, borderRadius: 999, px: { xs: 1.35, sm: 2 }, py: { xs: 0.65, sm: 0.9 }, boxShadow: brand.shadow, display: 'inline-flex', alignItems: 'center', gap: 1 }}>
+            <Box data-clarity-unmask="true" sx={{ position: 'absolute', top: { xs: 12, sm: 22 }, left: { xs: 12, sm: 22 }, bgcolor: brand.white, borderRadius: 999, px: { xs: 1.35, sm: 2 }, py: { xs: 0.65, sm: 0.9 }, boxShadow: brand.shadow, display: 'inline-flex', alignItems: 'center', gap: 1 }}>
               <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: brand.plantGreen }} />
               <Typography sx={{ fontWeight: 700, fontSize: { xs: '0.72rem', sm: '0.8rem' }, color: brand.graphite }}>{statPodsValue} · {statPodsLabel}</Typography>
             </Box>

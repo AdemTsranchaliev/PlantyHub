@@ -11,15 +11,12 @@ import AddRounded from '@mui/icons-material/AddRounded'
 import RemoveRounded from '@mui/icons-material/RemoveRounded'
 import NavigateNextRounded from '@mui/icons-material/NavigateNextRounded'
 import CheckCircleRounded from '@mui/icons-material/CheckCircleRounded'
-import ScheduleOutlined from '@mui/icons-material/ScheduleOutlined'
-import Inventory2Outlined from '@mui/icons-material/Inventory2Outlined'
-import WbSunnyOutlined from '@mui/icons-material/WbSunnyOutlined'
-import EnergySavingsLeafOutlined from '@mui/icons-material/EnergySavingsLeafOutlined'
 import SpaOutlined from '@mui/icons-material/SpaOutlined'
 import CircleOutlined from '@mui/icons-material/CircleOutlined'
 import WaterDropOutlined from '@mui/icons-material/WaterDropOutlined'
 import { useTranslation } from 'react-i18next'
 import ProductCard from '../components/ProductCard'
+import PodGuide from '../components/PodGuide'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
@@ -34,7 +31,7 @@ import MediaImg from '../components/MediaImg'
 import { GrowingDifficultyPanel } from '../components/GrowingDifficultyBadge'
 import ProductReviews, { ProductRatingRow, useProductReviews } from '../components/ProductReviews'
 
-const trustItems = ['compatible', 'nonGmo', 'shipping'] as const
+const trustItems = ['compatible', 'shipping'] as const
 
 export default function PodDetailPage() {
   const { t } = useTranslation()
@@ -68,12 +65,6 @@ export default function PodDetailPage() {
 
   const gallery = [pod.image, galleryExtra1, galleryExtra2]
   const kit = resolveKit(pod)
-  const specs = [
-    { key: 'harvest', Icon: ScheduleOutlined, value: t('podDetail.specs.harvest.value') },
-    { key: 'pack', Icon: Inventory2Outlined, value: t(`common.${pod.packKey}`) },
-    { key: 'light', Icon: WbSunnyOutlined, value: t('podDetail.specs.light.value') },
-    { key: 'nature', Icon: EnergySavingsLeafOutlined, value: t('podDetail.specs.nature.value') },
-  ]
   const related = allPods.filter((p) => p.id !== pod.id).slice(0, 4)
 
   return (
@@ -174,7 +165,7 @@ export default function PodDetailPage() {
               </Typography>
 
               {kit.pods > 0 && (
-                <Box sx={{ mb: 3.5 }}>
+                <Box data-clarity-unmask="true" sx={{ mb: 3.5 }}>
                   <Typography sx={{ fontWeight: 800, fontSize: '0.78rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: brand.textSecondary, mb: 1.25 }}>
                     {t('podDetail.includesTitle')}
                   </Typography>
@@ -214,6 +205,7 @@ export default function PodDetailPage() {
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ alignItems: { sm: 'center' }, mb: 3.5 }}>
                 <Stack
+                  data-clarity-unmask="true"
                   direction="row"
                   sx={{ alignItems: 'center', border: `1px solid ${brand.border}`, borderRadius: 999, px: 0.5, alignSelf: { xs: 'flex-start', sm: 'auto' } }}
                 >
@@ -245,33 +237,7 @@ export default function PodDetailPage() {
         </Grid>
       </SectionContainer>
 
-      <SectionContainer bgcolor={brand.surface} py={{ xs: 6, sm: 7, md: 8 }}>
-        <Typography component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, color: brand.graphite, mb: 3 }}>
-          {t('podDetail.detailsTitle')}
-        </Typography>
-        <Grid container spacing={{ xs: 2, md: 3 }}>
-          {specs.map(({ key, Icon, value }, index) => (
-            <Grid key={key} size={{ xs: 6, md: 3 }}>
-              <Reveal
-                delay={index * 0.06}
-                sx={{ height: '100%', bgcolor: brand.white, borderRadius: '20px', p: { xs: 2.5, sm: 3 }, border: `1px solid ${brand.border}`, textAlign: 'center' }}
-              >
-                <Box
-                  sx={{ width: 52, height: 52, borderRadius: '50%', border: `1.5px solid ${brand.plantGreen}`, display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 2 }}
-                >
-                  <Icon sx={{ color: brand.plantGreen, fontSize: 26 }} />
-                </Box>
-                <Typography variant="caption" sx={{ fontWeight: 700, color: brand.textSecondary, textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', mb: 0.5 }}>
-                  {t(`podDetail.specs.${key}.label`)}
-                </Typography>
-                <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, fontSize: '1.05rem', color: brand.graphite }}>
-                  {value}
-                </Typography>
-              </Reveal>
-            </Grid>
-          ))}
-        </Grid>
-      </SectionContainer>
+      <PodGuide plantId={pod.id} />
 
       <ProductReviews slug={pod.id} />
 

@@ -69,7 +69,7 @@ export default function NewsletterDialogContent({ open, onClose, onSubscribed }:
       onClose={onClose}
       maxWidth="xs"
       fullWidth
-      slotProps={{ paper: { sx: { borderRadius: '24px', overflow: 'hidden' } } }}
+      slotProps={{ paper: { 'data-clarity-unmask': 'true', sx: { borderRadius: '24px', overflow: 'hidden' } } }}
     >
       <Box sx={{ position: 'relative', p: { xs: 3, sm: 4 }, textAlign: 'center' }}>
         <IconButton
@@ -81,7 +81,7 @@ export default function NewsletterDialogContent({ open, onClose, onSubscribed }:
         </IconButton>
 
         {submitted ? (
-          <Stack spacing={2} sx={{ alignItems: 'center', py: 2 }}>
+          <Stack data-clarity-unmask="true" spacing={2} sx={{ alignItems: 'center', py: 2 }}>
             <CheckCircleRounded sx={{ fontSize: 56, color: brand.plantGreen }} />
             <Typography component="h2" variant="h3" sx={{ fontSize: '1.5rem', color: brand.graphite }}>
               {t('newsletter.successTitle')}
@@ -134,6 +134,7 @@ export default function NewsletterDialogContent({ open, onClose, onSubscribed }:
               <CardGiftcardRounded sx={{ fontSize: 32, color: brand.plantGreenDark }} />
             </Box>
             <Typography
+              data-clarity-unmask="true"
               sx={{
                 display: 'inline-block',
                 fontSize: '0.8rem',
@@ -148,7 +149,7 @@ export default function NewsletterDialogContent({ open, onClose, onSubscribed }:
             >
               {t('newsletter.badge')}
             </Typography>
-            <Typography component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', sm: '1.7rem' }, color: brand.graphite }}>
+            <Typography data-clarity-unmask="true" component="h2" variant="h3" sx={{ fontSize: { xs: '1.5rem', sm: '1.7rem' }, color: brand.graphite }}>
               {t('newsletter.title')}
             </Typography>
             <Typography sx={{ color: brand.textSecondary, lineHeight: 1.6, fontSize: '0.98rem' }}>
@@ -171,7 +172,7 @@ export default function NewsletterDialogContent({ open, onClose, onSubscribed }:
                 size="medium"
                 aria-label={t('newsletter.placeholder')}
               />
-              <Button type="submit" variant="contained" size="large" fullWidth disabled={submitting}>
+              <Button data-clarity-unmask="true" type="submit" variant="contained" size="large" fullWidth disabled={submitting}>
                 {submitting ? t('common.loading', { defaultValue: 'Loading…' }) : t('newsletter.button')}
               </Button>
             </Stack>

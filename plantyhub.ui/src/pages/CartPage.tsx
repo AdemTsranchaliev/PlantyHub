@@ -51,6 +51,7 @@ function QtyStepper({ quantity, onChange }: { quantity: number; onChange: (next:
 
   return (
     <Stack
+      data-clarity-unmask="true"
       direction="row"
       sx={{
         alignItems: 'center',

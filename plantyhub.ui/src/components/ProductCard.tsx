@@ -138,7 +138,7 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
         </Typography>
         {product.growingDifficulty && <GrowingDifficultyBadge difficulty={product.growingDifficulty} />}
         {product.includes ? (
-          <Stack direction="row" spacing={0.5} sx={{ pt: 0.25, flexWrap: 'nowrap' }}>
+          <Stack data-clarity-unmask="true" direction="row" spacing={0.5} sx={{ pt: 0.25, flexWrap: 'nowrap' }}>
             {[
               { key: 'pods', Icon: SpaOutlined, text: String(product.includes.pods) },
               { key: 'caps', Icon: CircleOutlined, text: String(product.includes.caps) },

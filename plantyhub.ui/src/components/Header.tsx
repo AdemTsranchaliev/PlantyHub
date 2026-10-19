@@ -196,7 +196,7 @@ export default function Header() {
               to={navHrefs.cart}
               sx={{ color: brand.graphite }}
             >
-              <Badge badgeContent={cartCount} color="primary" showZero={false}>
+              <Badge data-clarity-unmask="true" badgeContent={cartCount} color="primary" showZero={false}>
                 <ShoppingBagOutlinedIcon fontSize="small" />
               </Badge>
             </IconButton>
@@ -231,7 +231,7 @@ export default function Header() {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         slotProps={{
-          paper: { sx: { width: { xs: 'min(100vw, 320px)', sm: 340 } } },
+          paper: { 'data-clarity-unmask': 'true', sx: { width: { xs: 'min(100vw, 320px)', sm: 340 } } },
         }}
       >
         <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: pagePaddingX }}>

@@ -349,7 +349,7 @@
     "easy": "Facile",
     "medium": "Moyen",
     "hard": "Difficile",
-    "easyHint": "Indulgent et rapide — idéal pour les premières récoltes.",
+    "easyHint": "Indulgent et rapide — adapté aux débutants.",
     "mediumHint": "Un soin régulier aide — gratifiant pour les cultivateurs habitués.",
     "hardHint": "Demande plus d’attention — pour les cultivateurs confiants.",
     "easyHintShort": "Idéal pour débuter",
@@ -366,27 +366,72 @@
     "includesNutrientHint": "{{ml}} ml chacun",
     "relatedTitle": "Plus de capsules à cultiver",
     "specs": {
-      "harvest": {
-        "label": "Première récolte",
-        "value": "2–4 semaines"
-      },
       "pack": {
         "label": "Format"
       },
       "light": {
         "label": "Lumière",
         "value": "LED · auto 16/8"
-      },
-      "nature": {
-        "label": "Graines",
-        "value": "Sans OGM"
       }
     },
     "trust": {
       "compatible": "Compatible avec tous les jardins PlantyHub",
-      "nonGmo": "Sans OGM & naturel",
       "shipping": "Expédié sous 24h"
     }
+  },
+  "podGuide": {
+    "videoBadge": "Démo en 60 secondes",
+    "videoTitle": "Comment poser une capsule",
+    "videoText": "Retirez l’autocollant, placez la capsule et le dôme. L’eau et la lampe font le reste.",
+    "points": [
+      "Les graines sont déjà dedans — prête pour l’emplacement",
+      "Le dôme garde l’humidité jusqu’à la germination",
+      "Si rien ne germe et que vous avez suivi les étapes, nous en envoyons une nouvelle"
+    ],
+    "stepsTitle": "Quatre étapes jusqu’au germe",
+    "stepsLead": "Environ cinq minutes. Ensuite le jardin continue seul.",
+    "steps": [
+      { "title": "Retirez l’autocollant", "text": "Placez une capsule dans chaque emplacement." },
+      { "title": "Posez le dôme", "text": "Il garde l’humidité jusqu’à ce que le germe le touche. Ensuite, retirez-le." },
+      { "title": "Eau et nourriture", "text": "4 l d’eau, puis 5 ml de A, mélangez, puis 5 ml de B. Ne les mélangez pas purs." },
+      { "title": "Allumez la lampe", "text": "16 heures de lumière et 8 heures de repos. Le cycle démarre seul." }
+    ],
+    "timingTitle": "Quand ça germe",
+    "timingLead": "Les délais sont indicatifs. Dans une pièce plus chaude et avec de l’eau filtrée, ça va plus vite.",
+    "thisPlant": "Pour cette graine",
+    "sprout": "Germe",
+    "harvest": "Première récolte",
+    "timingFallback": "Les germes partent en quelques jours. La première récolte arrive en environ 6 semaines.",
+    "plants": {
+      "arugula": { "name": "Roquette", "sprout": "3–7 jours", "harvest": "dès 3 semaines" },
+      "basil": { "name": "Basilic", "sprout": "5–10 jours", "harvest": "dès 3 semaines" },
+      "lettuce": { "name": "Laitue", "sprout": "parmi les premières", "harvest": "dès 3 semaines" },
+      "mint": { "name": "Menthe", "sprout": "10–16 jours", "harvest": "environ 8–9 semaines" },
+      "cilantro": { "name": "Coriandre", "sprout": "7–14 jours", "harvest": "dès 4 semaines" },
+      "dill": { "name": "Aneth", "sprout": "7–14 jours", "harvest": "dès 4 semaines" },
+      "parsley": { "name": "Persil", "sprout": "2–4 semaines", "harvest": "dès 5 semaines" },
+      "plant-everything": { "name": "Tout planter", "note": "Capsules vides — le délai dépend des graines que vous mettez." }
+    },
+    "faqTitle": "À propos des capsules",
+    "faqSeeAll": "Tout voir",
+    "faq": [
+      {
+        "q": "Que contient une capsule ?",
+        "a": "Des graines pré-ensemencées dans un milieu hydroponique — prête à poser."
+      },
+      {
+        "q": "Quand arrive la première récolte ?",
+        "a": "Chaque plante a son délai. La roquette germe en 3–7 jours et se récolte dès 3 semaines, le basilic en 5–10 jours et dès 3 semaines. La laitue est parmi les premières et se récolte dès 3 semaines. La menthe germe en 10–16 jours et se récolte vers 8–9 semaines. Le persil germe en 2–4 semaines et se récolte dès 5 semaines."
+      },
+      {
+        "q": "La capsule ne germe pas — que faire ?",
+        "a": "Attendez le délai de la plante — jusqu’à 4 semaines pour le persil. Vérifiez l’eau, la lumière et la température. Si rien ne se passe, écrivez-nous avec le numéro de commande — nous remplacerons la capsule."
+      },
+      {
+        "q": "Puis-je réutiliser une capsule ?",
+        "a": "Mieux vaut non. Après la récolte, posez une capsule neuve — départ frais et système plus propre."
+      }
+    ]
   },
   "accessoriesPage": {
     "eyebrow": "Accessoires",
@@ -449,7 +494,7 @@
       },
       "sustainability": {
         "title": "Respect de la planète",
-        "text": "Graines sans OGM, matériaux recyclables et hydroponie qui économise l'eau par rapport à la terre."
+        "text": "Matériaux recyclables et hydroponie qui économise l'eau par rapport à la terre."
       },
       "simplicity": {
         "title": "Plus simple pour tous",
@@ -1019,6 +1064,8 @@
       "registerLink": "Créer un compte",
       "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
       "invalidPassword": "Le mot de passe doit contenir au moins 6 caractères.",
+      "invalidCredentials": "E-mail ou mot de passe incorrect.",
+      "unavailable": "La connexion n'a pas abouti. Réessayez dans un instant.",
       "success": "Vous êtes connecté. Bon retour sur PlantyHub !",
       "continue": "Continuer mes achats"
     },
@@ -2052,14 +2099,18 @@
     },
     "media": {
       "title": "Médias",
-      "subtitle": "Téléversez et remplacez les images du blog, À propos et des pages produit.",
+      "subtitle": "Téléversez et remplacez les images du blog, À propos et des pages produit, et la vidéo des capsules.",
       "saveFailed": "Impossible d'enregistrer l'image. Réessayez.",
       "groups": {
+        "pods": "Capsules",
         "blog": "Articles du blog",
         "about": "Page À propos",
         "pdp": "Pages produit et capsules"
       },
       "slots": {
+        "pods": {
+          "video": "Vidéo de la page capsules"
+        },
         "blog": {
           "pesto": "Article — pesto basilic",
           "hydroponics": "Article — hydroponie",
@@ -2310,7 +2361,7 @@
           },
           {
             "q": "Que contient une capsule ?",
-            "a": "Graines pré-ensemencées dans un milieu hydroponique, prêtes à placer. Graines non OGM selon notre politique produit."
+            "a": "Graines pré-ensemencées dans un milieu hydroponique, prêtes à placer."
           },
           {
             "q": "Durée de conservation des capsules ?",

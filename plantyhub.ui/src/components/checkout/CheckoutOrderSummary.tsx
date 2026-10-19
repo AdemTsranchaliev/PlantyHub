@@ -76,6 +76,7 @@ function LineItem({ item }: { item: CartItem }) {
           />
         </Box>
         <Box
+          data-clarity-unmask="true"
           sx={{
             position: 'absolute',
             top: -5,

@@ -69,6 +69,14 @@ function AdminLoginRedirect() {
   return null
 }
 
+function Masked({ children }: { children: React.ReactNode }) {
+  return (
+    <Box data-clarity-mask="true" sx={{ display: 'contents' }}>
+      {children}
+    </Box>
+  )
+}
+
 function PageFallback() {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
@@ -82,7 +90,7 @@ function StorefrontRoutes() {
   const isCheckoutFlow = /^\/(checkout|order\/)/.test(location.pathname)
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: brand.white, color: brand.graphite }}>
+    <Box data-clarity-unmask="true" sx={{ minHeight: '100vh', bgcolor: brand.white, color: brand.graphite }}>
       {!isCheckoutFlow && <PromoBar />}
       {!isCheckoutFlow && <Header />}
       <Suspense fallback={<PageFallback />}>
@@ -110,11 +118,11 @@ function StorefrontRoutes() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/verify-email" element={<VerifyEmailPage />} />
-          <Route path="/account/orders" element={<MyOrdersPage />} />
+          <Route path="/account/orders" element={<Masked><MyOrdersPage /></Masked>} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/order/:orderId" element={<OrderConfirmationPage />} />
-          <Route path="/review/:token" element={<ReviewPage />} />
+          <Route path="/checkout" element={<Masked><CheckoutPage /></Masked>} />
+          <Route path="/order/:orderId" element={<Masked><OrderConfirmationPage /></Masked>} />
+          <Route path="/review/:token" element={<Masked><ReviewPage /></Masked>} />
         </Routes>
       </Suspense>
       {!isCheckoutFlow && <Footer />}

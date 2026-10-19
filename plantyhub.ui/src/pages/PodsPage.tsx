@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography'
 import NavigateNextRounded from '@mui/icons-material/NavigateNextRounded'
 import { useTranslation } from 'react-i18next'
 import ProductCard from '../components/ProductCard'
+import PodGuide from '../components/PodGuide'
 import SectionContainer from '../components/SectionContainer'
 import Reveal from '../components/Reveal'
 import { navHrefs } from '../data/catalog'
@@ -82,10 +83,13 @@ export default function PodsPage() {
             </Grid>
           ))}
         </Grid>
+      </SectionContainer>
 
+      <PodGuide listedIds={pods.map((pod) => pod.id)} />
+
+      <SectionContainer bgcolor={brand.white} py={{ xs: 5, sm: 6, md: 8 }}>
         <Box
           sx={{
-            mt: { xs: 5, md: 7 },
             p: { xs: 3, sm: 5 },
             borderRadius: '28px',
             border: `2px dashed ${brand.plantGreen}`,

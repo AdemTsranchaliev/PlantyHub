@@ -61,7 +61,7 @@ export default function LightCycleSection() {
 
   return (
     <SectionContainer bgcolor={brand.white} py={{ xs: 4, sm: 6, md: 8 }}>
-      <Grid container spacing={{ xs: 3.5, md: 7 }} sx={{ alignItems: 'center' }}>
+      <Grid data-clarity-unmask="true" container spacing={{ xs: 3.5, md: 7 }} sx={{ alignItems: 'center' }}>
         <Grid size={{ xs: 12, md: 5 }}>
           <SectionHeading align="left" eyebrow={eyebrow} title={title} subtitle={description} />
           <Stack spacing={{ xs: 2, sm: 2.5 }} sx={{ mt: { xs: 2, sm: 3 } }}>

@@ -256,7 +256,7 @@ export const socialLinks = [
   { label: 'Instagram', href: 'https://instagram.com/plantyhub.official', icon: 'instagram' },
   { label: 'TikTok', href: 'https://tiktok.com/@plantyhub.official', icon: 'tiktok' },
   { label: 'Facebook', href: 'https://facebook.com/plantyhub', icon: 'facebook' },
-  { label: 'YouTube', href: 'https://youtube.com/@plantyhub', icon: 'youtube' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@PlantyHub1', icon: 'youtube' },
   { label: 'LinkedIn', href: 'https://linkedin.com/company/plantyhub', icon: 'linkedin' },
 ] as const
 

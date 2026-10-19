@@ -301,7 +301,7 @@ function graphNode(
           'https://instagram.com/plantyhub.official',
           'https://tiktok.com/@plantyhub.official',
           'https://facebook.com/plantyhub',
-          'https://youtube.com/@plantyhub',
+          'https://www.youtube.com/@PlantyHub1',
           'https://linkedin.com/company/plantyhub',
         ],
       },
