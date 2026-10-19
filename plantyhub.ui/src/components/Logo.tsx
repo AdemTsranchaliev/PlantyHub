@@ -26,7 +26,7 @@ const LOGO_RATIO = '862 / 218'
 export default function Logo({ size = 'md' }: LogoProps) {
   const [failed, setFailed] = useState(false)
   const resolved = toMediaUrl(logoSrc)
-  const srcSet = SRC_WIDTHS.map((width) => `${cfImageWidth(resolved, width)} ${width}w`).join(', ')
+  const srcSet = SRC_WIDTHS.map((width) => `${cfImageWidth(resolved, width, 75)} ${width}w`).join(', ')
 
   useEffect(() => {
     setFailed(false)
@@ -35,7 +35,7 @@ export default function Logo({ size = 'md' }: LogoProps) {
   return (
     <Box
       component="img"
-      src={failed ? resolved : cfImageWidth(resolved, 320)}
+      src={failed ? resolved : cfImageWidth(resolved, 240, 75)}
       srcSet={failed ? undefined : srcSet}
       sizes={sizes[size]}
       alt="PlantyHub"

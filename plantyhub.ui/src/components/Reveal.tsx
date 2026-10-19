@@ -20,20 +20,7 @@ export default function Reveal({ delay = 0, sx, children, ...rest }: RevealProps
     if (!el) return
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduceMotion) {
-      setShown(true)
-      return
-    }
-
-    // Already in view (common for above-the-fold content on mobile)
-    const rect = el.getBoundingClientRect()
-    const vh = window.innerHeight || document.documentElement.clientHeight
-    if (rect.top < vh * 0.92 && rect.bottom > 0) {
-      setShown(true)
-      return
-    }
-
-    if (typeof IntersectionObserver === 'undefined') {
+    if (reduceMotion || typeof IntersectionObserver === 'undefined') {
       setShown(true)
       return
     }

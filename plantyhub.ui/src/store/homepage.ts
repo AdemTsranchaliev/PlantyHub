@@ -1,8 +1,6 @@
 import type { LanguageCode } from '../i18n/languages'
-import en from '../i18n/locales/en.json'
-import bg from '../i18n/locales/bg.json'
-import de from '../i18n/locales/de.json'
-import fr from '../i18n/locales/fr.json'
+import i18n from '../i18n'
+import { bootSeed } from '../boot/seed'
 import {
   type HomepageSectionKey,
   homepageSectionOrder,
@@ -31,7 +29,6 @@ const defaultSectionEnabled = Object.fromEntries(
   ]),
 ) as Record<HomepageSectionKey, boolean>
 
-const localeFiles = { en, bg, de, fr } as const
 const listeners = new Set<() => void>()
 let cachedState: HomepageState | null = null
 let loading = false
@@ -45,27 +42,27 @@ export function subscribeHomepage(listener: () => void) {
   return () => listeners.delete(listener)
 }
 
-function getNested(obj: unknown, path: string): string | undefined {
-  const parts = path.split('.')
-  let cur: unknown = obj
-  for (const part of parts) {
-    if (!cur || typeof cur !== 'object' || !(part in cur)) return undefined
-    cur = (cur as Record<string, unknown>)[part]
-  }
-  return typeof cur === 'string' ? cur : undefined
-}
-
 function buildLocaleTexts(lang: LanguageCode): Record<string, string> {
-  const file = localeFiles[lang]
   const texts: Record<string, string> = {}
+  if (!i18n.hasResourceBundle(lang, 'translation')) return texts
   for (const key of getAllTextKeys()) {
-    const value = getNested(file, key)
-    if (value) texts[key] = value
+    const value = i18n.getResource(lang, 'translation', key)
+    if (typeof value === 'string' && value) texts[key] = value
+  }
+  const seed = bootSeed()
+  if (seed?.lang === lang && seed.texts) {
+    for (const [key, value] of Object.entries(seed.texts)) {
+      if (value) texts[key] = value
+    }
   }
   return texts
 }
 
 export function createDefaultHomepageState(): HomepageState {
+  const images = getDefaultImages()
+  const seed = bootSeed()
+  if (seed?.image) images['hero.main'] = seed.image
+  if (seed?.focus) images['hero.main.focus'] = seed.focus
   return {
     layoutVersion: LAYOUT_VERSION,
     sections: { ...defaultSectionEnabled },
@@ -75,7 +72,7 @@ export function createDefaultHomepageState(): HomepageState {
       de: buildLocaleTexts('de'),
       fr: buildLocaleTexts('fr'),
     },
-    images: getDefaultImages(),
+    images,
   }
 }
 

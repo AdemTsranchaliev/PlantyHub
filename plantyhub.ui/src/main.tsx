@@ -3,17 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import '@fontsource/nunito-sans/400.css'
-import '@fontsource/nunito-sans/600.css'
-import '@fontsource/nunito-sans/700.css'
-import '@fontsource/fraunces/400.css'
-import '@fontsource/fraunces/500.css'
-import '@fontsource/fraunces/600.css'
-import '@fontsource/fraunces/700.css'
-import '@fontsource/fraunces/500-italic.css'
-import '@fontsource/fraunces/600-italic.css'
 import './index.css'
-import './i18n/setup'
+import { i18nReady } from './i18n'
 import theme from './theme'
 import App from './App.tsx'
 import { defaultLanguage, isActiveLanguage, localeFromPathname } from './i18n/languages'
@@ -65,6 +56,8 @@ function AppRouter() {
   )
 }
 
+await i18nReady
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
@@ -73,3 +66,12 @@ createRoot(document.getElementById('root')!).render(
     </ThemeProvider>
   </StrictMode>,
 )
+
+const hero = document.getElementById('boot-hero-img')
+if (hero instanceof HTMLImageElement && !hero.complete) {
+  const loadFonts = () => void import('./fonts')
+  hero.addEventListener('load', loadFonts, { once: true })
+  hero.addEventListener('error', loadFonts, { once: true })
+} else {
+  void import('./fonts')
+}

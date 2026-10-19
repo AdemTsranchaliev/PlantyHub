@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
@@ -13,7 +14,9 @@ import { responsiveObjectPosition } from '../media/imageFocus'
 import { stockImages } from '../data/images'
 import { resolveHref } from '../paths'
 import { brand } from '../theme'
+import { HERO_IMAGE } from '../media/cfImage'
 import MediaImg from '../components/MediaImg'
+import { bootSeed } from '../boot/seed'
 
 const paper = '#F3F6F0'
 const line = 'rgba(31, 90, 59, 0.14)'
@@ -22,9 +25,8 @@ const statKeys = ['pods', 'light', 'height'] as const
 
 function HeroFacts() {
   return (
-    <Box
-      className="hero-fade-up-late"
-      sx={{
+      <Box
+        sx={{
         display: 'grid',
         gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
         mt: { xs: 3, md: 4, lg: 4.5 },
@@ -79,6 +81,9 @@ function HeroFact({ statKey, withRule }: { statKey: (typeof statKeys)[number]; w
 }
 
 export default function HeroSection() {
+  const [keepBootImage] = useState(
+    () => typeof document !== 'undefined' && document.getElementById('boot-hero-img') instanceof HTMLImageElement,
+  )
   const garden = useProduct('gardens', 'homegarder-one')
   const images = useHomepageImages()
   const heroImage = useHi('hero.main', garden?.image ?? stockImages.homeGardenProduct)
@@ -90,7 +95,7 @@ export default function HeroSection() {
   const imageAlt = useHt('hero.imageAlt')
   const priceLabel = useHt('hero.priceLabel')
   const trustShipping = useHt('hero.trust.shipping')
-  const price = garden?.price
+  const price = garden?.price || bootSeed()?.price
 
   return (
     <Box
@@ -103,9 +108,8 @@ export default function HeroSection() {
         overflow: 'hidden',
       }}
     >
-      <Box
-        className="hero-fade-up"
-        sx={{
+        <Box
+          sx={{
           position: 'relative',
           zIndex: 1,
           display: 'flex',
@@ -219,7 +223,6 @@ export default function HeroSection() {
       </Box>
 
       <Box
-        className="hero-fade-up-delay"
         sx={{
           position: 'relative',
           order: { xs: 0, md: 0 },
@@ -227,22 +230,26 @@ export default function HeroSection() {
           height: { xs: 'min(300px, 62vw)', sm: 'min(360px, 42vw)', md: 'auto' },
         }}
       >
-        <MediaImg
-          className="hero-image-reveal"
-          src={heroImage}
-          preset="hero"
-          alt={imageAlt}
-          loading="eager"
-          fetchPriority="high"
-          sx={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: responsiveObjectPosition(images, 'hero.main', 'mobile', 'desktop'),
-          }}
-        />
+        {keepBootImage ? (
+          <Box id="hero-lcp-slot" sx={{ position: 'absolute', inset: 0 }} />
+        ) : (
+          <MediaImg
+            src={heroImage}
+            preset="hero"
+            sizes={HERO_IMAGE.sizes}
+            alt={imageAlt}
+            loading="eager"
+            fetchPriority="high"
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: responsiveObjectPosition(images, 'hero.main', 'mobile', 'desktop'),
+            }}
+          />
+        )}
         <Box
           sx={{
             position: 'absolute',

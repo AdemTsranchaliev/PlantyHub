@@ -2,10 +2,29 @@ export type ImagePreset = 'thumb' | 'card' | 'gallery' | 'hero' | 'full'
 
 const PRESETS: Record<ImagePreset, string> = {
   thumb: 'width=240,height=240,fit=cover,format=auto,quality=75',
-  card: 'width=720,fit=scale-down,format=auto,quality=80',
-  gallery: 'width=1200,fit=scale-down,format=auto,quality=82',
-  hero: 'width=1600,fit=scale-down,format=auto,quality=82',
-  full: 'width=1920,fit=scale-down,format=auto,quality=85',
+  card: 'width=480,fit=scale-down,format=auto,quality=75',
+  gallery: 'width=960,fit=scale-down,format=auto,quality=78',
+  hero: 'width=960,fit=scale-down,format=auto,quality=75',
+  full: 'width=1280,fit=scale-down,format=auto,quality=80',
+}
+
+/**
+ * Homepage hero candidates. The server paints the same set in the first HTML
+ * (PlantyHub.Api/Services/FirstPaint.cs) so the browser does not download the photo twice.
+ */
+export const HERO_IMAGE = {
+  widths: [640, 960, 1280, 1600],
+  fallback: 960,
+  quality: 75,
+  sizes: '(min-width: 900px) 52vw, 100vw',
+} as const
+
+const SRCSET: Record<ImagePreset, { widths: readonly number[]; fallback: number; quality: number; sizes: string }> = {
+  thumb: { widths: [120, 240], fallback: 240, quality: 75, sizes: '96px' },
+  card: { widths: [320, 480, 720], fallback: 480, quality: 75, sizes: '(min-width: 900px) 280px, min(78vw, 260px)' },
+  gallery: { widths: [480, 640, 720, 960, 1200], fallback: 720, quality: 75, sizes: '(min-width: 900px) 46vw, calc(100vw - 32px)' },
+  hero: { widths: HERO_IMAGE.widths, fallback: HERO_IMAGE.fallback, quality: HERO_IMAGE.quality, sizes: '100vw' },
+  full: { widths: [960, 1280, 1920], fallback: 1280, quality: 80, sizes: '100vw' },
 }
 
 const VIDEO_EXT = /\.(mp4|webm|mov|m4v)(\?|#|$)/i
@@ -141,8 +160,22 @@ export function cfImage(url: string, preset: ImagePreset = 'card'): string {
   return cfImageUrl(url, PRESETS[preset])
 }
 
+export function cfImageSet(url: string, preset: ImagePreset = 'card'): { src: string; srcSet?: string; sizes?: string } {
+  const resolved = toMediaUrl(url)
+  const spec = SRCSET[preset]
+  if (!resolved || import.meta.env.VITE_CF_IMAGE_TRANSFORMS === 'false' || !isR2MediaUrl(resolved)) {
+    return { src: resolved }
+  }
+  const options = (width: number) => `width=${width},fit=scale-down,format=auto,quality=${spec.quality}`
+  return {
+    src: cfImageUrl(resolved, options(spec.fallback)),
+    srcSet: spec.widths.map((width) => `${cfImageUrl(resolved, options(width))} ${width}w`).join(', '),
+    sizes: spec.sizes,
+  }
+}
+
 /** Width cap for files shown far below their pixel size, such as the wordmark. */
-export function cfImageWidth(url: string, width: number, quality = 90): string {
+export function cfImageWidth(url: string, width: number, quality = 75): string {
   const safe = Math.max(1, Math.round(width))
   return cfImageUrl(url, `width=${safe},fit=scale-down,format=auto,quality=${quality}`)
 }

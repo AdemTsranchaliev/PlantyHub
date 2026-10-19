@@ -5,6 +5,8 @@ import { useProductReviews } from './ProductReviews'
 import { activeLanguages } from '../i18n/languages'
 import { currentLocale } from '../paths'
 import { absoluteCanonical, alternateUrls, buildHead, OG_IMAGE, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, type HeadDocument } from '../seo/buildHead'
+import { ensureLanguage } from '../i18n'
+import { loadSchoolPack } from '../content/school/load'
 import { getProductsError, getProductsLoading, getProductsState, subscribeProducts } from '../store/products'
 
 const ogLocales: Record<string, string> = { bg: 'bg_BG', en: 'en_US', de: 'de_DE', fr: 'fr_FR' }
@@ -113,18 +115,28 @@ export default function LocaleHead() {
   const productsReady = !loading && (error != null || products.pods.length + products.accessories.length + products.gardens.length > 0)
 
   useEffect(() => {
-    if (i18n.language !== locale) void i18n.changeLanguage(locale)
-    const model = buildHead({
-      origin: window.location.origin,
-      locale,
-      pathname,
-      search,
-      translate: t as (key: string, options?: Record<string, unknown>) => unknown,
-      products,
-      productsReady,
-      reviews: reviews && reviews.count > 0 ? { average: reviews.average, count: reviews.count } : null,
-    })
-    applyDocument(model, locale)
+    let cancel = false
+    void (async () => {
+      if (i18n.language !== locale) await ensureLanguage(locale)
+      if (cancel) return
+      const school = pathname === '/learn' ? await loadSchoolPack(locale) : null
+      if (cancel) return
+      const model = buildHead({
+        origin: window.location.origin,
+        locale,
+        pathname,
+        search,
+        translate: t as (key: string, options?: Record<string, unknown>) => unknown,
+        products,
+        productsReady,
+        reviews: reviews && reviews.count > 0 ? { average: reviews.average, count: reviews.count } : null,
+        school,
+      })
+      applyDocument(model, locale)
+    })()
+    return () => {
+      cancel = true
+    }
   }, [error, i18n, loading, locale, pathname, products, productsReady, reviews, search, t])
 
   return null

@@ -27,12 +27,11 @@ function CycleSweep({ tall = false }: { tall?: boolean }) {
           : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.85), transparent)',
         animation: 'cycleSweep 12s linear infinite',
         '@keyframes cycleSweep': {
-          '0%': { left: '0%' },
-          '100%': { left: '100%' },
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(calc(100cqi - 100%))' },
         },
         '@media (prefers-reduced-motion: reduce)': {
           animation: 'none',
-          left: '33%',
         },
       }}
     />
@@ -92,25 +91,32 @@ export default function LightCycleSection() {
         <Grid size={{ xs: 12, md: 7 }}>
           <Reveal sx={{ bgcolor: brand.surface, borderRadius: { xs: '20px', sm: '28px' }, p: { xs: 2.25, sm: 4.5 }, border: `1px solid ${brand.border}` }}>
             <Typography sx={{ fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'text.secondary', mb: { xs: 2, sm: 3 }, textAlign: 'center' }}>{diagramLabel}</Typography>
-            <Box sx={{ position: 'relative', borderRadius: { xs: '14px', sm: '18px' }, overflow: 'hidden', height: { xs: 56, sm: 84 }, mb: 2, boxShadow: brand.shadow, display: 'flex' }}>
+            <Box sx={{ position: 'relative', containerType: 'inline-size', borderRadius: { xs: '14px', sm: '18px' }, overflow: 'hidden', height: { xs: 56, sm: 84 }, mb: 2, boxShadow: brand.shadow, display: 'flex' }}>
               <Box
                 sx={{
                   flex: 16,
                   background: `linear-gradient(100deg, ${brand.plantGreenDark} 0%, ${brand.plantGreen} 38%, ${brand.plantGreenLight} 50%, ${brand.plantGreen} 62%, ${brand.plantGreenDark} 100%)`,
-                  backgroundSize: '220% 100%',
-                  animation: 'lightShimmer 4.8s ease-in-out infinite',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   position: 'relative',
-                  '@keyframes lightShimmer': {
-                    '0%, 100%': { backgroundPosition: '0% 50%' },
-                    '50%': { backgroundPosition: '100% 50%' },
+                  overflow: 'hidden',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.28) 46%, transparent 70%)',
+                    transform: 'translateX(-40%)',
+                    animation: 'lightShimmer 4.8s ease-in-out infinite',
                   },
-                  '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+                  '@keyframes lightShimmer': {
+                    '0%, 100%': { transform: 'translateX(-40%)' },
+                    '50%': { transform: 'translateX(40%)' },
+                  },
+                  '@media (prefers-reduced-motion: reduce)': { '&::before': { animation: 'none' } },
                 }}
               >
-                <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, color: brand.white, fontSize: { xs: '1.15rem', sm: '1.6rem' }, position: 'relative' }}>16h</Typography>
+                <Typography sx={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 600, color: brand.white, fontSize: { xs: '1.15rem', sm: '1.6rem' }, position: 'relative', zIndex: 1 }}>16h</Typography>
                 <LightModeOutlinedIcon sx={{ display: { xs: 'none', sm: 'block' }, position: 'absolute', right: 14, color: 'rgba(255,255,255,0.55)', fontSize: 28 }} />
               </Box>
               <Box sx={{ flex: 8, bgcolor: brand.graphite, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
@@ -146,6 +152,7 @@ export default function LightCycleSection() {
                     <Box
                       sx={{
                         position: 'relative',
+                        containerType: 'inline-size',
                         display: 'flex',
                         borderRadius: { xs: 1, sm: 1.5 },
                         overflow: 'hidden',

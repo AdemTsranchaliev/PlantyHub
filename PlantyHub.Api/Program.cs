@@ -1,8 +1,10 @@
+using System.IO.Compression;
 using System.Text;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PlantyHub.Api.Data;
@@ -144,6 +146,21 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+    [
+        "text/javascript",
+        "application/manifest+json",
+        "image/svg+xml",
+    ]);
+});
+builder.Services.Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
+builder.Services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
+
 var app = builder.Build();
 
 await DbSeeder.SeedAsync(app.Services);
@@ -161,9 +178,21 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
+app.UseResponseCompression();
 app.UseCors();
-app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        var path = ctx.Context.Request.Path.Value ?? "";
+        if (path.StartsWith("/assets/", StringComparison.Ordinal))
+            ctx.Context.Response.Headers.CacheControl = "public, max-age=31536000, immutable";
+        else if (path.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
+            ctx.Context.Response.Headers.CacheControl = "no-cache";
+        else
+            ctx.Context.Response.Headers.CacheControl = "public, max-age=604800";
+    }
+});
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -205,11 +234,13 @@ app.MapFallback(async (HttpContext context, AppDbContext db, CancellationToken c
         return;
     }
 
-    var html = await File.ReadAllTextAsync(index);
+    var html = await File.ReadAllTextAsync(index, ct);
     var product = await LocaleSeo.LoadPageProductAsync(db, context.Request.Path.Value ?? "/", ct);
     html = LocaleSeo.Apply(html, context.Request, product);
+    html = await FirstPaint.ApplyAsync(html, context.Request.Path.Value ?? "/", db, ct);
     context.Response.ContentType = "text/html; charset=utf-8";
-    await context.Response.WriteAsync(html);
+    context.Response.Headers.CacheControl = "no-cache";
+    await context.Response.WriteAsync(html, ct);
 });
 
 app.Run();

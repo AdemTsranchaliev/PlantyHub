@@ -1,28 +1,9 @@
+import { lazy, Suspense, useEffect, useState } from 'react'
 import HeroSection from '../sections/HeroSection'
-import GrowSmarterSection from '../sections/GrowSmarterSection'
-import ProductSection from '../sections/ProductSection'
-import HowItWorksSection from '../sections/HowItWorksSection'
-import LightCycleSection from '../sections/LightCycleSection'
-import PodsGridSection from '../sections/PodsGridSection'
-import SocialProofSection from '../sections/SocialProofSection'
-import GuaranteesSection from '../sections/GuaranteesSection'
-import AccessoriesSection from '../sections/AccessoriesSection'
-import CtaSection from '../sections/CtaSection'
 import { useSectionEnabled } from '../hooks/useHomepage'
 import type { HomepageSectionKey } from '../admin/homepageSchema'
 
-const sections: { key: HomepageSectionKey; Component: React.ComponentType }[] = [
-  { key: 'hero', Component: HeroSection },
-  { key: 'growSmarter', Component: GrowSmarterSection },
-  { key: 'product', Component: ProductSection },
-  { key: 'howItWorks', Component: HowItWorksSection },
-  { key: 'lightCycle', Component: LightCycleSection },
-  { key: 'podsGrid', Component: PodsGridSection },
-  { key: 'socialProof', Component: SocialProofSection },
-  { key: 'guarantees', Component: GuaranteesSection },
-  { key: 'accessories', Component: AccessoriesSection },
-  { key: 'cta', Component: CtaSection },
-]
+const HomeRest = lazy(() => import('./HomeRest'))
 
 function SectionGate({ sectionKey, children }: { sectionKey: HomepageSectionKey; children: React.ReactNode }) {
   const enabled = useSectionEnabled(sectionKey)
@@ -31,13 +12,28 @@ function SectionGate({ sectionKey, children }: { sectionKey: HomepageSectionKey;
 }
 
 export default function HomePage() {
+  const [showRest, setShowRest] = useState(false)
+
+  useEffect(() => {
+    const start = () => setShowRest(true)
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(start, { timeout: 600 })
+      return () => window.cancelIdleCallback(id)
+    }
+    const id = window.setTimeout(start, 1)
+    return () => window.clearTimeout(id)
+  }, [])
+
   return (
     <main>
-      {sections.map(({ key, Component }) => (
-        <SectionGate key={key} sectionKey={key}>
-          <Component />
-        </SectionGate>
-      ))}
+      <SectionGate sectionKey="hero">
+        <HeroSection />
+      </SectionGate>
+      {showRest ? (
+        <Suspense fallback={null}>
+          <HomeRest />
+        </Suspense>
+      ) : null}
     </main>
   )
 }

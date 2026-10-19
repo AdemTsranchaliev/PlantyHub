@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import LanguageIcon from '@mui/icons-material/Language'
 import { useTranslation } from 'react-i18next'
+import { ensureLanguage } from '../i18n'
 import { activeLanguages, languageStorageKey, type LanguageCode } from '../i18n/languages'
 import { BASE_PATH, localizePath } from '../paths'
 import { brand } from '../theme'
@@ -24,7 +25,7 @@ export default function LanguageSwitcher() {
     setAnchor(null)
 
     if (onAdmin) {
-      void i18n.changeLanguage(code)
+      void ensureLanguage(code)
       return
     }
 

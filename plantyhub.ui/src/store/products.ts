@@ -4,11 +4,8 @@ import {
   consumablesCatalog,
   accessoriesCatalog,
 } from '../data/catalog'
+import i18n from '../i18n'
 import type { LanguageCode } from '../i18n/languages'
-import en from '../i18n/locales/en.json'
-import bg from '../i18n/locales/bg.json'
-import de from '../i18n/locales/de.json'
-import fr from '../i18n/locales/fr.json'
 import { mapProductsResponse, productsApi, toProductUpsert } from '../api'
 
 export type ProductCategory = 'gardens' | 'pods' | 'consumables' | 'accessories'
@@ -85,7 +82,6 @@ const emptyProductsState: ProductsState = {
   accessories: [],
 }
 
-const locales = { en, bg, de, fr } as const
 const listeners = new Set<() => void>()
 let cachedState: ProductsState | null = null
 let loading = false
@@ -114,13 +110,14 @@ function readLocaleField(
   id: string,
   field: keyof ProductLocaleContent,
 ): string | undefined {
-  const products = locales[lang].products as Record<string, Record<string, Record<string, string>>>
-  return products[category]?.[id]?.[field]
+  if (!i18n.hasResourceBundle(lang, 'translation')) return undefined
+  const value = i18n.getResource(lang, 'translation', `products.${category}.${id}.${field}`)
+  return typeof value === 'string' && value ? value : undefined
 }
 
 function buildLocales(category: ProductCategory, id: string): Partial<Record<LanguageCode, ProductLocaleContent>> {
   const result: Partial<Record<LanguageCode, ProductLocaleContent>> = {}
-  for (const lang of Object.keys(locales) as LanguageCode[]) {
+  for (const lang of ['en', 'bg', 'de', 'fr'] as const) {
     const name = readLocaleField(lang, category, id, 'name')
     if (!name) continue
     result[lang] = {

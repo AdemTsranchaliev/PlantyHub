@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useLayoutEffect } from 'react'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
@@ -63,6 +63,32 @@ const AdminVatPage = lazy(() => import('./pages/admin/AdminVatPage'))
 const AdminPromoCodesPage = lazy(() => import('./pages/admin/AdminPromoCodesPage'))
 const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage'))
 const AdminReviewsPage = lazy(() => import('./pages/admin/AdminReviewsPage'))
+
+function DismissBootScreen() {
+  useLayoutEffect(() => {
+    const img = document.getElementById('boot-hero-img')
+    const slot = document.getElementById('hero-lcp-slot')
+    if (img instanceof HTMLImageElement && slot && img.parentElement !== slot) {
+      const mobile = img.dataset.posMobile || '50% 42%'
+      const desktop = img.dataset.posDesktop || '58% 50%'
+      const place = () => {
+        img.style.objectPosition = window.matchMedia('(min-width: 900px)').matches ? desktop : mobile
+      }
+      place()
+      img.style.position = 'absolute'
+      img.style.inset = '0'
+      img.style.width = '100%'
+      img.style.height = '100%'
+      img.style.objectFit = 'cover'
+      slot.appendChild(img)
+      window.matchMedia('(min-width: 900px)').addEventListener('change', place)
+    }
+    document.getElementById('boot')?.remove()
+    document.getElementById('boot-css')?.remove()
+    document.getElementById('boot-data')?.remove()
+  }, [])
+  return null
+}
 
 function AdminLoginRedirect() {
   window.location.replace(resolveHref('/login'))
@@ -178,6 +204,7 @@ function App() {
 
   return (
     <>
+      <DismissBootScreen />
       <SessionBootstrap />
       <DataBootstrap />
       <LocaleHead />

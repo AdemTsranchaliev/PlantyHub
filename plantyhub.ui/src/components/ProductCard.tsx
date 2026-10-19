@@ -85,6 +85,9 @@ export default function ProductCard({ product, width, layout = 'carousel', to, o
         <MediaImg
           src={product.image}
           preset="card"
+          sizes={layout === 'grid'
+            ? '(min-width: 1200px) 200px, (min-width: 600px) 30vw, calc(50vw - 22px)'
+            : '(min-width: 900px) 250px, min(78vw, 260px)'}
           alt={product.name}
           loading="lazy"
           sx={{

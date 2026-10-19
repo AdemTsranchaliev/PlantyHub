@@ -1,4 +1,4 @@
-import { schoolPackFor } from '../content/school'
+import type { SchoolPack } from '../content/school/types'
 import { isSchoolSection, isSchoolTopic, learnSearch, schoolSectionTopics } from '../content/school/outline'
 import { blogArticleIds } from '../data/catalog'
 import { activeLanguages, defaultLanguage, type LanguageCode } from '../i18n/languages'
@@ -146,6 +146,7 @@ export function buildHead(input: {
   products: ProductsState
   productsReady: boolean
   reviews: Reviews
+  school?: SchoolPack | null
 }): HeadDocument {
   const path = publicPath(input.pathname)
   const detail = productDetail(path)
@@ -217,9 +218,9 @@ export function buildHead(input: {
     const params = new URLSearchParams(input.search)
     const sectionId = params.get('section')
     const topicId = params.get('topic')
-    const school = schoolPackFor(input.locale)
+    const school = input.school
     crumbs.push({ name: crumbLabel(title), path: '/learn' })
-    if (isSchoolSection(sectionId)) {
+    if (school && isSchoolSection(sectionId)) {
       const section = school.sections[sectionId]
       crumbs.push({ name: section.title, path: `/learn?section=${sectionId}` })
       if (isSchoolTopic(topicId) && schoolSectionTopics[sectionId].includes(topicId)) {
